@@ -7,8 +7,12 @@ const LocaleContext = createContext({
   translate: enEn,
 })
 
-export const LocaleContextProvider = ({children}) => {
-  return <LocaleContext.Provider value={{ translate: enEn }}>{children}</LocaleContext.Provider>
+export const LocaleContextProvider = ({ children }) => {
+  return (
+    <LocaleContext.Provider value={{ translate: enEn }}>
+      {children}
+    </LocaleContext.Provider>
+  )
 }
 
 const useLocaleContext = () => useContext(LocaleContext)

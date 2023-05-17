@@ -3,7 +3,6 @@ import axios from "axios"
 import Product from "../../components/Product/Product"
 import useLocaleContext from "../../context/locale.context"
 
-
 const Shop = () => {
   const [products, setProducts] = useState([])
 
@@ -19,7 +18,7 @@ const Shop = () => {
       })
   }, [])
 
-  const {translate} = useLocaleContext();
+  const { translate } = useLocaleContext()
 
   return (
     <div>

@@ -4,10 +4,10 @@ import styles from "./Navbar.module.css"
 import useLocaleContext from "../../context/locale.context"
 
 const Navbar = () => {
-
-  const {translate} = useLocaleContext();
+  const { translate } = useLocaleContext()
   return (
     <nav className={styles.navbar}>
+      {}
       <NavLink
         className={styles.navLink}
         to='/'

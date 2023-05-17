@@ -3,8 +3,7 @@ import "./Footer.css"
 import useLocaleContext from "../../context/locale.context"
 
 const Footer = () => {
-
-  const {translate} = useLocaleContext();
+  const { translate } = useLocaleContext()
 
   return (
     <footer className='footer'>

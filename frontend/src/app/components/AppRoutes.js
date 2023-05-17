@@ -19,11 +19,11 @@ const AppRoutes = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/shop' element={<Shop />} />
+        {MenuItemList.map((i) => {
+          ;<Route path={i.path} element={i.component} />
+        })}
       </Routes>
-      <Sidebar/>
+      <Sidebar />
       <Footer />
     </>
   )
