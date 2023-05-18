@@ -23,6 +23,14 @@
       "price": "price"
     }
   },
+  "sidebar": { 
+    "essentialOils":"Essential Oils",
+    "difusers": "Difusers",
+    "bodyCare": "Body Care", 
+    "hairCare": "Hair Care",
+    "rollOn": "Roll On", 
+    "massageOils":"Massage Oils"
+   },
   "footer": {
     "copy": "Oylo Oils Online Shop. All Rights Reserved"
   }
