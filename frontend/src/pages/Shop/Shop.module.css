@@ -6,4 +6,6 @@
   display: flex;
   overflow-y: auto;
   flex-flow: wrap;
+  justify-content: space-evenly;
+  padding: 3rem 0;
 }
