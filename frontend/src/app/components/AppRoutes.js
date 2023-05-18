@@ -1,8 +1,4 @@
-import {
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 
 import { MenuItemList } from "./MenuItemList"
 import Navbar from "./Navbar"
@@ -18,10 +14,10 @@ const AppRoutes = () => {
       <Navbar />
       <Routes>
         <Route path='/about' element={<About />} />
-        <Route path='/shop' element={<Shop/>} />
-        <Route path='/home' element={<Home/>} />
+        <Route path='/shop' element={<Shop />} />
+        <Route path='/home' element={<Home />} />
       </Routes>
-     <Footer />
+      <Footer />
     </>
   )
 }

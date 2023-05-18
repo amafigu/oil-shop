@@ -27,9 +27,16 @@ const Sidebar = () => {
   return (
     <div>
       <ul className={style.sidebar}>
-        {SidebarItemList.map((i) => {
-          return <li className={style.sidebarItem}>{i.label}</li>
-        })}
+        <li className={style.sidebarItem}>Diffuser für ätherische Öle</li>
+        <li className={style.sidebarItem}>Körperpflege</li>
+        <li className={style.sidebarItem}>Haarpflege</li>
+        <li className={style.sidebarItem}>Sauna Aufgüsse</li>
+        <li className={style.sidebarItem}>Naturkosmetik</li>
+        <li className={style.sidebarItem}>Balsame</li>
+        <li className={style.sidebarItem}>Parfum Roll-Ons</li>
+        <li className={style.sidebarItem}>Badeöle</li>
+        <li className={style.sidebarItem}>Sauna Aufgüsse</li>
+        <li className={style.sidebarItem}>Massageöle</li>
       </ul>
     </div>
   )

@@ -20,6 +20,9 @@
   letter-spacing: 0.00938em;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  list-style-type: none;
+  cursor: pointer;
+  
 }
 
 .sidebarItem:hover {

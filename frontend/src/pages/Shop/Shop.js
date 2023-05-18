@@ -23,19 +23,18 @@ const Shop = () => {
 
   return (
     <div className={style.content}>
-      <Sidebar/>
-        <div className={style.mainContent}>
-      
+      <Sidebar />
+      <div className={style.mainContent}>
         {products.map((product, index) => (
-        <Product
-          key={index}
-          name={product.name}
-          image={process.env.PUBLIC_URL + "/" + product.image}
-          size={product.size}
-          price={product.price}
-          description={product.description}
-        />
-      ))}
+          <Product
+            key={index}
+            name={product.name}
+            image={process.env.PUBLIC_URL + "/" + product.image}
+            size={product.size}
+            price={product.price}
+            description={product.description}
+          />
+        ))}
       </div>
     </div>
   )
