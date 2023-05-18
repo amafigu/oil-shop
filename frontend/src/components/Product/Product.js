@@ -16,7 +16,7 @@ const Product = ({ name, image, size, price, description }) => {
         {translate.products.oil.price} ${price}
       </p>
       <p className='product-description'>{description}</p>
-      <button className='product-button'>Buy</button>
+      <button className='product-button button-hidden'>Buy</button>
     </div>
   )
 }
