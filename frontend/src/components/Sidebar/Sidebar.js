@@ -2,8 +2,11 @@ import React from "react"
 import style from "./Sidebar.module.css"
 import { SidebarItemList } from "../../app/components/SidebarItemList"
 import axios from "axios"
+import useLocaleContext from "../../context/locale.context"
 
 const Sidebar = () => {
+  const {translate} = useLocaleContext();
+
   function callYL() {
     const username = "your_username"
     const password = "your_password"
@@ -27,12 +30,12 @@ const Sidebar = () => {
   return (
     <div>
       <ul className={style.sidebar}>
-      <li className={style.sidebarItem}>Ätherische Öle</li>
-        <li className={style.sidebarItem}>Diffuser für ätherische Öle</li>
-        <li className={style.sidebarItem}>Körperpflege</li>
-        <li className={style.sidebarItem}>Haarpflege</li>
-        <li className={style.sidebarItem}>Roll-Ons</li>
-        <li className={style.sidebarItem}>Massageöle</li>
+      <li className={style.sidebarItem}>{translate.sidebar.essentialOils}</li>
+        <li className={style.sidebarItem}>{translate.sidebar.difusers}</li>
+        <li className={style.sidebarItem}>{translate.sidebar.bodyCare}</li>
+        <li className={style.sidebarItem}>{translate.sidebar.hairCare}</li>
+        <li className={style.sidebarItem}>{translate.sidebar.rollOn}</li>
+        <li className={style.sidebarItem}>{translate.sidebar.massageOils}</li>
       </ul>
     </div>
   )

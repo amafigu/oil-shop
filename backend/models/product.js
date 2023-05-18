@@ -11,12 +11,15 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
     },
+    measure: {
+      type: DataTypes.STRING,
+    },
     size: {
       type: DataTypes.INTEGER,
     },
     price: {
       type: DataTypes.DECIMAL(10, 2),
-    }
+    },
   });
 
   return Product;
