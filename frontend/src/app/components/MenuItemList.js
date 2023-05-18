@@ -5,7 +5,7 @@ import About from "../../pages/About/About"
 export const MenuItemList = [
   {
     label: "Home",
-    path: "/home",
+    path: "/",
     component: Home,
     icon: "x",
   },

@@ -5,14 +5,15 @@ import { SidebarItemList } from "../../app/components/SidebarItemList"
 const Sidebar = () => {
   
   return (
+    <div>
     <ul className={style.sidebar}>
       {SidebarItemList.map((i) => {
         return (
           <li className={style.sidebarItem}>{i.label}</li>
           )
         })}
-      
-    </ul>
+      </ul>
+    </div>
   )
 }
 
