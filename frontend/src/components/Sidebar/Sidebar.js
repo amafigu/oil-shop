@@ -1,6 +1,5 @@
 import React from "react"
 import style from "./Sidebar.module.css"
-import { SidebarItemList } from "../../app/components/SidebarItemList"
 import axios from "axios"
 import useLocaleContext from "../../context/locale.context"
 
