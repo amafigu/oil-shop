@@ -1,22 +1,22 @@
 import React from "react"
-import "./Product.css"
+import style from "./Product.module.css"
 import useLocaleContext from "../../context/locale.context"
 
 const Product = ({ name, image, size, price, description }) => {
   const { translate } = useLocaleContext()
+  console.log(image)
 
   return (
-    <div className='product'>
-      <h2 className='product-name'>{name}</h2>
-      <img className='product-image' src={image} alt={name} />
-      <p className='product-size'>
+    <div className={style.product}>
+      <h2 className={style.productName}>{name}</h2>
+      <img className={style.productImage} src={image} alt={name} />
+      <p className={style.productSize}>
         {translate.products.oil.size}: {size} ml
       </p>
-      <p className='product-price'>
+      <p className={style.productPrice}>
         {translate.products.oil.price} ${price}
       </p>
-      <p className='product-description'>{description}</p>
-      <button className='product-button button-hidden'>Buy</button>
+      <p className={style.productDescription}>{description}</p>
     </div>
   )
 }

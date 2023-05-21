@@ -4,6 +4,7 @@ import Product from "../../components/Product/Product"
 import useLocaleContext from "../../context/locale.context"
 import Sidebar from "../../components/Sidebar/Sidebar"
 import style from "./Shop.module.css"
+
 const Shop = () => {
   const [products, setProducts] = useState([])
 
