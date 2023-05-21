@@ -1,0 +1,35 @@
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 420px;
+    width: 1180px;
+  }
+  
+  .carousel img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .carousel button {
+    background-color: #3a3737;
+    border: none;
+    padding: 10px;
+    height: '120px';
+    max-width: '120px';
+    cursor: pointer;
+  }
+  
+  .carousel button:hover {
+    background-color: #ddd;
+  }
+  
+  .carousel .previous {
+    left: 10px;
+  }
+  
+  .carousel .next {
+    right: 10px;
+  }
+  
