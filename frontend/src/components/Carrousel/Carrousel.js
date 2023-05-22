@@ -41,11 +41,11 @@ const Carousel = () => {
       </span>
     </button>
     <img classeName={styles.image} src={images[currentImageIndex]} alt="" />
-    <button className={`${styles.next}`} onClick={nextImage}>
-      <span class="material-symbols-outlined">
+  
+      <span onClick={nextImage} class={`${styles.next} material-symbols-outlined`}>
         arrow_forward_ios
       </span>
-    </button>
+    
   </div>
   );
 };
