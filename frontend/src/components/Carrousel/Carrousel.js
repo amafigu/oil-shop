@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Carrousel.module.css'
 
 const images = [
@@ -13,25 +13,39 @@ const images = [
 const Carousel = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextImage();
+    }, 5000); // Change image every 5 seconds
+
+    // Cleanup timer on component unmount
+    return () => clearInterval(timer);
+  }, [currentImageIndex]);
+
   const nextImage = () => {
-    console.log('nextImage currentImageIndex ', currentImageIndex)
+
     const newIndex = currentImageIndex + 1;
-    console.log('nextImage newIndex ', newIndex)
     setCurrentImageIndex(newIndex >= images.length ? 0 : newIndex);
   };
 
   const previousImage = () => {
-    console.log('previousImage  currentImageIndex ', currentImageIndex)
     const newIndex = currentImageIndex - 1;
-    console.log('previousImage newIndex ', newIndex)
     setCurrentImageIndex(newIndex < 0 ? images.length - 1 : newIndex);
   };
 
   return (
     <div className={styles.carousel}>
-    <button className={`${styles.carousel} ${styles.previous}`} onClick={previousImage}>Previous</button>
+    <button className={`${styles.previous}`} onClick={previousImage}>
+      <span class="material-symbols-outlined">
+        arrow_back_ios
+      </span>
+    </button>
     <img classeName={styles.image} src={images[currentImageIndex]} alt="" />
-    <button className={`${styles.carousel} ${styles.next}`} onClick={nextImage}>Next</button>
+    <button className={`${styles.next}`} onClick={nextImage}>
+      <span class="material-symbols-outlined">
+        arrow_forward_ios
+      </span>
+    </button>
   </div>
   );
 };

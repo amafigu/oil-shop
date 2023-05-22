@@ -2,14 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 420px;
+    height: 720px;
     width: 1180px;
   }
   
   .carousel img {
+    object-fit: cover;
     height: 100%;
     width: 100%;
-    object-fit: cover;
   }
   
   .carousel button {
@@ -18,8 +18,20 @@
     padding: 10px;
     height: '120px';
     max-width: '120px';
+    min-width: '100px';
     cursor: pointer;
+    z-index: 200;
   }
+
+ 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
   
   .carousel button:hover {
     background-color: #ddd;
