@@ -35,14 +35,12 @@ const Carousel = () => {
 
   return (
     <div className={styles.carousel}>
-    <button className={`${styles.previous}`} onClick={previousImage}>
-      <span class="material-symbols-outlined">
+    
+      <span className="material-symbols-outlined" onClick={previousImage}>
         arrow_back_ios
       </span>
-    </button>
-    <img classeName={styles.image} src={images[currentImageIndex]} alt="" />
-  
-      <span onClick={nextImage} class={`${styles.next} material-symbols-outlined`}>
+      <img classeName={styles.image} src={images[currentImageIndex]} alt="" />
+      <span onClick={nextImage} className={"material-symbols-outlined"}>
         arrow_forward_ios
       </span>
     
