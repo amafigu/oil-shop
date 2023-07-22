@@ -16,6 +16,7 @@ import Shipping from "../../pages/Shipping/Shipping"
 import Payment from "../../pages/Payment/Payment"
 import OrderSummary from "../../pages/OrderSummary/OrderSummary"
 import SidebarMenu from "../../components/SidebarMenu/SidebarMenu"
+import Cancellation from "../../pages/Cancellation/Cancellation"
 
 const AppRoutes = () => {
   const [isSidebarMenuVisible, setSidebarMenuVisible] = useState(false)
@@ -48,6 +49,7 @@ const AppRoutes = () => {
             <Route path='/checkout/shipping' element={<Shipping />} />
             <Route path='/checkout/payment' element={<Payment />} />
             <Route path='/checkout/summary' element={<OrderSummary />} />
+            <Route path='/cancellation' element={<Cancellation />} />
           </Routes>
         </div>
         <Footer />
