@@ -12,7 +12,6 @@ const SidebarMenu = ({ className, setSidebarMenuVisible }) => {
     ESSENTIAL_OIL: "essentialOil",
     DIFUSER: "difuser",
     BODY_CARE: "bodyCare",
-    HAIR_CARE: "hairCare",
     ROLL: "roll",
     MASSAGE_OIL: "massageOil",
   })
@@ -44,11 +43,6 @@ const SidebarMenu = ({ className, setSidebarMenuVisible }) => {
         <div className={styles.sidebarItem}>
           <Link to={`/shop?category=${Categories.BODY_CARE}`}>
             {text.bodyCare}
-          </Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to={`/shop?category=${Categories.HAIR_CARE}`}>
-            {text.hairCare}
           </Link>
         </div>
         <div className={styles.sidebarItem}>

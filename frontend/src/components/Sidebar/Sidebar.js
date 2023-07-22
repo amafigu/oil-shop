@@ -10,7 +10,6 @@ const Sidebar = ({ setCategory }) => {
     ESSENTIAL_OIL: "essentialOil",
     DIFUSER: "difuser",
     BODY_CARE: "bodyCare",
-    HAIR_CARE: "hairCare",
     ROLL: "roll",
     MASSAGE_OIL: "massageOil",
   })
@@ -41,12 +40,6 @@ const Sidebar = ({ setCategory }) => {
           className={styles.sidebarItem}
         >
           {translate.components.sidebar.bodyCare}
-        </li>
-        <li
-          onClick={() => setCategory(Categories.HAIR_CARE)}
-          className={styles.sidebarItem}
-        >
-          {translate.components.sidebar.hairCare}
         </li>
         <li
           onClick={() => setCategory(Categories.ROLL)}
