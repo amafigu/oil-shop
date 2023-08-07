@@ -1,24 +1,18 @@
-require('dotenv').config();
-const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+import dotenv from 'dotenv'
+import Sequelize from 'sequelize';
+import productModel from './product.js';
+dotenv.config();
 
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  {
-    host: config.host,
-    dialect: config.dialect,
-    protocol: config.protocol,
-    dialectOptions: config.dialectOptions,
-  }
-);
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+});
 
 const db = {};
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+db.Sequelize = Sequelize; 
+db.sequelize = sequelize; 
 
-db.product = require('./product')(sequelize, Sequelize);
-module.exports = db;
+db.product = productModel(sequelize, Sequelize);
+
+export default db;
