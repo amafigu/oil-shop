@@ -1,14 +1,15 @@
 @import "#styles/helpers/mixins";
 @import "#styles/base/variables";
 
-.productPage {
-  display: flex;
-  width: 70%;
-}
 .productPageWrapper {
   display: flex;
   justify-content: center;
   padding: 20px;
+}
+
+.productPage {
+  display: flex;
+  width: 70%;
 }
 
 .leftContainer {
@@ -16,56 +17,26 @@
   width: 65%;
 }
 
-.imagesColumn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 25%;
-}
-
 .imageContainer {
-  width: 130px;
-  height: 150px;
-
+  width: 8rem;
+  height: 9rem;
   margin: 10px auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.imageSmall {
-  width: 100%;
-  height: 100%;
-}
-
-.middleContainer {
-  width: 75%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.imageMiddleContainer {
-  width: 300px;
-  height: 400px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.imageMiddle {
+.image {
   background-repeat: no-repeat;
   background-size: cover;
-  width: 300px;
-  height: 400px;
+  width: 100%;
+  height: 100%;
 }
 
 .rightContainer {
   width: 35%;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  border-radius: 0.5rem;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -76,67 +47,29 @@
   padding: 3rem;
 }
 
-.productName {
-  margin-bottom: 40px;
-}
-
 .rightContainerDetails {
   width: 100%;
 }
 
-/*
-.rightContainerDetailsPoints {
-  display: flex;
-  width: 90%;
-  margin-bottom: 40px;
-  flex-direction: column;
+.productInfoCategory {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: $primary-color;
+  text-transform: uppercase;
 }
-*/
+
+.productInfoCategoryLink {
+  text-decoration: none;
+  color: $primary-color;
+}
 
 .productName {
   font-weight: 600;
-  font-size: 22px;
-
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
   line-height: 128%;
-  margin-top: 24px;
-}
-
-.rightContainerPriceDetails {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
-  background-color: #f4f4f4;
-  border-radius: 2px;
-  padding: 8px 16px;
-  background-color: background-soft-grey;
-}
-
-.productSize {
-  flex: 1;
-  margin-right: 20px;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-}
-
-.productPrice {
-  font-weight: 300;
-  font-size: 17px;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  margin-bottom: 0;
-}
-
-.selectorAndButtonContainer {
-  display: flex;
-  height: 52px;
-  width: 100%;
-}
-
-.buttonIcon {
-  width: 16px;
-  height: 16px;
+  margin-top: 1.5rem;
 }
 
 .descriptionPoints {
@@ -156,20 +89,44 @@
   list-style-type: none;
 }
 
+.rightContainerPriceDetails {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  background-color: #f4f4f4;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  background-color: grey;
+}
+
+.productSize {
+  flex: 1;
+  margin-right: 1.25rem;
+  font-weight: 300;
+  font-size: 0.8rem;
+  line-height: 1.125rem;
+}
+
+.productPrice {
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  margin-bottom: 0;
+}
+
+.selectorAndButtonContainer {
+  display: flex;
+  height: 3.5rem;
+  width: 100%;
+}
+
 .quantitySelector {
   display: flex;
   justify-content: stretch;
   height: 100%;
   width: 11%;
-  background-color: rgb(244, 244, 244);
-}
-
-.quantityInput {
-  height: 100%;
-  text-align: center;
-  margin: 0;
-  width: 30px;
-  border: none;
   background-color: rgb(244, 244, 244);
 }
 
@@ -179,6 +136,15 @@
   margin: 0;
   display: flex;
   align-items: center;
+}
+
+.quantityInput {
+  height: 100%;
+  text-align: center;
+  margin: 0;
+  width: 2rem;
+  border: none;
+  background-color: rgb(244, 244, 244);
 }
 
 .quantityButtonsContainer {
@@ -193,22 +159,14 @@
   cursor: pointer;
 }
 
+.buttonIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
 .buttonContained {
   @include product-cart-purshase-button;
   height: 100%;
   margin-left: 0.3rem;
   flex-grow: 1;
-}
-
-.productInfoCategory {
-  font-size: 1.5rem;
-  font-weight: 300;
-  line-height: 1;
-  color: $primary-color;
-  text-transform: uppercase;
-}
-
-.productInfoCategoryLink {
-  text-decoration: none;
-  color: $primary-color;
 }

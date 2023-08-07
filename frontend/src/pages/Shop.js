@@ -33,7 +33,9 @@ const Shop = () => {
   }, [queryCategory])
 
   const filteredProducts = (category) =>
-    products.filter(product => (product.category === category || category === "all"))
+    products.filter(
+      (product) => product.category === category || category === "all",
+    )
 
   const sortedProducts = filteredProducts(category)
 
