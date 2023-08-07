@@ -5,9 +5,9 @@ const config = {
     username: process.env.DEV_USERNAME,
     password: process.env.DEV_PASSWORD,
     database: process.env.DEV_DATABASE,
-    host: process.env.DEV_HOST,
     dialect: process.env.DEV_DIALECT,
     dialectOptions: {
+      connectTimeout: 10000,
       ssl: false,
     },
   },
@@ -15,7 +15,6 @@ const config = {
     username: process.env.TEST_USERNAME,
     password: process.env.TEST_PASSWORD,
     database: process.env.TEST_DATABASE,
-    host: process.env.TEST_HOST,
     dialect: process.env.TEST_DIALECT,
     dialectOptions: {
       ssl: false,
