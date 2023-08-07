@@ -39,16 +39,6 @@
   margin-bottom: 20px;
 }
 
-.dropdown {
-  position: fixed;
-  top: 10px;
-  width: 28px;
-  img {
-    width: 28px;
-    height: 28px;
-  }
-}
-
 .listItemImage {
   width: 56px;
   height: 56px;
@@ -57,8 +47,6 @@
 .searchIcon {
   cursor: pointer;
 }
-
-/*TODO: Extract as mixins*/
 
 .searchDropdown {
   display: flex;

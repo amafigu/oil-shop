@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react"
-import styles from "./navbar.scss"
+import styles from "./navbar.module.scss"
 import useLocaleContext from "#context/localeContext"
 import { titleCase } from "#utils/utils"
 import { CartContext } from "#context/cartContext"

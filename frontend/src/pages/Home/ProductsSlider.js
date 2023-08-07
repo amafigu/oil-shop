@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import styles from "./productSlider.scss"
+import styles from "./productSlider.module.scss"
 import axios from "axios"
 import ProductCard from "#components/ProductCard"
 

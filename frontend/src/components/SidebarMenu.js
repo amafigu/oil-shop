@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import styles from "./sidebarMenu.scss"
+import styles from "./sidebarMenu.module.scss"
 import { Link } from "react-router-dom"
 import useLocaleContext from "#context/localeContext"
 

@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./home.scss"
+import styles from "./home.module.scss"
 import useLocaleContext from "../../context/localeContext"
 import Carousel from "./Carousel"
 import ProductsSlider from "./ProductsSlider"

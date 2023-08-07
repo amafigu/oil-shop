@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import axios from "axios"
 import { titleCase } from "#utils/utils"
 import useCartContext from "#context/cartContext"
-import styles from "./productDetails.scss"
+import styles from "./productDetails.module.scss"
 import useLocaleContext from "#context/localeContext"
 
 const ProductDetails = () => {

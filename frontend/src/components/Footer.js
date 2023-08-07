@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
-import styles from "./footer.scss"
+import styles from "./footer.module.scss"
 
 const Footer = () => {
   const { translate } = useLocaleContext()

@@ -4,7 +4,7 @@ import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { SHIPPING_COST } from "#utils/constants"
 import { totalCost, titleCase } from "#utils/utils"
-import styles from "./cart.scss"
+import styles from "./cart.module.scss"
 
 const Cart = () => {
   const { cart, removeProduct, updateProductQuantity } = useCartContext()

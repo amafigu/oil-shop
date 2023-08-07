@@ -1,9 +1,16 @@
-import React from "react"
-import AppRoutes from "./AppRoutes.js"
-import "./app.scss"
+import { BrowserRouter } from "react-router-dom"
+import { LocaleContextProvider } from "./context/localeContext"
+import AppRoutes from "./AppRoutes"
+import "#styles/main.scss"
 
-function App() {
-  return <AppRoutes></AppRoutes>
+const App = () => {
+  return (
+    <BrowserRouter>
+      <LocaleContextProvider>
+        <AppRoutes />
+      </LocaleContextProvider>
+    </BrowserRouter>
+  )
 }
 
 export default App

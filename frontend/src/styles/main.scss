@@ -1,14 +1,13 @@
-@import "base/variables";
-@import "base/typography";
-@import "base/reset";
+@use "~minireset.css/minireset.min";
+@import "#styles/base/variables";
 
-@import "./helpers/mixins";
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-@import "#components/Navbar/navbar";
-@import "../appRoutes";
-
-@import "#pages/Home/home";
-@import "#pages/cart";
-@import "#pages/productDetails";
-
-@import "#components/footer";
+body {
+  font-family: "GFS Neohellenic", sans-serif;
+  font-size: 16px;
+  color: $primary-color;
+}
