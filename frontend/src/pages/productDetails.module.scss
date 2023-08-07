@@ -35,7 +35,7 @@
 
 .rightContainer {
   width: 35%;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
   border-radius: 0.5rem;
   height: auto;
   display: flex;
@@ -83,7 +83,6 @@
 .descriptionPoint {
   padding-left: 20px;
   font-size: 16px;
-  margin-bottom: 0;
   position: relative;
   margin-bottom: 1.2rem;
   list-style-type: none;
@@ -94,7 +93,6 @@
   justify-content: space-between;
   width: 100%;
   margin-bottom: 1.25rem;
-  background-color: #f4f4f4;
   border-radius: 0.25rem;
   padding: 0.5rem 1rem;
   background-color: grey;
@@ -127,7 +125,7 @@
   justify-content: stretch;
   height: 100%;
   width: 11%;
-  background-color: rgb(244, 244, 244);
+  background-color: rgb(244 244 244);
 }
 
 .quantityInputContainer {
@@ -144,7 +142,7 @@
   margin: 0;
   width: 2rem;
   border: none;
-  background-color: rgb(244, 244, 244);
+  background-color: rgb(244 244 244);
 }
 
 .quantityButtonsContainer {
@@ -166,6 +164,7 @@
 
 .buttonContained {
   @include product-cart-purshase-button;
+
   height: 100%;
   margin-left: 0.3rem;
   flex-grow: 1;

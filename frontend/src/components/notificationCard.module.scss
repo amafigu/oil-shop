@@ -3,9 +3,9 @@
 
 .notificationCard {
   @include product-cart-purshase-button;
+
   position: fixed;
   top: 20px;
   right: 20px;
-
   z-index: 100;
 }

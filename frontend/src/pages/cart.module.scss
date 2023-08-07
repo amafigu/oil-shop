@@ -36,25 +36,22 @@
 .cartItemQuantitySelector {
   display: flex;
   align-items: center;
+  margin-left: 5rem;
 }
 
 .cartItemQuantityInput {
   width: 2rem;
   height: 32px;
   text-align: center;
-  border: none; // add this
-  outline: none; // this is optional and removes the focus outline
-}
-
-.cartItemQuantitySelector {
-  margin-left: 5rem;
+  border: none; 
+    outline: none; 
 }
 
 .cartItemQuantityButton {
   height: 32px;
   width: 32px;
-  border: none; // add this
-  background: none; // this is optional and removes the default background color
+  border: none; 
+  background: none; 
   outline: none;
   cursor: pointer;
 }

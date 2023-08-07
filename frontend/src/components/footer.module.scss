@@ -27,6 +27,7 @@
   font-weight: 600;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .footerStartSectionText {
@@ -38,24 +39,19 @@
   width: 90%;
 }
 
-.registrationFormTitle {
-  display: flex;
-  justify-content: center;
-}
-
-.footerStartSectionText:before,
-.footerStartSectionText:after {
+.footerStartSectionText::before,
+.footerStartSectionText::after {
   content: "";
   flex: 1 1;
   border-bottom: 1px solid;
   margin: auto;
 }
 
-.footerStartSectionText:before {
+.footerStartSectionText::before {
   margin-right: 10px;
 }
 
-.footerStartSectionText:after {
+.footerStartSectionText::after {
   margin-left: 10px;
 }
 
@@ -90,19 +86,12 @@
   margin-bottom: 1em;
 }
 
-.registrationFormTitle {
-  font-size: 24px;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 1em;
-}
-
 .registrationFormWrapper {
   width: 60%;
   background: #f0f0f0;
   padding: 1em;
   border-radius: 5px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
 }
 
 .registrationEmailInputAndButtonWrapper {
@@ -111,8 +100,6 @@
   width: 100%;
   margin-bottom: 1em;
 }
-
-/*maybe change that */
 
 .registrationEmailInputWrapper {
   width: 65%;
@@ -151,30 +138,19 @@
   max-width: 90%;
 }
 
-.columnsSection {
-  display: flex;
-  height: 280px;
-}
-
 .columnsSectionItemTitle {
   font-family: "GFS Neohellenic", sans-serif;
   font-weight: bolder;
   font-size: 24px;
+  height: 60px;
+  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .columnsSectionItemLinks a {
   color: grey;
   text-decoration: none;
-}
-
-.columnsSectionElements {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  align-items: baseline;
-  padding: 0;
-  margin: 0;
 }
 
 .iconsSection {
@@ -201,7 +177,9 @@
 
 .iconsSectionItemTitle {
   height: 40px;
+
   @include flex-center;
+
   font-size: 18px;
   font-weight: 300;
 }
@@ -216,7 +194,7 @@
 
 .columnsSection {
   display: flex;
-  height: 260px;
+  height: 16rem;
 }
 
 .columnsSectionElements {
@@ -235,13 +213,6 @@
   align-items: center;
   width: 25%;
   height: 240px;
-}
-
-.columnsSectionItemTitle {
-  height: 60px;
-  text-align: center;
-  display: flex;
-  align-items: center;
 }
 
 .columnsSectionItemLinks {
@@ -263,7 +234,6 @@
 }
 
 .footerUnderSectionText {
-  font-size: 20px;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -273,18 +243,18 @@
 }
 
 // for the lines on the sides
-.footerUnderSectionText:before,
-.footerUnderSectionText:after {
+.footerUnderSectionText::before,
+.footerUnderSectionText::after {
   content: "";
   flex: 1 1;
   border-bottom: 1px solid;
   margin: auto;
 }
 
-.footerUnderSectionText:before {
+.footerUnderSectionText::before {
   margin-right: 10px;
 }
 
-.footerUnderSectionText:after {
+.footerUnderSectionText::after {
   margin-left: 10px;
 }
