@@ -8,8 +8,8 @@
 
 .mainContent {
   display: flex;
-  overflow-y: auto;
   flex-flow: wrap;
   justify-content: space-evenly;
   padding: 5rem;
+  overflow-y: auto;
 }

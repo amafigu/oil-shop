@@ -24,8 +24,8 @@
 }
 
 .cartItemImage {
-  height: 8.25rem;
   width: 7.5rem;
+  height: 8.25rem;
   object-fit: contain;
 }
 
@@ -48,23 +48,23 @@
 }
 
 .cartItemQuantityButton {
-  height: 32px;
   width: 32px;
+  height: 32px;
+  cursor: pointer; 
+  background: none;
   border: none; 
-  background: none; 
   outline: none;
-  cursor: pointer;
 }
 
 .cartItemTotalCost {
-  margin-left: 2rem;
-  width: 6rem;
   justify-content: center;
+  width: 6rem;
+  margin-left: 2rem;
 }
 
 .cartItemButtonDeleteButton {
-  cursor: pointer;
   margin-left: 2rem;
+  cursor: pointer;
 }
 
 .cartOrderSummary {

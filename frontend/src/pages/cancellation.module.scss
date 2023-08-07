@@ -1,13 +1,13 @@
 .container {
+  box-sizing: border-box;
   width: 100%;
   padding: 20px;
-  box-sizing: border-box;
 }
 
 .policyWrapper {
+  padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
 
