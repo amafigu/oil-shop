@@ -4,6 +4,10 @@ export const titleCase = (str, separator) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ")
 }
+  
+export const productImageUrl = (image) => {
+  return "/assets/" + image
+}
 
 export const addOneProductToCart = (product, contextFunction) => {
   contextFunction(product, 1)

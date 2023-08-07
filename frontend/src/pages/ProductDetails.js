@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import axios from "axios"
-import { titleCase } from "#utils/utils"
+import { titleCase, productImageUrl  } from "#utils/utils"
 import useCartContext from "#context/cartContext"
 import styles from "./productDetails.module.scss"
 import useLocaleContext from "#context/localeContext"
@@ -59,21 +59,21 @@ const ProductDetails = () => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.imageSmall}
-                src={process.env.PUBLIC_URL + "/assets/" + image}
+                src={productImageUrl(image)}
                 alt={name}
               />
             </div>
             <div className={styles.imageContainer}>
               <img
                 className={styles.imageSmall}
-                src={process.env.PUBLIC_URL + "/assets/" + image}
+                src={productImageUrl(image)}
                 alt={name}
               />
             </div>
             <div className={styles.imageContainer}>
               <img
                 className={styles.imageSmall}
-                src={process.env.PUBLIC_URL + "/assets/" + image}
+                src={productImageUrl(image)}
                 alt={name}
               />
             </div>
@@ -82,7 +82,7 @@ const ProductDetails = () => {
             <div className={styles.imageMiddleContainer}>
               <img
                 className={styles.imageMiddle}
-                src={process.env.PUBLIC_URL + "/assets/" + image}
+                src={productImageUrl(image)}
                 alt={name}
               />
             </div>
