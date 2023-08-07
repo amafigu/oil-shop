@@ -1,5 +1,5 @@
-@import "../helpers/mixins";
-@import "../base/variables";
+@import "#styles/helpers/mixins";
+@import "#styles/base/variables";
 
 .productPage {
   display: flex;
@@ -109,7 +109,7 @@
   background-color: #f4f4f4;
   border-radius: 2px;
   padding: 8px 16px;
-  background-color: $background-soft-grey;
+  background-color: background-soft-grey;
 }
 
 .productSize {
@@ -191,10 +191,6 @@
 
 .quantityButtonsContainer span:hover {
   cursor: pointer;
-}
-
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
 }
 
 .buttonContained {

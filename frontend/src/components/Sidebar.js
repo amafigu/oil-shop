@@ -1,6 +1,6 @@
 import React from "react"
-import styles from "../../styles/components/_sidebar.module.scss"
-import useLocaleContext from "../../context/localeContext"
+import styles from "./sidebar.module.scss"
+import useLocaleContext from "../context/localeContext"
 
 const Sidebar = ({ setCategory }) => {
   const { translate } = useLocaleContext()

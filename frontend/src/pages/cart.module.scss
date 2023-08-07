@@ -1,13 +1,13 @@
-@import "../helpers/mixins";
-@import "../base/variables";
+@import "#styles/helpers/mixins";
+@import "#styles/base/variables";
 
 .cartContainerWrapper {
-  display: $flex;
-  justify-content: $center;
+  display: flex;
+  justify-content: center;
 }
 
 .cartContainer {
-  display: $flex;
+  display: flex;
   width: 70%;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .cartItem {
-  display: $flex;
+  display: flex;
   align-items: center;
   height: 9rem;
 }

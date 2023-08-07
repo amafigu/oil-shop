@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=GFS+Neohellenic&display=swap");
-@import "../helpers/mixins";
-@import "../base/variables";
+@import "#styles/helpers/mixins";
+@import "#styles/base/variables";
 
 .pageContainer {
   @include flex-center;
@@ -42,10 +42,6 @@
 .productSliderContainer {
   display: flex;
   justify-content: center;
-}
-
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 200, "opsz" 48;
 }
 
 .icon {

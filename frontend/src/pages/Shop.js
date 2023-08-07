@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import axios from "axios"
 import ProductCard from "../components/ProductCard"
-import Sidebar from "../components/Sidebar/Sidebar"
-import style from "#styles/pages/_shop.module.scss"
+import Sidebar from "../components/Sidebar"
+import style from "./shop.module.scss"
 
 const Shop = () => {
   const [products, setProducts] = useState([])
@@ -33,15 +33,7 @@ const Shop = () => {
   }, [queryCategory])
 
   const filteredProducts = (category) =>
-    products.filter((product) => {
-      if (product.category === category) {
-        return true
-      }
-      if (category === "all") {
-        return true
-      }
-      return false
-    })
+    products.filter(product => (product.category === category || category === "all"))
 
   const sortedProducts = filteredProducts(category)
 

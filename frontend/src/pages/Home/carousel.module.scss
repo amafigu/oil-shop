@@ -1,13 +1,9 @@
-@import "../helpers/mixins";
-@import "../base/variables";
+@import "#styles/helpers/mixins";
+@import "#styles/base/variables";
 
 .carousel {
   @include flex-center;
-  margin-bottom: $carousel-margin-bottom;
-}
-
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  margin-bottom: 3.8rem;
 }
 
 .carousel img {
@@ -21,8 +17,8 @@
 }
 
 .video {
-  width: $carousel-video-width;
-  height: $carousel-video-height;
+  width: 1120px;
+  height: 630px;
 }
 
 .borderDiv {
@@ -32,7 +28,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  border: $carousel-video-border;
+  border: 60px solid white;
   pointer-events: none;
 }
 
@@ -40,4 +36,5 @@
   position: relative;
   width: 1120px;
   height: 630px;
+  z-index: -1;
 }

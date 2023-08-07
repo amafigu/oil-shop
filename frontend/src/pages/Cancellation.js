@@ -1,5 +1,5 @@
 import React from "react"
-import "#styles/pages/_cancellation.scss"
+import "./cancellation.module.scss"
 
 const Cancellation = () => {
   return (

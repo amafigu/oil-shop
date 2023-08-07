@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from "react"
-import NotificationCard from "../components/NotificationCard/NotificationCard"
+import NotificationCard from "../components/NotificationCard"
 
 export const CartContext = createContext()
 
