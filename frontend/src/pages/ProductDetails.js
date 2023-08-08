@@ -1,10 +1,10 @@
+import useCartContext from "#context/cartContext"
+import useLocaleContext from "#context/localeContext"
+import { productImageUrl, titleCase } from "#utils/utils"
+import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { titleCase, productImageUrl } from "#utils/utils"
-import axios from "axios"
-import useCartContext from "#context/cartContext"
 import styles from "./productDetails.module.scss"
-import useLocaleContext from "#context/localeContext"
 
 const ProductDetails = () => {
   const { productName } = useParams()
@@ -52,7 +52,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className={styles.productPageWrapper}>
+
       <div className={styles.productPage}>
         <div className={styles.leftContainer}>
           <div className={styles.imageContainer}>
@@ -127,7 +127,7 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-    </div>
+
   )
 }
 
