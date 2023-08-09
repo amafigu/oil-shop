@@ -1,19 +1,21 @@
+@use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
-@import "#styles/base/variables";
 
 .carousel {
   @include flex-center;
+
   margin-bottom: 3.8rem;
 }
 
 .carousel img {
   object-fit: cover;
+
   @include full-width-and-height;
 }
 
 .iconCarousel {
+  color: theme.$primary-color;
   cursor: pointer;
-  color: $primary-color;
 }
 
 .video {
@@ -22,19 +24,16 @@
 }
 
 .borderDiv {
-  content: "";
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 60px solid white;
+  inset: 0;
   pointer-events: none;
+  content: "";
+  border: 60px solid white;
 }
 
 .videoWrapper {
   position: relative;
+  z-index: -1;
   width: 1120px;
   height: 630px;
-  z-index: -1;
 }

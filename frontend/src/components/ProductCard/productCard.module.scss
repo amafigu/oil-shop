@@ -1,5 +1,5 @@
+@use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
-@import "#styles/base/variables";
 
 .productCardWrapper {
   @include product-card-wrapper;
@@ -11,13 +11,14 @@
 
 .productCardAddToCartButton {
   @include product-cart-purshase-button;
-  opacity: 0;
+
   pointer-events: none;
+  opacity: 0;
 }
 
 .productCardWrapper:hover .productCardAddToCartButton {
-  opacity: 1;
   pointer-events: auto;
+  opacity: 1;
 }
 
 .productCardName {
@@ -26,6 +27,7 @@
 
 .productCardImage {
   @include product-image;
+
   object-fit: contain;
 }
 

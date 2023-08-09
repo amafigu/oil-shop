@@ -1,5 +1,7 @@
 @use "~minireset.css/minireset.min";
-@import "#styles/base/variables";
+@use "./media";
+@use "./theme";
+
 
 a {
   color: inherit;
@@ -7,7 +9,16 @@ a {
 }
 
 body {
-  font-family: "GFS Neohellenic", sans-serif;
+  font-family: theme.$body-font;
   font-size: 16px;
-  color: $primary-color;
+  color: theme.$primary-color;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: theme.$body-font;
+  font-size: 16px;
+  color: rgb(45 45 43);
 }

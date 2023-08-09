@@ -1,5 +1,5 @@
+@use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
-@import "#styles/base/variables";
 
 .productPage {
   display: flex;
@@ -39,7 +39,7 @@
   height: auto;
   padding: 3rem;
   overflow: hidden;
-  font-family: $main-font-family;
+  font-family: theme.$main-font-family;
   border-radius: 0.5rem;
   box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
 }
@@ -52,12 +52,12 @@
   font-size: 1.5rem;
   font-weight: 300;
   line-height: 1;
-  color: $primary-color;
+  color: theme.$primary-color;
   text-transform: uppercase;
 }
 
 .productInfoCategoryLink {
-  color: $primary-color;
+  color: theme.$primary-color;
   text-decoration: none;
 }
 

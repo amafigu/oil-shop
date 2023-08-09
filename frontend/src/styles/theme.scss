@@ -1,0 +1,27 @@
+$body-font: "Roboto", sans-serif;
+$heading-font: "Poppins", sans-serif;
+$shadow-grey: rgb(51 51 51 / 50%);
+$site-header-fixed-height: 3rem;
+$flash-success: #6fcf97;
+$primary-color: #686868;
+$secondary-color: #757575;
+$main-font-family: "GFS Neohellenic", sans-serif;
+ 
+$z-indexes: (
+  "navbar": 1000,
+  "sub-navbar": 1500,
+  "carousel": 1700,
+  "sidebar": 1900,
+  "menu-sidebar": 2000
+);
+
+%focus {
+  outline: 1px solid #000;
+}
+
+$container-x-pad: (
+  "mobile": 1rem,
+  "tablet": 2rem,
+  "desktop": 4rem
+);
+
