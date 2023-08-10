@@ -1,30 +1,31 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import styles from "./carousel.module.scss"
+
+const videos = [
+  { id: "YHYuQFBrJVc", start: 170, end: 185 },
+  { id: "yicHmCVxmNQ", start: 16, end: 31 },
+]
+
 const Carousel = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
+  const nextVideo = useCallback(() => {
+    const newIndex = currentVideoIndex + 1
+    setCurrentVideoIndex(newIndex >= videos.length ? 0 : newIndex)
+  }, [currentVideoIndex])
+
+  const previousVideo = useCallback( () => {
+    const newIndex = currentVideoIndex - 1
+    setCurrentVideoIndex(newIndex < 0 ? videos.length - 1 : newIndex)
+  },[currentVideoIndex])
+  
   useEffect(() => {
     const timer = setInterval(() => {
       nextVideo()
     }, 15000)
 
     return () => clearInterval(timer)
-  }, [currentVideoIndex])
-
-  const nextVideo = () => {
-    const newIndex = currentVideoIndex + 1
-    setCurrentVideoIndex(newIndex >= videos.length ? 0 : newIndex)
-  }
-
-  const previousVideo = () => {
-    const newIndex = currentVideoIndex - 1
-    setCurrentVideoIndex(newIndex < 0 ? videos.length - 1 : newIndex)
-  }
-
-  const videos = [
-    { id: "YHYuQFBrJVc", start: 170, end: 185 },
-    { id: "yicHmCVxmNQ", start: 16, end: 31 },
-  ]
+  }, [nextVideo])
 
   const currentVideo = videos[currentVideoIndex]
   const videoSrc = `https://www.youtube.com/embed/${currentVideo.id}?start=${currentVideo.start}&end=${currentVideo.end}&autoplay=1&loop=1&playlist=${currentVideo.id}&controls=0&modestbranding=1&mute=1`

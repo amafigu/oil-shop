@@ -1,15 +1,16 @@
+@use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
-@import "#styles/base/variables";
+
 
 .carousel {
   display: flex;
+  gap: 16px;
   align-items: center;
-  overflow-x: auto;
   width: 100%;
   padding: 20px 0;
+  overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: none; /* For Firefox */
-  gap: 16px;
 }
 
 .carousel::-webkit-scrollbar {
@@ -19,15 +20,15 @@
 
 .productContainer {
   display: inline-block;
-  margin: 0 15px;
   flex: 0 0 auto;
   width: 150px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   padding: 10px;
+  margin: 0 15px;
   text-align: center;
   background-color: white;
-  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px 0 hsl(0deg 0% 0% / 20%);
 }
 
 .productImage {
@@ -43,13 +44,13 @@
 }
 
 .productPrice {
-  color: #888;
   font-size: 14px;
+  color: #888;
 }
 
 .sliderButton {
-  color: #888;
   font-size: 2rem;
+  color: #888;
   cursor: pointer;
 }
 
@@ -64,5 +65,5 @@
 
 .iconCarousel:active,
 .iconCarousel:focus {
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 50%);
 }

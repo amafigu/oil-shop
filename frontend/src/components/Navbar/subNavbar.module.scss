@@ -2,24 +2,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
   height: 40px;
-  color: grey;
   font-family: "GFS Neohellenic", sans-serif;
+  color: grey;
+  background-color: white;
 }
 
 .navbar {
-  width: 440px;
   display: flex;
   justify-content: space-around;
+  width: 440px;
 }
 
 .navLink {
-  color: grey;
-  text-decoration: none;
-  text-align: center;
-  font-size: 18px;
   width: 120px;
+  font-size: 18px;
+  color: grey;
+  text-align: center;
+  text-decoration: none;
 }
 
 .activeLink {
@@ -27,6 +27,6 @@
 }
 
 .logo {
-  height: 68px;
   width: 116px;
+  height: 68px;
 }

@@ -194,16 +194,7 @@ const products = [
     category: 'massageOil',
     details: 'Reduces stress.',
   },
-  {
-    name: 'sensation',
-    image: 'oilMassage_sensation_236_ml.jpg',
-    description: 'Sense enhancer Vegetable Oil',
-    size: 236,
-    measure: 'ml',
-    price: 35.48,
-    category: 'massageOil',
-    details: 'Reduces stress.',
-  },
+ 
   {
     name: 'cel-lite_magic',
     image: 'oilMassage_cel-liteMagic_236_ml.jpg',

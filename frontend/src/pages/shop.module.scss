@@ -1,5 +1,4 @@
 @import "#styles/helpers/mixins";
-@import "#styles/base/variables";
 
 .content {
   display: flex;
@@ -8,8 +7,8 @@
 
 .mainContent {
   display: flex;
-  overflow-y: auto;
   flex-flow: wrap;
   justify-content: space-evenly;
-  padding: 5rem 5rem;
+  padding: 5rem;
+  overflow-y: auto;
 }

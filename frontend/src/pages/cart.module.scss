@@ -1,5 +1,5 @@
+@use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
-@import "#styles/base/variables";
 
 .cartContainerWrapper {
   display: flex;
@@ -24,8 +24,8 @@
 }
 
 .cartItemImage {
-  height: 8.25rem;
   width: 7.5rem;
+  height: 8.25rem;
   object-fit: contain;
 }
 
@@ -36,38 +36,35 @@
 .cartItemQuantitySelector {
   display: flex;
   align-items: center;
+  margin-left: 5rem;
 }
 
 .cartItemQuantityInput {
   width: 2rem;
   height: 32px;
   text-align: center;
-  border: none; // add this
-  outline: none; // this is optional and removes the focus outline
-}
-
-.cartItemQuantitySelector {
-  margin-left: 5rem;
+  border: none; 
+    outline: none; 
 }
 
 .cartItemQuantityButton {
-  height: 32px;
   width: 32px;
-  border: none; // add this
-  background: none; // this is optional and removes the default background color
+  height: 32px;
+  cursor: pointer; 
+  background: none;
+  border: none; 
   outline: none;
-  cursor: pointer;
 }
 
 .cartItemTotalCost {
-  margin-left: 2rem;
-  width: 6rem;
   justify-content: center;
+  width: 6rem;
+  margin-left: 2rem;
 }
 
 .cartItemButtonDeleteButton {
-  cursor: pointer;
   margin-left: 2rem;
+  cursor: pointer;
 }
 
 .cartOrderSummary {

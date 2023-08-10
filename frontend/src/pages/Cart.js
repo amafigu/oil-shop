@@ -1,9 +1,9 @@
-import React from "react"
-import { Link } from "react-router-dom"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { SHIPPING_COST } from "#utils/constants"
-import { totalCost, titleCase } from "#utils/utils"
+import { titleCase, totalCost } from "#utils/utils"
+import React from "react"
+import { Link } from "react-router-dom"
 import styles from "./cart.module.scss"
 
 const Cart = () => {
@@ -16,8 +16,8 @@ const Cart = () => {
       <div className={styles.cartContainer}>
         <div className={styles.cartItemsList}>
           {cart.map((item, index) => (
-            <div>
-              <div key={index} className={styles.cartItem}>
+            <div  key={index}>
+              <div className={styles.cartItem}>
                 <img
                   src={process.env.PUBLIC_URL + "/assets/" + item.product.image}
                   alt={item.product.name}
@@ -40,11 +40,7 @@ const Cart = () => {
                   >
                     -
                   </button>
-                  <input
-                    type='text'
-                    value={item.quantity}
-                    className={styles.cartItemQuantityInput}
-                  />
+                  <span className={styles.cartItemQuantityInput}>{item.quantity}</span>
                   <button
                     className={styles.cartItemQuantityButton}
                     onClick={() =>

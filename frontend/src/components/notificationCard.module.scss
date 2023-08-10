@@ -1,11 +1,10 @@
 @import "#styles/helpers/mixins";
-@import "#styles/base/variables";
 
 .notificationCard {
   @include product-cart-purshase-button;
+
   position: fixed;
   top: 20px;
   right: 20px;
-
   z-index: 100;
 }
