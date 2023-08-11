@@ -1,13 +1,15 @@
-// Cart.test.js
+// import should be in settings and not test file, provisory workaround
+import '@testing-library/jest-dom'
+
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { fireEvent, render } from "@testing-library/react"
+import { MemoryRouter } from 'react-router-dom'
 import Cart from "./Cart"
 
 jest.mock('#context/cartContext');
 jest.mock('#context/localeContext');
 
-// Rendering Test
 test("renders products correctly", () => {
   useCartContext.mockReturnValue({
     cart: [
@@ -22,20 +24,19 @@ test("renders products correctly", () => {
       pages: {
         cart: {
           deleteButton: "Delete",
-          orderSummary: "Order Summary",
-          orderSubtotal: "Order Subtotal",
-          orderShipping: "Shipping",
-          orderTotal: "Total"
-        },
+       },
       },
     },
   });
 
-  const { getByText } = render(<Cart />);
+  const { getByText } = render(
+    <MemoryRouter>
+      <Cart />
+    </MemoryRouter>
+  );
   expect(getByText("Test Product")).toBeInTheDocument();
 });
 
-// Remove Product Functionality Test
 test("removes product correctly", () => {
   const mockRemoveProduct = jest.fn();
 
@@ -61,8 +62,14 @@ test("removes product correctly", () => {
     },
   });
 
-  const { getByText } = render(<Cart />);
-  fireEvent.click(getByText("Delete"));
+  const { getByText } = render(
+    <MemoryRouter>
+      <Cart />
+    </MemoryRouter>
+  );
+
+ fireEvent.click(getByText("Delete"));
 
   expect(mockRemoveProduct).toHaveBeenCalledWith("Test Product");
 });
+
