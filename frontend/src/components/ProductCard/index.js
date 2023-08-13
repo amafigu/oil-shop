@@ -1,7 +1,7 @@
+import useLocaleContext from "#context/localeContext"
+import { productImageUrl, titleCase } from "#utils/utils"
 import React from "react"
 import { Link } from "react-router-dom"
-import { titleCase, productImageUrl } from "#utils/utils"
-import useLocaleContext from "#context/localeContext"
 import AddOneProductToCartButton from "./AddOneProductToCartButton"
 import styles from "./productCard.module.scss"
 
