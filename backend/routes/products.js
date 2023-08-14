@@ -1,5 +1,11 @@
 import express from 'express';
 import db from '../models/index.js';
+import {
+  CreateProductSchema,
+  ProductNameParamSchema,
+  UpdateProductSchema,
+} from '../utils/productSchema.js';
+import { validateBody, validateParams } from '../utils/validationMiddleware.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -11,24 +17,27 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:productName', async (req, res) => {
-  try {
-    const product = await db.product.findOne({
-      where: {
-        name: req.params.productName,
-      },
-    });
-    if (product === null) {
-      return res.status(404).json({ message: 'Product not found' });
+router.get(
+  '/:productName',
+  validateParams(ProductNameParamSchema),
+  async (req, res) => {
+    try {
+      const product = await db.product.findOne({
+        where: {
+          name: req.params.productName,
+        },
+      });
+      if (product === null) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      res.json(product);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-
-    res.json(product);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
   }
-});
+);
 
-router.post('/', async (req, res) => {
+router.post('/', validateBody(CreateProductSchema), async (req, res) => {
   try {
     const product = await db.product.findOne({
       where: {
@@ -43,7 +52,6 @@ router.post('/', async (req, res) => {
       });
     } else {
       const product = await db.product.create(req.body);
-
       res.status(201).json(product);
     }
   } catch (err) {
@@ -51,40 +59,43 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.delete('/:productName', async (req, res) => {
-  try {
-    const product = await db.product.findOne({
-      where: { name: req.params.productName },
-    });
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+router.delete(
+  '/:productName',
+  validateParams(ProductNameParamSchema),
+  async (req, res) => {
+    try {
+      const product = await db.product.findOne({
+        where: { name: req.params.productName },
+      });
+      if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      await product.destroy();
+      res.status(200).json({ message: 'Product successfully deleted' });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-
-    await product.destroy();
-    console.log('product delete', req.params.productName);
-    res.status(200).json({ message: 'Product successfully deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
   }
-});
+);
 
-router.put('/:productName', async (req, res) => {
-  try {
-    const product = await db.product.findOne({
-      where: { name: req.params.productName },
-    });
-    if (!product) {
-      console.log('req.params.productName', req.params.productName);
-      console.log('product ', product);
-
-      return res.status(404).json({ message: 'Product not found' });
+router.put(
+  '/:productName',
+  validateParams(ProductNameParamSchema),
+  validateBody(UpdateProductSchema),
+  async (req, res) => {
+    try {
+      const product = await db.product.findOne({
+        where: { name: req.params.productName },
+      });
+      if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      const updatedProduct = await product.update(req.body);
+      res.json(updatedProduct);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-
-    const updatedProduct = await product.update(req.body);
-    res.json(updatedProduct);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
   }
-});
+);
 
 export default router;
