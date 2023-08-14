@@ -1,5 +1,5 @@
 const productModel = (sequelize, DataTypes) => {
-  const Product = sequelize.define('products', {
+  const Product = sequelize.define('product', {
     name: {
       type: DataTypes.STRING,
     },
@@ -15,14 +15,8 @@ const productModel = (sequelize, DataTypes) => {
     size: {
       type: DataTypes.INTEGER,
     },
-    productCategoryId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'product_categories',
-        key: 'id',
-      },
-      allowNull: false,
-      onDelete: 'SET NULL',
+    category: {
+      type: DataTypes.STRING,
     },
     details: {
       type: DataTypes.STRING,
@@ -35,4 +29,4 @@ const productModel = (sequelize, DataTypes) => {
   return Product;
 };
 
-export default productModel;
+export default productModel

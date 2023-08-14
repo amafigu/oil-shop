@@ -1,6 +1,6 @@
 import express from 'express';
 import db from '../models/index.js';
-import { comparePassword } from '../utils/passwordEncrypt.js';
+import { comparePassword, hashPassword } from '../utils/passwordEncrypt.js';
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
-    // Here you'd also generate a token or session to keep the user logged in.
+    //  generate a token or session to keep the user logged in.
 
     res.json({ message: 'Logged in successfully', role: user.role });
   } catch (err) {
@@ -27,7 +27,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Create an Admin User
 router.post('/register-admin', async (req, res) => {
   try {
     const existingUser = await db.user.findOne({
@@ -46,17 +45,49 @@ router.post('/register-admin', async (req, res) => {
       role: 'admin',
     });
 
-    console.log({
+    console.log('{} ', {
       ...req.body,
       password: hashedPassword,
       role: 'admin',
     });
 
-    console.log(newAdmin);
+    console.log('new Adm ', newAdmin);
 
     res
       .status(201)
       .json({ message: 'Admin user created successfully', user: newAdmin });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.post('/register', async (req, res) => {
+  try {
+    const existingUser = await db.user.findOne({
+      where: { email: req.body.email },
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already in use' });
+    }
+
+    const hashedPassword = await hashPassword(req.body.password);
+
+    const newUser = await db.user.create({
+      ...req.body,
+      password: hashedPassword,
+      role: 'guest',
+    });
+
+    console.log('{} ', {
+      ...req.body,
+      password: hashedPassword,
+      role: 'guest',
+    });
+
+    res
+      .status(201)
+      .json({ message: 'Guest user created successfully', user: newUser });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -8,8 +8,6 @@ const validateBody = (schema) => (req, res, next) => {
 };
 
 const validateParams = (schema) => (req, res, next) => {
-  console.log('validateParams type ', typeof req.params);
-  console.log('validateParams ', req.params);
   try {
     schema.parse(req.params);
     next();

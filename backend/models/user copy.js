@@ -1,5 +1,5 @@
 const userModel = (sequelize, DataTypes) => {
-  const User = sequelize.define('users', {
+  const User = sequelize.define('user', {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
