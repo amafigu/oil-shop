@@ -15,6 +15,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.product = productModel(sequelize, Sequelize);
-db.product = userModel(sequelize, Sequelize);
+db.user = userModel(sequelize, Sequelize);
 
 export default db;
