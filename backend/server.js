@@ -1,10 +1,7 @@
-// const express = require('express');
-import express from 'express';
 import cors from 'cors';
-// const cors = require('cors');
+import express from 'express';
+import productRoutes from './routes/products.js';
 const app = express();
-// const productRoutes = require('./routes/products');
-import productRoutes from './routes/products.js'
 
 app.use(cors());
 app.use(express.json());
