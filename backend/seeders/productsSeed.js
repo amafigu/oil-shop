@@ -1,4 +1,4 @@
-import db from './models/index.js'
+import db from '../models/index.js';
 
 const products = [
   {
@@ -194,7 +194,7 @@ const products = [
     category: 'massageOil',
     details: 'Reduces stress.',
   },
- 
+
   {
     name: 'cel-lite_magic',
     image: 'oilMassage_cel-liteMagic_236_ml.jpg',
@@ -269,12 +269,27 @@ const products = [
 ];
 
 async function seed() {
+  const categories = await db.productCategory.findAll();
+
+  const categoryIdMap = categories.reduce((map, category) => {
+    map[category.name] = category.id;
+    return map;
+  }, {});
+
+  console.log('categoryIdMap ', categoryIdMap);
+
   try {
     await db.sequelize.sync({ force: true });
 
     await Promise.all(
       products.map((product) => {
-        return db.product.create(product);
+        const productToInsert = {
+          ...product,
+          productCategoryId: categoryIdMap[product.category],
+        };
+        delete productToInsert.category;
+
+        return db.product.create(productToInsert);
       })
     );
 
