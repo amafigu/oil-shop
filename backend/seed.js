@@ -1,4 +1,4 @@
-import db from './models/index.js'
+import db from './models/indexApp.js';
 
 const products = [
   {
@@ -194,7 +194,7 @@ const products = [
     category: 'massageOil',
     details: 'Reduces stress.',
   },
- 
+
   {
     name: 'cel-lite_magic',
     image: 'oilMassage_cel-liteMagic_236_ml.jpg',
