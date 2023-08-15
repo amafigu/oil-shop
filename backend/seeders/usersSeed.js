@@ -35,13 +35,11 @@ const users = [
 async function seed() {
   try {
     await db.sequelize.sync({ force: true });
-
     await Promise.all(
       users.map((newUser) => {
         return db.user.create(newUser);
       })
     );
-
     process.exit(0);
   } catch (err) {
     console.error(err);
