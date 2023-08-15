@@ -8,7 +8,7 @@ const Sidebar = ({ setCategory }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/product-categories")
+      .get(`${process.env.REACT_APP_API_URL}/product-categories`)
       .then((response) => {
         setProductCategories(response.data)
       })
