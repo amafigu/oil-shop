@@ -45,6 +45,7 @@ router.post('/', validateBody(CreateProductSchema), async (req, res) => {
       },
     });
 
+    console.log('create body ', req.body);
     if (product) {
       res.status(422).json({
         message:

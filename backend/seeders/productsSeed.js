@@ -276,22 +276,22 @@ async function seed() {
     return map;
   }, {});
 
-  console.log('categoryIdMap ', categoryIdMap);
-
   try {
-    await db.sequelize.sync({ force: true });
+    for (const product of products) {
+      const productToInsert = {
+        ...product,
+        productCategoryId: categoryIdMap[product.category],
+      };
+      delete productToInsert.category;
 
-    await Promise.all(
-      products.map((product) => {
-        const productToInsert = {
-          ...product,
-          productCategoryId: categoryIdMap[product.category],
-        };
-        delete productToInsert.category;
-
-        return db.product.create(productToInsert);
-      })
-    );
+      // Check if product exists before creating to avoid duplication
+      const existingProduct = await db.product.findOne({
+        where: { name: productToInsert.name },
+      });
+      if (!existingProduct) {
+        await db.product.create(productToInsert);
+      }
+    }
 
     process.exit(0);
   } catch (err) {

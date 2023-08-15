@@ -6,7 +6,7 @@ const CreateProductSchema = z.object({
   description: z.string(),
   measure: z.string(),
   size: z.number().int(),
-  category: z.string(),
+  productCategoryId: z.number().int(),
   details: z.string(),
   price: z.number(),
   createdAt: z.string().or(z.date()).optional(),
@@ -29,7 +29,7 @@ const ProductNameParamSchema = z.object({
 });
 
 const ProductCategorySchema = z.object({
-  category: z.string(),
+  name: z.string(),
 });
 
 export {
