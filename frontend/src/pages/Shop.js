@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
-import { useLocation } from "react-router-dom"
 import axios from "axios"
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import ProductCard from "../components/ProductCard"
 import Sidebar from "../components/Sidebar"
 import style from "./shop.module.scss"
@@ -34,10 +34,14 @@ const Shop = () => {
 
   const filteredProducts = (category) =>
     products.filter(
-      (product) => product.category === category || category === "all",
+      (product) => product.category.name === category || category === "all",
     )
 
   const sortedProducts = filteredProducts(category)
+
+  console.log("Shop ")
+  console.log("category ", category)
+  console.log("sorted ", sortedProducts)
 
   return (
     <div className={style.content}>
@@ -51,7 +55,6 @@ const Shop = () => {
             size={product.size}
             price={product.price}
             description={product.description}
-            category={product.category}
           />
         ))}
       </div>

@@ -1,59 +1,37 @@
-import React from "react"
+import axios from "axios"
+import { React, useEffect, useState } from "react"
+import { titleCase } from "../utils/utils"
 import styles from "./sidebar.module.scss"
-import useLocaleContext from "../context/localeContext"
 
 const Sidebar = ({ setCategory }) => {
-  const { translate } = useLocaleContext()
+  const [productCategories, setProductCategories] = useState([])
 
-  const Categories = Object.freeze({
-    ALL: "all",
-    ESSENTIAL_OIL: "essentialOil",
-    DIFUSER: "difuser",
-    BODY_CARE: "bodyCare",
-    ROLL: "roll",
-    MASSAGE_OIL: "massageOil",
-  })
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/product-categories")
+      .then((response) => {
+        setProductCategories(response.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error)
+      })
+  }, [])
+
+  const renderedCategories = productCategories
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((category) => (
+      <li
+        key={category.id}
+        onClick={() => setCategory(category.name)}
+        className={styles.sidebarItem}
+      >
+        {titleCase(category.name, "_")}
+      </li>
+    ))
 
   return (
     <div>
-      <ul className={styles.sidebar}>
-        <li
-          onClick={() => setCategory(Categories.ALL)}
-          className={styles.sidebarItem}
-        >
-          {translate.components.sidebar.allProducts}
-        </li>
-        <li
-          onClick={() => setCategory(Categories.ESSENTIAL_OIL)}
-          className={styles.sidebarItem}
-        >
-          {translate.components.sidebar.essentialOils}
-        </li>
-        <li
-          onClick={() => setCategory(Categories.DIFUSER)}
-          className={styles.sidebarItem}
-        >
-          {translate.components.sidebar.difusers}
-        </li>
-        <li
-          onClick={() => setCategory(Categories.BODY_CARE)}
-          className={styles.sidebarItem}
-        >
-          {translate.components.sidebar.bodyCare}
-        </li>
-        <li
-          onClick={() => setCategory(Categories.ROLL)}
-          className={styles.sidebarItem}
-        >
-          {translate.components.sidebar.rollOn}
-        </li>
-        <li
-          onClick={() => setCategory(Categories.MASSAGE_OIL)}
-          className={styles.sidebarItem}
-        >
-          {translate.components.sidebar.massageOils}
-        </li>
-      </ul>
+      <ul className={styles.sidebar}>{renderedCategories}</ul>
     </div>
   )
 }

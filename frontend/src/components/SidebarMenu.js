@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react"
-import styles from "./sidebarMenu.module.scss"
-import { Link } from "react-router-dom"
 import useLocaleContext from "#context/localeContext"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { titleCase } from "../utils/utils"
+import styles from "./sidebarMenu.module.scss"
 
 const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
   const [slideInOutClass, setSlideInOutClass] = useState(
     isOpen ? "visible" : "hidden",
   )
+  const [productCategories, setProductCategories] = useState([])
 
   useEffect(() => {
     if (isOpen) {
@@ -16,17 +19,29 @@ const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
     }
   }, [isOpen])
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/product-categories")
+      .then((response) => {
+        setProductCategories(response.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error)
+      })
+  }, [])
+
   const { translate } = useLocaleContext()
   const text = translate.components.sidebarMenu
 
-  const Categories = Object.freeze({
-    ALL: "all",
-    ESSENTIAL_OIL: "essentialOil",
-    DIFUSER: "difuser",
-    BODY_CARE: "bodyCare",
-    ROLL: "roll",
-    MASSAGE_OIL: "massageOil",
-  })
+  const renderedCategories = productCategories
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((category) => (
+      <Link to={`/shop?category=${category.name}`}>
+        <div key={category.id} className={styles.sidebarItem}>
+          {titleCase(category.name, "_")}
+        </div>
+      </Link>
+    ))
 
   return (
     <div className={styles[slideInOutClass]}>
@@ -37,63 +52,25 @@ const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
         >
           <span className='material-symbols-outlined'>close</span>
         </div>
-        <div className={styles.sidebarItem}>
-          <Link to={`/shop?category=all`}>{text.allProducts}</Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to={`/shop?category=${Categories.ESSENTIAL_OIL}`}>
-            {text.essentialOils}
-          </Link>
-        </div>
-
-        <div className={styles.sidebarItem}>
-          <Link to={`/shop?category=${Categories.DIFUSER}`}>
-            {text.difusers}
-          </Link>
-        </div>
-
-        <div className={styles.sidebarItem}>
-          <Link to={`/shop?category=${Categories.BODY_CARE}`}>
-            {text.bodyCare}
-          </Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to={`/shop?category=${Categories.ROLL}`}>{text.rollOn}</Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to={`/shop?category=${Categories.MASSAGE_OIL}`}>
-            {text.massageOils}
-          </Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <a href='mailto:oylooils@gmail.com'>Contact us</a>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to='/login' title={text.accountAndLogin}>
-            {text.accountAndLogin}
-          </Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to='/shop' title={text.onlineShop}>
-            {text.onlineShop}
-          </Link>
-        </div>
-
-        <div className={styles.sidebarItem}>
-          <Link to='/cancellation' title={text.cancellationPolicyTitle}>
-            {text.cancellationPolicy}
-          </Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to='/return' title={text.returnProductsTitle}>
-            {text.returnProducts}
-          </Link>
-        </div>
-        <div className={styles.sidebarItem}>
-          <Link to='/faq' title={text.faqTitle}>
-            {text.faq}
-          </Link>
-        </div>
+        {renderedCategories}
+        <Link to='/login' title={text.accountAndLogin}>
+          <div className={styles.sidebarItem}>{text.accountAndLogin}</div>
+        </Link>
+        <Link to='/shop' title={text.onlineShop}>
+          <div className={styles.sidebarItem}>{text.onlineShop}</div>
+        </Link>
+        <Link to='/cancellation' title={text.cancellationPolicyTitle}>
+          <div className={styles.sidebarItem}>{text.cancellationPolicy}</div>
+        </Link>
+        <Link to='/return' title={text.returnProductsTitle}>
+          <div className={styles.sidebarItem}>{text.returnProducts}</div>
+        </Link>
+        <Link to='/faq' title={text.faqTitle}>
+          <div className={styles.sidebarItem}>{text.faq}</div>
+        </Link>
+        <a href='mailto:oylooils@gmail.com'>
+          <div className={styles.sidebarItem}>Contact us</div>
+        </a>
       </div>
     </div>
   )

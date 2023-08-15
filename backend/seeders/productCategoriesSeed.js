@@ -8,16 +8,16 @@ const productCategories = [
     name: 'all',
   },
   {
-    name: 'essentialOil',
+    name: 'essential_oil',
   },
   {
-    name: 'bodyCare',
+    name: 'body_care',
   },
   {
     name: 'difuser',
   },
   {
-    name: 'massageOil',
+    name: 'massage_oil',
   },
 ];
 

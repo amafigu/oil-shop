@@ -10,7 +10,14 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const products = await db.product.findAll();
+    const products = await db.product.findAll({
+      include: [
+        {
+          model: db.productCategory,
+          as: 'category',
+        },
+      ],
+    });
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -26,6 +33,12 @@ router.get(
         where: {
           name: req.params.productName,
         },
+        include: [
+          {
+            model: db.productCategory,
+            as: 'category',
+          },
+        ],
       });
       if (product === null) {
         return res.status(404).json({ message: 'Product not found' });
