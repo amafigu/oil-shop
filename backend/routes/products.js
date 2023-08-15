@@ -26,6 +26,12 @@ router.get(
         where: {
           name: req.params.productName,
         },
+        include: [
+          {
+            model: db.productCategory,
+            as: 'category',
+          },
+        ],
       });
       if (product === null) {
         return res.status(404).json({ message: 'Product not found' });
