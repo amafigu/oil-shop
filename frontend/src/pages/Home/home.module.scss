@@ -8,12 +8,43 @@
   flex-direction: column;
 }
 
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This will center-align child elements horizontally */
+  justify-content: center;
+  width: 80%;
+}
+
+.carouselWrapper {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.teaserTextWrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .teaserText {
-  @include flex-column-text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  text-align: center;
+}
+
+.teaserCardsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
 }
 
 .teaserCards {
   display: flex;
+  justify-content: space-between;
 }
 
 .title {
@@ -26,6 +57,9 @@
 }
 
 .homeSubtitle {
+  display: flex;
+  align-items: center;
+  height: 80px;
   font-family: theme.$main-font-family;
   font-size: 18px;
   font-weight: bold;
@@ -33,6 +67,7 @@
 }
 
 .subtitleText {
+  width: 60%;
   font-family: theme.$main-font-family;
   font-size: 18px;
   font-weight: 500;
@@ -43,6 +78,7 @@
 .productSliderContainer {
   display: flex;
   justify-content: center;
+  width: 80%;
 }
 
 .icon {
@@ -50,7 +86,13 @@
 }
 
 .teaserSingleCard {
-  @include flex-column;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
+}
+
+.columnsContainer {
+  display: flex;
+  justify-content: center;
 }
