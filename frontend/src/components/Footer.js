@@ -144,7 +144,7 @@ const Footer = () => {
               </div>
               <div className={styles.iconsSectionItemIcons}>
                 <img
-                  src={process.env.PUBLIC_URL + "/assets/" + "iconPay.png"}
+                  src={`${process.env.PUBLIC_URL}/assets/iconPay.png`}
                   alt=''
                   id='last'
                   width='316'
@@ -158,13 +158,13 @@ const Footer = () => {
               <div className={styles.iconsSectionItemIcons}>
                 <img
                   id='last'
-                  src={process.env.PUBLIC_URL + "/assets/" + "iconDhl.png"}
+                  src={`${process.env.PUBLIC_URL}/assets/iconDhl.png`}
                   alt=''
                   width='77'
                 />
                 <img
                   id='last'
-                  src={process.env.PUBLIC_URL + "/assets/" + "iconUps.png"}
+                  src={`${process.env.PUBLIC_URL}/assets/iconUps.png`}
                   alt=''
                   width='77'
                 />
@@ -180,13 +180,12 @@ const Footer = () => {
                 <a
                   href='https://www.facebook.com/'
                   target='_blank'
+                  rel='noreferrer'
                   title={text.iconsColumns.third.facebook}
                   alt={text.iconsColumns.third.facebook}
                 >
                   <img
-                    src={
-                      process.env.PUBLIC_URL + "/assets/" + "iconFacebook.png"
-                    }
+                    src={`${process.env.PUBLIC_URL}/assets/iconFacebook.png`}
                     alt=''
                     width='50'
                   />
@@ -194,13 +193,12 @@ const Footer = () => {
                 <a
                   href='https://www.instagram.com/'
                   target='_blank'
+                  rel='noreferrer'
                   title={text.iconsColumns.third.instagram}
                   alt={text.iconsColumns.third.instagram}
                 >
                   <img
-                    src={
-                      process.env.PUBLIC_URL + "/assets/" + "iconInstagram.png"
-                    }
+                    src={`${process.env.PUBLIC_URL}/assets/iconInstagram.png`}
                     alt=''
                     width='50'
                   />
@@ -208,13 +206,12 @@ const Footer = () => {
                 <a
                   href='https://www.youtube.com/user/'
                   target='_blank'
+                  rel='noreferrer'
                   title={text.iconsColumns.third.youtube}
                   alt={text.iconsColumns.third.youtube}
                 >
                   <img
-                    src={
-                      process.env.PUBLIC_URL + "/assets/" + "iconYoutube.png"
-                    }
+                    src={`${process.env.PUBLIC_URL}/assets/iconYoutube.png`}
                     alt=''
                     width='50'
                   />

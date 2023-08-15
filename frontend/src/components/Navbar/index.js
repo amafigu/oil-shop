@@ -1,5 +1,4 @@
 import { CartContext } from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
 import { titleCase } from "#utils/utils"
 import axios from "axios"
 import React, { useContext, useEffect, useRef, useState } from "react"
@@ -9,7 +8,7 @@ import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
 const Navbar = ({ toggleSidebarMenuVisibility }) => {
-  const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false)
+  const [, setLanguageDropdownOpen] = useState(false)
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
@@ -18,7 +17,6 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
   )
   const [matchedProducts, setMatchedProducts] = useState([])
   const { getAllProductsQuantity } = useContext(CartContext)
-  const { setLanguage } = useLocaleContext()
 
   const navigate = useNavigate()
   const languageDropdownRef = useRef(null)
@@ -136,7 +134,8 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
           <div className={styles.navbarColumn}>
             <img
               className={styles.logo}
-              src={process.env.PUBLIC_URL + "/assets/" + "logo.png"}
+              src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+              alt='logo'
             />
           </div>
 

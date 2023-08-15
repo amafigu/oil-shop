@@ -30,7 +30,10 @@ const OrderSummary = () => {
         <div key={index}>
           <p>Name: {item.product.name}</p>
           <p>Quantity: {item.quantity}</p>
-          <img src={process.env.PUBLIC_URL + "/assets/" + item.product.image} />
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/${item.product.image}`}
+            alt={item.product.name}
+          />
         </div>
       ))}
     </div>
