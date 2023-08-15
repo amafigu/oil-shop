@@ -1,5 +1,7 @@
 import express from 'express';
 import db from '../models/index.js';
+import { ProductCategorySchema } from '../utils/productSchema.js';
+import { validateBody } from '../utils/validationMiddleware.js';
 
 const router = express.Router();
 
@@ -12,15 +14,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', validateBody(ProductCategorySchema), async (req, res) => {
   try {
     const productCategory = await db.productCategory.findOne({
       where: {
         name: req.body.name,
       },
     });
-    console.log('req cat ', req.body.name);
-    console.log('req body ', req.body);
 
     if (productCategory) {
       res.status(400).json({

@@ -29,7 +29,7 @@ const ProductNameParamSchema = z.object({
 });
 
 const ProductCategorySchema = z.object({
-  category: z.string(),
+  name: z.string(),
 });
 
 export {

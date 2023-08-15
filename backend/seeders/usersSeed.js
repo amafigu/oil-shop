@@ -34,12 +34,14 @@ const users = [
 
 async function seed() {
   try {
-    await db.sequelize.sync({ force: true });
-    await Promise.all(
-      users.map((newUser) => {
-        return db.user.create(newUser);
-      })
-    );
+    for (const newUser of users) {
+      const existingUser = await db.user.findOne({
+        where: { email: newUser.email },
+      });
+      if (!existingUser) {
+        await db.user.create(newUser);
+      }
+    }
     process.exit(0);
   } catch (err) {
     console.error(err);

@@ -23,14 +23,14 @@ const productCategories = [
 
 async function seed() {
   try {
-    await db.sequelize.sync({ force: true });
-
-    await Promise.all(
-      productCategories.map((newCategory) => {
-        return db.productCategory.create(newCategory);
-      })
-    );
-
+    for (const newCategory of productCategories) {
+      const existingCategory = await db.productCategory.findOne({
+        where: { name: newCategory.name },
+      });
+      if (!existingCategory) {
+        await db.productCategory.create(newCategory);
+      }
+    }
     process.exit(0);
   } catch (err) {
     console.error(err);
