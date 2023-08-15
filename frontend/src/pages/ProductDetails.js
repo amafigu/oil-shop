@@ -34,8 +34,16 @@ const ProductDetails = () => {
     return <div>{text.loading}...</div>
   }
 
-  const { name, image, size, price, description, productCategoryId, details } =
-    product
+  const {
+    name,
+    image,
+    size,
+    price,
+    description,
+    productCategoryId,
+    category,
+    details,
+  } = product
 
   const addToCart = () => {
     addProduct(product, quantity)
@@ -69,9 +77,9 @@ const ProductDetails = () => {
           <div className={styles.productInfoCategory}>
             <Link
               className={styles.productInfoCategoryLink}
-              to={`/shop?category=${productCategoryId}`}
+              to={`/shop?category=${category.name}`}
             >
-              {productCategoryId}
+              {category.name}
             </Link>
           </div>
           <div className={styles.productName}>

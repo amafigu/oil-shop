@@ -10,24 +10,23 @@ const Sidebar = ({ setCategory }) => {
       .get("http://localhost:3001/api/product-categories")
       .then((response) => {
         setProductCategories(response.data)
-        console.log("sidebar.js productCategories", response.data)
       })
       .catch((error) => {
         console.error("Error fetching data: ", error)
       })
   }, [])
 
-  // Render all categories dynamically.
-  const renderedCategories = productCategories.map((category) => (
-    <li
-      key={category.id} // Assuming each category has a unique ID.
-      onClick={() => setCategory(category.id)}
-      className={styles.sidebarItem}
-    >
-      {category.id}
-      {category.name}
-    </li>
-  ))
+  const renderedCategories = productCategories
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((category) => (
+      <li
+        key={category.id}
+        onClick={() => setCategory(category.name)}
+        className={styles.sidebarItem}
+      >
+        {category.name}
+      </li>
+    ))
 
   return (
     <div>
