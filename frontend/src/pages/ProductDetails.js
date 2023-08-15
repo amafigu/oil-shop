@@ -34,16 +34,7 @@ const ProductDetails = () => {
     return <div>{text.loading}...</div>
   }
 
-  const {
-    name,
-    image,
-    size,
-    price,
-    description,
-    productCategoryId,
-    category,
-    details,
-  } = product
+  const { name, image, size, price, description, category, details } = product
 
   const addToCart = () => {
     addProduct(product, quantity)
@@ -79,7 +70,7 @@ const ProductDetails = () => {
               className={styles.productInfoCategoryLink}
               to={`/shop?category=${category.name}`}
             >
-              {category.name}
+              {titleCase(category.name, "_")}
             </Link>
           </div>
           <div className={styles.productName}>

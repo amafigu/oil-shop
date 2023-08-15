@@ -2,6 +2,7 @@ import useLocaleContext from "#context/localeContext"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { titleCase } from "../utils/utils"
 import styles from "./sidebarMenu.module.scss"
 
 const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
@@ -37,7 +38,7 @@ const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
     .map((category) => (
       <Link to={`/shop?category=${category.name}`}>
         <div key={category.id} className={styles.sidebarItem}>
-          {category.name}
+          {titleCase(category.name, "_")}
         </div>
       </Link>
     ))

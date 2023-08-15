@@ -1,5 +1,6 @@
 import axios from "axios"
 import { React, useEffect, useState } from "react"
+import { titleCase } from "../utils/utils"
 import styles from "./sidebar.module.scss"
 
 const Sidebar = ({ setCategory }) => {
@@ -24,7 +25,7 @@ const Sidebar = ({ setCategory }) => {
         onClick={() => setCategory(category.name)}
         className={styles.sidebarItem}
       >
-        {category.name}
+        {titleCase(category.name, "_")}
       </li>
     ))
 
