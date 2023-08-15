@@ -8,7 +8,7 @@ const products = [
     size: 5,
     measure: 'ml',
     price: 15.88,
-    category: 'essentialOil',
+    category: 'essential_oil',
     details: 'Reduces the wrinkles, increases skin firmness.',
   },
   {
@@ -18,7 +18,7 @@ const products = [
     size: 15,
     measure: 'ml',
     price: 16.45,
-    category: 'essentialOil',
+    category: 'essential_oil',
     details: 'Reduces the wrinkles, increases skin firmness.',
   },
   {
@@ -28,7 +28,7 @@ const products = [
     size: 15,
     measure: 'ml',
     price: 17.25,
-    category: 'essentialOil',
+    category: 'essential_oil',
     details: 'Reduces the wrinkles, increases skin firmness.',
   },
   {
@@ -38,7 +38,7 @@ const products = [
     size: 5,
     measure: 'ml',
     price: 18.33,
-    category: 'essentialOil',
+    category: 'essential_oil',
     details: 'Reduces the wrinkles, increases skin firmness.',
   },
   {
@@ -48,7 +48,7 @@ const products = [
     size: 15,
     measure: 'ml',
     price: 22.44,
-    category: 'essentialOil',
+    category: 'essential_oil',
     details: 'Reduces the wrinkles, increases skin firmness.',
   },
   {
@@ -58,7 +58,7 @@ const products = [
     size: 15,
     measure: 'ml',
     price: 12.33,
-    category: 'essentialOil',
+    category: 'essential_oil',
     details: 'Reduces the wrinkles, increases skin firmness.',
   },
   {
@@ -68,7 +68,7 @@ const products = [
     size: 236,
     measure: 'ml',
     price: 23.65,
-    category: 'bodyCare',
+    category: 'body_care',
     details: 'shower gel.',
   },
   {
@@ -78,7 +78,7 @@ const products = [
     size: 236,
     measure: 'ml',
     price: 23.69,
-    category: 'bodyCare',
+    category: 'body_care',
     details: 'shower gel.',
   },
   {
@@ -88,7 +88,7 @@ const products = [
     size: 236,
     measure: 'ml',
     price: 23.69,
-    category: 'bodyCare',
+    category: 'body_care',
     details: 'shower gel.',
   },
   {
@@ -98,7 +98,7 @@ const products = [
     size: 236,
     measure: 'ml',
     price: 23.69,
-    category: 'bodyCare',
+    category: 'body_care',
     details: 'shower gel.',
   },
   {
@@ -108,7 +108,7 @@ const products = [
     size: 236,
     measure: 'ml',
     price: 23.69,
-    category: 'bodyCare',
+    category: 'body_care',
     details: 'shower gel.',
   },
 
@@ -180,7 +180,7 @@ const products = [
     size: 944,
     measure: 'ml',
     price: 35.48,
-    category: 'massageOil',
+    category: 'massage_oil',
     details: 'Reduces the wrinkles, increases skin firmness.',
   },
 
@@ -191,7 +191,7 @@ const products = [
     size: 236,
     measure: 'ml',
     price: 35.48,
-    category: 'massageOil',
+    category: 'massage_oil',
     details: 'Reduces stress.',
   },
 
@@ -202,7 +202,7 @@ const products = [
     size: 236,
     measure: 'ml',
     price: 35.48,
-    category: 'massageOil',
+    category: 'massage_oil',
     details: 'Reduces stress.',
   },
 
@@ -282,6 +282,9 @@ async function seed() {
         ...product,
         productCategoryId: categoryIdMap[product.category],
       };
+      if (!productToInsert.productCategoryId) {
+        console.error(`Category not found for product: ${product.name}`);
+      }
       delete productToInsert.category;
 
       // Check if product exists before creating to avoid duplication
