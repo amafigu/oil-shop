@@ -13,9 +13,11 @@ const Shop = () => {
   const params = new URLSearchParams(location.search)
   const queryCategory = params.get("category")
 
+  console.log("process.env.REACT_APP_API_URL ", process.env.REACT_APP_API_URL)
+
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/products")
+      .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
         setProducts(response.data)
       })

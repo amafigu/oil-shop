@@ -1,12 +1,12 @@
-import React, { useState, useContext, useEffect, useRef } from "react"
-import styles from "./navbar.module.scss"
+import { CartContext } from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { titleCase } from "#utils/utils"
-import { CartContext } from "#context/cartContext"
-import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
-import SubNavbar from "./SubNavbar"
+import React, { useContext, useEffect, useRef, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
+import SubNavbar from "./SubNavbar"
+import styles from "./navbar.module.scss"
 
 const Navbar = ({ toggleSidebarMenuVisibility }) => {
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false)
@@ -74,7 +74,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/products")
+      .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
         setProducts(response.data)
       })

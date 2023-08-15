@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"
-import styles from "./productSlider.module.scss"
-import axios from "axios"
 import ProductCard from "#components/ProductCard"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
+import styles from "./productSlider.module.scss"
 
 const ProductSlider = () => {
   const [products, setProducts] = useState([])
@@ -10,8 +10,9 @@ const ProductSlider = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/products")
+      .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
+        console.log(response.data)
         setProducts(response.data)
       })
       .catch((error) => {
