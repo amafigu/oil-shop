@@ -43,7 +43,6 @@ const Home = () => {
                 {translate.pages.welcome.subTeaser.title}
               </p>
             </div>
-
             <div className={styles.teaserCards}>
               <div className={styles.teaserSingleCard}>
                 <p className={styles.homeSubtitle}>
@@ -52,7 +51,7 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserFirstSentence}
                 </p>
-                <span className={`material-symbols-outlined $''icon}`}>
+                <span className={`material-symbols-outlined ${styles.icon}`}>
                   nature_people
                 </span>
               </div>
@@ -63,7 +62,7 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserSecondSentence}
                 </p>
-                <span className={`material-symbols-outlined $''icon}`}>
+                <span className={`material-symbols-outlined ${styles.icon}`}>
                   spa
                 </span>
               </div>
@@ -74,7 +73,7 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserThirthSentence}
                 </p>
-                <span className={`material-symbols-outlined $''icon}`}>
+                <span className={`material-symbols-outlined ${styles.icon}`}>
                   send
                 </span>
               </div>
@@ -85,7 +84,7 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserFourthSentence}
                 </p>
-                <span className={`material-symbols-outlined $''icon}`}>
+                <span className={`material-symbols-outlined ${styles.icon}`}>
                   diversity_1
                 </span>
               </div>

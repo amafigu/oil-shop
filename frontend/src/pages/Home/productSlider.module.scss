@@ -1,20 +1,17 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-
 .carousel {
   display: flex;
   gap: 16px;
   align-items: center;
-  width: 100%;
   padding: 20px 0;
   overflow-x: auto;
   white-space: nowrap;
-  scrollbar-width: none; /* For Firefox */
+  scrollbar-width: none;
 }
 
 .carousel::-webkit-scrollbar {
-  /* For Chrome, Safari, and Opera */
   display: none;
 }
 
@@ -28,7 +25,7 @@
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 4px 6px 0 hsl(0deg 0% 0% / 20%);
+  box-shadow: 0 4px 6px 0;
 }
 
 .productImage {

@@ -6,7 +6,7 @@ import styles from "./productSlider.module.scss"
 const ProductSlider = () => {
   const [products, setProducts] = useState([])
   const [currentProductIndex, setcurrentProductIndex] = useState(0)
-  const displayCount = 6
+  const displayCount = 4
 
   useEffect(() => {
     axios
