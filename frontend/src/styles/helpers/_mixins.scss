@@ -16,19 +16,6 @@
   text-align: center;
 }
 
-@mixin product-card-wrapper {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
-  width: 16.25rem;
-  height: 23rem;
-  margin: 1rem;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  text-align: center;
-}
-
 @mixin full-width-and-height {
   width: 100%;
   height: 100%;
@@ -43,36 +30,16 @@
   text-align: center;
 }
 
-@mixin product-card-description {
-  margin-bottom: 10px;
-  font-size: 0.875rem;
-  color: theme.$secondary-color;
-}
-
-@mixin product-card-size-and-price {
-  margin: 0;
-  font-family: theme.$main-font-family;
-  font-size: product-card-name-font-size;
-  font-weight: 500;
-  color: theme.$secondary-color;
-}
-
-@mixin product-image {
-  max-width: 80%;
-  height: 12.5rem;
-  margin: 1rem 0;
-}
-
 @mixin product-cart-purshase-button {
   position: relative;
   box-sizing: border-box;
   display: inline-block;
   min-width: 64px;
   height: auto;
-  padding: 1rem;
+  padding: 16px;
   overflow: hidden;
   font-family: theme.$main-font-family;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 500;
   color: theme.$primary-color;
   text-align: center;
@@ -84,8 +51,7 @@
   border: none;
   border-radius: 0.25rem;
   outline: none;
-  box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
-    0 1px 5px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%);
   transition: box-shadow 0.2s;
 }
 
@@ -94,4 +60,17 @@
   background: none;
   border: none;
   outline: none;
+}
+
+@mixin reset-button {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
 }

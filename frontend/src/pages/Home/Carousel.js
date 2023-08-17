@@ -14,11 +14,11 @@ const Carousel = () => {
     setCurrentVideoIndex(newIndex >= videos.length ? 0 : newIndex)
   }, [currentVideoIndex])
 
-  const previousVideo = useCallback( () => {
+  const previousVideo = useCallback(() => {
     const newIndex = currentVideoIndex - 1
     setCurrentVideoIndex(newIndex < 0 ? videos.length - 1 : newIndex)
-  },[currentVideoIndex])
-  
+  }, [currentVideoIndex])
+
   useEffect(() => {
     const timer = setInterval(() => {
       nextVideo()
@@ -32,29 +32,29 @@ const Carousel = () => {
 
   return (
     <div className={styles.carousel}>
-      <span
-        className={`material-symbols-outlined iconCarousel`}
+      <button
+        className={`material-symbols-outlined ${styles.iconSlider}`}
         onClick={previousVideo}
       >
         arrow_back_ios
-      </span>
+      </button>
       <div className={styles.videoWrapper}>
         <iframe
           key={videoSrc}
-          className={styles.video}
+          className={styles.iframeVideo}
           src={videoSrc}
-          title='YouTube video player'
+          title='teaser video'
           allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
         ></iframe>
         <div className={styles.borderDiv}></div>
       </div>
 
-      <span
+      <button
         onClick={nextVideo}
-        className={`material-symbols-outlined iconCarousel`}
+        className={`material-symbols-outlined ${styles.iconSlider}`}
       >
         arrow_forward_ios
-      </span>
+      </button>
     </div>
   )
 }

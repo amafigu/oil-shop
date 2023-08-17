@@ -36,8 +36,8 @@ const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
   const renderedCategories = productCategories
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((category) => (
-      <Link to={`/shop?category=${category.name}`}>
-        <div key={category.id} className={styles.sidebarItem}>
+      <Link key={category.id} to={`/shop?category=${category.name}`}>
+        <div className={styles.sidebarItem}>
           {titleCase(category.name, "_")}
         </div>
       </Link>

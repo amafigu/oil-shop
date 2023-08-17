@@ -3,7 +3,15 @@
 @import "#styles/helpers/mixins";
 
 .productCardWrapper {
-  @include product-card-wrapper;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 260px;
+  height: 384px;
+  margin: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  text-align: center;
 }
 
 .productCardWrapper:hover {
@@ -27,16 +35,24 @@
 }
 
 .productCardImage {
-  @include product-image;
-
+  max-width: 80%;
+  height: 200px;
+  margin: 16px 0;
   object-fit: contain;
 }
 
 .productCardSize,
 .productCardPrice {
-  @include product-card-size-and-price;
+  margin: 0;
+  font-family: theme.$main-font-family;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: theme.$secondary-color;
 }
 
 .productCardDescription {
-  @include product-card-description;
+  margin-bottom: 10px;
+  font-family: theme.$main-font-family;
+  font-size: 0.875rem;
+  color: theme.$secondary-color;
 }
