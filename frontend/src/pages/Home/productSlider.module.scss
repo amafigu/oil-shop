@@ -1,66 +1,16 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.carousel {
+.slider {
   display: flex;
   gap: 16px;
   align-items: center;
   padding: 20px 0;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
 }
 
-.carousel::-webkit-scrollbar {
-  display: none;
-}
+.iconSlider {
+  @include reset-button;
 
-.productContainer {
-  display: inline-block;
-  flex: 0 0 auto;
-  width: 150px;
-  padding: 10px;
-  margin: 0 15px;
-  text-align: center;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px 0;
-}
-
-.productImage {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.productTitle {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #333;
-}
-
-.productPrice {
-  font-size: 14px;
-  color: #888;
-}
-
-.sliderButton {
-  font-size: 2rem;
-  color: #888;
+  color: theme.$primary-color;
   cursor: pointer;
-}
-
-.sliderButton:hover {
-  color: #333;
-}
-
-.iconCarousel {
-  cursor: pointer;
-  background-color: white;
-}
-
-.iconCarousel:active,
-.iconCarousel:focus {
-  box-shadow: 0 0 0 2px rgb(0 0 0 / 50%);
 }

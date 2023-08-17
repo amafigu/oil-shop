@@ -32,12 +32,12 @@ const Carousel = () => {
 
   return (
     <div className={styles.carousel}>
-      <span
-        className={`material-symbols-outlined iconCarousel`}
+      <button
+        className={`material-symbols-outlined ${styles.iconSlider}`}
         onClick={previousVideo}
       >
         arrow_back_ios
-      </span>
+      </button>
       <div className={styles.videoWrapper}>
         <iframe
           key={videoSrc}
@@ -49,12 +49,12 @@ const Carousel = () => {
         <div className={styles.borderDiv}></div>
       </div>
 
-      <span
+      <button
         onClick={nextVideo}
-        className={`material-symbols-outlined iconCarousel`}
+        className={`material-symbols-outlined ${styles.iconSlider}`}
       >
         arrow_forward_ios
-      </span>
+      </button>
     </div>
   )
 }

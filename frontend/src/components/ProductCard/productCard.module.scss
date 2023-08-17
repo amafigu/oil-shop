@@ -35,16 +35,24 @@
 }
 
 .productCardImage {
-  @include product-image;
-
+  max-width: 80%;
+  height: 200px;
+  margin: 16px 0;
   object-fit: contain;
 }
 
 .productCardSize,
 .productCardPrice {
-  @include product-card-size-and-price;
+  margin: 0;
+  font-family: theme.$main-font-family;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: theme.$secondary-color;
 }
 
 .productCardDescription {
-  @include product-card-description;
+  margin-bottom: 10px;
+  font-family: theme.$main-font-family;
+  font-size: 0.875rem;
+  color: theme.$secondary-color;
 }

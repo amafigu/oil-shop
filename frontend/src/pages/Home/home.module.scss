@@ -39,6 +39,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
 }
 
 .teaserCards {
@@ -66,10 +67,20 @@
   text-align: center;
 }
 
+.columnsTitle {
+  align-items: center;
+  font-family: theme.$main-font-family;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .homeSubtitleText {
   display: flex;
   align-items: flex-start;
-  min-height: 220px;
+  min-height: 120px;
+  max-height: 200px;
   overflow: hidden;
   font-family: theme.$main-font-family;
   font-size: 16px;
@@ -90,10 +101,11 @@
   display: flex;
   justify-content: center;
   width: 96%;
+  margin-bottom: 16px;
 }
 
-.icon {
-  font-size: 56px;
+.iconColumns {
+  font-size: 46px;
 }
 
 .teaserSingleCard {

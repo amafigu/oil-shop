@@ -39,7 +39,7 @@ const Home = () => {
         <div className={styles.columnsContainer}>
           <div className={styles.teaserCardsWrapper}>
             <div>
-              <p className={styles.homeTitle}>
+              <p className={styles.columnsTitle}>
                 {translate.pages.welcome.subTeaser.title}
               </p>
             </div>
@@ -51,7 +51,9 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserFirstSentence}
                 </p>
-                <span className={`material-symbols-outlined ${styles.icon}`}>
+                <span
+                  className={`material-symbols-outlined ${styles.iconColumns}`}
+                >
                   nature_people
                 </span>
               </div>
@@ -62,7 +64,9 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserSecondSentence}
                 </p>
-                <span className={`material-symbols-outlined ${styles.icon}`}>
+                <span
+                  className={`material-symbols-outlined ${styles.iconColumns}`}
+                >
                   spa
                 </span>
               </div>
@@ -73,7 +77,9 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserThirthSentence}
                 </p>
-                <span className={`material-symbols-outlined ${styles.icon}`}>
+                <span
+                  className={`material-symbols-outlined ${styles.iconColumns}`}
+                >
                   send
                 </span>
               </div>
@@ -84,7 +90,9 @@ const Home = () => {
                 <p className={styles.homeSubtitleText}>
                   {translate.pages.welcome.subTeaser.teaserFourthSentence}
                 </p>
-                <span className={`material-symbols-outlined ${styles.icon}`}>
+                <span
+                  className={`material-symbols-outlined ${styles.iconColumns}`}
+                >
                   diversity_1
                 </span>
               </div>

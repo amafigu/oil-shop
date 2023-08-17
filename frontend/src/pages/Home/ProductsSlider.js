@@ -35,13 +35,13 @@ const ProductSlider = () => {
   }
 
   return (
-    <div className={styles.carousel}>
-      <span
-        className={`material-symbols-outlined ${styles.iconCarousel}`}
+    <div className={styles.slider}>
+      <button
+        className={`material-symbols-outlined ${styles.iconSlider}`}
         onClick={previousProduct}
       >
         arrow_back_ios
-      </span>
+      </button>
       {products
         .slice(currentProductIndex, currentProductIndex + displayCount)
         .map((product, index) => (
@@ -54,12 +54,12 @@ const ProductSlider = () => {
             description={product.description}
           />
         ))}
-      <span
+      <button
         onClick={nextProduct}
-        className={`material-symbols-outlined ${styles.iconCarousel}`}
+        className={`material-symbols-outlined ${styles.iconSlider}`}
       >
         arrow_forward_ios
-      </span>
+      </button>
     </div>
   )
 }
