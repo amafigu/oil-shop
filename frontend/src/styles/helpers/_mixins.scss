@@ -31,9 +31,6 @@
 }
 
 @mixin product-cart-purshase-button {
-  position: relative;
-  box-sizing: border-box;
-  display: inline-block;
   min-width: 64px;
   height: auto;
   padding: 16px;
@@ -45,14 +42,11 @@
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
-  vertical-align: middle;
   cursor: pointer;
-  background-color: rgb(181 207 170);
+  background-color: theme.$purchase-button-background;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 4px;
   outline: none;
-  box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%);
-  transition: box-shadow 0.2s;
 }
 
 @mixin input-styles-reset {
