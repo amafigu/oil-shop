@@ -4,6 +4,7 @@
 .cartContainerWrapper {
   display: flex;
   justify-content: center;
+  margin-bottom: 80px;
 }
 
 .cartContainer {
@@ -40,19 +41,21 @@
 }
 
 .cartItemQuantityInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 2rem;
   height: 32px;
-  text-align: center;
-  border: none; 
-    outline: none; 
+  border: none;
+  outline: none;
 }
 
 .cartItemQuantityButton {
   width: 32px;
   height: 32px;
-  cursor: pointer; 
+  cursor: pointer;
   background: none;
-  border: none; 
+  border: none;
   outline: none;
 }
 
@@ -62,17 +65,50 @@
   margin-left: 2rem;
 }
 
-.cartItemButtonDeleteButton {
-  margin-left: 2rem;
+.deleteButtonWrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.deleteButton {
+  padding-left: 3rem;
   cursor: pointer;
 }
 
 .cartOrderSummary {
   width: 35%;
-  height: 20rem;
+  height: fit-content;
+  padding: 32px;
   margin-left: 3rem;
+  background: #f4f4f4;
+  border-radius: 4px;
+  box-shadow: theme.$main-box-shadow;
 }
 
-.buttonContained {
+.orderSumaryText {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.totalCostDivider {
+  margin: 40px 0;
+}
+
+.cartOrderSummaryDetails {
+  margin-bottom: 40px;
+}
+
+.orderTotalText {
+  font-weight: 500;
+}
+
+.confimOrderButton {
   @include product-cart-purshase-button;
+
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
 }

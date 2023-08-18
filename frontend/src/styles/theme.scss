@@ -2,20 +2,5 @@ $primary-color: #686868;
 $secondary-color: #757575;
 $main-font-family: "GFS Neohellenic", sans-serif;
 $purchase-button-background: rgb(181 207 170);
-$z-indexes: (
-  "navbar": 1000,
-  "sub-navbar": 1500,
-  "carousel": 1700,
-  "sidebar": 1900,
-  "menu-sidebar": 2000,
-);
-
-%focus {
-  outline: 1px solid #000;
-}
-
-$container-x-pad: (
-  "mobile": 1rem,
-  "tablet": 2rem,
-  "desktop": 4rem,
-);
+$main-box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
+  0 1px 5px 0 rgb(0 0 0 / 12%);
