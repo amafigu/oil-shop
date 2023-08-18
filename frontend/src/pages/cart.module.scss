@@ -34,10 +34,12 @@
   width: 20rem;
 }
 
-.cartItemQuantitySelector {
+.cartItemSelectors {
   display: flex;
+  flex-grow: 1;
   align-items: center;
-  margin-left: 5rem;
+  justify-content: space-between;
+  padding-right: 40px;
 }
 
 .cartItemQuantityInput {
@@ -60,19 +62,10 @@
 }
 
 .cartItemTotalCost {
-  justify-content: center;
-  width: 6rem;
-  margin-left: 2rem;
-}
-
-.deleteButtonWrapper {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
+  @include flex-center;
 }
 
 .deleteButton {
-  padding-left: 3rem;
   cursor: pointer;
 }
 
@@ -103,6 +96,10 @@
 
 .orderTotalText {
   font-weight: 500;
+}
+
+.quantityButtonsContainer {
+  display: flex;
 }
 
 .confimOrderButton {
