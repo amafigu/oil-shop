@@ -11,12 +11,17 @@ const Cart = () => {
   const { translate } = useLocaleContext()
   const text = translate.pages.cart
 
+  const cartTotalSum =
+    Number(totalCost(cart).toFixed(2)) + Number(SHIPPING_COST.toFixed(2))
+
+  console.log("cartTotalSum", cartTotalSum)
+
   return (
     <div className={styles.cartContainerWrapper}>
       <div className={styles.cartContainer}>
         <div className={styles.cartItemsList}>
           {cart.map((item, index) => (
-            <div  key={index}>
+            <div key={index}>
               <div className={styles.cartItem}>
                 <img
                   src={process.env.PUBLIC_URL + "/assets/" + item.product.image}
@@ -28,40 +33,46 @@ const Cart = () => {
                   <p>{item.product.description}</p>
                   <p>{item.product.size} ml</p>
                 </div>
-                <div className={styles.cartItemQuantitySelector}>
-                  <button
-                    className={styles.cartItemQuantityButton}
-                    onClick={() =>
-                      updateProductQuantity(
-                        item.product.name,
-                        item.quantity - 1,
-                      )
-                    }
-                  >
-                    -
-                  </button>
-                  <span className={styles.cartItemQuantityInput}>{item.quantity}</span>
-                  <button
-                    className={styles.cartItemQuantityButton}
-                    onClick={() =>
-                      updateProductQuantity(
-                        item.product.name,
-                        item.quantity + 1,
-                      )
-                    }
-                  >
-                    +
-                  </button>
+                <div className={styles.cartItemSelectors}>
+                  <div className={styles.quantityButtonsContainer}>
+                    <button
+                      className={styles.cartItemQuantityButton}
+                      onClick={() =>
+                        updateProductQuantity(
+                          item.product.name,
+                          item.quantity - 1,
+                        )
+                      }
+                    >
+                      -
+                    </button>
+                    <span className={styles.cartItemQuantityInput}>
+                      {item.quantity}
+                    </span>
+                    <button
+                      className={styles.cartItemQuantityButton}
+                      onClick={() =>
+                        updateProductQuantity(
+                          item.product.name,
+                          item.quantity + 1,
+                        )
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
                   <div className={styles.cartItemTotalCost}>
                     {(item.quantity * Number(item.product.price)).toFixed(2)} €
                   </div>
+                  <div className={styles.deleteButtonWrapper}>
+                    <span
+                      className={styles.deleteButton}
+                      onClick={() => removeProduct(item.product.name)}
+                    >
+                      {text.deleteButton}
+                    </span>
+                  </div>
                 </div>
-                <span
-                  className={styles.cartItemButtonDeleteButton}
-                  onClick={() => removeProduct(item.product.name)}
-                >
-                  {text.deleteButton}
-                </span>
               </div>
               <hr />
             </div>
@@ -69,22 +80,26 @@ const Cart = () => {
         </div>
 
         <div className={styles.cartOrderSummary}>
-          <h2>{text.orderSummary}</h2>
+          <h2 className={styles.orderSumaryText}>{text.orderSummary}</h2>
           <div className={styles.cartOrderSummaryDetails}>
             <div>
-              {text.orderSubtotal} {totalCost(cart).toFixed(2)} €
+              <span>{text.orderSubtotal} </span>
+              <span>{totalCost(cart).toFixed(2)} €</span>
             </div>
             <div>
-              {text.orderShipping} {SHIPPING_COST} €
+              <span>{text.orderShipping} </span>
+              <span>{SHIPPING_COST.toFixed(2)} €</span>
             </div>
-            <hr />
+            <div className={styles.totalCostDivider}>
+              <hr />
+            </div>
+
             <div>
-              {text.orderTotal}
-              {(totalCost(cart) + SHIPPING_COST).toFixed(2)} €
+              <span className={styles.orderTotalText}>{text.orderTotal} </span>
+              <span>{cartTotalSum.toFixed(2)} €</span>
             </div>
           </div>
-
-          <Link className={styles.buttonContained} to='/checkout/shipping'>
+          <Link className={styles.confimOrderButton} to='/checkout/shipping'>
             Confirm Purchase
           </Link>
         </div>
