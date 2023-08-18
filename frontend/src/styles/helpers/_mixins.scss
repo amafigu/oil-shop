@@ -6,8 +6,20 @@
   justify-content: center;
 }
 
-@mixin flex-column {
+@mixin flex-center-column {
   @include flex-center;
+
+  flex-direction: column;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+@mixin flex-start-column {
+  @include flex-start;
 
   flex-direction: column;
 }

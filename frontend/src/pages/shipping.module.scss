@@ -1,8 +1,33 @@
-@import "../helpers/mixins";
-@import "../base/variables";
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
 
-.content {
-  display: flex;
+.shippingPageWrapper {
+  @include flex-center-column;
+
   min-height: 85vh;
-  font-size: 80px;
+}
+
+.shippingPage {
+  @include flex-center-column;
+
+  width: 80%;
+}
+
+.form {
+  @include flex-center-column;
+}
+
+.formTitel {
+  font-family: theme.$main-font-family;
+  font-size: medium;
+}
+
+.formField {
+  font-size: medium;
+}
+
+.emailFieldContainer {
+  @include flex-start-column;
+
+  height: 200px;
 }
