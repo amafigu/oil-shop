@@ -6,6 +6,11 @@
   justify-content: center;
 }
 
+@mixin flex-justify-center {
+  display: flex;
+  justify-content: center;
+}
+
 @mixin flex-center-column {
   @include flex-center;
 

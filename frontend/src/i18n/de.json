@@ -38,6 +38,7 @@
       "addToCartButton": "In den Warenkorb"
     },
     "shipping": {
+      "yourInfo": "Ihren Daten",
       "yourEmail": "Ihren E-Mail",
       "title": "Wenn Sie bereits registriert sind, geben Sie einfach Ihre E-Mail-Adresse ein. Andernfalls können Sie durch die Übermittlung Ihrer E-Mail-Adresse als Gast zur Kasse gehen",
       "inputLabels": {
@@ -45,8 +46,8 @@
         "lastName": "Nachname",
         "email": "E-Mail",
         "phone": "Telefonnummer",
-        "street": "Straße",
-        "streetNumber": "Nummer",
+        "address": "Adresse",
+        "state": "Bundesland",
         "postalCode": "PLZ",
         "city": "Stadt",
         "country": "Land"

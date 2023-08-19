@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./shipping.module.scss"
 
@@ -40,11 +40,13 @@ const Shipping = () => {
       <div className={styles.shippingPage}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.emailFieldContainer}>
-            <div>{text.yourEmail}</div>
+            <div className={styles.containerTitle}>{text.yourEmail}</div>
             <div className={styles.formTitel}>
               <div className={styles.emailRegistrationText}>{text.title}</div>
             </div>
-            <label for='email'>{text.inputLabels.email}</label>
+            <label className={styles.label} htmlFor='email'>
+              {text.inputLabels.email}
+            </label>
 
             <input
               className={styles.formField}
@@ -53,75 +55,117 @@ const Shipping = () => {
               required
             />
           </div>
-          <div>
-            <label for='firstName'>{text.inputLabels.firstName}</label>
+          <div className={styles.customerInfo}>
+            <div className={styles.infoColumn}>
+              <div className={styles.containerTitle}>{text.yourInfo}</div>
+              <div className={styles.infoRow}>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='firstName'>
+                    {text.inputLabels.firstName}
+                  </label>
+                  <input
+                    className={styles.formField}
+                    name='firstName'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='lastName'>
+                    {text.inputLabels.lastName}
+                  </label>
 
-            <input
-              className={styles.formField}
-              name='firstName'
-              onChange={handleChange}
-              required
-            />
-            <label for='lastName'>{text.inputLabels.lastName}</label>
+                  <input
+                    className={styles.formField}
+                    name='lastName'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className={styles.infoRow}>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='phone'>
+                    {text.inputLabels.phone}
+                  </label>
 
-            <input
-              className={styles.formField}
-              name='lastName'
-              onChange={handleChange}
-              required
-            />
+                  <input
+                    className={styles.formField}
+                    name='phone'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='country'>
+                    {text.inputLabels.country}
+                  </label>
 
-            <label for='phone'>{text.inputLabels.phone}</label>
+                  <input
+                    className={styles.formField}
+                    name='country'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className={styles.infoRow}>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='state'>
+                    {text.inputLabels.state}
+                  </label>
 
-            <input
-              className={styles.formField}
-              name='phone'
-              onChange={handleChange}
-              required
-            />
-            <label for='country'>{text.inputLabels.country}</label>
+                  <input
+                    className={styles.formField}
+                    name='state'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='city'>
+                    {text.inputLabels.city}
+                  </label>
 
-            <input
-              className={styles.formField}
-              name='country'
-              onChange={handleChange}
-              required
-            />
-            <label for='state'>{text.inputLabels.state}</label>
+                  <input
+                    className={styles.formField}
+                    name='city'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className={styles.infoRow}>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='postalCode'>
+                    {text.inputLabels.postalCode}
+                  </label>
+                  <input
+                    className={styles.formField}
+                    name='postalCode'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className={styles.infoRowCell}>
+                  <label className={styles.label} htmlFor='address'>
+                    {text.inputLabels.address}
+                  </label>
 
-            <input
-              className={styles.formField}
-              name='state'
-              onChange={handleChange}
-              required
-            />
-            <label for='city'>{text.inputLabels.city}</label>
-
-            <input
-              className={styles.formField}
-              name='city'
-              onChange={handleChange}
-              required
-            />
-            <label for='address'>{text.inputLabels.address}</label>
-
-            <input
-              className={styles.formField}
-              name='address'
-              onChange={handleChange}
-              required
-            />
-            <label for='postalCode'>{text.inputLabels.postalCode}</label>
-
-            <input
-              className={styles.formField}
-              name='postalCode'
-              onChange={handleChange}
-              required
-            />
+                  <input
+                    className={styles.formField}
+                    name='address'
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
           </div>
+          <Link to='/cart'>Back to cart</Link>
+
+          <button onClick={handleSubmit}>{text.submitButton}</button>
         </form>
-        <button onClick={handleSubmit}>{text.submitButton}</button>
       </div>
     </div>
   )

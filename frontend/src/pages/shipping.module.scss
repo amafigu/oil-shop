@@ -8,9 +8,10 @@
 }
 
 .shippingPage {
-  @include flex-center-column;
+  @include flex-justify-center;
 
-  width: 80%;
+  flex-direction: column;
+  width: 45%;
 }
 
 .form {
@@ -28,6 +29,42 @@
 
 .emailFieldContainer {
   @include flex-start-column;
+}
 
-  height: 200px;
+.customerInfo {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.infoColumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoRowCell {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.containerTitle {
+  font-size: 24px;
+}
+
+input {
+  width: 96%;
+  height: 32px;
 }

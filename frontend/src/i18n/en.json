@@ -44,6 +44,7 @@
       "addToCartButton": "Add To Cart"
     },
     "shipping": {
+      "yourInfo": "Your Info",
       "yourEmail": "Your email",
       "title": "If you are already registered just fill your email. Otherwise, by submitting your email you may checkout as a guest",
       "inputLabels": {
