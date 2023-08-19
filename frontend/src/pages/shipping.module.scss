@@ -12,10 +12,14 @@
 
   flex-direction: column;
   width: 45%;
+  background: #f4f4f4;
+  box-shadow: theme.$main-box-shadow;
 }
 
 .form {
   @include flex-center-column;
+
+  margin: 48px;
 }
 
 .emailFormTitel {
@@ -89,6 +93,7 @@ input {
 }
 
 .formButton {
-  width: 25%;
+  width: fit-content;
   padding: 6px;
+  cursor: pointer;
 }

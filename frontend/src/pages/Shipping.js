@@ -164,7 +164,7 @@ const Shipping = () => {
           </div>
           <div className={styles.actionButtons}>
             <Link className={styles.formButton} to='/cart'>
-              Back to cart
+              {text.backToCart}
             </Link>
 
             <span

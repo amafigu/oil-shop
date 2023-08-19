@@ -58,7 +58,8 @@
         "address": "Address",
         "postalCode": "Postal code"
       },
-      "submitButton": "Proceed to Payment"
+      "submitButton": "Payment form",
+      "backToCart": "Back to cart"
     },
     "shop": {
       "title": "All products"

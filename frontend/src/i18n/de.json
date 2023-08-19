@@ -52,7 +52,8 @@
         "city": "Stadt",
         "country": "Land"
       },
-      "submitButton": "Zur Kasse"
+      "submitButton": "Zur Zahlungsart",
+      "backToCart": "Zurück zur Kasse"
     },
     "shop": {
       "title": "Alle Produkte"
