@@ -1,7 +1,7 @@
 import React from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
-
+import styles from "./payment.module.scss"
 const Payment = () => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -16,26 +16,29 @@ const Payment = () => {
   }
 
   return (
-    <div>
-      <div>
-        <h2>Shipping Details</h2>
-        <p>
-          {text.name}:{shippingData.firstName} {shippingData.lastName}
-        </p>
-        <p>
-          {text.email}: {shippingData.email}
-        </p>
-        <p>
-          {text.address}: {shippingData.address}
-        </p>
-        <p>
-          {text.phone}: {shippingData.phone}
-        </p>
-      </div>
-      <div>
-        <h2>Payment Method</h2>
-        <button onClick={() => handlePaymentMethod("paypal")}>Paypal</button>
-        <button onClick={() => handlePaymentMethod("paypal")}>Deposit</button>
+    <div className={styles.paymentPageWrapper}>
+      <div className={styles.paymentPage}>
+        <h2 className={styles.title}>Payment Method</h2>
+        <form className={styles.paymentForm}>
+          <fieldset>
+            <legend>Please select your preferred payment method:</legend>
+            <div>
+              <div className={styles.row}>
+                <input type='radio' id='' name='paypal' value='email' />
+                <label htmlFor='paypal'>paypal</label>
+              </div>
+              <div className={styles.row}>
+                <input type='radio' id='paypal' name='paypal' value='paypal' />
+                <label htmlFor='klarna'>klarna</label>
+              </div>
+            </div>
+            <div>
+              <button onClick={() => handlePaymentMethod()} type='submit'>
+                Submit
+              </button>
+            </div>
+          </fieldset>
+        </form>
       </div>
     </div>
   )
