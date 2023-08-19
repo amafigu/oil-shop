@@ -41,7 +41,7 @@ const Shipping = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.emailFieldContainer}>
             <div className={styles.containerTitle}>{text.yourEmail}</div>
-            <div className={styles.formTitel}>
+            <div className={styles.emailFormTitel}>
               <div className={styles.emailRegistrationText}>{text.title}</div>
             </div>
             <label className={styles.label} htmlFor='email'>
@@ -59,7 +59,7 @@ const Shipping = () => {
             <div className={styles.infoColumn}>
               <div className={styles.containerTitle}>{text.yourInfo}</div>
               <div className={styles.infoRow}>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellLeft}>
                   <label className={styles.label} htmlFor='firstName'>
                     {text.inputLabels.firstName}
                   </label>
@@ -70,7 +70,7 @@ const Shipping = () => {
                     required
                   />
                 </div>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellRight}>
                   <label className={styles.label} htmlFor='lastName'>
                     {text.inputLabels.lastName}
                   </label>
@@ -84,7 +84,7 @@ const Shipping = () => {
                 </div>
               </div>
               <div className={styles.infoRow}>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellLeft}>
                   <label className={styles.label} htmlFor='phone'>
                     {text.inputLabels.phone}
                   </label>
@@ -96,7 +96,7 @@ const Shipping = () => {
                     required
                   />
                 </div>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellRight}>
                   <label className={styles.label} htmlFor='country'>
                     {text.inputLabels.country}
                   </label>
@@ -110,7 +110,7 @@ const Shipping = () => {
                 </div>
               </div>
               <div className={styles.infoRow}>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellLeft}>
                   <label className={styles.label} htmlFor='state'>
                     {text.inputLabels.state}
                   </label>
@@ -122,7 +122,7 @@ const Shipping = () => {
                     required
                   />
                 </div>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellRight}>
                   <label className={styles.label} htmlFor='city'>
                     {text.inputLabels.city}
                   </label>
@@ -136,7 +136,7 @@ const Shipping = () => {
                 </div>
               </div>
               <div className={styles.infoRow}>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellLeft}>
                   <label className={styles.label} htmlFor='postalCode'>
                     {text.inputLabels.postalCode}
                   </label>
@@ -147,7 +147,7 @@ const Shipping = () => {
                     required
                   />
                 </div>
-                <div className={styles.infoRowCell}>
+                <div className={styles.infoRowCellRight}>
                   <label className={styles.label} htmlFor='address'>
                     {text.inputLabels.address}
                   </label>
@@ -162,9 +162,19 @@ const Shipping = () => {
               </div>
             </div>
           </div>
-          <Link to='/cart'>Back to cart</Link>
+          <div className={styles.actionButtons}>
+            <Link className={styles.formButton} to='/cart'>
+              Back to cart
+            </Link>
 
-          <button onClick={handleSubmit}>{text.submitButton}</button>
+            <span
+              tabIndex='0'
+              className={styles.formButton}
+              onClick={handleSubmit}
+            >
+              {text.submitButton}
+            </span>
+          </div>
         </form>
       </div>
     </div>

@@ -82,3 +82,10 @@
     outline: none;
   }
 }
+
+@mixin shipping-info-cell {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 20px;
+}

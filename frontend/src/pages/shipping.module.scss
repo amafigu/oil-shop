@@ -18,7 +18,8 @@
   @include flex-center-column;
 }
 
-.formTitel {
+.emailFormTitel {
+  margin-bottom: 24px;
   font-family: theme.$main-font-family;
   font-size: medium;
 }
@@ -29,6 +30,9 @@
 
 .emailFieldContainer {
   @include flex-start-column;
+
+  width: 100%;
+  margin-bottom: 60px;
 }
 
 .customerInfo {
@@ -36,6 +40,7 @@
   flex-grow: 1;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 60px;
 }
 
 .infoColumn {
@@ -54,17 +59,36 @@
   justify-content: space-between;
 }
 
-.infoRowCell {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+.infoRowCellRight {
+  @include shipping-info-cell;
+
+  padding-left: 28px;
+}
+
+.infoRowCellLeft {
+  @include shipping-info-cell;
+
+  padding-right: 28px;
 }
 
 .containerTitle {
+  margin-bottom: 24px;
   font-size: 24px;
 }
 
 input {
-  width: 96%;
+  width: 100%;
   height: 32px;
+  font-family: theme.$main-font-family;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.formButton {
+  width: 25%;
+  padding: 6px;
 }
