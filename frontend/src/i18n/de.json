@@ -38,19 +38,20 @@
       "addToCartButton": "In den Warenkorb"
     },
     "shipping": {
-      "title": "Versand",
-      "inputPlacehoders": {
+      "yourInfo": "Ihren Daten",
+      "yourEmail": "Ihren E-Mail",
+      "title": "Wenn Sie bereits registriert sind, geben Sie einfach Ihre E-Mail-Adresse ein. Andernfalls können Sie durch die Übermittlung Ihrer E-Mail-Adresse als Gast zur Kasse gehen",
+      "inputLabels": {
         "firstName": "Name",
         "lastName": "Nachname",
         "email": "E-Mail",
         "phone": "Telefonnummer",
-        "street": "Straße",
-        "streetNumber": "Nummer",
+        "address": "Adresse",
+        "state": "Bundesland",
         "postalCode": "PLZ",
         "city": "Stadt",
         "country": "Land"
       },
-
       "submitButton": "Zur Kasse"
     },
     "shop": {
@@ -121,14 +122,12 @@
           "faq": "Häufig gestellte Fragen / FAQ",
           "faqTitle": "Häufig gestellte Fragen"
         },
-
         "third": {
           "title": "Legal",
           "companyDetails": "Impressum",
           "generalTerms": "AGB",
           "dataProtection": "Datenschutz"
         },
-
         "fourth": {
           "title": "Angemeldete Kunden",
           "accountAndLogin": "Account & Login",
@@ -150,7 +149,6 @@
         "second": {
           "title": "Schnelle Lieferung"
         },
-
         "third": {
           "title": "Folgen Sie uns",
           "facebook": "Folge uns auf Facebook",

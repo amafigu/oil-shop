@@ -44,19 +44,20 @@
       "addToCartButton": "Add To Cart"
     },
     "shipping": {
-      "title": "shipping page",
-      "inputPlacehoders": {
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "Email Address",
-        "phone": "Phone Number",
-        "street": "Street",
-        "streetNumber": "Number",
-        "postalCode": "Code",
+      "yourInfo": "Your Info",
+      "yourEmail": "Your email",
+      "title": "If you are already registered just fill your email. Otherwise, by submitting your email you may checkout as a guest",
+      "inputLabels": {
+        "email": "Email address",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "Phone number",
+        "country": "Country",
+        "state": "State",
         "city": "City",
-        "country": "Country"
+        "address": "Address",
+        "postalCode": "Postal code"
       },
-
       "submitButton": "Proceed to Payment"
     },
     "shop": {
@@ -127,14 +128,12 @@
           "faq": "Frequently Asked Questions / FAQ",
           "faqTitle": "Frequently Asked Questions"
         },
-
         "third": {
           "title": "Legal",
           "companyDetails": "Company Details",
           "generalTerms": "General terms and conditions",
           "dataProtection": "Data Protection"
         },
-
         "fourth": {
           "title": "Already Shop Customers",
           "accountAndLogin": "Account & Login",
@@ -156,7 +155,6 @@
         "second": {
           "title": "Fast Shipping"
         },
-
         "third": {
           "title": "Follow us",
           "facebook": "Follow us on Facebook",

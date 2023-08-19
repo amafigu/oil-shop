@@ -1,8 +1,94 @@
-@import "../helpers/mixins";
-@import "../base/variables";
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
 
-.content {
-  display: flex;
+.shippingPageWrapper {
+  @include flex-center-column;
+
   min-height: 85vh;
-  font-size: 80px;
+}
+
+.shippingPage {
+  @include flex-justify-center;
+
+  flex-direction: column;
+  width: 45%;
+}
+
+.form {
+  @include flex-center-column;
+}
+
+.emailFormTitel {
+  margin-bottom: 24px;
+  font-family: theme.$main-font-family;
+  font-size: medium;
+}
+
+.formField {
+  font-size: medium;
+}
+
+.emailFieldContainer {
+  @include flex-start-column;
+
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.customerInfo {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.infoColumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoRowCellRight {
+  @include shipping-info-cell;
+
+  padding-left: 28px;
+}
+
+.infoRowCellLeft {
+  @include shipping-info-cell;
+
+  padding-right: 28px;
+}
+
+.containerTitle {
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+input {
+  width: 100%;
+  height: 32px;
+  font-family: theme.$main-font-family;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.formButton {
+  width: 25%;
+  padding: 6px;
 }

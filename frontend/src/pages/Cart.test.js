@@ -1,4 +1,3 @@
-// import should be in settings and not test file, provisory workaround
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import "@testing-library/jest-dom"

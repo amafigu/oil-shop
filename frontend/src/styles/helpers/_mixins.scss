@@ -6,8 +6,25 @@
   justify-content: center;
 }
 
-@mixin flex-column {
+@mixin flex-justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-center-column {
   @include flex-center;
+
+  flex-direction: column;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+@mixin flex-start-column {
+  @include flex-start;
 
   flex-direction: column;
 }
@@ -64,4 +81,11 @@
   &:focus {
     outline: none;
   }
+}
+
+@mixin shipping-info-cell {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-bottom: 20px;
 }
