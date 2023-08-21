@@ -13,8 +13,6 @@ const Shop = () => {
   const params = new URLSearchParams(location.search)
   const queryCategory = params.get("category")
 
-  console.log("process.env.REACT_APP_API_URL ", process.env.REACT_APP_API_URL)
-
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/products`)
@@ -40,10 +38,6 @@ const Shop = () => {
     )
 
   const sortedProducts = filteredProducts(category)
-
-  console.log("Shop ")
-  console.log("category ", category)
-  console.log("sorted ", sortedProducts)
 
   return (
     <div className={style.content}>

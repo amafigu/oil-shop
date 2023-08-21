@@ -12,7 +12,6 @@ const ProductSlider = () => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
-        console.log(response.data)
         setProducts(response.data)
       })
       .catch((error) => {
