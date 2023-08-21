@@ -1,0 +1,50 @@
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
+
+.orderSummaryWrapper {
+  @include flex-center-column;
+
+  min-height: 85vh;
+
+  .orderSummary {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .clientDetails {
+    width: 50%;
+    box-shadow: theme.$main-box-shadow;
+  }
+
+  .purchasedProducts {
+    width: 50%;
+    box-shadow: theme.$main-box-shadow;
+  }
+
+  .cartItem {
+    display: flex;
+    align-items: center;
+    height: 9rem;
+  }
+
+  .cartItemImage {
+    width: 7.5rem;
+    height: 8.25rem;
+    object-fit: contain;
+  }
+
+  .cartItemDetails {
+    width: 20rem;
+  }
+
+  .cartItemsList {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+
+  .columns {
+    display: flex;
+    width: 100%;
+  }
+}
