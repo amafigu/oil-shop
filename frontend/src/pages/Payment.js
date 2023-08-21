@@ -1,43 +1,105 @@
-import React from "react"
+import { React, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./payment.module.scss"
+
 const Payment = () => {
+  const [paymentMethod, setPaymentMethod] = useState("")
+  const [isMethodSelected, setIsMethodSelected] = useState(true)
   const location = useLocation()
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const shippingData = location.state.shippingData
   const text = translate.pages.payment
 
-  const handlePaymentMethod = (method) => {
+  const submitPaymentMethod = () => {
+    if (!paymentMethod) {
+      setIsMethodSelected(false)
+      return
+    }
     navigate("/checkout/summary", {
-      state: { shippingData, paymentMethod: method },
+      state: { shippingData, paymentMethod },
     })
+  }
+
+  const backToShippingPage = () => {
+    navigate("/checkout/shipping", {
+      state: { shippingData },
+    })
+  }
+
+  const selectPaymentMethod = (e) => {
+    setPaymentMethod(e.target.value)
+    setIsMethodSelected(true)
   }
 
   return (
     <div className={styles.paymentPageWrapper}>
+      <div className={styles.separator}></div>
+
       <div className={styles.paymentPage}>
-        <h2 className={styles.title}>Payment Method</h2>
         <form className={styles.paymentForm}>
-          <fieldset>
-            <legend>Please select your preferred payment method:</legend>
-            <div>
-              <div className={styles.row}>
-                <input type='radio' id='' name='paypal' value='email' />
-                <label htmlFor='paypal'>paypal</label>
-              </div>
-              <div className={styles.row}>
-                <input type='radio' id='paypal' name='paypal' value='paypal' />
-                <label htmlFor='klarna'>klarna</label>
-              </div>
+          <div className={styles.titleAndAlertContainer}>
+            <legend className={styles.title}>{text.title}</legend>
+            {!isMethodSelected && (
+              <legend className={styles.requirePaymentText}>
+                {text.insertPaymentMethod}
+              </legend>
+            )}
+          </div>
+
+          <div className={styles.methods}>
+            <div
+              className={
+                isMethodSelected
+                  ? styles.row
+                  : `${styles.row} ${styles.requirePaymentMethod}`
+              }
+            >
+              <input
+                type='radio'
+                id='paypal'
+                name='paymentMethod'
+                value='paypal'
+                checked={paymentMethod === "paypal"}
+                onChange={selectPaymentMethod}
+              />
+              <label htmlFor='paypal'>Paypal</label>
             </div>
-            <div>
-              <button onClick={() => handlePaymentMethod()} type='submit'>
-                Submit
-              </button>
+            <div
+              className={
+                isMethodSelected
+                  ? styles.row
+                  : `${styles.row} ${styles.requirePaymentMethod}`
+              }
+            >
+              <input
+                type='radio'
+                id='klarna'
+                name='paymentMethod'
+                value='klarna'
+                checked={paymentMethod === "klarna"}
+                onChange={selectPaymentMethod}
+              />
+              <label htmlFor='klarna'>Klarna</label>
             </div>
-          </fieldset>
+          </div>
+          <div className={styles.navigateButtons}>
+            <span
+              tabIndex='0'
+              className={styles.formButton}
+              onClick={() => backToShippingPage()}
+            >
+              {text.backButton}
+            </span>
+            <span
+              tabIndex='0'
+              className={styles.formButton}
+              onClick={() => submitPaymentMethod()}
+            >
+              {text.paymentButton}
+            </span>
+          </div>
         </form>
       </div>
     </div>
