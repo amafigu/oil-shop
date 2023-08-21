@@ -15,7 +15,3 @@ export const addOneProductToCart = (product, contextFunction) => {
 
 export const totalCost = (cart) =>
   cart.reduce((total, item) => total + item.quantity * item.product.price, 0)
-
-export const preventDefault = (e) => {
-  e.preventDefault()
-}
