@@ -14,8 +14,6 @@ const Cart = () => {
   const cartTotalSum =
     Number(totalCost(cart).toFixed(2)) + Number(SHIPPING_COST.toFixed(2))
 
-  console.log("cartTotalSum", cartTotalSum)
-
   return (
     <div className={styles.cartContainerWrapper}>
       <div className={styles.cartContainer}>

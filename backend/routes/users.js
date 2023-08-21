@@ -45,14 +45,6 @@ router.post('/register-admin', async (req, res) => {
       role: 'admin',
     });
 
-    console.log('{} ', {
-      ...req.body,
-      password: hashedPassword,
-      role: 'admin',
-    });
-
-    console.log('new Adm ', newAdmin);
-
     res
       .status(201)
       .json({ message: 'Admin user created successfully', user: newAdmin });
@@ -74,12 +66,6 @@ router.post('/register', async (req, res) => {
     const hashedPassword = await hashPassword(req.body.password);
 
     const newUser = await db.user.create({
-      ...req.body,
-      password: hashedPassword,
-      role: 'guest',
-    });
-
-    console.log('{} ', {
       ...req.body,
       password: hashedPassword,
       role: 'guest',

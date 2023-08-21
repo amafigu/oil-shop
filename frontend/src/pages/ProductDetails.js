@@ -21,7 +21,6 @@ const ProductDetails = () => {
           `${process.env.REACT_APP_API_URL}/products/${productName}`,
         )
         setProduct(response.data)
-        console.log("getProduct ", response.data)
       } catch (error) {
         console.error("Error fetching product: ", error)
       }

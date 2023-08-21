@@ -34,10 +34,10 @@
       "tenthAnswer": "Animals react differently than humans to essential oils. Please inform yourself in specialized literature on the subject of which oils you use in what dosage you can use. For this we can not own give recommendations for action."
     },
     "payment": {
-      "name": "Name",
-      "email": "Email",
-      "address": "Address",
-      "phone": "Phone"
+      "paymentButton": "Proceed to payment",
+      "title": "Payment with:",
+      "backButton": "Go Back",
+      "insertPaymentMethod": "Please choose a payment method."
     },
     "productsDetails": {
       "loading": "Loading",
