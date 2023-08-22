@@ -33,6 +33,22 @@
       "tenthQuestion": " Can I also use essential oils on my pets?",
       "tenthAnswer": "Animals react differently than humans to essential oils. Please inform yourself in specialized literature on the subject of which oils you use in what dosage you can use. For this we can not own give recommendations for action."
     },
+    "orderSummary": {
+      "thankClient": "Thank you for shopping at Oylo!",
+      "orderResume": "Order Summary",
+      "deliveryInformation": "Delivery information",
+      "inputLabels": {
+        "email": "Email address",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "Phone number",
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "address": "Address",
+        "postalCode": "Postal code"
+      }
+    },
     "payment": {
       "paymentButton": "Proceed to payment",
       "title": "Payment with:",

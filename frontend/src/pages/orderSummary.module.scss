@@ -9,42 +9,112 @@
   .orderSummary {
     display: flex;
     flex-direction: column;
+    width: 35%;
+    margin-bottom: 48px;
+    box-shadow: theme.$main-box-shadow;
   }
 
-  .clientDetails {
+  .pageTitle {
+    margin-bottom: 20px;
+  }
+
+  .customerInfo {
     width: 50%;
-    box-shadow: theme.$main-box-shadow;
+  }
+
+  .infoColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .containerTitleWrapper {
+    text-align: center;
+  }
+
+  .containerTitle {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 24px;
+    font-size: 24px;
+  }
+
+  .clientInfoContainer {
+    width: 100%;
+    padding: 40px;
   }
 
   .purchasedProducts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
-    box-shadow: theme.$main-box-shadow;
+    padding: 40px;
   }
 
   .cartItem {
     display: flex;
     align-items: center;
-    height: 9rem;
+    height: 4.5rem;
+    margin-bottom: 16px;
+    background-color: #fff;
+    border-bottom: solid 1px grey;
+    border-radius: 4px;
   }
 
   .cartItemImage {
-    width: 7.5rem;
-    height: 8.25rem;
+    width: 3.75rem;
+    height: 4.125rem;
     object-fit: contain;
   }
 
   .cartItemDetails {
-    width: 20rem;
+    margin: 12px;
   }
 
   .cartItemsList {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    margin-top: 18px;
   }
 
   .columns {
     display: flex;
     width: 100%;
+    background: theme.$form-background;
+  }
+
+  .columnTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    font-size: 48px;
+  }
+
+  .clientInfoItem {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+
+  .cartItemsListWrapper {
+    width: 100%;
+  }
+
+  .formField {
+    @include input-styles-reset;
+
+    width: 100%;
+    height: 2rem;
+    padding-left: 10px;
+    font-family: theme.$main-font-family;
+    background-color: #fff;
+    border: solid 1px grey;
+    border-radius: 0.2rem;
   }
 }
