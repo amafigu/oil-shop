@@ -102,6 +102,10 @@
     margin-bottom: 16px;
   }
 
+  .cartItemsListWrapper {
+    width: 100%;
+  }
+
   .formField {
     @include input-styles-reset;
 
