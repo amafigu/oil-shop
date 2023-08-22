@@ -12,22 +12,22 @@ const OrderSummary = () => {
   const { cart } = useContext(CartContext)
   const { shippingData, paymentMethod } = location.state
   const { translate } = useLocaleContext()
-  const text = translate.pages.shipping
-
-  console.log(shippingData)
-  console.log(paymentMethod)
+  const text = translate.pages.orderSummary
 
   return (
     <div className={styles.orderSummaryWrapper}>
       <div className={styles.columnTitle}>
-        <h1>Thank you for trust Oylo!</h1>
+        <h1 className={styles.pageTitle}>{text.thankClient}</h1>
+        <h2 className={styles.summaryTitle}>{text.orderResume}</h2>
       </div>
       <div className={styles.orderSummary}>
         <div className={styles.columns}>
           <div className={styles.customerInfo}>
             <div className={styles.infoColumn}>
               <div className={styles.clientInfoContainer}>
-                <div className={styles.containerTitle}>{text.yourInfo}</div>
+                <div className={styles.containerTitle}>
+                  {text.deliveryInformation}
+                </div>
                 <div className={styles.clientInfoItem}>
                   <label className={styles.label} htmlFor='firstName'>
                     {text.inputLabels.firstName}
@@ -134,7 +134,7 @@ const OrderSummary = () => {
                   <input
                     className={styles.formField}
                     readOnly
-                    value={cartTotalSum(cart, SHIPPING_COST)}
+                    value={`${cartTotalSum(cart, SHIPPING_COST)} €`}
                   />
                 </div>
               </div>
@@ -145,23 +145,24 @@ const OrderSummary = () => {
             <div className={styles.containerTitle}>
               <h2>Products</h2>
             </div>
-
-            <div className={styles.cartItemsList}>
-              {cart.map((item, index) => (
-                <div key={index} className={styles.cartItem}>
-                  <img
-                    src={
-                      process.env.PUBLIC_URL + "/assets/" + item.product.image
-                    }
-                    alt={item.product.name}
-                    className={styles.cartItemImage}
-                  />
-                  <div className={styles.cartItemDetails}>
-                    <h3>{titleCase(item.product.name, "_")}</h3>
-                    <p>{item.product.size} ml</p>
+            <div className={styles.cartItemsListWrapper}>
+              <div className={styles.cartItemsList}>
+                {cart.map((item, index) => (
+                  <div key={index} className={styles.cartItem}>
+                    <img
+                      src={
+                        process.env.PUBLIC_URL + "/assets/" + item.product.image
+                      }
+                      alt={item.product.name}
+                      className={styles.cartItemImage}
+                    />
+                    <div className={styles.cartItemDetails}>
+                      <h3>{titleCase(item.product.name, "_")}</h3>
+                      <p>{item.product.size} ml</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
