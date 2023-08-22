@@ -126,7 +126,7 @@
     },
     "footer": {
       "linksColumns": {
-        "first": {
+        "wayToUs": {
           "title": "Your way to us",
           "address": "Oil Paradise 1",
           "postalCode": "12437",
@@ -134,25 +134,23 @@
           "phoneTitle": "phone",
           "contactPhone": "+49-6622-88334"
         },
-        "second": {
+        "forClient": {
           "title": "For you",
           "returnToShop": "Back to shop",
           "returnToShopTitle": "Back to shopping",
           "cancellationPolicy": "Cancellation",
           "cancellationPolicyTitle": "Cancellation policy",
-          "returnProducts": "Return buyed products",
-          "returnProductsTitle": "Return buyed products policy",
           "faq": "Frequently Asked Questions / FAQ",
           "faqTitle": "Frequently Asked Questions"
         },
-        "third": {
+        "legal": {
           "title": "Legal",
           "companyDetails": "Company Details",
           "generalTerms": "General terms and conditions",
           "dataProtection": "Data Protection"
         },
-        "fourth": {
-          "title": "Already Shop Customers",
+        "users": {
+          "title": "Customers",
           "accountAndLogin": "Account & Login",
           "registration": "Be a Shop Customer"
         }
@@ -166,13 +164,13 @@
         "registrationDataConsentText": "The data you enter here will only be used to send the Newsletters used and not passed on to third parties. You can unsubscribe from the newsletter at any time withdraw your consent by sending us an email. Your data after completion of the newsletter receipt within 3 Months deleted, provided that the deletion is not legal conflict with retention requirements. By sending the entered data you agree to the data processing and confirm our privacy policy."
       },
       "iconsColumns": {
-        "first": {
+        "creditCards": {
           "title": "Shop Safely"
         },
-        "second": {
+        "shippingPartners": {
           "title": "Fast Shipping"
         },
-        "third": {
+        "socialMedia": {
           "title": "Follow us",
           "facebook": "Follow us on Facebook",
           "instagram": "Follow us on Instagram",

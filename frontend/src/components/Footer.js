@@ -55,82 +55,75 @@ const Footer = () => {
           <ul className={styles.columnsSectionElements}>
             <li className={styles.columnsSectionItem}>
               <div className={styles.columnsSectionItemTitle}>
-                {text.linksColumns.first.title}
+                {text.linksColumns.wayToUs.title}
               </div>
               <div className={styles.columnsSectionItemLinks}>
-                <div> {text.linksColumns.first.address}</div>
+                <div> {text.linksColumns.wayToUs.address}</div>
                 <div>
-                  {text.linksColumns.first.postalCode} {text.city}
+                  {text.linksColumns.wayToUs.postalCode} {text.city}
                 </div>
                 <div>
-                  {text.linksColumns.first.phoneTitle}{" "}
-                  {text.linksColumns.first.contactPhone}
+                  {text.linksColumns.wayToUs.phoneTitle}{" "}
+                  {text.linksColumns.wayToUs.contactPhone}
                 </div>
               </div>
             </li>
 
             <li className={styles.columnsSectionItem}>
               <div className={styles.columnsSectionItemTitle}>
-                {text.linksColumns.second.title}
+                {text.linksColumns.forClient.title}
               </div>
               <div className={styles.columnsSectionItemLinks}>
                 <Link
                   to='/shop'
-                  title={text.linksColumns.second.returnToShopTitle}
+                  title={text.linksColumns.forClient.returnToShopTitle}
                 >
-                  {text.linksColumns.second.returnToShop}
+                  {text.linksColumns.forClient.returnToShop}
                 </Link>
 
                 <Link
                   to='/cancellation'
-                  title={text.linksColumns.second.cancellationPolicyTitle}
+                  title={text.linksColumns.forClient.cancellationPolicyTitle}
                 >
-                  {text.linksColumns.second.cancellationPolicy}
-                </Link>
-
-                <Link
-                  to='/return'
-                  title={text.linksColumns.second.returnProductsTitle}
-                >
-                  {text.linksColumns.second.returnProducts}
+                  {text.linksColumns.forClient.cancellationPolicy}
                 </Link>
 
                 <Link to='/faq' title='FAQ'>
-                  {text.linksColumns.second.faq}
+                  {text.linksColumns.forClient.faq}
                 </Link>
               </div>
             </li>
 
             <li className={styles.columnsSectionItem}>
               <div className={styles.columnsSectionItemTitle}>
-                {text.linksColumns.third.title}
+                {text.linksColumns.legal.title}
               </div>
               <div className={styles.columnsSectionItemLinks}>
                 <Link to='/company-details' title='company details'>
-                  {text.linksColumns.third.companyDetails}
+                  {text.linksColumns.legal.companyDetails}
                 </Link>
 
                 <Link to='/general-terms' title='general terms'>
-                  {text.linksColumns.third.generalTerms}
+                  {text.linksColumns.legal.generalTerms}
                 </Link>
 
                 <Link to='/data-protection' title='data protection'>
-                  {text.linksColumns.third.dataProtection}
+                  {text.linksColumns.legal.dataProtection}
                 </Link>
               </div>
             </li>
 
             <li className={styles.columnsSectionItem}>
               <div className={styles.columnsSectionItemTitle}>
-                {text.linksColumns.fourth.title}
+                {text.linksColumns.users.title}
               </div>
               <div className={styles.columnsSectionItemLinks}>
                 <Link to='/login' title='account & login'>
-                  {text.linksColumns.fourth.accountAndLogin}
+                  {text.linksColumns.users.accountAndLogin}
                 </Link>
 
                 <Link to='/registration' title='registration'>
-                  {text.linksColumns.fourth.registration}
+                  {text.linksColumns.users.registration}
                 </Link>
               </div>
             </li>
@@ -140,7 +133,7 @@ const Footer = () => {
           <ul className={styles.iconsSectionElements}>
             <li className={styles.iconsSectionItem}>
               <div className={styles.iconsSectionItemTitle}>
-                <h4>{text.iconsColumns.first.title}</h4>
+                <h4>{text.iconsColumns.creditCards.title}</h4>
               </div>
               <div className={styles.iconsSectionItemIcons}>
                 <img
@@ -153,7 +146,7 @@ const Footer = () => {
             </li>
             <li className={styles.iconsSectionItem}>
               <div className={styles.iconsSectionItemTitle}>
-                <h4>{text.iconsColumns.second.title}</h4>
+                <h4>{text.iconsColumns.shippingPartners.title}</h4>
               </div>
               <div className={styles.iconsSectionItemIcons}>
                 <img
@@ -173,7 +166,7 @@ const Footer = () => {
 
             <li className={styles.iconsSectionItem}>
               <div className={styles.iconsSectionItemTitle}>
-                <h4>{text.iconsColumns.third.title}</h4>
+                <h4>{text.iconsColumns.socialMedia.title}</h4>
               </div>
 
               <div className={styles.iconsSectionItemIcons}>
@@ -181,8 +174,8 @@ const Footer = () => {
                   href='https://www.facebook.com/'
                   target='_blank'
                   rel='noreferrer'
-                  title={text.iconsColumns.third.facebook}
-                  alt={text.iconsColumns.third.facebook}
+                  title={text.iconsColumns.socialMedia.facebook}
+                  alt={text.iconsColumns.socialMedia.facebook}
                 >
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/iconFacebook.png`}
@@ -194,8 +187,8 @@ const Footer = () => {
                   href='https://www.instagram.com/'
                   target='_blank'
                   rel='noreferrer'
-                  title={text.iconsColumns.third.instagram}
-                  alt={text.iconsColumns.third.instagram}
+                  title={text.iconsColumns.socialMedia.instagram}
+                  alt={text.iconsColumns.socialMedia.instagram}
                 >
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/iconInstagram.png`}
@@ -207,8 +200,8 @@ const Footer = () => {
                   href='https://www.youtube.com/user/'
                   target='_blank'
                   rel='noreferrer'
-                  title={text.iconsColumns.third.youtube}
-                  alt={text.iconsColumns.third.youtube}
+                  title={text.iconsColumns.socialMedia.youtube}
+                  alt={text.iconsColumns.socialMedia.youtube}
                 >
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/iconYoutube.png`}
