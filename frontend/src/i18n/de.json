@@ -126,7 +126,7 @@
     },
     "footer": {
       "linksColumns": {
-        "first": {
+        "wayToUs": {
           "title": "Ihr Weg zu uns",
           "address": "Oil Paradise 1",
           "postalCode": "12437",
@@ -134,25 +134,23 @@
           "phoneTitle": "Telefon",
           "contactPhone": "+49-6622-88334"
         },
-        "second": {
+        "forClient": {
           "title": "Für dich",
           "returnToShop": "Zurück zum Shop",
           "returnToShopTitle": "Zurück zum shopping",
           "cancellationPolicy": "Stornierung",
           "cancellationPolicyTitle": "Stornierungsbedingungen",
-          "returnProducts": "Gekaufte Produkte zurückgeben",
-          "returnProductsTitle": "Rückgaberecht für gekaufte Produkte",
           "faq": "Häufig gestellte Fragen / FAQ",
           "faqTitle": "Häufig gestellte Fragen"
         },
-        "third": {
+        "legal": {
           "title": "Legal",
           "companyDetails": "Impressum",
           "generalTerms": "AGB",
           "dataProtection": "Datenschutz"
         },
-        "fourth": {
-          "title": "Angemeldete Kunden",
+        "users": {
+          "title": "Kunden",
           "accountAndLogin": "Account & Login",
           "registration": "Seien Sie Shop-Kunde"
         }
@@ -166,13 +164,13 @@
         "registrationDataConsentText": "Die von Ihnen hier eingegebenen Daten werden ausschließlich zum Versand des Newsletters genutzt und nicht an Dritte weitergegeben. Sie können den Newsletter jederzeit per E-Mail abbestellen und Ihre Einwilligung widerrufen. Ihre Daten werden nach Abschluss des Newsletter-Empfangs innerhalb von 3 Monaten gelöscht, sofern der Löschung keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Mit dem Absenden der eingegebenen Daten erklären Sie sich mit der Datenverarbeitung einverstanden und bestätigen unsere Datenschutzerklärung."
       },
       "iconsColumns": {
-        "first": {
+        "creditCards": {
           "title": "Sicher einkaufen"
         },
-        "second": {
+        "shippingPartners": {
           "title": "Schnelle Lieferung"
         },
-        "third": {
+        "socialMedia": {
           "title": "Folgen Sie uns",
           "facebook": "Folge uns auf Facebook",
           "instagram": "Folge uns auf Instagram",

@@ -18,16 +18,13 @@ const OrderSummary = () => {
     <div className={styles.orderSummaryWrapper}>
       <div className={styles.columnTitle}>
         <h1 className={styles.pageTitle}>{text.thankClient}</h1>
-        <h2 className={styles.summaryTitle}>{text.orderResume}</h2>
+        <h2 className={styles.summaryTitle}>{text.orderResume}:</h2>
       </div>
       <div className={styles.orderSummary}>
         <div className={styles.columns}>
           <div className={styles.customerInfo}>
             <div className={styles.infoColumn}>
               <div className={styles.clientInfoContainer}>
-                <div className={styles.containerTitle}>
-                  {text.deliveryInformation}
-                </div>
                 <div className={styles.clientInfoItem}>
                   <label className={styles.label} htmlFor='firstName'>
                     {text.inputLabels.firstName}
@@ -142,9 +139,6 @@ const OrderSummary = () => {
           </div>
 
           <div className={styles.purchasedProducts}>
-            <div className={styles.containerTitle}>
-              <h2>Products</h2>
-            </div>
             <div className={styles.cartItemsListWrapper}>
               <div className={styles.cartItemsList}>
                 {cart.map((item, index) => (
@@ -157,7 +151,9 @@ const OrderSummary = () => {
                       className={styles.cartItemImage}
                     />
                     <div className={styles.cartItemDetails}>
-                      <h3>{titleCase(item.product.name, "_")}</h3>
+                      <h3>
+                        {item.quantity} {titleCase(item.product.name, "_")}
+                      </h3>
                       <p>{item.product.size} ml</p>
                     </div>
                   </div>

@@ -28,8 +28,6 @@ const Shipping = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    console.log("maybe store in global state or localStore", formData)
-
     navigate("/checkout/payment", {
       state: { shippingData: formData },
     })
