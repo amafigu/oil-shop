@@ -15,3 +15,6 @@ export const addOneProductToCart = (product, contextFunction) => {
 
 export const totalCost = (cart) =>
   cart.reduce((total, item) => total + item.quantity * item.product.price, 0)
+
+export const cartTotalSum = (cart, shippingCost) =>
+  Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))

@@ -1,7 +1,7 @@
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { SHIPPING_COST } from "#utils/constants"
-import { titleCase, totalCost } from "#utils/utils"
+import { cartTotalSum, titleCase, totalCost } from "#utils/utils"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./cart.module.scss"
@@ -10,9 +10,6 @@ const Cart = () => {
   const { cart, removeProduct, updateProductQuantity } = useCartContext()
   const { translate } = useLocaleContext()
   const text = translate.pages.cart
-
-  const cartTotalSum =
-    Number(totalCost(cart).toFixed(2)) + Number(SHIPPING_COST.toFixed(2))
 
   return (
     <div className={styles.cartContainerWrapper}>
@@ -94,7 +91,7 @@ const Cart = () => {
 
             <div>
               <span className={styles.orderTotalText}>{text.orderTotal} </span>
-              <span>{cartTotalSum.toFixed(2)} €</span>
+              <span>{cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €</span>
             </div>
           </div>
           <Link className={styles.confimOrderButton} to='/checkout/shipping'>
