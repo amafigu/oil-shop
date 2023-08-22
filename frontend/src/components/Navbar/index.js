@@ -8,7 +8,6 @@ import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
 const Navbar = ({ toggleSidebarMenuVisibility }) => {
-  const [, setLanguageDropdownOpen] = useState(false)
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
@@ -19,7 +18,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
   const { getAllProductsQuantity } = useContext(CartContext)
 
   const navigate = useNavigate()
-  const languageDropdownRef = useRef(null)
+
   const searchProductListDropdownRef = useRef(null)
 
   useEffect(() => {
@@ -29,24 +28,6 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
       setSlideInOutClass("hidden")
     }
   }, [isSearchDropdownOpen])
-
-  useEffect(() => {
-    const listenClickOutsideLanguageDropdown = (event) => {
-      if (
-        languageDropdownRef.current &&
-        !languageDropdownRef.current.contains(event.target)
-      ) {
-        setLanguageDropdownOpen(false)
-      }
-    }
-    document.addEventListener("mousedown", listenClickOutsideLanguageDropdown)
-    return () => {
-      document.removeEventListener(
-        "mousedown",
-        listenClickOutsideLanguageDropdown,
-      )
-    }
-  }, [])
 
   useEffect(() => {
     const listenClickOutsideSearchProductListDropdown = (event) => {
@@ -204,17 +185,22 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
             </div>
             <div className={styles.gap}></div>
             <nav className={styles.iconsNav}>
-              <Link to='/cart'>
-                <span className='material-symbols-outlined'>shopping_cart</span>
+              <LanguageDropdown />
+              <div className={styles.account}>
+                <span className='material-symbols-outlined'>
+                  account_circle
+                </span>
+              </div>
+
+              <div className={styles.cartAndQuantity}>
+                <Link className={styles.linkChild} to='/cart'>
+                  <span className='material-symbols-outlined'>
+                    shopping_cart
+                  </span>
+                </Link>
                 <span className={styles.productsQuantity}>
                   {getAllProductsQuantity}
                 </span>
-              </Link>
-
-              <span className='material-symbols-outlined'>account_circle</span>
-
-              <div>
-                <LanguageDropdown />
               </div>
             </nav>
           </div>

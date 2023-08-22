@@ -112,6 +112,7 @@
   align-items: center;
   justify-content: center;
   width: 33.33%;
+  height: 100%;
 }
 
 .inputIconContainer {
@@ -148,8 +149,9 @@
 
 .iconsNav {
   display: flex;
+  align-items: center;
   justify-content: space-evenly;
-  width: 120px;
+  min-width: 210px;
   cursor: pointer;
 }
 
@@ -161,4 +163,23 @@
   flex-grow: 1;
   width: 100%;
   border: none;
+}
+
+.linkChild {
+  display: flex;
+  align-items: center;
+}
+
+.productsQuantity {
+  width: 36px;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+}
+
+.cartAndQuantity {
+  display: flex;
+  align-items: center;
 }
