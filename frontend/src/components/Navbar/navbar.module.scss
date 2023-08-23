@@ -116,10 +116,8 @@
 }
 
 .inputIconContainer {
-  position: fixed;
-  top: 1%;
-  left: 55%;
-  z-index: 3000;
+  @include z-index(product-search-dropdow);
+
   display: flex;
   flex-direction: column;
   flex-grow: 1;

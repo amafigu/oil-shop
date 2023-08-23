@@ -8,26 +8,15 @@ import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
 const Navbar = ({ toggleSidebarMenuVisibility }) => {
-  const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false)
+  const [, setSearchDropdownOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
-  const [slideInOutClass, setSlideInOutClass] = useState(
-    isSearchDropdownOpen ? "visible" : "hidden",
-  )
   const [matchedProducts, setMatchedProducts] = useState([])
   const { getAllProductsQuantity } = useContext(CartContext)
 
   const navigate = useNavigate()
 
   const searchProductListDropdownRef = useRef(null)
-
-  useEffect(() => {
-    if (isSearchDropdownOpen) {
-      setSlideInOutClass("visible")
-    } else {
-      setSlideInOutClass("hidden")
-    }
-  }, [isSearchDropdownOpen])
 
   useEffect(() => {
     const listenClickOutsideSearchProductListDropdown = (event) => {
@@ -122,29 +111,8 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
           </div>
 
           <div className={styles.navbarColumn}>
-            <span
-              onClick={() => {
-                setSearchDropdownOpen(
-                  (prevIsSearchDropdownOpen) => !prevIsSearchDropdownOpen,
-                )
-                setMatchedProducts([])
-                setSearchText("")
-              }}
-              onKeyDown={(e) => {
-                getPressedKey(e)
-              }}
-              className={`material-symbols-outlined ${styles.searchIcon}`}
-            >
-              search
-            </span>
-
-            <div
-              className={`${styles.inputIconContainer} ${styles[slideInOutClass]}`}
-            >
-              <div
-                className={styles.searchTextInputAndProductList}
-                ref={searchProductListDropdownRef}
-              >
+            <div className={`${styles.inputIconContainer}`}>
+              <div className={styles.searchTextInputAndProductList}>
                 <input
                   className={styles.searchTextInput}
                   onChange={getInputChange}
@@ -152,14 +120,8 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
                   placeholder='Search Product'
                   value={searchText}
                 ></input>
-                {isSearchDropdownOpen && matchedProducts.length > 0 && (
-                  <div
-                    className={
-                      isSearchDropdownOpen
-                        ? styles.searchDropdown
-                        : styles.hidden
-                    }
-                  >
+                {matchedProducts.length > 0 && (
+                  <div className={styles.searchDropdown}>
                     {matchedProducts.map((product) => (
                       <div
                         className={styles.dropdownListItem}
@@ -187,6 +149,18 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
                 )}
               </div>
             </div>
+            <span
+              onClick={() => {
+                setSearchDropdownOpen(
+                  (prevIsSearchDropdownOpen) => !prevIsSearchDropdownOpen,
+                )
+                setMatchedProducts([])
+                setSearchText("")
+              }}
+              className={`material-symbols-outlined ${styles.searchIcon}`}
+            >
+              search
+            </span>
             <div className={styles.gap}></div>
             <nav className={styles.iconsNav}>
               <LanguageDropdown />
