@@ -88,6 +88,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
   }
 
   const searchProduct = () => {
+    console.log("search")
     const match = products.find(
       (product) => product.name.toLowerCase() === searchText.toLowerCase(),
     )
@@ -129,7 +130,11 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
                 setMatchedProducts([])
                 setSearchText("")
               }}
+              onKeyDown={(e) => {
+                getPressedKey(e)
+              }}
               className={`material-symbols-outlined ${styles.searchIcon}`}
+              tabIndex={0}
             >
               search
             </span>
@@ -187,7 +192,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
             <nav className={styles.iconsNav}>
               <LanguageDropdown />
               <div className={styles.account}>
-                <span className='material-symbols-outlined'>
+                <span tabIndex={0} className='material-symbols-outlined'>
                   account_circle
                 </span>
               </div>

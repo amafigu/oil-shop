@@ -12,9 +12,7 @@ const LanguageDropdown = () => {
         languageDropdownRef.current &&
         !languageDropdownRef.current.contains(event.target)
       ) {
-        console.log("before", isLanguageDropdownOpen)
         setLanguageDropdownOpen(false)
-        console.log(isLanguageDropdownOpen)
       }
     }
 
@@ -35,13 +33,21 @@ const LanguageDropdown = () => {
 
   return (
     <div ref={languageDropdownRef} className={styles.languageDropdownWrapper}>
-      <div ref={languageDropdownRef} className={styles.dropdown}>
+      <div
+        className={
+          isLanguageDropdownOpen
+            ? styles.dropdown
+            : `${styles.dropdown} ${styles.hideDropdown}`
+        }
+      >
         <img
+          tabIndex={isLanguageDropdownOpen ? 0 : -1}
           src={`${process.env.PUBLIC_URL}/assets/united-kingdom.png`}
           onClick={() => handleChangeLanguage("en")}
           alt='en'
         ></img>
         <img
+          tabIndex={isLanguageDropdownOpen ? 0 : -1}
           src={`${process.env.PUBLIC_URL}/assets/germany.png`}
           onClick={() => handleChangeLanguage("de")}
           alt='de'
@@ -49,6 +55,7 @@ const LanguageDropdown = () => {
       </div>
 
       <span
+        tabIndex={0}
         className={`${styles.openCloseButton} material-symbols-outlined`}
         onClick={() => setLanguageDropdownOpen(!isLanguageDropdownOpen)}
       >
