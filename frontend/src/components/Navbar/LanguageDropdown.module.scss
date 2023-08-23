@@ -1,9 +1,39 @@
-.dropdown {
-  position: fixed;
-  top: 10px;
-  width: 28px;
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
+
+.languageDropdownWrapper {
+  display: flex;
+  align-items: center;
+
+  .dropdownColumn {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .openCloseButton {
+    margin-left: 16px;
+  }
+
   img {
     width: 28px;
     height: 28px;
+  }
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    cursor: pointer;
+    background: white;
+    border-radius: 4px;
+    box-shadow: theme.$main-box-shadow;
+    opacity: 1;
+  }
+
+  .hideDropdown {
+    pointer-events: none;
+    cursor: none;
+    opacity: 0;
   }
 }

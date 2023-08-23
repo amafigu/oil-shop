@@ -1,4 +1,5 @@
 @use "../theme" as theme;
+@use "./functions" as functions;
 
 @mixin flex-center {
   display: flex;
@@ -88,4 +89,8 @@
   flex-direction: column;
   width: 50%;
   margin-bottom: 20px;
+}
+
+@mixin z-index($key) {
+  z-index: functions.get-z-index($key);
 }
