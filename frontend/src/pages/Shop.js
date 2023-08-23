@@ -43,19 +43,21 @@ const Shop = () => {
   useEffectScrollTop()
 
   return (
-    <div className={style.content}>
-      <Sidebar setCategory={setCategory} />
-      <div className={style.mainContent}>
-        {sortedProducts.map((product, index) => (
-          <ProductCard
-            key={index}
-            name={product.name}
-            image={product.image}
-            size={product.size}
-            price={product.price}
-            description={product.description}
-          />
-        ))}
+    <div className={style.shopPageWrapper}>
+      <div className={style.shopPage}>
+        <Sidebar setCategory={setCategory} />
+        <div className={style.sortedProducts}>
+          {sortedProducts.map((product, index) => (
+            <ProductCard
+              key={index}
+              name={product.name}
+              image={product.image}
+              size={product.size}
+              price={product.price}
+              description={product.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

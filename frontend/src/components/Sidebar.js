@@ -22,15 +22,19 @@ const Sidebar = ({ setCategory }) => {
     .map((category) => (
       <li
         key={category.id}
-        onClick={() => setCategory(category.name)}
+        onClick={() => {
+          setCategory(category.name)
+          window.scrollTo(0, 0)
+        }}
         className={styles.sidebarItem}
       >
         {titleCase(category.name, "_")}
+        <hr />
       </li>
     ))
 
   return (
-    <div>
+    <div className={styles.sidebarWrapper}>
       <ul className={styles.sidebar}>{renderedCategories}</ul>
     </div>
   )

@@ -1,59 +1,61 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-@keyframes slideIn {
-  from {
-    transition: transform 0.5s ease;
-    transform: translateX(-100%);
+.sidebarMenuWrapper {
+  @keyframes slideIn {
+    from {
+      transition: transform 0.5s ease;
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
   }
 
-  to {
-    transform: translateX(0);
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
   }
-}
 
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
+  .visible {
+    animation: slideIn 0.4s forwards;
   }
 
-  to {
-    transform: translateX(-100%);
+  .hidden {
+    animation: slideOut 0.6s forwards;
   }
-}
 
-.visible {
-  animation: slideIn 0.4s forwards;
-}
+  .sidebar {
+    position: fixed;
+    top: 9%;
+    left: 0;
+    width: 280px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
+      0 1px 10px 0 rgb(0 0 0 / 12%);
+  }
 
-.hidden {
-  animation: slideOut 0.6s forwards;
-}
+  .sidebarItem {
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgb(0 0 0 / 87%);
+    letter-spacing: 0.0094em;
+    list-style-type: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
 
-.sidebar {
-  position: fixed;
-  top: 9%;
-  left: 0;
-  width: 280px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%),
-    0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
-}
-
-.sidebarItem {
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: rgb(0 0 0 / 87%);
-  letter-spacing: 0.0094em;
-  list-style-type: none;
-          cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.sidebarItem:hover {
-  background-color: rgb(0 0 0 / 4%);
+  .sidebarItem:hover {
+    background-color: rgb(0 0 0 / 4%);
+  }
 }

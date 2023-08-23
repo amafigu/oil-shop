@@ -1,14 +1,23 @@
+@use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.content {
+.shopPageWrapper {
   display: flex;
-  min-height: 85vh;
-}
+  justify-content: center;
+  min-height: 80vh;
 
-.mainContent {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: space-evenly;
-  padding: 5rem;
-  overflow-y: auto;
+  .shopPage {
+    display: flex;
+    flex-flow: wrap;
+    width: theme.$default-page-width;
+    margin: 5rem;
+    overflow-y: auto;
+  }
+
+  .sortedProducts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 88%;
+  }
 }
