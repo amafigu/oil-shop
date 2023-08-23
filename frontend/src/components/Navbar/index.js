@@ -8,7 +8,7 @@ import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
 const Navbar = ({ toggleSidebarMenuVisibility }) => {
-  const [, setSearchDropdownOpen] = useState(false)
+  const [isLanguageDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
   const [matchedProducts, setMatchedProducts] = useState([])
@@ -17,6 +17,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
   const navigate = useNavigate()
 
   const searchProductListDropdownRef = useRef(null)
+  const modalRef = useRef(null)
 
   useEffect(() => {
     const listenClickOutsideSearchProductListDropdown = (event) => {
@@ -48,6 +49,14 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
       })
       .catch((e) => console.error("Error getting products data", e))
   }, [])
+
+  useEffect(() => {
+    if (isLanguageDropdownOpen) {
+      modalRef.current.classList.add("noScroll")
+    } else {
+      modalRef.current.classList.remove("noScroll")
+    }
+  }, [isLanguageDropdownOpen])
 
   const getInputChange = (e) => {
     setSearchText(e.target.value)
@@ -89,7 +98,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={modalRef}>
       <div className={styles.container}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarColumn}>
@@ -111,41 +120,50 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
           </div>
 
           <div className={styles.navbarColumn}>
-            <div className={`${styles.inputIconContainer}`}>
+            <div className={`${styles.searchProduct}`}>
               <div className={styles.searchTextInputAndProductList}>
-                <input
-                  className={styles.searchTextInput}
-                  onChange={getInputChange}
-                  onKeyDown={getPressedKey}
-                  placeholder='Search Product'
-                  value={searchText}
-                ></input>
-                {matchedProducts.length > 0 && (
-                  <div className={styles.searchDropdown}>
-                    {matchedProducts.map((product) => (
-                      <div
-                        className={styles.dropdownListItem}
-                        key={product.name}
-                        onClick={() => navigateToProduct(product.name)}
-                      >
-                        <div className={styles.dropdownListItemImage}>
-                          <img
-                            src={
-                              process.env.PUBLIC_URL +
-                              "/assets/" +
-                              product.image
-                            }
-                            alt={product.name}
-                            className={styles.listItemImage}
-                          />
-                        </div>
+                <div>
+                  <input
+                    className={styles.searchTextInput}
+                    onChange={getInputChange}
+                    onKeyDown={getPressedKey}
+                    placeholder='Search Product'
+                    value={searchText}
+                  ></input>
+                </div>
 
-                        <div className={styles.dropdownListItemName}>
-                          {titleCase(product.name, "_")}
+                {matchedProducts.length > 0 && (
+                  <>
+                    <div className={styles.dropdownModal}></div>
+                    <div
+                      ref={searchProductListDropdownRef}
+                      className={styles.searchDropdown}
+                    >
+                      {matchedProducts.map((product) => (
+                        <div
+                          className={styles.dropdownListItem}
+                          key={product.name}
+                          onClick={() => navigateToProduct(product.name)}
+                        >
+                          <div className={styles.dropdownListItemImage}>
+                            <img
+                              src={
+                                process.env.PUBLIC_URL +
+                                "/assets/" +
+                                product.image
+                              }
+                              alt={product.name}
+                              className={styles.listItemImage}
+                            />
+                          </div>
+
+                          <div className={styles.dropdownListItemName}>
+                            {titleCase(product.name, "_")}
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  </>
                 )}
               </div>
             </div>
