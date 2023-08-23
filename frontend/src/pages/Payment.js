@@ -86,14 +86,12 @@ const Payment = () => {
           </div>
           <div className={styles.navigateButtons}>
             <span
-              tabIndex='0'
               className={styles.formButton}
               onClick={() => backToShippingPage()}
             >
               {text.backButton}
             </span>
             <span
-              tabIndex='0'
               className={styles.formButton}
               onClick={() => submitPaymentMethod()}
             >

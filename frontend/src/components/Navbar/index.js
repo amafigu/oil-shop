@@ -134,7 +134,6 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
                 getPressedKey(e)
               }}
               className={`material-symbols-outlined ${styles.searchIcon}`}
-              tabIndex={0}
             >
               search
             </span>
@@ -192,7 +191,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
             <nav className={styles.iconsNav}>
               <LanguageDropdown />
               <div className={styles.account}>
-                <span tabIndex={0} className='material-symbols-outlined'>
+                <span className='material-symbols-outlined'>
                   account_circle
                 </span>
               </div>

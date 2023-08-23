@@ -41,13 +41,11 @@ const LanguageDropdown = () => {
         }
       >
         <img
-          tabIndex={isLanguageDropdownOpen ? 0 : -1}
           src={`${process.env.PUBLIC_URL}/assets/united-kingdom.png`}
           onClick={() => handleChangeLanguage("en")}
           alt='en'
         ></img>
         <img
-          tabIndex={isLanguageDropdownOpen ? 0 : -1}
           src={`${process.env.PUBLIC_URL}/assets/germany.png`}
           onClick={() => handleChangeLanguage("de")}
           alt='de'
@@ -55,7 +53,6 @@ const LanguageDropdown = () => {
       </div>
 
       <span
-        tabIndex={0}
         className={`${styles.openCloseButton} material-symbols-outlined`}
         onClick={() => setLanguageDropdownOpen(!isLanguageDropdownOpen)}
       >
