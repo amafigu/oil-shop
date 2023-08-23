@@ -1,3 +1,4 @@
+import { useEffectScrollTop } from "#utils/utils"
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
@@ -32,6 +33,8 @@ const Shipping = () => {
       state: { shippingData: formData },
     })
   }
+
+  useEffectScrollTop()
 
   return (
     <div className={styles.shippingPageWrapper}>

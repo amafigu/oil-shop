@@ -8,7 +8,6 @@ import Footer from "#components/Footer"
 import Navbar from "#components/Navbar"
 import SidebarMenu from "#components/SidebarMenu"
 import About from "#pages/About"
-import Cancellation from "#pages/Cancellation"
 import Cart from "#pages/Cart"
 import Faq from "#pages/Faq"
 import Home from "#pages/Home"
@@ -45,7 +44,6 @@ const AppRoutes = () => {
             <Route path='/checkout/shipping' element={<Shipping />} />
             <Route path='/checkout/payment' element={<Payment />} />
             <Route path='/checkout/summary' element={<OrderSummary />} />
-            <Route path='/cancellation' element={<Cancellation />} />
           </Routes>
         </div>
         <Footer />

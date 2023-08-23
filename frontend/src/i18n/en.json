@@ -138,16 +138,8 @@
           "title": "For you",
           "returnToShop": "Back to shop",
           "returnToShopTitle": "Back to shopping",
-          "cancellationPolicy": "Cancellation",
-          "cancellationPolicyTitle": "Cancellation policy",
           "faq": "Frequently Asked Questions / FAQ",
           "faqTitle": "Frequently Asked Questions"
-        },
-        "legal": {
-          "title": "Legal",
-          "companyDetails": "Company Details",
-          "generalTerms": "General terms and conditions",
-          "dataProtection": "Data Protection"
         },
         "users": {
           "title": "Customers",

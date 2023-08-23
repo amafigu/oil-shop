@@ -1,28 +1,28 @@
-.sidebar {
-  top: 6%;
-  left: 0;
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
+
+.sidebarWrapper {
   display: flex;
-  flex-direction: column;
-  width: 250px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%),
-    0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
-}
+  width: 12%;
 
-.sidebarItem {
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: rgb(0 0 0 / 87%);
-  letter-spacing: 0.0094em;
-  list-style-type: none;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    margin-top: 150px;
+  }
 
-.sidebarItem:hover {
-  background-color: rgb(0 0 0 / 4%);
+  .sidebarItem {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: theme.$secondary-color;
+    letter-spacing: 0.0094em;
+    list-style-type: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
 }

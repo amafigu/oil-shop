@@ -44,33 +44,35 @@ const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
     ))
 
   return (
-    <div className={styles[slideInOutClass]}>
-      <div className={styles.sidebar}>
-        <div
-          className={styles.sidebarItem}
-          onClick={() => setSidebarMenuVisible(false)}
-        >
-          <span className='material-symbols-outlined'>close</span>
+    <div className={styles.sidebarMenuWrapper}>
+      <div className={styles[slideInOutClass]}>
+        <div className={styles.sidebar}>
+          <div
+            className={styles.sidebarItem}
+            onClick={() => setSidebarMenuVisible(false)}
+          >
+            <span className='material-symbols-outlined'>close</span>
+          </div>
+          {renderedCategories}
+          <Link to='/login' title={text.accountAndLogin}>
+            <div className={styles.sidebarItem}>{text.accountAndLogin}</div>
+          </Link>
+          <Link to='/shop' title={text.onlineShop}>
+            <div className={styles.sidebarItem}>{text.onlineShop}</div>
+          </Link>
+          <Link to='/cancellation' title={text.cancellationPolicyTitle}>
+            <div className={styles.sidebarItem}>{text.cancellationPolicy}</div>
+          </Link>
+          <Link to='/return' title={text.returnProductsTitle}>
+            <div className={styles.sidebarItem}>{text.returnProducts}</div>
+          </Link>
+          <Link to='/faq' title={text.faqTitle}>
+            <div className={styles.sidebarItem}>{text.faq}</div>
+          </Link>
+          <a href='mailto:oylooils@gmail.com'>
+            <div className={styles.sidebarItem}>Contact us</div>
+          </a>
         </div>
-        {renderedCategories}
-        <Link to='/login' title={text.accountAndLogin}>
-          <div className={styles.sidebarItem}>{text.accountAndLogin}</div>
-        </Link>
-        <Link to='/shop' title={text.onlineShop}>
-          <div className={styles.sidebarItem}>{text.onlineShop}</div>
-        </Link>
-        <Link to='/cancellation' title={text.cancellationPolicyTitle}>
-          <div className={styles.sidebarItem}>{text.cancellationPolicy}</div>
-        </Link>
-        <Link to='/return' title={text.returnProductsTitle}>
-          <div className={styles.sidebarItem}>{text.returnProducts}</div>
-        </Link>
-        <Link to='/faq' title={text.faqTitle}>
-          <div className={styles.sidebarItem}>{text.faq}</div>
-        </Link>
-        <a href='mailto:oylooils@gmail.com'>
-          <div className={styles.sidebarItem}>Contact us</div>
-        </a>
       </div>
     </div>
   )
