@@ -138,16 +138,8 @@
           "title": "Für dich",
           "returnToShop": "Zurück zum Shop",
           "returnToShopTitle": "Zurück zum shopping",
-          "cancellationPolicy": "Stornierung",
-          "cancellationPolicyTitle": "Stornierungsbedingungen",
           "faq": "Häufig gestellte Fragen / FAQ",
           "faqTitle": "Häufig gestellte Fragen"
-        },
-        "legal": {
-          "title": "Legal",
-          "companyDetails": "Impressum",
-          "generalTerms": "AGB",
-          "dataProtection": "Datenschutz"
         },
         "users": {
           "title": "Kunden",

@@ -5,6 +5,7 @@ import React, { useContext } from "react"
 import { useLocation } from "react-router-dom"
 
 import useLocaleContext from "#context/localeContext"
+import { useEffectScrollTop } from "#utils/utils"
 import styles from "./orderSummary.module.scss"
 
 const OrderSummary = () => {
@@ -13,6 +14,8 @@ const OrderSummary = () => {
   const { shippingData, paymentMethod } = location.state
   const { translate } = useLocaleContext()
   const text = translate.pages.orderSummary
+
+  useEffectScrollTop()
 
   return (
     <div className={styles.orderSummaryWrapper}>

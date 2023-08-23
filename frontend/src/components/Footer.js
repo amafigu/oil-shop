@@ -81,34 +81,8 @@ const Footer = () => {
                   {text.linksColumns.forClient.returnToShop}
                 </Link>
 
-                <Link
-                  to='/cancellation'
-                  title={text.linksColumns.forClient.cancellationPolicyTitle}
-                >
-                  {text.linksColumns.forClient.cancellationPolicy}
-                </Link>
-
                 <Link to='/faq' title='FAQ'>
                   {text.linksColumns.forClient.faq}
-                </Link>
-              </div>
-            </li>
-
-            <li className={styles.columnsSectionItem}>
-              <div className={styles.columnsSectionItemTitle}>
-                {text.linksColumns.legal.title}
-              </div>
-              <div className={styles.columnsSectionItemLinks}>
-                <Link to='/company-details' title='company details'>
-                  {text.linksColumns.legal.companyDetails}
-                </Link>
-
-                <Link to='/general-terms' title='general terms'>
-                  {text.linksColumns.legal.generalTerms}
-                </Link>
-
-                <Link to='/data-protection' title='data protection'>
-                  {text.linksColumns.legal.dataProtection}
                 </Link>
               </div>
             </li>

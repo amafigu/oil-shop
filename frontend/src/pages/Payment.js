@@ -1,3 +1,4 @@
+import { useEffectScrollTop } from "#utils/utils"
 import { React, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
@@ -32,6 +33,8 @@ const Payment = () => {
     setPaymentMethod(e.target.value)
     setIsMethodSelected(true)
   }
+
+  useEffectScrollTop()
 
   return (
     <div className={styles.paymentPageWrapper}>

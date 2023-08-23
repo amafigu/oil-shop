@@ -1,3 +1,4 @@
+import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
@@ -38,6 +39,8 @@ const Shop = () => {
     )
 
   const sortedProducts = filteredProducts(category)
+
+  useEffectScrollTop()
 
   return (
     <div className={style.content}>

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 export const titleCase = (str, separator) => {
   return str
     .split(separator)
@@ -18,3 +19,9 @@ export const totalCost = (cart) =>
 
 export const cartTotalSum = (cart, shippingCost) =>
   Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
+
+export const useEffectScrollTop = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+}

@@ -1,11 +1,9 @@
+import { useEffectScrollTop } from "#utils/utils"
 import React from "react"
-import useLocaleContext from "../context/localeContext"
 import styles from "./about.module.scss"
 
 const About = () => {
-  const { translate } = useLocaleContext()
-  const text = translate.pages.about
-
+  useEffectScrollTop()
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.page}>

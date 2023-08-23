@@ -15,11 +15,14 @@ const ProductDetails = () => {
   const text = translate.pages.productsDetails
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+
     const getProduct = async () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/products/${productName}`,
         )
+
         setProduct(response.data)
       } catch (error) {
         console.error("Error fetching product: ", error)
