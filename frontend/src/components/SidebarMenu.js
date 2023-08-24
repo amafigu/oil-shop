@@ -40,16 +40,19 @@ const SidebarMenu = ({ setSidebarMenuVisible, isOpen }) => {
         <div className={styles.sidebarItem}>
           {titleCase(category.name, "_")}
         </div>
+        <hr />
       </Link>
     ))
 
   return (
     <div className={styles.sidebarMenuWrapper}>
       <div className={styles[slideInOutClass]}>
-        <div className={styles.sidebar}>
+        <div className={styles.sidebarMenu}>
           <div
             className={styles.sidebarItem}
-            onClick={() => setSidebarMenuVisible(false)}
+            onClick={() => {
+              setSidebarMenuVisible(false)
+            }}
           >
             <span className='material-symbols-outlined'>close</span>
           </div>

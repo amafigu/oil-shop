@@ -2,121 +2,122 @@
 @import "https://fonts.googleapis.com/css2?family=GFS+Neohellenic&display=swap";
 @import "#styles/helpers/mixins";
 
-.pageContainer {
-  @include flex-center;
-
-  flex-direction: column;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-}
-
-.carouselWrapper {
+.homePageWrapper {
   display: flex;
   justify-content: center;
-  width: 100%;
-}
 
-.teaserTextWrapper {
-  display: flex;
-  justify-content: center;
-}
+  .homePage {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+  }
 
-.teaserText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70%;
-  text-align: center;
-}
+  .pageColumn {
+    width: 100%;
+  }
 
-.teaserCardsWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-}
+  .carouselWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 
-.teaserCards {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
+  .teaserTextWrapper {
+    display: flex;
+    justify-content: center;
+  }
 
-.title {
-  margin-bottom: 20px;
-  font-family: theme.$main-font-family;
-  font-size: 28px;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-}
+  .teaserText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    text-align: center;
+  }
 
-.homeSubtitle {
-  display: flex;
-  align-items: center;
-  height: 80px;
-  font-family: theme.$main-font-family;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-}
+  .teaserCardsWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+  }
 
-.columnsTitle {
-  align-items: center;
-  font-family: theme.$main-font-family;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-}
+  .teaserCards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
 
-.homeSubtitleText {
-  display: flex;
-  align-items: flex-start;
-  min-height: 120px;
-  max-height: 200px;
-  overflow: hidden;
-  font-family: theme.$main-font-family;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-}
+  .title {
+    margin-bottom: 20px;
+    font-family: theme.$main-font-family;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
 
-.subtitleText {
-  width: 60%;
-  font-family: theme.$main-font-family;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 128%;
-  text-align: center;
-}
+  .homeSubtitle {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    font-family: theme.$main-font-family;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
 
-.productSliderContainer {
-  display: flex;
-  justify-content: center;
-  width: 96%;
-  margin-bottom: 16px;
-}
+  .columnsTitle {
+    align-items: center;
+    font-family: theme.$main-font-family;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
 
-.iconColumns {
-  font-size: 46px;
-}
+  .homeSubtitleText {
+    display: flex;
+    align-items: flex-start;
+    min-height: 120px;
+    max-height: 200px;
+    overflow: hidden;
+    font-family: theme.$main-font-family;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+  }
 
-.teaserSingleCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
+  .subtitleText {
+    width: 60%;
+    font-family: theme.$main-font-family;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 128%;
+    text-align: center;
+  }
 
-.columnsContainer {
-  display: flex;
-  justify-content: center;
-  width: 95%;
+  .productSliderContainer {
+    display: flex;
+    justify-content: center;
+    width: 96%;
+    margin-bottom: 16px;
+  }
+
+  .iconColumns {
+    font-size: 46px;
+  }
+
+  .teaserSingleCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .columnsContainer {
+    display: flex;
+    justify-content: center;
+    width: 95%;
+  }
 }

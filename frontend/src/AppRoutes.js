@@ -6,7 +6,6 @@ import styles from "./appRoutes.module.scss"
 
 import Footer from "#components/Footer"
 import Navbar from "#components/Navbar"
-import SidebarMenu from "#components/SidebarMenu"
 import About from "#pages/About"
 import Cart from "#pages/Cart"
 import Faq from "#pages/Faq"
@@ -22,6 +21,7 @@ const AppRoutes = () => {
 
   const toggleSidebarMenuVisibility = () => {
     setSidebarMenuVisible((prevIsSidebarVisible) => !prevIsSidebarVisible)
+    console.log(isSidebarMenuVisible)
   }
 
   return (
@@ -29,15 +29,18 @@ const AppRoutes = () => {
       <CartProvider>
         <Navbar toggleSidebarMenuVisibility={toggleSidebarMenuVisibility} />
         <div className={styles.content}>
-          <SidebarMenu
-            setSidebarMenuVisible={setSidebarMenuVisible}
-            isOpen={isSidebarMenuVisible}
-          />
-
           <Routes>
             <Route path='/about' element={<About />} />
             <Route path='/shop' element={<Shop />} />
-            <Route path='/' element={<Home />} />
+            <Route
+              path='/'
+              element={
+                <Home
+                  setSidebarMenuVisible={setSidebarMenuVisible}
+                  isOpen={isSidebarMenuVisible}
+                />
+              }
+            />
             <Route path='/cart' element={<Cart />} />
             <Route path='/faq' element={<Faq />} />
             <Route path='/products/:productName' element={<ProductDetails />} />
