@@ -55,8 +55,8 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className={styles.productPageWrapper}>
-      <div className={styles.productPage}>
+    <div className={styles.productDetailsPageWrapper}>
+      <div className={styles.productDetailsPage}>
         <div className={styles.imageContainerWrapper}>
           <div className={styles.imageContainer}>
             <img

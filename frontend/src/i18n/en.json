@@ -5,7 +5,9 @@
       "teaser": "We are passionate about essential oils."
     },
     "cart": {
+      "emptyCart": "There are no products in the cart",
       "confirmPurchase": "Confirm Purchase",
+      "orderToContinue": "Order to Continue",
       "orderSummary": "Summary",
       "deleteButton": "delete",
       "orderSubtotal": "Subtotal:",

@@ -1,6 +1,10 @@
 import { CartContext } from "#context/cartContext"
-import { titleCase } from "#utils/utils"
-import axios from "axios"
+import {
+  navigateToProductAndCloseDropdown,
+  searchAndNavigateToProduct,
+  titleCase,
+  useGetProducts,
+} from "#utils/utils"
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
@@ -54,22 +58,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [isLanguageDropdownOpen])
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/products`)
-      .then((response) => {
-        setProducts(response.data)
-      })
-      .catch((e) => console.error("Error getting products data", e))
-  }, [])
-
-  useEffect(() => {
-    if (isLanguageDropdownOpen) {
-      modalRef.current.classList.add("noScroll")
-    } else {
-      modalRef.current.classList.remove("noScroll")
-    }
-  }, [isLanguageDropdownOpen])
+  useGetProducts(setProducts)
 
   const getInputChange = (e) => {
     setSearchText(e.target.value)
@@ -85,26 +74,9 @@ const Navbar = () => {
     }
   }
 
-  const navigateToProduct = (name) => {
-    navigate(`/products/${name}`)
-    setSearchDropdownOpen(false)
-    setMatchedProducts([])
-    setSearchText("")
-  }
-
-  const getPressedKeyInSearchField = (e) => {
+  const getPressedEnterKeyInSearchField = (e) => {
     if (e.key === "Enter") {
-      searchProduct()
-    }
-  }
-
-  const searchProduct = () => {
-    console.log("search")
-    const match = products.find(
-      (product) => product.name.toLowerCase() === searchText.toLowerCase(),
-    )
-    if (match) {
-      navigate(`/products/${match.name}`)
+      searchAndNavigateToProduct(products, searchText, navigate)
     }
   }
 
@@ -128,7 +100,7 @@ const Navbar = () => {
                   <input
                     className={styles.searchTextInput}
                     onChange={getInputChange}
-                    onKeyDown={getPressedKeyInSearchField}
+                    onKeyDown={getPressedEnterKeyInSearchField}
                     placeholder='Search Product'
                     value={searchText}
                   ></input>
@@ -145,7 +117,15 @@ const Navbar = () => {
                         <div
                           className={styles.dropdownListItem}
                           key={product.name}
-                          onClick={() => navigateToProduct(product.name)}
+                          onClick={() =>
+                            navigateToProductAndCloseDropdown(
+                              product.name,
+                              navigate,
+                              setSearchDropdownOpen,
+                              setMatchedProducts,
+                              setSearchText,
+                            )
+                          }
                         >
                           <div className={styles.dropdownListItemImage}>
                             <img

@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useEffect } from "react"
 
 export const titleCase = (str, separator) => {
@@ -27,8 +28,7 @@ export const useEffectScrollTop = () => {
   }, [])
 }
 
-export const searchProduct = (products, searchText, navigate) => {
-  console.log("search")
+export const searchAndNavigateToProduct = (products, searchText, navigate) => {
   const match = products.find(
     (product) => product.name.toLowerCase() === searchText.toLowerCase(),
   )
@@ -37,4 +37,28 @@ export const searchProduct = (products, searchText, navigate) => {
   } else {
     console.error("not able to navigate to product page ")
   }
+}
+
+export const navigateToProductAndCloseDropdown = (
+  name,
+  navigate,
+  setSearchDropdownOpen,
+  setMatchedProducts,
+  setSearchText,
+) => {
+  navigate(`/products/${name}`)
+  setSearchDropdownOpen(false)
+  setMatchedProducts([])
+  setSearchText("")
+}
+
+export const useGetProducts = (setProducts) => {
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/products`)
+      .then((response) => {
+        setProducts(response.data)
+      })
+      .catch((e) => console.error("Error getting products data", e))
+  }, [setProducts])
 }
