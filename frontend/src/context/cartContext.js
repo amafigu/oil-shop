@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react"
+import React, { createContext, useContext, useState } from "react"
 import NotificationCard from "../components/NotificationCard"
 
 export const CartContext = createContext()
@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
   }
 
   const updateProductQuantity = (productName, newQuantity) => {
-    if (newQuantity >= 0) {
+    if (newQuantity > 0) {
       setCart(
         cart.map((item) =>
           item.product.name === productName
