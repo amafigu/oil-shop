@@ -7,7 +7,7 @@ import LanguageDropdown from "./LanguageDropdown"
 import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
-const Navbar = ({ toggleSidebarMenuVisibility }) => {
+const Navbar = () => {
   const [isLanguageDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
@@ -29,6 +29,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
         setMatchedProducts([])
       }
     }
+
     document.addEventListener(
       "mousedown",
       listenClickOutsideSearchProductListDropdown,
@@ -40,6 +41,18 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
       )
     }
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setSearchDropdownOpen(false)
+      setMatchedProducts([])
+      setSearchText("")
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [isLanguageDropdownOpen])
 
   useEffect(() => {
     axios
@@ -123,7 +136,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
                   ></input>
                 </div>
 
-                {matchedProducts.length > 0 && (
+                {matchedProducts.length > 0 && isLanguageDropdownOpen && (
                   <>
                     <div className={styles.dropdownModal}></div>
                     <div
