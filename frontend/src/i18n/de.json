@@ -5,6 +5,7 @@
       "teaser": "Wir haben eine Leidenschaft für ätherische Öle."
     },
     "cart": {
+      "confirmPurchase": "Bestätigen",
       "orderSummary": "Zusammenfassung",
       "deleteButton": "löschen",
       "orderSubtotal": "Zwischensumme:",

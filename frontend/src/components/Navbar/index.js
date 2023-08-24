@@ -7,7 +7,7 @@ import LanguageDropdown from "./LanguageDropdown"
 import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
-const Navbar = ({ toggleSidebarMenuVisibility }) => {
+const Navbar = () => {
   const [isLanguageDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
@@ -29,6 +29,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
         setMatchedProducts([])
       }
     }
+
     document.addEventListener(
       "mousedown",
       listenClickOutsideSearchProductListDropdown,
@@ -40,6 +41,18 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
       )
     }
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setSearchDropdownOpen(false)
+      setMatchedProducts([])
+      setSearchText("")
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [isLanguageDropdownOpen])
 
   useEffect(() => {
     axios
@@ -79,7 +92,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
     setSearchText("")
   }
 
-  const getPressedKey = (e) => {
+  const getPressedKeyInSearchField = (e) => {
     if (e.key === "Enter") {
       searchProduct()
     }
@@ -92,8 +105,6 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
     )
     if (match) {
       navigate(`/products/${match.name}`)
-    } else {
-      console.error("not able to navigate to product page ")
     }
   }
 
@@ -101,16 +112,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
     <div className={styles.wrapper} ref={modalRef}>
       <div className={styles.container}>
         <div className={styles.navbarContainer}>
-          <div className={styles.navbarColumn}>
-            <span
-              className={`${styles.toggleSidebarButton} material-symbols-outlined`}
-              onClick={() => {
-                toggleSidebarMenuVisibility()
-              }}
-            >
-              menu
-            </span>
-          </div>
+          <div className={styles.navbarColumn}></div>
           <div className={styles.navbarColumn}>
             <img
               className={styles.logo}
@@ -126,13 +128,13 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
                   <input
                     className={styles.searchTextInput}
                     onChange={getInputChange}
-                    onKeyDown={getPressedKey}
+                    onKeyDown={getPressedKeyInSearchField}
                     placeholder='Search Product'
                     value={searchText}
                   ></input>
                 </div>
 
-                {matchedProducts.length > 0 && (
+                {matchedProducts.length > 0 && isLanguageDropdownOpen && (
                   <>
                     <div className={styles.dropdownModal}></div>
                     <div

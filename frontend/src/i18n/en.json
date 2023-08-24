@@ -5,6 +5,7 @@
       "teaser": "We are passionate about essential oils."
     },
     "cart": {
+      "confirmPurchase": "Confirm Purchase",
       "orderSummary": "Summary",
       "deleteButton": "delete",
       "orderSubtotal": "Subtotal:",

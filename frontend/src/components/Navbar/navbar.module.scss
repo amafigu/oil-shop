@@ -60,6 +60,7 @@
     color: black;
     background-color: #f5f5f5;
     border-radius: 4px;
+    box-shadow: theme.$main-box-shadow;
   }
 
   .dropdownModal {
@@ -84,6 +85,7 @@
     cursor: pointer;
     background-color: #fff;
     border-radius: 4px;
+    box-shadow: theme.$light-box-shadow;
     transition: background-color 0.3s ease;
   }
 
@@ -154,6 +156,7 @@
   .logo {
     width: 116px;
     height: 68px;
+    border-radius: 50%;
   }
 
   .iconsNav {

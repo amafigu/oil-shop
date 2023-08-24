@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import { CartProvider } from "./context/cartContext"
 
@@ -6,7 +5,6 @@ import styles from "./appRoutes.module.scss"
 
 import Footer from "#components/Footer"
 import Navbar from "#components/Navbar"
-import SidebarMenu from "#components/SidebarMenu"
 import About from "#pages/About"
 import Cart from "#pages/Cart"
 import Faq from "#pages/Faq"
@@ -18,22 +16,11 @@ import Shipping from "#pages/Shipping"
 import Shop from "#pages/Shop"
 
 const AppRoutes = () => {
-  const [isSidebarMenuVisible, setSidebarMenuVisible] = useState(false)
-
-  const toggleSidebarMenuVisibility = () => {
-    setSidebarMenuVisible((prevIsSidebarVisible) => !prevIsSidebarVisible)
-  }
-
   return (
     <div className={styles.wrapper}>
       <CartProvider>
-        <Navbar toggleSidebarMenuVisibility={toggleSidebarMenuVisibility} />
+        <Navbar />
         <div className={styles.content}>
-          <SidebarMenu
-            setSidebarMenuVisible={setSidebarMenuVisible}
-            isOpen={isSidebarMenuVisible}
-          />
-
           <Routes>
             <Route path='/about' element={<About />} />
             <Route path='/shop' element={<Shop />} />
