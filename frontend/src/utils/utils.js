@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+
 export const titleCase = (str, separator) => {
   return str
     .split(separator)
@@ -24,4 +25,16 @@ export const useEffectScrollTop = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+}
+
+export const searchProduct = (products, searchText, navigate) => {
+  console.log("search")
+  const match = products.find(
+    (product) => product.name.toLowerCase() === searchText.toLowerCase(),
+  )
+  if (match) {
+    navigate(`/products/${match.name}`)
+  } else {
+    console.error("not able to navigate to product page ")
+  }
 }

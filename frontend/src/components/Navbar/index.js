@@ -92,7 +92,7 @@ const Navbar = () => {
     setSearchText("")
   }
 
-  const getPressedKey = (e) => {
+  const getPressedKeyInSearchField = (e) => {
     if (e.key === "Enter") {
       searchProduct()
     }
@@ -105,8 +105,6 @@ const Navbar = () => {
     )
     if (match) {
       navigate(`/products/${match.name}`)
-    } else {
-      console.error("not able to navigate to product page ")
     }
   }
 
@@ -130,7 +128,7 @@ const Navbar = () => {
                   <input
                     className={styles.searchTextInput}
                     onChange={getInputChange}
-                    onKeyDown={getPressedKey}
+                    onKeyDown={getPressedKeyInSearchField}
                     placeholder='Search Product'
                     value={searchText}
                   ></input>
