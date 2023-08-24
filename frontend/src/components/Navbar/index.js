@@ -101,16 +101,7 @@ const Navbar = ({ toggleSidebarMenuVisibility }) => {
     <div className={styles.wrapper} ref={modalRef}>
       <div className={styles.container}>
         <div className={styles.navbarContainer}>
-          <div className={styles.navbarColumn}>
-            <span
-              className={`${styles.toggleSidebarButton} material-symbols-outlined`}
-              onClick={() => {
-                toggleSidebarMenuVisibility()
-              }}
-            >
-              menu
-            </span>
-          </div>
+          <div className={styles.navbarColumn}></div>
           <div className={styles.navbarColumn}>
             <img
               className={styles.logo}

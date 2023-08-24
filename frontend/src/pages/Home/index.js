@@ -1,20 +1,15 @@
 import { React } from "react"
-import SidebarMenu from "../../components/SidebarMenu"
 import useLocaleContext from "../../context/localeContext"
 import Carousel from "./Carousel"
 import ProductsSlider from "./ProductsSlider"
 import styles from "./home.module.scss"
 
-const Home = ({ setSidebarMenuVisible, isOpen }) => {
+const Home = () => {
   const { translate } = useLocaleContext()
 
   return (
     <div className={styles.homePageWrapper}>
       <div className={styles.homePage}>
-        <SidebarMenu
-          setSidebarMenuVisible={setSidebarMenuVisible}
-          isOpen={isOpen}
-        />
         <div className={styles.pageColumn}>
           <div className={styles.carouselWrapper}>
             <Carousel />
