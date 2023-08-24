@@ -46,7 +46,6 @@ export const navigateToProductAndCloseDropdown = (
   setMatchedProducts,
   setSearchText,
 ) => {
-  console.log("navigateToProductAndCloseDropdown")
   navigate(`/products/${name}`)
   setSearchDropdownOpen(false)
   setMatchedProducts([])
@@ -59,8 +58,7 @@ export const useGetProducts = (setProducts) => {
       .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
         setProducts(response.data)
-        console.log(response.data)
       })
       .catch((e) => console.error("Error getting products data", e))
-  }, [])
+  }, [setProducts])
 }
