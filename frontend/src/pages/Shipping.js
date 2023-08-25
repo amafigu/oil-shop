@@ -1,6 +1,6 @@
 import useCartContext from "#context/cartContext"
 import { useEffectScrollTop } from "#utils/utils"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./shipping.module.scss"
@@ -24,6 +24,12 @@ const Shipping = () => {
   const { cart } = useCartContext()
   const text = translate.pages.shipping
 
+  useEffect(() => {
+    if (cart.length <= 0) {
+      navigate("/cart")
+    }
+  }, [cart])
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -35,6 +41,9 @@ const Shipping = () => {
       navigate("/checkout/payment", {
         state: { shippingData: formData },
       })
+    } else {
+      e.preventDefault()
+      navigate("/cart")
     }
   }
 

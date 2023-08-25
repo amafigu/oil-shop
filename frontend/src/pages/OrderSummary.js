@@ -1,8 +1,8 @@
 import { CartContext } from "#context/cartContext"
 import { SHIPPING_COST } from "#utils/constants"
 import { cartTotalSum, titleCase } from "#utils/utils"
-import React, { useContext } from "react"
-import { useLocation } from "react-router-dom"
+import React, { useContext, useEffect } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import useLocaleContext from "#context/localeContext"
 import { useEffectScrollTop } from "#utils/utils"
@@ -11,9 +11,24 @@ import styles from "./orderSummary.module.scss"
 const OrderSummary = () => {
   const location = useLocation()
   const { cart } = useContext(CartContext)
-  const { shippingData, paymentMethod } = location.state
+
   const { translate } = useLocaleContext()
   const text = translate.pages.orderSummary
+  const navigate = useNavigate()
+
+  let shippingData = {}
+  let paymentMethod = ""
+
+  if (location.state) {
+    shippingData = location.state.shippingData
+    paymentMethod = location.state.paymentMethod
+  }
+
+  useEffect(() => {
+    if (!location.state || !location.state.shippingData || cart.length <= 0) {
+      navigate("/cart")
+    }
+  }, [location.state, cart, navigate])
 
   useEffectScrollTop()
 
