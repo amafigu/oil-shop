@@ -88,3 +88,27 @@ export const useHideListOnOuterClick = (
     }
   }, [listRef, setListOpen, setMatchedItems])
 }
+
+export const useListenScrollAndCloseDropdown = (
+  isDropdownOpen,
+  setDropdownOpen,
+  setMatches,
+  setSearchString,
+) => {
+  useEffect(() => {
+    if (isDropdownOpen) {
+      const listenScrollAndCloseDropdows = () => {
+        setDropdownOpen(false)
+        setMatches([])
+        setSearchString("")
+      }
+
+      window.addEventListener("scroll", listenScrollAndCloseDropdows, {
+        passive: true,
+      })
+
+      return () =>
+        window.removeEventListener("scroll", listenScrollAndCloseDropdows)
+    }
+  }, [isDropdownOpen, setDropdownOpen, setMatches, setSearchString])
+}

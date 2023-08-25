@@ -5,8 +5,9 @@ import {
   titleCase,
   useGetProducts,
   useHideListOnOuterClick,
+  useListenScrollAndCloseDropdown,
 } from "#utils/utils"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import SubNavbar from "./SubNavbar"
@@ -30,19 +31,14 @@ const Navbar = () => {
     setMatchedProducts,
   )
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setSearchDropdownOpen(false)
-      setMatchedProducts([])
-      setSearchText("")
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [isLanguageDropdownOpen])
-
   useGetProducts(setProducts)
+
+  useListenScrollAndCloseDropdown(
+    isLanguageDropdownOpen,
+    setSearchDropdownOpen,
+    setMatchedProducts,
+    setSearchText,
+  )
 
   const getInputChange = (e) => {
     setSearchText(e.target.value)
