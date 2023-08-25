@@ -94,3 +94,15 @@
 @mixin z-index($key) {
   z-index: functions.get-z-index($key);
 }
+
+@mixin newsleter-input-and-button-wrapper {
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+}

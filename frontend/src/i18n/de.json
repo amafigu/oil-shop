@@ -152,10 +152,8 @@
       },
       "newsletter": {
         "subscriptionText": "Ihr regelmäßiges Oylo-Update",
-        "subscriptionTeaser": "Newsletter abonnieren",
-        "title": "Newsletter",
+        "subscriptionButton": "Newsletter abonnieren",
         "emailAddressPlaceholder": "E-Mail Adresse eingeben",
-        "registrationTitle": "Anmeldung zum Newsletter:",
         "registrationDataConsentText": "Die von Ihnen hier eingegebenen Daten werden ausschließlich zum Versand des Newsletters genutzt und nicht an Dritte weitergegeben. Sie können den Newsletter jederzeit per E-Mail abbestellen und Ihre Einwilligung widerrufen. Ihre Daten werden nach Abschluss des Newsletter-Empfangs innerhalb von 3 Monaten gelöscht, sofern der Löschung keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Mit dem Absenden der eingegebenen Daten erklären Sie sich mit der Datenverarbeitung einverstanden und bestätigen unsere Datenschutzerklärung."
       },
       "iconsColumns": {

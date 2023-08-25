@@ -8,26 +8,17 @@ const Footer = () => {
   const text = translate.components.footer
 
   return (
-    <footer className={styles.pageFooter}>
-      <div className={styles.footerContent}>
-        <div className={styles.footerStartSection}>
-          <span className={styles.footerStartSectionText}>
+    <footer className={styles.footerWrapper}>
+      <div className={styles.footer}>
+        <div className={styles.startSection}>
+          <span className={styles.startSectionText}>
             {text.newsletter.subscriptionText}
           </span>
         </div>
-        <div className={styles.footerNewsletterSection}>
+        <div className={styles.newsletterSection}>
           <div className={styles.registrationFormWrapper}>
-            <div className={styles.registrationFormTitle}>
-              <span>{text.newsletter.title}</span>
-            </div>
             <div className={styles.registrationFormContent}>
               <form className={styles.registrationForm}>
-                <div className={styles.registrationFormLabelWrapper}>
-                  <label className={styles.registrationFormLabel}>
-                    <span>{text.newsletter.registrationTitle}</span>
-                  </label>
-                </div>
-
                 <div className={styles.registrationEmailInputAndButtonWrapper}>
                   <div className={styles.registrationEmailInputWrapper}>
                     <input
@@ -36,13 +27,12 @@ const Footer = () => {
                       placeholder={text.newsletter.emailAddressPlaceholder}
                     />
                   </div>
-                  <button
+                  <span
                     className={styles.registrationEmailButtonWrapper}
                     title='Subscribe'
-                    type='submit'
                   >
-                    <span>{text.newsletter.subscriptionTeaser}</span>
-                  </button>
+                    <span>{text.newsletter.subscriptionButton}</span>
+                  </span>
                 </div>
               </form>
               <p className={styles.registrationDataConsentText}>
@@ -187,10 +177,9 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className={styles.footerUnderSection}>
-          <div className={styles.footerUnderSectionText}>
-            <small className={styles.footerUnderSectionTextIcon}>®</small> OYLO
-            OILS
+        <div className={styles.underSection}>
+          <div className={styles.underSectionText}>
+            <small className={styles.underSectionTextIcon}>®</small> OYLO OILS
           </div>
         </div>
         <div>© {text.copy}</div>
