@@ -28,7 +28,7 @@ const Shipping = () => {
     if (cart.length <= 0) {
       navigate("/cart")
     }
-  }, [cart])
+  }, [cart, navigate])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
