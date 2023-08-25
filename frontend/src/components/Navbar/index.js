@@ -4,6 +4,7 @@ import {
   searchAndNavigateToProduct,
   titleCase,
   useGetProducts,
+  useHideListOnOuterClick,
 } from "#utils/utils"
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -23,28 +24,11 @@ const Navbar = () => {
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
 
-  useEffect(() => {
-    const listenClickOutsideSearchProductListDropdown = (event) => {
-      if (
-        searchProductListDropdownRef.current &&
-        !searchProductListDropdownRef.current.contains(event.target)
-      ) {
-        setSearchDropdownOpen(false)
-        setMatchedProducts([])
-      }
-    }
-
-    document.addEventListener(
-      "mousedown",
-      listenClickOutsideSearchProductListDropdown,
-    )
-    return () => {
-      document.removeEventListener(
-        "mousedown",
-        listenClickOutsideSearchProductListDropdown,
-      )
-    }
-  }, [])
+  useHideListOnOuterClick(
+    searchProductListDropdownRef,
+    setSearchDropdownOpen,
+    setMatchedProducts,
+  )
 
   useEffect(() => {
     const handleScroll = () => {

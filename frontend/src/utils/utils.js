@@ -62,3 +62,29 @@ export const useGetProducts = (setProducts) => {
       .catch((e) => console.error("Error getting products data", e))
   }, [setProducts])
 }
+
+export const useHideListOnOuterClick = (
+  listRef,
+  setListOpen,
+  setMatchedItems,
+) => {
+  useEffect(() => {
+    const listenClickOutsideSearchProductListDropdown = (event) => {
+      if (listRef.current && !listRef.current.contains(event.target)) {
+        setListOpen(false)
+        setMatchedItems([])
+      }
+    }
+
+    document.addEventListener(
+      "mousedown",
+      listenClickOutsideSearchProductListDropdown,
+    )
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        listenClickOutsideSearchProductListDropdown,
+      )
+    }
+  }, [listRef, setListOpen, setMatchedItems])
+}
