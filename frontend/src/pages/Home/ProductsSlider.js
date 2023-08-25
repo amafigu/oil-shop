@@ -1,40 +1,31 @@
 import ProductCard from "#components/ProductCard"
-import axios from "axios"
-import React, { useEffect, useState } from "react"
+import { PRODUCT_SLIDER_QUANTITY } from "#utils/constants"
+import { useGetProducts } from "#utils/utils"
+import React, { useState } from "react"
 import styles from "./productSlider.module.scss"
 
 const ProductSlider = () => {
   const [products, setProducts] = useState([])
   const [currentProductIndex, setcurrentProductIndex] = useState(0)
-  const displayCount = 4
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/products`)
-      .then((response) => {
-        setProducts(response.data)
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error)
-      })
-  }, [])
+  useGetProducts(setProducts)
 
   const nextProduct = () => {
     const newIndex = currentProductIndex + 1
     setcurrentProductIndex(
-      newIndex >= products.length - displayCount + 1 ? 0 : newIndex,
+      newIndex >= products.length - PRODUCT_SLIDER_QUANTITY + 1 ? 0 : newIndex,
     )
   }
 
   const previousProduct = () => {
     const newIndex = currentProductIndex - 1
     setcurrentProductIndex(
-      newIndex < 0 ? products.length - displayCount : newIndex,
+      newIndex < 0 ? products.length - PRODUCT_SLIDER_QUANTITY : newIndex,
     )
   }
 
   return (
-    <div className={styles.slider}>
+    <div className={styles.productSliderWrapper}>
       <button
         className={`material-symbols-outlined ${styles.iconSlider}`}
         onClick={previousProduct}
@@ -42,7 +33,10 @@ const ProductSlider = () => {
         arrow_back_ios
       </button>
       {products
-        .slice(currentProductIndex, currentProductIndex + displayCount)
+        .slice(
+          currentProductIndex,
+          currentProductIndex + PRODUCT_SLIDER_QUANTITY,
+        )
         .map((product, index) => (
           <ProductCard
             key={index}

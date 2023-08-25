@@ -1,39 +1,11 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(200%);
-  }
-}
-
-.wrapper {
+.navbarWrapper {
   width: 100%;
   background-color: white;
 
-  .visible {
-    animation: slideIn 0.4s forwards;
-  }
-
-  .hidden {
-    animation: slideOut 0.6s forwards;
-  }
-
-  .container {
+  .navbar {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -139,8 +111,7 @@
     margin-right: 16px;
     background-color: #f5f5f5;
     border-radius: 4px;
-    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
-      0 1px 10px 0 rgb(0 0 0 / 12%);
+    box-shadow: theme.$main-box-shadow;
   }
 
   .searchTextInput {

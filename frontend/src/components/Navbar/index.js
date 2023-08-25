@@ -1,11 +1,14 @@
 import { CartContext } from "#context/cartContext"
 import {
+  getInputChangeAndOpenList,
   navigateToProductAndCloseDropdown,
   searchAndNavigateToProduct,
   titleCase,
   useGetProducts,
+  useHideListOnOuterClick,
+  useListenScrollAndCloseDropdown,
 } from "#utils/utils"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import SubNavbar from "./SubNavbar"
@@ -23,56 +26,20 @@ const Navbar = () => {
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
 
-  useEffect(() => {
-    const listenClickOutsideSearchProductListDropdown = (event) => {
-      if (
-        searchProductListDropdownRef.current &&
-        !searchProductListDropdownRef.current.contains(event.target)
-      ) {
-        setSearchDropdownOpen(false)
-        setMatchedProducts([])
-      }
-    }
-
-    document.addEventListener(
-      "mousedown",
-      listenClickOutsideSearchProductListDropdown,
-    )
-    return () => {
-      document.removeEventListener(
-        "mousedown",
-        listenClickOutsideSearchProductListDropdown,
-      )
-    }
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setSearchDropdownOpen(false)
-      setMatchedProducts([])
-      setSearchText("")
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [isLanguageDropdownOpen])
+  useHideListOnOuterClick(
+    searchProductListDropdownRef,
+    setSearchDropdownOpen,
+    setMatchedProducts,
+  )
 
   useGetProducts(setProducts)
 
-  const getInputChange = (e) => {
-    setSearchText(e.target.value)
-    setSearchDropdownOpen(true)
-
-    const match = products.filter((product) =>
-      product.name.toLowerCase().includes(e.target.value.toLowerCase()),
-    )
-    setMatchedProducts(match.slice(0, 6))
-    if (e.target.value === "") {
-      setMatchedProducts([])
-      setSearchText("")
-    }
-  }
+  useListenScrollAndCloseDropdown(
+    isLanguageDropdownOpen,
+    setSearchDropdownOpen,
+    setMatchedProducts,
+    setSearchText,
+  )
 
   const getPressedEnterKeyInSearchField = (e) => {
     if (e.key === "Enter") {
@@ -81,8 +48,8 @@ const Navbar = () => {
   }
 
   return (
-    <div className={styles.wrapper} ref={modalRef}>
-      <div className={styles.container}>
+    <div className={styles.navbarWrapper} ref={modalRef}>
+      <div className={styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarColumn}></div>
           <div className={styles.navbarColumn}>
@@ -99,7 +66,12 @@ const Navbar = () => {
                 <div>
                   <input
                     className={styles.searchTextInput}
-                    onChange={getInputChange}
+                    onChange={getInputChangeAndOpenList(
+                      products,
+                      setSearchText,
+                      setSearchDropdownOpen,
+                      setMatchedProducts,
+                    )}
                     onKeyDown={getPressedEnterKeyInSearchField}
                     placeholder='Search Product'
                     value={searchText}

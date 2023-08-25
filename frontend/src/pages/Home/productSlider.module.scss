@@ -1,16 +1,16 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.slider {
+.productSliderWrapper {
   display: flex;
   gap: 16px;
   align-items: center;
   padding: 20px 0;
-}
 
-.iconSlider {
-  @include reset-button;
+  .iconSlider {
+    @include reset-button;
 
-  color: theme.$primary-color;
-  cursor: pointer;
+    color: theme.$primary-color;
+    cursor: pointer;
+  }
 }

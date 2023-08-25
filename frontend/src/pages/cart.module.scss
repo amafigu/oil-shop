@@ -1,119 +1,119 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.cartContainerWrapper {
+.cartWrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 80px;
-}
 
-.cartContainer {
-  display: flex;
-  width: 70%;
-}
+  .cart {
+    display: flex;
+    width: 70%;
+  }
 
-.cartItemsList {
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-}
+  .cartItemsList {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
 
-.cartItem {
-  display: flex;
-  align-items: center;
-  height: 9rem;
-}
+  .cartItem {
+    display: flex;
+    align-items: center;
+    height: 9rem;
+  }
 
-.cartEmptyMessage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 9rem;
-  font-size: 20px;
-}
+  .cartEmptyMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 9rem;
+    font-size: 20px;
+  }
 
-.cartItemImage {
-  width: 7.5rem;
-  height: 8.25rem;
-  object-fit: contain;
-}
+  .cartItemImage {
+    width: 7.5rem;
+    height: 8.25rem;
+    object-fit: contain;
+  }
 
-.cartItemDetails {
-  width: 20rem;
-}
+  .cartItemDetails {
+    width: 20rem;
+  }
 
-.cartItemSelectors {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 40px;
-}
+  .cartItemSelectors {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 40px;
+  }
 
-.cartItemQuantityInput {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 32px;
-  border: none;
-  outline: none;
-}
+  .cartItemQuantityInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 32px;
+    border: none;
+    outline: none;
+  }
 
-.cartItemQuantityButton {
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  outline: none;
-}
+  .cartItemQuantityButton {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+  }
 
-.cartItemTotalCost {
-  @include flex-center;
-}
+  .cartItemTotalCost {
+    @include flex-center;
+  }
 
-.deleteButton {
-  cursor: pointer;
-}
+  .deleteButton {
+    cursor: pointer;
+  }
 
-.cartOrderSummary {
-  width: 35%;
-  height: fit-content;
-  padding: 32px;
-  margin-left: 3rem;
-  background: #f4f4f4;
-  border-radius: 4px;
-  box-shadow: theme.$main-box-shadow;
-}
+  .cartOrderSummary {
+    width: 35%;
+    height: fit-content;
+    padding: 32px;
+    margin-left: 3rem;
+    background: #f4f4f4;
+    border-radius: 4px;
+    box-shadow: theme.$main-box-shadow;
+  }
 
-.orderSumaryText {
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
+  .orderSumaryText {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
 
-.totalCostDivider {
-  margin: 40px 0;
-}
+  .totalCostDivider {
+    margin: 40px 0;
+  }
 
-.cartOrderSummaryDetails {
-  margin-bottom: 40px;
-}
+  .cartOrderSummaryDetails {
+    margin-bottom: 40px;
+  }
 
-.orderTotalText {
-  font-weight: 500;
-}
+  .orderTotalText {
+    font-weight: 500;
+  }
 
-.quantityButtonsContainer {
-  display: flex;
-}
+  .quantityButtonsContainer {
+    display: flex;
+  }
 
-.confimOrderButton {
-  @include product-cart-purshase-button;
+  .confimOrderButton {
+    @include product-cart-purshase-button;
 
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+  }
 }

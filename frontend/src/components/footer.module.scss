@@ -1,260 +1,246 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.pageFooter {
+.footerWrapper {
   width: 100%;
   font-family: "GFS Neohellenic", sans-serif;
   color: grey;
   text-align: center;
   background-color: white;
-}
 
-.footerContent {
-  display: flex;
-  flex-direction: column;
-}
+  .footer {
+    display: flex;
+    flex-direction: column;
+  }
 
-.footerStartSection {
-  display: flex;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 400;
-  text-transform: capitalize;
-}
+  .startSection {
+    display: flex;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 400;
+    text-transform: capitalize;
+  }
 
-.registrationFormTitle {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: 400;
-}
+  .startSectionText {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    font-size: 26px;
+    font-weight: 400;
+  }
 
-.footerStartSectionText {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 90%;
-  font-size: 26px;
-  font-weight: 400;
-}
+  .startSectionText::before,
+  .startSectionText::after {
+    flex: 1 1;
+    margin: auto;
+    content: "";
+    border-bottom: 1px solid;
+  }
 
-.footerStartSectionText::before,
-.footerStartSectionText::after {
-  flex: 1 1;
-  margin: auto;
-  content: "";
-  border-bottom: 1px solid;
-}
+  .startSectionText::before {
+    margin-right: 10px;
+  }
 
-.footerStartSectionText::before {
-  margin-right: 10px;
-}
+  .startSectionText::after {
+    margin-left: 10px;
+  }
 
-.footerStartSectionText::after {
-  margin-left: 10px;
-}
+  .pageFooter li {
+    list-style: none;
+  }
 
-.pageFooter li {
-  list-style: none;
-}
+  .pageFooter ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 
-.pageFooter ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+  .newsletterSection {
+    display: flex;
+    justify-content: center;
+    margin: 2em 0;
+  }
 
-.footerNewsletterSection {
-  display: flex;
-  justify-content: center;
-  margin: 2em 0;
-}
+  .registrationFormContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.registrationFormContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .registrationFormLabel {
+    font-size: 16px;
+  }
 
-.registrationFormLabel {
-  font-size: 16px;
-}
+  .registrationFormWrapper {
+    width: 60%;
+    padding: 1em;
+    background: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: theme.$main-box-shadow;
+  }
 
-.registrationFormLabelWrapper {
-  margin-bottom: 1em;
-  text-align: center;
-}
+  .registrationEmailInputAndButtonWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1em;
+  }
 
-.registrationFormWrapper {
-  width: 60%;
-  padding: 1em;
-  background: #f0f0f0;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
-}
+  .registrationEmailInputWrapper {
+    width: 65%;
+  }
 
-.registrationEmailInputAndButtonWrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 1em;
-}
+  .registrationEmailInputWrapper input {
+    width: 90%;
+    padding: 20px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
 
-.registrationEmailInputWrapper {
-  width: 65%;
-}
+  .registrationEmailButtonWrapper {
+    width: 30%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+  }
 
-.registrationEmailInputWrapper input {
-  width: 90%;
-  padding: 20px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
+  .registrationEmailButtonWrapper:hover {
+    background-color: #444;
+  }
 
-.registrationEmailButtonWrapper {
-  width: 30%;
-  padding: 10px;
-  font-size: 16px;
-  color: #fff;
-  text-align: center;
-  cursor: pointer;
-  background-color: #333;
-  border: none;
-  border-radius: 5px;
-}
+  .registrationDataConsentText {
+    min-width: 300px;
+    max-width: 90%;
+    margin-top: 1em;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+  }
 
-.registrationEmailButtonWrapper:hover {
-  background-color: #444;
-}
+  .columnsSectionItemTitle {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    font-family: "GFS Neohellenic", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+  }
 
-.registrationDataConsentText {
-  min-width: 300px;
-  max-width: 90%;
-  margin-top: 1em;
-  font-size: 14px;
-  font-style: italic;
-  text-align: center;
-}
+  .columnsSectionItemLinks a {
+    color: grey;
+    text-decoration: none;
+  }
 
-.columnsSectionItemTitle {
-  display: flex;
-  align-items: center;
-  height: 60px;
-  font-family: "GFS Neohellenic", sans-serif;
-  font-size: 24px;
-  font-weight: 400;
-  text-align: center;
-}
+  .iconsSection {
+    display: flex;
+    height: 160px;
+  }
 
-.columnsSectionItemLinks a {
-  color: grey;
-  text-decoration: none;
-}
+  .iconsSectionElements {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 
-.iconsSection {
-  display: flex;
-  height: 160px;
-}
+  .iconsSectionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+  }
 
-.iconsSectionElements {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-around;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
+  .iconsSectionItemTitle {
+    height: 40px;
 
-.iconsSectionItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 25%;
-}
+    @include flex-center;
 
-.iconsSectionItemTitle {
-  height: 40px;
+    font-size: 18px;
+    font-weight: 300;
+  }
 
-  @include flex-center;
+  .iconsSectionItemIcons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100px;
+  }
 
-  font-size: 18px;
-  font-weight: 300;
-}
+  .columnsSection {
+    display: flex;
+    height: 16rem;
+  }
 
-.iconsSectionItemIcons {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100px;
-}
+  .columnsSectionElements {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 
-.columnsSection {
-  display: flex;
-  height: 16rem;
-}
+  .columnsSectionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+    height: 240px;
+  }
 
-.columnsSectionElements {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-around;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
+  .columnsSectionItemLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 160px;
+  }
 
-.columnsSectionItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 25%;
-  height: 240px;
-}
+  .underSection {
+    display: flex;
+    justify-content: center;
+  }
 
-.columnsSectionItemLinks {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 160px;
-}
+  .underSectionTextIcon {
+    font-size: 16px;
+  }
 
-.footerUnderSection {
-  display: flex;
-  justify-content: center;
-}
+  .underSectionText {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    font-size: 28px;
+    font-weight: 400;
+  }
 
-.footerUnderSectionTextIcon {
-  font-size: 16px;
-}
+  .underSectionText::before,
+  .underSectionText::after {
+    flex: 1 1;
+    margin: auto;
+    content: "";
+    border-bottom: 1px solid;
+  }
 
-.footerUnderSectionText {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 90%;
-  font-size: 28px;
-  font-weight: 400;
-}
+  .underSectionText::before {
+    margin-right: 10px;
+  }
 
-// for the lines on the sides
-.footerUnderSectionText::before,
-.footerUnderSectionText::after {
-  flex: 1 1;
-  margin: auto;
-  content: "";
-  border-bottom: 1px solid;
-}
-
-.footerUnderSectionText::before {
-  margin-right: 10px;
-}
-
-.footerUnderSectionText::after {
-  margin-left: 10px;
+  .underSectionText::after {
+    margin-left: 10px;
+  }
 }
