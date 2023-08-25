@@ -41,24 +41,13 @@ const Payment = () => {
       <div className={styles.separator}></div>
 
       <div className={styles.paymentPage}>
-        <form className={styles.paymentForm}>
+        <form className={styles.paymentForm} onSubmit={submitPaymentMethod}>
           <div className={styles.titleAndAlertContainer}>
             <legend className={styles.title}>{text.title}</legend>
-            {!isMethodSelected && (
-              <legend className={styles.requirePaymentText}>
-                {text.insertPaymentMethod}
-              </legend>
-            )}
           </div>
 
           <div className={styles.methods}>
-            <div
-              className={
-                isMethodSelected
-                  ? styles.row
-                  : `${styles.row} ${styles.requirePaymentMethod}`
-              }
-            >
+            <div className={styles.row}>
               <input
                 type='radio'
                 id='paypal'
@@ -66,16 +55,11 @@ const Payment = () => {
                 value='paypal'
                 checked={paymentMethod === "paypal"}
                 onChange={selectPaymentMethod}
+                required
               />
               <label htmlFor='paypal'>Paypal</label>
             </div>
-            <div
-              className={
-                isMethodSelected
-                  ? styles.row
-                  : `${styles.row} ${styles.requirePaymentMethod}`
-              }
-            >
+            <div className={styles.row}>
               <input
                 type='radio'
                 id='klarna'
@@ -83,6 +67,7 @@ const Payment = () => {
                 value='klarna'
                 checked={paymentMethod === "klarna"}
                 onChange={selectPaymentMethod}
+                required
               />
               <label htmlFor='klarna'>Klarna</label>
             </div>
@@ -94,12 +79,12 @@ const Payment = () => {
             >
               {text.backButton}
             </span>
-            <span
+            <button
               className={styles.formButton}
               onClick={() => submitPaymentMethod()}
             >
               {text.paymentButton}
-            </span>
+            </button>
           </div>
         </form>
       </div>

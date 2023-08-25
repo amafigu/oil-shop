@@ -33,8 +33,11 @@
     border-radius: 8px;
   }
 
+  /* create custom radio */
+
   .row input[type="radio"] {
-    display: none;
+    width: 1px;
+    opacity: 0;
   }
 
   .row label {
@@ -73,14 +76,21 @@
     transform: scale(1);
   }
 
+  /* end create custom radio */
+
   .title {
     margin-right: 8px;
     font-size: 24px;
   }
 
   .formButton {
+    @include reset-button;
+
     width: fit-content;
     padding: 6px;
+    font-family: theme.$main-font-family;
+    font-size: 1rem;
+    color: grey;
     cursor: pointer;
   }
 
@@ -94,7 +104,7 @@
   }
 
   input {
-    margin-right: 32px;
+    margin-right: -9px;
   }
 
   .navigateButtons {
