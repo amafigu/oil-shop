@@ -168,9 +168,9 @@ const Shipping = () => {
               {text.backToCart}
             </Link>
 
-            <span className={styles.formButton} onClick={handleSubmit}>
+            <button className={styles.formButton} type='submit'>
               {text.submitButton}
-            </span>
+            </button>
           </div>
         </form>
       </div>
