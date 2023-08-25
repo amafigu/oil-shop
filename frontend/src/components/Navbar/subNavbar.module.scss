@@ -1,4 +1,4 @@
-.navbarContainer {
+.subNavbarWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,27 +6,27 @@
   font-family: "GFS Neohellenic", sans-serif;
   color: grey;
   background-color: white;
-}
 
-.navbar {
-  display: flex;
-  justify-content: space-around;
-  width: 440px;
-}
+  .subNavbar {
+    display: flex;
+    justify-content: space-around;
+    width: 440px;
+  }
 
-.navLink {
-  width: 120px;
-  font-size: 18px;
-  color: grey;
-  text-align: center;
-  text-decoration: none;
-}
+  .navLink {
+    width: 120px;
+    font-size: 18px;
+    color: grey;
+    text-align: center;
+    text-decoration: none;
+  }
 
-.activeLink {
-  font-weight: bold;
-}
+  .activeLink {
+    font-weight: bold;
+  }
 
-.logo {
-  width: 116px;
-  height: 68px;
+  .logo {
+    width: 116px;
+    height: 68px;
+  }
 }

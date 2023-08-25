@@ -48,8 +48,8 @@ const Navbar = () => {
   }
 
   return (
-    <div className={styles.wrapper} ref={modalRef}>
-      <div className={styles.container}>
+    <div className={styles.navbarWrapper} ref={modalRef}>
+      <div className={styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarColumn}></div>
           <div className={styles.navbarColumn}>

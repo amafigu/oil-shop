@@ -12,8 +12,8 @@ const Cart = () => {
   const text = translate.pages.cart
 
   return (
-    <div className={styles.cartContainerWrapper}>
-      <div className={styles.cartContainer}>
+    <div className={styles.cartWrapper}>
+      <div className={styles.cart}>
         <div className={styles.cartItemsList}>
           {cart.length > 0 ? (
             cart.map((item, index) => (

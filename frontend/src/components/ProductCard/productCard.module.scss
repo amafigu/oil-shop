@@ -12,47 +12,47 @@
   margin-bottom: 16px;
   overflow: hidden;
   text-align: center;
-}
 
-.productCardWrapper:hover {
-  transform: scale(1.05);
-}
+  &:hover {
+    transform: scale(1.05);
+  }
 
-.productCardAddToCartButton {
-  @include product-cart-purshase-button;
+  .productCardAddToCartButton {
+    @include product-cart-purshase-button;
 
-  pointer-events: none;
-  opacity: 0;
-}
+    pointer-events: none;
+    opacity: 0;
+  }
 
-.productCardWrapper:hover .productCardAddToCartButton {
-  pointer-events: auto;
-  opacity: 1;
-}
+  &:hover .productCardAddToCartButton {
+    pointer-events: auto;
+    opacity: 1;
+  }
 
-.productCardName {
-  @include product-card-name;
-}
+  .productCardName {
+    @include product-card-name;
+  }
 
-.productCardImage {
-  max-width: 80%;
-  height: 200px;
-  margin: 16px 0;
-  object-fit: contain;
-}
+  .productCardImage {
+    max-width: 80%;
+    height: 200px;
+    margin: 16px 0;
+    object-fit: contain;
+  }
 
-.productCardSize,
-.productCardPrice {
-  margin: 0;
-  font-family: theme.$main-font-family;
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: theme.$secondary-color;
-}
+  .productCardSize,
+  .productCardPrice {
+    margin: 0;
+    font-family: theme.$main-font-family;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: theme.$secondary-color;
+  }
 
-.productCardDescription {
-  margin-bottom: 10px;
-  font-family: theme.$main-font-family;
-  font-size: 0.875rem;
-  color: theme.$secondary-color;
+  .productCardDescription {
+    margin-bottom: 10px;
+    font-family: theme.$main-font-family;
+    font-size: 0.875rem;
+    color: theme.$secondary-color;
+  }
 }

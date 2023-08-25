@@ -25,7 +25,7 @@ const ProductSlider = () => {
   }
 
   return (
-    <div className={styles.slider}>
+    <div className={styles.productSliderWrapper}>
       <button
         className={`material-symbols-outlined ${styles.iconSlider}`}
         onClick={previousProduct}
