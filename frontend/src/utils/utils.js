@@ -112,3 +112,18 @@ export const useListenScrollAndCloseDropdown = (
     }
   }, [isDropdownOpen, setDropdownOpen, setMatches, setSearchString])
 }
+
+export const getInputChangeAndOpenList =
+  (searchArray, setSearchString, setDropdownOpen, setMatches) => (event) => {
+    setSearchString(event.target.value)
+    setDropdownOpen(true)
+
+    const match = searchArray.filter((item) =>
+      item.name.toLowerCase().includes(event.target.value.toLowerCase()),
+    )
+
+    setMatches(match.slice(0, 6))
+    if (event.target.value === "") {
+      setMatches([])
+    }
+  }

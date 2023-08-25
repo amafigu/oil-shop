@@ -1,5 +1,6 @@
 import { CartContext } from "#context/cartContext"
 import {
+  getInputChangeAndOpenList,
   navigateToProductAndCloseDropdown,
   searchAndNavigateToProduct,
   titleCase,
@@ -40,20 +41,6 @@ const Navbar = () => {
     setSearchText,
   )
 
-  const getInputChange = (e) => {
-    setSearchText(e.target.value)
-    setSearchDropdownOpen(true)
-
-    const match = products.filter((product) =>
-      product.name.toLowerCase().includes(e.target.value.toLowerCase()),
-    )
-    setMatchedProducts(match.slice(0, 6))
-    if (e.target.value === "") {
-      setMatchedProducts([])
-      setSearchText("")
-    }
-  }
-
   const getPressedEnterKeyInSearchField = (e) => {
     if (e.key === "Enter") {
       searchAndNavigateToProduct(products, searchText, navigate)
@@ -79,7 +66,12 @@ const Navbar = () => {
                 <div>
                   <input
                     className={styles.searchTextInput}
-                    onChange={getInputChange}
+                    onChange={getInputChangeAndOpenList(
+                      products,
+                      setSearchText,
+                      setSearchDropdownOpen,
+                      setMatchedProducts,
+                    )}
                     onKeyDown={getPressedEnterKeyInSearchField}
                     placeholder='Search Product'
                     value={searchText}
