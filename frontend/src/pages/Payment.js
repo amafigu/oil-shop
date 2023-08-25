@@ -1,21 +1,26 @@
 import { useEffectScrollTop } from "#utils/utils"
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./payment.module.scss"
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
-  const [isMethodSelected, setIsMethodSelected] = useState(true)
+
   const location = useLocation()
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
-  const shippingData = location.state.shippingData
+  const shippingData = location.state?.shippingData
   const text = translate.pages.payment
+
+  useEffect(() => {
+    if (!location.state || !location.state.shippingData) {
+      navigate("/checkout/shipping")
+    }
+  }, [location.state, navigate])
 
   const submitPaymentMethod = () => {
     if (!paymentMethod) {
-      setIsMethodSelected(false)
       return
     }
     navigate("/checkout/summary", {
@@ -31,7 +36,6 @@ const Payment = () => {
 
   const selectPaymentMethod = (e) => {
     setPaymentMethod(e.target.value)
-    setIsMethodSelected(true)
   }
 
   useEffectScrollTop()
@@ -41,24 +45,13 @@ const Payment = () => {
       <div className={styles.separator}></div>
 
       <div className={styles.paymentPage}>
-        <form className={styles.paymentForm}>
+        <form className={styles.paymentForm} onSubmit={submitPaymentMethod}>
           <div className={styles.titleAndAlertContainer}>
             <legend className={styles.title}>{text.title}</legend>
-            {!isMethodSelected && (
-              <legend className={styles.requirePaymentText}>
-                {text.insertPaymentMethod}
-              </legend>
-            )}
           </div>
 
           <div className={styles.methods}>
-            <div
-              className={
-                isMethodSelected
-                  ? styles.row
-                  : `${styles.row} ${styles.requirePaymentMethod}`
-              }
-            >
+            <div className={styles.row}>
               <input
                 type='radio'
                 id='paypal'
@@ -66,16 +59,11 @@ const Payment = () => {
                 value='paypal'
                 checked={paymentMethod === "paypal"}
                 onChange={selectPaymentMethod}
+                required
               />
               <label htmlFor='paypal'>Paypal</label>
             </div>
-            <div
-              className={
-                isMethodSelected
-                  ? styles.row
-                  : `${styles.row} ${styles.requirePaymentMethod}`
-              }
-            >
+            <div className={styles.row}>
               <input
                 type='radio'
                 id='klarna'
@@ -83,6 +71,7 @@ const Payment = () => {
                 value='klarna'
                 checked={paymentMethod === "klarna"}
                 onChange={selectPaymentMethod}
+                required
               />
               <label htmlFor='klarna'>Klarna</label>
             </div>
@@ -94,12 +83,12 @@ const Payment = () => {
             >
               {text.backButton}
             </span>
-            <span
+            <button
               className={styles.formButton}
               onClick={() => submitPaymentMethod()}
             >
               {text.paymentButton}
-            </span>
+            </button>
           </div>
         </form>
       </div>

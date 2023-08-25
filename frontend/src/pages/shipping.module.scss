@@ -92,8 +92,13 @@
   }
 
   .formButton {
+    @include reset-button;
+
     width: fit-content;
     padding: 6px;
+    font-family: theme.$main-font-family;
+    font-size: 1rem;
+    color: grey;
     cursor: pointer;
   }
 }

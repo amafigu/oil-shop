@@ -1,5 +1,6 @@
+import useCartContext from "#context/cartContext"
 import { useEffectScrollTop } from "#utils/utils"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./shipping.module.scss"
@@ -20,18 +21,30 @@ const Shipping = () => {
   const navigate = useNavigate()
 
   const { translate } = useLocaleContext()
+  const { cart } = useCartContext()
   const text = translate.pages.shipping
+
+  useEffect(() => {
+    if (cart.length <= 0) {
+      navigate("/cart")
+    }
+  }, [cart, navigate])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    if (cart.length > 0) {
+      e.preventDefault()
 
-    navigate("/checkout/payment", {
-      state: { shippingData: formData },
-    })
+      navigate("/checkout/payment", {
+        state: { shippingData: formData },
+      })
+    } else {
+      e.preventDefault()
+      navigate("/cart")
+    }
   }
 
   useEffectScrollTop()
@@ -168,9 +181,9 @@ const Shipping = () => {
               {text.backToCart}
             </Link>
 
-            <span className={styles.formButton} onClick={handleSubmit}>
+            <button className={styles.formButton} type='submit'>
               {text.submitButton}
-            </span>
+            </button>
           </div>
         </form>
       </div>
