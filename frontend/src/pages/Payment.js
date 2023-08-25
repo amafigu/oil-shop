@@ -1,21 +1,26 @@
 import { useEffectScrollTop } from "#utils/utils"
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./payment.module.scss"
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
-  const [isMethodSelected, setIsMethodSelected] = useState(true)
+
   const location = useLocation()
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
-  const shippingData = location.state.shippingData
+  const shippingData = location.state?.shippingData
   const text = translate.pages.payment
+
+  useEffect(() => {
+    if (!location.state || !location.state.shippingData) {
+      navigate("/checkout/shipping")
+    }
+  }, [location.state, navigate])
 
   const submitPaymentMethod = () => {
     if (!paymentMethod) {
-      setIsMethodSelected(false)
       return
     }
     navigate("/checkout/summary", {
@@ -31,7 +36,6 @@ const Payment = () => {
 
   const selectPaymentMethod = (e) => {
     setPaymentMethod(e.target.value)
-    setIsMethodSelected(true)
   }
 
   useEffectScrollTop()
