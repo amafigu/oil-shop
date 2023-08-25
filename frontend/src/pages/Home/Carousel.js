@@ -1,22 +1,18 @@
+import { TEASER_VIDEOS } from "#utils/constants"
 import React, { useCallback, useEffect, useState } from "react"
 import styles from "./carousel.module.scss"
-
-const videos = [
-  { id: "YHYuQFBrJVc", start: 170, end: 185 },
-  { id: "yicHmCVxmNQ", start: 16, end: 31 },
-]
 
 const Carousel = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
   const nextVideo = useCallback(() => {
     const newIndex = currentVideoIndex + 1
-    setCurrentVideoIndex(newIndex >= videos.length ? 0 : newIndex)
+    setCurrentVideoIndex(newIndex >= TEASER_VIDEOS.length ? 0 : newIndex)
   }, [currentVideoIndex])
 
   const previousVideo = useCallback(() => {
     const newIndex = currentVideoIndex - 1
-    setCurrentVideoIndex(newIndex < 0 ? videos.length - 1 : newIndex)
+    setCurrentVideoIndex(newIndex < 0 ? TEASER_VIDEOS.length - 1 : newIndex)
   }, [currentVideoIndex])
 
   useEffect(() => {
@@ -27,11 +23,11 @@ const Carousel = () => {
     return () => clearInterval(timer)
   }, [nextVideo])
 
-  const currentVideo = videos[currentVideoIndex]
+  const currentVideo = TEASER_VIDEOS[currentVideoIndex]
   const videoSrc = `https://www.youtube.com/embed/${currentVideo.id}?start=${currentVideo.start}&end=${currentVideo.end}&autoplay=1&loop=1&playlist=${currentVideo.id}&controls=0&modestbranding=1&mute=1`
 
   return (
-    <div className={styles.carousel}>
+    <div className={styles.carouselWrapper}>
       <button
         className={`material-symbols-outlined ${styles.iconSlider}`}
         onClick={previousVideo}

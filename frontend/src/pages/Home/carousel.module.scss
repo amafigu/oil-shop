@@ -1,41 +1,41 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.carousel {
+.carouselWrapper {
   @include flex-center;
 
   margin-bottom: 3.8rem;
-}
 
-.carousel img {
-  object-fit: cover;
+  .carousel img {
+    object-fit: cover;
 
-  @include full-width-and-height;
-}
+    @include full-width-and-height;
+  }
 
-.iconSlider {
-  @include reset-button;
+  .iconSlider {
+    @include reset-button;
 
-  color: theme.$primary-color;
-  cursor: pointer;
-}
+    color: theme.$primary-color;
+    cursor: pointer;
+  }
 
-.iframeVideo {
-  width: 100%;
-  height: 100%;
-}
+  .iframeVideo {
+    width: 100%;
+    height: 100%;
+  }
 
-.borderDiv {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  content: "";
-  border: 60px solid #fff;
-}
+  .borderDiv {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    content: "";
+    border: 60px solid #fff;
+  }
 
-.videoWrapper {
-  position: relative;
-  z-index: -1;
-  width: 872px;
-  height: 485px;
+  .videoWrapper {
+    position: relative;
+    z-index: -1;
+    width: 872px;
+    height: 485px;
+  }
 }
