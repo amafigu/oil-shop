@@ -51,8 +51,10 @@ const Navbar = () => {
     <div className={styles.navbarWrapper} ref={modalRef}>
       <div className={styles.navbar}>
         <div className={styles.navbarContainer}>
-          <div className={styles.navbarColumn}></div>
-          <div className={styles.navbarColumn}>
+          <div
+            className={`${styles.navbarColumn} ${styles.navbarColumnLeft}`}
+          ></div>
+          <div className={`${styles.navbarColumn} ${styles.navbarColumnLogo}`}>
             <img
               className={styles.logo}
               src={`${process.env.PUBLIC_URL}/assets/logo.png`}
@@ -60,7 +62,7 @@ const Navbar = () => {
             />
           </div>
 
-          <div className={styles.navbarColumn}>
+          <div className={`${styles.navbarColumn} ${styles.navbarColumnRight}`}>
             <div className={`${styles.searchProduct}`}>
               <div className={styles.searchTextInputAndProductList}>
                 <div>
@@ -136,11 +138,6 @@ const Navbar = () => {
             <div className={styles.gap}></div>
             <nav className={styles.iconsNav}>
               <LanguageDropdown />
-              <div className={styles.account}>
-                <span className='material-symbols-outlined'>
-                  account_circle
-                </span>
-              </div>
 
               <div className={styles.cartAndQuantity}>
                 <Link className={styles.linkChild} to='/cart'>
