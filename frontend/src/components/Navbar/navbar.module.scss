@@ -12,6 +12,23 @@
     justify-content: center;
     margin-bottom: 20px;
 
+    .menuWrapper {
+      @include media.tablet-down {
+        display: flex;
+      }
+
+      display: none;
+    }
+
+    .menuIconWrapper {
+      @include media.tablet-down {
+        display: block;
+        cursor: pointer;
+      }
+
+      display: none;
+    }
+
     .navbarContainer {
       display: flex;
       align-items: center;
@@ -21,17 +38,21 @@
       background-color: #b5cfaa;
 
       .navbarColumnLeft {
-        @include media.tablet {
-          display: none !important;
-        }
-
-        @include media.mobile {
+        @include media.tablet-down {
           display: none !important;
         }
       }
 
+      .navbarColumnLogo {
+        @include media.tablet-down {
+          justify-content: space-between !important;
+          width: 100% !important;
+          margin: 40px 20px;
+        }
+      }
+
       .navbarColumnRight {
-        @include media.mobile {
+        @include media.tablet-down {
           display: none !important;
         }
       }
