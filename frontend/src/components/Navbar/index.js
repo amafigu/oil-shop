@@ -8,17 +8,19 @@ import {
   useHideListOnOuterClick,
   useListenScrollAndCloseDropdown,
 } from "#utils/utils"
+import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import React, { useContext, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
-import Menu from "./MenuMobile"
+import MenuMobile from "./MenuMobile"
 import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
 const Navbar = () => {
   const [isLanguageDropdownOpen, setSearchDropdownOpen] = useState(false)
-  const [isMenuOpen, setMenuOpen] = useState(true)
+  const [isMenuOpen, setMenuOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
   const [matchedProducts, setMatchedProducts] = useState([])
@@ -67,10 +69,12 @@ const Navbar = () => {
             <div
               className={styles.menuIconWrapper}
               onClick={() => setMenuOpen(true)}
-            ></div>
+            >
+              <FontAwesomeIcon icon={faBars} size={"xl"} />
+            </div>
 
             <div className={styles.menuWrapper}>
-              {isMenuOpen && <Menu setMenu={setMenuOpen} />}
+              {isMenuOpen && <MenuMobile setMenuOpen={setMenuOpen} />}
             </div>
           </div>
 

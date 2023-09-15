@@ -45,7 +45,10 @@ const Shop = () => {
   return (
     <div className={style.shopPageWrapper}>
       <div className={style.shopPage}>
-        <Sidebar setCategory={setCategory} />
+        <div className={style.sidebarWrapper}>
+          <Sidebar setCategory={setCategory} />
+        </div>
+
         <div className={style.sortedProducts}>
           {sortedProducts.map((product, index) => (
             <ProductCard

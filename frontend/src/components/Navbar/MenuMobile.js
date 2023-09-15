@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar"
 import styles from "./menuMobile.module.scss"
 
-const Menu = ({ setMenu }) => {
-  const [category, setCategory] = useState("all")
+const Menu = ({ setMenuOpen }) => {
+  const [category, setCategory] = useState("")
 
   const location = useLocation()
   const params = new URLSearchParams(location.search)
@@ -23,7 +23,7 @@ const Menu = ({ setMenu }) => {
   }, [queryCategory])
 
   const navigateAndCloseMenu = (route) => {
-    setMenu(false)
+    setMenuOpen(false)
     navigate(route)
   }
 
@@ -33,18 +33,29 @@ const Menu = ({ setMenu }) => {
         <ul className={styles.menu}>
           <li
             className={`${styles.listItem} ${styles.closeIcon}`}
-            onClick={() => setMenu(false)}
+            onClick={() => setMenuOpen(false)}
           >
             <FontAwesomeIcon icon={faX} />
           </li>
           <li
             className={styles.listItem}
+            onClick={() => navigateAndCloseMenu("/cart")}
+          >
+            <span className={styles.linkContent}>Cart</span>
+          </li>
+          <li
+            className={styles.listItem}
             onClick={() => navigateAndCloseMenu("/about")}
           >
-            <span className={styles.linkContent}>about</span>
+            <span className={styles.linkContent}>About</span>
           </li>
+
+          <Sidebar
+            setMenuOpen={setMenuOpen}
+            category={category}
+            setCategory={setCategory}
+          />
         </ul>
-        <Sidebar category={category} setCategory={setCategory} />
       </div>
     </div>
   )
