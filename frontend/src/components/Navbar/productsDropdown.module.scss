@@ -3,8 +3,18 @@
 @import "#styles/helpers/mixins";
 
 .productsDropdownWrapper {
-  display: flex;
-  align-items: center;
+  .hidden {
+    display: none;
+  }
+
+  @include media.mobile {
+    position: fixed;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: 60vw;
+    border: none;
+  }
 
   .searchProduct {
     display: flex;
@@ -19,10 +29,6 @@
     box-shadow: theme.$main-box-shadow;
 
     .searchTextInputAndProductList {
-      position: fixed;
-      width: 100%;
-      border: none;
-
       .searchTextInput {
         @include input-styles-reset;
 
@@ -37,10 +43,6 @@
         cursor: pointer;
       }
 
-      .hidden {
-        display: none;
-      }
-
       .dropdownModal {
         position: fixed;
         inset: 0;
@@ -53,7 +55,6 @@
 
       .dropdownList {
         @include media.mobile {
-          position: fixed;
           left: 20px;
           z-index: 500;
           display: flex;

@@ -6,11 +6,13 @@ import {
 } from "#utils/utils"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { React, useState } from "react"
+import { React } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./productsDropdown.module.scss"
 
 const ProductsDropdown = ({
+  isMobileProductDropdownVisible,
+  setMobileProductDropdownVisible,
   products,
   setSearchText,
   setSearchDropdownOpen,
@@ -20,7 +22,6 @@ const ProductsDropdown = ({
   isSearchDropdownOpen,
   searchText,
 }) => {
-  const [isInputVisible, setInputVisible] = useState(false)
   const navigate = useNavigate()
 
   const getPressedEnterKeyInSearchField = (e) => {
@@ -28,12 +29,14 @@ const ProductsDropdown = ({
       searchAndNavigateToProduct(products, searchText, navigate)
     }
   }
+
+  console.log(isMobileProductDropdownVisible)
   return (
     <div className={styles.productsDropdownWrapper}>
-      <div className={`${styles.searchProduct}`}>
+      <div className={styles.searchProduct}>
         <div
           className={
-            isInputVisible
+            isMobileProductDropdownVisible
               ? styles.searchTextInputAndProductList
               : styles.hidden
           }
@@ -95,14 +98,16 @@ const ProductsDropdown = ({
         </div>
       </div>
       <div
-        className={styles.searchIcon}
+        className={
+          isMobileProductDropdownVisible ? styles.searchIcon : styles.hidden
+        }
         onClick={() => {
-          setSearchDropdownOpen(
-            (prevIsSearchDropdownOpen) => !prevIsSearchDropdownOpen,
-          )
           setMatchedProducts([])
           setSearchText("")
-          setInputVisible((prevIsInputVisible) => !prevIsInputVisible)
+          setMobileProductDropdownVisible(
+            (prevIsMobileProductDropdownVisible) =>
+              !prevIsMobileProductDropdownVisible,
+          )
         }}
       >
         <FontAwesomeIcon icon={faSearch} size={"xl"} />

@@ -4,7 +4,7 @@ import {
   useHideListOnOuterClick,
   useListenScrollAndCloseDropdown,
 } from "#utils/utils"
-import { faBars } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import React, { useContext, useRef, useState } from "react"
@@ -16,6 +16,9 @@ import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
 const Navbar = () => {
+  const [isMobileProductDropdownVisible, setMobileProductDropdownVisible] =
+    useState(false)
+
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
@@ -48,10 +51,22 @@ const Navbar = () => {
           <div
             className={`${styles.navbarColumn} ${styles.navbarColumnLeft}`}
           ></div>
+
           <div className={`${styles.navbarColumn} ${styles.navbarColumnLogo}`}>
             <div className={styles.searchIconWrapper}>
+              <div
+                className={styles.menuIconWrapper}
+                onClick={() => setMobileProductDropdownVisible(true)}
+              >
+                <FontAwesomeIcon icon={faSearch} size={"xl"} />
+              </div>
+
               <ProductsDropdown
+                isMobileProductDropdownVisible={isMobileProductDropdownVisible}
                 products={products}
+                setMobileProductDropdownVisible={
+                  setMobileProductDropdownVisible
+                }
                 setSearchText={setSearchText}
                 setSearchDropdownOpen={setSearchDropdownOpen}
                 setMatchedProducts={setMatchedProducts}
