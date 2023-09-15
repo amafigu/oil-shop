@@ -8,7 +8,7 @@ import style from "./shop.module.scss"
 
 const Shop = () => {
   const [products, setProducts] = useState([])
-  const [category, setCategory] = useState("all")
+  const [category, setCategory] = useState("")
 
   const location = useLocation()
   const params = new URLSearchParams(location.search)

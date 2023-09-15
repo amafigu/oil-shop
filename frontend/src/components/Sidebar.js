@@ -1,5 +1,6 @@
 import axios from "axios"
 import { React, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { titleCase } from "../utils/utils"
 import styles from "./sidebar.module.scss"
 
@@ -17,6 +18,8 @@ const Sidebar = ({ setCategory }) => {
       })
   }, [])
 
+  const navigate = useNavigate()
+
   const renderedCategories = productCategories
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((category) => (
@@ -24,6 +27,7 @@ const Sidebar = ({ setCategory }) => {
         key={category.id}
         onClick={() => {
           setCategory(category.name)
+          navigate(`/shop?category-name=${category.name}`)
           window.scrollTo(0, 0)
         }}
         className={styles.sidebarItem}

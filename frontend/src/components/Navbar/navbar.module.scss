@@ -22,7 +22,10 @@
 
     .menuIconWrapper {
       @include media.tablet-down {
-        display: block;
+        display: flex;
+        flex-grow: 1;
+        justify-content: flex-end;
+        margin-right: 20px;
         cursor: pointer;
       }
 

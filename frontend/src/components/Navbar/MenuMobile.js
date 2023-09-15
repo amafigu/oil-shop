@@ -1,20 +1,32 @@
 import { faX } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { React, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { React, useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+import Sidebar from "../Sidebar"
 import styles from "./menuMobile.module.scss"
 
 const Menu = ({ setMenu }) => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false)
+  const [category, setCategory] = useState("all")
+
+  const location = useLocation()
+  const params = new URLSearchParams(location.search)
+  const queryCategory = params.get("category")
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (queryCategory) {
+      setCategory(queryCategory)
+    } else {
+      setCategory("all")
+    }
+  }, [queryCategory])
 
   const navigateAndCloseMenu = (route) => {
     setMenu(false)
     navigate(route)
   }
 
-  console.log("isDropdownOpen ", isDropdownOpen)
   return (
     <div className={styles.menuWrapper}>
       <div className={styles.menuAndMailButtonContainer}>
@@ -32,13 +44,7 @@ const Menu = ({ setMenu }) => {
             <span className={styles.linkContent}>about</span>
           </li>
         </ul>
-        <a
-          onClick={() => setMenu(false)}
-          href='mailto:percusion.tierrayaire@gmail.com'
-          className={styles.mailButton}
-        >
-          Contact Us
-        </a>
+        <Sidebar category={category} setCategory={setCategory} />
       </div>
     </div>
   )
