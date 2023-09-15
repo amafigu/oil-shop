@@ -8,7 +8,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import React, { useContext, useRef, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
 import ProductsDropdown from "./ProductsDropdown"
@@ -23,11 +23,8 @@ const Navbar = () => {
   const [matchedProducts, setMatchedProducts] = useState([])
   const { getAllProductsQuantity } = useContext(CartContext)
 
-  const navigate = useNavigate()
-
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
-  const menuDropdownRef = useRef(null)
 
   useHideListOnOuterClick(
     searchProductListDropdownRef,
