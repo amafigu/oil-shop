@@ -22,12 +22,15 @@
 
     .menuIconWrapper {
       @include media.tablet-down {
-        display: flex;
+        display: grid;
         flex-basis: 0;
         flex-grow: 1;
-        justify-content: flex-end;
         margin-right: 20px;
         cursor: pointer;
+
+        svg {
+          justify-self: flex-end;
+        }
       }
 
       display: none;
@@ -49,24 +52,20 @@
     .navbarContainer {
       display: flex;
       align-items: center;
-      justify-content: space-around;
       height: 84px;
       margin-bottom: 20px;
       background-color: #b5cfaa;
 
       .navbarColumnLeft {
-        @include media.tablet-down {
-          display: none !important;
+        flex-basis: 0;
+        flex-grow: 1;
+
+        .searchIconIWrapper {
+          margin-left: 20px;
         }
       }
 
       .navbarColumnLogo {
-        @include media.tablet-down {
-          justify-content: space-between !important;
-          width: 100% !important;
-          margin: 40px 20px;
-        }
-
         .logoContainer {
           display: flex;
           justify-content: center;
@@ -74,18 +73,17 @@
       }
 
       .navbarColumnRight {
+        flex-basis: 0;
+        flex-grow: 1;
+      }
+
+      .rightSideForBigScreen {
         @include media.tablet-down {
           display: none !important;
         }
       }
 
       .navbarColumn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 33.33%;
-        height: 100%;
-
         .logo {
           width: 116px;
           height: 68px;

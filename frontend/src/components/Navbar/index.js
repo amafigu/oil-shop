@@ -48,14 +48,10 @@ const Navbar = () => {
     <div className={styles.navbarWrapper} ref={modalRef}>
       <div className={styles.navbar}>
         <div className={styles.navbarContainer}>
-          <div
-            className={`${styles.navbarColumn} ${styles.navbarColumnLeft}`}
-          ></div>
-
-          <div className={`${styles.navbarColumn} ${styles.navbarColumnLogo}`}>
-            <div className={styles.searchIconWrapper}>
+          <div className={`${styles.navbarColumn} ${styles.navbarColumnLeft}`}>
+            <div className={styles.searchIconAndDropdownWrapper}>
               <div
-                className={styles.menuIconWrapper}
+                className={styles.searchIconIWrapper}
                 onClick={() => setMobileProductDropdownVisible(true)}
               >
                 <FontAwesomeIcon icon={faSearch} size={"xl"} />
@@ -76,6 +72,9 @@ const Navbar = () => {
                 searchText={searchText}
               />
             </div>
+          </div>
+
+          <div className={`${styles.navbarColumn} ${styles.navbarColumnLogo}`}>
             <div className={styles.logoContainer}>
               <img
                 className={styles.logo}
@@ -84,45 +83,46 @@ const Navbar = () => {
               />
             </div>
 
-            <div
-              className={styles.menuIconWrapper}
-              onClick={() => setMenuOpen(true)}
-            >
-              <FontAwesomeIcon icon={faBars} size={"xl"} />
-            </div>
-
             <div className={styles.menuWrapper}>
               {isMenuOpen && <MenuMobile setMenuOpen={setMenuOpen} />}
             </div>
           </div>
 
           <div className={`${styles.navbarColumn} ${styles.navbarColumnRight}`}>
-            <ProductsDropdown
-              products={products}
-              setSearchText={setSearchText}
-              setSearchDropdownOpen={setSearchDropdownOpen}
-              setMatchedProducts={setMatchedProducts}
-              matchedProducts={matchedProducts}
-              searchProductListDropdownRef={searchProductListDropdownRef}
-              isSearchDropdownOpen={isSearchDropdownOpen}
-              searchText={searchText}
-            />
+            <div
+              className={styles.menuIconWrapper}
+              onClick={() => setMenuOpen(true)}
+            >
+              <FontAwesomeIcon icon={faBars} size={"xl"} />
+            </div>
+            <div className={styles.rightSideForBigScreen}>
+              <ProductsDropdown
+                products={products}
+                setSearchText={setSearchText}
+                setSearchDropdownOpen={setSearchDropdownOpen}
+                setMatchedProducts={setMatchedProducts}
+                matchedProducts={matchedProducts}
+                searchProductListDropdownRef={searchProductListDropdownRef}
+                isSearchDropdownOpen={isSearchDropdownOpen}
+                searchText={searchText}
+              />
 
-            <div className={styles.gap}></div>
-            <nav className={styles.iconsNav}>
-              <LanguageDropdown />
+              <div className={styles.gap}></div>
+              <div className={styles.iconsNav}>
+                <LanguageDropdown />
 
-              <div className={styles.cartAndQuantity}>
-                <Link className={styles.linkChild} to='/cart'>
-                  <span className='material-symbols-outlined'>
-                    shopping_cart
+                <div className={styles.cartAndQuantity}>
+                  <Link className={styles.linkChild} to='/cart'>
+                    <div className='material-symbols-outlined'>
+                      shopping_cart
+                    </div>
+                  </Link>
+                  <span className={styles.productsQuantity}>
+                    {getAllProductsQuantity}
                   </span>
-                </Link>
-                <span className={styles.productsQuantity}>
-                  {getAllProductsQuantity}
-                </span>
+                </div>
               </div>
-            </nav>
+            </div>
           </div>
         </div>
         <SubNavbar />
