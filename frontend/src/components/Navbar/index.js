@@ -52,6 +52,9 @@ const Navbar = () => {
             <div className={styles.searchIconAndDropdownWrapper}>
               <div
                 className={styles.searchIconIWrapper}
+                style={
+                  isMobileProductDropdownVisible ? { display: "none" } : {}
+                }
                 onClick={() => setMobileProductDropdownVisible(true)}
               >
                 <FontAwesomeIcon icon={faSearch} size={"xl"} />

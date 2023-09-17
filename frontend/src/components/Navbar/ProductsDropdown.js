@@ -31,6 +31,8 @@ const ProductsDropdown = ({
   }
 
   console.log(isMobileProductDropdownVisible)
+  console.log(matchedProducts)
+  console.log(products)
   return (
     <div className={styles.productsDropdownWrapper}>
       <div className={styles.searchProduct}>
@@ -41,7 +43,20 @@ const ProductsDropdown = ({
               : styles.hidden
           }
         >
-          <div>
+          <div
+            className={styles.searchAndDropdownContainer}
+            style={
+              isSearchDropdownOpen
+                ? {
+                    borderBottomLeftRadius: "0px",
+                    borderBottomRightRadius: "0px",
+                  }
+                : {
+                    borderBottomLeftRadius: "8px",
+                    borderBottomRightRadius: "8px",
+                  }
+            }
+          >
             <input
               className={styles.searchTextInput}
               onChange={getInputChangeAndOpenList(
@@ -53,7 +68,24 @@ const ProductsDropdown = ({
               onKeyDown={getPressedEnterKeyInSearchField}
               placeholder='Search Product'
               value={searchText}
-            ></input>
+            />
+            <div
+              className={
+                isMobileProductDropdownVisible
+                  ? styles.searchIcon
+                  : styles.hidden
+              }
+              onClick={() => {
+                setMatchedProducts([])
+                setSearchText("")
+                setMobileProductDropdownVisible(
+                  (prevIsMobileProductDropdownVisible) =>
+                    !prevIsMobileProductDropdownVisible,
+                )
+              }}
+            >
+              <FontAwesomeIcon icon={faSearch} size={"xl"} />
+            </div>
           </div>
 
           {matchedProducts.length > 0 && isSearchDropdownOpen && (
@@ -96,21 +128,6 @@ const ProductsDropdown = ({
             </>
           )}
         </div>
-      </div>
-      <div
-        className={
-          isMobileProductDropdownVisible ? styles.searchIcon : styles.hidden
-        }
-        onClick={() => {
-          setMatchedProducts([])
-          setSearchText("")
-          setMobileProductDropdownVisible(
-            (prevIsMobileProductDropdownVisible) =>
-              !prevIsMobileProductDropdownVisible,
-          )
-        }}
-      >
-        <FontAwesomeIcon icon={faSearch} size={"xl"} />
       </div>
     </div>
   )

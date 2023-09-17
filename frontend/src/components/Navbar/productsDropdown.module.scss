@@ -9,10 +9,11 @@
 
   @include media.mobile {
     position: fixed;
+    top: 0;
     left: 0;
     display: flex;
     align-items: center;
-    width: 60vw;
+    width: 70vw;
     border: none;
   }
 
@@ -22,14 +23,18 @@
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    width: 25%;
-    margin-right: 16px;
     background-color: #f5f5f5;
     border-radius: 4px;
     box-shadow: theme.$main-box-shadow;
 
     .searchTextInputAndProductList {
+      width: 100%;
+
       .searchTextInput {
+        @include media.mobile {
+          width: 100% !important;
+        }
+
         @include input-styles-reset;
 
         width: 100%;
@@ -40,7 +45,18 @@
       }
 
       .searchIcon {
+        margin-right: 10px;
         cursor: pointer;
+      }
+
+      .searchAndDropdownContainer {
+        @include z-index(product-search-dropdow);
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-radius: 8px;
       }
 
       .dropdownModal {
@@ -51,20 +67,23 @@
         overflow: hidden;
         background: rgb(0 0 0 / 50%);
         transition: opacity 0.3s ease-in-out;
+
+        @include z-index(modal-product-search-dropdow);
       }
 
       .dropdownList {
         @include media.mobile {
-          left: 20px;
-          z-index: 500;
+          @include z-index(product-search-dropdow);
+
+          position: relative;
           display: flex;
           flex-direction: column;
-          width: 40%;
+          width: 100%;
           padding: 12px;
-          margin-top: 16px;
           color: black;
           background-color: #f5f5f5;
-          border-radius: 4px;
+          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: 8px;
           box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%),
             0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 

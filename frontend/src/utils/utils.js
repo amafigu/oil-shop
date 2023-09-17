@@ -125,5 +125,6 @@ export const getInputChangeAndOpenList =
     setMatches(match.slice(0, 6))
     if (event.target.value === "") {
       setMatches([])
+      setDropdownOpen(false)
     }
   }
