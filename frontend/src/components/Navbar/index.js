@@ -64,14 +64,11 @@ const Navbar = () => {
             >
               <FontAwesomeIcon icon={faSearch} size={"xl"} />
             </div>
-            {matchedProducts.length > 0 && isSearchDropdownOpen && (
+            {matchedProducts.length > 0 && isProductDropdownVisible && (
               <div className={styles.dropdownModal}></div>
             )}
             <div className={styles.productsDropdownWrapper}>
-              <div
-                className={styles.searchProductContainer}
-                ref={searchProductListDropdownRef}
-              >
+              <div className={styles.searchProductContainer}>
                 <div className={styles.searchProduct}>
                   <div
                     className={
@@ -103,7 +100,10 @@ const Navbar = () => {
 
                     {matchedProducts.length > 0 && isSearchDropdownOpen && (
                       <>
-                        <div className={styles.searchDropdown}>
+                        <div
+                          className={styles.searchDropdown}
+                          ref={searchProductListDropdownRef}
+                        >
                           {matchedProducts.map((product) => (
                             <div
                               className={styles.dropdownListItem}
@@ -166,10 +166,7 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faBars} size={"xl"} />
             </div>
             <div className={styles.rightSideForBigScreen}>
-              <div
-                className={styles.searchIconAndDropdownWrapperRight}
-                ref={searchProductListDropdownRef}
-              >
+              <div className={styles.searchIconAndDropdownWrapperRight}>
                 <div
                   className={styles.searchIconIWrapper}
                   style={isProductDropdownVisible ? { display: "none" } : {}}
