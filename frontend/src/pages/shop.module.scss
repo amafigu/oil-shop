@@ -1,4 +1,5 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .shopPageWrapper {
@@ -12,6 +13,14 @@
     width: theme.$default-page-width;
     margin: 5rem;
     overflow-y: auto;
+
+    .sidebarWrapper {
+      @include media.tablet-down {
+        display: none;
+      }
+
+      display: block;
+    }
   }
 
   .sortedProducts {

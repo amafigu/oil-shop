@@ -1,0 +1,45 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.menuWrapper {
+  .menuAndMailButtonContainer {
+    @include z-index(mobilemenu);
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    min-width: 80%;
+    background-color: white;
+    box-shadow: theme.$main-box-shadow;
+  }
+
+  .menu {
+    width: 100%;
+
+    .listItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 40px;
+      margin: 20px;
+      font-size: 18px;
+      line-height: 1.5;
+      color: theme.$secondary-color;
+      letter-spacing: 0.0094em;
+      list-style-type: none;
+      cursor: pointer;
+      border: 1px red solid;
+      border-radius: 4px;
+    }
+
+    .listItem:first-child {
+      right: 0;
+      color: black;
+      text-align: right;
+      cursor: pointer;
+    }
+  }
+}

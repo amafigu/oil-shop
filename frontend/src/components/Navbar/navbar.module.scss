@@ -1,168 +1,250 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .navbarWrapper {
   width: 100%;
   background-color: white;
 
+  .hidden {
+    display: none;
+  }
+
+  .productsDropdownWrapper {
+    @include media.mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      width: 70vw;
+      border: none;
+    }
+
+    .searchProductContainer {
+      width: 100%;
+    }
+
+    width: 80vw;
+  }
+
   .navbar {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
-  }
 
-  .listItemImage {
-    width: 56px;
-    height: 56px;
-  }
+    .dropdownModal {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: rgb(0 0 0 / 50%);
+      transition: opacity 0.3s ease-in-out;
+    }
 
-  .searchIcon {
-    cursor: pointer;
-  }
+    .searchProduct {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: theme.$main-box-shadow;
 
-  .searchDropdown {
-    position: fixed;
-    z-index: 500;
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-    padding: 12px;
-    margin-top: 16px;
-    color: black;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    box-shadow: theme.$main-box-shadow;
-  }
+      .searchTextInputAndIcon {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
 
-  .dropdownModal {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: rgb(0 0 0 / 50%);
-    transition: opacity 0.3s ease-in-out;
-  }
+      .searchTextInputAndProductList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        border: none;
 
-  .dropdownListItem {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    font-size: 1rem;
-    line-height: 1.5;
-    letter-spacing: 0.0094em;
-    list-style-type: none;
-    cursor: pointer;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: theme.$light-box-shadow;
-    transition: background-color 0.3s ease;
-  }
+        .searchTextInput {
+          @include input-styles-reset;
 
-  .dropdownListItemName {
-    font-weight: 400;
-    color: theme.$primary-color;
-  }
+          width: 100%;
+          height: 2rem;
+          padding-left: 10px;
+          background-color: #fff;
+          border-radius: 0.2rem;
+        }
 
-  .dropdownListItem img {
-    margin-right: 2rem;
-  }
+        .dropdownModal {
+          position: fixed;
+          inset: 0;
+          width: 100vw;
+          height: 100vh;
+          overflow: hidden;
+          background: rgb(0 0 0 / 50%);
+          transition: opacity 0.3s ease-in-out;
+        }
 
-  .sidebarItem:hover {
-    background-color: rgb(0 0 0 / 4%);
-  }
+        .searchDropdown {
+          z-index: 500;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding: 12px;
+          margin-top: 16px;
+          color: black;
+          background-color: #f5f5f5;
+          border-radius: 4px;
+          box-shadow: theme.$main-box-shadow;
 
-  .navbarContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 84px;
-    margin-bottom: 20px;
-    background-color: #b5cfaa;
-  }
+          .dropdownListItem {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            letter-spacing: 0.0094em;
+            list-style-type: none;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: theme.$light-box-shadow;
+            transition: background-color 0.3s ease;
+          }
 
-  .toggleSidebarButton {
-    cursor: pointer;
-  }
+          .dropdownListItemName {
+            font-weight: 400;
+            color: theme.$primary-color;
+          }
 
-  .navLink {
-    font-size: 18px;
-    color: grey;
-    text-decoration: none;
-  }
+          .dropdownListItem img {
+            margin-right: 2rem;
+          }
 
-  .navbarColumn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 33.33%;
-    height: 100%;
-  }
+          .sidebarItem:hover {
+            background-color: rgb(0 0 0 / 4%);
+          }
 
-  .searchProduct {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: center;
-    width: 25%;
-    margin-right: 16px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-    box-shadow: theme.$main-box-shadow;
-  }
+          .listItemImage {
+            width: 56px;
+            height: 56px;
+          }
+        }
+      }
+    }
 
-  .searchTextInput {
-    @include input-styles-reset;
+    .menuWrapper {
+      @include media.tablet-down {
+        display: flex;
+      }
 
-    width: 100%;
-    height: 2rem;
-    padding-left: 10px;
-    background-color: #fff;
-    border-radius: 0.2rem;
-  }
+      display: none;
+    }
 
-  .logo {
-    width: 116px;
-    height: 68px;
-    border-radius: 50%;
-  }
+    .menuIconWrapper {
+      @include media.tablet-down {
+        display: grid;
+        flex-basis: 0;
+        flex-grow: 1;
+        margin-right: 20px;
+        cursor: pointer;
 
-  .iconsNav {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    min-width: 210px;
-    cursor: pointer;
-  }
+        svg {
+          justify-self: flex-end;
+        }
+      }
 
-  .gap {
-    width: 40px;
-  }
+      display: none;
+    }
 
-  .searchTextInputAndProductList {
-    width: 100%;
-    border: none;
-  }
+    .searchIconWrapper {
+      @include media.tablet-down {
+        display: flex;
+        flex-basis: 0;
+        flex-grow: 1;
+        justify-content: flex-start;
+        margin-right: 20px;
+        cursor: pointer;
+      }
 
-  .linkChild {
-    display: flex;
-    align-items: center;
-  }
+      display: none;
+    }
 
-  .productsQuantity {
-    width: 36px;
-  }
+    .navbarContainer {
+      display: flex;
+      align-items: center;
+      height: 84px;
+      margin-bottom: 20px;
+      background-color: #b5cfaa;
 
-  .account {
-    display: flex;
-    align-items: center;
-  }
+      .navbarColumnLeft {
+        flex-basis: 0;
+        flex-grow: 1;
 
-  .cartAndQuantity {
-    display: flex;
-    align-items: center;
+        .searchIconIWrapperOut {
+          margin-right: 8px;
+        }
+
+        .searchIconIWrapper {
+          margin-left: 20px;
+        }
+      }
+
+      .navbarColumnLogo {
+        .logoContainer {
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+      .navbarColumnRight {
+        flex-basis: 0;
+        flex-grow: 1;
+      }
+
+      .rightSideForBigScreen {
+        @include media.tablet-down {
+          display: none !important;
+        }
+      }
+
+      .navbarColumn {
+        .logo {
+          width: 116px;
+          height: 68px;
+          border-radius: 50%;
+        }
+
+        .gap {
+          width: 40px;
+        }
+
+        .iconsNav {
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          min-width: 210px;
+          cursor: pointer;
+
+          .linkChild {
+            display: flex;
+            align-items: center;
+          }
+
+          .productsQuantity {
+            width: 36px;
+          }
+
+          .cartAndQuantity {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
   }
 }
