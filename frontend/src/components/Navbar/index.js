@@ -68,7 +68,10 @@ const Navbar = () => {
               <div className={styles.dropdownModal}></div>
             )}
             <div className={styles.productsDropdownWrapper}>
-              <div className={styles.searchProductContainer}>
+              <div
+                className={styles.searchProductContainer}
+                ref={searchProductListDropdownRef}
+              >
                 <div className={styles.searchProduct}>
                   <div
                     className={
@@ -76,7 +79,6 @@ const Navbar = () => {
                         ? styles.searchTextInputAndProductList
                         : styles.hidden
                     }
-                    ref={searchProductListDropdownRef}
                   >
                     <div className={styles.searchTextInputAndIcon}>
                       <input

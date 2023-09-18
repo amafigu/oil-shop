@@ -78,6 +78,16 @@
           border-radius: 0.2rem;
         }
 
+        .dropdownModal {
+          position: fixed;
+          inset: 0;
+          width: 100vw;
+          height: 100vh;
+          overflow: hidden;
+          background: rgb(0 0 0 / 50%);
+          transition: opacity 0.3s ease-in-out;
+        }
+
         .searchDropdown {
           z-index: 500;
           display: flex;
