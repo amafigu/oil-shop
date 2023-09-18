@@ -6,15 +6,113 @@
   width: 100%;
   background-color: white;
 
+  .hidden {
+    display: none;
+  }
+
+  .productsDropdownWrapper {
+    @include media.mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      width: 70vw;
+      border: none;
+    }
+
+    width: 80vw;
+  }
+
   .navbar {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 20px;
 
-    .searchIconAndDropdownWrapper {
-      @include media.tablet {
-        display: none;
+    .searchProduct {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      align-items: center;
+      justify-content: center;
+      width: 25%;
+      margin-right: 16px;
+      background-color: #f5f5f5;
+      border-radius: 4px;
+      box-shadow: theme.$main-box-shadow;
+
+      .searchTextInputAndProductList {
+        width: 100%;
+        border: none;
+
+        .searchTextInput {
+          @include input-styles-reset;
+
+          width: 100%;
+          height: 2rem;
+          padding-left: 10px;
+          background-color: #fff;
+          border-radius: 0.2rem;
+        }
+
+        .dropdownModal {
+          position: fixed;
+          inset: 0;
+          width: 100vw;
+          height: 100vh;
+          overflow: hidden;
+          background: rgb(0 0 0 / 50%);
+          transition: opacity 0.3s ease-in-out;
+        }
+
+        .searchDropdown {
+          position: fixed;
+          z-index: 500;
+          display: flex;
+          flex-direction: column;
+          width: 20%;
+          padding: 12px;
+          margin-top: 16px;
+          color: black;
+          background-color: #f5f5f5;
+          border-radius: 4px;
+          box-shadow: theme.$main-box-shadow;
+
+          .dropdownListItem {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            letter-spacing: 0.0094em;
+            list-style-type: none;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: theme.$light-box-shadow;
+            transition: background-color 0.3s ease;
+          }
+
+          .dropdownListItemName {
+            font-weight: 400;
+            color: theme.$primary-color;
+          }
+
+          .dropdownListItem img {
+            margin-right: 2rem;
+          }
+
+          .sidebarItem:hover {
+            background-color: rgb(0 0 0 / 4%);
+          }
+
+          .listItemImage {
+            width: 56px;
+            height: 56px;
+          }
+        }
       }
     }
 

@@ -1,5 +1,9 @@
 import { CartContext } from "#context/cartContext"
 import {
+  getInputChangeAndOpenList,
+  navigateToProductAndCloseDropdown,
+  searchAndNavigateToProduct,
+  titleCase,
   useGetProducts,
   useHideListOnOuterClick,
   useListenScrollAndCloseDropdown,
@@ -8,16 +12,14 @@ import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import React, { useContext, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
-import ProductsDropdown from "./ProductsDropdown"
 import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
 const Navbar = () => {
-  const [isMobileProductDropdownVisible, setMobileProductDropdownVisible] =
-    useState(false)
+  const [isProductDropdownVisible, setProductDropdownVisible] = useState(false)
 
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(false)
@@ -28,7 +30,13 @@ const Navbar = () => {
 
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
+  const navigate = useNavigate()
 
+  const getPressedEnterKeyInSearchField = (e) => {
+    if (e.key === "Enter") {
+      searchAndNavigateToProduct(products, searchText, navigate)
+    }
+  }
   useHideListOnOuterClick(
     searchProductListDropdownRef,
     setSearchDropdownOpen,
@@ -49,31 +57,88 @@ const Navbar = () => {
       <div className={styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={`${styles.navbarColumn} ${styles.navbarColumnLeft}`}>
-            <div className={styles.searchIconAndDropdownWrapper}>
+            <div className={styles.productsDropdownWrapper}>
               <div
                 className={styles.searchIconIWrapper}
-                style={
-                  isMobileProductDropdownVisible ? { display: "none" } : {}
-                }
-                onClick={() => setMobileProductDropdownVisible(true)}
+                style={isProductDropdownVisible ? { display: "none" } : {}}
+                onClick={() => setProductDropdownVisible(true)}
               >
                 <FontAwesomeIcon icon={faSearch} size={"xl"} />
               </div>
+              <div className={styles.searchProductContainer}>
+                <div className={styles.searchProduct}>
+                  <div
+                    className={
+                      isProductDropdownVisible
+                        ? styles.searchTextInputAndProductList
+                        : styles.hidden
+                    }
+                  >
+                    <div>
+                      <input
+                        className={styles.searchTextInput}
+                        onChange={getInputChangeAndOpenList(
+                          products,
+                          setSearchText,
+                          setSearchDropdownOpen,
+                          setMatchedProducts,
+                        )}
+                        onKeyDown={getPressedEnterKeyInSearchField}
+                        placeholder='Search Product'
+                        value={searchText}
+                      ></input>
+                    </div>
 
-              <ProductsDropdown
-                isMobileProductDropdownVisible={isMobileProductDropdownVisible}
-                products={products}
-                setMobileProductDropdownVisible={
-                  setMobileProductDropdownVisible
-                }
-                setSearchText={setSearchText}
-                setSearchDropdownOpen={setSearchDropdownOpen}
-                setMatchedProducts={setMatchedProducts}
-                matchedProducts={matchedProducts}
-                searchProductListDropdownRef={searchProductListDropdownRef}
-                isSearchDropdownOpen={isSearchDropdownOpen}
-                searchText={searchText}
-              />
+                    {matchedProducts.length > 0 && isSearchDropdownOpen && (
+                      <>
+                        <div className={styles.dropdownModal}></div>
+                        <div
+                          ref={searchProductListDropdownRef}
+                          className={styles.searchDropdown}
+                        >
+                          {matchedProducts.map((product) => (
+                            <div
+                              className={styles.dropdownListItem}
+                              key={product.name}
+                              onClick={() =>
+                                navigateToProductAndCloseDropdown(
+                                  product.name,
+                                  navigate,
+                                  setSearchDropdownOpen,
+                                  setMatchedProducts,
+                                  setSearchText,
+                                )
+                              }
+                            >
+                              <div className={styles.dropdownListItemImage}>
+                                <img
+                                  src={
+                                    process.env.PUBLIC_URL +
+                                    "/assets/" +
+                                    product.image
+                                  }
+                                  alt={product.name}
+                                  className={styles.listItemImage}
+                                />
+                              </div>
+
+                              <div className={styles.dropdownListItemName}>
+                                {titleCase(product.name, "_")}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                    <div
+                      className={styles.searchIconIWrapper}
+                      onClick={() => setProductDropdownVisible(false)}
+                    >
+                      <FontAwesomeIcon icon={faSearch} size={"xl"} />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -105,21 +170,19 @@ const Navbar = () => {
               >
                 <div
                   className={styles.searchIconIWrapper}
-                  style={
-                    isMobileProductDropdownVisible ? { display: "none" } : {}
-                  }
-                  onClick={() => setMobileProductDropdownVisible(true)}
+                  style={isProductDropdownVisible ? { display: "none" } : {}}
+                  onClick={() => setProductDropdownVisible(true)}
                 >
                   <FontAwesomeIcon icon={faSearch} size={"xl"} />
                 </div>
 
-                <ProductsDropdown
-                  isMobileProductDropdownVisible={
-                    isMobileProductDropdownVisible
+                {/*<ProductsDropdown
+                  isProductDropdownVisible={
+                    isProductDropdownVisible
                   }
                   products={products}
-                  setMobileProductDropdownVisible={
-                    setMobileProductDropdownVisible
+                  setProductDropdownVisible={
+                    setProductDropdownVisible
                   }
                   setSearchText={setSearchText}
                   setSearchDropdownOpen={setSearchDropdownOpen}
@@ -127,7 +190,7 @@ const Navbar = () => {
                   matchedProducts={matchedProducts}
                   isSearchDropdownOpen={isSearchDropdownOpen}
                   searchText={searchText}
-                />
+                />*/}
               </div>
 
               <div className={styles.gap}></div>

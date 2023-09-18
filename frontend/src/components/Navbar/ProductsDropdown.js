@@ -11,8 +11,8 @@ import { useNavigate } from "react-router-dom"
 import styles from "./productsDropdown.module.scss"
 
 const ProductsDropdown = ({
-  isMobileProductDropdownVisible,
-  setMobileProductDropdownVisible,
+  isProductDropdownVisible,
+  setProductDropdownVisible,
   products,
   setSearchText,
   setSearchDropdownOpen,
@@ -30,7 +30,7 @@ const ProductsDropdown = ({
     }
   }
 
-  console.log(isMobileProductDropdownVisible)
+  console.log(isProductDropdownVisible)
   console.log(matchedProducts)
   console.log(products)
   return (
@@ -38,7 +38,7 @@ const ProductsDropdown = ({
       <div className={styles.searchProduct}>
         <div
           className={
-            isMobileProductDropdownVisible
+            isProductDropdownVisible
               ? styles.searchTextInputAndProductList
               : styles.hidden
           }
@@ -71,16 +71,14 @@ const ProductsDropdown = ({
             />
             <div
               className={
-                isMobileProductDropdownVisible
-                  ? styles.searchIcon
-                  : styles.hidden
+                isProductDropdownVisible ? styles.searchIcon : styles.hidden
               }
               onClick={() => {
                 setMatchedProducts([])
                 setSearchText("")
-                setMobileProductDropdownVisible(
-                  (prevIsMobileProductDropdownVisible) =>
-                    !prevIsMobileProductDropdownVisible,
+                setProductDropdownVisible(
+                  (prevIsProductDropdownVisible) =>
+                    !prevIsProductDropdownVisible,
                 )
               }}
             >
