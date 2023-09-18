@@ -12,6 +12,12 @@
     justify-content: center;
     margin-bottom: 20px;
 
+    .searchIconAndDropdownWrapper {
+      @include media.tablet {
+        display: none;
+      }
+    }
+
     .menuWrapper {
       @include media.tablet-down {
         display: flex;

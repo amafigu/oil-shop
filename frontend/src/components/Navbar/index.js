@@ -99,16 +99,36 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faBars} size={"xl"} />
             </div>
             <div className={styles.rightSideForBigScreen}>
-              <ProductsDropdown
-                products={products}
-                setSearchText={setSearchText}
-                setSearchDropdownOpen={setSearchDropdownOpen}
-                setMatchedProducts={setMatchedProducts}
-                matchedProducts={matchedProducts}
-                searchProductListDropdownRef={searchProductListDropdownRef}
-                isSearchDropdownOpen={isSearchDropdownOpen}
-                searchText={searchText}
-              />
+              <div
+                className={styles.searchIconAndDropdownWrapperRight}
+                ref={searchProductListDropdownRef}
+              >
+                <div
+                  className={styles.searchIconIWrapper}
+                  style={
+                    isMobileProductDropdownVisible ? { display: "none" } : {}
+                  }
+                  onClick={() => setMobileProductDropdownVisible(true)}
+                >
+                  <FontAwesomeIcon icon={faSearch} size={"xl"} />
+                </div>
+
+                <ProductsDropdown
+                  isMobileProductDropdownVisible={
+                    isMobileProductDropdownVisible
+                  }
+                  products={products}
+                  setMobileProductDropdownVisible={
+                    setMobileProductDropdownVisible
+                  }
+                  setSearchText={setSearchText}
+                  setSearchDropdownOpen={setSearchDropdownOpen}
+                  setMatchedProducts={setMatchedProducts}
+                  matchedProducts={matchedProducts}
+                  isSearchDropdownOpen={isSearchDropdownOpen}
+                  searchText={searchText}
+                />
+              </div>
 
               <div className={styles.gap}></div>
               <div className={styles.iconsNav}>
