@@ -42,12 +42,12 @@ export const searchAndNavigateToProduct = (products, searchText, navigate) => {
 export const navigateToProductAndCloseDropdown = (
   name,
   navigate,
-  setSearchDropdownOpen,
+  setProductDropdownVisible,
   setMatchedProducts,
   setSearchText,
 ) => {
   navigate(`/products/${name}`)
-  setSearchDropdownOpen(false)
+  setProductDropdownVisible(false)
   setMatchedProducts([])
   setSearchText("")
 }

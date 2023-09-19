@@ -11,21 +11,21 @@
   }
 
   .productsDropdownWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: 70vw;
+    border: none;
+
     @include media.mobile {
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      width: 70vw;
-      border: none;
+      width: 80vw;
     }
 
     .searchProductContainer {
       width: 100%;
     }
-
-    width: 80vw;
   }
 
   .navbar {
@@ -72,7 +72,7 @@
           @include input-styles-reset;
 
           width: 100%;
-          height: 2rem;
+          height: 82px;
           padding-left: 10px;
           background-color: #fff;
           border-radius: 0.2rem;
@@ -138,15 +138,17 @@
     }
 
     .menuWrapper {
-      @include media.tablet-down {
+      display: none;
+
+      @include media.desktop-down {
         display: flex;
       }
-
-      display: none;
     }
 
     .menuIconWrapper {
-      @include media.tablet-down {
+      display: none;
+
+      @include media.desktop-down {
         display: grid;
         flex-basis: 0;
         flex-grow: 1;
@@ -157,11 +159,11 @@
           justify-self: flex-end;
         }
       }
-
-      display: none;
     }
 
     .searchIconWrapper {
+      display: none;
+
       @include media.tablet-down {
         display: flex;
         flex-basis: 0;
@@ -170,13 +172,12 @@
         margin-right: 20px;
         cursor: pointer;
       }
-
-      display: none;
     }
 
     .navbarContainer {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       height: 84px;
       margin-bottom: 20px;
       background-color: #b5cfaa;
@@ -207,8 +208,10 @@
       }
 
       .rightSideForBigScreen {
-        @include media.tablet-down {
-          display: none !important;
+        display: block;
+
+        @include media.desktop-down {
+          display: none;
         }
       }
 

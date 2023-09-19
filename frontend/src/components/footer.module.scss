@@ -1,4 +1,5 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .footerWrapper {
@@ -78,6 +79,10 @@
     background: #f0f0f0;
     border-radius: 5px;
     box-shadow: theme.$main-box-shadow;
+
+    @include media.tablet-down {
+      width: 90%;
+    }
   }
 
   .registrationEmailInputAndButtonWrapper {
@@ -141,7 +146,7 @@
 
   .iconsSection {
     display: flex;
-    height: 160px;
+    height: fit-content;
   }
 
   .iconsSectionElements {
@@ -150,8 +155,14 @@
     align-items: baseline;
     justify-content: space-around;
     width: 100%;
+    height: fit-content;
     padding: 0;
     margin: 0;
+
+    @include media.tablet-down {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .iconsSectionItem {
@@ -180,7 +191,7 @@
 
   .columnsSection {
     display: flex;
-    height: 16rem;
+    height: auto;
   }
 
   .columnsSectionElements {
@@ -191,6 +202,11 @@
     width: 100%;
     padding: 0;
     margin: 0;
+
+    @include media.tablet-down {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .columnsSectionItem {
