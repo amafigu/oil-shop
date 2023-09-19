@@ -112,7 +112,7 @@ const Navbar = () => {
                                 navigateToProductAndCloseDropdown(
                                   product.name,
                                   navigate,
-                                  setSearchDropdownOpen,
+                                  setProductDropdownVisible,
                                   setMatchedProducts,
                                   setSearchText,
                                 )

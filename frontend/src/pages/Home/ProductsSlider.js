@@ -1,26 +1,47 @@
 import ProductCard from "#components/ProductCard"
-import { PRODUCT_SLIDER_QUANTITY } from "#utils/constants"
 import { useGetProducts } from "#utils/utils"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./productSlider.module.scss"
 
 const ProductSlider = () => {
   const [products, setProducts] = useState([])
   const [currentProductIndex, setcurrentProductIndex] = useState(0)
-
+  const [sliderQuantity, setSliderQuantity] = useState(1)
   useGetProducts(setProducts)
 
+  const updateSliderQuantityByScreenSize = () => {
+    let windowSize = window.innerWidth
+    if (windowSize >= 1300) {
+      setSliderQuantity(4)
+    }
+    if (windowSize <= 1299) {
+      setSliderQuantity(3)
+    }
+    if (windowSize <= 970) {
+      setSliderQuantity(2)
+    }
+    if (windowSize <= 600) {
+      setSliderQuantity(1)
+    }
+  }
+
+  useEffect(() => {
+    updateSliderQuantityByScreenSize()
+    window.addEventListener("resize", updateSliderQuantityByScreenSize)
+    return () =>
+      window.removeEventListener("resize", updateSliderQuantityByScreenSize)
+  }, [])
   const nextProduct = () => {
     const newIndex = currentProductIndex + 1
     setcurrentProductIndex(
-      newIndex >= products.length - PRODUCT_SLIDER_QUANTITY + 1 ? 0 : newIndex,
+      newIndex >= products.length - sliderQuantity + 1 ? 0 : newIndex,
     )
   }
 
   const previousProduct = () => {
     const newIndex = currentProductIndex - 1
     setcurrentProductIndex(
-      newIndex < 0 ? products.length - PRODUCT_SLIDER_QUANTITY : newIndex,
+      newIndex < 0 ? products.length - sliderQuantity : newIndex,
     )
   }
 
@@ -33,10 +54,7 @@ const ProductSlider = () => {
         arrow_back_ios
       </button>
       {products
-        .slice(
-          currentProductIndex,
-          currentProductIndex + PRODUCT_SLIDER_QUANTITY,
-        )
+        .slice(currentProductIndex, currentProductIndex + sliderQuantity)
         .map((product, index) => (
           <ProductCard
             key={index}
