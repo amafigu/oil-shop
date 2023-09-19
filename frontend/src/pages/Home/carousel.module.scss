@@ -1,10 +1,15 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .carouselWrapper {
   @include flex-center;
 
   margin-bottom: 3.8rem;
+
+  @include media.desktop-down {
+    width: 100%;
+  }
 
   .carousel img {
     object-fit: cover;
@@ -17,6 +22,10 @@
 
     color: theme.$primary-color;
     cursor: pointer;
+
+    @include media.desktop-down {
+      display: none;
+    }
   }
 
   .iframeVideo {
@@ -30,6 +39,10 @@
     pointer-events: none;
     content: "";
     border: 60px solid #fff;
+
+    @include media.tablet-down {
+      display: none;
+    }
   }
 
   .videoWrapper {
@@ -37,5 +50,9 @@
     z-index: -1;
     width: 872px;
     height: 485px;
+
+    @include media.desktop-down {
+      width: 100%;
+    }
   }
 }

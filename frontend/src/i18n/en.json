@@ -153,7 +153,7 @@
       "newsletter": {
         "subscriptionText": "Your regular Oylo update",
         "subscriptionButton": "Subscribe to Newsletter",
-        "emailAddressPlaceholder": "Enter email address",
+        "emailAddressPlaceholder": "Enter email",
         "registrationDataConsentText": "The data you enter here will only be used to send the Newsletters used and not passed on to third parties. You can unsubscribe from the newsletter at any time withdraw your consent by sending us an email. Your data after completion of the newsletter receipt within 3 Months deleted, provided that the deletion is not legal conflict with retention requirements. By sending the entered data you agree to the data processing and confirm our privacy policy."
       },
       "iconsColumns": {
