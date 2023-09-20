@@ -2,39 +2,9 @@
 @import "#styles/helpers/mixins";
 
 .dropdownMenu {
-  @include z-index(language);
-
-  @include media.tablet {
-    background-color: #3b3e4b;
-  }
-
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-  transition: all 2s linear;
+  color: #b5cfaa;
 
   .listItem {
-    @include media.mobile {
-      font-weight: 400;
-      border-bottom: 1px solid #30343f;
-    }
-
-    padding: 14px 20px;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.5;
-    color: #fff;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-bottom: 1px solid #3b3e4b;
-
-    &:hover {
-      color: #3b3e4b;
-    }
-  }
-
-  .listItem:last-child {
-    border-bottom: none;
+    @include menu-list-item;
   }
 }

@@ -24,32 +24,25 @@ const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
     <div className={styles.menuWrapper}>
       <div className={styles.menuAndMailButtonContainer}>
         <ul className={styles.menu}>
-          <li className={styles.listItem} onClick={() => setMenuOpen(false)}>
+          <li
+            className={`${styles.closeMenuIconContainer} ${styles.listItem}`}
+            onClick={() => setMenuOpen(false)}
+          >
             <FontAwesomeIcon icon={faX} />
           </li>
 
           <li
-            className={styles.listDropdownItem}
-            style={{
-              borderBottom: isDropdownOpen && "none",
-            }}
+            className={`${styles.listDropdownItem} ${styles.listItem}`}
             onClick={() => setDropdownOpen((isDropdownOpen) => !isDropdownOpen)}
           >
-            <div className={styles.listDropdownLinkContent}>
-              <div className={styles.itemsContainer}>
-                <div className={styles.item}>
-                  <FontAwesomeIcon icon={faGlobe} />
-                </div>
-                {!isDropdownOpen && <FontAwesomeIcon icon={faChevronDown} />}
-                {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
-              </div>
+            <div className={styles.itemsContainer}>
+              <FontAwesomeIcon icon={faGlobe} />
+
+              {!isDropdownOpen && <FontAwesomeIcon icon={faChevronDown} />}
+              {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
             </div>
-            {isDropdownOpen && (
-              <div className={styles.menuDropdown}>
-                <LanguageDropdown setMenuOpen={setMenuOpen} />
-              </div>
-            )}
           </li>
+          {isDropdownOpen && <LanguageDropdown setMenuOpen={setMenuOpen} />}
           <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu("/cart")}

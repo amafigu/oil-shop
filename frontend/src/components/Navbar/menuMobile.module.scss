@@ -11,9 +11,19 @@
   min-height: fit-content;
   overflow-y: auto;
   background-color: white;
+  border-bottom-left-radius: 4px;
   box-shadow: theme.$main-box-shadow;
 
   @include flex-vertical-center;
+
+  .itemsContainer {
+    display: flex;
+    gap: 16px;
+  }
+
+  .closeMenuIconContainer {
+    color: theme.$branding-background-color;
+  }
 
   .menuAndMailButtonContainer {
     width: 100%;
