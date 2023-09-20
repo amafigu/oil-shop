@@ -1,26 +1,12 @@
 import { faX } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { React, useEffect, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { React } from "react"
+import { useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar"
 import styles from "./menuMobile.module.scss"
 
-const Menu = ({ setMenuOpen }) => {
-  const [category, setCategory] = useState("")
-
-  const location = useLocation()
-  const params = new URLSearchParams(location.search)
-  const queryCategory = params.get("category")
-
+const Menu = ({ setMenuOpen, category, setCategory }) => {
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (queryCategory) {
-      setCategory(queryCategory)
-    } else {
-      setCategory("all")
-    }
-  }, [queryCategory])
 
   const navigateAndCloseMenu = (route) => {
     setMenuOpen(false)

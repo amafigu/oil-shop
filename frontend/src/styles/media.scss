@@ -9,7 +9,7 @@ $desktop: 960px;
 }
 
 @mixin tablet-down {
-  @media screen and (max-width: #{($tablet - 1px)}) {
+  @media screen and (max-width: $tablet) {
     @content;
   }
 }
@@ -21,7 +21,7 @@ $desktop: 960px;
 }
 
 @mixin desktop-down {
-  @media screen and (max-width: #{$desktop - 1px}) {
+  @media screen and (max-width: $desktop) {
     @content;
   }
 }
