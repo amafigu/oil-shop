@@ -1,6 +1,15 @@
+import {
+  faDhl,
+  faSquareFacebook,
+  faSquareInstagram,
+  faSquareYoutube,
+  faUps,
+} from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { Link } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
+
 import styles from "./footer.module.scss"
 
 const Footer = () => {
@@ -113,18 +122,8 @@ const Footer = () => {
                 <h4>{text.iconsColumns.shippingPartners.title}</h4>
               </div>
               <div className={styles.iconsSectionItemIcons}>
-                <img
-                  id='last'
-                  src={`${process.env.PUBLIC_URL}/assets/iconDhl.png`}
-                  alt=''
-                  width='77'
-                />
-                <img
-                  id='last'
-                  src={`${process.env.PUBLIC_URL}/assets/iconUps.png`}
-                  alt=''
-                  width='77'
-                />
+                <FontAwesomeIcon icon={faDhl} size='2xl' />
+                <FontAwesomeIcon icon={faUps} size='2xl' />
               </div>
             </li>
 
@@ -141,11 +140,7 @@ const Footer = () => {
                   title={text.iconsColumns.socialMedia.facebook}
                   alt={text.iconsColumns.socialMedia.facebook}
                 >
-                  <img
-                    src={`${process.env.PUBLIC_URL}/assets/iconFacebook.png`}
-                    alt=''
-                    width='50'
-                  />
+                  <FontAwesomeIcon icon={faSquareFacebook} size='2xl' />
                 </a>
                 <a
                   href='https://www.instagram.com/'
@@ -154,11 +149,7 @@ const Footer = () => {
                   title={text.iconsColumns.socialMedia.instagram}
                   alt={text.iconsColumns.socialMedia.instagram}
                 >
-                  <img
-                    src={`${process.env.PUBLIC_URL}/assets/iconInstagram.png`}
-                    alt=''
-                    width='50'
-                  />
+                  <FontAwesomeIcon icon={faSquareInstagram} size='2xl' />
                 </a>
                 <a
                   href='https://www.youtube.com/user/'
@@ -167,11 +158,7 @@ const Footer = () => {
                   title={text.iconsColumns.socialMedia.youtube}
                   alt={text.iconsColumns.socialMedia.youtube}
                 >
-                  <img
-                    src={`${process.env.PUBLIC_URL}/assets/iconYoutube.png`}
-                    alt=''
-                    width='50'
-                  />
+                  <FontAwesomeIcon icon={faSquareYoutube} size='2xl' />
                 </a>
               </div>
             </li>

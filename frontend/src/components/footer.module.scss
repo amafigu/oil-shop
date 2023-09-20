@@ -60,7 +60,7 @@
   .newsletterSection {
     display: flex;
     justify-content: center;
-    margin: 2em 0;
+    margin: 32px 0;
   }
 
   .registrationFormContent {
@@ -132,7 +132,7 @@
   .columnsSectionItemTitle {
     display: flex;
     align-items: center;
-    height: 60px;
+    margin-bottom: 12px;
     font-family: "GFS Neohellenic", sans-serif;
     font-size: 24px;
     font-weight: 400;
@@ -161,7 +161,9 @@
 
     @include media.tablet-down {
       flex-direction: column;
+      gap: 20px;
       align-items: center;
+      margin-bottom: 32px;
     }
   }
 
@@ -169,7 +171,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25%;
+    width: 100%;
   }
 
   .iconsSectionItemTitle {
@@ -186,12 +188,22 @@
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    height: 100px;
+
+    svg[data-icon="dhl"] {
+      width: 60px;
+      height: 60px;
+    }
+
+    svg[data-icon="ups"] {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .columnsSection {
     display: flex;
     height: auto;
+    margin-bottom: 32px;
   }
 
   .columnsSectionElements {
@@ -213,17 +225,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25%;
-    height: 240px;
+    width: 100%;
+    margin: 12px 0;
   }
 
   .columnsSectionItemLinks {
     display: flex;
     flex-direction: column;
+    gap: 16px;
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    height: 160px;
   }
 
   .underSection {
