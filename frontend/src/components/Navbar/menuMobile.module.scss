@@ -8,13 +8,20 @@
   right: 0;
   width: 60%;
   min-width: fit-content;
+  min-height: fit-content;
+  overflow-y: auto;
   background-color: white;
   box-shadow: theme.$main-box-shadow;
 
-  @include z-index(mobilemenu);
+  @include flex-vertical-center;
 
   .menuAndMailButtonContainer {
     width: 100%;
+
+    @include media.short {
+      height: 100vh;
+      overflow-y: auto;
+    }
   }
 
   .menu {

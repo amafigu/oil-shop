@@ -17,10 +17,7 @@ const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
     <div className={styles.menuWrapper}>
       <div className={styles.menuAndMailButtonContainer}>
         <ul className={styles.menu}>
-          <li
-            className={`${styles.listItem} ${styles.closeIcon}`}
-            onClick={() => setMenuOpen(false)}
-          >
+          <li className={styles.listItem} onClick={() => setMenuOpen(false)}>
             <FontAwesomeIcon icon={faX} />
           </li>
           <li
