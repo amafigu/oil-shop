@@ -1,39 +1,40 @@
-@use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.languageDropdownWrapper {
+.dropdownMenu {
+  @include z-index(language);
+
+  @include media.tablet {
+    background-color: #3b3e4b;
+  }
+
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  transition: all 2s linear;
 
-  .dropdownColumn {
-    display: flex;
-    flex-direction: column;
-  }
+  .listItem {
+    @include media.mobile {
+      font-weight: 400;
+      border-bottom: 1px solid #30343f;
+    }
 
-  .openCloseButton {
-    margin-left: 16px;
-  }
-
-  img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .dropdown {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 40px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #fff;
+    text-transform: uppercase;
     cursor: pointer;
-    background: white;
-    border-radius: 4px;
-    box-shadow: theme.$main-box-shadow;
-    opacity: 1;
+    border-bottom: 1px solid #3b3e4b;
+
+    &:hover {
+      color: #3b3e4b;
+    }
   }
 
-  .hideDropdown {
-    pointer-events: none;
-    cursor: none;
-    opacity: 0;
+  .listItem:last-child {
+    border-bottom: none;
   }
 }

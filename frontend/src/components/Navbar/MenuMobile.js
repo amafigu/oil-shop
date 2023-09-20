@@ -1,11 +1,18 @@
-import { faX } from "@fortawesome/free-solid-svg-icons"
+import {
+  faChevronDown,
+  faChevronUp,
+  faGlobe,
+  faX,
+} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { React } from "react"
+import { React, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar"
+import LanguageDropdown from "./LanguageDropdown"
 import styles from "./menuMobile.module.scss"
 
 const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
   const navigate = useNavigate()
 
   const navigateAndCloseMenu = (route) => {
@@ -19,6 +26,29 @@ const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
         <ul className={styles.menu}>
           <li className={styles.listItem} onClick={() => setMenuOpen(false)}>
             <FontAwesomeIcon icon={faX} />
+          </li>
+
+          <li
+            className={styles.listDropdownItem}
+            style={{
+              borderBottom: isDropdownOpen && "none",
+            }}
+            onClick={() => setDropdownOpen((isDropdownOpen) => !isDropdownOpen)}
+          >
+            <div className={styles.listDropdownLinkContent}>
+              <div className={styles.itemsContainer}>
+                <div className={styles.item}>
+                  <FontAwesomeIcon icon={faGlobe} />
+                </div>
+                {!isDropdownOpen && <FontAwesomeIcon icon={faChevronDown} />}
+                {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
+              </div>
+            </div>
+            {isDropdownOpen && (
+              <div className={styles.menuDropdown}>
+                <LanguageDropdown setMenuOpen={setMenuOpen} />
+              </div>
+            )}
           </li>
           <li
             className={styles.listItem}

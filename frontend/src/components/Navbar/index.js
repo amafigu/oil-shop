@@ -192,22 +192,6 @@ const Navbar = ({ productCategories }) => {
                 >
                   <FontAwesomeIcon icon={faSearch} size={"xl"} />
                 </div>
-
-                {/*<ProductsDropdown
-                  isProductDropdownVisible={
-                    isProductDropdownVisible
-                  }
-                  products={products}
-                  setProductDropdownVisible={
-                    setProductDropdownVisible
-                  }
-                  setSearchText={setSearchText}
-                  setSearchDropdownOpen={setSearchDropdownOpen}
-                  setMatchedProducts={setMatchedProducts}
-                  matchedProducts={matchedProducts}
-                  isSearchDropdownOpen={isSearchDropdownOpen}
-                  searchText={searchText}
-                />*/}
               </div>
 
               <div className={styles.gap}></div>
