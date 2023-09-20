@@ -192,6 +192,10 @@
 
         .searchIconIWrapper {
           margin-left: 20px;
+
+          @include media.desktop {
+            display: none;
+          }
         }
       }
 
@@ -208,7 +212,9 @@
       }
 
       .rightSideForBigScreen {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
 
         @include media.desktop-down {
           display: none;

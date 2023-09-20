@@ -8,29 +8,43 @@ import {
   useHideListOnOuterClick,
   useListenScrollAndCloseDropdown,
 } from "#utils/utils"
+import { useLocation, useNavigate } from "react-router-dom"
+
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import React, { useContext, useRef, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import React, { useContext, useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
 import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
-const Navbar = () => {
+const Navbar = ({ productCategories }) => {
   const [isProductDropdownVisible, setProductDropdownVisible] = useState(false)
-
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [searchText, setSearchText] = useState("")
   const [products, setProducts] = useState([])
+  const [category, setCategory] = useState("")
   const [matchedProducts, setMatchedProducts] = useState([])
   const { getAllProductsQuantity } = useContext(CartContext)
 
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
   const navigate = useNavigate()
+
+  const location = useLocation()
+  const params = new URLSearchParams(location.search)
+  const queryCategory = params.get("category")
+
+  useEffect(() => {
+    if (queryCategory) {
+      setCategory(queryCategory)
+    } else {
+      setCategory("all")
+    }
+  }, [queryCategory])
 
   const getPressedEnterKeyInSearchField = (e) => {
     if (e.key === "Enter") {
@@ -154,7 +168,14 @@ const Navbar = () => {
             </div>
 
             <div className={styles.menuWrapper}>
-              {isMenuOpen && <MenuMobile setMenuOpen={setMenuOpen} />}
+              {isMenuOpen && (
+                <MenuMobile
+                  productCategories={productCategories}
+                  category={category}
+                  setCategory={setCategory}
+                  setMenuOpen={setMenuOpen}
+                />
+              )}
             </div>
           </div>
 
