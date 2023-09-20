@@ -20,7 +20,7 @@ import MenuMobile from "./MenuMobile"
 import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
-const Navbar = () => {
+const Navbar = ({ productCategories }) => {
   const [isProductDropdownVisible, setProductDropdownVisible] = useState(false)
   const [isSearchDropdownOpen, setSearchDropdownOpen] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(false)
@@ -170,6 +170,7 @@ const Navbar = () => {
             <div className={styles.menuWrapper}>
               {isMenuOpen && (
                 <MenuMobile
+                  productCategories={productCategories}
                   category={category}
                   setCategory={setCategory}
                   setMenuOpen={setMenuOpen}

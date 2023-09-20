@@ -6,7 +6,7 @@ import ProductCard from "../components/ProductCard"
 import Sidebar from "../components/Sidebar"
 import style from "./shop.module.scss"
 
-const Shop = () => {
+const Shop = ({ productCategories }) => {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState("")
 
@@ -46,7 +46,10 @@ const Shop = () => {
     <div className={style.shopPageWrapper}>
       <div className={style.shopPage}>
         <div className={style.sidebarWrapper}>
-          <Sidebar setCategory={setCategory} />
+          <Sidebar
+            setCategory={setCategory}
+            productCategories={productCategories}
+          />
         </div>
 
         <div className={style.sortedProducts}>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar"
 import styles from "./menuMobile.module.scss"
 
-const Menu = ({ setMenuOpen, category, setCategory }) => {
+const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
   const navigate = useNavigate()
 
   const navigateAndCloseMenu = (route) => {
@@ -37,6 +37,7 @@ const Menu = ({ setMenuOpen, category, setCategory }) => {
           </li>
 
           <Sidebar
+            productCategories={productCategories}
             setMenuOpen={setMenuOpen}
             category={category}
             setCategory={setCategory}
