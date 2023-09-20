@@ -2,17 +2,9 @@
 @import "#styles/helpers/mixins";
 
 .sidebarItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 40px;
-  margin: 20px;
-  font-size: 18px;
-  line-height: 1.5;
-  color: theme.$secondary-color;
-  letter-spacing: 0.0094em;
-  list-style-type: none;
-  cursor: pointer;
-  border-radius: 4px;
+  @include menu-list-item;
+
+  &:last-child {
+    border-bottom: white 1px solid !important;
+  }
 }

@@ -8,13 +8,10 @@ import {
   useHideListOnOuterClick,
   useListenScrollAndCloseDropdown,
 } from "#utils/utils"
-import { useLocation, useNavigate } from "react-router-dom"
-
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
 import SubNavbar from "./SubNavbar"
@@ -195,22 +192,6 @@ const Navbar = ({ productCategories }) => {
                 >
                   <FontAwesomeIcon icon={faSearch} size={"xl"} />
                 </div>
-
-                {/*<ProductsDropdown
-                  isProductDropdownVisible={
-                    isProductDropdownVisible
-                  }
-                  products={products}
-                  setProductDropdownVisible={
-                    setProductDropdownVisible
-                  }
-                  setSearchText={setSearchText}
-                  setSearchDropdownOpen={setSearchDropdownOpen}
-                  setMatchedProducts={setMatchedProducts}
-                  matchedProducts={matchedProducts}
-                  isSearchDropdownOpen={isSearchDropdownOpen}
-                  searchText={searchText}
-                />*/}
               </div>
 
               <div className={styles.gap}></div>
