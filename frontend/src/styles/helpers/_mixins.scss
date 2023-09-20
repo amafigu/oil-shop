@@ -53,6 +53,11 @@
   justify-content: center;
 }
 
+@mixin flex-justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @mixin flex-center-column {
   @include flex-center;
 
@@ -155,4 +160,20 @@
   line-height: 1.3em;
   text-transform: uppercase;
   border-bottom: solid grey 1px;
+}
+
+@mixin menu-list-item {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 60px;
+  padding: 20px;
+  margin: auto;
+  font-size: 16px;
+  line-height: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 0.0094em;
+  list-style-type: none;
+  cursor: pointer;
+  border-bottom: 1px solid gray;
 }
