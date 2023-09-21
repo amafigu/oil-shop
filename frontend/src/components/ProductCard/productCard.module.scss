@@ -15,6 +15,10 @@
 
   &:hover {
     transform: scale(1.05);
+
+    @include media.desktop-down {
+      transform: none;
+    }
   }
 
   .productCardAddToCartButton {

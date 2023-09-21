@@ -148,7 +148,7 @@
     .menuIconWrapper {
       display: none;
 
-      @include media.desktop-down {
+      @include media.tablet-down {
         display: grid;
         flex-basis: 0;
         flex-grow: 1;
@@ -193,7 +193,7 @@
         .searchIconIWrapper {
           margin-left: 20px;
 
-          @include media.desktop {
+          @include media.tablet {
             display: none;
           }
         }
@@ -216,7 +216,7 @@
         align-items: center;
         justify-content: flex-end;
 
-        @include media.desktop-down {
+        @include media.tablet-down {
           display: none;
         }
       }
