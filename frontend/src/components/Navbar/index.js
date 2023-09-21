@@ -8,7 +8,11 @@ import {
   useHideListOnOuterClick,
   useListenScrollAndCloseDropdown,
 } from "#utils/utils"
-import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons"
+import {
+  faBars,
+  faCartShopping,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useContext, useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
@@ -200,9 +204,7 @@ const Navbar = ({ productCategories }) => {
 
                 <div className={styles.cartAndQuantity}>
                   <Link className={styles.linkChild} to='/cart'>
-                    <div className='material-symbols-outlined'>
-                      shopping_cart
-                    </div>
+                    <FontAwesomeIcon icon={faCartShopping} />
                   </Link>
                   <span className={styles.productsQuantity}>
                     {getAllProductsQuantity}

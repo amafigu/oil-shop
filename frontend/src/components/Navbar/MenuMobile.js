@@ -1,11 +1,14 @@
+import { CartContext } from "#context/cartContext"
+
 import {
+  faCartShopping,
   faChevronDown,
   faChevronUp,
   faGlobe,
   faX,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { React, useState } from "react"
+import { React, useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar"
 import LanguageDropdown from "./LanguageDropdown"
@@ -19,6 +22,8 @@ const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
     setMenuOpen(false)
     navigate(route)
   }
+
+  const { getAllProductsQuantity } = useContext(CartContext)
 
   return (
     <div className={styles.menuWrapper}>
@@ -47,7 +52,13 @@ const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu("/cart")}
           >
-            <span className={styles.linkContent}>Cart</span>
+            <div className={styles.itemsContainer}>
+              <FontAwesomeIcon icon={faCartShopping} />
+
+              <span className={styles.productsQuantity}>
+                {getAllProductsQuantity}
+              </span>
+            </div>
           </li>
           <li
             className={styles.listItem}

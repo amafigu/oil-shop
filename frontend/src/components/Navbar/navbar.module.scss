@@ -191,10 +191,11 @@
         }
 
         .searchIconIWrapper {
-          margin-left: 20px;
+          display: none;
 
-          @include media.tablet {
-            display: none;
+          @include media.tablet-down {
+            display: block;
+            margin-left: 20px;
           }
         }
       }
@@ -250,6 +251,7 @@
 
           .cartAndQuantity {
             display: flex;
+            gap: 16px;
             align-items: center;
           }
         }

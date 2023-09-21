@@ -29,14 +29,14 @@
   }
 
   .sortedProducts {
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    justify-content: center;
+    margin: 24px;
 
-    @include media.tablet {
-      margin: 24px;
+    @include media.tablet-down {
+      display: flex;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 }
