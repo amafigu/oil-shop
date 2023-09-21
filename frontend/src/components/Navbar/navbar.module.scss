@@ -74,6 +74,9 @@
           width: 100%;
           height: 82px;
           padding-left: 10px;
+          font-size: 16px;
+          font-weight: 400;
+          color: grey;
           background-color: #fff;
           border-radius: 0.2rem;
         }
@@ -99,6 +102,11 @@
           background-color: #f5f5f5;
           border-radius: 4px;
           box-shadow: theme.$main-box-shadow;
+
+          @include media.short {
+            height: 80vh;
+            overflow-y: auto;
+          }
 
           .dropdownListItem {
             display: flex;
@@ -148,7 +156,7 @@
     .menuIconWrapper {
       display: none;
 
-      @include media.desktop-down {
+      @include media.tablet-down {
         display: grid;
         flex-basis: 0;
         flex-grow: 1;
@@ -191,10 +199,11 @@
         }
 
         .searchIconIWrapper {
-          margin-left: 20px;
+          display: none;
 
-          @include media.desktop {
-            display: none;
+          @include media.tablet-down {
+            display: block;
+            margin-left: 20px;
           }
         }
       }
@@ -216,8 +225,19 @@
         align-items: center;
         justify-content: flex-end;
 
-        @include media.desktop-down {
+        @include media.tablet-down {
           display: none;
+        }
+
+        .itemsContainer {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .languageChevronContainer {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
         }
       }
 
@@ -234,8 +254,10 @@
 
         .iconsNav {
           display: flex;
+          gap: 18px;
           align-items: center;
           justify-content: space-evenly;
+          width: 100%;
           min-width: 210px;
           cursor: pointer;
 
@@ -250,6 +272,7 @@
 
           .cartAndQuantity {
             display: flex;
+            gap: 8px;
             align-items: center;
           }
         }

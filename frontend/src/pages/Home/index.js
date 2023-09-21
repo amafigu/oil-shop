@@ -1,3 +1,10 @@
+import {
+  faEnvelope,
+  faPeopleGroup,
+  faSeedling,
+  faTree,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React } from "react"
 import useLocaleContext from "../../context/localeContext"
 import Carousel from "./Carousel"
@@ -52,10 +59,8 @@ const Home = () => {
                   <p className={styles.homeSubtitleText}>
                     {translate.pages.welcome.subTeaser.teaserFirstSentence}
                   </p>
-                  <span
-                    className={`material-symbols-outlined ${styles.iconColumns}`}
-                  >
-                    nature_people
+                  <span className={styles.iconColumns}>
+                    <FontAwesomeIcon icon={faTree} size='xs' />
                   </span>
                 </div>
                 <div className={styles.teaserSingleCard}>
@@ -65,10 +70,9 @@ const Home = () => {
                   <p className={styles.homeSubtitleText}>
                     {translate.pages.welcome.subTeaser.teaserSecondSentence}
                   </p>
-                  <span
-                    className={`material-symbols-outlined ${styles.iconColumns}`}
-                  >
-                    spa
+
+                  <span className={styles.iconColumns}>
+                    <FontAwesomeIcon icon={faSeedling} size='xs' />
                   </span>
                 </div>
                 <div className={styles.teaserSingleCard}>
@@ -78,10 +82,8 @@ const Home = () => {
                   <p className={styles.homeSubtitleText}>
                     {translate.pages.welcome.subTeaser.teaserThirthSentence}
                   </p>
-                  <span
-                    className={`material-symbols-outlined ${styles.iconColumns}`}
-                  >
-                    send
+                  <span className={styles.iconColumns}>
+                    <FontAwesomeIcon icon={faEnvelope} size='xs' />
                   </span>
                 </div>
                 <div className={styles.teaserSingleCard}>
@@ -94,7 +96,7 @@ const Home = () => {
                   <span
                     className={`material-symbols-outlined ${styles.iconColumns}`}
                   >
-                    diversity_1
+                    <FontAwesomeIcon icon={faPeopleGroup} size='xs' />
                   </span>
                 </div>
               </div>

@@ -31,6 +31,7 @@
 
     .searchTextInputAndProductList {
       width: 100%;
+      font-size: 20px;
 
       .searchTextInput {
         @include media.mobile {

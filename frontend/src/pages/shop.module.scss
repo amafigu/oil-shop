@@ -9,13 +9,18 @@
 
   .shopPage {
     display: flex;
-    flex-flow: wrap;
-    width: theme.$default-page-width;
-    margin: 5rem;
-    overflow-y: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    @include media.desktop-down {
+      width: 100%;
+      margin: 0;
+    }
 
     .sidebarWrapper {
-      display: block;
+      display: flex;
 
       @include media.tablet-down {
         display: none;
@@ -24,9 +29,14 @@
   }
 
   .sortedProducts {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 88%;
+    margin: 24px;
+
+    @include media.tablet-down {
+      display: flex;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 }

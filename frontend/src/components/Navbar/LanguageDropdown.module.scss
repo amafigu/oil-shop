@@ -1,10 +1,20 @@
 @use "#styles/media" as media;
+@use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
 .dropdownMenu {
   color: #b5cfaa;
 
   .listItem {
-    @include menu-list-item;
+    @include media.tablet-down {
+      @include menu-list-item;
+    }
+  }
+
+  @include media.tablet {
+    display: flex;
+    gap: 12px;
+    color: theme;
+    background-color: red;
   }
 }

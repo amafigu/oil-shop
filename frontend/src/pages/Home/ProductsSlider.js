@@ -1,5 +1,11 @@
 import ProductCard from "#components/ProductCard"
 import { useGetProducts } from "#utils/utils"
+
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from "react"
 import styles from "./productSlider.module.scss"
 
@@ -31,6 +37,7 @@ const ProductSlider = () => {
     return () =>
       window.removeEventListener("resize", updateSliderQuantityByScreenSize)
   }, [])
+
   const nextProduct = () => {
     const newIndex = currentProductIndex + 1
     setcurrentProductIndex(
@@ -47,11 +54,8 @@ const ProductSlider = () => {
 
   return (
     <div className={styles.productSliderWrapper}>
-      <button
-        className={`material-symbols-outlined ${styles.iconSlider}`}
-        onClick={previousProduct}
-      >
-        arrow_back_ios
+      <button className={styles.iconSlider} onClick={previousProduct}>
+        <FontAwesomeIcon icon={faChevronLeft} size='2xl' />
       </button>
       {products
         .slice(currentProductIndex, currentProductIndex + sliderQuantity)
@@ -65,11 +69,8 @@ const ProductSlider = () => {
             description={product.description}
           />
         ))}
-      <button
-        onClick={nextProduct}
-        className={`material-symbols-outlined ${styles.iconSlider}`}
-      >
-        arrow_forward_ios
+      <button onClick={nextProduct} className={styles.iconSlider}>
+        <FontAwesomeIcon icon={faChevronRight} size='2xl' />
       </button>
     </div>
   )

@@ -14,11 +14,20 @@
   border-bottom-left-radius: 4px;
   box-shadow: theme.$main-box-shadow;
 
+  @include media.mobile {
+    width: 40%;
+  }
+
+  @include media.tablet {
+    display: none;
+  }
+
   @include flex-vertical-center;
 
   .itemsContainer {
     display: flex;
     gap: 16px;
+    align-items: center;
   }
 
   .closeMenuIconContainer {
