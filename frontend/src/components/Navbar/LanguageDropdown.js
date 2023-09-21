@@ -8,7 +8,9 @@ const LanguageDropdown = ({ setMenuOpen }) => {
   const handleChangeLanguage = (lang) => {
     console.log("handleLanguage", lang)
     setLanguage(lang)
-    setMenuOpen(false)
+    if (setMenuOpen) {
+      setMenuOpen(false)
+    }
   }
 
   return (

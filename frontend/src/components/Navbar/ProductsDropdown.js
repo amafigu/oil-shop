@@ -30,9 +30,6 @@ const ProductsDropdown = ({
     }
   }
 
-  console.log(isProductDropdownVisible)
-  console.log(matchedProducts)
-  console.log(products)
   return (
     <div className={styles.productsDropdownWrapper}>
       <div className={styles.searchProduct}>

@@ -6,11 +6,13 @@ import {
   titleCase,
   useGetProducts,
   useHideListOnOuterClick,
-  useListenScrollAndCloseDropdown,
 } from "#utils/utils"
 import {
   faBars,
   faCartShopping,
+  faChevronDown,
+  faChevronUp,
+  faGlobe,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -30,6 +32,7 @@ const Navbar = ({ productCategories }) => {
   const [category, setCategory] = useState("")
   const [matchedProducts, setMatchedProducts] = useState([])
   const { getAllProductsQuantity } = useContext(CartContext)
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
 
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
@@ -60,13 +63,6 @@ const Navbar = ({ productCategories }) => {
 
   useGetProducts(setProducts)
 
-  useListenScrollAndCloseDropdown(
-    isSearchDropdownOpen,
-    setSearchDropdownOpen,
-    setMatchedProducts,
-    setSearchText,
-  )
-
   return (
     <div className={styles.navbarWrapper} ref={modalRef}>
       <div className={styles.navbar}>
@@ -75,7 +71,10 @@ const Navbar = ({ productCategories }) => {
             <div
               className={styles.searchIconIWrapper}
               style={isProductDropdownVisible ? { display: "none" } : {}}
-              onClick={() => setProductDropdownVisible(true)}
+              onClick={() => {
+                setProductDropdownVisible(true)
+                setSearchText("")
+              }}
             >
               <FontAwesomeIcon icon={faSearch} size={"xl"} />
             </div>
@@ -107,7 +106,10 @@ const Navbar = ({ productCategories }) => {
                       ></input>
                       <div
                         className={styles.searchIconIWrapperOut}
-                        onClick={() => setProductDropdownVisible(false)}
+                        onClick={() => {
+                          setProductDropdownVisible(false)
+                          setSearchText("")
+                        }}
                       >
                         <FontAwesomeIcon icon={faSearch} size={"xl"} />
                       </div>
@@ -188,19 +190,33 @@ const Navbar = ({ productCategories }) => {
               <FontAwesomeIcon icon={faBars} size={"xl"} />
             </div>
             <div className={styles.rightSideForBigScreen}>
-              <div className={styles.searchIconAndDropdownWrapperRight}>
-                <div
-                  className={styles.searchIconIWrapper}
-                  style={isProductDropdownVisible ? { display: "none" } : {}}
-                  onClick={() => setProductDropdownVisible(true)}
-                >
-                  <FontAwesomeIcon icon={faSearch} size={"xl"} />
-                </div>
-              </div>
-
-              <div className={styles.gap}></div>
               <div className={styles.iconsNav}>
-                <LanguageDropdown />
+                <div className={styles.searchIconAndDropdownWrapperRight}>
+                  <div
+                    className={styles.searchIconIWrapper}
+                    style={isProductDropdownVisible ? { display: "none" } : {}}
+                    onClick={() => setProductDropdownVisible(true)}
+                  >
+                    <FontAwesomeIcon icon={faSearch} />
+                  </div>
+                </div>
+                <div
+                  onClick={() =>
+                    setDropdownOpen((isDropdownOpen) => !isDropdownOpen)
+                  }
+                >
+                  <div className={styles.itemsContainer}>
+                    <div className={styles.languageChevronContainer}>
+                      <FontAwesomeIcon icon={faGlobe} />
+
+                      {!isDropdownOpen && (
+                        <FontAwesomeIcon icon={faChevronDown} />
+                      )}
+                      {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
+                    </div>
+                    <div>{isDropdownOpen && <LanguageDropdown />}</div>
+                  </div>
+                </div>
 
                 <div className={styles.cartAndQuantity}>
                   <Link className={styles.linkChild} to='/cart'>
