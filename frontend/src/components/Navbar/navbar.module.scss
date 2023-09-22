@@ -4,7 +4,7 @@
 
 .navbarWrapper {
   width: 100%;
-  background-color: white;
+  background-color: #fff;
 
   .hidden {
     display: none;
@@ -59,6 +59,11 @@
         display: flex;
         align-items: center;
         width: 100%;
+      }
+
+      .laguageDropdownContainer {
+        min-width: 50px;
+        min-height: 20px;
       }
 
       .searchTextInputAndProductList {
@@ -232,11 +237,13 @@
         .itemsContainer {
           display: flex;
           flex-direction: column;
+          justify-content: center;
         }
 
         .languageChevronContainer {
           display: flex;
           gap: 8px;
+          align-items: center;
           justify-content: center;
         }
       }

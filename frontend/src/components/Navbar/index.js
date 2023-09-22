@@ -214,7 +214,9 @@ const Navbar = ({ productCategories }) => {
                       )}
                       {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
                     </div>
-                    <div>{isDropdownOpen && <LanguageDropdown />}</div>
+                    <div className={styles.languageDropdownContainer}>
+                      {isDropdownOpen && <LanguageDropdown />}
+                    </div>
                   </div>
                 </div>
 
