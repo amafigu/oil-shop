@@ -1,4 +1,5 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .productDetailsPageWrapper {
@@ -10,6 +11,19 @@
     display: flex;
     justify-content: center;
     width: 80%;
+
+    @include media.mobile {
+      gap: 40px;
+      width: 100%;
+    }
+  }
+
+  .detailsAndButtonContainer {
+    display: flex;
+
+    @include media.mobile {
+      margin: 20px;
+    }
   }
 
   .imageContainerWrapper {
@@ -17,6 +31,10 @@
     align-items: center;
     justify-content: center;
     width: 60%;
+
+    @include media.mobile {
+      width: fit-content;
+    }
   }
 
   .imageContainer {
@@ -24,13 +42,16 @@
     align-items: center;
     justify-content: center;
     width: 15rem;
-    height: 9rem;
+
+    @include media.mobile {
+      width: 8rem;
+    }
   }
 
   .image {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
     background-repeat: no-repeat;
     object-fit: cover;
   }
@@ -42,6 +63,11 @@
     height: auto;
     overflow: hidden;
     font-family: theme.$main-font-family;
+
+    @include media.mobile {
+      width: 3rem;
+      width: 80%;
+    }
   }
 
   .productInfo {
@@ -51,6 +77,11 @@
     width: 66%;
     overflow: hidden;
     font-family: theme.$main-font-family;
+
+    @include media.mobile {
+      flex-grow: 1;
+      max-width: 300px;
+    }
   }
 
   .rightContainerDetails {
@@ -156,6 +187,10 @@
     flex-grow: 1;
     justify-content: space-between;
     height: 100%;
+
+    @include media.mobile {
+      margin-right: 20px;
+    }
   }
 
   .buttonIcon {
