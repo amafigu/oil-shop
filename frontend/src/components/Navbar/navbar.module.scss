@@ -4,7 +4,7 @@
 
 .navbarWrapper {
   width: 100%;
-  background-color: white;
+  background-color: #fff;
 
   .hidden {
     display: none;
@@ -59,6 +59,11 @@
         display: flex;
         align-items: center;
         width: 100%;
+      }
+
+      .laguageDropdownContainer {
+        min-width: 50px;
+        min-height: 20px;
       }
 
       .searchTextInputAndProductList {
@@ -232,12 +237,18 @@
         .itemsContainer {
           display: flex;
           flex-direction: column;
+          justify-content: center;
         }
 
         .languageChevronContainer {
           display: flex;
           gap: 8px;
+          align-items: center;
           justify-content: center;
+        }
+
+        .languageDropdownContainer {
+          @include flex-horizontal-center;
         }
       }
 
@@ -254,9 +265,9 @@
 
         .iconsNav {
           display: flex;
-          gap: 18px;
+          gap: 28px;
           align-items: center;
-          justify-content: space-evenly;
+          justify-content: flex-end;
           width: 100%;
           min-width: 210px;
           cursor: pointer;
@@ -274,6 +285,7 @@
             display: flex;
             gap: 8px;
             align-items: center;
+            margin-right: 16px;
           }
         }
       }

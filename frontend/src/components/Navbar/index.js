@@ -76,7 +76,7 @@ const Navbar = ({ productCategories }) => {
                 setSearchText("")
               }}
             >
-              <FontAwesomeIcon icon={faSearch} size={"xl"} />
+              <FontAwesomeIcon icon={faSearch} />
             </div>
             {matchedProducts.length > 0 && isProductDropdownVisible && (
               <div className={styles.dropdownModal}></div>
@@ -111,7 +111,7 @@ const Navbar = ({ productCategories }) => {
                           setSearchText("")
                         }}
                       >
-                        <FontAwesomeIcon icon={faSearch} size={"xl"} />
+                        <FontAwesomeIcon icon={faSearch} />
                       </div>
                     </div>
 
@@ -214,7 +214,9 @@ const Navbar = ({ productCategories }) => {
                       )}
                       {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
                     </div>
-                    <div>{isDropdownOpen && <LanguageDropdown />}</div>
+                    <div className={styles.languageDropdownContainer}>
+                      {isDropdownOpen && <LanguageDropdown />}
+                    </div>
                   </div>
                 </div>
 

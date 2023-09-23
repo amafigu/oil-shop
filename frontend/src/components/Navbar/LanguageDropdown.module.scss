@@ -12,9 +12,10 @@
   }
 
   @include media.tablet {
+    position: absolute;
     display: flex;
-    gap: 12px;
-    color: theme;
-    background-color: red;
+    gap: 16px;
+    margin-top: 8px;
+    color: grey;
   }
 }
