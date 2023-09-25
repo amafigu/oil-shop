@@ -29,6 +29,32 @@ const AppRoutes = () => {
         console.error("Error fetching data: ", error)
       })
   }, [])
+
+  const useActiveElement = () => {
+    const [active, setActive] = useState(document.activeElement)
+
+    const handleFocusIn = (e) => {
+      setActive(document.activeElement)
+    }
+
+    useEffect(() => {
+      document.addEventListener("focusin", handleFocusIn)
+      return () => {
+        document.removeEventListener("focusin", handleFocusIn)
+      }
+    }, [])
+
+    return active
+  }
+
+  const focusedElement = useActiveElement()
+
+  useEffect(() => {
+    if (focusedElement) {
+      focusedElement.value && console.log(focusedElement.value)
+    }
+    console.log(focusedElement)
+  }, [focusedElement])
   return (
     <div className={styles.wrapper}>
       <CartProvider>
