@@ -1,8 +1,8 @@
+import AddProductToCartButton from "#components/AddProductToCartButton"
 import useLocaleContext from "#context/localeContext"
 import { productImageUrl, titleCase } from "#utils/utils"
 import React from "react"
 import { Link } from "react-router-dom"
-import AddOneProductToCartButton from "./AddOneProductToCartButton"
 import styles from "./productCard.module.scss"
 
 const ProductCard = ({ name, image, size, price, description, category }) => {
@@ -28,10 +28,13 @@ const ProductCard = ({ name, image, size, price, description, category }) => {
           <div className={styles.productCardDescription}>{description}</div>
         </div>
       </Link>
-      <AddOneProductToCartButton
-        product={product}
-        classname={styles.productCardAddToCartButton}
-      />
+      <div className={styles.addButtonContainer}>
+        <AddProductToCartButton
+          product={product}
+          classname={styles.addButton}
+          quantity={1}
+        />
+      </div>
     </div>
   )
 }

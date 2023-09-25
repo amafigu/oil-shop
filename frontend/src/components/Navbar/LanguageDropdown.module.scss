@@ -15,7 +15,10 @@
     position: absolute;
     display: flex;
     gap: 16px;
+    padding: 0 4px;
     margin-top: 8px;
-    color: grey;
+    color: theme.$branding-background-color;
+    background-color: #fff;
+    border-radius: 4px;
   }
 }

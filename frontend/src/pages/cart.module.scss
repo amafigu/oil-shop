@@ -1,4 +1,5 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .cartWrapper {
@@ -9,12 +10,21 @@
   .cart {
     display: flex;
     width: 70%;
+
+    @include media.mobile {
+      flex-direction: column;
+      width: 90%;
+    }
   }
 
   .cartItemsList {
     display: flex;
     flex-direction: column;
     width: 60%;
+
+    @include media.mobile {
+      width: 100%;
+    }
   }
 
   .cartItem {
@@ -33,12 +43,21 @@
 
   .cartItemImage {
     width: 7.5rem;
-    height: 8.25rem;
     object-fit: contain;
+
+    @include media.mobile {
+      width: 3.75rem;
+    }
   }
 
   .cartItemDetails {
     width: 20rem;
+
+    @include media.mobile {
+      width: fit-content;
+      max-width: 68px;
+      overflow: hidden;
+    }
   }
 
   .cartItemSelectors {
@@ -47,6 +66,10 @@
     align-items: center;
     justify-content: space-between;
     padding-right: 40px;
+
+    @include media.mobile {
+      padding-right: 0;
+    }
   }
 
   .cartItemQuantityInput {

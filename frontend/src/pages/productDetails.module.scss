@@ -18,11 +18,44 @@
     }
   }
 
+  .addProductToCartButton {
+    @include product-cart-purshase-button;
+
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .detailsContainerForMobile {
+    @include flex-column-all-center;
+
+    width: 90%;
+  }
+
+  .selectorAndButtonContainerMobile {
+    display: none;
+
+    @include media.mobile {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+  }
+
+  .selectorAndButtonContainerDesktop {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+
+    @include media.mobile {
+      display: none;
+    }
+  }
+
   .detailsAndButtonContainer {
     display: flex;
 
     @include media.mobile {
-      margin: 20px;
+      margin-bottom: 60px;
     }
   }
 
@@ -30,11 +63,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60%;
-
-    @include media.mobile {
-      width: fit-content;
-    }
+    width: 40%;
   }
 
   .imageContainer {
@@ -56,31 +85,16 @@
     object-fit: cover;
   }
 
-  .productInfoWrapper {
-    display: flex;
-    align-items: center;
-    width: 40%;
+  .productInfo {
+    @include flex-column-all-center;
+
+    width: 50%;
     height: auto;
     overflow: hidden;
     font-family: theme.$main-font-family;
 
     @include media.mobile {
-      width: 3rem;
-      width: 80%;
-    }
-  }
-
-  .productInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 66%;
-    overflow: hidden;
-    font-family: theme.$main-font-family;
-
-    @include media.mobile {
-      flex-grow: 1;
-      max-width: 300px;
+      width: fit-content;
     }
   }
 
@@ -148,30 +162,6 @@
     letter-spacing: 0.04em;
   }
 
-  .selectorAndButtonContainer {
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-
-  .quantitySelector {
-    display: flex;
-    justify-content: stretch;
-    width: 11%;
-    height: 100%;
-    background-color: rgb(244 244 244);
-    border-radius: 4px;
-  }
-
-  .quantityContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60%;
-    margin: 0;
-    text-align: center;
-  }
-
   .quantityInput {
     width: 2rem;
     height: 100%;
@@ -179,18 +169,6 @@
     text-align: center;
     background-color: rgb(244 244 244);
     border: none;
-  }
-
-  .quantityButtonsContainer {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    justify-content: space-between;
-    height: 100%;
-
-    @include media.mobile {
-      margin-right: 20px;
-    }
   }
 
   .buttonIcon {
@@ -201,6 +179,5 @@
     @include product-cart-purshase-button;
 
     flex-grow: 1;
-    margin-left: 0.3rem;
   }
 }
