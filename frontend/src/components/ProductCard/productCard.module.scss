@@ -15,22 +15,25 @@
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  .addButtonContainer {
+    pointer-events: none;
+    opacity: 0;
 
     @include media.desktop-down {
-      transform: none;
+      pointer-events: auto;
+      opacity: 1;
     }
   }
 
-  .productCardAddToCartButton {
-    @include product-cart-purshase-button;
-
-    pointer-events: none;
-    opacity: 0;
-  }
-
-  &:hover .productCardAddToCartButton {
+  &:hover .addButtonContainer {
     pointer-events: auto;
     opacity: 1;
+  }
+
+  .addButton {
+    @include product-cart-purshase-button;
   }
 
   .productCardName {

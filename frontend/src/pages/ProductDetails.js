@@ -1,16 +1,14 @@
-import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { productImageUrl, titleCase } from "#utils/utils"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
+import ProductQuantity from "../components/ProductQuantity"
 import styles from "./productDetails.module.scss"
 
 const ProductDetails = () => {
   const { productName } = useParams()
   const [product, setProduct] = useState(null)
-  const [quantity, setQuantity] = useState(1)
-  const { addProduct } = useCartContext()
   const { translate } = useLocaleContext()
   const text = translate.pages.productsDetails
 
@@ -38,36 +36,20 @@ const ProductDetails = () => {
 
   const { name, image, size, price, description, category, details } = product
 
-  const addToCart = () => {
-    addProduct(product, quantity)
-  }
-
-  const increaseQuantity = () => {
-    if (quantity < 20) {
-      setQuantity((prevQuantity) => prevQuantity + 1)
-    }
-  }
-
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1)
-    }
-  }
-
   return (
     <div className={styles.productDetailsPageWrapper}>
       <div className={styles.productDetailsPage}>
-        <div className={styles.detailsAndButtonContainer}>
-          <div className={styles.imageContainerWrapper}>
-            <div className={styles.imageContainer}>
-              <img
-                className={styles.image}
-                src={productImageUrl(image)}
-                alt={name}
-              />
+        <div className={styles.detailsContainerForMobile}>
+          <div className={styles.detailsAndButtonContainer}>
+            <div className={styles.imageContainerWrapper}>
+              <div className={styles.imageContainer}>
+                <img
+                  className={styles.image}
+                  src={productImageUrl(image)}
+                  alt={name}
+                />
+              </div>
             </div>
-          </div>
-          <div className={styles.productInfoWrapper}>
             <div className={styles.productInfo}>
               <div className={styles.rightContainerDetails}>
                 <div className={styles.productInfoCategory}>
@@ -92,33 +74,7 @@ const ProductDetails = () => {
                 <div className={styles.productPrice}>${price}</div>
               </div>
               <div className={styles.selectorAndButtonContainer}>
-                <div className={styles.quantitySelector}>
-                  <div className={styles.quantityContainer}>
-                    <div>{quantity}</div>
-                  </div>
-                  <div className={styles.quantityButtonsContainer}>
-                    <span
-                      onClick={increaseQuantity}
-                      className={`material-symbols-outlined ${styles.buttonIcon}`}
-                    >
-                      expand_less
-                    </span>
-
-                    <span
-                      onClick={decreaseQuantity}
-                      className={`material-symbols-outlined ${styles.buttonIcon}`}
-                    >
-                      expand_more
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  className={styles.addToCartButton}
-                  onClick={() => addToCart()}
-                >
-                  {text.addToCartButton}
-                </button>
+                <ProductQuantity product={product} />
               </div>
             </div>
           </div>
