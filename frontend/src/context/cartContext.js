@@ -8,6 +8,10 @@ export const CartProvider = ({ children }) => {
   const [notification, setNotification] = useState(null)
 
   const addProduct = (product, quantity) => {
+    let newQuantity = quantity
+    if (!quantity) {
+      newQuantity = 1
+    }
     const existingProduct = cart.find(
       (item) => item.product.name === product.name,
     )
@@ -16,15 +20,15 @@ export const CartProvider = ({ children }) => {
       setCart(
         cart.map((item) =>
           item.product.name === product.name
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity + newQuantity }
             : item,
         ),
       )
     } else {
-      setCart([...cart, { product, quantity }])
+      setCart([...cart, { product, newQuantity }])
     }
 
-    setNotification(`${quantity} ${product.name} were added to cart`)
+    setNotification(`${newQuantity} ${product.name} were added to cart`)
     setTimeout(() => setNotification(null), 1000)
   }
 

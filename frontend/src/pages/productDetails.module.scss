@@ -18,6 +18,10 @@
     }
   }
 
+  .addProductToCartButton {
+    @include product-cart-purshase-button;
+  }
+
   .detailsContainerForMobile {
     @include flex-column;
   }

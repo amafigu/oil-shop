@@ -1,14 +1,18 @@
+import AddProductToCartButton from "#components/AddProductToCartButton"
+import ProductQuantity from "#components/ProductQuantity"
+import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { productImageUrl, titleCase } from "#utils/utils"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import ProductQuantity from "../components/ProductQuantity"
 import styles from "./productDetails.module.scss"
 
 const ProductDetails = () => {
   const { productName } = useParams()
   const [product, setProduct] = useState(null)
+  const [quantity, setQuantity] = useState(1)
+  const { addProduct } = useCartContext()
   const { translate } = useLocaleContext()
   const text = translate.pages.productsDetails
 
@@ -74,7 +78,15 @@ const ProductDetails = () => {
                 <div className={styles.productPrice}>${price}</div>
               </div>
               <div className={styles.selectorAndButtonContainer}>
-                <ProductQuantity product={product} />
+                <ProductQuantity
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                />
+                <AddProductToCartButton
+                  product={product}
+                  classname={styles.addProductToCartButton}
+                  addProductsToCart={addProduct}
+                />
               </div>
             </div>
           </div>
