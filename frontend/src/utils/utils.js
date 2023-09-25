@@ -104,3 +104,15 @@ export const getInputChangeAndOpenList =
       setDropdownOpen(false)
     }
   }
+
+export const increaseQuantity = (quantity, setQuantity) => {
+  if (quantity < 20) {
+    setQuantity((prevQuantity) => prevQuantity + 1)
+  }
+}
+
+export const decreaseQuantity = (quantity, setQuantity) => {
+  if (quantity > 1) {
+    setQuantity((prevQuantity) => prevQuantity - 1)
+  }
+}
