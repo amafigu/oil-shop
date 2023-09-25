@@ -91,9 +91,8 @@
 }
 
 @mixin product-cart-purshase-button {
-  min-width: 64px;
-  max-height: 60px;
-  padding: 16px;
+  min-width: 124px;
+  height: 60px;
   overflow: hidden;
   font-family: theme.$main-font-family;
   font-size: 1rem;

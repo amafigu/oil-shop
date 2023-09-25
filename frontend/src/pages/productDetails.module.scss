@@ -20,17 +20,42 @@
 
   .addProductToCartButton {
     @include product-cart-purshase-button;
+
+    flex-grow: 1;
+    flex-shrink: 1;
   }
 
   .detailsContainerForMobile {
-    @include flex-column;
+    @include flex-column-all-center;
+
+    width: 90%;
+  }
+
+  .selectorAndButtonContainerMobile {
+    display: none;
+
+    @include media.mobile {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+  }
+
+  .selectorAndButtonContainerDesktop {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+
+    @include media.mobile {
+      display: none;
+    }
   }
 
   .detailsAndButtonContainer {
     display: flex;
 
     @include media.mobile {
-      margin: 20px;
+      margin-bottom: 60px;
     }
   }
 
@@ -38,11 +63,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
-
-    @include media.mobile {
-      width: fit-content;
-    }
+    width: 40%;
   }
 
   .imageContainer {

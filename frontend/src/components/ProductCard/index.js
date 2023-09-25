@@ -32,6 +32,7 @@ const ProductCard = ({ name, image, size, price, description, category }) => {
         <AddProductToCartButton
           product={product}
           classname={styles.addButton}
+          quantity={1}
         />
       </div>
     </div>

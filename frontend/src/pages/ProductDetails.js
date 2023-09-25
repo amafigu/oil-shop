@@ -1,6 +1,5 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import ProductQuantity from "#components/ProductQuantity"
-import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { productImageUrl, titleCase } from "#utils/utils"
 import axios from "axios"
@@ -12,7 +11,7 @@ const ProductDetails = () => {
   const { productName } = useParams()
   const [product, setProduct] = useState(null)
   const [quantity, setQuantity] = useState(1)
-  const { addProduct } = useCartContext()
+
   const { translate } = useLocaleContext()
   const text = translate.pages.productsDetails
 
@@ -77,7 +76,7 @@ const ProductDetails = () => {
                 <div className={styles.productSize}>{size} ml</div>
                 <div className={styles.productPrice}>${price}</div>
               </div>
-              <div className={styles.selectorAndButtonContainer}>
+              <div className={styles.selectorAndButtonContainerDesktop}>
                 <ProductQuantity
                   quantity={quantity}
                   setQuantity={setQuantity}
@@ -85,10 +84,18 @@ const ProductDetails = () => {
                 <AddProductToCartButton
                   product={product}
                   classname={styles.addProductToCartButton}
-                  addProductsToCart={addProduct}
+                  quantity={quantity}
                 />
               </div>
             </div>
+          </div>
+          <div className={styles.selectorAndButtonContainerMobile}>
+            <ProductQuantity quantity={quantity} setQuantity={setQuantity} />
+            <AddProductToCartButton
+              product={product}
+              classname={styles.addProductToCartButton}
+              quantity={quantity}
+            />
           </div>
         </div>
       </div>
