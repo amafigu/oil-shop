@@ -1,7 +1,7 @@
 import { decreaseQuantity, increaseQuantity } from "#utils/utils"
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+
 import styles from "./productQuantity.module.scss"
 
 const ProductQuantity = ({ quantity, setQuantity }) => {

@@ -2,10 +2,11 @@ import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { SHIPPING_COST } from "#utils/constants"
 import { cartTotalSum, titleCase, totalCost } from "#utils/utils"
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./cart.module.scss"
-
 const Cart = () => {
   const { cart, removeProduct, updateProductQuantity } = useCartContext()
   const { translate } = useLocaleContext()
@@ -42,7 +43,7 @@ const Cart = () => {
                           )
                         }
                       >
-                        -
+                        <FontAwesomeIcon icon={faMinus} />
                       </button>
                       <span className={styles.cartItemQuantityInput}>
                         {item.quantity}
@@ -56,7 +57,7 @@ const Cart = () => {
                           )
                         }
                       >
-                        +
+                        <FontAwesomeIcon icon={faPlus} />
                       </button>
                     </div>
                     <div className={styles.cartItemTotalCost}>

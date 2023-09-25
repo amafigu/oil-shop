@@ -14,20 +14,22 @@ export const CartProvider = ({ children }) => {
       (item) => item.product.name === product.name,
     )
 
-    if (existingProduct) {
-      setCart(
-        cart.map((item) =>
-          item.product.name === product.name
-            ? { ...item, quantity: item.quantity + quantity }
-            : item,
-        ),
-      )
-    } else {
-      setCart([...cart, { product, quantity }])
-    }
+    if (quantity > 0) {
+      if (existingProduct) {
+        setCart(
+          cart.map((item) =>
+            item.product.name === product.name
+              ? { ...item, quantity: item.quantity + quantity }
+              : item,
+          ),
+        )
+      } else {
+        setCart([...cart, { product, quantity }])
+      }
 
-    setNotification(`${quantity} ${product.name} were added to cart`)
-    setTimeout(() => setNotification(null), 1000)
+      setNotification(`${quantity} ${product.name} were added to cart`)
+      setTimeout(() => setNotification(null), 1000)
+    }
   }
 
   const updateProductQuantity = (productName, newQuantity) => {
