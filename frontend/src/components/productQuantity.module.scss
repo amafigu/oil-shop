@@ -1,0 +1,39 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.selectorAndButtonContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .quantitySelector {
+    display: flex;
+    width: 52px;
+    height: 100%;
+    background-color: rgb(244 244 244);
+    border-radius: 4px;
+  }
+
+  .quantityContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    margin: 0;
+    text-align: center;
+  }
+
+  .quantityButtonsContainer {
+    @include flex-column;
+
+    flex-grow: 1;
+    justify-content: space-evenly;
+    height: 100%;
+    margin-right: 4px;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+}
