@@ -7,7 +7,7 @@
   flex-flow: column nowrap;
   align-items: center;
   width: 260px;
-  min-height: 394px;
+  min-height: 406px;
   margin: 8px;
   margin-bottom: 16px;
   overflow: hidden;
@@ -30,6 +30,10 @@
   &:hover .addButtonContainer {
     pointer-events: auto;
     opacity: 1;
+  }
+
+  .productCardBody {
+    margin-bottom: 20px;
   }
 
   .addButton {

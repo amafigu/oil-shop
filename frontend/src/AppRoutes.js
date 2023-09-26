@@ -59,22 +59,22 @@ const AppRoutes = () => {
     <div className={styles.wrapper}>
       <CartProvider>
         <Navbar productCategories={productCategories} />
-        <div className={styles.content}>
-          <Routes>
-            <Route path='/about' element={<About />} />
-            <Route
-              path='/shop'
-              element={<Shop productCategories={productCategories} />}
-            />
-            <Route path='/' element={<Home />} />
-            <Route path='/cart' element={<Cart />} />
-            <Route path='/faq' element={<Faq />} />
-            <Route path='/products/:productName' element={<ProductDetails />} />
-            <Route path='/checkout/shipping' element={<Shipping />} />
-            <Route path='/checkout/payment' element={<Payment />} />
-            <Route path='/checkout/summary' element={<OrderSummary />} />
-          </Routes>
-        </div>
+
+        <Routes>
+          <Route path='/about' element={<About />} />
+          <Route
+            path='/shop'
+            element={<Shop productCategories={productCategories} />}
+          />
+          <Route path='/' element={<Home />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/faq' element={<Faq />} />
+          <Route path='/products/:productName' element={<ProductDetails />} />
+          <Route path='/checkout/shipping' element={<Shipping />} />
+          <Route path='/checkout/payment' element={<Payment />} />
+          <Route path='/checkout/summary' element={<OrderSummary />} />
+        </Routes>
+
         <Footer />
       </CartProvider>
     </div>

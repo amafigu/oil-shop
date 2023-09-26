@@ -42,16 +42,14 @@ const ProductDetails = () => {
   return (
     <div className={styles.productDetailsPageWrapper}>
       <div className={styles.productDetailsPage}>
-        <div className={styles.detailsContainerForMobile}>
+        <div className={styles.detailsAndButtonContainerWrapper}>
           <div className={styles.detailsAndButtonContainer}>
-            <div className={styles.imageContainerWrapper}>
-              <div className={styles.imageContainer}>
-                <img
-                  className={styles.image}
-                  src={productImageUrl(image)}
-                  alt={name}
-                />
-              </div>
+            <div className={styles.imageContainer}>
+              <img
+                className={styles.image}
+                src={productImageUrl(image)}
+                alt={name}
+              />
             </div>
             <div className={styles.productInfo}>
               <div className={styles.rightContainerDetails}>
