@@ -123,13 +123,10 @@
   }
 
   .formButton {
-    @include reset-button;
+    @include action-button;
 
-    width: fit-content;
-    padding: 6px;
-    font-family: theme.$main-font-family;
+    height: 36px;
     font-size: 1rem;
-    color: grey;
-    cursor: pointer;
+    text-transform: none;
   }
 }

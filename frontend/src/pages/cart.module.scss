@@ -40,6 +40,7 @@
 
     hr {
       margin-top: 24px;
+      margin-right: 38px;
 
       @include media.desktop-down {
         margin-top: 0;
@@ -99,7 +100,7 @@
   .cartItemDetails {
     flex-grow: 1;
     flex-shrink: 1;
-    min-width: 9rem;
+    width: 172px;
     overflow: hidden;
 
     @include media.desktop-down {
@@ -121,9 +122,8 @@
   }
 
   .cartItemQuantityInput {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-all-center;
+
     width: 2rem;
     height: 32px;
     border: none;
@@ -197,14 +197,15 @@
   }
 
   .deleteButtonWrapper {
-    display: flex;
     flex-basis: 0;
     flex-grow: 1;
-    justify-content: flex-end;
+
+    @include flex-justify-end;
 
     .deleteButton {
       width: 96px;
       height: 60px;
+      margin-right: 20px;
       cursor: pointer;
 
       @include flex-all-center;
@@ -218,7 +219,7 @@
   .confirmOrderButton {
     flex-grow: 1;
 
-    @include product-cart-purshase-button;
+    @include action-button;
     @include flex-horizontal-center;
   }
 }
