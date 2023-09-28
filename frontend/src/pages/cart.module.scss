@@ -24,6 +24,7 @@
 
     @include media.mobile {
       width: 100%;
+      margin-bottom: 24px;
     }
   }
 
@@ -49,7 +50,17 @@
 
     @include media.mobile {
       width: 100%;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .cartItemContainer {
+    margin-top: 24px;
+
+    &:first-child {
+      @include media.mobile {
+        margin-top: 0;
+      }
     }
   }
 
@@ -87,6 +98,7 @@
       flex-grow: 0;
       width: 100%;
       padding-right: 0;
+      margin-bottom: 4px;
     }
   }
 
@@ -125,6 +137,15 @@
     background: #f4f4f4;
     border-radius: 4px;
     box-shadow: theme.$main-box-shadow;
+
+    @include media.mobile {
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      margin-left: 0;
+
+      @include flex-horizontal-center;
+    }
   }
 
   .orderSumaryText {
@@ -132,6 +153,10 @@
     font-size: 20px;
     font-weight: 800;
     text-transform: uppercase;
+
+    @include media.mobile {
+      padding: 20px 0 0 20px;
+    }
   }
 
   .totalCostDivider {
@@ -140,6 +165,10 @@
 
   .cartOrderSummaryDetails {
     margin-bottom: 40px;
+
+    @include media.mobile {
+      padding: 0 20px;
+    }
   }
 
   .orderTotalText {
@@ -171,7 +200,7 @@
     }
   }
 
-  .confimOrderButton {
+  .confirmOrderButton {
     @include product-cart-purshase-button;
 
     display: flex;
