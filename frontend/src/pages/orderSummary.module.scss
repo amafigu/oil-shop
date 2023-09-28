@@ -4,18 +4,21 @@
 .orderSummaryWrapper {
   @include flex-center-column;
 
-  min-height: 85vh;
-
   .orderSummary {
     display: flex;
     flex-direction: column;
     width: 35%;
     margin-bottom: 48px;
-    box-shadow: theme.$main-box-shadow;
+    border-bottom: 1px solid theme.$secondary-color;
   }
 
   .pageTitle {
     margin-bottom: 20px;
+    font-size: 24px;
+  }
+
+  .summaryTitle {
+    font-size: 24px;
   }
 
   .customerInfo {
@@ -48,21 +51,24 @@
   }
 
   .purchasedProducts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-justify-center;
+
     width: 50%;
     padding: 40px;
   }
 
+  .cartItemWrapper {
+    margin-bottom: 16px;
+    border-bottom: 1px solid theme.$secondary-color;
+  }
+
   .cartItem {
-    display: flex;
-    align-items: center;
+    @include flex-align-center;
+
     height: 4.5rem;
     margin-bottom: 16px;
     background-color: #fff;
     border-radius: 4px;
-    box-shadow: theme.$main-box-shadow;
   }
 
   .cartItemImage {
@@ -76,23 +82,18 @@
   }
 
   .cartItemsList {
-    display: flex;
-    flex-direction: column;
-    margin-top: 18px;
+    @include flex-column;
   }
 
   .columns {
     display: flex;
     width: 100%;
-    background: theme.$form-background;
-    box-shadow: theme.$main-box-shadow;
+    background: #fff;
   }
 
   .columnTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flex-column-all-center;
+
     padding: 40px;
     font-size: 48px;
   }
@@ -112,15 +113,18 @@
     width: 100%;
   }
 
-  .formField {
-    @include input-styles-reset;
+  .label {
+    display: flex;
+  }
 
+  .formField {
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 2rem;
     padding-left: 10px;
     font-family: theme.$main-font-family;
     background-color: #fff;
-    border-radius: 0.2rem;
-    box-shadow: theme.$main-box-shadow;
+    border-bottom: 1px solid theme.$secondary-color;
   }
 }

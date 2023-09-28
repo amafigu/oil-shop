@@ -23,7 +23,7 @@
     display: none;
   }
 
-  @include flex-vertical-center;
+  @include flex-align-center;
 
   .itemsContainer {
     display: flex;

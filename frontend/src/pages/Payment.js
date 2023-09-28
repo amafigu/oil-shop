@@ -44,8 +44,8 @@ const Payment = () => {
     <div className={styles.paymentPageWrapper}>
       <div className={styles.paymentPage}>
         <form className={styles.paymentForm} onSubmit={submitPaymentMethod}>
-          <div className={styles.titleAndAlertContainer}>
-            <legend className={styles.title}>{text.title}</legend>
+          <div className={styles.titleContainer}>
+            <span className={styles.title}>{text.title}</span>
           </div>
 
           <div className={styles.methods}>

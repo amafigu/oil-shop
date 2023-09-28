@@ -49,7 +49,9 @@
         "state": "Bundesland",
         "postalCode": "PLZ",
         "city": "Stadt",
-        "country": "Land"
+        "country": "Land",
+        "paidWith": "Zahlungsart",
+        "totalAmount": "Gesamt"
       }
     },
     "payment": {

@@ -49,7 +49,9 @@
         "state": "State",
         "city": "City",
         "address": "Address",
-        "postalCode": "Postal code"
+        "postalCode": "Postal code",
+        "paidWith": "Payment method",
+        "totalAmount": "Amount"
       }
     },
     "payment": {
