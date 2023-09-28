@@ -37,7 +37,7 @@
   }
 
   .addButton {
-    @include product-cart-purshase-button;
+    @include action-button;
   }
 
   .productCardName {

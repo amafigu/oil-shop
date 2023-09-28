@@ -1,24 +1,37 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .shippingPageWrapper {
   @include flex-center-column;
 
-  min-height: 85vh;
-
   .shippingPage {
     @include flex-justify-center;
 
     flex-direction: column;
-    width: 45%;
+    width: 68%;
+    margin-bottom: 32px;
     background: #f4f4f4;
     box-shadow: theme.$main-box-shadow;
+
+    @include media.widescreen-down {
+      width: 80%;
+    }
+
+    @include media.tablet-down {
+      width: 90%;
+      margin-bottom: 32px;
+    }
   }
 
   .form {
     @include flex-center-column;
 
-    margin: 48px;
+    margin: 28px;
+
+    @include media.tablet-down {
+      margin: 18px;
+    }
   }
 
   .emailFormTitel {
@@ -35,7 +48,7 @@
     @include flex-start-column;
 
     width: 100%;
-    margin-bottom: 60px;
+    margin-bottom: 24px;
   }
 
   .customerInfo {
@@ -43,7 +56,7 @@
     flex-grow: 1;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 60px;
+    margin-bottom: 0;
   }
 
   .infoColumn {
@@ -60,18 +73,32 @@
   .infoRow {
     display: flex;
     justify-content: space-between;
+
+    @include media.tablet-down {
+      flex-direction: column;
+    }
   }
 
   .infoRowCellRight {
     @include shipping-info-cell;
 
     padding-left: 28px;
+
+    @include media.tablet-down {
+      width: 100%;
+      padding-left: 0;
+    }
   }
 
   .infoRowCellLeft {
     @include shipping-info-cell;
 
     padding-right: 28px;
+
+    @include media.tablet-down {
+      width: 100%;
+      padding-right: 0;
+    }
   }
 
   .containerTitle {
@@ -89,16 +116,17 @@
     display: flex;
     justify-content: space-around;
     width: 60%;
+
+    @include media.tablet-down {
+      width: 100%;
+    }
   }
 
   .formButton {
-    @include reset-button;
+    @include action-button;
 
-    width: fit-content;
-    padding: 6px;
-    font-family: theme.$main-font-family;
+    height: 36px;
     font-size: 1rem;
-    color: grey;
-    cursor: pointer;
+    text-transform: none;
   }
 }

@@ -20,7 +20,7 @@
   }
 
   .addProductToCartButton {
-    @include product-cart-purshase-button;
+    @include action-button;
 
     flex-grow: 1;
     flex-shrink: 1;
@@ -189,7 +189,7 @@
   }
 
   .addToCartButton {
-    @include product-cart-purshase-button;
+    @include action-button;
 
     flex-grow: 1;
   }

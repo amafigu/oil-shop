@@ -77,8 +77,10 @@
   text-align: center;
 }
 
-@mixin product-cart-purshase-button {
+@mixin action-button {
+  display: flex;
   align-items: center;
+  justify-content: center;
   min-width: 124px;
   height: 60px;
   overflow: hidden;

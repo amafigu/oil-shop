@@ -1,7 +1,7 @@
 @import "#styles/helpers/mixins";
 
 .notificationCard {
-  @include product-cart-purshase-button;
+  @include action-button;
 
   position: fixed;
   top: 20px;
