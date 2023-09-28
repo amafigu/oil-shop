@@ -125,8 +125,14 @@
   .formButton {
     @include action-button;
 
+    width: 160px;
     height: 36px;
     font-size: 1rem;
     text-transform: none;
+
+    @include media.mobile {
+      width: 120px;
+      overflow: hidden;
+    }
   }
 }

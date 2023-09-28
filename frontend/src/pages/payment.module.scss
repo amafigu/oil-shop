@@ -1,16 +1,38 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .paymentPageWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 85vh;
+  @include flex-column-horizontal-center;
+
+  margin: 80px 0 160px;
 
   .paymentPage {
-    width: 45%;
+    width: 68%;
     background: #f4f4f4;
     box-shadow: theme.$main-box-shadow;
+
+    @include media.widescreen-down {
+      width: 80%;
+    }
+
+    @include media.tablet-down {
+      width: 90%;
+    }
+  }
+
+  .formButton {
+    @include action-button;
+
+    width: 160px;
+    height: 36px;
+    font-size: 1rem;
+    text-transform: none;
+
+    @include media.mobile {
+      width: 120px;
+      overflow: hidden;
+    }
   }
 
   .paymentForm {
@@ -18,15 +40,19 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin: 48px;
+    margin: 28px;
+
+    @include media.tablet-down {
+      margin: 18px;
+    }
   }
 
   .row {
     display: flex;
     align-items: center;
-    height: 64px;
-    padding: 16px;
-    margin-bottom: 32px;
+    height: 32px;
+    padding-left: 16px;
+    margin-bottom: 20px;
     font-size: 18px;
     background-color: white;
     border: solid 1px grey;
@@ -63,7 +89,7 @@
       width: 10px;
       height: 10px;
       content: "";
-      background-color: grey;
+      background-color: theme.$branding-background-color;
       border-radius: 50%;
       opacity: 0;
       transition: opacity 0.3s, transform 0.3s;
@@ -83,24 +109,12 @@
     font-size: 24px;
   }
 
-  .formButton {
-    @include reset-button;
-
-    width: fit-content;
-    padding: 6px;
-    font-family: theme.$main-font-family;
-    font-size: 1rem;
-    color: grey;
-    cursor: pointer;
-  }
-
   .separator {
     margin-bottom: 120px;
   }
 
   .methods {
     width: 100%;
-    margin-bottom: 32px;
   }
 
   input {

@@ -42,8 +42,6 @@ const Payment = () => {
 
   return (
     <div className={styles.paymentPageWrapper}>
-      <div className={styles.separator}></div>
-
       <div className={styles.paymentPage}>
         <form className={styles.paymentForm} onSubmit={submitPaymentMethod}>
           <div className={styles.titleAndAlertContainer}>
@@ -77,12 +75,12 @@ const Payment = () => {
             </div>
           </div>
           <div className={styles.navigateButtons}>
-            <span
+            <button
               className={styles.formButton}
               onClick={() => backToShippingPage()}
             >
               {text.backButton}
-            </span>
+            </button>
             <button
               className={styles.formButton}
               onClick={() => submitPaymentMethod()}
