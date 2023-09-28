@@ -3,64 +3,66 @@
 @import "#styles/helpers/mixins";
 
 .cartWrapper {
-  display: flex;
-  justify-content: center;
+  @include flex-horizontal-center;
+
   margin-bottom: 80px;
 
   .cart {
     display: flex;
     width: 70%;
 
-    @include media.mobile {
+    @include media.desktop-down {
       flex-direction: column;
       width: 90%;
     }
   }
 
   .cartItemsList {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
+
     width: 60%;
 
-    @include media.mobile {
+    @include media.desktop-down {
       width: 100%;
       margin-bottom: 24px;
-    }
-  }
-
-  .cartItem {
-    @include flex-vertical-center;
-
-    @include media.mobile {
-      flex-direction: column;
-    }
-  }
-
-  .cartEmptyMessage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 9rem;
-    font-size: 20px;
-  }
-
-  .imagesAndDetails {
-    display: flex;
-    align-items: center;
-
-    @include media.mobile {
-      width: 100%;
-      margin-bottom: 16px;
     }
   }
 
   .cartItemContainer {
     margin-top: 24px;
 
+    &:last-child hr {
+      display: none;
+    }
+
     &:first-child {
-      @include media.mobile {
+      @include media.desktop-down {
         margin-top: 0;
       }
+    }
+  }
+
+  .cartItem {
+    @include flex-vertical-center;
+
+    @include media.desktop-down {
+      flex-direction: column;
+    }
+  }
+
+  .cartEmptyMessage {
+    @include flex-all-center;
+
+    height: 9rem;
+    font-size: 20px;
+  }
+
+  .imagesAndDetails {
+    @include flex-vertical-center;
+
+    @include media.desktop-down {
+      width: 100%;
+      margin-bottom: 16px;
     }
   }
 
@@ -70,7 +72,7 @@
     object-fit: contain;
     margin-right: 32px;
 
-    @include media.mobile {
+    @include media.desktop-down {
       width: 2.75rem;
       max-height: 80px;
       margin-right: 20px;
@@ -80,7 +82,7 @@
   .cartItemDetails {
     width: 20rem;
 
-    @include media.mobile {
+    @include media.desktop-down {
       flex-grow: 1;
       width: fit-content;
       overflow: hidden;
@@ -88,13 +90,13 @@
   }
 
   .cartItemSelectors {
-    display: flex;
+    @include flex-vertical-center;
+
     flex-grow: 1;
-    align-items: center;
     justify-content: space-between;
     padding-right: 40px;
 
-    @include media.mobile {
+    @include media.desktop-down {
       flex-grow: 0;
       width: 100%;
       padding-right: 0;
@@ -138,7 +140,7 @@
     border-radius: 4px;
     box-shadow: theme.$main-box-shadow;
 
-    @include media.mobile {
+    @include media.desktop-down {
       flex-direction: column;
       width: 100%;
       padding: 0;
@@ -154,7 +156,7 @@
     font-weight: 800;
     text-transform: uppercase;
 
-    @include media.mobile {
+    @include media.desktop-down {
       padding: 20px 0 0 20px;
     }
   }
@@ -166,7 +168,7 @@
   .cartOrderSummaryDetails {
     margin-bottom: 40px;
 
-    @include media.mobile {
+    @include media.desktop-down {
       padding: 0 20px;
     }
   }
@@ -184,14 +186,14 @@
   .deleteButtonWrapper {
     display: flex;
 
-    @include media.mobile {
+    @include media.desktop-down {
       flex-basis: 0;
       flex-grow: 1;
       justify-content: flex-end;
     }
 
     .deleteButton {
-      @include media.mobile {
+      @include media.desktop-down {
         height: 40px;
         margin: 0 20px;
 
@@ -201,10 +203,9 @@
   }
 
   .confirmOrderButton {
-    @include product-cart-purshase-button;
-
-    display: flex;
     flex-grow: 1;
-    justify-content: center;
+
+    @include product-cart-purshase-button;
+    @include flex-horizontal-center;
   }
 }
