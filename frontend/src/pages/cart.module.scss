@@ -9,7 +9,7 @@
 
   .cart {
     display: flex;
-    width: 70%;
+    width: 80%;
 
     @include media.desktop-down {
       flex-direction: column;
