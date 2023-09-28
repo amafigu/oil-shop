@@ -5,19 +5,17 @@
 .shippingPageWrapper {
   @include flex-center-column;
 
-  min-height: 85vh;
-
   .shippingPage {
     @include flex-justify-center;
 
     flex-direction: column;
     width: 68%;
+    margin-bottom: 32px;
     background: #f4f4f4;
     box-shadow: theme.$main-box-shadow;
 
     @include media.widescreen-down {
       width: 80%;
-      margin-bottom: 32px;
     }
 
     @include media.tablet-down {
@@ -29,7 +27,7 @@
   .form {
     @include flex-center-column;
 
-    margin: 48px;
+    margin: 28px;
 
     @include media.tablet-down {
       margin: 18px;
@@ -50,11 +48,7 @@
     @include flex-start-column;
 
     width: 100%;
-    margin-bottom: 60px;
-
-    @include media.tablet-down {
-      margin-bottom: 24px;
-    }
+    margin-bottom: 24px;
   }
 
   .customerInfo {
@@ -62,11 +56,7 @@
     flex-grow: 1;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 60px;
-
-    @include media.tablet-down {
-      margin-bottom: 0;
-    }
+    margin-bottom: 0;
   }
 
   .infoColumn {
