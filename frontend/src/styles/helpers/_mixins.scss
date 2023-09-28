@@ -1,9 +1,6 @@
 @use "../theme" as theme;
 @use "./functions" as functions;
 
-///////////////
-///
-///
 @mixin flex-horizontal-center {
   display: flex;
   justify-content: center;
@@ -38,10 +35,6 @@
   justify-content: center;
 }
 
-/////////////
-///
-///
-
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -64,14 +57,14 @@
   flex-direction: column;
 }
 
-@mixin flex-start {
+@mixin flex-vertical-start-horizontal-around {
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
 }
 
 @mixin flex-start-column {
-  @include flex-start;
+  @include flex-vertical-start-horizontal-around;
 
   flex-direction: column;
 }

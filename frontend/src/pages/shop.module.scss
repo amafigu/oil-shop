@@ -29,14 +29,31 @@
   }
 
   .sortedProducts {
-    margin: 24px;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    width: 72%;
+    margin: 120px 0;
+
+    @include media.desktop-down {
+      gap: 32px;
+      width: 76%;
+      margin: 100px 0;
+    }
 
     @include media.tablet-down {
-      display: flex;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-wrap: wrap;
-      justify-content: center;
+      gap: 24px;
+      width: 84%;
+      margin: 80px 0;
+    }
+
+    @include media.mobile {
+      gap: 24px;
+      width: 100%;
+      margin: 60px 20px;
     }
   }
 }

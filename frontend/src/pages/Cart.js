@@ -20,18 +20,21 @@ const Cart = () => {
             cart.map((item, index) => (
               <div key={index}>
                 <div className={styles.cartItem}>
-                  <img
-                    src={
-                      process.env.PUBLIC_URL + "/assets/" + item.product.image
-                    }
-                    alt={item.product.name}
-                    className={styles.cartItemImage}
-                  />
-                  <div className={styles.cartItemDetails}>
-                    <h3>{titleCase(item.product.name, "_")}</h3>
-                    <p>{item.product.description}</p>
-                    <p>{item.product.size} ml</p>
+                  <div className={styles.imagesAndDetails}>
+                    <img
+                      src={
+                        process.env.PUBLIC_URL + "/assets/" + item.product.image
+                      }
+                      alt={item.product.name}
+                      className={styles.cartItemImage}
+                    />
+                    <div className={styles.cartItemDetails}>
+                      <h3>{titleCase(item.product.name, "_")}</h3>
+                      <p>{item.product.description}</p>
+                      <p>{item.product.size} ml</p>
+                    </div>
                   </div>
+
                   <div className={styles.cartItemSelectors}>
                     <div className={styles.quantityButtonsContainer}>
                       <button
