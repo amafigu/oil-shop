@@ -28,9 +28,7 @@
   }
 
   .cartItem {
-    display: flex;
-    align-items: center;
-    height: 13rem;
+    @include flex-vertical-center;
 
     @include media.mobile {
       flex-direction: column;
@@ -87,7 +85,6 @@
 
     @include media.mobile {
       flex-grow: 0;
-      justify-content: space-around;
       width: 100%;
       padding-right: 0;
     }
@@ -151,6 +148,27 @@
 
   .quantityButtonsContainer {
     display: flex;
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+
+  .deleteButtonWrapper {
+    display: flex;
+
+    @include media.mobile {
+      flex-basis: 0;
+      flex-grow: 1;
+      justify-content: flex-end;
+    }
+
+    .deleteButton {
+      @include media.mobile {
+        height: 40px;
+        margin: 0 20px;
+
+        @include flex-all-center;
+      }
+    }
   }
 
   .confimOrderButton {
