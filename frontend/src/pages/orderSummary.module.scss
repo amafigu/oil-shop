@@ -1,25 +1,39 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .orderSummaryWrapper {
   @include flex-center-column;
 
-  min-height: 85vh;
-
   .orderSummary {
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 80%;
     margin-bottom: 48px;
-    box-shadow: theme.$main-box-shadow;
+    border-bottom: 1px solid theme.$secondary-color;
+
+    @include media.desktop-down {
+      width: 90%;
+    }
   }
 
   .pageTitle {
     margin-bottom: 20px;
+    font-size: 24px;
   }
 
-  .customerInfo {
+  .summaryTitle {
+    font-size: 24px;
+  }
+
+  .infoColumnContainer {
     width: 50%;
+    overflow: hidden;
+
+    @include media.mobile {
+      flex-wrap: nowrap;
+      width: 50%;
+    }
   }
 
   .infoColumn {
@@ -45,56 +59,73 @@
   .clientInfoContainer {
     width: 100%;
     padding: 40px;
+
+    @include media.mobile {
+      padding: 0;
+    }
   }
 
   .purchasedProducts {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-justify-center;
+
     width: 50%;
     padding: 40px;
+
+    @include media.mobile {
+      padding: 0;
+    }
+  }
+
+  .cartItemWrapper {
+    margin-bottom: 16px;
+
+    @include media.tablet {
+      width: 200px;
+    }
   }
 
   .cartItem {
-    display: flex;
-    align-items: center;
+    @include flex-align-center;
+
     height: 4.5rem;
     margin-bottom: 16px;
     background-color: #fff;
     border-radius: 4px;
-    box-shadow: theme.$main-box-shadow;
   }
 
   .cartItemImage {
-    width: 3.75rem;
-    height: 4.125rem;
+    width: 30px;
+    max-height: 100%;
     object-fit: contain;
   }
 
   .cartItemDetails {
     margin: 12px;
+    overflow: hidden;
   }
 
   .cartItemsList {
     display: flex;
-    flex-direction: column;
-    margin-top: 18px;
+    flex-wrap: wrap;
+    margin-left: 36px;
   }
 
   .columns {
     display: flex;
     width: 100%;
-    background: theme.$form-background;
-    box-shadow: theme.$main-box-shadow;
+    background: #fff;
   }
 
   .columnTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flex-column-all-center;
+
     padding: 40px;
     font-size: 48px;
+
+    @include media.mobile {
+      width: 90%;
+      text-align: center;
+    }
   }
 
   .clientInfoItem {
@@ -112,15 +143,18 @@
     width: 100%;
   }
 
-  .formField {
-    @include input-styles-reset;
+  .label {
+    display: flex;
+  }
 
+  .formField {
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 2rem;
     padding-left: 10px;
     font-family: theme.$main-font-family;
     background-color: #fff;
-    border-radius: 0.2rem;
-    box-shadow: theme.$main-box-shadow;
+    border-bottom: 1px solid theme.$secondary-color;
   }
 }

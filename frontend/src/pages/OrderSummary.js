@@ -32,125 +32,55 @@ const OrderSummary = () => {
 
   useEffectScrollTop()
 
+  console.log(shippingData)
+
   return (
     <div className={styles.orderSummaryWrapper}>
       <div className={styles.columnTitle}>
-        <h1 className={styles.pageTitle}>{text.thankClient}</h1>
-        <h2 className={styles.summaryTitle}>{text.orderResume}:</h2>
+        <span className={styles.pageTitle}>{text.thankClient}</span>
+        <span className={styles.summaryTitle}>{text.orderResume}:</span>
       </div>
       <div className={styles.orderSummary}>
         <div className={styles.columns}>
-          <div className={styles.customerInfo}>
+          <div className={styles.infoColumnContainer}>
             <div className={styles.infoColumn}>
               <div className={styles.clientInfoContainer}>
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='firstName'>
-                    {text.inputLabels.firstName}
-                  </label>
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.firstName}
-                  />
+                  <div className={styles.formField}>
+                    {shippingData.firstName}
+                  </div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='lastName'>
-                    {text.inputLabels.lastName}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.lastName}
-                  />
+                  <div className={styles.formField}>
+                    {shippingData.lastName}
+                  </div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label}>
-                    {text.inputLabels.phone}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.phone}
-                  />
+                  <div className={styles.formField}>{shippingData.phone}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='country'>
-                    {text.inputLabels.country}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.country}
-                  />
+                  <div className={styles.formField}>{shippingData.address}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='state'>
-                    {text.inputLabels.state}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.state}
-                  />
+                  <div className={styles.formField}>{shippingData.city}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='city'>
-                    {text.inputLabels.city}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.city}
-                  />
+                  <div className={styles.formField}>{shippingData.country}</div>
                 </div>
 
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='postalCode'>
-                    {text.inputLabels.postalCode}
-                  </label>
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.postalCode}
-                  />
+                  <div className={styles.formField}>
+                    {shippingData.postalCode}
+                  </div>
+                </div>
+
+                <div className={styles.clientInfoItem}>
+                  <div className={styles.formField}>{paymentMethod}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='address'>
-                    {text.inputLabels.address}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={shippingData.address}
-                  />
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='paidWidth'>
-                    Paid with:
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={paymentMethod}
-                  />
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <label className={styles.label} htmlFor='total'>
-                    Total
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    readOnly
-                    value={`${cartTotalSum(cart, SHIPPING_COST)} €`}
-                  />
+                  <div className={styles.formField}>
+                    {`${cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €`}
+                  </div>
                 </div>
               </div>
             </div>
@@ -160,19 +90,23 @@ const OrderSummary = () => {
             <div className={styles.cartItemsListWrapper}>
               <div className={styles.cartItemsList}>
                 {cart.map((item, index) => (
-                  <div key={index} className={styles.cartItem}>
-                    <img
-                      src={
-                        process.env.PUBLIC_URL + "/assets/" + item.product.image
-                      }
-                      alt={item.product.name}
-                      className={styles.cartItemImage}
-                    />
-                    <div className={styles.cartItemDetails}>
-                      <h3>
-                        {item.quantity} {titleCase(item.product.name, "_")}
-                      </h3>
-                      <p>{item.product.size} ml</p>
+                  <div className={styles.cartItemWrapper}>
+                    <div key={index} className={styles.cartItem}>
+                      <img
+                        src={
+                          process.env.PUBLIC_URL +
+                          "/assets/" +
+                          item.product.image
+                        }
+                        alt={item.product.name}
+                        className={styles.cartItemImage}
+                      />
+                      <div className={styles.cartItemDetails}>
+                        <h3>
+                          {item.quantity} {titleCase(item.product.name, "_")}
+                        </h3>
+                        <p>{item.product.size} ml</p>
+                      </div>
                     </div>
                   </div>
                 ))}

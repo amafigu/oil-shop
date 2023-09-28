@@ -45,7 +45,7 @@
   }
 
   .emailFieldContainer {
-    @include flex-start-column;
+    @include flex-column-align-start-justify-around;
 
     width: 100%;
     margin-bottom: 24px;
