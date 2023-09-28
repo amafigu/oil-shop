@@ -1,7 +1,7 @@
 # oil-shop
-JavaScript/Node Based application 
 
-Test 
-Run Jest 
+JavaScript/Node Based Portfolio application
 
-Install locally your Postgres DB
+Jest
+
+Postgres

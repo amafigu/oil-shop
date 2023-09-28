@@ -18,7 +18,7 @@ const Cart = () => {
         <div className={styles.cartItemsList}>
           {cart.length > 0 ? (
             cart.map((item, index) => (
-              <div key={index}>
+              <div className={styles.cartItemContainer} key={index}>
                 <div className={styles.cartItem}>
                   <div className={styles.imagesAndDetails}>
                     <img
@@ -108,11 +108,11 @@ const Cart = () => {
             </div>
           </div>
           {cart.length ? (
-            <Link className={styles.confimOrderButton} to='/checkout/shipping'>
+            <Link className={styles.confirmOrderButton} to='/checkout/shipping'>
               {text.confirmPurchase}
             </Link>
           ) : (
-            <Link className={styles.confimOrderButton} to='/cart'>
+            <Link className={styles.confirmOrderButton} to='/cart'>
               {text.orderToContinue}
             </Link>
           )}

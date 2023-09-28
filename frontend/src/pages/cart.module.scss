@@ -3,55 +3,84 @@
 @import "#styles/helpers/mixins";
 
 .cartWrapper {
-  display: flex;
-  justify-content: center;
+  @include flex-horizontal-center;
+
   margin-bottom: 80px;
 
   .cart {
     display: flex;
-    width: 70%;
+    width: 86%;
 
-    @include media.mobile {
+    @include media.widescreen-down {
+      width: 90%;
+    }
+
+    @include media.desktop-down {
       flex-direction: column;
       width: 90%;
     }
   }
 
   .cartItemsList {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
+
+    flex-grow: 1;
+    flex-shrink: 1;
+    justify-content: center;
     width: 60%;
 
-    @include media.mobile {
+    @include media.desktop-down {
       width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+
+  .cartItemContainer {
+    margin-top: 24px;
+
+    hr {
+      margin-top: 24px;
+
+      @include media.desktop-down {
+        margin-top: 0;
+      }
+    }
+
+    &:last-child hr {
+      display: none;
+    }
+
+    &:first-child {
+      @include media.desktop-down {
+        margin-top: 0;
+      }
     }
   }
 
   .cartItem {
-    display: flex;
-    align-items: center;
-    height: 13rem;
+    @include flex-vertical-center;
 
-    @include media.mobile {
+    @include media.desktop-down {
       flex-direction: column;
     }
   }
 
   .cartEmptyMessage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-all-center;
+
     height: 9rem;
     font-size: 20px;
   }
 
   .imagesAndDetails {
-    display: flex;
-    align-items: center;
+    @include flex-vertical-center;
 
-    @include media.mobile {
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    @include media.desktop-down {
       width: 100%;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
   }
 
@@ -59,37 +88,35 @@
     width: 3.5rem;
     max-height: 90px;
     object-fit: contain;
-    margin-right: 32px;
+    margin-right: 12px;
 
-    @include media.mobile {
+    @include media.desktop-down {
       width: 2.75rem;
       max-height: 80px;
-      margin-right: 20px;
     }
   }
 
   .cartItemDetails {
-    width: 20rem;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 9rem;
+    overflow: hidden;
 
-    @include media.mobile {
+    @include media.desktop-down {
       flex-grow: 1;
-      width: fit-content;
-      overflow: hidden;
     }
   }
 
   .cartItemSelectors {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 40px;
+    @include flex-vertical-center;
 
-    @include media.mobile {
+    flex-grow: 1;
+    justify-content: space-between;
+
+    @include media.desktop-down {
       flex-grow: 0;
-      justify-content: space-around;
       width: 100%;
-      padding-right: 0;
+      margin-bottom: 4px;
     }
   }
 
@@ -113,21 +140,27 @@
   }
 
   .cartItemTotalCost {
-    @include flex-center;
-  }
-
-  .deleteButton {
-    cursor: pointer;
+    @include flex-all-center;
   }
 
   .cartOrderSummary {
     width: 35%;
+    max-width: 460px;
     height: fit-content;
     padding: 32px;
     margin-left: 3rem;
     background: #f4f4f4;
     border-radius: 4px;
     box-shadow: theme.$main-box-shadow;
+
+    @include media.desktop-down {
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      margin-left: 0;
+
+      @include flex-horizontal-center;
+    }
   }
 
   .orderSumaryText {
@@ -135,6 +168,10 @@
     font-size: 20px;
     font-weight: 800;
     text-transform: uppercase;
+
+    @include media.desktop-down {
+      padding: 20px 0 0 20px;
+    }
   }
 
   .totalCostDivider {
@@ -143,6 +180,10 @@
 
   .cartOrderSummaryDetails {
     margin-bottom: 40px;
+
+    @include media.desktop-down {
+      padding: 0 20px;
+    }
   }
 
   .orderTotalText {
@@ -151,13 +192,33 @@
 
   .quantityButtonsContainer {
     display: flex;
+    flex-basis: 0;
+    flex-grow: 1;
   }
 
-  .confimOrderButton {
-    @include product-cart-purshase-button;
-
+  .deleteButtonWrapper {
     display: flex;
+    flex-basis: 0;
     flex-grow: 1;
-    justify-content: center;
+    justify-content: flex-end;
+
+    .deleteButton {
+      width: 96px;
+      height: 60px;
+      cursor: pointer;
+
+      @include flex-all-center;
+
+      @include media.desktop-down {
+        height: 40px;
+      }
+    }
+  }
+
+  .confirmOrderButton {
+    flex-grow: 1;
+
+    @include product-cart-purshase-button;
+    @include flex-horizontal-center;
   }
 }

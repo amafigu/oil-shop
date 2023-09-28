@@ -35,12 +35,6 @@
   justify-content: center;
 }
 
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 @mixin flex-justify-center {
   display: flex;
   justify-content: center;
@@ -52,7 +46,7 @@
 }
 
 @mixin flex-center-column {
-  @include flex-center;
+  @include flex-all-center;
 
   flex-direction: column;
 }
@@ -84,6 +78,7 @@
 }
 
 @mixin product-cart-purshase-button {
+  align-items: center;
   min-width: 124px;
   height: 60px;
   overflow: hidden;

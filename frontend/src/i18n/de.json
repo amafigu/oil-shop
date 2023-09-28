@@ -7,7 +7,7 @@
     "cart": {
       "emptyCart": "Es befinden sich keine Produkte in Ihrem Warenkorb",
       "confirmPurchase": "Bestätigen",
-      "orderToContinue": "Kaufen Sie ein Produkt, um fortzufahren",
+      "orderToContinue": "Bitte bestellen",
       "orderSummary": "Zusammenfassung",
       "deleteButton": "löschen",
       "orderSubtotal": "Zwischensumme:",
