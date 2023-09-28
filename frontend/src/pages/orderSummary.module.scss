@@ -78,6 +78,10 @@
 
   .cartItemWrapper {
     margin-bottom: 16px;
+
+    @include media.tablet {
+      width: 200px;
+    }
   }
 
   .cartItem {
@@ -103,6 +107,7 @@
   .cartItemsList {
     display: flex;
     flex-wrap: wrap;
+    margin-left: 36px;
   }
 
   .columns {
