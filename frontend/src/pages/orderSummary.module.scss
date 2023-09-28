@@ -1,4 +1,5 @@
 @use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .orderSummaryWrapper {
@@ -7,9 +8,13 @@
   .orderSummary {
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 80%;
     margin-bottom: 48px;
     border-bottom: 1px solid theme.$secondary-color;
+
+    @include media.desktop-down {
+      width: 90%;
+    }
   }
 
   .pageTitle {
@@ -21,8 +26,14 @@
     font-size: 24px;
   }
 
-  .customerInfo {
+  .infoColumnContainer {
     width: 50%;
+    overflow: hidden;
+
+    @include media.mobile {
+      flex-wrap: nowrap;
+      width: 50%;
+    }
   }
 
   .infoColumn {
@@ -48,6 +59,10 @@
   .clientInfoContainer {
     width: 100%;
     padding: 40px;
+
+    @include media.mobile {
+      padding: 0;
+    }
   }
 
   .purchasedProducts {
@@ -55,11 +70,14 @@
 
     width: 50%;
     padding: 40px;
+
+    @include media.mobile {
+      padding: 0;
+    }
   }
 
   .cartItemWrapper {
     margin-bottom: 16px;
-    border-bottom: 1px solid theme.$secondary-color;
   }
 
   .cartItem {
@@ -72,17 +90,19 @@
   }
 
   .cartItemImage {
-    width: 3.75rem;
-    height: 4.125rem;
+    width: 30px;
+    max-height: 100%;
     object-fit: contain;
   }
 
   .cartItemDetails {
     margin: 12px;
+    overflow: hidden;
   }
 
   .cartItemsList {
-    @include flex-column;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .columns {
@@ -96,6 +116,11 @@
 
     padding: 40px;
     font-size: 48px;
+
+    @include media.mobile {
+      width: 90%;
+      text-align: center;
+    }
   }
 
   .clientInfoItem {

@@ -157,6 +157,7 @@
     @include media.desktop-down {
       flex-direction: column;
       width: 100%;
+      max-width: unset;
       padding: 0;
       margin-left: 0;
 

@@ -42,58 +42,43 @@ const OrderSummary = () => {
       </div>
       <div className={styles.orderSummary}>
         <div className={styles.columns}>
-          <div className={styles.customerInfo}>
+          <div className={styles.infoColumnContainer}>
             <div className={styles.infoColumn}>
               <div className={styles.clientInfoContainer}>
                 <div className={styles.clientInfoItem}>
                   <div className={styles.formField}>
-                    {text.inputLabels.firstName}: {shippingData.firstName}
+                    {shippingData.firstName}
                   </div>
                 </div>
                 <div className={styles.clientInfoItem}>
                   <div className={styles.formField}>
-                    {text.inputLabels.lastName}: {shippingData.lastName}
+                    {shippingData.lastName}
                   </div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {text.inputLabels.phone}: {shippingData.phone}
-                  </div>
+                  <div className={styles.formField}>{shippingData.phone}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {text.inputLabels.country}: {shippingData.country}
-                  </div>
+                  <div className={styles.formField}>{shippingData.address}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {text.inputLabels.state}: {shippingData.country}
-                  </div>
+                  <div className={styles.formField}>{shippingData.city}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {text.inputLabels.city}: {shippingData.city}
-                  </div>
+                  <div className={styles.formField}>{shippingData.country}</div>
                 </div>
 
                 <div className={styles.clientInfoItem}>
                   <div className={styles.formField}>
-                    {text.inputLabels.postalCode}: {shippingData.postalCode}
+                    {shippingData.postalCode}
                   </div>
+                </div>
+
+                <div className={styles.clientInfoItem}>
+                  <div className={styles.formField}>{paymentMethod}</div>
                 </div>
                 <div className={styles.clientInfoItem}>
                   <div className={styles.formField}>
-                    {text.inputLabels.address}: {shippingData.address}
-                  </div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {text.inputLabels.paidWith}: {paymentMethod}
-                  </div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {text.inputLabels.totalAmount}:{" "}
                     {`${cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €`}
                   </div>
                 </div>
