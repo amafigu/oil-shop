@@ -6,6 +6,10 @@
   @include menu-list-item;
 
   @include media.tablet {
+    border-bottom: 0;
+  }
+
+  @include media.tablet {
     width: auto;
     height: auto;
     padding: 0;

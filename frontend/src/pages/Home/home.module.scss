@@ -7,6 +7,8 @@
   @include flex-justify-center;
   @include margin-page-wrapper;
 
+  margin-top: 0 !important;
+
   .homePage {
     @include flex-justify-center;
 
