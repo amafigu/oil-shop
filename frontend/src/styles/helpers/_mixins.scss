@@ -1,4 +1,5 @@
 @use "../theme" as theme;
+@use "../media" as media;
 @use "./functions" as functions;
 
 @mixin flex-horizontal-center {
@@ -63,7 +64,7 @@
   flex-direction: column;
 }
 
-@mixin full-width-and-height {
+@mixin hundred-percent-width-and-height {
   width: 100%;
   height: 100%;
 }
@@ -164,4 +165,16 @@
   list-style-type: none;
   cursor: pointer;
   border-bottom: 1px solid gray;
+}
+
+@mixin margin-page-wrapper {
+  margin-bottom: 80px;
+
+  @include media.desktop-down {
+    margin-bottom: 40px;
+  }
+
+  @include media.mobile {
+    margin-bottom: 28px;
+  }
 }
