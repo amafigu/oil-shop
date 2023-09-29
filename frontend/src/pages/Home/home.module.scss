@@ -4,16 +4,16 @@
 @import "#styles/helpers/mixins";
 
 .homePageWrapper {
-  display: flex;
-  justify-content: center;
+  @include flex-justify-center;
+  @include margin-page-wrapper;
 
   .homePage {
-    display: flex;
-    justify-content: center;
+    @include flex-justify-center;
+
     width: 80%;
 
-    @include media.tablet-down {
-      width: 100%;
+    @include media.widescreen-down {
+      width: 90%;
     }
   }
 

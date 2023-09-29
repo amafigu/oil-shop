@@ -3,16 +3,12 @@
 @import "#styles/helpers/mixins";
 
 .shopPageWrapper {
-  display: flex;
-  justify-content: center;
-
+  @include flex-justify-center;
   @include margin-page-wrapper;
 
   .shopPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flex-column-all-center;
+
     width: 80%;
 
     @include media.widescreen-down {

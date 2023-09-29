@@ -1,4 +1,9 @@
 import { TEASER_VIDEOS } from "#utils/constants"
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useCallback, useEffect, useState } from "react"
 import styles from "./carousel.module.scss"
 
@@ -28,11 +33,8 @@ const Carousel = () => {
 
   return (
     <div className={styles.carouselWrapper}>
-      <button
-        className={`material-symbols-outlined ${styles.iconSlider}`}
-        onClick={previousVideo}
-      >
-        arrow_back_ios
+      <button className={styles.iconSlider} onClick={previousVideo}>
+        <FontAwesomeIcon icon={faChevronLeft} />
       </button>
       <div className={styles.videoWrapper}>
         <iframe
@@ -45,11 +47,8 @@ const Carousel = () => {
         <div className={styles.borderDiv}></div>
       </div>
 
-      <button
-        onClick={nextVideo}
-        className={`material-symbols-outlined ${styles.iconSlider}`}
-      >
-        arrow_forward_ios
+      <button onClick={nextVideo} className={styles.iconSlider}>
+        <FontAwesomeIcon icon={faChevronRight} />
       </button>
     </div>
   )
