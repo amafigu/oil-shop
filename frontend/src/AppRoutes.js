@@ -10,6 +10,7 @@ import About from "#pages/About"
 import Cart from "#pages/Cart"
 import Faq from "#pages/Faq"
 import Home from "#pages/Home"
+import Login from "#pages/Login"
 import OrderSummary from "#pages/OrderSummary"
 import Payment from "#pages/Payment"
 import ProductDetails from "#pages/ProductDetails"
@@ -70,6 +71,7 @@ const AppRoutes = () => {
           <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/faq' element={<Faq />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/products/:productName' element={<ProductDetails />} />
           <Route path='/checkout/shipping' element={<Shipping />} />
           <Route path='/checkout/payment' element={<Payment />} />
