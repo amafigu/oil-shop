@@ -3,7 +3,11 @@
 @import "#styles/helpers/mixins";
 
 .dropdownMenu {
-  color: #b5cfaa;
+  color: grey;
+
+  .activeCategory {
+    color: theme.$branding-background-color;
+  }
 
   .listItem {
     @include media.tablet-down {
@@ -17,7 +21,6 @@
     gap: 16px;
     padding: 0 4px;
     margin-top: 8px;
-    color: theme.$branding-background-color;
     background-color: #fff;
     border-radius: 4px;
   }

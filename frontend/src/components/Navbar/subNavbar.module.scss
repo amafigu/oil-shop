@@ -1,3 +1,7 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
 .subNavbarWrapper {
   display: flex;
   align-items: center;
@@ -21,8 +25,8 @@
     text-decoration: none;
   }
 
-  .activeLink {
-    font-weight: bold;
+  .activeCategory {
+    color: theme.$branding-background-color;
   }
 
   .logo {

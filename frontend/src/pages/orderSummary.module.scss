@@ -30,6 +30,8 @@
     width: 50%;
     overflow: hidden;
 
+    @include flex-justify-end;
+
     @include media.mobile {
       flex-wrap: nowrap;
       width: 50%;
@@ -40,8 +42,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
+    max-width: 400px;
   }
 
   .containerTitleWrapper {

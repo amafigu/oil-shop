@@ -1,11 +1,10 @@
+import ProductCard from "#components/ProductCard/index"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
-import ProductCard from "../components/ProductCard"
 import Sidebar from "../components/Sidebar"
 import style from "./shop.module.scss"
-
 const Shop = ({ productCategories }) => {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState("")
@@ -43,29 +42,31 @@ const Shop = ({ productCategories }) => {
   useEffectScrollTop()
 
   return (
-    <div className={style.shopPageWrapper}>
-      <div className={style.shopPage}>
-        <div className={style.sidebarWrapper}>
-          <Sidebar
-            setCategory={setCategory}
-            productCategories={productCategories}
-          />
-        </div>
-
-        <div className={style.sortedProducts}>
-          {sortedProducts.map((product, index) => (
-            <ProductCard
-              key={index}
-              name={product.name}
-              image={product.image}
-              size={product.size}
-              price={product.price}
-              description={product.description}
+    <>
+      <div className={style.shopPageWrapper}>
+        <div className={style.shopPage}>
+          <div className={style.sidebarWrapper}>
+            <Sidebar
+              setCategory={setCategory}
+              productCategories={productCategories}
             />
-          ))}
+          </div>
+
+          <div className={style.sortedProducts}>
+            {sortedProducts.map((product, index) => (
+              <ProductCard
+                key={index}
+                name={product.name}
+                image={product.image}
+                size={product.size}
+                price={product.price}
+                description={product.description}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

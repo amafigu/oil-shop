@@ -6,6 +6,8 @@
   @include flex-justify-center;
   @include margin-page-wrapper;
 
+  min-height: 100vh;
+
   .shopPage {
     @include flex-column-all-center;
 

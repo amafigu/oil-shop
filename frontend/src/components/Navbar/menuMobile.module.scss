@@ -39,7 +39,7 @@
     width: 100%;
 
     @include media.short {
-      height: 100vh;
+      height: 90vh;
       overflow-y: auto;
     }
   }
