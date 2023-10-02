@@ -1,5 +1,6 @@
+import NotificationCard from "#components/NotificationCard"
+import { titleCase } from "#utils/utils"
 import React, { createContext, useContext, useState } from "react"
-import NotificationCard from "../components/NotificationCard"
 
 export const CartContext = createContext()
 
@@ -27,8 +28,10 @@ export const CartProvider = ({ children }) => {
         setCart([...cart, { product, quantity }])
       }
 
-      setNotification(`${quantity} ${product.name} were added to cart`)
-      setTimeout(() => setNotification(null), 1000)
+      setNotification(
+        `${quantity} ${titleCase(product.name, "_")} were added to your cart`,
+      )
+      setTimeout(() => setNotification(null), 1300)
     }
   }
 

@@ -3,10 +3,9 @@ import React from "react"
 import styles from "./LanguageDropdown.module.scss"
 
 const LanguageDropdown = ({ setMenuOpen }) => {
-  const { setLanguage } = useLocaleContext()
+  const { setLanguage, language } = useLocaleContext()
 
   const handleChangeLanguage = (lang) => {
-    console.log("handleLanguage", lang)
     setLanguage(lang)
     if (setMenuOpen) {
       setMenuOpen(false)
@@ -16,13 +15,17 @@ const LanguageDropdown = ({ setMenuOpen }) => {
   return (
     <ul className={styles.dropdownMenu}>
       <li
-        className={styles.listItem}
+        className={`${styles.listItem} ${
+          language === "en" ? styles.activeCategory : ""
+        }`}
         onClick={() => handleChangeLanguage("en")}
       >
         <span className={styles.linkContent}>EN</span>
       </li>
       <li
-        className={styles.listItem}
+        className={`${styles.listItem} ${
+          language === "de" ? styles.activeCategory : ""
+        }`}
         onClick={() => handleChangeLanguage("de")}
       >
         <span className={styles.linkContent}>DE</span>

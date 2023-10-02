@@ -1,8 +1,7 @@
 {
   "pages": {
     "about": {
-      "title": "about oylo",
-      "teaser": "We are passionate about essential oils."
+      "title": "Hi! Thanks for visiting Oylo, Portfolio web-shop"
     },
     "cart": {
       "emptyCart": "There are no products in the cart",
@@ -55,7 +54,7 @@
       }
     },
     "payment": {
-      "paymentButton": "Proceed to payment",
+      "paymentButton": "Proceed",
       "title": "Payment with:",
       "backButton": "Go Back",
       "insertPaymentMethod": "Please choose a payment method."

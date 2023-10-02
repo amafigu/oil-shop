@@ -1,7 +1,12 @@
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { SHIPPING_COST } from "#utils/constants"
-import { cartTotalSum, titleCase, totalCost } from "#utils/utils"
+import {
+  cartTotalSum,
+  titleCase,
+  totalCost,
+  useEffectScrollTop,
+} from "#utils/utils"
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
@@ -11,6 +16,8 @@ const Cart = () => {
   const { cart, removeProduct, updateProductQuantity } = useCartContext()
   const { translate } = useLocaleContext()
   const text = translate.pages.cart
+
+  useEffectScrollTop()
 
   return (
     <div className={styles.cartWrapper}>
