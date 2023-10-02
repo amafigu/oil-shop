@@ -14,7 +14,12 @@ import Sidebar from "../Sidebar"
 import LanguageDropdown from "./LanguageDropdown"
 import styles from "./menuMobile.module.scss"
 
-const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
+const MenuMobile = ({
+  setMenuOpen,
+  category,
+  setCategory,
+  productCategories,
+}) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const navigate = useNavigate()
 
@@ -24,6 +29,8 @@ const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
   }
 
   const { getAllProductsQuantity } = useContext(CartContext)
+
+  console.log("Menu productCategories ", productCategories)
 
   return (
     <div className={styles.menuWrapper}>
@@ -79,4 +86,4 @@ const Menu = ({ setMenuOpen, category, setCategory, productCategories }) => {
   )
 }
 
-export default Menu
+export default MenuMobile

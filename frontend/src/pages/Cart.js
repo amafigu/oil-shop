@@ -88,7 +88,7 @@ const Cart = () => {
         </div>
 
         <div className={styles.cartOrderSummary}>
-          <h2 className={styles.orderSumaryText}>{text.orderSummary}</h2>
+          <h2 className={styles.orderSummaryText}>{text.orderSummary}</h2>
           <div className={styles.cartOrderSummaryDetails}>
             <div>
               <span>{text.orderSubtotal} </span>

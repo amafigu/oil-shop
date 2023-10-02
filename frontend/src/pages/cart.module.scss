@@ -141,6 +141,8 @@
   }
 
   .cartItemTotalCost {
+    min-width: 120px;
+
     @include flex-all-center;
   }
 
@@ -165,7 +167,7 @@
     }
   }
 
-  .orderSumaryText {
+  .orderSummaryText {
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 800;

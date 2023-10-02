@@ -2,6 +2,10 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
+.activeCategory {
+  color: theme.$branding-background-color;
+}
+
 .sidebarItem {
   @include menu-list-item;
 
