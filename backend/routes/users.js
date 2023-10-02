@@ -4,6 +4,16 @@ import { comparePassword, hashPassword } from '../utils/passwordEncrypt.js';
 
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+  try {
+    const users = await db.user.findAll();
+    res.json(users);
+    console.log(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/login', async (req, res) => {
   try {
     const user = await db.user.findOne({ where: { email: req.body.email } });
