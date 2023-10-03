@@ -5,6 +5,7 @@ import {
   faChevronDown,
   faChevronUp,
   faGlobe,
+  faUser,
   faX,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -66,6 +67,14 @@ const MenuMobile = ({
                 {getAllProductsQuantity}
               </span>
             </div>
+          </li>
+          <li
+            className={styles.listItem}
+            onClick={() => navigateAndCloseMenu("/login")}
+          >
+            <span className={styles.linkContent}>
+              <FontAwesomeIcon icon={faUser} />
+            </span>
           </li>
           <li
             className={styles.listItem}
