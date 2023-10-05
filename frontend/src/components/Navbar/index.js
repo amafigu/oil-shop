@@ -14,6 +14,7 @@ import {
   faChevronUp,
   faGlobe,
   faSearch,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useContext, useEffect, useRef, useState } from "react"
@@ -219,6 +220,9 @@ const Navbar = ({ productCategories }) => {
                     </div>
                   </div>
                 </div>
+                <Link className={styles.linkChild} to='login'>
+                  <FontAwesomeIcon icon={faUser} />
+                </Link>
 
                 <div className={styles.cartAndQuantity}>
                   <Link className={styles.linkChild} to='/cart'>

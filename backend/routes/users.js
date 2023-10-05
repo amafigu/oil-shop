@@ -1,29 +1,64 @@
+import dotenv from 'dotenv';
 import express from 'express';
+import jwt from 'jsonwebtoken';
+import { decodeJWT } from '../middleware/decodeToken.js';
 import db from '../models/index.js';
-import { comparePassword, hashPassword } from '../utils/passwordEncrypt.js';
 
+import { comparePassword, hashPassword } from '../utils/passwordEncrypt.js';
+dotenv.config();
 const router = express.Router();
+
+router.get('/', async (req, res) => {
+  try {
+    const users = await db.user.findAll();
+    return res.json(users);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/current-user', decodeJWT, async (req, res) => {
+  console.log(res.json);
+  return res.json({ email: req.user.email });
+});
+
+router.post('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.json({ message: 'Logged out successfully' });
+});
 
 router.post('/login', async (req, res) => {
   try {
     const user = await db.user.findOne({ where: { email: req.body.email } });
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'invalid username' });
     }
 
     const isPasswordValid = await comparePassword(
       req.body.password,
       user.password
     );
+
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
-    //  generate a token or session to keep the user logged in.
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_KEY,
+      { expiresIn: '3600000' } // 1 hour
+    );
 
-    res.json({ message: 'Logged in successfully', role: user.role });
+    console.log('res.cookie ', res.cookie);
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: 'strict',
+      path: '/',
+    });
+    res.json({ message: 'Logged in successfully' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 });
 
@@ -45,15 +80,15 @@ router.post('/register-admin', async (req, res) => {
       role: 'admin',
     });
 
-    res
+    return res
       .status(201)
       .json({ message: 'Admin user created successfully', user: newAdmin });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 });
 
-router.post('/register', async (req, res) => {
+router.post('/create', async (req, res) => {
   try {
     const existingUser = await db.user.findOne({
       where: { email: req.body.email },
@@ -71,11 +106,11 @@ router.post('/register', async (req, res) => {
       role: 'guest',
     });
 
-    res
+    return res
       .status(201)
       .json({ message: 'Guest user created successfully', user: newUser });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 });
 

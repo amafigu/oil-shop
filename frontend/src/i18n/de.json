@@ -35,6 +35,10 @@
       "tenthQuestion": "Kann ich ätherische Öle auch bei meinen Haustieren anwenden?",
       "tenthAnswer": "Tiere reagieren anders als Menschen auf ätherische Öle. Bitte informieren Sie sich in Fachliteratur darüber, welche Öle Sie in welcher Dosierung verwenden können. Hierzu können wir keine eigenen Handlungsempfehlungen geben."
     },
+    "login": {
+      "emailPlaceholder": "Email eingeben",
+      "passwordPlaceholder": "Passwort eingeben"
+    },
     "orderSummary": {
       "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",
       "orderResume": "Bestellübersicht",
