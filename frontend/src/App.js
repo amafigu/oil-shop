@@ -3,14 +3,17 @@ import { BrowserRouter } from "react-router-dom"
 import AppRoutes from "./AppRoutes"
 import { CartProvider } from "./context/cartContext"
 import { LocaleContextProvider } from "./context/localeContext"
+import { UserProvider } from "./context/userContext"
 
 const App = () => {
   return (
     <BrowserRouter>
       <LocaleContextProvider>
-      <CartProvider>
-        <AppRoutes />
-        </CartProvider >
+        <UserProvider>
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
+        </UserProvider>
       </LocaleContextProvider>
     </BrowserRouter>
   )

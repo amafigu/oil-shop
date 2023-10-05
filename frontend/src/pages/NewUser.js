@@ -18,14 +18,17 @@ const NewUser = () => {
   const createUser = async (e) => {
     e.preventDefault()
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/users/create`, {
-        firstName,
-        lastName,
-        email,
-        password,
-      })
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/users/register-admin`,
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+      )
 
-      navigate("/users/current-user")
+      navigate("/users/current-admin")
 
       console.log(process.env.REACT_APP_API_URL)
       console.log(firstName, lastName, email, password)

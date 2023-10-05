@@ -16,6 +16,9 @@ import Payment from "#pages/Payment"
 import ProductDetails from "#pages/ProductDetails"
 import Shipping from "#pages/Shipping"
 import Shop from "#pages/Shop"
+import Admin from "./pages/Admin"
+import NewUser from "./pages/NewUser"
+import User from "./pages/User"
 
 const AppRoutes = () => {
   const [productCategories, setProductCategories] = useState([])
@@ -31,31 +34,6 @@ const AppRoutes = () => {
       })
   }, [])
 
-  const useActiveElement = () => {
-    const [active, setActive] = useState(document.activeElement)
-
-    const handleFocusIn = (e) => {
-      setActive(document.activeElement)
-    }
-
-    useEffect(() => {
-      document.addEventListener("focusin", handleFocusIn)
-      return () => {
-        document.removeEventListener("focusin", handleFocusIn)
-      }
-    }, [])
-
-    return active
-  }
-
-  const focusedElement = useActiveElement()
-
-  useEffect(() => {
-    if (focusedElement) {
-      focusedElement.value && console.log(focusedElement.value)
-    }
-    console.log(focusedElement)
-  }, [focusedElement])
   return (
     <div className={styles.wrapper}>
       <CartProvider>
@@ -72,6 +50,9 @@ const AppRoutes = () => {
           <Route path='/cart' element={<Cart />} />
           <Route path='/faq' element={<Faq />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/sign-up' element={<NewUser />} />
+          <Route path='/users/current-user' element={<User />} />
+          <Route path='/users/current-admin' element={<Admin />} />
           <Route path='/products/:productName' element={<ProductDetails />} />
           <Route path='/checkout/shipping' element={<Shipping />} />
           <Route path='/checkout/payment' element={<Payment />} />

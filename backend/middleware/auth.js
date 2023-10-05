@@ -1,10 +1,7 @@
 import jwt from 'jsonwebtoken';
 
-export const authenticateJWT = (req, res, next) => {
+export const authenticateToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  console.log('auth authHeader ', authHeader);
-
-  console.log('auth req.user ', req.user);
 
   if (authHeader) {
     const token = authHeader.split(' ')[1];
@@ -13,9 +10,15 @@ export const authenticateJWT = (req, res, next) => {
       if (err) {
         return res.sendStatus(403); // Forbidden
       }
-      console.log('auth user ', req.user);
+
+      console.log(
+        'authenticateToken.js process.env.JWT_KEY',
+        process.env.JWT_KEY
+      );
 
       req.user = user;
+
+      console.log('jwt.verify req.user = user;', user);
       next();
     });
   } else {
