@@ -3,35 +3,33 @@ import React, { useEffect, useState } from "react"
 import style from "./admin.module.scss"
 
 const Admin = () => {
-  const [adminData, setadminData] = useState(null)
+  const [adminData, setAdminData] = useState(null)
 
   useEffect(() => {
-    const fetchadminData = async () => {
+    const fetchAdminData = async () => {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/users/current-user`,
           { withCredentials: true },
         )
-        setadminData(response.data)
+        setAdminData(response.data)
       } catch (error) {
-        console.log("error admin ")
         console.error("Error fetching admin data", error)
       }
     }
 
-    fetchadminData()
+    fetchAdminData()
   }, [])
 
   return (
     <div className=''>
       <div className=''>
         <div className={style.pageTitle}>
-          {/* Render admin data */}
           {adminData
-            ? `Hello, ${adminData.firstName}!`
+            ? `Hello, ${adminData.firstName} ${adminData.lastName} you are loggin as a ${adminData.role}!`
             : "Loading admin data..."}
         </div>
-        <div>admin Info Page</div>
+        <div>Admin Info Page</div>
       </div>
     </div>
   )

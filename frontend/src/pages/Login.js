@@ -1,5 +1,4 @@
 import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { useState } from "react"
@@ -10,7 +9,6 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
-  const { setUserEmail, setToken } = useUserContext()
   const text = translate.pages.login
   const navigate = useNavigate()
 
@@ -25,19 +23,26 @@ const Login = () => {
         { withCredentials: true },
       )
       if (response) {
-        console.log("post front ", email, password)
+        const getUser = async () => {
+          try {
+            const responseUser = await axios.get(
+              `${process.env.REACT_APP_API_URL}/users/current-user`,
+              { withCredentials: true },
+            )
 
-        console.log("post front ", response)
+            const userRole = responseUser.data.role
 
-        setToken(response.data.token)
-        setUserEmail(email)
-        if (response.data.role === "admin") {
-          navigate("/users/current-admin")
-        } else {
-          navigate("/users/current-user")
+            if (userRole === "admin") {
+              navigate("/users/current-admin")
+            } else {
+              navigate("/users/current-user")
+            }
+          } catch (error) {
+            console.error("Error fetching user data", error)
+          }
         }
 
-        // Redirect to user page or any other action
+        getUser()
       }
     } catch (error) {
       console.error("Login error", error)

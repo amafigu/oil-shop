@@ -12,13 +12,8 @@ const User = () => {
           `${process.env.REACT_APP_API_URL}/users/current-user`,
           { withCredentials: true },
         )
-        const userEmail = response.data.email
-        setUserData(userEmail)
-        console.log("user fetchUserData ", response.data)
-        console.log("user userEmail ", response.data)
+        setUserData(response.data)
       } catch (error) {
-        console.log("error User")
-        console.log("error User", error)
         console.error("Error fetching user data", error)
       }
     }
@@ -30,8 +25,9 @@ const User = () => {
     <div className=''>
       <div className=''>
         <div className={style.pageTitle}>
-          {/* Render user data */}
-          {userData ? `Hello, ${userData}!` : "Loading user data..."}
+          {userData
+            ? `Hello, ${userData.firstName} ${userData.lastName} you are loggin as a ${userData.role}!`
+            : "Loading user data..."}
         </div>
         <div>User Info Page</div>
       </div>
