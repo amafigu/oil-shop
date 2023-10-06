@@ -5,12 +5,17 @@ import express from 'express';
 import productCategoryRoutes from './routes/productCategory.js';
 import productRoutes from './routes/products.js';
 import userRoutes from './routes/users.js';
+const envFile =
+  process.env.NODE_ENV === 'production'
+    ? '.env.production'
+    : '.env.development';
+dotenv.config({ path: envFile });
+console.log('env file ', envFile);
 const app = express();
-dotenv.config();
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: process.env.API_URL,
     credentials: true,
   })
 );
