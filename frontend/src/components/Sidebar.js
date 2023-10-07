@@ -19,11 +19,7 @@ const Sidebar = ({ setCategory, setMenuOpen, productCategories }) => {
     const params = new URLSearchParams(location.search)
     const category = params.get("category") || "all"
     setActiveCategory(category)
-    console.log("Sidebar useEffect", params)
-    console.log("Sidebar category", category)
   }, [location.search])
-
-  console.log("Sidebar productCategories", productCategories)
 
   const renderedCategories = productCategories
     .sort((a, b) => a.name.localeCompare(b.name))

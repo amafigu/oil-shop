@@ -29,14 +29,7 @@ const NewUser = () => {
       )
 
       navigate("/users/current-admin")
-
-      console.log(process.env.REACT_APP_API_URL)
-      console.log(firstName, lastName, email, password)
     } catch (error) {
-      console.log(typeof password)
-      console.log(password)
-      console.log(email)
-
       console.error("Signup error", error)
     }
   }

@@ -31,8 +31,6 @@ const MenuMobile = ({
 
   const { getAllProductsQuantity } = useContext(CartContext)
 
-  console.log("Menu productCategories ", productCategories)
-
   return (
     <div className={styles.menuWrapper}>
       <div className={styles.menuAndMailButtonContainer}>
