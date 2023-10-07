@@ -10,16 +10,16 @@ const envFile =
     ? '.env.production'
     : '.env.development';
 dotenv.config({ path: envFile });
-console.log('env file ', envFile);
-const app = express();
 
+const app = express();
+app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.API_URL,
     credentials: true,
   })
 );
-app.use(cookieParser());
+
 app.use(express.json());
 
 app.use('/api/products', productRoutes);

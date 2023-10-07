@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/current-user', decodeJWT, async (req, res) => {
-  console.log(res.json);
   return res.json({
     email: req.user.email,
     role: req.user.role,
@@ -47,7 +46,6 @@ router.post('/login', async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid password' });
     }
-    console.log('user !!! ', user);
 
     const token = jwt.sign(
       {
@@ -60,14 +58,15 @@ router.post('/login', async (req, res) => {
       { expiresIn: '3600000' } // 1 hour
     );
 
-    console.log('res.cookie ', res.cookie);
     const isSecure = process.env.IS_SECURE;
+
     res.cookie('token', token, {
       httpOnly: true,
-      sameSite: 'strict',
+      sameSite: 'none',
       path: '/',
       secure: isSecure,
     });
+
     res.json({ message: 'Logged in successfully' });
   } catch (err) {
     return res.status(500).json({ message: err.message });
