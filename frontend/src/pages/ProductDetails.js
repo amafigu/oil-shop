@@ -66,8 +66,8 @@ const ProductDetails = () => {
                 </div>
 
                 <ul className={styles.descriptionPoints}>
-                  <li className={styles.descriptionPoint}>{details}</li>
                   <li className={styles.descriptionPoint}>{description}</li>
+                  <li className={styles.descriptionPoint}>{details}</li>
                 </ul>
               </div>
               <div className={styles.rightContainerPriceDetails}>

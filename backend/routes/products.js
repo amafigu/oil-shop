@@ -8,22 +8,28 @@ import {
 import { validateBody, validateParams } from '../utils/validationMiddleware.js';
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.post('/create', validateBody(CreateProductSchema), async (req, res) => {
+  console.log('post route ');
   try {
-    const products = await db.product.findAll({
-      include: [
-        {
-          model: db.productCategory,
-          as: 'category',
-        },
-      ],
+    const product = await db.product.findOne({
+      where: {
+        name: req.body.name,
+      },
     });
-    return res.json(products);
+
+    if (product) {
+      res.status(422).json({
+        message:
+          'Can not add product with this name, please try with another name',
+      });
+    } else {
+      const product = await db.product.create(req.body);
+      res.status(201).json(product);
+    }
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
 router.get(
   '/:productName',
   validateParams(ProductNameParamSchema),
@@ -49,28 +55,6 @@ router.get(
     }
   }
 );
-
-router.post('/', validateBody(CreateProductSchema), async (req, res) => {
-  try {
-    const product = await db.product.findOne({
-      where: {
-        name: req.body.name,
-      },
-    });
-
-    if (product) {
-      res.status(422).json({
-        message:
-          'Can not add product with this name, please try with another name',
-      });
-    } else {
-      const product = await db.product.create(req.body);
-      res.status(201).json(product);
-    }
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
 
 router.delete(
   '/:productName',
@@ -110,5 +94,21 @@ router.put(
     }
   }
 );
+
+router.get('/', async (req, res) => {
+  try {
+    const products = await db.product.findAll({
+      include: [
+        {
+          model: db.productCategory,
+          as: 'category',
+        },
+      ],
+    });
+    return res.json(products);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 export default router;

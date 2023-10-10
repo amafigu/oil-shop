@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
       secure: isSecure,
     });
 
-    res.json({ message: 'Logged in successfully' });
+    return res.json({ message: 'Logged in successfully' });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
