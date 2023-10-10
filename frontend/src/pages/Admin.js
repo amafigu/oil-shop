@@ -62,11 +62,7 @@ const Admin = () => {
       valueToCheck = parseFloat(e.target.value)
     }
 
-    setProductData({ ...productData, [e.target.name]: e.target.value })
-  }
-
-  const uploadImageToBucket = () => {
-    // send
+    setProductData({ ...productData, [e.target.name]: valueToCheck })
   }
 
   const submitProductForm = async (e) => {
@@ -89,6 +85,7 @@ const Admin = () => {
     }
   }
 
+  console.log("admin product categories ", productCategories)
   return (
     <div className={styles.adminPageWrapper}>
       {notification && <NotificationCard message={notification} />}
