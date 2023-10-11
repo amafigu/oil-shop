@@ -1,3 +1,139 @@
 @use "#styles/theme" as theme;
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
+
+.newUserPageWrapper {
+  @include flex-center-column;
+
+  .newUserPage {
+    @include flex-justify-center;
+
+    flex-direction: column;
+    width: 68%;
+    margin-bottom: 32px;
+    background: #f4f4f4;
+    box-shadow: theme.$main-box-shadow;
+
+    @include media.widescreen-down {
+      width: 80%;
+    }
+
+    @include media.tablet-down {
+      width: 90%;
+      margin-bottom: 32px;
+    }
+  }
+
+  .form {
+    @include flex-center-column;
+
+    margin: 28px;
+
+    @include media.tablet-down {
+      margin: 18px;
+    }
+  }
+
+  .emailFormTitel {
+    margin-bottom: 24px;
+    font-family: theme.$main-font-family;
+    font-size: medium;
+  }
+
+  .formField {
+    font-size: medium;
+  }
+
+  .emailFieldContainer {
+    @include flex-column-align-start-justify-around;
+
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .customerInfo {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .infoColumn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .infoRow {
+    display: flex;
+    justify-content: space-between;
+
+    @include media.tablet-down {
+      flex-direction: column;
+    }
+  }
+
+  .infoRowCellRight {
+    @include shipping-info-cell;
+
+    padding-left: 28px;
+
+    @include media.tablet-down {
+      width: 100%;
+      padding-left: 0;
+    }
+  }
+
+  .infoRowCellLeft {
+    @include shipping-info-cell;
+
+    padding-right: 28px;
+
+    @include media.tablet-down {
+      width: 100%;
+      padding-right: 0;
+    }
+  }
+
+  .containerTitle {
+    margin-bottom: 24px;
+    font-size: 24px;
+  }
+
+  input {
+    width: 100%;
+    height: 32px;
+    font-family: theme.$main-font-family;
+  }
+
+  .actionButtons {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+
+    @include media.tablet-down {
+      width: 100%;
+    }
+  }
+
+  .formButton {
+    @include action-button;
+
+    width: 160px;
+    height: 36px;
+    font-size: 1rem;
+    text-transform: none;
+
+    @include media.mobile {
+      width: 120px;
+      overflow: hidden;
+    }
+  }
+}
