@@ -2,7 +2,11 @@ import dotenv from 'dotenv';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { decodeJWT } from '../middleware/decodeToken.js';
+
+import { validateBody } from '../utils/validationMiddleware.js';
+
 import db from '../models/index.js';
+import { CreateUserSchema, LoginSchema } from '../utils/userSchema.js';
 
 import { comparePassword, hashPassword } from '../utils/passwordEncrypt.js';
 dotenv.config();
@@ -27,11 +31,12 @@ router.get('/current-user', decodeJWT, async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
+  console.log('LOGOUT');
   res.clearCookie('token');
   res.json({ message: 'Logged out successfully' });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', validateBody(LoginSchema), async (req, res) => {
   try {
     const user = await db.user.findOne({ where: { email: req.body.email } });
     if (!user) {
@@ -99,7 +104,7 @@ router.post('/register-admin', async (req, res) => {
   }
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
   try {
     const existingUser = await db.user.findOne({
       where: { email: req.body.email },
