@@ -9,7 +9,6 @@ import { validateBody, validateParams } from '../utils/validationMiddleware.js';
 const router = express.Router();
 
 router.post('/create', validateBody(CreateProductSchema), async (req, res) => {
-  console.log('post route ');
   try {
     const product = await db.product.findOne({
       where: {
