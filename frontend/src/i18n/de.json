@@ -44,7 +44,10 @@
       "tenthAnswer": "Tiere reagieren anders als Menschen auf ätherische Öle. Bitte informieren Sie sich in Fachliteratur darüber, welche Öle Sie in welcher Dosierung verwenden können. Hierzu können wir keine eigenen Handlungsempfehlungen geben."
     },
     "login": {
-      "emailPlaceholder": "Email eingeben",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "loginButton": "Einlogen",
+      "emailPlaceholder": "E-Mail eingeben",
       "passwordPlaceholder": "Passwort eingeben"
     },
     "orderSummary": {

@@ -3,8 +3,8 @@ import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import styles from "./login.module.scss"
 
-import style from "./login.module.scss"
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -34,8 +34,10 @@ const Login = () => {
 
             if (userRole === "admin") {
               navigate("/users/current-admin")
-            } else {
+            } else if (userRole === "guest") {
               navigate("/users/current-user")
+            } else {
+              navigate("/login")
             }
           } catch (error) {
             console.error("Error fetching user data", error)
@@ -50,26 +52,41 @@ const Login = () => {
   }
 
   return (
-    <div className=''>
-      <div className=''>
-        <div className={style.pageTitle}>
-          {text.title}
-          <form onSubmit={login}>
+    <div className={styles.loginPageWrapper}>
+      <div className={styles.loginPage}>
+        <div className={styles.formContainer}>
+          <div className={styles.containerTitle}>{text.title}</div>
+
+          <form className={styles.form} onSubmit={login}>
+            <label className={styles.label} htmlFor='email'>
+              {text.email}
+            </label>
             <input
+              className={styles.formField}
               type='email'
               value={email}
               placeholder={text.emailPlaceholder}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete='true'
+              name='email'
+              required
             ></input>
+            <label className={styles.label} htmlFor='password'>
+              {text.password}
+            </label>
             <input
               type='password'
               value={password}
               placeholder={text.passwordPlaceholder}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete='true'
+              name='email'
+              required
+              className={styles.formField}
             ></input>
-            <button type='submit'>login</button>
+            <button className={styles.formButton} type='submit'>
+              {text.loginButton}
+            </button>
           </form>
         </div>
       </div>
