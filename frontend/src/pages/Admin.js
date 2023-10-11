@@ -35,7 +35,7 @@ const Admin = () => {
     }
 
     fetchAdminData()
-  }, [])
+  }, [navigate])
 
   const logout = async () => {
     try {

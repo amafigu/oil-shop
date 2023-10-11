@@ -35,7 +35,7 @@ const User = () => {
     }
 
     fetchUserData()
-  }, [])
+  }, [navigate])
 
   return (
     <div className=''>
