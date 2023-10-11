@@ -1,5 +1,7 @@
 import express from 'express';
+import { decodeJWT } from '../middleware/decodeToken.js';
 import db from '../models/index.js';
+
 import {
   CreateProductSchema,
   ProductNameParamSchema,
@@ -8,28 +10,32 @@ import {
 import { validateBody, validateParams } from '../utils/validationMiddleware.js';
 const router = express.Router();
 
-router.post('/create', validateBody(CreateProductSchema), async (req, res) => {
-  console.log('post route ');
-  try {
-    const product = await db.product.findOne({
-      where: {
-        name: req.body.name,
-      },
-    });
-
-    if (product) {
-      res.status(422).json({
-        message:
-          'Can not add product with this name, please try with another name',
+router.post(
+  '/create',
+  validateBody(CreateProductSchema),
+  decodeJWT,
+  async (req, res) => {
+    try {
+      const product = await db.product.findOne({
+        where: {
+          name: req.body.name,
+        },
       });
-    } else {
-      const product = await db.product.create(req.body);
-      res.status(201).json(product);
+
+      if (product) {
+        res.status(422).json({
+          message:
+            'Can not add product with this name, please try with another name',
+        });
+      } else {
+        const product = await db.product.create(req.body);
+        res.status(201).json(product);
+      }
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-  } catch (err) {
-    res.status(500).json({ message: err.message });
   }
-});
+);
 router.get(
   '/:productName',
   validateParams(ProductNameParamSchema),

@@ -3,6 +3,14 @@
     "about": {
       "title": "Hi! Thanks for visiting Oylo, Portfolio web-shop"
     },
+    "admin": {
+      "loadingData": "Admin-Daten werden geladen...",
+      "welcomeText": {
+        "firstPart": "Hello,",
+        "secondPart": "you are loggin as a",
+        "thirdPart": "."
+      }
+    },
     "cart": {
       "emptyCart": "There are no products in the cart",
       "confirmPurchase": "Confirm Purchase",
@@ -116,6 +124,17 @@
       "home": "Home",
       "shop": "Shop",
       "about": "About us"
+    },
+    "newProductForm": {
+      "name": "Name",
+      "category": "Category",
+      "size": "Size",
+      "price": "Price",
+      "description": "Description",
+      "details": "Details",
+      "measure": "Measure",
+      "imageUrl": "Image Url",
+      "submitButton": "Create product"
     },
     "products": {
       "oil": {

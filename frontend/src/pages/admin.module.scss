@@ -35,12 +35,22 @@
   }
 
   .adminFormTitel {
-    margin-bottom: 24px;
+    margin: 24px;
     font-family: theme.$main-font-family;
     font-size: 24px;
   }
 
   .formField {
+    width: 100%;
+    height: 32px;
+    font-family: theme.$main-font-family;
+    font-size: medium;
+  }
+
+  .formFieldSelect {
+    width: 100%;
+    height: 38px;
+    font-family: theme.$main-font-family;
     font-size: medium;
   }
 
@@ -48,17 +58,6 @@
     display: flex;
     justify-content: flex-start;
     margin-bottom: 4px;
-  }
-
-  .containerTitle {
-    margin-bottom: 24px;
-    font-size: 24px;
-  }
-
-  input {
-    width: 100%;
-    height: 32px;
-    font-family: theme.$main-font-family;
   }
 
   .formButton {
