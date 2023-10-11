@@ -1,9 +1,11 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import style from "./user.module.scss"
 
 const User = () => {
   const [userData, setUserData] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -12,6 +14,9 @@ const User = () => {
           `${process.env.REACT_APP_API_URL}/users/current-user`,
           { withCredentials: true },
         )
+        if (response.data.role === "admin") {
+          navigate("/users/current-admin")
+        }
         setUserData(response.data)
       } catch (error) {
         console.error("Error fetching user data", error)
