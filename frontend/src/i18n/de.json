@@ -48,7 +48,23 @@
       "password": "Passwort",
       "loginButton": "Einlogen",
       "emailPlaceholder": "E-Mail eingeben",
-      "passwordPlaceholder": "Passwort eingeben"
+      "passwordPlaceholder": "Passwort eingeben",
+      "signUp": "Zur Registrierung",
+      "haveAccount": "Sie haben noch kein Konto?",
+      "or": "oder",
+      "passwordLost": "Haben Sie Ihr Passwort vergessen?"
+    },
+    "signUp": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "loginButton": "Einlogen",
+      "login": "Anmelden",
+      "haveAccount": "Haben Sie ein Konto?",
+      "or": "oder",
+      "passwordLost": "Haben Sie Ihr Passwort vergessen?",
+      "firstName": "Name",
+      "lastName": "Nachname",
+      "submitButton": "Konto erstellen"
     },
     "orderSummary": {
       "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",

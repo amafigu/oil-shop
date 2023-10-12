@@ -2,7 +2,7 @@ import useLocaleContext from "#context/localeContext"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styles from "./newUser.module.scss"
 
 const NewUser = () => {
@@ -11,7 +11,7 @@ const NewUser = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
-  const text = translate.pages.login
+  const text = translate.pages.signUp
   const navigate = useNavigate()
   useEffectScrollTop()
 
@@ -34,55 +34,78 @@ const NewUser = () => {
   return (
     <div className={styles.newUserPageWrapper}>
       <div className={styles.newUserPage}>
-        <div className={styles.containerTitle}>
-          {text.title}
+        <div className={styles.formContainer}>
+          <div className={styles.logoContainer}>
+            <img
+              className={styles.logo}
+              src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+              alt='logo'
+            />
+          </div>
           <form className={styles.form} onSubmit={createUser}>
-            <label className={styles.label} htmlFor='name'></label>
+            <label className={styles.label} htmlFor='firstName'>
+              {text.firstName}
+            </label>
             <input
               className={styles.formField}
               name='firstName'
               type='text'
               value={firstName}
-              placeholder={"first name"}
+              placeholder={text.firstName}
               onChange={(e) => setFirstName(e.target.value)}
               autoComplete='true'
               required
             ></input>
+            <label className={styles.label} htmlFor='lastName'>
+              {text.lastName}
+            </label>
             <input
               className={styles.formField}
               name='lastName'
               type='text'
               value={lastName}
-              placeholder={"last name"}
+              placeholder={text.lastName}
               onChange={(e) => setLastName(e.target.value)}
               autoComplete='true'
               required
             ></input>
+            <label className={styles.label} htmlFor='email'>
+              {text.email}
+            </label>
             <input
               className={styles.formField}
               type='email'
               value={email}
-              placeholder={text.emailPlaceholder}
+              placeholder={text.email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete='true'
               required
             ></input>
+
+            <label className={styles.label} htmlFor='password'>
+              {text.password}
+            </label>
             <input
               className={styles.formField}
               type='password'
               value={password}
-              placeholder={text.passwordPlaceholder}
+              placeholder={text.password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete='true'
               required
             ></input>
 
             <button className={styles.formButton} type='submit'>
-              Sign Up
+              {text.submitButton}
             </button>
           </form>
         </div>
-        <div></div>
+
+        <div className={styles.loginContainer}>
+          <span>
+            {text.haveAccount} <Link to='/login'>{text.login}</Link>
+          </span>
+        </div>
       </div>
     </div>
   )

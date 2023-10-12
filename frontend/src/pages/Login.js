@@ -2,7 +2,7 @@ import useLocaleContext from "#context/localeContext"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styles from "./login.module.scss"
 
 const Login = () => {
@@ -55,8 +55,13 @@ const Login = () => {
     <div className={styles.loginPageWrapper}>
       <div className={styles.loginPage}>
         <div className={styles.formContainer}>
-          <div className={styles.containerTitle}>{text.title}</div>
-
+          <div className={styles.logoContainer}>
+            <img
+              className={styles.logo}
+              src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+              alt='logo'
+            />
+          </div>
           <form className={styles.form} onSubmit={login}>
             <label className={styles.label} htmlFor='email'>
               {text.email}
@@ -88,6 +93,16 @@ const Login = () => {
               {text.loginButton}
             </button>
           </form>
+          <div className={styles.divider}>{text.or}</div>
+          <div className={styles.lostPasswordContainer}>
+            <Link to='/accounts/password/reset'>{text.passwordLost}</Link>
+          </div>
+        </div>
+
+        <div className={styles.signUpContainer}>
+          <span>
+            {text.haveAccount} <Link to='/sign-up'>{text.signUp}</Link>
+          </span>
         </div>
       </div>
     </div>
