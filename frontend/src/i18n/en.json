@@ -44,8 +44,30 @@
       "tenthAnswer": "Animals react differently than humans to essential oils. Please inform yourself in specialized literature on the subject of which oils you use in what dosage you can use. For this we can not own give recommendations for action."
     },
     "login": {
+      "email": "Email",
+      "password": "Password",
+      "loginButton": "Login",
       "emailPlaceholder": "enter email",
-      "passwordPlaceholder": "enter password"
+      "passwordPlaceholder": "enter password",
+      "signUp": "Create an Account",
+      "haveAccount": "Don't have an account?",
+      "or": "or",
+      "passwordLost": "Did you forget your password?"
+    },
+    "signUp": {
+      "newCustomer": "New Customer?",
+      "email": "Email",
+      "password": "Password",
+      "loginButton": "Login",
+      "emailPlaceholder": "enter email",
+      "passwordPlaceholder": "enter password",
+      "login": "Login",
+      "haveAccount": "Do you have an account?",
+      "or": "or",
+      "passwordLost": "Did you forget your password?",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "submitButton": "Create an Account"
     },
     "orderSummary": {
       "thankClient": "Thank you for shopping at Oylo!",

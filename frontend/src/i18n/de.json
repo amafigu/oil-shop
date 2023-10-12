@@ -44,8 +44,27 @@
       "tenthAnswer": "Tiere reagieren anders als Menschen auf ätherische Öle. Bitte informieren Sie sich in Fachliteratur darüber, welche Öle Sie in welcher Dosierung verwenden können. Hierzu können wir keine eigenen Handlungsempfehlungen geben."
     },
     "login": {
-      "emailPlaceholder": "Email eingeben",
-      "passwordPlaceholder": "Passwort eingeben"
+      "email": "E-Mail",
+      "password": "Passwort",
+      "loginButton": "Einlogen",
+      "emailPlaceholder": "E-Mail eingeben",
+      "passwordPlaceholder": "Passwort eingeben",
+      "signUp": "Zur Registrierung",
+      "haveAccount": "Sie haben noch kein Konto?",
+      "or": "oder",
+      "passwordLost": "Haben Sie Ihr Passwort vergessen?"
+    },
+    "signUp": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "loginButton": "Einlogen",
+      "login": "Anmelden",
+      "haveAccount": "Haben Sie ein Konto?",
+      "or": "oder",
+      "passwordLost": "Haben Sie Ihr Passwort vergessen?",
+      "firstName": "Name",
+      "lastName": "Nachname",
+      "submitButton": "Konto erstellen"
     },
     "orderSummary": {
       "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",
