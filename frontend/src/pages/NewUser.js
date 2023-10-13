@@ -10,6 +10,8 @@ const NewUser = () => {
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [emailInUserError, setEmailInUserError] = useState("")
+  const [validationErrors, setValidationErrors] = useState("")
   const { translate } = useLocaleContext()
   const text = translate.pages.signUp
   const navigate = useNavigate()
@@ -27,6 +29,14 @@ const NewUser = () => {
 
       navigate("/users/current-user")
     } catch (error) {
+      if (error.response.data.message === "Email already in use") {
+        setEmailInUserError(`${text.emailInUseErrorMessage}`)
+        setTimeout(() => setEmailInUserError(null), 6000)
+      }
+      if (error.response.data.errors) {
+        setValidationErrors(error.response.data.errors)
+        setTimeout(() => setValidationErrors(null), 6000)
+      }
       console.error("Signup error", error)
     }
   }
@@ -81,6 +91,9 @@ const NewUser = () => {
               autoComplete='true'
               required
             ></input>
+            {emailInUserError && (
+              <span className={styles.errorMessage}>{emailInUserError}</span>
+            )}
 
             <label className={styles.label} htmlFor='password'>
               {text.password}
@@ -99,6 +112,8 @@ const NewUser = () => {
               {text.submitButton}
             </button>
           </form>
+          {validationErrors &&
+            validationErrors.map((error) => <div>{error.message}</div>)}
         </div>
 
         <div className={styles.loginContainer}>

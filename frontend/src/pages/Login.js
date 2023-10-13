@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 import styles from "./login.module.scss"
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
@@ -40,6 +41,9 @@ const Login = () => {
               navigate("/login")
             }
           } catch (error) {
+            setErrorMessage(`${text.errorMessage}`)
+            setTimeout(() => setErrorMessage(null), 10000)
+
             console.error("Error fetching user data", error)
           }
         }
@@ -47,6 +51,9 @@ const Login = () => {
         getUser()
       }
     } catch (error) {
+      setErrorMessage(`${text.errorMessage}`)
+      setTimeout(() => setErrorMessage(null), 10000)
+
       console.error("Login error", error)
     }
   }
@@ -76,6 +83,7 @@ const Login = () => {
               name='email'
               required
             ></input>
+
             <label className={styles.label} htmlFor='password'>
               {text.password}
             </label>
@@ -89,11 +97,15 @@ const Login = () => {
               required
               className={styles.formField}
             ></input>
+
             <button className={styles.formButton} type='submit'>
               {text.loginButton}
             </button>
           </form>
           <div className={styles.divider}>{text.or}</div>
+          {errorMessage && (
+            <span className={styles.errorMessage}>{errorMessage}</span>
+          )}
           <div className={styles.lostPasswordContainer}>
             <Link to='/accounts/password/reset'>{text.passwordLost}</Link>
           </div>
