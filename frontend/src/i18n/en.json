@@ -52,7 +52,8 @@
       "signUp": "Create an Account",
       "haveAccount": "Don't have an account?",
       "or": "or",
-      "passwordLost": "Did you forget your password?"
+      "passwordLost": "Did you forget your password?",
+      "errorMessage": "Unfortunately your password or email address was incorrect."
     },
     "signUp": {
       "newCustomer": "New Customer?",
@@ -67,7 +68,29 @@
       "passwordLost": "Did you forget your password?",
       "firstName": "First name",
       "lastName": "Last name",
-      "submitButton": "Create an Account"
+      "submitButton": "Create an Account",
+      "emailInUseErrorMessage": "Email already registered",
+      "validationErrors": {
+        "firstName": {
+          "too_small": "First name should have at least two letters",
+          "too_big": "First name can't be longer than 30 characters.",
+          "custom": "First name should start with a capital letter and can only contain letters."
+        },
+        "lastName": {
+          "too_small": "Last name should have at least two letters",
+          "too_big": "Last name can't be longer than 40 characters.",
+          "custom": "Last name should start with a capital letter and can only contain letters."
+        },
+        "password": {
+          "too_small": "Password should be at least 8 characters long.",
+          "custom": "Password should have at least 8 characters and 1 symbol."
+        },
+        "email": {
+          "too_big": "Email can't be longer than 40 characters.",
+          "invalid_string": "Invalid email format.",
+          "too_small": "Email should have at least 8 characters."
+        }
+      }
     },
     "orderSummary": {
       "thankClient": "Thank you for shopping at Oylo!",

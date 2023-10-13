@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useLocation } from "react-router-dom"
 import styles from "./appRoutes.module.scss"
 import { CartProvider } from "./context/cartContext"
 
@@ -33,11 +33,17 @@ const AppRoutes = () => {
         console.error("Error fetching data: ", error)
       })
   }, [])
+  const location = useLocation()
+  const currentPath = location.pathname
+
+  const routesWithoutNavbar = ["/login", "/sign-up"]
 
   return (
     <div className={styles.wrapper}>
       <CartProvider>
-        <Navbar productCategories={productCategories} />
+        {!routesWithoutNavbar.includes(currentPath) && (
+          <Navbar productCategories={productCategories} />
+        )}
 
         <Routes>
           <Route path='/about' element={<About />} />

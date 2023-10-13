@@ -3,12 +3,18 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import { decodeJWT } from '../middleware/decodeToken.js';
 
-import { validateBody } from '../utils/validationMiddleware.js';
+import { validateBody } from '../middleware/validationMiddleware.js';
 
+import {
+  CreateUserSchema,
+  LoginSchema,
+} from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
-import { CreateUserSchema, LoginSchema } from '../utils/userSchema.js';
 
-import { comparePassword, hashPassword } from '../utils/passwordEncrypt.js';
+import {
+  comparePassword,
+  hashPassword,
+} from '../middleware/passwordEncrypt.js';
 dotenv.config();
 const router = express.Router();
 
@@ -40,7 +46,7 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
   try {
     const user = await db.user.findOne({ where: { email: req.body.email } });
     if (!user) {
-      return res.status(404).json({ message: 'invalid username' });
+      return res.status(404).json({ message: 'Invalid email' });
     }
 
     const isPasswordValid = await comparePassword(

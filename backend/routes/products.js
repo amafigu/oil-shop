@@ -3,11 +3,14 @@ import { decodeJWT } from '../middleware/decodeToken.js';
 import db from '../models/index.js';
 
 import {
+  validateBody,
+  validateParams,
+} from '../middleware/validationMiddleware.js';
+import {
   CreateProductSchema,
   ProductNameParamSchema,
   UpdateProductSchema,
-} from '../utils/productSchema.js';
-import { validateBody, validateParams } from '../utils/validationMiddleware.js';
+} from '../middleware/validationSchemas/productSchema.js';
 const router = express.Router();
 
 router.post(
