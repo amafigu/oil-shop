@@ -26,6 +26,4 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/product-categories', productCategoryRoutes);
 
-app.listen(process.env.PORT || 3001, () => {
-  console.log(`Server is running on port ${process.env.PORT || 3001}.`);
-});
+export default app;

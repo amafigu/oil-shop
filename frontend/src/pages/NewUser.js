@@ -104,12 +104,6 @@ const NewUser = () => {
               autoComplete='true'
               required
             ></input>
-            {fieldErrors.firstName &&
-              fieldErrors.firstName.map((error) => (
-                <div key={error.message} className={styles.errorMessage}>
-                  {translateErrors(error)}
-                </div>
-              ))}
 
             <input
               className={styles.formField}
@@ -121,12 +115,6 @@ const NewUser = () => {
               autoComplete='true'
               required
             ></input>
-            {fieldErrors.lastName &&
-              fieldErrors.lastName.map((error) => (
-                <div key={error.message} className={styles.errorMessage}>
-                  {translateErrors(error)}
-                </div>
-              ))}
 
             <input
               className={styles.formField}
@@ -137,15 +125,7 @@ const NewUser = () => {
               autoComplete='true'
               required
             ></input>
-            {fieldErrors.email &&
-              fieldErrors.email.map((error) => (
-                <div key={error.message} className={styles.errorMessage}>
-                  {translateErrors(error)}
-                </div>
-              ))}
-            {emailInUserError && (
-              <div className={styles.errorMessage}>{emailInUserError}</div>
-            )}
+
             <div className={styles.passwordInputAndToggleButtonContainer}>
               <input
                 className={styles.formField}
@@ -156,12 +136,7 @@ const NewUser = () => {
                 autoComplete='true'
                 required
               ></input>
-              {fieldErrors.password &&
-                fieldErrors.password.map((error) => (
-                  <div key={error.message} className={styles.errorMessage}>
-                    {translateErrors(error)}
-                  </div>
-                ))}
+
               <button
                 type='button'
                 onClick={() => setShowPassword(!showPassword)}
@@ -184,6 +159,35 @@ const NewUser = () => {
           <span>
             {text.haveAccount} <Link to='/login'>{text.login}</Link>
           </span>
+        </div>
+        <div className={styles.errorsContainer}>
+          {fieldErrors.firstName &&
+            fieldErrors.firstName.map((error) => (
+              <div key={error.message} className={styles.errorMessage}>
+                {translateErrors(error)}
+              </div>
+            ))}
+          {fieldErrors.lastName &&
+            fieldErrors.lastName.map((error) => (
+              <div key={error.message} className={styles.errorMessage}>
+                {translateErrors(error)}
+              </div>
+            ))}
+          {fieldErrors.email &&
+            fieldErrors.email.map((error) => (
+              <div key={error.message} className={styles.errorMessage}>
+                {translateErrors(error)}
+              </div>
+            ))}
+          {emailInUserError && (
+            <div className={styles.errorMessage}>{emailInUserError}</div>
+          )}
+          {fieldErrors.password &&
+            fieldErrors.password.map((error) => (
+              <div key={error.message} className={styles.errorMessage}>
+                {translateErrors(error)}
+              </div>
+            ))}
         </div>
       </div>
     </div>
