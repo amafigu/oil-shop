@@ -52,7 +52,8 @@
       "signUp": "Zur Registrierung",
       "haveAccount": "Sie haben noch kein Konto?",
       "or": "oder",
-      "passwordLost": "Haben Sie Ihr Passwort vergessen?"
+      "passwordLost": "Haben Sie Ihr Passwort vergessen?",
+      "errorMessage": "Leider war Ihre E-Mail-Adresse oder Ihr Passwort falsch."
     },
     "signUp": {
       "email": "E-Mail",
@@ -64,7 +65,8 @@
       "passwordLost": "Haben Sie Ihr Passwort vergessen?",
       "firstName": "Name",
       "lastName": "Nachname",
-      "submitButton": "Konto erstellen"
+      "submitButton": "Konto erstellen",
+      "emailInUseErrorMessage": "E-Mail bereits registriert"
     },
     "orderSummary": {
       "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",
