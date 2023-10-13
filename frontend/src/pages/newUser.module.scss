@@ -127,4 +127,20 @@
     font-weight: 500;
     color: red;
   }
+
+  .passwordInputAndToggleButtonContainer {
+    position: relative;
+
+    button {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      transform: translateY(
+        -20%
+      ); /* This centers the button vertically inside the input */
+    }
+  }
 }

@@ -1,8 +1,12 @@
+import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import useLocaleContext from "#context/localeContext"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import LanguageDropdown from "../components/Navbar/LanguageDropdown"
 import styles from "./newUser.module.scss"
 
 const NewUser = () => {
@@ -10,8 +14,9 @@ const NewUser = () => {
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState({})
   const [emailInUserError, setEmailInUserError] = useState("")
-  const [validationErrors, setValidationErrors] = useState("")
   const { translate } = useLocaleContext()
   const text = translate.pages.signUp
   const navigate = useNavigate()
@@ -29,21 +34,57 @@ const NewUser = () => {
 
       navigate("/users/current-user")
     } catch (error) {
+      if (error.response.data.errors) {
+        const errorMessages = error.response.data.errors.reduce((acc, err) => {
+          if (!acc[err.path[0]]) {
+            acc[err.path[0]] = []
+          }
+          acc[err.path[0]].push({
+            code: err.code,
+            message: err.message,
+            path: err.path[0],
+          })
+          return acc
+        }, {})
+        console.log(errorMessages)
+
+        setFieldErrors(errorMessages)
+        setTimeout(() => setFieldErrors({}), 60000)
+      }
       if (error.response.data.message === "Email already in use") {
         setEmailInUserError(`${text.emailInUseErrorMessage}`)
         setTimeout(() => setEmailInUserError(null), 6000)
       }
-      if (error.response.data.errors) {
-        setValidationErrors(error.response.data.errors)
-        setTimeout(() => setValidationErrors(null), 6000)
-      }
+
       console.error("Signup error", error)
+    }
+  }
+
+  const translateErrors = (error) => {
+    const translatedMessage = text.validationErrors[error.path]
+    const customError = text.validationErrors[error.params]
+
+    console.log("translated message", translatedMessage)
+    console.log("translated customError", customError)
+    if (translatedMessage) {
+      console.log("if translated error.path ", error.path)
+      console.log("if translated error.code ", error.code)
+      console.log("if translated message", translatedMessage)
+      return translatedMessage[error.code]
+    } else {
+      console.log("else translated error.code ", error.code)
+      // If no translated message is found, you can return the original message or a default one
+      return error.message // or return a default message like "Unknown error"
     }
   }
 
   return (
     <div className={styles.newUserPageWrapper}>
       <div className={styles.newUserPage}>
+        <div className={styles.languagesContainer}>
+          <LanguageDropdown />
+        </div>
+
         <div className={styles.formContainer}>
           <div className={styles.logoContainer}>
             <img
@@ -53,9 +94,6 @@ const NewUser = () => {
             />
           </div>
           <form className={styles.form} onSubmit={createUser}>
-            <label className={styles.label} htmlFor='firstName'>
-              {text.firstName}
-            </label>
             <input
               className={styles.formField}
               name='firstName'
@@ -66,9 +104,13 @@ const NewUser = () => {
               autoComplete='true'
               required
             ></input>
-            <label className={styles.label} htmlFor='lastName'>
-              {text.lastName}
-            </label>
+            {fieldErrors.firstName &&
+              fieldErrors.firstName.map((error) => (
+                <div key={error.message} className={styles.errorMessage}>
+                  {translateErrors(error)}
+                </div>
+              ))}
+
             <input
               className={styles.formField}
               name='lastName'
@@ -79,9 +121,13 @@ const NewUser = () => {
               autoComplete='true'
               required
             ></input>
-            <label className={styles.label} htmlFor='email'>
-              {text.email}
-            </label>
+            {fieldErrors.lastName &&
+              fieldErrors.lastName.map((error) => (
+                <div key={error.message} className={styles.errorMessage}>
+                  {translateErrors(error)}
+                </div>
+              ))}
+
             <input
               className={styles.formField}
               type='email'
@@ -91,29 +137,47 @@ const NewUser = () => {
               autoComplete='true'
               required
             ></input>
+            {fieldErrors.email &&
+              fieldErrors.email.map((error) => (
+                <div key={error.message} className={styles.errorMessage}>
+                  {translateErrors(error)}
+                </div>
+              ))}
             {emailInUserError && (
-              <span className={styles.errorMessage}>{emailInUserError}</span>
+              <div className={styles.errorMessage}>{emailInUserError}</div>
             )}
-
-            <label className={styles.label} htmlFor='password'>
-              {text.password}
-            </label>
-            <input
-              className={styles.formField}
-              type='password'
-              value={password}
-              placeholder={text.password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete='true'
-              required
-            ></input>
+            <div className={styles.passwordInputAndToggleButtonContainer}>
+              <input
+                className={styles.formField}
+                type={showPassword ? "text" : "password"}
+                value={password}
+                placeholder={text.password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete='true'
+                required
+              ></input>
+              {fieldErrors.password &&
+                fieldErrors.password.map((error) => (
+                  <div key={error.message} className={styles.errorMessage}>
+                    {translateErrors(error)}
+                  </div>
+                ))}
+              <button
+                type='button'
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <FontAwesomeIcon icon={faUnlock} />
+                ) : (
+                  <FontAwesomeIcon icon={faLock} />
+                )}
+              </button>
+            </div>
 
             <button className={styles.formButton} type='submit'>
               {text.submitButton}
             </button>
           </form>
-          {validationErrors &&
-            validationErrors.map((error) => <div>{error.message}</div>)}
         </div>
 
         <div className={styles.loginContainer}>

@@ -1,7 +1,7 @@
 import express from 'express';
+import { validateBody } from '../middleware/validationMiddleware.js';
+import { ProductCategorySchema } from '../middleware/validationSchemas/productSchema.js';
 import db from '../models/index.js';
-import { ProductCategorySchema } from '../utils/productSchema.js';
-import { validateBody } from '../utils/validationMiddleware.js';
 
 const router = express.Router();
 

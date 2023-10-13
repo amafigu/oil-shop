@@ -66,7 +66,27 @@
       "firstName": "Name",
       "lastName": "Nachname",
       "submitButton": "Konto erstellen",
-      "emailInUseErrorMessage": "E-Mail bereits registriert"
+      "emailInUseErrorMessage": "E-Mail bereits registriert",
+      "validationErrors": {
+        "firstName": {
+          "too_small": "Der Vorname sollte mindestens zwei Zeichen haben.",
+          "custom": "Der Vorname sollte mit einem Großbuchstaben beginnen und darf nur Buchstaben enthalten."
+        },
+        "lastName": {
+          "too_small": "Der Nachname sollte mindestens zwei Zeichen haben.",
+          "custom": "Der Nachname sollte mit einem Großbuchstaben beginnen und darf nur Buchstaben enthalten."
+        },
+        "password": {
+          "too_small": "Das Passwort sollte mindestens 8 Zeichen lang sein.",
+          "custom": "Das Passwort sollte mindestens 8 Zeichen und 1 Symbol haben."
+        },
+        "email": {
+          "too_big": "E-Mails dürfen nicht länger als 40 Zeichen sein.",
+          "invalid_string": "Ungültiges E-Mail-Format.",
+          "too_small": "Das Passwort sollte mindestens 8 Zeichen lang sein.",
+          "custom": "Das Passwort sollte mindestens 8 Zeichen und 1 Symbol haben."
+        }
+      }
     },
     "orderSummary": {
       "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",
