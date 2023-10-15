@@ -112,3 +112,13 @@ export const decreaseQuantity = (quantity, setQuantity) => {
     setQuantity((prevQuantity) => prevQuantity - 1)
   }
 }
+
+export const translateZodValidationErrors = (error, text) => {
+  const translatedMessage = text.validationErrors[error.path]
+  if (translatedMessage) {
+    return translatedMessage[error.code]
+  } else {
+    console.log("error code ", error.code)
+    return error.message
+  }
+}

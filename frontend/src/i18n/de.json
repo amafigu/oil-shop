@@ -88,7 +88,7 @@
       "haveAccount": "Haben Sie ein Konto?",
       "or": "oder",
       "passwordLost": "Haben Sie Ihr Passwort vergessen?",
-      "firstName": "Name",
+      "firstName": "Vorname",
       "lastName": "Nachname",
       "submitButton": "Konto erstellen",
       "emailInUseErrorMessage": "E-Mail bereits registriert",
@@ -118,7 +118,7 @@
       "orderResume": "Bestellübersicht",
       "deliveryInformation": "Lieferinformationen",
       "inputLabels": {
-        "firstName": "Name",
+        "firstName": "Vorname",
         "lastName": "Nachname",
         "email": "E-Mail",
         "phone": "Telefonnummer",
@@ -146,7 +146,7 @@
       "yourEmail": "Ihren E-Mail",
       "title": "Wenn Sie bereits registriert sind, geben Sie einfach Ihre E-Mail-Adresse ein. Andernfalls können Sie durch die Übermittlung Ihrer E-Mail-Adresse als Gast zur Kasse gehen",
       "inputLabels": {
-        "firstName": "Name",
+        "firstName": "Vorname",
         "lastName": "Nachname",
         "email": "E-Mail",
         "phone": "Telefonnummer",
@@ -194,6 +194,11 @@
     "crud": {
       "forms": {
         "commonProperties": {
+          "password": "Passwort",
+          "createdAt": "Erstellt am",
+          "role": "Rolle",
+          "firstName": "Vorname",
+          "lastName": "Nachname",
           "name": "Name",
           "email": "E-Mail",
           "category": "Kategorie",
@@ -212,6 +217,20 @@
         "button": "Benutzer löschen",
         "error": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
         "deletedByEmail": "wurde erfolgreich aus dem System gelöscht"
+      },
+      "getUser": {
+        "button": "Benutzer Daten sehen",
+        "error": "Kann nicht Benutzer finden: ",
+        "getByEmail": "Benutzer per E-Mail  sehen"
+      },
+      "getAllUsers": {
+        "showButton": "Alle Benutzer anzeigen",
+        "hideButton": "Alle Benutzer ausblenden",
+        "error": "Kann nicht alle Benutzer finden"
+      },
+      "createUser": {
+        "submitButton": "Konto erstellen",
+        "emailInUseErrorMessage": "E-Mail bereits registriert"
       }
     },
     "products": {
