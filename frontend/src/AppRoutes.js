@@ -17,7 +17,7 @@ import ProductDetails from "#pages/ProductDetails"
 import Shipping from "#pages/Shipping"
 import Shop from "#pages/Shop"
 import Admin from "./pages/Admin"
-import NewUser from "./pages/NewUser"
+import SignUp from "./pages/SignUp"
 import User from "./pages/User"
 
 const AppRoutes = () => {
@@ -56,7 +56,7 @@ const AppRoutes = () => {
           <Route path='/cart' element={<Cart />} />
           <Route path='/faq' element={<Faq />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/sign-up' element={<NewUser />} />
+          <Route path='/sign-up' element={<SignUp />} />
           <Route path='/users/current-user' element={<User />} />
           <Route path='/users/current-admin' element={<Admin />} />
           <Route path='/products/:productName' element={<ProductDetails />} />
