@@ -1,6 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import axios from "axios"
+import { getGetUserByEmail } from "#utils/utils"
 import { useState } from "react"
 import styles from "./getUser.module.scss"
 
@@ -11,22 +11,6 @@ const GetUser = () => {
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
-
-  const getUserByEmail = async (email) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/user/${email}`,
-        { withCredentials: true },
-      )
-      setUserDataByEmail(response.data)
-      console.log("data ", response.data)
-      setUserEmail("")
-    } catch (error) {
-      setNotification(`Error geting user: ${error.response.data.message}`)
-      setTimeout(() => setNotification(null), 2000)
-      console.error("Error geting user by email", error)
-    }
-  }
 
   return (
     <div>
@@ -39,22 +23,33 @@ const GetUser = () => {
       />
       <button
         className={styles.formButton}
-        onClick={() => getUserByEmail(userEmail.trim())}
+        onClick={() =>
+          getGetUserByEmail(
+            userEmail.trim(),
+            setUserDataByEmail,
+            setUserEmail,
+            setNotification,
+          )
+        }
       >
         {text.getUser.getByEmail}
       </button>
 
       <div>
-        {text.forms.commonProperties.firstName}: {userDataByEmail.firstName}
+        {text.forms.commonProperties.firstName}:{" "}
+        {userDataByEmail ? userDataByEmail.firstName : ""}
       </div>
       <div>
-        {text.forms.commonProperties.lastName}: {userDataByEmail.lastName}
+        {text.forms.commonProperties.lastName}:
+        {userDataByEmail ? userDataByEmail.lastName : ""}
       </div>
       <div>
-        {text.forms.commonProperties.role}: {userDataByEmail.role}
+        {text.forms.commonProperties.role}:
+        {userDataByEmail ? userDataByEmail.role : ""}
       </div>
       <div>
-        {text.forms.commonProperties.createdAt}: {userDataByEmail.createdAt}
+        {text.forms.commonProperties.createdAt}:
+        {userDataByEmail ? userDataByEmail.createdAt : ""}
       </div>
     </div>
   )

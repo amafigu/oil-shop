@@ -48,6 +48,8 @@ export const navigateToProductAndCloseDropdown = (
   setSearchText("")
 }
 
+// crud products and users functions
+
 export const useGetProducts = (setProducts) => {
   useEffect(() => {
     axios
@@ -57,6 +59,64 @@ export const useGetProducts = (setProducts) => {
       })
       .catch((e) => console.error("Error getting products data", e))
   }, [setProducts])
+}
+
+export const getGetUserByEmail = async (
+  email,
+  setUserDataByEmail,
+  setUserEmail,
+  setNotification,
+) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/user/${email}`,
+      {
+        withCredentials: true,
+      },
+    )
+
+    setUserDataByEmail(response.data)
+    setUserEmail("")
+  } catch (error) {
+    setNotification(`Error geting user: ${error.response.data.message}`)
+    setTimeout(() => setNotification(null), 2000)
+    console.error("Error geting user by email", error)
+  }
+}
+
+export const getAdminData = async (setAdminData, setNotification, navigate) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/current-user`,
+      { withCredentials: true },
+    )
+    setAdminData(response.data)
+  } catch (error) {
+    setNotification(`${error.response.data.message}`)
+    setTimeout(() => navigate("/login"), 1900)
+    setTimeout(() => setNotification(null), 2000)
+
+    console.error("Error geting admin data", error)
+  }
+}
+
+// end crud products and users functions
+
+export const logout = async (navigate, setNotification) => {
+  try {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}/users/logout`,
+      {},
+      {
+        withCredentials: true,
+      },
+    )
+    navigate("/login")
+  } catch (error) {
+    setNotification(`Error to logout: ${error.response.data.message}`)
+    setTimeout(() => setNotification(null), 2000)
+    console.error(error)
+  }
 }
 
 export const useHideListOnOuterClick = (

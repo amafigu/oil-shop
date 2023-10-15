@@ -233,6 +233,7 @@
         "error": "Can not see all users"
       },
       "createUser": {
+        "success": "User created successfully",
         "submitButton": "Create an Account",
         "emailInUseErrorMessage": "Email already registered"
       }

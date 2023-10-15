@@ -229,6 +229,7 @@
         "error": "Kann nicht alle Benutzer finden"
       },
       "createUser": {
+        "success": "Benutzer wurde erfolgreich erstellt",
         "submitButton": "Konto erstellen",
         "emailInUseErrorMessage": "E-Mail bereits registriert"
       }

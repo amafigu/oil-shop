@@ -1,10 +1,9 @@
-import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import axios from "axios"
 import { useState } from "react"
 import styles from "./deleteUser.module.scss"
 
-const DeleteUser = () => {
+const DeleteUser = ({ setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState("")
   const [userEmail, setUserEmail] = useState("")
 
@@ -20,18 +19,17 @@ const DeleteUser = () => {
         },
       )
       setNotification(`${userEmail} ${text.deleteUser.deletedByEmail}`)
-
-      setTimeout(() => setNotification(null), 3000)
+      setTimeout(() => setNotification(null), 2000)
+      setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
+      setUserEmail("")
     } catch (error) {
       setNotification(`${userEmail} ${text.deleteUser.error}`)
       setTimeout(() => setNotification(null), 3000)
-
       console.error("Can not delete user", error)
     }
   }
   return (
     <div>
-      {notification && <NotificationCard message={notification} />}
       <div className={styles.form}>
         <label className={styles.label} htmlFor='userEmail'>
           {text.forms.commonProperties.email}
@@ -49,6 +47,7 @@ const DeleteUser = () => {
           {text.deleteUser.button}
         </button>
       </div>
+      <div>{notification}</div>
     </div>
   )
 }
