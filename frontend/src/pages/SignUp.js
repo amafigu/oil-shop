@@ -1,15 +1,14 @@
-import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
+import LanguageDropdown from "#components/Navbar/LanguageDropdown"
 import useLocaleContext from "#context/localeContext"
 import { useEffectScrollTop } from "#utils/utils"
+import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import LanguageDropdown from "../components/Navbar/LanguageDropdown"
-import styles from "./newUser.module.scss"
+import styles from "./signUp.module.scss"
 
-const NewUser = () => {
+const SignUp = () => {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
@@ -194,4 +193,4 @@ const NewUser = () => {
   )
 }
 
-export default NewUser
+export default SignUp

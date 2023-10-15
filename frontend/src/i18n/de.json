@@ -9,6 +9,31 @@
         "firstPart": "Hallo,",
         "secondPart": "Sie sind als",
         "thirdPart": " angemeldet."
+      },
+      "crud": {
+        "users": {
+          "create": "Benutzer erstellen",
+          "delete": "Benutzer löschen",
+          "deletedByEmail": "wurde erfolgreich aus dem System gelöscht",
+          "deleteError": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
+          "edit": "Benutzer editieren",
+          "getUserButton": "Benutzer Daten sehen",
+          "getByEmail": "Benutzer per E-Mail Daten sehen"
+        },
+        "products": {
+          "create": "Produkt erstellen",
+          "delete": "Produkt löschen",
+          "edit": "Produkt editieren",
+          "getByName": "Produkt per Name finden",
+          "getByNameAndQuantity": ""
+        }
+      },
+      "logout": "Ausloggen",
+      "userInfo": {
+        "email": "E-Mail",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "role": "Rolle"
       }
     },
     "cart": {
@@ -166,16 +191,28 @@
       "shop": "Shop",
       "about": "Über uns"
     },
-    "newProductForm": {
-      "name": "Name",
-      "category": "Kategorie",
-      "price": "Preis",
-      "size": "Größe",
-      "description": "Beschreibung",
-      "details": "Details",
-      "measure": "Maß",
-      "imageUrl": "Bild URL",
-      "submitButton": "Produkt erstellen"
+    "crud": {
+      "forms": {
+        "commonProperties": {
+          "name": "Name",
+          "email": "E-Mail",
+          "category": "Kategorie",
+          "price": "Preis",
+          "size": "Größe",
+          "description": "Beschreibung",
+          "details": "Details",
+          "measure": "Maß",
+          "imageUrl": "Bild URL"
+        },
+        "createProductForm": {
+          "submitButton": "Produkt erstellen"
+        }
+      },
+      "deleteUser": {
+        "button": "Benutzer löschen",
+        "error": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
+        "deletedByEmail": "wurde erfolgreich aus dem System gelöscht"
+      }
     },
     "products": {
       "oil": {

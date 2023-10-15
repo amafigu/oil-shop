@@ -9,6 +9,31 @@
         "firstPart": "Hello,",
         "secondPart": "you are loggin as a",
         "thirdPart": "."
+      },
+      "crud": {
+        "users": {
+          "create": "",
+          "delete": "",
+          "deletedByEmail": "was successfully deleted from system",
+          "deleteError": "Can not delete user with this email: ",
+          "edit": "",
+          "getByEmail": "Get user by email",
+          "getUserButton": "Get user data"
+        },
+        "products": {
+          "create": "Create product",
+          "delete": "Delete product",
+          "edit": "Edit product",
+          "getByName": "Get Product By Name",
+          "getByNameAndQuantity": ""
+        }
+      },
+      "logout": "Logout",
+      "userInfo": {
+        "email": "Email",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "role": "Rolle"
       }
     },
     "cart": {
@@ -170,16 +195,28 @@
       "shop": "Shop",
       "about": "About us"
     },
-    "newProductForm": {
-      "name": "Name",
-      "category": "Category",
-      "size": "Size",
-      "price": "Price",
-      "description": "Description",
-      "details": "Details",
-      "measure": "Measure",
-      "imageUrl": "Image Url",
-      "submitButton": "Create product"
+    "crud": {
+      "forms": {
+        "commonProperties": {
+          "name": "Name",
+          "email": "Email",
+          "category": "Category",
+          "price": "Price",
+          "size": "Size",
+          "description": "Description",
+          "details": "Details",
+          "measure": "Measure",
+          "imageUrl": "Image Url"
+        },
+        "createProductForm": {
+          "submitButton": "Create product"
+        }
+      },
+      "deleteUser": {
+        "button": "Delete User",
+        "error": "Can not delete user with this email: ",
+        "deletedByEmail": "was successfully deleted from system"
+      }
     },
     "products": {
       "oil": {

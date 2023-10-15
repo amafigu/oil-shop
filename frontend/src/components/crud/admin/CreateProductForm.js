@@ -3,11 +3,10 @@ import useLocaleContext from "#context/localeContext"
 import { titleCase } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import styles from "./newProductForm.module.scss"
+import styles from "./createProductForm.module.scss"
 
-const NewProductForm = () => {
+const CreateProductForm = () => {
   const [notification, setNotification] = useState(null)
-
   const [productCategories, setProductCategories] = useState(null)
   const [productData, setProductData] = useState({
     name: "",
@@ -21,7 +20,7 @@ const NewProductForm = () => {
   })
 
   const { translate } = useLocaleContext()
-  const text = translate.components.newProductForm
+  const text = translate.components.crud
 
   useEffect(() => {
     try {
@@ -70,7 +69,7 @@ const NewProductForm = () => {
       {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={submitProductForm}>
         <label className={styles.label} htmlFor='name'>
-          {text.name}
+          {text.forms.commonProperties.name}
         </label>
         <input
           className={styles.formField}
@@ -81,7 +80,7 @@ const NewProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='name'>
-          {text.category}
+          {text.forms.commonProperties.category}
         </label>
         <select
           onChange={listenInputChange}
@@ -104,7 +103,7 @@ const NewProductForm = () => {
         </select>
 
         <label className={styles.label} htmlFor='name'>
-          {text.price}
+          {text.forms.commonProperties.price}
         </label>
         <input
           className={styles.formField}
@@ -116,7 +115,7 @@ const NewProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='description'>
-          {text.description}
+          {text.forms.commonProperties.description}
         </label>
         <input
           className={styles.formField}
@@ -127,7 +126,7 @@ const NewProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='details'>
-          {text.details}
+          {text.forms.commonProperties.details}
         </label>
         <input
           className={styles.formField}
@@ -138,7 +137,7 @@ const NewProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='size'>
-          {text.size}
+          {text.forms.commonProperties.size}
         </label>
         <input
           className={styles.formField}
@@ -149,7 +148,7 @@ const NewProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='measure'>
-          {text.measure}
+          {text.forms.commonProperties.measure}
         </label>
         <input
           className={styles.formField}
@@ -160,7 +159,7 @@ const NewProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='image'>
-          {text.imageUrl}
+          {text.forms.commonProperties.imageUrl}
         </label>
         <input
           className={styles.formField}
@@ -169,13 +168,12 @@ const NewProductForm = () => {
           onChange={listenInputChange}
           required
         />
-
         <button className={styles.formButton} type='submit'>
-          {text.submitButton}
+          {text.forms.createProductForm.submitButton}
         </button>
       </form>
     </div>
   )
 }
 
-export default NewProductForm
+export default CreateProductForm
