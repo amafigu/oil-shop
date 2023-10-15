@@ -1,6 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import { getGetUserByEmail } from "#utils/utils"
+import { getUserByEmail } from "#utils/utils"
 import { useState } from "react"
 import styles from "./getUser.module.scss"
 
@@ -24,12 +24,7 @@ const GetUser = () => {
       <button
         className={styles.formButton}
         onClick={() =>
-          getGetUserByEmail(
-            userEmail.trim(),
-            setUserDataByEmail,
-            setUserEmail,
-            setNotification,
-          )
+          getUserByEmail(userEmail.trim(), setUserDataByEmail, setNotification)
         }
       >
         {text.getUser.getByEmail}

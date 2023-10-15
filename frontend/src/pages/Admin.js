@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import CreateUserForm from "./SignUp/CreateUserForm"
 
+import UpdateUserForm from "../components/crud/admin/UpdateUserForm"
 import styles from "./admin.module.scss"
 
 const Admin = () => {
@@ -96,6 +97,7 @@ const Admin = () => {
             </div>
             <div className={styles.adminCrudContainer}>
               {text.crud.users.edit}
+              <UpdateUserForm />
             </div>
             <div className={styles.adminCrudContainer}>
               {text.crud.users.delete}
