@@ -21,10 +21,10 @@ const DeleteUser = () => {
       )
       setNotification(`${userEmail} ${text.deleteUser.deletedByEmail}`)
 
-      setTimeout(() => setNotification(null), 6000)
+      setTimeout(() => setNotification(null), 3000)
     } catch (error) {
       setNotification(`${userEmail} ${text.deleteUser.error}`)
-      setTimeout(() => setNotification(null), 6000)
+      setTimeout(() => setNotification(null), 3000)
 
       console.error("Can not delete user", error)
     }
@@ -32,7 +32,7 @@ const DeleteUser = () => {
   return (
     <div>
       {notification && <NotificationCard message={notification} />}
-      <form className={styles.form}>
+      <div className={styles.form}>
         <label className={styles.label} htmlFor='userEmail'>
           {text.forms.commonProperties.email}
         </label>
@@ -48,7 +48,7 @@ const DeleteUser = () => {
         >
           {text.deleteUser.button}
         </button>
-      </form>
+      </div>
     </div>
   )
 }

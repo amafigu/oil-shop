@@ -1,23 +1,30 @@
 import NotificationCard from "#components/NotificationCard"
+import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
 import CreateProductForm from "#components/crud/admin/CreateProductForm"
 import DeleteUser from "#components/crud/admin/DeleteUser"
+import GetAllUsers from "#components/crud/admin/GetAllUsers"
+import GetUser from "#components/crud/admin/GetUser"
 import useLocaleContext from "#context/localeContext"
 import { titleCase } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import CreateUserForm from "./SignUp/CreateUserForm"
+
 import styles from "./admin.module.scss"
 
 const Admin = () => {
   const [adminData, setAdminData] = useState(null)
   const [notification, setNotification] = useState(null)
-  const [userEmail, setUserEmail] = useState("")
-  const [userDataByEmail, setUserDataByEmail] = useState({})
-  const [availableUsers, setAvailableUsers] = useState([])
+  const [emailInUserError, setEmailInUserError] = useState("")
+  const [fieldErrors, setFieldErrors] = useState({})
 
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.admin
+  const errorText = translate.pages.signUp
+
+  console.log("admin page emailInUserError ", emailInUserError)
 
   useEffect(() => {
     const getAdminData = async () => {
@@ -38,33 +45,6 @@ const Admin = () => {
 
     getAdminData()
   }, [navigate])
-
-  const getUserByEmail = async (email) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/user/${email}`,
-        { withCredentials: true },
-      )
-      setUserDataByEmail(response.data)
-      setUserEmail("")
-    } catch (error) {
-      setNotification(`Error geting user: ${error.response.data.message}`)
-      setTimeout(() => setNotification(null), 2000)
-      console.error("Error geting user by email", error)
-    }
-  }
-
-  const getAllUsers = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/`,
-        { withCredentials: true },
-      )
-      setAvailableUsers(response.data)
-    } catch (error) {
-      setNotification("Can not get all users")
-    }
-  }
 
   const logout = async () => {
     try {
@@ -124,60 +104,25 @@ const Admin = () => {
           <div className={styles.formsContainer}>
             <div className={styles.adminCrudContainer}>
               {text.crud.users.getByEmail}
-              <input
-                type='text'
-                value={userEmail}
-                required
-                onChange={(e) => setUserEmail(e.target.value)}
-              />
-              <button
-                className={styles.formButton}
-                onClick={() => getUserByEmail(userEmail.trim())}
-              >
-                {text.crud.users.getUserButton}
-              </button>
-
-              <div>
-                {text.userInfo.firstName}: {userDataByEmail.firstName}
-              </div>
-              <div>
-                {text.userInfo.lastName}: {userDataByEmail.lastName}
-              </div>
-              <div>
-                {text.userInfo.role}: {userDataByEmail.role}
-              </div>
+              <GetUser />
             </div>
-            <button className={styles.formButton} onClick={() => getAllUsers()}>
-              SHOW ALL USERS
-            </button>
-            <button
-              className={styles.formButton}
-              onClick={() => setAvailableUsers([])}
-            >
-              HIDE ALL USERS
-            </button>
-            <div className={styles.availableUsersContainer}>
-              {availableUsers &&
-                availableUsers.map((availableUser) => (
-                  <div
-                    className={styles.avaliableUserData}
-                    key={availableUser.email}
-                  >
-                    <div>
-                      {text.userInfo.firstName}: {availableUser.firstName}
-                    </div>
-                    <div>
-                      {text.userInfo.lastName}: {availableUser.lastName}
-                    </div>
-                    <div>
-                      {text.userInfo.email}: {availableUser.email}
-                    </div>
-                  </div>
-                ))}
-            </div>
-
+            <div className={styles.adminCrudContainer}></div>
+            <GetAllUsers />
             <div className={styles.adminCrudContainer}>
               {text.crud.users.create}
+              <CreateUserForm
+                setEmailInUserError={setEmailInUserError}
+                setFieldErrors={setFieldErrors}
+              />
+              {emailInUserError && (
+                <div className={styles.errorMessage}>{emailInUserError}</div>
+              )}
+              {fieldErrors && (
+                <ZodValidationErrorsCard
+                  fieldErrors={fieldErrors}
+                  text={errorText}
+                />
+              )}
             </div>
             <div className={styles.adminCrudContainer}>
               {text.crud.users.edit}

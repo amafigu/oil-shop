@@ -198,6 +198,11 @@
     "crud": {
       "forms": {
         "commonProperties": {
+          "password": "Password",
+          "createdAt": "Created at",
+          "role": "Rolle",
+          "firstName": "First name",
+          "lastName": "Last name",
           "name": "Name",
           "email": "Email",
           "category": "Category",
@@ -216,6 +221,20 @@
         "button": "Delete User",
         "error": "Can not delete user with this email: ",
         "deletedByEmail": "was successfully deleted from system"
+      },
+      "getUser": {
+        "button": "Get user data",
+        "error": "Can not find user: ",
+        "getByEmail": "Get user by email"
+      },
+      "getAllUsers": {
+        "showButton": "Show all users",
+        "hideButton": "Hide all users",
+        "error": "Can not see all users"
+      },
+      "createUser": {
+        "submitButton": "Create an Account",
+        "emailInUseErrorMessage": "Email already registered"
       }
     },
     "products": {

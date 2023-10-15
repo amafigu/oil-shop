@@ -84,19 +84,13 @@
     border: 1px grey solid;
   }
 
+  .errorMessage {
+    font-weight: 500;
+    color: red;
+  }
+
   .titleAndLogoutButtonContainer {
     display: flex;
     justify-content: space-between;
-  }
-
-  .availableUsersContainer {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .avaliableUserData {
-    padding: 12px 8px;
-    margin: 12px 0;
-    border: 1px solid grey;
   }
 }
