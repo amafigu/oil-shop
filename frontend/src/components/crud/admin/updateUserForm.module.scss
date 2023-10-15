@@ -53,22 +53,3 @@
     overflow: hidden;
   }
 }
-
-.availableUsersContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.avaliableUserData {
-  padding: 12px 8px;
-  margin: 12px 0;
-  border: 1px solid grey;
-}
-
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
-}

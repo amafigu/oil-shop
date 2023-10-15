@@ -1,4 +1,6 @@
+import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
+
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
@@ -7,7 +9,13 @@ import { useLocation, useNavigate } from "react-router-dom"
 
 import styles from "./createUserForm.module.scss"
 
-const CreateUserForm = ({ setFieldErrors, setEmailInUserError }) => {
+const CreateUserForm = ({
+  setFieldErrors,
+  setEmailInUserError,
+  setRefreshAllUsersCounter,
+}) => {
+  const [notification, setNotification] = useState()
+
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
@@ -16,13 +24,10 @@ const CreateUserForm = ({ setFieldErrors, setEmailInUserError }) => {
 
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
-
+  const text = translate.components.crud
   const location = useLocation()
   const currentPath = location.pathname
-
   const doNotRedirectFrom = ["/users/current-admin"]
-
-  const text = translate.components.crud
 
   const createUser = async (e) => {
     e.preventDefault()
@@ -35,7 +40,13 @@ const CreateUserForm = ({ setFieldErrors, setEmailInUserError }) => {
       })
       if (!currentPath.includes(doNotRedirectFrom)) {
         navigate("/users/current-user")
+        setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
       }
+      if (currentPath.includes(doNotRedirectFrom)) {
+        setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
+      }
+      setNotification(text.createUser.success)
+      setTimeout(() => setNotification(null), 6000)
     } catch (error) {
       if (error.response.data.errors) {
         const errorMessages = error.response.data.errors.reduce((acc, err) => {
@@ -49,22 +60,22 @@ const CreateUserForm = ({ setFieldErrors, setEmailInUserError }) => {
           })
           return acc
         }, {})
-        console.log(errorMessages)
 
         setFieldErrors(errorMessages)
-        setTimeout(() => setFieldErrors({}), 60000)
+        setTimeout(() => setFieldErrors({}), 6000)
       }
       if (error.response.data.message === "Email already in use") {
         setEmailInUserError(`${text.createUser.emailInUseErrorMessage}`)
         setTimeout(() => setEmailInUserError(null), 6000)
       }
-
       console.error("Signup error", error)
     }
   }
 
   return (
     <form className={styles.form} onSubmit={createUser}>
+      {notification && <NotificationCard message={notification} />}
+
       <input
         className={styles.formField}
         name='firstName'

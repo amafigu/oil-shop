@@ -5,8 +5,7 @@ import DeleteUser from "#components/crud/admin/DeleteUser"
 import GetAllUsers from "#components/crud/admin/GetAllUsers"
 import GetUser from "#components/crud/admin/GetUser"
 import useLocaleContext from "#context/localeContext"
-import { titleCase } from "#utils/utils"
-import axios from "axios"
+import { getAdminData, logout, titleCase } from "#utils/utils"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import CreateUserForm from "./SignUp/CreateUserForm"
@@ -14,6 +13,8 @@ import CreateUserForm from "./SignUp/CreateUserForm"
 import styles from "./admin.module.scss"
 
 const Admin = () => {
+  const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
+
   const [adminData, setAdminData] = useState(null)
   const [notification, setNotification] = useState(null)
   const [emailInUserError, setEmailInUserError] = useState("")
@@ -24,44 +25,9 @@ const Admin = () => {
   const text = translate.pages.admin
   const errorText = translate.pages.signUp
 
-  console.log("admin page emailInUserError ", emailInUserError)
-
   useEffect(() => {
-    const getAdminData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/users/current-user`,
-          { withCredentials: true },
-        )
-        setAdminData(response.data)
-      } catch (error) {
-        setNotification(`${error.response.data.message}`)
-        setTimeout(() => setNotification(null), 2000)
-        setTimeout(() => navigate("/login"), 2500)
-
-        console.error("Error geting admin data", error)
-      }
-    }
-
-    getAdminData()
+    getAdminData(setAdminData, setNotification, navigate)
   }, [navigate])
-
-  const logout = async () => {
-    try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/logout`,
-        {},
-        {
-          withCredentials: true,
-        },
-      )
-      navigate("/login")
-    } catch (error) {
-      setNotification(`Error to logout: ${error.response.data.message}`)
-      setTimeout(() => setNotification(null), 2000)
-      console.error(error)
-    }
-  }
 
   return (
     <div className={styles.adminPageWrapper}>
@@ -78,7 +44,10 @@ const Admin = () => {
                 )}${text.welcomeText.thirdPart}`
               : `${text.loadingData}`}
           </div>
-          <button className={styles.formButton} onClick={() => logout()}>
+          <button
+            className={styles.formButton}
+            onClick={() => logout(navigate, setNotification)}
+          >
             {text.logout}
           </button>
         </div>
@@ -107,12 +76,13 @@ const Admin = () => {
               <GetUser />
             </div>
             <div className={styles.adminCrudContainer}></div>
-            <GetAllUsers />
+            <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
             <div className={styles.adminCrudContainer}>
               {text.crud.users.create}
               <CreateUserForm
                 setEmailInUserError={setEmailInUserError}
                 setFieldErrors={setFieldErrors}
+                setRefreshAllUsersCounter={setRefreshAllUsersCounter}
               />
               {emailInUserError && (
                 <div className={styles.errorMessage}>{emailInUserError}</div>
@@ -129,7 +99,9 @@ const Admin = () => {
             </div>
             <div className={styles.adminCrudContainer}>
               {text.crud.users.delete}
-              <DeleteUser />
+              <DeleteUser
+                setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+              />
             </div>
           </div>
         </div>

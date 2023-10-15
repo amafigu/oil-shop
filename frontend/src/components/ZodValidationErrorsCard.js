@@ -2,8 +2,6 @@ import { translateZodValidationErrors } from "#utils/utils"
 import styles from "./zodValidationErrorsCard.module.scss"
 
 const ZodValidationErrorsCard = ({ fieldErrors, text }) => {
-  console.log("ZodValidationErrorsCard fieldErrors", fieldErrors)
-  console.log("ZodValidationErrorsCard text", text)
   return (
     <div>
       {fieldErrors.firstName &&
