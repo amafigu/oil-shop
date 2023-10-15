@@ -2,21 +2,6 @@ import db from '../models/index.js';
 
 const users = [
   {
-    firstName: 'Admin',
-    lastName: 'One',
-    email: 'adminone@mail.com',
-    password: '123456789',
-    role: 'admin',
-  },
-  {
-    firstName: 'Admin',
-    lastName: 'Two',
-    email: 'admintwo@mail.com',
-    password: '123456789',
-    role: 'admin',
-  },
-
-  {
     firstName: 'Guest',
     lastName: 'Two',
     email: 'guesttwo@mail.com',
