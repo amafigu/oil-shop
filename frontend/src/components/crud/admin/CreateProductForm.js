@@ -20,7 +20,7 @@ const CreateProductForm = () => {
   })
 
   const { translate } = useLocaleContext()
-  const text = translate.components.forms
+  const text = translate.components.crud
 
   useEffect(() => {
     try {
@@ -69,7 +69,7 @@ const CreateProductForm = () => {
       {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={submitProductForm}>
         <label className={styles.label} htmlFor='name'>
-          {text.commonProperties.name}
+          {text.forms.commonProperties.name}
         </label>
         <input
           className={styles.formField}
@@ -80,7 +80,7 @@ const CreateProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='name'>
-          {text.commonProperties.category}
+          {text.forms.commonProperties.category}
         </label>
         <select
           onChange={listenInputChange}
@@ -103,7 +103,7 @@ const CreateProductForm = () => {
         </select>
 
         <label className={styles.label} htmlFor='name'>
-          {text.commonProperties.price}
+          {text.forms.commonProperties.price}
         </label>
         <input
           className={styles.formField}
@@ -115,7 +115,7 @@ const CreateProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='description'>
-          {text.commonProperties.description}
+          {text.forms.commonProperties.description}
         </label>
         <input
           className={styles.formField}
@@ -126,7 +126,7 @@ const CreateProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='details'>
-          {text.commonProperties.details}
+          {text.forms.commonProperties.details}
         </label>
         <input
           className={styles.formField}
@@ -137,7 +137,7 @@ const CreateProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='size'>
-          {text.commonProperties.size}
+          {text.forms.commonProperties.size}
         </label>
         <input
           className={styles.formField}
@@ -148,7 +148,7 @@ const CreateProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='measure'>
-          {text.commonProperties.measure}
+          {text.forms.commonProperties.measure}
         </label>
         <input
           className={styles.formField}
@@ -159,7 +159,7 @@ const CreateProductForm = () => {
         />
 
         <label className={styles.label} htmlFor='image'>
-          {text.commonProperties.imageUrl}
+          {text.forms.commonProperties.imageUrl}
         </label>
         <input
           className={styles.formField}
@@ -169,7 +169,7 @@ const CreateProductForm = () => {
           required
         />
         <button className={styles.formButton} type='submit'>
-          {text.createProductForm.submitButton}
+          {text.forms.createProductForm.submitButton}
         </button>
       </form>
     </div>

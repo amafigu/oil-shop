@@ -1,10 +1,11 @@
 import NotificationCard from "#components/NotificationCard"
+import CreateProductForm from "#components/crud/admin/CreateProductForm"
+import DeleteUser from "#components/crud/admin/DeleteUser"
 import useLocaleContext from "#context/localeContext"
+import { titleCase } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import CreateProductForm from "../components/forms/admin/CreateProductForm"
-import { titleCase } from "../utils/utils"
 import styles from "./admin.module.scss"
 
 const Admin = () => {
@@ -15,12 +16,8 @@ const Admin = () => {
   const [availableUsers, setAvailableUsers] = useState([])
 
   const navigate = useNavigate()
-
   const { translate } = useLocaleContext()
-
   const text = translate.pages.admin
-
-  console.log(userDataByEmail)
 
   useEffect(() => {
     const getAdminData = async () => {
@@ -48,8 +45,8 @@ const Admin = () => {
         `${process.env.REACT_APP_API_URL}/users/user/${email}`,
         { withCredentials: true },
       )
-      // Handle the user data or show a notification
       setUserDataByEmail(response.data)
+      setUserEmail("")
     } catch (error) {
       setNotification(`Error geting user: ${error.response.data.message}`)
       setTimeout(() => setNotification(null), 2000)
@@ -105,87 +102,90 @@ const Admin = () => {
             {text.logout}
           </button>
         </div>
+        <div className={styles.productsCrudContainer}>
+          PRODUCTS
+          <div className={styles.formsContainer}>
+            <div className={styles.adminCrudContainer}>
+              {text.crud.products.create}
+              <CreateProductForm />
+            </div>
+            <div className={styles.adminCrudContainer}>
+              {text.crud.products.edit}
+            </div>
+            <div className={styles.adminCrudContainer}>
+              {text.crud.products.delete}
+            </div>
 
-        <div className={styles.formsContainer}>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.products.create}
-            <CreateProductForm />
+            <div className={styles.adminCrudContainer}></div>
           </div>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.products.edit}
-          </div>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.products.delete}
-          </div>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.users.getByEmail}
-            <input
-              type='text'
-              value={userEmail}
-              required
-              onChange={(e) => setUserEmail(e.target.value)}
-            />
+        </div>
+        <div className={styles.usersCrudContainer}>
+          USERS
+          <div className={styles.formsContainer}>
+            <div className={styles.adminCrudContainer}>
+              {text.crud.users.getByEmail}
+              <input
+                type='text'
+                value={userEmail}
+                required
+                onChange={(e) => setUserEmail(e.target.value)}
+              />
+              <button
+                className={styles.formButton}
+                onClick={() => getUserByEmail(userEmail.trim())}
+              >
+                {text.crud.users.getUserButton}
+              </button>
+
+              <div>
+                {text.userInfo.firstName}: {userDataByEmail.firstName}
+              </div>
+              <div>
+                {text.userInfo.lastName}: {userDataByEmail.lastName}
+              </div>
+              <div>
+                {text.userInfo.role}: {userDataByEmail.role}
+              </div>
+            </div>
+            <button className={styles.formButton} onClick={() => getAllUsers()}>
+              SHOW ALL USERS
+            </button>
             <button
               className={styles.formButton}
-              onClick={() => getUserByEmail(userEmail.trim())}
+              onClick={() => setAvailableUsers([])}
             >
-              {text.crud.users.getUserButton}
+              HIDE ALL USERS
             </button>
+            <div className={styles.availableUsersContainer}>
+              {availableUsers &&
+                availableUsers.map((availableUser) => (
+                  <div
+                    className={styles.avaliableUserData}
+                    key={availableUser.email}
+                  >
+                    <div>
+                      {text.userInfo.firstName}: {availableUser.firstName}
+                    </div>
+                    <div>
+                      {text.userInfo.lastName}: {availableUser.lastName}
+                    </div>
+                    <div>
+                      {text.userInfo.email}: {availableUser.email}
+                    </div>
+                  </div>
+                ))}
+            </div>
 
-            <div>
-              {text.userInfo.firstName}: {userDataByEmail.firstName}
+            <div className={styles.adminCrudContainer}>
+              {text.crud.users.create}
             </div>
-            <div>
-              {text.userInfo.lastName}: {userDataByEmail.lastName}
+            <div className={styles.adminCrudContainer}>
+              {text.crud.users.edit}
             </div>
-            <div>
-              {text.userInfo.role}: {userDataByEmail.role}
+            <div className={styles.adminCrudContainer}>
+              {text.crud.users.delete}
+              <DeleteUser />
             </div>
-          </div>
-          <button className={styles.formButton} onClick={() => getAllUsers()}>
-            ALL USERS
-          </button>
-          <button
-            className={styles.formButton}
-            onClick={() => setAvailableUsers([])}
-          >
-            HIDE USERS
-          </button>
-          <div className={styles.availableUsersContainer}>
-            {availableUsers &&
-              availableUsers.map((availableUser) => (
-                <div className={styles.avaliableUserData} key={availableUser}>
-                  <div>
-                    {text.userInfo.firstName}: {availableUser.firstName}
-                  </div>
-                  <div>
-                    {text.userInfo.lastName}: {availableUser.lastName}
-                  </div>
-                  <div>
-                    {text.userInfo.email}: {availableUser.email}
-                  </div>
-                </div>
-              ))}
-          </div>
-
-          <div className={styles.adminCrudContainer}></div>
-        </div>
-        <div className={styles.formsContainer}>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.users.create}
-            <CreateProductForm />
-          </div>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.users.edit}
-            <CreateProductForm />
-          </div>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.users.delete}
-            <CreateProductForm />
-          </div>
-          <div className={styles.adminCrudContainer}>
-            {text.crud.users.getByEmail}
-            <CreateProductForm />
           </div>
         </div>
       </div>
