@@ -14,6 +14,8 @@
         "users": {
           "create": "Benutzer erstellen",
           "delete": "Benutzer löschen",
+          "deletedByEmail": "wurde erfolgreich aus dem System gelöscht",
+          "deleteError": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
           "edit": "Benutzer editieren",
           "getUserButton": "Benutzer Daten sehen",
           "getByEmail": "Benutzer per E-Mail Daten sehen"
@@ -28,6 +30,7 @@
       },
       "logout": "Ausloggen",
       "userInfo": {
+        "email": "E-Mail",
         "firstName": "Vorname",
         "lastName": "Nachname",
         "role": "Rolle"
@@ -188,19 +191,27 @@
       "shop": "Shop",
       "about": "Über uns"
     },
-    "forms": {
-      "commonProperties": {
-        "name": "Name",
-        "category": "Kategorie",
-        "price": "Preis",
-        "size": "Größe",
-        "description": "Beschreibung",
-        "details": "Details",
-        "measure": "Maß",
-        "imageUrl": "Bild URL"
+    "crud": {
+      "forms": {
+        "commonProperties": {
+          "name": "Name",
+          "email": "E-Mail",
+          "category": "Kategorie",
+          "price": "Preis",
+          "size": "Größe",
+          "description": "Beschreibung",
+          "details": "Details",
+          "measure": "Maß",
+          "imageUrl": "Bild URL"
+        },
+        "createProductForm": {
+          "submitButton": "Produkt erstellen"
+        }
       },
-      "createProductForm": {
-        "submitButton": "Produkt erstellen"
+      "deleteUser": {
+        "button": "Benutzer löschen",
+        "error": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
+        "deletedByEmail": "wurde erfolgreich aus dem System gelöscht"
       }
     },
     "products": {

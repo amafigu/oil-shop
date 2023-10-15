@@ -14,6 +14,8 @@
         "users": {
           "create": "",
           "delete": "",
+          "deletedByEmail": "was successfully deleted from system",
+          "deleteError": "Can not delete user with this email: ",
           "edit": "",
           "getByEmail": "Get user by email",
           "getUserButton": "Get user data"
@@ -28,6 +30,7 @@
       },
       "logout": "Logout",
       "userInfo": {
+        "email": "Email",
         "firstName": "First name",
         "lastName": "Last name",
         "role": "Rolle"
@@ -192,19 +195,27 @@
       "shop": "Shop",
       "about": "About us"
     },
-    "forms": {
-      "commonProperties": {
-        "name": "Name",
-        "category": "Category",
-        "price": "Price",
-        "size": "Size",
-        "description": "Description",
-        "details": "Details",
-        "measure": "Measure",
-        "imageUrl": "Image Url"
+    "crud": {
+      "forms": {
+        "commonProperties": {
+          "name": "Name",
+          "email": "Email",
+          "category": "Category",
+          "price": "Price",
+          "size": "Size",
+          "description": "Description",
+          "details": "Details",
+          "measure": "Measure",
+          "imageUrl": "Image Url"
+        },
+        "createProductForm": {
+          "submitButton": "Create product"
+        }
       },
-      "createProductForm": {
-        "submitButton": "Create product"
+      "deleteUser": {
+        "button": "Delete User",
+        "error": "Can not delete user with this email: ",
+        "deletedByEmail": "was successfully deleted from system"
       }
     },
     "products": {
