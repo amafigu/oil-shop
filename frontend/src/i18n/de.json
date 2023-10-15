@@ -9,6 +9,28 @@
         "firstPart": "Hallo,",
         "secondPart": "Sie sind als",
         "thirdPart": " angemeldet."
+      },
+      "crud": {
+        "users": {
+          "create": "Benutzer erstellen",
+          "delete": "Benutzer löschen",
+          "edit": "Benutzer editieren",
+          "getUserButton": "Benutzer Daten sehen",
+          "getByEmail": "Benutzer per E-Mail Daten sehen"
+        },
+        "products": {
+          "create": "Produkt erstellen",
+          "delete": "Produkt löschen",
+          "edit": "Produkt editieren",
+          "getByName": "Produkt per Name finden",
+          "getByNameAndQuantity": ""
+        }
+      },
+      "logout": "Ausloggen",
+      "userInfo": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "role": "Rolle"
       }
     },
     "cart": {
@@ -166,16 +188,20 @@
       "shop": "Shop",
       "about": "Über uns"
     },
-    "newProductForm": {
-      "name": "Name",
-      "category": "Kategorie",
-      "price": "Preis",
-      "size": "Größe",
-      "description": "Beschreibung",
-      "details": "Details",
-      "measure": "Maß",
-      "imageUrl": "Bild URL",
-      "submitButton": "Produkt erstellen"
+    "forms": {
+      "commonProperties": {
+        "name": "Name",
+        "category": "Kategorie",
+        "price": "Preis",
+        "size": "Größe",
+        "description": "Beschreibung",
+        "details": "Details",
+        "measure": "Maß",
+        "imageUrl": "Bild URL"
+      },
+      "createProductForm": {
+        "submitButton": "Produkt erstellen"
+      }
     },
     "products": {
       "oil": {

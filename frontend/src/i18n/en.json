@@ -9,6 +9,28 @@
         "firstPart": "Hello,",
         "secondPart": "you are loggin as a",
         "thirdPart": "."
+      },
+      "crud": {
+        "users": {
+          "create": "",
+          "delete": "",
+          "edit": "",
+          "getByEmail": "Get user by email",
+          "getUserButton": "Get user data"
+        },
+        "products": {
+          "create": "Create product",
+          "delete": "Delete product",
+          "edit": "Edit product",
+          "getByName": "Get Product By Name",
+          "getByNameAndQuantity": ""
+        }
+      },
+      "logout": "Logout",
+      "userInfo": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "role": "Rolle"
       }
     },
     "cart": {
@@ -170,16 +192,20 @@
       "shop": "Shop",
       "about": "About us"
     },
-    "newProductForm": {
-      "name": "Name",
-      "category": "Category",
-      "size": "Size",
-      "price": "Price",
-      "description": "Description",
-      "details": "Details",
-      "measure": "Measure",
-      "imageUrl": "Image Url",
-      "submitButton": "Create product"
+    "forms": {
+      "commonProperties": {
+        "name": "Name",
+        "category": "Category",
+        "price": "Price",
+        "size": "Size",
+        "description": "Description",
+        "details": "Details",
+        "measure": "Measure",
+        "imageUrl": "Image Url"
+      },
+      "createProductForm": {
+        "submitButton": "Create product"
+      }
     },
     "products": {
       "oil": {
