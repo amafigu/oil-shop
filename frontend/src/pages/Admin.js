@@ -2,6 +2,7 @@ import NotificationCard from "#components/NotificationCard"
 import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
 import CreateProductForm from "#components/crud/admin/CreateProductForm"
 import DeleteUser from "#components/crud/admin/DeleteUser"
+import GetAllProducts from "#components/crud/admin/GetAllProducts"
 import GetAllUsers from "#components/crud/admin/GetAllUsers"
 import GetUser from "#components/crud/admin/GetUser"
 import useLocaleContext from "#context/localeContext"
@@ -10,6 +11,9 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import CreateUserForm from "./SignUp/CreateUserForm"
 
+import DeleteProduct from "../components/crud/admin/DeleteProduct"
+import GetProduct from "../components/crud/admin/GetProduct"
+import UpdateProductForm from "../components/crud/admin/UpdateProductForm"
 import UpdateUserForm from "../components/crud/admin/UpdateUserForm"
 import styles from "./admin.module.scss"
 
@@ -75,13 +79,23 @@ const Admin = () => {
               <div className={styles.formsContainer}>
                 <div className={styles.adminCrudContainer}>
                   {text.crud.products.create}
+                  <GetProduct />
+                </div>
+                <div className={styles.adminCrudContainer}>
+                  {text.crud.products.create}
+                  <GetAllProducts />
+                </div>
+                <div className={styles.adminCrudContainer}>
+                  {text.crud.products.create}
                   <CreateProductForm />
                 </div>
                 <div className={styles.adminCrudContainer}>
                   {text.crud.products.edit}
+                  <UpdateProductForm />
                 </div>
                 <div className={styles.adminCrudContainer}>
                   {text.crud.products.delete}
+                  <DeleteProduct />
                 </div>
 
                 <div className={styles.adminCrudContainer}></div>

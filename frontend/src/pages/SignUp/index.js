@@ -14,9 +14,8 @@ const SignUp = () => {
 
   const { translate } = useLocaleContext()
   const text = translate.pages.signUp
-  useEffectScrollTop()
 
-  console.log("signup page emailInUserError ", emailInUserError)
+  useEffectScrollTop()
 
   return (
     <div className={styles.newUserPageWrapper}>

@@ -1,6 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import { titleCase } from "#utils/utils"
+import { titleCase, uploadToS3 } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from "./createProductForm.module.scss"
@@ -8,6 +8,8 @@ import styles from "./createProductForm.module.scss"
 const CreateProductForm = () => {
   const [notification, setNotification] = useState(null)
   const [productCategories, setProductCategories] = useState(null)
+  const [file, setFile] = useState(null)
+
   const [productData, setProductData] = useState({
     name: "",
     productCategoryId: "",
@@ -15,7 +17,6 @@ const CreateProductForm = () => {
     price: "",
     details: "",
     measure: "",
-    image: "",
     size: "",
   })
 
@@ -38,6 +39,7 @@ const CreateProductForm = () => {
 
   const listenInputChange = (e) => {
     let valueToCheck = e.target.value
+
     if (e.target.type === "number" || e.target.name === "productCategoryId") {
       valueToCheck = Number(e.target.value)
     }
@@ -45,13 +47,29 @@ const CreateProductForm = () => {
     setProductData({ ...productData, [e.target.name]: valueToCheck })
   }
 
+  const setFileToUpload = (e) => {
+    setFile(e.target.files[0])
+  }
+
   const submitProductForm = async (e) => {
     e.preventDefault()
+
+    const imageUrl = await uploadToS3(file)
+
+    if (!imageUrl) {
+      console.error("!imageUrlFailed to upload image to S3")
+
+      return
+    }
+    const productDataWithImage = {
+      ...productData,
+      image: imageUrl,
+    }
 
     try {
       await axios.post(
         `${process.env.REACT_APP_API_URL}/products/create`,
-        productData,
+        productDataWithImage,
         { withCredentials: true },
       )
       setNotification(
@@ -64,6 +82,7 @@ const CreateProductForm = () => {
       console.error("Product submit failed: ", error)
     }
   }
+
   return (
     <div>
       {notification && <NotificationCard message={notification} />}
@@ -94,7 +113,11 @@ const CreateProductForm = () => {
               onChange={listenInputChange}
               className={styles.formFieldSelect}
               name='productCategoryId'
+              value={productData.productCategoryId}
             >
+              <option value='' disabled>
+                Select a category
+              </option>
               {productCategories
                 ? productCategories
                     .filter((category) => category.name !== "all")
@@ -103,6 +126,7 @@ const CreateProductForm = () => {
                         key={productCategory.id}
                         className={styles.formField}
                         value={productCategory.id}
+                        name={productCategory.id}
                       >
                         {titleCase(productCategory.name, "_")}
                       </option>
@@ -156,6 +180,7 @@ const CreateProductForm = () => {
               type='number'
               name='size'
               onChange={listenInputChange}
+              min={1}
               required
             />
           </div>
@@ -177,9 +202,9 @@ const CreateProductForm = () => {
             </label>
             <input
               className={styles.formField}
-              type='text'
+              type='file'
               name='image'
-              onChange={listenInputChange}
+              onChange={setFileToUpload}
               required
             />
           </div>

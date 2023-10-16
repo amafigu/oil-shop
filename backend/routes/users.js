@@ -67,18 +67,14 @@ router.post('/register-admin', async (req, res) => {
 
 router.delete('/user/:email', decodeJWT, async (req, res) => {
   try {
-    console.log('delete try ');
     const result = await db.user.destroy({
       where: { email: req.params.email },
     });
     if (!result) {
-      console.log('delete if try !result 404 ');
       return res.status(404).json({ message: 'User not found' });
     }
-    console.log('delete successfully ');
     return res.json({ message: 'User deleted successfully' });
   } catch (err) {
-    console.log('delete err 500 ');
     return res.status(500).json({ message: err.message });
   }
 });
@@ -86,7 +82,6 @@ router.delete('/user/:email', decodeJWT, async (req, res) => {
 router.put('/user/:email', decodeJWT, async (req, res) => {
   try {
     const user = await db.user.findOne({ where: { email: req.params.email } });
-    console.log(user);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -160,30 +155,35 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
   }
 });
 
-router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
-  try {
-    const existingUser = await db.user.findOne({
-      where: { email: req.body.email },
-    });
+router.post(
+  '/create',
+  decodeJWT,
+  validateBody(CreateUserSchema),
+  async (req, res) => {
+    try {
+      const existingUser = await db.user.findOne({
+        where: { email: req.body.email },
+      });
 
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email already in use' });
+      if (existingUser) {
+        return res.status(400).json({ message: 'Email already in use' });
+      }
+
+      const hashedPassword = await hashPassword(req.body.password);
+
+      const newUser = await db.user.create({
+        ...req.body,
+        password: hashedPassword,
+        role: 'guest',
+      });
+
+      return res
+        .status(201)
+        .json({ message: 'Guest user created successfully', user: newUser });
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
     }
-
-    const hashedPassword = await hashPassword(req.body.password);
-
-    const newUser = await db.user.create({
-      ...req.body,
-      password: hashedPassword,
-      role: 'guest',
-    });
-
-    return res
-      .status(201)
-      .json({ message: 'Guest user created successfully', user: newUser });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
   }
-});
+);
 
 export default router;

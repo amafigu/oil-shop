@@ -7,7 +7,6 @@ import {
   validateParams,
 } from '../middleware/validationMiddleware.js';
 import {
-  CreateProductSchema,
   ProductNameParamSchema,
   UpdateProductSchema,
 } from '../middleware/validationSchemas/productSchema.js';
@@ -15,20 +14,22 @@ const router = express.Router();
 
 router.post(
   '/create',
-  validateBody(CreateProductSchema),
+
   decodeJWT,
   async (req, res) => {
     try {
       const product = await db.product.findOne({
         where: {
           name: req.body.name,
+          category: req.body.category,
+          size: req.body.size,
         },
       });
 
       if (product) {
         res.status(422).json({
           message:
-            'Can not add product with this name, please try with another name',
+            'Can not add product, please try with another name, size or category.',
         });
       } else {
         const product = await db.product.create(req.body);

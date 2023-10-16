@@ -8,10 +8,6 @@ export const titleCase = (str, separator) => {
     .join(" ")
 }
 
-export const productImageUrl = (image) => {
-  return "/assets/" + image
-}
-
 export const totalCost = (cart) =>
   cart.reduce((total, item) => total + item.quantity * item.product.price, 0)
 
@@ -62,6 +58,27 @@ export const useGetProducts = (setProducts) => {
 }
 
 export const getUserByEmail = async (
+  email,
+  setUserDataByEmail,
+  setNotification,
+) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/user/${email}`,
+      {
+        withCredentials: true,
+      },
+    )
+
+    setUserDataByEmail(response.data)
+  } catch (error) {
+    setNotification(`Error geting user: ${error.response.data.message}`)
+    setTimeout(() => setNotification(null), 2000)
+    console.error("Error geting user by email", error)
+  }
+}
+
+export const getProductByEmail = async (
   email,
   setUserDataByEmail,
   setNotification,
@@ -176,7 +193,33 @@ export const translateZodValidationErrors = (error, text) => {
   if (translatedMessage) {
     return translatedMessage[error.code]
   } else {
-    console.log("error code ", error.code)
     return error.message
   }
+}
+
+export const uploadToS3 = async (file) => {
+  let newUrl = ""
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/aws/generate-upload-url?fileName=${file.name}`,
+      { withCredentials: true },
+    )
+    newUrl = `https://oylo-images.s3.us-east-2.amazonaws.com/${response.data.fileName}`
+
+    await axios.put(
+      response.data.uploadURL,
+      file,
+
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": file.type,
+        },
+      },
+    )
+  } catch (error) {
+    console.error("Error uploading to S3: ", error)
+    return null
+  }
+  return newUrl
 }
