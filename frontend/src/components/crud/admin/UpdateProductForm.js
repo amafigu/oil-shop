@@ -1,5 +1,4 @@
 import NotificationCard from "#components/NotificationCard"
-import useLocaleContext from "#context/localeContext"
 import { titleCase } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -19,8 +18,6 @@ const UpdateProductForm = () => {
     image: "",
     size: "",
   })
-
-  const { translate } = useLocaleContext()
 
   useEffect(() => {
     try {
