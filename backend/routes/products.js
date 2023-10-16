@@ -1,5 +1,4 @@
 import express from 'express';
-import { decodeJWT } from '../middleware/decodeToken.js';
 import db from '../models/index.js';
 
 import {
@@ -7,7 +6,6 @@ import {
   validateParams,
 } from '../middleware/validationMiddleware.js';
 import {
-  CreateProductSchema,
   ProductNameParamSchema,
   UpdateProductSchema,
 } from '../middleware/validationSchemas/productSchema.js';
@@ -15,8 +13,7 @@ const router = express.Router();
 
 router.post(
   '/create',
-  validateBody(CreateProductSchema),
-  decodeJWT,
+
   async (req, res) => {
     try {
       const product = await db.product.findOne({
