@@ -1,6 +1,6 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import useLocaleContext from "#context/localeContext"
-import { productImageUrl, titleCase } from "#utils/utils"
+import { titleCase } from "#utils/utils"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./productCard.module.scss"
@@ -8,6 +8,10 @@ import styles from "./productCard.module.scss"
 const ProductCard = ({ name, image, size, price, description, category }) => {
   const { translate } = useLocaleContext()
   const product = { name, image, size, price, description, category }
+
+  const productImageUrl = (imageName) => {
+    return `https://s3.us-east-2.amazonaws.com/oylo-images/${imageName}`
+  }
 
   return (
     <div className={styles.productCardWrapper}>
