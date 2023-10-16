@@ -21,7 +21,6 @@ const UpdateProductForm = () => {
   })
 
   const { translate } = useLocaleContext()
-  const text = translate.components.forms
 
   useEffect(() => {
     try {
