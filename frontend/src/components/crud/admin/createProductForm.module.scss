@@ -3,13 +3,19 @@
 @import "#styles/helpers/mixins";
 
 .form {
-  @include flex-column;
+  display: flex;
+  flex-direction: column;
+}
 
-  margin: 28px;
+.inputsContainer {
+  display: flex;
+  gap: 18px;
+}
 
-  @include media.tablet-down {
-    margin: 18px;
-  }
+.labelAndInputContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .formField {
@@ -22,7 +28,7 @@
 
 .formFieldSelect {
   width: 100%;
-  height: 38px;
+  height: 32px;
   margin-bottom: 12px;
   font-family: theme.$main-font-family;
   font-size: medium;

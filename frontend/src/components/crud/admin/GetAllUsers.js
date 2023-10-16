@@ -38,7 +38,7 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
   }
 
   return (
-    <div>
+    <div className={styles.getAllUsersWrapper}>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.form}>
         <button

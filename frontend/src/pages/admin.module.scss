@@ -25,8 +25,7 @@
   }
 
   .form {
-    @include flex-column;
-
+    display: flex;
     margin: 28px;
 
     @include media.tablet-down {
@@ -77,11 +76,12 @@
 
   .formsContainer {
     display: flex;
+    flex-direction: column;
   }
 
   .adminCrudContainer {
     margin: 24px 12px;
-    border: 1px grey solid;
+    border-bottom: 1px grey solid;
   }
 
   .errorMessage {

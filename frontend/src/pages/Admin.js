@@ -15,7 +15,8 @@ import styles from "./admin.module.scss"
 
 const Admin = () => {
   const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
-
+  const [showProductsSection, setShowProductsSection] = useState(false)
+  const [showUsersSection, setShowUsersSection] = useState(false)
   const [adminData, setAdminData] = useState(null)
   const [notification, setNotification] = useState(null)
   const [emailInUserError, setEmailInUserError] = useState("")
@@ -53,59 +54,94 @@ const Admin = () => {
           </button>
         </div>
         <div className={styles.productsCrudContainer}>
-          PRODUCTS
-          <div className={styles.formsContainer}>
-            <div className={styles.adminCrudContainer}>
-              {text.crud.products.create}
-              <CreateProductForm />
-            </div>
-            <div className={styles.adminCrudContainer}>
-              {text.crud.products.edit}
-            </div>
-            <div className={styles.adminCrudContainer}>
-              {text.crud.products.delete}
-            </div>
+          {showProductsSection ? (
+            <button
+              className={styles.formButton}
+              onClick={() => setShowProductsSection(false)}
+            >
+              HIDE PRODUCTS SECTION
+            </button>
+          ) : (
+            <button
+              className={styles.formButton}
+              onClick={() => setShowProductsSection(true)}
+            >
+              SHOW PRODUCTS SECTION
+            </button>
+          )}
 
-            <div className={styles.adminCrudContainer}></div>
-          </div>
+          {showProductsSection && (
+            <div>
+              <div className={styles.formsContainer}>
+                <div className={styles.adminCrudContainer}>
+                  {text.crud.products.create}
+                  <CreateProductForm />
+                </div>
+                <div className={styles.adminCrudContainer}>
+                  {text.crud.products.edit}
+                </div>
+                <div className={styles.adminCrudContainer}>
+                  {text.crud.products.delete}
+                </div>
+
+                <div className={styles.adminCrudContainer}></div>
+              </div>
+            </div>
+          )}
         </div>
         <div className={styles.usersCrudContainer}>
-          USERS
-          <div className={styles.formsContainer}>
-            <div className={styles.adminCrudContainer}>
-              {text.crud.users.getByEmail}
-              <GetUser />
-            </div>
-            <div className={styles.adminCrudContainer}></div>
-            <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
-            <div className={styles.adminCrudContainer}>
-              {text.crud.users.create}
-              <CreateUserForm
-                setEmailInUserError={setEmailInUserError}
-                setFieldErrors={setFieldErrors}
-                setRefreshAllUsersCounter={setRefreshAllUsersCounter}
-              />
-              {emailInUserError && (
-                <div className={styles.errorMessage}>{emailInUserError}</div>
-              )}
-              {fieldErrors && (
-                <ZodValidationErrorsCard
-                  fieldErrors={fieldErrors}
-                  text={errorText}
+          {showUsersSection ? (
+            <button
+              className={styles.formButton}
+              onClick={() => setShowUsersSection(false)}
+            >
+              HIDE USERS SECTION
+            </button>
+          ) : (
+            <button
+              className={styles.formButton}
+              onClick={() => setShowUsersSection(true)}
+            >
+              SHOW USERS SECTION
+            </button>
+          )}
+          {showUsersSection && (
+            <div className={styles.formsContainer}>
+              <div className={styles.adminCrudContainer}>
+                {text.crud.users.getByEmail}
+                <GetUser />
+              </div>
+              <div className={styles.adminCrudContainer}></div>
+              <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
+              <div className={styles.adminCrudContainer}>
+                {text.crud.users.create}
+                <CreateUserForm
+                  setEmailInUserError={setEmailInUserError}
+                  setFieldErrors={setFieldErrors}
+                  setRefreshAllUsersCounter={setRefreshAllUsersCounter}
                 />
-              )}
+                {emailInUserError && (
+                  <div className={styles.errorMessage}>{emailInUserError}</div>
+                )}
+                {fieldErrors && (
+                  <ZodValidationErrorsCard
+                    fieldErrors={fieldErrors}
+                    text={errorText}
+                  />
+                )}
+              </div>
+              <div className={styles.adminCrudContainer}>
+                {text.crud.users.edit}
+                <UpdateUserForm />
+              </div>
+              <div className={styles.adminCrudContainer}>
+                {text.crud.users.delete}
+                <DeleteUser
+                  setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+                />
+              </div>
             </div>
-            <div className={styles.adminCrudContainer}>
-              {text.crud.users.edit}
-              <UpdateUserForm />
-            </div>
-            <div className={styles.adminCrudContainer}>
-              {text.crud.users.delete}
-              <DeleteUser
-                setRefreshAllUsersCounter={setRefreshAllUsersCounter}
-              />
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
