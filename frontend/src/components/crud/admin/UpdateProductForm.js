@@ -69,9 +69,7 @@ const UpdateProductForm = () => {
     <div>
       {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={submitProductForm}>
-        <label className={styles.label} htmlFor='name'>
-          {text.commonProperties.name}
-        </label>
+        <label className={styles.label} htmlFor='name'></label>
         <input
           className={styles.formField}
           type='text'
@@ -80,9 +78,7 @@ const UpdateProductForm = () => {
           required
         />
 
-        <label className={styles.label} htmlFor='name'>
-          {text.commonProperties.category}
-        </label>
+        <label className={styles.label} htmlFor='name'></label>
         <select
           onChange={listenInputChange}
           className={styles.formFieldSelect}
@@ -103,9 +99,7 @@ const UpdateProductForm = () => {
             : ""}
         </select>
 
-        <label className={styles.label} htmlFor='name'>
-          {text.commonProperties.price}
-        </label>
+        <label className={styles.label} htmlFor='name'></label>
         <input
           className={styles.formField}
           type='number'
@@ -115,9 +109,7 @@ const UpdateProductForm = () => {
           required
         />
 
-        <label className={styles.label} htmlFor='description'>
-          {text.commonProperties.description}
-        </label>
+        <label className={styles.label} htmlFor='description'></label>
         <input
           className={styles.formField}
           type='text'
@@ -126,9 +118,7 @@ const UpdateProductForm = () => {
           required
         />
 
-        <label className={styles.label} htmlFor='details'>
-          {text.commonProperties.details}
-        </label>
+        <label className={styles.label} htmlFor='details'></label>
         <input
           className={styles.formField}
           type='text'
@@ -137,9 +127,7 @@ const UpdateProductForm = () => {
           required
         />
 
-        <label className={styles.label} htmlFor='size'>
-          {text.commonProperties.size}
-        </label>
+        <label className={styles.label} htmlFor='size'></label>
         <input
           className={styles.formField}
           type='number'
@@ -148,9 +136,7 @@ const UpdateProductForm = () => {
           required
         />
 
-        <label className={styles.label} htmlFor='measure'>
-          {text.commonProperties.measure}
-        </label>
+        <label className={styles.label} htmlFor='measure'></label>
         <input
           className={styles.formField}
           type='text'
@@ -159,9 +145,7 @@ const UpdateProductForm = () => {
           required
         />
 
-        <label className={styles.label} htmlFor='image'>
-          {text.commonProperties.imageUrl}
-        </label>
+        <label className={styles.label} htmlFor='image'></label>
         <input
           className={styles.formField}
           type='text'
@@ -170,7 +154,7 @@ const UpdateProductForm = () => {
           required
         />
         <button className={styles.formButton} type='submit'>
-          {text.submitButton}
+          EDIT
         </button>
       </form>
     </div>

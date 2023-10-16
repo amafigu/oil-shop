@@ -1,0 +1,74 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.form {
+  @include flex-column;
+
+  margin: 28px;
+
+  @include media.tablet-down {
+    margin: 18px;
+  }
+}
+
+.formField {
+  width: 100%;
+  height: 32px;
+  margin-bottom: 12px;
+  font-family: theme.$main-font-family;
+  font-size: medium;
+}
+
+.formFieldSelect {
+  width: 100%;
+  height: 38px;
+  margin-bottom: 12px;
+  font-family: theme.$main-font-family;
+  font-size: medium;
+}
+
+.label {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+}
+
+.containerTitle {
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.formButton {
+  @include action-button;
+
+  width: 160px;
+  height: 36px;
+  margin-top: 24px;
+  font-size: 1rem;
+  text-transform: none;
+
+  @include media.mobile {
+    width: 120px;
+    overflow: hidden;
+  }
+}
+
+.availableUsersContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.avaliableUserData {
+  padding: 12px 8px;
+  margin: 12px 0;
+  border: 1px solid grey;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

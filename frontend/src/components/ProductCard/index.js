@@ -9,19 +9,11 @@ const ProductCard = ({ name, image, size, price, description, category }) => {
   const { translate } = useLocaleContext()
   const product = { name, image, size, price, description, category }
 
-  const productImageUrl = (imageName) => {
-    return `https://s3.us-east-2.amazonaws.com/oylo-images/${imageName}`
-  }
-
   return (
     <div className={styles.productCardWrapper}>
       <Link to={`/products/${name}`}>
         <div className={styles.productCardBody}>
-          <img
-            className={styles.productCardImage}
-            src={productImageUrl(image)}
-            alt={name}
-          />
+          <img className={styles.productCardImage} src={image} alt={name} />
           <div className={styles.productCardName}>{titleCase(name, "_")}</div>
           <div className={styles.productCardSize}>
             {translate.components.products.oil.size}: {size} ml

@@ -38,7 +38,6 @@ const UpdateUserForm = () => {
         { withCredentials: true },
       )
       setUserOldData(response.data)
-      console.log(response.data)
       setNotification("setUser")
       setTimeout(() => setNotification(null), 1300)
     } catch (error) {
@@ -47,14 +46,8 @@ const UpdateUserForm = () => {
   }
 
   const listenInputChange = (e) => {
-    console.log(userOldData)
-    console.log(userNewData)
     setUserNewData({ ...userOldData, [e.target.name]: e.target.value })
   }
-
-  console.log(email)
-  console.log(userNewData)
-  console.log(userOldData)
 
   return (
     <div>

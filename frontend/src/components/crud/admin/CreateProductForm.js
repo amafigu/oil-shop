@@ -1,6 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import { titleCase } from "#utils/utils"
+import { titleCase, uploadToS3 } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from "./createProductForm.module.scss"
@@ -37,61 +37,26 @@ const CreateProductForm = () => {
     }
   }, [])
 
-  console.log(productCategories)
-
   const listenInputChange = (e) => {
     let valueToCheck = e.target.value
 
-    console.log("listenInputChange a ", valueToCheck)
     if (e.target.type === "number" || e.target.name === "productCategoryId") {
       valueToCheck = Number(e.target.value)
-
-      console.log("listenInputChange b ", valueToCheck)
     }
 
     setProductData({ ...productData, [e.target.name]: valueToCheck })
-    console.log("listenInputChange productData ", productData)
   }
 
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
   }
 
-  const uploadToS3 = async () => {
-    console.log(file)
-    let newUrl = ""
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/aws/generate-upload-url?fileName=${file.name}`,
-      )
-      newUrl = `https://oylo-images.s3.us-east-2.amazonaws.com/${response.data.fileName}`
-      console.log(response.data)
-      console.log(response.data.uploadURL)
-      console.log(response.data.fileName)
-
-      // MY PROBLEM IS HERE
-
-      await axios.put(response.data.uploadURL, file, {
-        headers: {
-          "Content-Type": file.type,
-        },
-      })
-    } catch (error) {
-      console.log(error)
-      console.error("Error uploading to S3: ", error)
-      return null
-    }
-    return newUrl
-  }
-
   const submitProductForm = async (e) => {
     e.preventDefault()
 
-    const imageUrl = await uploadToS3()
-    console.log(imageUrl)
+    const imageUrl = await uploadToS3(file)
 
     if (!imageUrl) {
-      console.log(" !img") // HERE I GET ALWAYS UNDEFINED
       console.error("!imageUrlFailed to upload image to S3")
 
       return
@@ -100,14 +65,12 @@ const CreateProductForm = () => {
       ...productData,
       image: imageUrl,
     }
-    console.log(productDataWithImage)
 
     try {
-      console.log()
-      console.log(productDataWithImage)
       await axios.post(
         `${process.env.REACT_APP_API_URL}/products/create`,
         productDataWithImage,
+        { withCredentials: true },
       )
       setNotification(
         ` ${titleCase(productData.name, "_")} was added to your products list `,
@@ -150,7 +113,11 @@ const CreateProductForm = () => {
               onChange={listenInputChange}
               className={styles.formFieldSelect}
               name='productCategoryId'
+              value={productData.productCategoryId}
             >
+              <option value='' disabled>
+                Select a category
+              </option>
               {productCategories
                 ? productCategories
                     .filter((category) => category.name !== "all")
@@ -213,6 +180,7 @@ const CreateProductForm = () => {
               type='number'
               name='size'
               onChange={listenInputChange}
+              min={1}
               required
             />
           </div>
