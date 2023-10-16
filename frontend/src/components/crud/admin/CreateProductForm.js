@@ -68,109 +68,122 @@ const CreateProductForm = () => {
     <div>
       {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={submitProductForm}>
-        <label className={styles.label} htmlFor='name'>
-          {text.forms.commonProperties.name}
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='name'
-          onChange={listenInputChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor='name'>
-          {text.forms.commonProperties.category}
-        </label>
-        <select
-          onChange={listenInputChange}
-          className={styles.formFieldSelect}
-          name='productCategoryId'
-        >
-          {productCategories
-            ? productCategories
-                .filter((category) => category.name !== "all")
-                .map((productCategory) => (
-                  <option
-                    key={productCategory.id}
-                    className={styles.formField}
-                    value={productCategory.id}
-                  >
-                    {titleCase(productCategory.name, "_")}
-                  </option>
-                ))
-            : ""}
-        </select>
-
-        <label className={styles.label} htmlFor='name'>
-          {text.forms.commonProperties.price}
-        </label>
-        <input
-          className={styles.formField}
-          type='number'
-          name='price'
-          step='.01'
-          onChange={listenInputChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor='description'>
-          {text.forms.commonProperties.description}
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='description'
-          onChange={listenInputChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor='details'>
-          {text.forms.commonProperties.details}
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='details'
-          onChange={listenInputChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor='size'>
-          {text.forms.commonProperties.size}
-        </label>
-        <input
-          className={styles.formField}
-          type='number'
-          name='size'
-          onChange={listenInputChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor='measure'>
-          {text.forms.commonProperties.measure}
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='measure'
-          onChange={listenInputChange}
-          required
-        />
-
-        <label className={styles.label} htmlFor='image'>
-          {text.forms.commonProperties.imageUrl}
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='image'
-          onChange={listenInputChange}
-          required
-        />
-        <button className={styles.formButton} type='submit'>
-          {text.forms.createProductForm.submitButton}
-        </button>
+        <div className={styles.actionButton}>
+          <button className={styles.formButton} type='submit'>
+            {text.forms.createProductForm.submitButton}
+          </button>
+        </div>
+        <div className={styles.inputsContainer}>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='name'>
+              {text.forms.commonProperties.name}
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='name'
+              onChange={listenInputChange}
+              required
+            />
+          </div>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='name'>
+              {text.forms.commonProperties.category}
+            </label>
+            <select
+              onChange={listenInputChange}
+              className={styles.formFieldSelect}
+              name='productCategoryId'
+            >
+              {productCategories
+                ? productCategories
+                    .filter((category) => category.name !== "all")
+                    .map((productCategory) => (
+                      <option
+                        key={productCategory.id}
+                        className={styles.formField}
+                        value={productCategory.id}
+                      >
+                        {titleCase(productCategory.name, "_")}
+                      </option>
+                    ))
+                : ""}
+            </select>
+          </div>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='name'>
+              {text.forms.commonProperties.price}
+            </label>
+            <input
+              className={styles.formField}
+              type='number'
+              name='price'
+              step='.01'
+              onChange={listenInputChange}
+              required
+            />
+          </div>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='description'>
+              {text.forms.commonProperties.description}
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='description'
+              onChange={listenInputChange}
+              required
+            />
+          </div>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='details'>
+              {text.forms.commonProperties.details}
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='details'
+              onChange={listenInputChange}
+              required
+            />
+          </div>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='size'>
+              {text.forms.commonProperties.size}
+            </label>
+            <input
+              className={styles.formField}
+              type='number'
+              name='size'
+              onChange={listenInputChange}
+              required
+            />
+          </div>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='measure'>
+              {text.forms.commonProperties.measure}
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='measure'
+              onChange={listenInputChange}
+              required
+            />
+          </div>
+          <div className={styles.labelAndInputContainer}>
+            <label className={styles.label} htmlFor='image'>
+              {text.forms.commonProperties.imageUrl}
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='image'
+              onChange={listenInputChange}
+              required
+            />
+          </div>
+        </div>
       </form>
     </div>
   )

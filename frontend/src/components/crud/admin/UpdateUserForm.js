@@ -1,75 +1,115 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
+
+import { getUserByEmail } from "#utils/utils"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import styles from "./updateUserForm.module.scss"
 
 const UpdateUserForm = () => {
   const [notification, setNotification] = useState(null)
   const [email, setEmail] = useState("")
 
-  const [userNewData, seUserNewData] = useState({
-    firstName: "",
-    lastName: "",
+  const [userOldData, setUserOldData] = useState({
     email: "",
+    lastName: "",
+    firstName: "",
+  })
+
+  const [userNewData, setUserNewData] = useState({
+    email: "",
+    lastName: "",
+    firstName: "",
   })
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
 
-  updateUser = async () => {
+  const updateUser = async (e) => {
+    e.preventDefault()
+    if (JSON.stringify(userOldData) === JSON.stringify(userNewData)) {
+      setNotification("No changes made.")
+      return
+    }
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/users/user/${email}`,
+        userNewData,
+        { withCredentials: true },
       )
-      seUserNewData(response.data)
+      setUserOldData(response.data)
+      console.log(response.data)
+      setNotification("setUser")
+      setTimeout(() => setNotification(null), 1300)
     } catch (error) {
       console.error("Can not edit user ", error)
     }
   }
 
-  useEffect(() => {
-    useGetUserByEmail(email)
-  }, [email])
-
   const listenInputChange = (e) => {
+    console.log(userOldData)
     console.log(userNewData)
-    setProductData({ ...userNewData, [e.target.name]: e.target.value })
+    setUserNewData({ ...userOldData, [e.target.name]: e.target.value })
   }
+
+  console.log(email)
+  console.log(userNewData)
+  console.log(userOldData)
 
   return (
     <div>
       {notification && <NotificationCard message={notification} />}
-      <label className={styles.label} htmlFor='firstName'>
-        {text.commonProperties.firstName}
+
+      <label className={styles.label} htmlFor='userEmail'>
+        User Email
       </label>
       <input
         className={styles.formField}
         type='text'
-        name='useEmail'
+        name='userEmail'
         onChange={(e) => setEmail(e.target.value)}
         value={email}
+        placeholder={email}
       />
+      <button
+        className={styles.formButton}
+        onClick={() => getUserByEmail(email, setUserOldData, setNotification)}
+      >
+        Set User
+      </button>
+      <div>
+        <div>{userOldData.email}</div>
+        <div>{userOldData.firstName}</div>
+        <div>{userOldData.lastName}</div>
+      </div>
 
-      <form className={styles.form} onSubmit={submitProductForm}>
-        <label className={styles.label} htmlFor='firstName'>
-          {text.commonProperties.firstName}
-        </label>
+      <form className={styles.form} onSubmit={(e) => updateUser(e)}>
+        <label className={styles.label} htmlFor='email'></label>
         <input
           className={styles.formField}
           type='text'
-          name='name'
-          onChange={listenInputChange}
+          name='email'
+          onChange={(e) => listenInputChange(e)}
+          value={userNewData.email}
+          placeholder={"email"}
+        />
+        <label className={styles.label} htmlFor='firstName'></label>
+        <input
+          className={styles.formField}
+          type='text'
+          name='firstName'
+          onChange={(e) => listenInputChange(e)}
           value={userNewData.firstName}
+          placeholder={"firstName"}
         />
 
-        <label className={styles.label} htmlFor='lastName'>
-          {text.commonProperties.lastName}
-        </label>
+        <label className={styles.label} htmlFor='lastName'></label>
         <input
-          onChange={listenInputChange}
+          onChange={(e) => listenInputChange(e)}
           className={styles.formFieldSelect}
-          name='email'
+          name='lastName'
+          value={userNewData.lastName}
+          placeholder={"lastName"}
         />
 
         <button className={styles.formButton} type='submit'>

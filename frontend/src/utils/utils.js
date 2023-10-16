@@ -61,10 +61,9 @@ export const useGetProducts = (setProducts) => {
   }, [setProducts])
 }
 
-export const getGetUserByEmail = async (
+export const getUserByEmail = async (
   email,
   setUserDataByEmail,
-  setUserEmail,
   setNotification,
 ) => {
   try {
@@ -76,7 +75,6 @@ export const getGetUserByEmail = async (
     )
 
     setUserDataByEmail(response.data)
-    setUserEmail("")
   } catch (error) {
     setNotification(`Error geting user: ${error.response.data.message}`)
     setTimeout(() => setNotification(null), 2000)
