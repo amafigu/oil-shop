@@ -78,20 +78,18 @@ export const getUserByEmail = async (
   }
 }
 
-export const getProductByEmail = async (
-  email,
-  setUserDataByEmail,
+export const getProductByName = async (
+  name,
+  setProductDataByName,
   setNotification,
 ) => {
+  console.log(name)
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/user/${email}`,
-      {
-        withCredentials: true,
-      },
+      `${process.env.REACT_APP_API_URL}/products/${name}`,
     )
 
-    setUserDataByEmail(response.data)
+    setProductDataByName(response.data)
   } catch (error) {
     setNotification(`Error geting user: ${error.response.data.message}`)
     setTimeout(() => setNotification(null), 2000)

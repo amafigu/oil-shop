@@ -40,31 +40,29 @@ router.post(
     }
   }
 );
-router.get(
-  '/:productName',
-  validateParams(ProductNameParamSchema),
-  async (req, res) => {
-    try {
-      const product = await db.product.findOne({
-        where: {
-          name: req.params.productName,
+
+router.get('/:productName', async (req, res) => {
+  console.log('asdasd');
+  try {
+    const product = await db.product.findOne({
+      where: {
+        name: req.params.productName,
+      },
+      include: [
+        {
+          model: db.productCategory,
+          as: 'category',
         },
-        include: [
-          {
-            model: db.productCategory,
-            as: 'category',
-          },
-        ],
-      });
-      if (product === null) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-      res.json(product);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+      ],
+    });
+    if (product === null) {
+      return res.status(404).json({ message: 'Product not found' });
     }
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-);
+});
 
 router.delete(
   '/:productName',
