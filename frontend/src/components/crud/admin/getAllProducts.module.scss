@@ -1,0 +1,100 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.getAllProductsWrapper {
+  width: 100%;
+
+  .showHideButtonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 24px 0;
+  }
+
+  .showHideButtons {
+    @include action-button;
+
+    width: 160px;
+    height: 36px;
+    font-size: 1rem;
+    text-transform: none;
+
+    @include media.mobile {
+      width: 120px;
+      overflow: hidden;
+    }
+  }
+
+  .avaliableProductsContainer {
+    @include flex-column;
+
+    flex-grow: 1;
+    flex-shrink: 1;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .availableProductContainer {
+    padding: 12px;
+  }
+
+  .availableProduct {
+    @include flex-align-center;
+
+    gap: 48px;
+    padding: 4px;
+    border-bottom: solid 1px theme.$branding-background-color;
+
+    @include media.mobile {
+      gap: 18px;
+    }
+  }
+
+  .itemImage {
+    width: 3.5rem;
+    min-height: 90px;
+    max-height: 90px;
+    object-fit: contain;
+    margin-right: 12px;
+
+    @include media.desktop-down {
+      width: 2.75rem;
+      min-height: 80px;
+      max-height: 80px;
+    }
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .actionButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+
+    @include media.widescreen-down {
+      flex-direction: column;
+      align-items: unset;
+      justify-items: center;
+    }
+  }
+
+  .availableProductData {
+    flex-grow: 1;
+
+    @include flex-column;
+
+    .item {
+      height: 36px;
+
+      @include flex-align-center;
+    }
+  }
+}

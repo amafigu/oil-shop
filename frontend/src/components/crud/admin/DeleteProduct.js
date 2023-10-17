@@ -3,9 +3,12 @@ import axios from "axios"
 import { useState } from "react"
 import styles from "./deleteProduct.module.scss"
 
-const DeleteProduct = ({ setRefreshAllUsersCounter }) => {
+const DeleteProduct = ({
+  setRefreshAllUsersCounter,
+  setrefreshAllProductsCounter,
+}) => {
   const [notification, setNotification] = useState("")
-  const [userEmail, setUserEmail] = useState("")
+  const [productName, setProductName] = useState("")
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
@@ -15,32 +18,35 @@ const DeleteProduct = ({ setRefreshAllUsersCounter }) => {
       await axios.delete(`${process.env.REACT_APP_API_URL}/products/product/`, {
         withCredentials: true,
       })
-      setNotification(`${userEmail} ${text.deleteProduct.deletedByEmail}`)
+      setNotification(` productDeleted`)
       setTimeout(() => setNotification(null), 2000)
       setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
-      setUserEmail("")
+      setrefreshAllProductsCounter((prevCounter) => prevCounter + 1)
+      setProductName("")
     } catch (error) {
-      setNotification(`${userEmail} ${text.deleteProduct.error}`)
+      setNotification(`productDeleted error `)
       setTimeout(() => setNotification(null), 3000)
-      console.error("Can not delete user", error)
+      console.error("Can not delete product", error)
     }
   }
   return (
     <div>
       <div className={styles.form}>
-        <label className={styles.label} htmlFor='userEmail'>
+        <label className={styles.label} htmlFor='productName'>
           {text.forms.commonProperties.email}
         </label>
         <input
           type='text'
-          value={userEmail}
+          value={productName}
           required
-          onChange={(e) => setUserEmail(e.target.value)}
+          onChange={(e) => setProductName(e.target.value)}
         />
         <button
           className={styles.formButton}
-          onClick={() => deleteProduct(userEmail.trim())}
-        ></button>
+          onClick={() => deleteProduct(productName.trim())}
+        >
+          DELETE
+        </button>
       </div>
       <div>{notification}</div>
     </div>
