@@ -33,7 +33,9 @@
   .productCardImage {
     max-width: 80%;
     height: 200px;
+    min-height: 200px;
     margin: 16px 0;
+    background-color: white;
     object-fit: contain;
   }
 

@@ -1,5 +1,4 @@
 import express from 'express';
-import { decodeJWT } from '../middleware/decodeToken.js';
 import db from '../models/index.js';
 
 import {
@@ -15,13 +14,12 @@ const router = express.Router();
 router.post(
   '/create',
 
-  decodeJWT,
   async (req, res) => {
     try {
       const product = await db.product.findOne({
         where: {
           name: req.body.name,
-          category: req.body.category,
+          productCategoryId: req.body.productCategoryId,
           size: req.body.size,
         },
       });
@@ -42,7 +40,6 @@ router.post(
 );
 
 router.get('/:productName', async (req, res) => {
-  console.log('asdasd');
   try {
     const product = await db.product.findOne({
       where: {

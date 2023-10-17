@@ -87,12 +87,14 @@
 
   .cartItemImage {
     width: 3.5rem;
+    min-height: 90px;
     max-height: 90px;
     object-fit: contain;
     margin-right: 12px;
 
     @include media.desktop-down {
       width: 2.75rem;
+      min-height: 80px;
       max-height: 80px;
     }
   }

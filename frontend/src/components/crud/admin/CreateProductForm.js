@@ -72,6 +72,7 @@ const CreateProductForm = () => {
         productDataWithImage,
         { withCredentials: true },
       )
+
       setNotification(
         ` ${titleCase(productData.name, "_")} was added to your products list `,
       )

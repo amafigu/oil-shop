@@ -1,12 +1,11 @@
 import AWS from 'aws-sdk';
 import dotenv from 'dotenv';
 import express from 'express';
-import { decodeJWT } from '../middleware/decodeToken.js';
 
 dotenv.config();
 const router = express.Router();
 
-router.get('/generate-upload-url', decodeJWT, async (req, res) => {
+router.get('/generate-upload-url', async (req, res) => {
   const fileName = `${Date.now()}-${req.query.fileName}`;
 
   AWS.config.update({

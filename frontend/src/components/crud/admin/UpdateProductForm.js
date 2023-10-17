@@ -52,10 +52,8 @@ const UpdateProductForm = () => {
 
   const listenProductToFind = (e) => {
     let valueToCheck = e.target.value
-    console.log(findProductData)
 
     setFindProductData({ ...findProductData, [e.target.name]: valueToCheck })
-    console.log(findProductData)
   }
 
   const listenUpdateProductData = (e) => {

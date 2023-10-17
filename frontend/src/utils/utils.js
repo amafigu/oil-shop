@@ -83,7 +83,6 @@ export const getProductByName = async (
   setProductDataByName,
   setNotification,
 ) => {
-  console.log(name)
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/products/${name}`,
