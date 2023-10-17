@@ -12,7 +12,7 @@ const GetProduct = () => {
         required
         onChange={(e) => setUserEmail(e.target.value)}
       />
-      <button className={styles.formButton}></button>
+      <button className={styles.formButton}>GET PRODUCT</button>
     </div>
   )
 }

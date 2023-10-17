@@ -232,6 +232,11 @@
         "success": "Benutzer wurde erfolgreich erstellt",
         "submitButton": "Konto erstellen",
         "emailInUseErrorMessage": "E-Mail bereits registriert"
+      },
+      "getAllProducts": {
+        "showButton": "Alle Produkte anzeigen",
+        "hideButton": "Alle Produkte ausblenden",
+        "error": "Kann nicht alle Produkte finden"
       }
     },
     "products": {

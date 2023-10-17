@@ -46,6 +46,11 @@
   justify-content: flex-end;
 }
 
+@mixin flex-justify-around {
+  display: flex;
+  justify-content: space-around;
+}
+
 @mixin flex-center-column {
   @include flex-all-center;
 
@@ -177,4 +182,9 @@
   @include media.mobile {
     margin-bottom: 28px;
   }
+}
+
+@mixin error-message {
+  font-weight: 500;
+  color: red;
 }

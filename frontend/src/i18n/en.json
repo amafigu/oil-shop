@@ -236,6 +236,11 @@
         "success": "User created successfully",
         "submitButton": "Create an Account",
         "emailInUseErrorMessage": "Email already registered"
+      },
+      "getAllProducts": {
+        "showButton": "Show all products",
+        "hideButton": "Hide all products",
+        "error": "Can not see all products"
       }
     },
     "products": {
