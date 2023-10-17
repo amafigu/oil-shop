@@ -42,6 +42,8 @@ const CreateProductForm = () => {
 
     if (e.target.type === "number" || e.target.name === "productCategoryId") {
       valueToCheck = Number(e.target.value)
+      console.log(valueToCheck)
+      console.log(valueToCheck)
     }
 
     setProductData({ ...productData, [e.target.name]: valueToCheck })
@@ -72,6 +74,7 @@ const CreateProductForm = () => {
         productDataWithImage,
         { withCredentials: true },
       )
+
       setNotification(
         ` ${titleCase(productData.name, "_")} was added to your products list `,
       )
