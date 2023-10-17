@@ -1,5 +1,5 @@
 import NotificationCard from "#components/NotificationCard"
-import { titleCase } from "#utils/utils"
+import { getProductByName, titleCase } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from "./updateProductForm.module.scss"
@@ -8,7 +8,24 @@ const UpdateProductForm = () => {
   const [notification, setNotification] = useState(null)
 
   const [productCategories, setProductCategories] = useState(null)
-  const [productData, setProductData] = useState({
+  const [findProductData, setFindProductData] = useState({
+    name: "",
+    size: "",
+    productCategoryId: "",
+  })
+
+  const [productOldData, setProductOldData] = useState({
+    name: "",
+    productCategoryId: "",
+    description: "",
+    price: "",
+    details: "",
+    measure: "",
+    image: "",
+    size: "",
+  })
+
+  const [productNewData, setProductNewData] = useState({
     name: "",
     productCategoryId: "",
     description: "",
@@ -33,50 +50,104 @@ const UpdateProductForm = () => {
     }
   }, [])
 
-  const listenInputChange = (e) => {
+  const listenProductToFind = (e) => {
+    let valueToCheck = e.target.value
+    console.log(findProductData)
+
+    setFindProductData({ ...findProductData, [e.target.name]: valueToCheck })
+    console.log(findProductData)
+  }
+
+  const listenUpdateProductData = (e) => {
     let valueToCheck = e.target.value
     if (e.target.type === "number" || e.target.name === "productCategoryId") {
       valueToCheck = Number(e.target.value)
     }
-
-    setProductData({ ...productData, [e.target.name]: valueToCheck })
+    console.log(productNewData)
+    setProductNewData({ ...productNewData, [e.target.name]: valueToCheck })
   }
 
-  const submitProductForm = async (e) => {
+  const updateProduct = async (e) => {
     e.preventDefault()
-
+    if (JSON.stringify(productOldData) === JSON.stringify(productNewData)) {
+      setNotification("No changes made.")
+      return
+    }
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}/products/create`,
-        productData,
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/products/${findProductData.name}`,
+        productNewData,
         { withCredentials: true },
       )
-      setNotification(
-        ` ${titleCase(productData.name, "_")} was added to your products list `,
-      )
+      setProductNewData(response.data)
+      setNotification("setProduct")
       setTimeout(() => setNotification(null), 1300)
     } catch (error) {
-      setNotification(`Error by creating new product`)
-      setTimeout(() => setNotification(null), 1300)
-      console.error("Product submit failed: ", error)
+      console.error("Can not edit product ", error)
     }
   }
+
   return (
     <div>
       {notification && <NotificationCard message={notification} />}
-      <form className={styles.form} onSubmit={submitProductForm}>
+      <label className={styles.label} htmlFor='productName'>
+        Product Name
+      </label>
+      <input
+        className={styles.formField}
+        type='text'
+        name='name'
+        onChange={(e) => listenProductToFind(e)}
+        placeholder={"Name"}
+      />
+      <label className={styles.label} htmlFor='productName'>
+        Product Category
+      </label>
+      <input
+        className={styles.formField}
+        type='text'
+        name='productCategoryId'
+        onChange={(e) => listenProductToFind(e)}
+        placeholder={"Category"}
+      />
+      <label className={styles.label} htmlFor='productName'>
+        Size
+      </label>
+      <input
+        className={styles.formField}
+        type='number'
+        step={1}
+        name='size'
+        onChange={(e) => listenProductToFind(e)}
+        placeholder={"Size"}
+      />
+      <button
+        className={styles.formButton}
+        onClick={() =>
+          getProductByName(
+            findProductData.name,
+            setProductOldData,
+            setNotification,
+          )
+        }
+      >
+        Set Product
+      </button>
+      <form className={styles.form} onSubmit={updateProduct}>
         <label className={styles.label} htmlFor='name'></label>
         <input
           className={styles.formField}
           type='text'
           name='name'
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           required
         />
 
-        <label className={styles.label} htmlFor='name'></label>
+        <label className={styles.label} htmlFor='category'>
+          cat
+        </label>
         <select
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           className={styles.formFieldSelect}
           name='productCategoryId'
         >
@@ -95,58 +166,70 @@ const UpdateProductForm = () => {
             : ""}
         </select>
 
-        <label className={styles.label} htmlFor='name'></label>
+        <label className={styles.label} htmlFor='name'>
+          price
+        </label>
         <input
           className={styles.formField}
           type='number'
           name='price'
           step='.01'
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           required
         />
 
-        <label className={styles.label} htmlFor='description'></label>
+        <label className={styles.label} htmlFor='description'>
+          description
+        </label>
         <input
           className={styles.formField}
           type='text'
           name='description'
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           required
         />
 
-        <label className={styles.label} htmlFor='details'></label>
+        <label className={styles.label} htmlFor='details'>
+          details
+        </label>
         <input
           className={styles.formField}
           type='text'
           name='details'
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           required
         />
 
-        <label className={styles.label} htmlFor='size'></label>
+        <label className={styles.label} htmlFor='size'>
+          size
+        </label>
         <input
           className={styles.formField}
           type='number'
           name='size'
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           required
         />
 
-        <label className={styles.label} htmlFor='measure'></label>
+        <label className={styles.label} htmlFor='measure'>
+          measure
+        </label>
         <input
           className={styles.formField}
           type='text'
           name='measure'
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           required
         />
 
-        <label className={styles.label} htmlFor='image'></label>
+        <label className={styles.label} htmlFor='image'>
+          image
+        </label>
         <input
           className={styles.formField}
           type='text'
           name='image'
-          onChange={listenInputChange}
+          onChange={listenUpdateProductData}
           required
         />
         <button className={styles.formButton} type='submit'>
