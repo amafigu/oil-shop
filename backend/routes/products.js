@@ -34,14 +34,12 @@ router.post(
         res.status(201).json(product);
       }
     } catch (err) {
-      console.log(req.body);
       res.status(500).json({ message: err.message });
     }
   }
 );
 
 router.get('/:productName', async (req, res) => {
-  console.log('asdasd');
   try {
     const product = await db.product.findOne({
       where: {
