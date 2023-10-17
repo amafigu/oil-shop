@@ -76,7 +76,6 @@
 
       width: 100px;
       height: 32px;
-      margin-top: 24px;
       font-size: 1rem;
       text-transform: none;
 
@@ -92,7 +91,7 @@
 
     .sectionsToggleButtons {
       display: flex;
-      justify-content: space-between;
+      gap: 48px;
       margin-bottom: 24px;
     }
   }

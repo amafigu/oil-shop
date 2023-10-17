@@ -96,7 +96,6 @@ const Admin = () => {
             <div className={styles.formsContainerWrapper}>
               <div className={styles.formsContainer}>
                 <div className={styles.crudContainer}>
-                  {text.crud.products.getByName}
                   <GetProduct />
                 </div>
                 <div className={styles.crudContainer}>
