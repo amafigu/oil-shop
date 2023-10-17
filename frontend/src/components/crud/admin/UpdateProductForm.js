@@ -97,14 +97,14 @@ const UpdateProductForm = () => {
       <div className={styles.toggleButtonsContainer}>
         {showSearchAndForm ? (
           <button
-            className={styles.showHideButtons}
+            className={styles.formButton}
             onClick={() => setShowSearchAndForm(false)}
           >
             HIDE FORM
           </button>
         ) : (
           <button
-            className={styles.showHideButtons}
+            className={styles.formButton}
             onClick={() => setShowSearchAndForm(true)}
           >
             SHOW FORM
