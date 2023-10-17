@@ -7,9 +7,14 @@
 
   .showHideButtonsContainer {
     display: flex;
+    gap: 48px;
     align-items: center;
-    justify-content: space-around;
     margin: 24px 0;
+
+    @include media.mobile {
+      justify-content: space-between;
+      margin: 24px 0;
+    }
   }
 
   .showHideButtons {
@@ -43,8 +48,9 @@
     @include flex-align-center;
 
     gap: 48px;
-    padding: 4px;
-    border-bottom: solid 1px theme.$branding-background-color;
+    padding: 8px;
+    border: solid 1px theme.$branding-background-color;
+    border-radius: 4px;
 
     @include media.mobile {
       gap: 18px;

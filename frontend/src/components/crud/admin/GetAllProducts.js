@@ -41,18 +41,21 @@ const GetAllProducts = ({ refreshAllProductsCounter }) => {
     <div className={styles.getAllProductsWrapper}>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.showHideButtonsContainer}>
-        <button
-          className={styles.showHideButtons}
-          onClick={() => showProductsListAndGetData()}
-        >
-          {text.getAllProducts.showButton}
-        </button>
-        <button
-          className={styles.showHideButtons}
-          onClick={() => hideUserList()}
-        >
-          {text.getAllProducts.hideButton}
-        </button>
+        {showProducts ? (
+          <button
+            className={styles.showHideButtons}
+            onClick={() => hideUserList()}
+          >
+            {text.getAllProducts.hideButton}
+          </button>
+        ) : (
+          <button
+            className={styles.showHideButtons}
+            onClick={() => showProductsListAndGetData()}
+          >
+            {text.getAllProducts.showButton}
+          </button>
+        )}
       </div>
       {
         <div
