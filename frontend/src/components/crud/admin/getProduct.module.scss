@@ -53,6 +53,11 @@
 
   .availableProductContainer {
     padding: 12px;
+
+    @include media.mobile {
+      padding: 0;
+      margin: 16px 0;
+    }
   }
 
   .availableProduct {
@@ -63,6 +68,7 @@
 
     @include media.mobile {
       gap: 18px;
+      padding: 0;
     }
   }
 

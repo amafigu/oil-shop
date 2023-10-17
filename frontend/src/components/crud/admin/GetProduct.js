@@ -14,8 +14,11 @@ const GetProduct = () => {
   const text = translate.components.crud
 
   const getProductAndShow = () => {
-    setShowProduct(true)
     getProductByName(productName, setProductData, setNotification)
+    if (productData != {}) {
+      console.log(productData)
+      setShowProduct(true)
+    }
   }
 
   return (

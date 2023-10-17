@@ -6,6 +6,8 @@ import styles from "./updateProductForm.module.scss"
 
 const UpdateProductForm = () => {
   const [notification, setNotification] = useState(null)
+  const [showForm, setShowForm] = useState(false)
+  const [showSearchAndForm, setShowSearchAndForm] = useState(false)
 
   const [productCategories, setProductCategories] = useState(null)
   const [findProductData, setFindProductData] = useState({
@@ -85,155 +87,177 @@ const UpdateProductForm = () => {
     }
   }
 
+  const getProductByNameAndShowForm = () => {
+    getProductByName(findProductData.name, setProductOldData, setNotification)
+    setShowForm(true)
+  }
+
   return (
     <div>
       {notification && <NotificationCard message={notification} />}
-      <label className={styles.label} htmlFor='productName'>
-        Product Name
-      </label>
-      <input
-        className={styles.formField}
-        type='text'
-        name='name'
-        onChange={(e) => listenProductToFind(e)}
-        placeholder={"Name"}
-      />
-      <label className={styles.label} htmlFor='productName'>
-        Product Category
-      </label>
-      <input
-        className={styles.formField}
-        type='text'
-        name='productCategoryId'
-        onChange={(e) => listenProductToFind(e)}
-        placeholder={"Category"}
-      />
-      <label className={styles.label} htmlFor='productName'>
-        Size
-      </label>
-      <input
-        className={styles.formField}
-        type='number'
-        step={1}
-        name='size'
-        onChange={(e) => listenProductToFind(e)}
-        placeholder={"Size"}
-      />
-      <button
-        className={styles.formButton}
-        onClick={() =>
-          getProductByName(
-            findProductData.name,
-            setProductOldData,
-            setNotification,
-          )
-        }
-      >
-        Set Product
-      </button>
-      <form className={styles.form} onSubmit={updateProduct}>
-        <label className={styles.label} htmlFor='name'></label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='name'
-          onChange={listenUpdateProductData}
-          required
-        />
 
-        <label className={styles.label} htmlFor='category'>
-          cat
-        </label>
-        <select
-          onChange={listenUpdateProductData}
-          className={styles.formFieldSelect}
-          name='productCategoryId'
-        >
-          {productCategories
-            ? productCategories
-                .filter((category) => category.name !== "all")
-                .map((productCategory) => (
-                  <option
-                    key={productCategory.id}
-                    className={styles.formField}
-                    value={productCategory.id}
-                  >
-                    {titleCase(productCategory.name, "_")}
-                  </option>
-                ))
-            : ""}
-        </select>
+      <div className={styles.toggleButtonsContainer}>
+        {showSearchAndForm ? (
+          <button
+            className={styles.showHideButtons}
+            onClick={() => setShowSearchAndForm(false)}
+          >
+            HIDE FORM
+          </button>
+        ) : (
+          <button
+            className={styles.showHideButtons}
+            onClick={() => setShowSearchAndForm(true)}
+          >
+            SHOW FORM
+          </button>
+        )}
+      </div>
+      {showSearchAndForm && (
+        <div className={styles.searchProductAndFormWrapper}>
+          <label className={styles.label} htmlFor='productName'>
+            Product Name
+          </label>
+          <input
+            className={styles.formField}
+            type='text'
+            name='name'
+            onChange={(e) => listenProductToFind(e)}
+            placeholder={"Name"}
+          />
+          <label className={styles.label} htmlFor='productName'>
+            Product Category
+          </label>
+          <input
+            className={styles.formField}
+            type='text'
+            name='productCategoryId'
+            onChange={(e) => listenProductToFind(e)}
+            placeholder={"Category"}
+          />
+          <label className={styles.label} htmlFor='productName'>
+            Size
+          </label>
+          <input
+            className={styles.formField}
+            type='number'
+            step={1}
+            name='size'
+            onChange={(e) => listenProductToFind(e)}
+            placeholder={"Size"}
+          />
+          <button
+            className={styles.formButton}
+            onClick={() => getProductByNameAndShowForm()}
+          >
+            Set Product
+          </button>
 
-        <label className={styles.label} htmlFor='name'>
-          price
-        </label>
-        <input
-          className={styles.formField}
-          type='number'
-          name='price'
-          step='.01'
-          onChange={listenUpdateProductData}
-          required
-        />
+          <form className={styles.form} onSubmit={updateProduct}>
+            <label className={styles.label} htmlFor='name'></label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='name'
+              onChange={listenUpdateProductData}
+              required
+            />
 
-        <label className={styles.label} htmlFor='description'>
-          description
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='description'
-          onChange={listenUpdateProductData}
-          required
-        />
+            <label className={styles.label} htmlFor='category'>
+              category
+            </label>
+            <select
+              onChange={listenUpdateProductData}
+              className={styles.formFieldSelect}
+              name='productCategoryId'
+            >
+              {productCategories
+                ? productCategories
+                    .filter((category) => category.name !== "all")
+                    .map((productCategory) => (
+                      <option
+                        key={productCategory.id}
+                        className={styles.formField}
+                        value={productCategory.id}
+                      >
+                        {titleCase(productCategory.name, "_")}
+                      </option>
+                    ))
+                : ""}
+            </select>
 
-        <label className={styles.label} htmlFor='details'>
-          details
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='details'
-          onChange={listenUpdateProductData}
-          required
-        />
+            <label className={styles.label} htmlFor='name'>
+              price
+            </label>
+            <input
+              className={styles.formField}
+              type='number'
+              name='price'
+              step='.01'
+              onChange={listenUpdateProductData}
+              required
+            />
 
-        <label className={styles.label} htmlFor='size'>
-          size
-        </label>
-        <input
-          className={styles.formField}
-          type='number'
-          name='size'
-          onChange={listenUpdateProductData}
-          required
-        />
+            <label className={styles.label} htmlFor='description'>
+              description
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='description'
+              onChange={listenUpdateProductData}
+              required
+            />
 
-        <label className={styles.label} htmlFor='measure'>
-          measure
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='measure'
-          onChange={listenUpdateProductData}
-          required
-        />
+            <label className={styles.label} htmlFor='details'>
+              details
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='details'
+              onChange={listenUpdateProductData}
+              required
+            />
 
-        <label className={styles.label} htmlFor='image'>
-          image
-        </label>
-        <input
-          className={styles.formField}
-          type='text'
-          name='image'
-          onChange={listenUpdateProductData}
-          required
-        />
-        <button className={styles.formButton} type='submit'>
-          EDIT
-        </button>
-      </form>
+            <label className={styles.label} htmlFor='size'>
+              size
+            </label>
+            <input
+              className={styles.formField}
+              type='number'
+              name='size'
+              onChange={listenUpdateProductData}
+              required
+            />
+
+            <label className={styles.label} htmlFor='measure'>
+              measure
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='measure'
+              onChange={listenUpdateProductData}
+              required
+            />
+
+            <label className={styles.label} htmlFor='image'>
+              image
+            </label>
+            <input
+              className={styles.formField}
+              type='text'
+              name='image'
+              onChange={listenUpdateProductData}
+              required
+            />
+            <button className={styles.formButton} type='submit'>
+              EDIT
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   )
 }

@@ -96,6 +96,7 @@ const Admin = () => {
             <div className={styles.formsContainerWrapper}>
               <div className={styles.formsContainer}>
                 <div className={styles.crudContainer}>
+                  GET ALL PRODUCT
                   <GetProduct />
                 </div>
                 <div className={styles.crudContainer}>
@@ -106,14 +107,17 @@ const Admin = () => {
                 </div>
                 <div className={styles.crudContainer}>
                   {text.crud.products.create}
+
                   <CreateProductForm />
                 </div>
                 <div className={styles.crudContainer}>
                   {text.crud.products.edit}
+
                   <UpdateProductForm />
                 </div>
                 <div className={styles.crudContainer}>
                   {text.crud.products.delete}
+
                   <DeleteProduct
                     setrefreshAllProductsCounter={setrefreshAllProductsCounter}
                   />
@@ -127,10 +131,14 @@ const Admin = () => {
             <div className={styles.formsContainer}>
               <div className={styles.crudContainer}>
                 {text.crud.users.getByEmail}
+                GET USER
                 <GetUser />
               </div>
-              <div className={styles.crudContainer}></div>
-              <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
+              <div className={styles.crudContainer}>
+                GET ALL USERS
+                <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
+              </div>
+
               <div className={styles.crudContainer}>
                 {text.crud.users.create}
                 <CreateUserForm
