@@ -15,10 +15,8 @@ const GetProduct = () => {
 
   const getProductAndShow = () => {
     getProductByName(productName, setProductData, setNotification)
-    if (productData != {}) {
-      console.log(productData)
-      setShowProduct(true)
-    }
+
+    setShowProduct(true)
   }
 
   return (

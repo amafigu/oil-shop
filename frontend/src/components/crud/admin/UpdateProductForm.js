@@ -6,7 +6,6 @@ import styles from "./updateProductForm.module.scss"
 
 const UpdateProductForm = () => {
   const [notification, setNotification] = useState(null)
-  const [showForm, setShowForm] = useState(false)
   const [showSearchAndForm, setShowSearchAndForm] = useState(false)
 
   const [productCategories, setProductCategories] = useState(null)
@@ -89,7 +88,6 @@ const UpdateProductForm = () => {
 
   const getProductByNameAndShowForm = () => {
     getProductByName(findProductData.name, setProductOldData, setNotification)
-    setShowForm(true)
   }
 
   return (
