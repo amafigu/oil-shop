@@ -1,5 +1,4 @@
 import NotificationCard from "#components/NotificationCard"
-import useLocaleContext from "#context/localeContext"
 import { getUserByEmail } from "#utils/utils"
 import { useState } from "react"
 import styles from "./getUser.module.scss"
@@ -9,9 +8,6 @@ const GetUser = () => {
   const [userDataByEmail, setUserDataByEmail] = useState({})
   const [notification, setNotification] = useState(null)
   const [showUser, setShowUser] = useState(false)
-
-  const { translate } = useLocaleContext()
-  const text = translate.components.crud
 
   const getUserAndShow = () => {
     getUserByEmail(userEmail.trim(), setUserDataByEmail, setNotification)
