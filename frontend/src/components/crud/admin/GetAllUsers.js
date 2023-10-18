@@ -28,10 +28,6 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
     getAllUsers()
   }, [refreshAllUsersCounter])
 
-  const hideUserList = () => {
-    setShowUsers(false)
-  }
-
   const showUserListAndGetData = () => {
     getAllUsers()
     setShowUsers(true)
@@ -40,50 +36,81 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
   return (
     <div className={styles.getAllUsersWrapper}>
       {notification && <NotificationCard message={notification} />}
-      <div className={styles.form}>
-        <button
-          className={styles.formButton}
-          onClick={() => showUserListAndGetData()}
-        >
-          {text.getAllUsers.showButton}
-        </button>
-        <button className={styles.formButton} onClick={() => hideUserList()}>
-          {text.getAllUsers.hideButton}
-        </button>
-        {
-          <div
-            className={
-              showUsers
-                ? `${styles.availableUsersContainer} ${styles.show}`
-                : `${styles.hide}`
-            }
+
+      <div className={styles.showHideButtonsContainer}>
+        {showUsers ? (
+          <button
+            className={styles.showHideButtons}
+            onClick={() => setShowUsers(false)}
           >
-            {availableUsers &&
-              availableUsers.map((availableUser) => (
-                <div
-                  className={styles.avaliableUserData}
-                  key={availableUser.email}
-                >
-                  <img src={availableUser.image} alt='user' />
-                  <div>
+            HIDE ALL USERS
+          </button>
+        ) : (
+          <button
+            className={styles.showHideButtons}
+            onClick={() => showUserListAndGetData()}
+          >
+            GET ALL USERS
+          </button>
+        )}
+      </div>
+      {
+        <div
+          className={
+            showUsers
+              ? `${styles.availableUsersContainer} ${styles.show}`
+              : `${styles.hide}`
+          }
+        >
+          {availableUsers &&
+            availableUsers.map((availableUser) => (
+              <div className={styles.availableUser} key={availableUser.email}>
+                <img
+                  src={availableUser.image}
+                  alt={availableUser.name}
+                  className={styles.itemImage}
+                />
+                <div className={styles.availableUserData}>
+                  <div className={styles.item}>
                     {text.forms.commonProperties.firstName}:{" "}
                     {availableUser.firstName}
                   </div>
-                  <div>
+                  <div className={styles.item}>
                     {text.forms.commonProperties.lastName}:{" "}
                     {availableUser.lastName}
                   </div>
-                  <div>
+                  <div className={styles.item}>
                     {text.forms.commonProperties.email}: {availableUser.email}
                   </div>
-                  <div>
+                  <div className={styles.item}>
                     {text.forms.commonProperties.role}: {availableUser.role}
                   </div>
                 </div>
-              ))}
-          </div>
-        }
-      </div>
+                <div className={styles.actionButtons}>
+                  <button
+                    className={styles.showHideButtons}
+                    onClick={() => console.log("edit user")}
+                  >
+                    EDIT
+                  </button>
+
+                  <button
+                    className={styles.showHideButtons}
+                    onClick={() => console.log("delete user")}
+                  >
+                    DELETE
+                  </button>
+                  <button
+                    className={styles.showHideButtons}
+                    onClick={() => setShowUsers(false)}
+                  >
+                    {text.getAllProducts.hideButton}
+                  </button>
+                </div>
+              </div>
+            ))}
+        </div>
+      }
     </div>
   )
 }

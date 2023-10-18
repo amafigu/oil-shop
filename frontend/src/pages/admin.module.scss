@@ -42,14 +42,10 @@
 
     .productsCrudContainer {
       display: flex;
-      border: solid 1px theme.$branding-background-color;
-      border-radius: 4px;
     }
 
     .usersCrudContainer {
       display: flex;
-      border: solid 1px theme.$branding-background-color;
-      border-radius: 4px;
     }
 
     .formsContainerWrapper {
@@ -75,13 +71,13 @@
     .formButton {
       @include action-button;
 
-      width: 100px;
+      width: 260px;
       height: 32px;
       font-size: 1rem;
       text-transform: none;
 
       @include media.mobile {
-        width: 120px;
+        width: 100%;
         overflow: hidden;
       }
     }
@@ -96,7 +92,8 @@
       margin-bottom: 24px;
 
       @include media.mobile {
-        justify-content: space-between;
+        flex-direction: column;
+        width: 100%;
       }
     }
   }

@@ -28,10 +28,6 @@ const GetAllProducts = ({ refreshAllProductsCounter }) => {
     getAllProducts()
   }, [refreshAllProductsCounter])
 
-  const hideUserList = () => {
-    setShowProducts(false)
-  }
-
   const showProductsListAndGetData = () => {
     getAllProducts()
     setShowProducts(true)
@@ -44,7 +40,7 @@ const GetAllProducts = ({ refreshAllProductsCounter }) => {
         {showProducts ? (
           <button
             className={styles.showHideButtons}
-            onClick={() => hideUserList()}
+            onClick={() => setShowProducts(false)}
           >
             {text.getAllProducts.hideButton}
           </button>
@@ -108,7 +104,7 @@ const GetAllProducts = ({ refreshAllProductsCounter }) => {
                     </button>
                     <button
                       className={styles.showHideButtons}
-                      onClick={() => hideUserList()}
+                      onClick={() => setShowProducts(false)}
                     >
                       {text.getAllProducts.hideButton}
                     </button>

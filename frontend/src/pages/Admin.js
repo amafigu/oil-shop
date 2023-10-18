@@ -70,14 +70,14 @@ const Admin = () => {
               className={styles.formButton}
               onClick={() => setShowProductsSection(false)}
             >
-              HIDE PRODUCTS
+              HIDE PRODUCTS ACTIONS
             </button>
           ) : (
             <button
               className={styles.formButton}
               onClick={() => setShowProductsSection(true)}
             >
-              SHOW PRODUCTS
+              SHOW PRODUCTS ACTIONS
             </button>
           )}
           {showUsersSection ? (
@@ -85,23 +85,25 @@ const Admin = () => {
               className={styles.formButton}
               onClick={() => setShowUsersSection(false)}
             >
-              HIDE USERS
+              HIDE USERS ACTIONS
             </button>
           ) : (
             <button
               className={styles.formButton}
               onClick={() => setShowUsersSection(true)}
             >
-              SHOW USERS
+              SHOW USERS ACTIONS
             </button>
           )}
         </div>
+
         <div className={styles.productsCrudContainer}>
           {showProductsSection && (
             <div className={styles.formsContainerWrapper}>
               <div className={styles.formsContainer}>
+                PRODUCTS OPERATIONS SECTION
                 <div className={styles.crudContainer}>
-                  GET ALL PRODUCT
+                  GET PRODUCT
                   <GetProduct />
                 </div>
                 <div className={styles.crudContainer}>
@@ -111,18 +113,15 @@ const Admin = () => {
                   />
                 </div>
                 <div className={styles.crudContainer}>
-                  {text.crud.products.create}
-
+                  CREATE PRODUCT
                   <CreateProductForm />
                 </div>
                 <div className={styles.crudContainer}>
-                  {text.crud.products.edit}
-
+                  UPDATE PRODUCT
                   <UpdateProductForm />
                 </div>
                 <div className={styles.crudContainer}>
-                  {text.crud.products.delete}
-
+                  DELETE PRODUCT
                   <DeleteProduct
                     setrefreshAllProductsCounter={setrefreshAllProductsCounter}
                   />
@@ -131,21 +130,21 @@ const Admin = () => {
             </div>
           )}
         </div>
+
         <div className={styles.usersCrudContainer}>
           {showUsersSection && (
             <div className={styles.formsContainer}>
+              USER CRUD SECTION
               <div className={styles.crudContainer}>
-                {text.crud.users.getByEmail}
-                GET USER
+                GET USER SECTION
                 <GetUser />
               </div>
               <div className={styles.crudContainer}>
-                GET ALL USERS
+                GET ALL USERS SECTION
                 <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
               </div>
-
               <div className={styles.crudContainer}>
-                {text.crud.users.create}
+                CREATE USER
                 <CreateUserForm
                   setEmailInUserError={setEmailInUserError}
                   setFieldErrors={setFieldErrors}
@@ -162,11 +161,11 @@ const Admin = () => {
                 )}
               </div>
               <div className={styles.crudContainer}>
-                {text.crud.users.edit}
+                UPDATE USER SECTION
                 <UpdateUserForm />
               </div>
               <div className={styles.crudContainer}>
-                {text.crud.users.delete}
+                DELETE USER SECTION
                 <DeleteUser
                   setRefreshAllUsersCounter={setRefreshAllUsersCounter}
                 />

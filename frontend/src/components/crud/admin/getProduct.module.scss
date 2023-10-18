@@ -4,6 +4,7 @@
 
 .getProductWrapper {
   .getProductInputAndButton {
+    display: flex;
     gap: 48px;
 
     @include flex-align-center;
@@ -114,8 +115,10 @@
   }
 
   .buttonsContainer {
+    display: flex;
+    gap: 48px;
+
     @include media.mobile {
-      display: flex;
       gap: 18px;
       justify-content: space-between;
       order: 2;
