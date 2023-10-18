@@ -44,7 +44,7 @@ const Admin = () => {
           <div className={styles.adminFormTitel}>
             {adminData ? (
               <div>
-                <img src={adminData.image} />
+                <img src={adminData.image} alt='image' />
                 <span>{`${text.welcomeText.firstPart} ${adminData.firstName} ${
                   adminData.lastName
                 } ${text.welcomeText.secondPart} ${titleCase(
