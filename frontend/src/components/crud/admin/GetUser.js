@@ -29,6 +29,7 @@ const GetUser = () => {
       >
         {text.getUser.getByEmail}
       </button>
+      <img src={userDataByEmail.image} />
 
       <div>
         {text.forms.commonProperties.firstName}:{" "}

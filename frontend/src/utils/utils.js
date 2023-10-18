@@ -208,7 +208,6 @@ export const uploadToS3 = async (file) => {
       file,
 
       {
-        withCredentials: true,
         headers: {
           "Content-Type": file.type,
         },

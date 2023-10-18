@@ -1,6 +1,7 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 
+import { uploadToS3 } from "#utils/utils"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
@@ -20,6 +21,8 @@ const CreateUserForm = ({
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [file, setFile] = useState(null)
+
   const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate()
@@ -29,14 +32,26 @@ const CreateUserForm = ({
   const currentPath = location.pathname
   const doNotRedirectFrom = ["/users/current-admin"]
 
+  const setFileToUpload = (e) => {
+    setFile(e.target.files[0])
+  }
+
   const createUser = async (e) => {
     e.preventDefault()
+
+    let image = await uploadToS3(file)
+
+    if (!image) {
+      console.error("!imageUrlFailed to upload user image to S3")
+      image = ""
+    }
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/users/create`, {
         firstName,
         lastName,
         email,
         password,
+        image,
       })
       if (!currentPath.includes(doNotRedirectFrom)) {
         navigate("/users/current-user")
@@ -126,6 +141,22 @@ const CreateUserForm = ({
             <FontAwesomeIcon icon={faLock} />
           )}
         </button>
+      </div>
+      <div className={styles.labelAndInputContainer}>
+        <span className={styles.label}>
+          {file ? "Selected file: " : "Select a file"}
+        </span>
+        <label className={styles.labelForFile} htmlFor='fileInput'>
+          {file ? file.name : "Search on device"}
+        </label>
+
+        <input
+          type='file'
+          name='image'
+          id='fileInput'
+          onChange={setFileToUpload}
+          required
+        />
       </div>
 
       <button className={styles.formButton} type='submit'>

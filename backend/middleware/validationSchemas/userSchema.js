@@ -42,6 +42,7 @@ const CreateUserSchema = z.object({
   lastName: lastNameValidation,
   email: emailValidation,
   password: passwordValidation,
+  image: z.string().optional(),
   createdAt: z.string().or(z.date()).optional(),
   updatedAt: z.string().or(z.date()).optional(),
 });
