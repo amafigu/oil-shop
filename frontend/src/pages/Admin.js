@@ -42,14 +42,19 @@ const Admin = () => {
       <div className={styles.adminPage}>
         <div className={styles.titleAndLogoutButtonContainer}>
           <div className={styles.adminFormTitel}>
-            {adminData
-              ? `${text.welcomeText.firstPart} ${adminData.firstName} ${
+            {adminData ? (
+              <div>
+                <img src={adminData.image} alt='user' />
+                <span>{`${text.welcomeText.firstPart} ${adminData.firstName} ${
                   adminData.lastName
                 } ${text.welcomeText.secondPart} ${titleCase(
                   adminData.role,
                   " ",
-                )}${text.welcomeText.thirdPart}`
-              : `${text.loadingData}`}
+                )}${text.welcomeText.thirdPart}`}</span>
+              </div>
+            ) : (
+              `${text.loadingData}`
+            )}
           </div>
           <button
             className={styles.formButton}

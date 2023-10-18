@@ -3,6 +3,7 @@ import useLocaleContext from "#context/localeContext"
 import { titleCase, uploadToS3 } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import styles from "./createProductForm.module.scss"
 
 const CreateProductForm = () => {
@@ -24,6 +25,10 @@ const CreateProductForm = () => {
   const { translate } = useLocaleContext()
   const text = translate.components.crud
 
+  const location = useLocation()
+  const currentPath = location.pathname
+
+  const routesWithoutImageUpload = ["/login", "/sign-up"]
   useEffect(() => {
     try {
       const getProductCategories = async () => {
@@ -55,11 +60,11 @@ const CreateProductForm = () => {
   const submitProductForm = async (e) => {
     e.preventDefault()
 
-    const imageUrl = await uploadToS3(file)
+    let imageUrl = await uploadToS3(file)
 
     if (!imageUrl) {
       console.error("!imageUrlFailed to upload image to S3")
-
+      imageUrl = ""
       return
     }
     const productDataWithImage = {
@@ -84,6 +89,12 @@ const CreateProductForm = () => {
       console.error("Product submit failed: ", error)
     }
   }
+
+  console.log("currentPath", currentPath)
+  console.log(
+    "!routesWithoutImageUpload",
+    !routesWithoutImageUpload.includes(currentPath),
+  )
 
   return (
     <div>
@@ -214,22 +225,25 @@ const CreateProductForm = () => {
                   required
                 />
               </div>
-              <div className={styles.labelAndInputContainer}>
-                <span className={styles.label}>
-                  {file ? "Selected file: " : "Select a file"}
-                </span>
-                <label className={styles.labelForFile} htmlFor='fileInput'>
-                  {file ? file.name : "Search on device"}
-                </label>
 
-                <input
-                  type='file'
-                  name='image'
-                  id='fileInput'
-                  onChange={setFileToUpload}
-                  required
-                />
-              </div>
+              {!routesWithoutImageUpload.includes(currentPath) && (
+                <div className={styles.labelAndInputContainer}>
+                  <span className={styles.label}>
+                    {file ? "Selected file: " : "Select a file"}
+                  </span>
+                  <label className={styles.labelForFile} htmlFor='fileInput'>
+                    {file ? file.name : "Search on device"}
+                  </label>
+
+                  <input
+                    type='file'
+                    name='image'
+                    id='fileInput'
+                    onChange={setFileToUpload}
+                    required
+                  />
+                </div>
+              )}
             </div>
 
             <button className={styles.formButton} type='submit'>

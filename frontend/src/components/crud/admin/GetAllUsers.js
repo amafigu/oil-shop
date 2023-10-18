@@ -64,6 +64,7 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
                   className={styles.avaliableUserData}
                   key={availableUser.email}
                 >
+                  <img src={availableUser.image} alt='user' />
                   <div>
                     {text.forms.commonProperties.firstName}:{" "}
                     {availableUser.firstName}
