@@ -2,54 +2,120 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.form {
-  @include flex-column;
-
-  margin: 28px;
-
-  @include media.tablet-down {
-    margin: 18px;
+.deleteProductWrapper {
+  .deleteProduct {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
-}
 
-.formField {
-  width: 100%;
-  height: 32px;
-  margin-bottom: 12px;
-  font-family: theme.$main-font-family;
-  font-size: medium;
-}
+  .getProductInputAndButton {
+    gap: 48px;
+    width: 100%;
 
-.formFieldSelect {
-  width: 100%;
-  height: 38px;
-  margin-bottom: 12px;
-  font-family: theme.$main-font-family;
-  font-size: medium;
-}
+    @include flex-align-center;
 
-.label {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 4px;
-}
+    @include media.mobile {
+      gap: 0;
+    }
+  }
 
-.containerTitle {
-  margin-bottom: 24px;
-  font-size: 24px;
-}
+  .formButton {
+    @include action-button;
 
-.formButton {
-  @include action-button;
+    width: 140px;
+    height: 36px;
+    margin-left: 24px;
+    font-size: 1rem;
+    text-transform: none;
 
-  width: 160px;
-  height: 36px;
-  margin-top: 24px;
-  font-size: 1rem;
-  text-transform: none;
+    @include media.mobile {
+      order: 2;
+      width: 120px;
+      overflow: hidden;
+    }
+  }
 
-  @include media.mobile {
-    width: 120px;
-    overflow: hidden;
+  .formField {
+    width: 100%;
+    height: 32px;
+    font-family: theme.$main-font-family;
+    font-size: medium;
+
+    @include media.mobile {
+      order: 1;
+    }
+  }
+
+  .availableProductData {
+    flex-grow: 1;
+
+    @include flex-column;
+
+    .item {
+      height: 36px;
+
+      @include flex-align-center;
+    }
+  }
+
+  .availableProductContainer {
+    padding: 12px;
+
+    @include media.mobile {
+      padding: 0;
+      margin: 16px 0;
+    }
+  }
+
+  .availableProduct {
+    @include flex-align-center;
+
+    gap: 48px;
+    padding: 4px;
+
+    @include media.mobile {
+      gap: 18px;
+      padding: 0;
+    }
+  }
+
+  .actionButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: center;
+
+    @include media.widescreen-down {
+      flex-direction: column;
+      align-items: unset;
+      justify-items: center;
+    }
+  }
+
+  .showHideButtons {
+    @include action-button;
+
+    width: 160px;
+    height: 36px;
+    font-size: 1rem;
+    text-transform: none;
+
+    @include media.mobile {
+      width: 120px;
+      overflow: hidden;
+    }
+  }
+
+  .buttonsContainer {
+    display: flex;
+    gap: 48px;
+
+    @include media.mobile {
+      gap: 18px;
+      justify-content: space-between;
+      order: 2;
+      width: 100%;
+    }
   }
 }

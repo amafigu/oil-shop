@@ -15,13 +15,15 @@ const DeleteProduct = ({
 
   const deleteProduct = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/products/product/`, {
-        withCredentials: true,
-      })
-      setNotification(` productDeleted`)
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/products/${productName}`,
+        {
+          withCredentials: true,
+        },
+      )
+      setNotification(`productDeleted`)
       setTimeout(() => setNotification(null), 2000)
-      setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
-      setrefreshAllProductsCounter((prevCounter) => prevCounter + 1)
+
       setProductName("")
     } catch (error) {
       setNotification(`productDeleted error `)
@@ -30,23 +32,25 @@ const DeleteProduct = ({
     }
   }
   return (
-    <div>
-      <div className={styles.form}>
-        <label className={styles.label} htmlFor='productName'>
-          {text.forms.commonProperties.email}
-        </label>
-        <input
-          type='text'
-          value={productName}
-          required
-          onChange={(e) => setProductName(e.target.value)}
-        />
-        <button
-          className={styles.formButton}
-          onClick={() => deleteProduct(productName.trim())}
-        >
-          DELETE
-        </button>
+    <div className={styles.deleteProductWrapper}>
+      <div className={styles.deleteProduct}>
+        <div className={styles.getProductInputAndButton}>
+          <input
+            type='text'
+            value={productName}
+            required
+            placeholder={text.forms.commonProperties.name}
+            className={styles.formField}
+            onChange={(e) => setProductName(e.target.value)}
+          />
+
+          <button
+            className={styles.formButton}
+            onClick={() => deleteProduct(productName.trim())}
+          >
+            DELETE
+          </button>
+        </div>
       </div>
       <div>{notification}</div>
     </div>
