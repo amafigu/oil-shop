@@ -6,7 +6,7 @@ import GetAllProducts from "#components/crud/admin/GetAllProducts"
 import GetAllUsers from "#components/crud/admin/GetAllUsers"
 import GetUser from "#components/crud/admin/GetUser"
 import useLocaleContext from "#context/localeContext"
-import { getAdminData, logout, titleCase } from "#utils/utils"
+import { getAdminData, logout } from "#utils/utils"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import CreateUserForm from "./SignUp/CreateUserForm"
@@ -22,7 +22,7 @@ const Admin = () => {
   const [refreshAllProductsCounter, setrefreshAllProductsCounter] = useState(0)
   const [showProductsSection, setShowProductsSection] = useState(false)
   const [showUsersSection, setShowUsersSection] = useState(false)
-  const [adminData, setAdminData] = useState(null)
+  const [adminData, setAdminData] = useState({})
   const [notification, setNotification] = useState(null)
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
@@ -33,8 +33,12 @@ const Admin = () => {
   const errorText = translate.pages.signUp
 
   useEffect(() => {
-    getAdminData(setAdminData, setNotification, navigate)
-  }, [navigate])
+    getAdminData(setAdminData, setNotification)
+
+    if (adminData.role === "guest") {
+      navigate("/users/current-user")
+    }
+  }, [])
 
   return (
     <div className={styles.adminPageWrapper}>
@@ -45,12 +49,9 @@ const Admin = () => {
             {adminData ? (
               <div>
                 <img src={adminData.image} alt='user' />
-                <span>{`${text.welcomeText.firstPart} ${adminData.firstName} ${
-                  adminData.lastName
-                } ${text.welcomeText.secondPart} ${titleCase(
-                  adminData.role,
-                  " ",
-                )}${text.welcomeText.thirdPart}`}</span>
+                <span>{`${text.welcomeText.firstPart} ${adminData.firstName} ${adminData.lastName} ${text.welcomeText.secondPart}
+                 ${adminData.role} 
+                 ${text.welcomeText.thirdPart}`}</span>
               </div>
             ) : (
               `${text.loadingData}`

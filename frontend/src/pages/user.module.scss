@@ -1,3 +1,34 @@
 @use "#styles/theme" as theme;
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
+
+.userWrapper {
+  @include flex-justify-center;
+  @include margin-page-wrapper;
+
+  min-height: 100vh;
+
+  .userPage {
+    width: 80%;
+
+    @include flex-column;
+
+    @include media.widescreen-down {
+      width: 90%;
+    }
+
+    .titleAndLogoutButtonContainer {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .logoutButton {
+    @include action-button;
+  }
+
+  .image {
+    width: 120px;
+    height: 120px;
+  }
+}

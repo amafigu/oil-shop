@@ -102,6 +102,7 @@ export const getAdminData = async (setAdminData, setNotification, navigate) => {
       `${process.env.REACT_APP_API_URL}/users/current-user`,
       { withCredentials: true },
     )
+
     setAdminData(response.data)
   } catch (error) {
     setNotification(`${error.response.data.message}`)

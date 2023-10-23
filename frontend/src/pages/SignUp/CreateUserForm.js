@@ -31,6 +31,7 @@ const CreateUserForm = ({
   const location = useLocation()
   const currentPath = location.pathname
   const doNotRedirectFrom = ["/users/current-admin"]
+  const doNotShowImageInput = ["/login", "/sign-up"]
 
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
@@ -55,11 +56,10 @@ const CreateUserForm = ({
       })
       if (!currentPath.includes(doNotRedirectFrom)) {
         navigate("/users/current-user")
-        setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
       }
-      if (currentPath.includes(doNotRedirectFrom)) {
-        setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
-      }
+
+      setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
+
       setNotification(text.createUser.success)
       setTimeout(() => setNotification(null), 6000)
     } catch (error) {
@@ -142,22 +142,24 @@ const CreateUserForm = ({
           )}
         </button>
       </div>
-      <div className={styles.labelAndInputContainer}>
-        <span className={styles.label}>
-          {file ? "Selected file: " : "Select a file"}
-        </span>
-        <label className={styles.labelForFile} htmlFor='fileInput'>
-          {file ? file.name : "Search on device"}
-        </label>
+      {currentPath.includes(doNotShowImageInput) && (
+        <div className={styles.labelAndInputContainer}>
+          <span className={styles.label}>
+            {file ? "Selected file: " : "Select a file"}
+          </span>
+          <label className={styles.labelForFile} htmlFor='fileInput'>
+            {file ? file.name : "Search on device"}
+          </label>
 
-        <input
-          type='file'
-          name='image'
-          id='fileInput'
-          onChange={setFileToUpload}
-          required
-        />
-      </div>
+          <input
+            type='file'
+            name='image'
+            id='fileInput'
+            onChange={setFileToUpload}
+            required
+          />
+        </div>
+      )}
 
       <button className={styles.formButton} type='submit'>
         {text.createUser.submitButton}

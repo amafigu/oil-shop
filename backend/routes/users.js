@@ -132,10 +132,11 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
 
     const token = jwt.sign(
       {
-        email: user.email,
-        role: user.role,
         firstName: user.firstName,
         lastName: user.lastName,
+        image: user.image,
+        email: user.email,
+        role: user.role,
       },
       process.env.JWT_KEY,
       { expiresIn: '3600000' } // 1 hour

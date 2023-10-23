@@ -1,11 +1,12 @@
 import NotificationCard from "#components/NotificationCard"
+import { logout } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import style from "./user.module.scss"
+import styles from "./user.module.scss"
 
 const User = () => {
-  const [userData, setUserData] = useState(null)
+  const [userData, setUserData] = useState({})
   const [notification, setNotification] = useState(null)
 
   const navigate = useNavigate()
@@ -20,6 +21,7 @@ const User = () => {
         if (response.data.role === "admin") {
           navigate("/users/current-admin")
         }
+
         if (response.data.role === "guest") {
           navigate("/users/current-user")
         } else {
@@ -37,17 +39,44 @@ const User = () => {
     fetchUserData()
   }, [navigate])
 
-  return (
-    <div className=''>
-      <div className=''>
-        {notification && <NotificationCard message={notification} />}
+  console.log(userData)
 
-        <div className={style.pageTitle}>
-          {userData
-            ? `Hello, ${userData.firstName} ${userData.lastName} you are loggin as a ${userData.role}!`
-            : "Loading user data..."}
+  return (
+    <div className={styles.userWrapper}>
+      {notification && <NotificationCard message={notification} />}
+
+      <div className={styles.userPage}>
+        <div className={styles.titleAndLogoutButtonContainer}>
+          <div className={styles.adminFormTitel}>
+            {`Hello ${userData.firstName} ${userData.lastName}`}
+          </div>
+          <button
+            className={styles.logoutButton}
+            onClick={() => logout(navigate, setNotification)}
+          >
+            LOGOUT
+          </button>
         </div>
-        <div>User Info Page</div>
+        <div className={styles.userData}>
+          {userData ? (
+            <div className={styles.imageAndNameContainer}>
+              <img className={styles.image} src={userData.image} alt='user' />
+              <div className={styles.name}>
+                <div>{userData.firstName}</div>
+                <div>{userData.lastName}</div>
+              </div>
+            </div>
+          ) : (
+            `loading data ...`
+          )}
+        </div>
+        <div className={styles.addressData}>
+          <div>Street: </div>
+          <div>Number: </div>
+          <div>Postal Code: </div>
+          <div>State: </div>
+          <div>Country: </div>
+        </div>
       </div>
     </div>
   )
