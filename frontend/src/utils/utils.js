@@ -102,8 +102,9 @@ export const getAdminData = async (setAdminData, setNotification, navigate) => {
       `${process.env.REACT_APP_API_URL}/users/current-user`,
       { withCredentials: true },
     )
-
+    console.log(response.data)
     setAdminData(response.data)
+    return response.data
   } catch (error) {
     setNotification(`${error.response.data.message}`)
     setTimeout(() => navigate("/login"), 1900)
