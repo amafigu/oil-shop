@@ -2,10 +2,10 @@ import LanguageDropdown from "#components/Navbar/LanguageDropdown"
 import useLocaleContext from "#context/localeContext"
 import { useEffectScrollTop } from "#utils/utils"
 
+import CreateUserForm from "#pages/Admin/UsersCrud/CreateUserForm"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import ZodValidationErrorsCard from "../../components/ZodValidationErrorsCard"
-import CreateUserForm from "./CreateUserForm"
 import styles from "./signUp.module.scss"
 
 const SignUp = () => {

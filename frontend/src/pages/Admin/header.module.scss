@@ -1,0 +1,40 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.titleAndLogoutButtonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 48px;
+
+  @include media.mobile {
+    flex-direction: column;
+  }
+
+  .adminFormTitel {
+    margin: 24px;
+    font-family: theme.$main-font-family;
+    font-size: 24px;
+    font-weight: 500;
+
+    @include media.mobile {
+      margin: 16px;
+      font-size: 16px;
+    }
+  }
+
+  .formButton {
+    @include action-button;
+
+    width: 260px;
+    height: 32px;
+    font-size: 1rem;
+    text-transform: none;
+
+    @include media.mobile {
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+}

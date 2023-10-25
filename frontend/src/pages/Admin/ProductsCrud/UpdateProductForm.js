@@ -1,5 +1,5 @@
 import NotificationCard from "#components/NotificationCard"
-import { getProductByName, titleCase } from "#utils/utils"
+import { getProductByName, titleCase, uploadToS3 } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from "./updateProductForm.module.scss"
@@ -7,6 +7,7 @@ import styles from "./updateProductForm.module.scss"
 const UpdateProductForm = () => {
   const [notification, setNotification] = useState(null)
   const [showSearchAndForm, setShowSearchAndForm] = useState(false)
+  const [file, setFile] = useState(null)
 
   const [productCategories, setProductCategories] = useState(null)
   const [findProductData, setFindProductData] = useState({
@@ -68,14 +69,26 @@ const UpdateProductForm = () => {
 
   const updateProduct = async (e) => {
     e.preventDefault()
+
     if (JSON.stringify(productOldData) === JSON.stringify(productNewData)) {
       setNotification("No changes made.")
       return
     }
+
+    let imageUrl = await uploadToS3(file)
+
+    if (!file) {
+      console.error("!imageUrlFailed to upload image to S3")
+      imageUrl = productOldData.image
+    }
+    const productNewDataWithImage = {
+      ...productNewData,
+      image: imageUrl,
+    }
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_API_URL}/products/${findProductData.name}`,
-        productNewData,
+        productNewDataWithImage,
         { withCredentials: true },
       )
       setProductNewData(response.data)
@@ -88,6 +101,10 @@ const UpdateProductForm = () => {
 
   const getProductByNameAndShowForm = () => {
     getProductByName(findProductData.name, setProductOldData, setNotification)
+  }
+
+  const setFileToUpload = (e) => {
+    setFile(e.target.files[0])
   }
 
   return (
@@ -126,41 +143,24 @@ const UpdateProductForm = () => {
           <label className={styles.label} htmlFor='productName'>
             Product Category
           </label>
-          <input
-            className={styles.formField}
-            type='text'
-            name='productCategoryId'
-            onChange={(e) => listenProductToFind(e)}
-            placeholder={"Category"}
-          />
-          <label className={styles.label} htmlFor='productName'>
-            Size
-          </label>
-          <input
-            className={styles.formField}
-            type='number'
-            step={1}
-            name='size'
-            onChange={(e) => listenProductToFind(e)}
-            placeholder={"Size"}
-          />
           <button
             className={styles.formButton}
             onClick={() => getProductByNameAndShowForm()}
           >
             Set Product
           </button>
+          <div>{productOldData && JSON.stringify(productOldData)}</div>
 
           <form className={styles.form} onSubmit={updateProduct}>
-            <label className={styles.label} htmlFor='name'></label>
+            <label className={styles.label} htmlFor='name'>
+              Name
+            </label>
             <input
               className={styles.formField}
               type='text'
               name='name'
               onChange={listenUpdateProductData}
-              required
             />
-
             <label className={styles.label} htmlFor='category'>
               category
             </label>
@@ -183,7 +183,6 @@ const UpdateProductForm = () => {
                     ))
                 : ""}
             </select>
-
             <label className={styles.label} htmlFor='name'>
               price
             </label>
@@ -193,9 +192,7 @@ const UpdateProductForm = () => {
               name='price'
               step='.01'
               onChange={listenUpdateProductData}
-              required
             />
-
             <label className={styles.label} htmlFor='description'>
               description
             </label>
@@ -204,9 +201,7 @@ const UpdateProductForm = () => {
               type='text'
               name='description'
               onChange={listenUpdateProductData}
-              required
             />
-
             <label className={styles.label} htmlFor='details'>
               details
             </label>
@@ -215,9 +210,7 @@ const UpdateProductForm = () => {
               type='text'
               name='details'
               onChange={listenUpdateProductData}
-              required
             />
-
             <label className={styles.label} htmlFor='size'>
               size
             </label>
@@ -226,9 +219,7 @@ const UpdateProductForm = () => {
               type='number'
               name='size'
               onChange={listenUpdateProductData}
-              required
             />
-
             <label className={styles.label} htmlFor='measure'>
               measure
             </label>
@@ -237,19 +228,20 @@ const UpdateProductForm = () => {
               type='text'
               name='measure'
               onChange={listenUpdateProductData}
-              required
             />
-
-            <label className={styles.label} htmlFor='image'>
-              image
+            <span className={styles.label}>
+              {file ? "Selected file: " : "Select a file"}
+            </span>
+            <label className={styles.labelForFile} htmlFor='fileInput'>
+              {file ? file.name : "Search on device"}
             </label>
             <input
-              className={styles.formField}
-              type='text'
+              type='file'
               name='image'
-              onChange={listenUpdateProductData}
-              required
+              id='fileInput'
+              onChange={setFileToUpload}
             />
+
             <button className={styles.formButton} type='submit'>
               EDIT
             </button>

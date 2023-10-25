@@ -72,7 +72,10 @@ const CreateProductForm = () => {
       image: imageUrl,
     }
 
+    console.log(imageUrl)
+
     try {
+      console.log(productDataWithImage)
       await axios.post(
         `${process.env.REACT_APP_API_URL}/products/create`,
         productDataWithImage,
@@ -99,7 +102,7 @@ const CreateProductForm = () => {
   return (
     <div>
       {notification && <NotificationCard message={notification} />}
-      <form className={styles.form} onSubmit={() => submitProductForm()}>
+      <form className={styles.form} onSubmit={(e) => submitProductForm(e)}>
         <div className={styles.actionButtonContainer}>
           {showFormInputs ? (
             <button
