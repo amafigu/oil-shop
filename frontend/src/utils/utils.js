@@ -88,7 +88,9 @@ export const getProductByName = async (
       `${process.env.REACT_APP_API_URL}/products/${name}`,
     )
 
+    setNotification(`Selected Product: ${JSON.stringify(response.data.name)}`)
     setProductDataByName(response.data)
+    setTimeout(() => setNotification(null), 2000)
   } catch (error) {
     setNotification(`Error geting user: ${error.response.data.message}`)
     setTimeout(() => setNotification(null), 2000)
