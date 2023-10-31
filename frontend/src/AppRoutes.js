@@ -17,6 +17,7 @@ import ProductDetails from "#pages/ProductDetails"
 import Shipping from "#pages/Shipping"
 import Shop from "#pages/Shop"
 import Admin from "./pages/Admin"
+import NotFound from "./pages/NotFound"
 import SignUp from "./pages/SignUp"
 import User from "./pages/User"
 
@@ -63,6 +64,7 @@ const AppRoutes = () => {
           <Route path='/checkout/shipping' element={<Shipping />} />
           <Route path='/checkout/payment' element={<Payment />} />
           <Route path='/checkout/summary' element={<OrderSummary />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
 
         <Footer />
