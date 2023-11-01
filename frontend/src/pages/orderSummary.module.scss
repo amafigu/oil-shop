@@ -10,7 +10,7 @@
     flex-direction: column;
     width: 80%;
     margin-bottom: 48px;
-    border-bottom: 1px solid theme.$secondary-color;
+    border-bottom: 1px solid theme.$font-color-light;
 
     @include media.desktop-down {
       width: 90%;
@@ -139,7 +139,7 @@
 
     input {
       font-size: 16px;
-      color: theme.$secondary-color;
+      color: theme.$font-color-light;
     }
   }
 
@@ -157,8 +157,8 @@
     width: 100%;
     height: 2rem;
     padding-left: 10px;
-    font-family: theme.$main-font-family;
+    font-family: theme.$font-family-primary;
     background-color: #fff;
-    border-bottom: 1px solid theme.$secondary-color;
+    border-bottom: 1px solid theme.$font-color-light;
   }
 }

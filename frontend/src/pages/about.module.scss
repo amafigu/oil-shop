@@ -4,7 +4,7 @@
 .pageWrapper {
   display: flex;
   justify-content: center;
-  min-height: theme.$min-vh-page-wrapper;
+  min-height: theme.$min-height-page-primary;
 
   .page {
     display: flex;

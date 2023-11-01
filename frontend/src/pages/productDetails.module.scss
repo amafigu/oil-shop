@@ -103,7 +103,7 @@
     width: 50%;
     height: auto;
     overflow: hidden;
-    font-family: theme.$main-font-family;
+    font-family: theme.$font-family-primary;
 
     @include media.mobile {
       flex-grow: 1;
@@ -119,13 +119,13 @@
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1;
-    color: theme.$primary-color;
+    color: theme.$font-color-primary;
     text-decoration: underline;
     text-decoration-thickness: 1px;
   }
 
   .productInfoCategoryLink {
-    color: theme.$primary-color;
+    color: theme.$font-color-primary;
     text-decoration: none;
   }
 

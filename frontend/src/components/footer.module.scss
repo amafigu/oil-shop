@@ -78,7 +78,7 @@
     padding: 1em;
     background: #f0f0f0;
     border-radius: 5px;
-    box-shadow: theme.$main-box-shadow;
+    box-shadow: theme.$box-shadow-primary;
 
     @include media.tablet-down {
       width: 90%;

@@ -10,7 +10,7 @@
   .paymentPage {
     width: 68%;
     background: #f4f4f4;
-    box-shadow: theme.$main-box-shadow;
+    box-shadow: theme.$box-shadow-primary;
 
     @include media.widescreen-down {
       width: 80%;
@@ -89,7 +89,7 @@
       width: 10px;
       height: 10px;
       content: "";
-      background-color: theme.$branding-background-color;
+      background-color: theme.$color-branding-primary;
       border-radius: 50%;
       opacity: 0;
       transition: opacity 0.3s, transform 0.3s;

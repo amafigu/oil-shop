@@ -76,10 +76,10 @@
 
 @mixin product-card-name {
   margin: 0;
-  font-family: theme.$main-font-family;
+  font-family: theme.$font-family-primary;
   font-size: 1.125rem;
   font-weight: 500;
-  color: theme.$secondary-color;
+  color: theme.$font-color-light;
   text-align: center;
 }
 
@@ -90,18 +90,18 @@
   min-width: 124px;
   height: 60px;
   overflow: hidden;
-  font-family: theme.$main-font-family;
+  font-family: theme.$font-family-primary;
   font-size: 1rem;
   font-weight: 500;
-  color: theme.$primary-color;
+  color: theme.$font-color-primary;
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
   cursor: pointer;
-  background-color: theme.$branding-background-color;
+  background-color: theme.$color-branding-primary;
   border: none;
   border-radius: 4px;
-  box-shadow: theme.$main-box-shadow;
+  box-shadow: theme.$box-shadow-primary;
 }
 
 @mixin input-styles-reset {

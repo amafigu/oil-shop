@@ -39,7 +39,7 @@
   .formField {
     width: 100%;
     height: 32px;
-    font-family: theme.$main-font-family;
+    font-family: theme.$font-family-primary;
     font-size: medium;
 
     @include media.mobile {

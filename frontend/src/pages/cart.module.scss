@@ -156,7 +156,7 @@
     margin-left: 3rem;
     background: #f4f4f4;
     border-radius: 4px;
-    box-shadow: theme.$main-box-shadow;
+    box-shadow: theme.$box-shadow-primary;
 
     @include media.desktop-down {
       flex-direction: column;
