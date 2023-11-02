@@ -3,7 +3,7 @@ import { logout } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import UpdateUserShippingDataForm from "./Admin/UsersCrud/UpdateUserShippingDataForm"
+import UpdateUserShippingDataForm from "../components/UsersCrud/UpdateUserShippingDataForm"
 import styles from "./user.module.scss"
 
 const User = () => {

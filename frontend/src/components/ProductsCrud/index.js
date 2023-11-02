@@ -1,4 +1,4 @@
-import styles from "../admin.module.scss"
+import styles from "#pages/Admin/admin.module.scss"
 import CreateProductForm from "./CreateProductForm"
 import DeleteProduct from "./DeleteProduct"
 import GetAllProducts from "./GetAllProducts"

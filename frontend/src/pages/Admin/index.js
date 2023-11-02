@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ToggleSectionsButtons from "./ToggleSectionsButtons"
 
+import UsersCrud from "#components//UsersCrud"
+import ProductsCrud from "#components/ProductsCrud"
 import Header from "./Header"
-import ProductsCrud from "./ProductsCrud"
-import UsersCrud from "./UsersCrud"
 import styles from "./admin.module.scss"
 
 const Admin = () => {

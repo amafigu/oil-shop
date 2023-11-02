@@ -1,6 +1,6 @@
 import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
 import useLocaleContext from "#context/localeContext"
-import styles from "../admin.module.scss"
+import styles from "#pages/Admin/admin.module.scss"
 import CreateUserForm from "./CreateUserForm"
 import DeleteUser from "./DeleteUser"
 import GetAllUsers from "./GetAllUsers"

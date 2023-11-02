@@ -188,3 +188,17 @@
   font-weight: 500;
   color: red;
 }
+
+@mixin form-action-button {
+  @include action-button;
+
+  width: 160px;
+  height: 36px;
+  overflow: hidden;
+  font-size: 1rem;
+  text-transform: none;
+
+  @include media.mobile {
+    width: 120px;
+  }
+}
