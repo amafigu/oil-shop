@@ -1,5 +1,7 @@
+import FormInput from "#components/FormInput"
 import NotificationCard from "#components/NotificationCard"
-
+import ToggleButton from "#components/ToggleButton"
+import { FORM_FIELDS_SHIPPING_DATA } from "#utils/constants"
 import axios from "axios"
 import { useState } from "react"
 import styles from "./updateUserShippingDataForm.module.scss"
@@ -78,109 +80,35 @@ const UpdateUserShippingDataForm = ({ userId }) => {
       ...updatedShippingData,
       [e.target.name]: e.target.value,
     })
-
-    console.log("listenInputChange oldShippingData ", oldShippingData)
-    console.log("listenInputChange updatedShippingData ", updatedShippingData)
   }
 
   return (
     <div>
       {notification && <NotificationCard message={notification} />}
-      {showForm ? (
-        <button
-          onClick={() => setShowForm(false)}
-          className={styles.formButton}
-          type='button'
-        >
-          HIDE SHIPPING DATA FORM
-        </button>
-      ) : (
-        <button
-          onClick={() => setShowForm(true)}
-          className={styles.formButton}
-          type='button'
-        >
-          UPDATE SHIPPING DATA
-        </button>
-      )}
+      <ToggleButton
+        show={showForm}
+        setToggle={setShowForm}
+        textHide={"HIDE SHIPPING DATA FORM"}
+        textShow={"UPDATE SHIPPING DATA"}
+        classCss={"userOptionsButton"}
+      />
+
       {showForm && (
         <form
           className={styles.form}
           onSubmit={(e) => updateUserShippingData(e)}
         >
-          <label className={styles.label} htmlFor='street'>
-            Street
-          </label>
-          <input
-            className={styles.formField}
-            type='text'
-            name='street'
-            onChange={(e) => listenInputChange(e)}
-            value={updatedShippingData.street}
-            placeholder='street'
-          />
-          <label className={styles.label} htmlFor='number'>
-            Number
-          </label>
-          <input
-            className={styles.formField}
-            type='text'
-            name='number'
-            onChange={(e) => listenInputChange(e)}
-            value={updatedShippingData.number}
-            placeholder='number'
-          />
-
-          <label className={styles.label} htmlFor='details'>
-            Details
-          </label>
-          <input
-            onChange={(e) => listenInputChange(e)}
-            className={styles.formFieldSelect}
-            name='details'
-            value={updatedShippingData.details}
-            placeholder='details'
-          />
-          <label className={styles.label} htmlFor='details'>
-            Postal Code
-          </label>
-          <input
-            onChange={(e) => listenInputChange(e)}
-            className={styles.formFieldSelect}
-            name='postal_code'
-            value={updatedShippingData.postal_code}
-            placeholder='postal code'
-          />
-          <label className={styles.label} htmlFor='city'>
-            City
-          </label>
-          <input
-            onChange={(e) => listenInputChange(e)}
-            className={styles.formFieldSelect}
-            name='city'
-            value={updatedShippingData.city}
-            placeholder='city'
-          />
-          <label className={styles.label} htmlFor='state'>
-            State
-          </label>
-          <input
-            onChange={(e) => listenInputChange(e)}
-            className={styles.formFieldSelect}
-            name='state'
-            value={updatedShippingData.state}
-            placeholder='state'
-          />
-          <label className={styles.label} htmlFor='country'>
-            Country
-          </label>
-          <input
-            onChange={(e) => listenInputChange(e)}
-            className={styles.formFieldSelect}
-            name='country'
-            value={updatedShippingData.country}
-            placeholder='country'
-          />
+          {FORM_FIELDS_SHIPPING_DATA.map((field) => (
+            <FormInput
+              classCss={field.classCss}
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              onChange={(e) => listenInputChange(e)}
+              placeholder={field.placeholder}
+              value={updatedShippingData[field.name]}
+            />
+          ))}
 
           <button className={styles.formButton} type='submit'>
             submit
