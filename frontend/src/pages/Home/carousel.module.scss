@@ -16,7 +16,7 @@
   .iconSlider {
     @include reset-button;
 
-    color: theme.$primary-color;
+    color: theme.$font-color-primary;
     cursor: pointer;
 
     @include media.mobile {

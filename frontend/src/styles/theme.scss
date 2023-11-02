@@ -1,12 +1,21 @@
-$primary-color: #686868;
-$secondary-color: #757575;
-$main-font-family: "GFS Neohellenic", sans-serif;
-$branding-background-color: #b5cfaa;
-$main-box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
-  0 1px 5px 0 rgb(0 0 0 / 12%);
-$light-box-shadow: 0 1px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+$background-color-form-primary: #f4f4f4;
+$box-shadow-primary: 0 3px 1px -2px rgb(0 0 0 / 20%),
+  0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+$box-shadow-light: 0 1px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
   0 1px 2px 0 rgb(0 0 0 / 12%);
-$form-background: #f4f4f4;
+$color-branding-primary: #b5cfaa;
+$font-color-primary: #686868;
+$font-color-light: #757575;
+$font-family-primary: "GFS Neohellenic", sans-serif;
+$font-size-title: 32px;
+$font-size-title-mobile: 24px;
+$font-size-subtitle: 24px;
+$font-size-subtitle-mobile: 20px;
+$font-size-generic-data: 20px;
+$font-size-button: 20px;
+$font-size-button-mobile: 16px;
+$min-height-page-primary: 65vh;
+$page-width-primary: 80%;
 $z-index: (
   sidebar-menu: 200,
   modal-product-search-dropdow: 300,
@@ -14,5 +23,3 @@ $z-index: (
   background: -1,
   language: 300,
 );
-$min-vh-page-wrapper: 65vh;
-$default-page-width: 80%;

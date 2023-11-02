@@ -100,7 +100,9 @@ router.put('/user/:email', decodeJWT, async (req, res) => {
 // End Admin routes
 
 router.get('/current-user', decodeJWT, async (req, res) => {
+  console.log(req.user);
   return res.json({
+    id: req.user.id,
     email: req.user.email,
     role: req.user.role,
     firstName: req.user.firstName,
@@ -132,11 +134,13 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
 
     const token = jwt.sign(
       {
+        id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         image: user.image,
         email: user.email,
         role: user.role,
+        image: user.image,
       },
       process.env.JWT_KEY,
       { expiresIn: '3600000' } // 1 hour
@@ -178,6 +182,53 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
     return res
       .status(201)
       .json({ message: 'Guest user created successfully', user: newUser });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/user/shipping-data/:id', async (req, res) => {
+  console.log(req.params.id);
+  try {
+    const shippingData = await db.userShippingData.findOne({
+      where: { userId: req.params.id },
+    });
+    if (!shippingData) {
+      return res
+        .status(404)
+        .json({ message: 'user has no shipping data saved' });
+    }
+    return res.json(shippingData);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.put('/user/shipping-data/:id', async (req, res) => {
+  try {
+    const shippingData = await db.userShippingData.findOne({
+      where: { userId: req.params.id },
+    });
+
+    console.log('router.put shippingData ', shippingData);
+    console.log('router.put req.body ', req.body);
+
+    if (!shippingData) {
+      await db.userShippingData.create({ ...req.body, userId: req.params.id });
+    } else {
+      shippingData.street = req.body.street || shippingData.street;
+      shippingData.number = req.body.number || shippingData.number;
+      shippingData.details = req.body.details || shippingData.details;
+      shippingData.postal_code =
+        req.body.postal_code || shippingData.postal_code;
+      shippingData.city = req.body.city || shippingData.city;
+      shippingData.state = req.body.state || shippingData.state;
+      shippingData.country = req.body.country || shippingData.country;
+
+      await shippingData.save();
+    }
+
+    return res.json({ message: 'Shipping data updated successfully' });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

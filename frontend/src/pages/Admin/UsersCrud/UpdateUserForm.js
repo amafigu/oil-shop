@@ -29,6 +29,7 @@ const UpdateUserForm = () => {
     e.preventDefault()
     if (JSON.stringify(userOldData) === JSON.stringify(userNewData)) {
       setNotification("No changes made.")
+      setTimeout(() => setNotification(null), 1300)
       return
     }
     try {

@@ -3,10 +3,13 @@ import { logout } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import UpdateUserShippingDataForm from "./Admin/UsersCrud/UpdateUserShippingDataForm"
 import styles from "./user.module.scss"
 
 const User = () => {
   const [userData, setUserData] = useState({})
+  const [userShippingData, setUserShippingData] = useState({})
+  const [showShippingData, setShowShippingData] = useState(false)
   const [notification, setNotification] = useState(null)
 
   const navigate = useNavigate()
@@ -18,6 +21,9 @@ const User = () => {
           `${process.env.REACT_APP_API_URL}/users/current-user`,
           { withCredentials: true },
         )
+
+        console.log(response.data)
+
         if (response.data.role === "admin") {
           navigate("/users/current-admin")
         }
@@ -39,7 +45,20 @@ const User = () => {
     fetchUserData()
   }, [navigate])
 
-  console.log(userData)
+  console.log("userData", userData)
+
+  const getAndShowShippingData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userData.id}`,
+        { withCredentials: true },
+      )
+      setUserShippingData(response.data)
+      setShowShippingData(true)
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   return (
     <div className={styles.userWrapper}>
@@ -59,24 +78,46 @@ const User = () => {
         </div>
         <div className={styles.userData}>
           {userData ? (
-            <div className={styles.imageAndNameContainer}>
-              <img className={styles.image} src={userData.image} alt='user' />
-              <div className={styles.name}>
-                <div>{userData.firstName}</div>
-                <div>{userData.lastName}</div>
+            <div className={styles.userDataContainer}>
+              <img className={styles.avatar} src={userData.image} alt='user' />
+              <div className={styles.userData}>
+                <div>Email: {userData.email}</div>
+                <div>First Name: {userData.firstName}</div>
+                <div>Last Name: {userData.lastName}</div>
               </div>
             </div>
           ) : (
             `loading data ...`
           )}
         </div>
-        <div className={styles.addressData}>
-          <div>Street: </div>
-          <div>Number: </div>
-          <div>Postal Code: </div>
-          <div>State: </div>
-          <div>Country: </div>
-        </div>
+        {showShippingData ? (
+          <button
+            onClick={() => setShowShippingData(false)}
+            className={styles.formButton}
+          >
+            HIDE SHIPPING DATA{" "}
+          </button>
+        ) : (
+          <button
+            onClick={() => getAndShowShippingData()}
+            className={styles.formButton}
+          >
+            SHOW SHIPPING DATA{" "}
+          </button>
+        )}
+
+        {showShippingData && (
+          <div className={styles.addressData}>
+            <div>Street: {userShippingData.street}</div>
+            <div>Number: {userShippingData.number}</div>
+            <div>Details: {userShippingData.details}</div>
+            <div>Postal Code: {userShippingData.postal_code}</div>
+            <div>City: {userShippingData.city}</div>
+            <div>State: {userShippingData.state}</div>
+            <div>Country: {userShippingData.country}</div>
+          </div>
+        )}
+        <UpdateUserShippingDataForm userId={userData.id} />
       </div>
     </div>
   )

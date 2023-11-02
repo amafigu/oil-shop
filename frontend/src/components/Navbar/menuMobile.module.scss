@@ -13,7 +13,7 @@
   overflow-y: auto;
   background-color: white;
   border-bottom-left-radius: 4px;
-  box-shadow: theme.$main-box-shadow;
+  box-shadow: theme.$box-shadow-primary;
 
   @include media.mobile {
     width: 50%;
@@ -32,7 +32,7 @@
   }
 
   .closeMenuIconContainer {
-    color: theme.$branding-background-color;
+    color: theme.$color-branding-primary;
   }
 
   .menuAndMailButtonContainer {

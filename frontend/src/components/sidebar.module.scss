@@ -3,7 +3,7 @@
 @import "#styles/helpers/mixins";
 
 .activeCategory {
-  color: theme.$branding-background-color;
+  color: theme.$color-branding-primary;
 }
 
 .sidebarItem {

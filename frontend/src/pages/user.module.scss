@@ -27,8 +27,33 @@
     @include action-button;
   }
 
-  .image {
-    width: 120px;
-    height: 120px;
+  .formButton {
+    width: 160px;
+
+    @include action-button;
+  }
+
+  .adminFormTitel {
+    font-size: 32px;
+  }
+
+  .avatar {
+    width: 160px;
+    height: 160px;
+    margin-right: 24px;
+    border-radius: 50%;
+  }
+
+  .userDataContainer {
+    display: flex;
+    margin: 24px 0;
+
+    .userData {
+      font-size: 24px;
+    }
+  }
+
+  .addressData {
+    font-size: theme.$font-size-generic-data;
   }
 }

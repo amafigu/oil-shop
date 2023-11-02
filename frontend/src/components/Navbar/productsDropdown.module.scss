@@ -27,7 +27,7 @@
     justify-content: center;
     background-color: #f5f5f5;
     border-radius: 4px;
-    box-shadow: theme.$main-box-shadow;
+    box-shadow: theme.$box-shadow-primary;
 
     .searchTextInputAndProductList {
       width: 100%;
@@ -106,12 +106,12 @@
             cursor: pointer;
             background-color: #fff;
             border-radius: 4px;
-            box-shadow: theme.$light-box-shadow;
+            box-shadow: theme.$box-shadow-light;
             transition: background-color 0.3s ease;
 
             .dropdownListItemName {
               font-weight: 400;
-              color: theme.$primary-color;
+              color: theme.$font-color-primary;
             }
 
             .listItemImage {

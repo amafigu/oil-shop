@@ -42,16 +42,16 @@
   .productCardSize,
   .productCardPrice {
     margin: 0;
-    font-family: theme.$main-font-family;
+    font-family: theme.$font-family-primary;
     font-size: 1.25rem;
     font-weight: 400;
-    color: theme.$secondary-color;
+    color: theme.$font-color-light;
   }
 
   .productCardDescription {
     margin-bottom: 10px;
-    font-family: theme.$main-font-family;
+    font-family: theme.$font-family-primary;
     font-size: 0.875rem;
-    color: theme.$secondary-color;
+    color: theme.$font-color-light;
   }
 }
