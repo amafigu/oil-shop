@@ -3,13 +3,13 @@ import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import { FORM_FIELDS_SHIPPING_DATA } from "#utils/constants"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./updateUserShippingDataForm.module.scss"
 
-const UpdateUserShippingDataForm = ({ userId }) => {
+const UpdateUserShippingDataForm = ({ userId, setUserShippingDataInUser }) => {
   const [notification, setNotification] = useState(null)
   const [showForm, setShowForm] = useState(false)
-  const [updatedShippingData, setUpdatedShippingData] = useState({
+  const initialShippingData = {
     street: "",
     number: "",
     details: "",
@@ -17,63 +17,72 @@ const UpdateUserShippingDataForm = ({ userId }) => {
     city: "",
     state: "",
     country: "",
+  }
+  const [updatedShippingData, setUpdatedShippingData] = useState({
+    ...initialShippingData,
   })
   const [oldShippingData, setOldShippingData] = useState({
-    street: "",
-    number: "",
-    details: "",
-    postal_code: "",
-    city: "",
-    state: "",
-    country: "",
+    ...initialShippingData,
   })
+
+  useEffect(() => {
+    async function getOriginalShippingData() {
+      console.log(userId)
+      try {
+        if (!userId) return
+        const originalShippingData = await axios.get(
+          `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+          { withCredentials: true },
+        )
+        setOldShippingData(originalShippingData.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    getOriginalShippingData()
+  }, [userId])
 
   const updateUserShippingData = async (e) => {
     e.preventDefault()
 
     try {
-      const shippingData = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
-        { withCredentials: true },
-      )
-
-      setOldShippingData(shippingData.data)
       setUpdatedShippingData((prevData) => ({
         ...prevData,
-        ...shippingData.data,
+        ...oldShippingData,
       }))
       if (
-        JSON.stringify(shippingData) === JSON.stringify(updatedShippingData)
+        JSON.stringify(oldShippingData) === JSON.stringify(updatedShippingData)
       ) {
         setNotification("No changes made.")
         setTimeout(() => setNotification(null), 1300)
         return
       }
 
-      const response = await axios.put(
+      await axios.put(
         `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
         updatedShippingData,
         { withCredentials: true },
       )
-      setUpdatedShippingData({
-        street: "",
-        number: "",
-        details: "",
-        postal_code: "",
-        city: "",
-        state: "",
-        country: "",
-      })
       setOldShippingData(updatedShippingData)
-      console.log("response ", response)
-      console.log("updatedShippingData ", updatedShippingData)
-
+      setUserShippingDataInUser((prevData) => ({
+        ...prevData,
+        ...nonEmptyUpdates,
+      }))
+      setUpdatedShippingData(initialShippingData)
       setNotification("update shipping data")
       setTimeout(() => setNotification(null), 1300)
     } catch (error) {
       console.error("Can not edit shipping data ", error)
     }
   }
+
+  const nonEmptyUpdates = Object.keys(updatedShippingData)
+    .filter((key) => updatedShippingData[key] !== "")
+    .reduce((obj, key) => {
+      obj[key] = updatedShippingData[key]
+      return obj
+    }, {})
 
   const listenInputChange = (e) => {
     setUpdatedShippingData({
@@ -104,7 +113,7 @@ const UpdateUserShippingDataForm = ({ userId }) => {
               key={field.name}
               label={field.label}
               name={field.name}
-              onChange={(e) => listenInputChange(e)}
+              onChangeListener={(e) => listenInputChange(e)}
               placeholder={field.placeholder}
               value={updatedShippingData[field.name]}
             />

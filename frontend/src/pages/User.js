@@ -117,7 +117,10 @@ const User = () => {
             <div>Country: {userShippingData.country}</div>
           </div>
         )}
-        <UpdateUserShippingDataForm userId={userData.id} />
+        <UpdateUserShippingDataForm
+          userId={userData.id}
+          setUserShippingDataInUser={setUserShippingData}
+        />
       </div>
     </div>
   )
