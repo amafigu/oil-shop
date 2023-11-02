@@ -202,3 +202,16 @@
     width: 120px;
   }
 }
+
+@mixin form-field {
+  height: theme.$height-form-field;
+  margin-bottom: theme.$margin-bottom-form-field;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-form-field;
+}
+
+@mixin label-form-field {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: theme.$margin-bottom-label-form-field;
+}
