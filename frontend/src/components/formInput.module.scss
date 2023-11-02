@@ -5,25 +5,21 @@
 .form {
   @include flex-column;
 
-  margin: 28px;
+  margin: theme.$margin-form-container;
 
   @include media.tablet-down {
-    margin: 18px;
+    margin: theme.$margin-form-container-mobile;
   }
 }
 
 .formField {
   width: 100%;
-  height: 32px;
-  margin-bottom: 12px;
-  font-family: theme.$font-family-primary;
-  font-size: medium;
+
+  @include form-field;
 }
 
 .label {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 4px;
+  @include label-form-field;
 }
 
 .formButton {
