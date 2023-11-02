@@ -1,4 +1,5 @@
 import NotificationCard from "#components/NotificationCard"
+import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -28,9 +29,8 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
     getAllUsers()
   }, [refreshAllUsersCounter])
 
-  const showUserListAndGetData = () => {
-    getAllUsers()
-    setShowUsers(true)
+  const showUserListAndGetData = (bool) => {
+    setShowUsers(bool)
   }
 
   return (
@@ -38,21 +38,13 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
       {notification && <NotificationCard message={notification} />}
 
       <div className={styles.showHideButtonsContainer}>
-        {showUsers ? (
-          <button
-            className={styles.showHideButtons}
-            onClick={() => setShowUsers(false)}
-          >
-            HIDE ALL USERS
-          </button>
-        ) : (
-          <button
-            className={styles.showHideButtons}
-            onClick={() => showUserListAndGetData()}
-          >
-            GET ALL USERS
-          </button>
-        )}
+        <ToggleButton
+          show={showUsers}
+          setToggle={showUserListAndGetData}
+          textHide='HIDE ALL USERS'
+          textShow='GET ALL USERS'
+          classCss='showHideButtons'
+        />
       </div>
       {
         <div
