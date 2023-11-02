@@ -3,7 +3,7 @@ import { logout } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import UpdateUserShippingDataForm from "./Admin/UsersCrud/UpdateUserShippingDataForm"
+import UpdateUserShippingDataForm from "../components/UsersCrud/UpdateUserShippingDataForm"
 import styles from "./user.module.scss"
 
 const User = () => {
@@ -117,7 +117,10 @@ const User = () => {
             <div>Country: {userShippingData.country}</div>
           </div>
         )}
-        <UpdateUserShippingDataForm userId={userData.id} />
+        <UpdateUserShippingDataForm
+          userId={userData.id}
+          setUserShippingDataInUser={setUserShippingData}
+        />
       </div>
     </div>
   )
