@@ -15,7 +15,7 @@ const FormInput = ({
         {label}
       </label>
       <input
-        className={`${styles}.${classCss}`}
+        className={styles[classCss]}
         type={type}
         name={name}
         onChange={onChangeListener}
