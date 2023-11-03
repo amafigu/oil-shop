@@ -104,7 +104,7 @@ export const getAdminData = async (setAdminData, setNotification, navigate) => {
       `${process.env.REACT_APP_API_URL}/users/current-user`,
       { withCredentials: true },
     )
-    console.log(response.data)
+    console.log("getAdminData response.data ", response.data)
     setAdminData(response.data)
     return response.data
   } catch (error) {
@@ -118,7 +118,12 @@ export const getAdminData = async (setAdminData, setNotification, navigate) => {
 
 // end crud products and users functions
 
-export const logout = async (navigate, setNotification) => {
+export const logout = async (
+  navigate,
+  setNotification,
+  setIsLoggedIn,
+  setUserEmail,
+) => {
   try {
     await axios.post(
       `${process.env.REACT_APP_API_URL}/users/logout`,
@@ -127,6 +132,9 @@ export const logout = async (navigate, setNotification) => {
         withCredentials: true,
       },
     )
+    setIsLoggedIn(false)
+    setUserEmail("")
+
     navigate("/login")
   } catch (error) {
     setNotification(`Error to logout: ${error.response.data.message}`)

@@ -1,4 +1,5 @@
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { useState } from "react"
@@ -10,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
+  const { setIsLoggedIn, setUserEmail } = useUserContext()
   const text = translate.pages.login
   const navigate = useNavigate()
 
@@ -31,11 +33,14 @@ const Login = () => {
               { withCredentials: true },
             )
 
-            const userRole = responseUser.data.role
+            const userData = responseUser.data
 
-            if (userRole === "admin") {
+            setUserEmail(userData.email)
+            setIsLoggedIn(true)
+
+            if (userData.role === "admin") {
               navigate("/users/current-admin")
-            } else if (userRole === "guest") {
+            } else if (userData.role === "guest") {
               navigate("/users/current-user")
             } else {
               navigate("/login")
