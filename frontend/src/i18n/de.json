@@ -144,7 +144,9 @@
     "shipping": {
       "yourInfo": "Ihren Daten",
       "yourEmail": "Ihren E-Mail",
-      "title": "Wenn Sie bereits registriert sind, geben Sie einfach Ihre E-Mail-Adresse ein. Andernfalls können Sie durch die Übermittlung Ihrer E-Mail-Adresse als Gast zur Kasse gehen",
+      "title": "Wenn Sie bereits registriert sind, gehen sie zur",
+      "titleLink": "Login",
+      "titleSubSentence": "Seite. Andernfalls können Sie durch die Übermittlung Ihrer Daten als Gast zur Kasse gehen",
       "inputLabels": {
         "firstName": "Vorname",
         "lastName": "Nachname",

@@ -72,10 +72,7 @@ const CreateProductForm = () => {
       image: imageUrl,
     }
 
-    console.log(imageUrl)
-
     try {
-      console.log(productDataWithImage)
       await axios.post(
         `${process.env.REACT_APP_API_URL}/products/create`,
         productDataWithImage,
@@ -92,12 +89,6 @@ const CreateProductForm = () => {
       console.error("Product submit failed: ", error)
     }
   }
-
-  console.log("currentPath", currentPath)
-  console.log(
-    "!routesWithoutImageUpload",
-    !routesWithoutImageUpload.includes(currentPath),
-  )
 
   return (
     <div>

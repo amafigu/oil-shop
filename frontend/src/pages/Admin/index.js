@@ -1,5 +1,5 @@
 import NotificationCard from "#components/NotificationCard"
-import { getAdminData, logout } from "#utils/utils"
+import { getAdminData } from "#utils/utils"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import ToggleSectionsButtons from "./ToggleSectionsButtons"
@@ -24,9 +24,9 @@ const Admin = () => {
   useEffect(() => {
     const checkData = async () => {
       const data = await getAdminData(setAdminData, setNotification)
-      console.log(data)
+      console.log("Admin - checkData() - data ", data)
       if (data && data.role !== "admin") {
-        console.log(data.role)
+        console.log("Admin - checkData() - data.role ", data.role)
         navigate("/login")
       }
     }
@@ -37,7 +37,7 @@ const Admin = () => {
     <div className={styles.adminPageWrapper}>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.adminPage}>
-        <Header data={adminData} logout={logout} />
+        <Header data={adminData} />
         <ToggleSectionsButtons
           showProductsSection={showProductsSection}
           setShowProductsSection={setShowProductsSection}
