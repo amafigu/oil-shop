@@ -2,7 +2,7 @@ import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./login.module.scss"
 
@@ -11,11 +11,24 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
-  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
+  const { setIsLoggedIn, setUserEmail, setUser, isLoggedIn, user } =
+    useUserContext()
   const text = translate.pages.login
   const navigate = useNavigate()
 
   useEffectScrollTop()
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log(isLoggedIn)
+      if (user.role === "admin") {
+        navigate("/users/current-admin")
+      }
+      if (user.role === "guest") {
+        navigate("/users/current-user")
+      }
+    }
+  })
 
   const login = async (e) => {
     e.preventDefault()
