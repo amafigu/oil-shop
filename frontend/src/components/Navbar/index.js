@@ -36,7 +36,7 @@ const Navbar = ({ productCategories }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
 
   const { getAllProductsQuantity } = useCartContext()
-  const { isLoggedIn, userEmail, user } = useUserContext()
+  const { isLoggedIn, userEmail, user, isLoading } = useUserContext()
   const navigate = useNavigate()
   const location = useLocation()
   const params = new URLSearchParams(location.search)
@@ -64,6 +64,10 @@ const Navbar = ({ productCategories }) => {
     setMatchedProducts,
   )
 
+  console.log("UserEmail", userEmail)
+  console.log("user", user)
+
+  console.log("navbar isLoggedIn", isLoggedIn)
   useGetProducts(setProducts)
 
   return (

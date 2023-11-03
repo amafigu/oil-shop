@@ -123,6 +123,7 @@ export const logout = async (
   setNotification,
   setIsLoggedIn,
   setUserEmail,
+  setUser,
 ) => {
   try {
     await axios.post(
@@ -134,8 +135,8 @@ export const logout = async (
     )
     setIsLoggedIn(false)
     setUserEmail("")
-
-    navigate("/login")
+    setUser({})
+    setTimeout(() => navigate("/login"), 400)
   } catch (error) {
     setNotification(`Error to logout: ${error.response.data.message}`)
     setTimeout(() => setNotification(null), 2000)

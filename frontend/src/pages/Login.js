@@ -11,7 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
-  const { setIsLoggedIn, setUserEmail } = useUserContext()
+  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
   const text = translate.pages.login
   const navigate = useNavigate()
 
@@ -37,6 +37,7 @@ const Login = () => {
 
             setUserEmail(userData.email)
             setIsLoggedIn(true)
+            setUser(userData)
 
             if (userData.role === "admin") {
               navigate("/users/current-admin")

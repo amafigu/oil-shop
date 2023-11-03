@@ -234,4 +234,16 @@ router.put('/user/shipping-data/:id', async (req, res) => {
   }
 });
 
+router.get('/verify-token', (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ message: 'Not authenticated' });
+
+    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+    return res.json(decodedToken);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 export default router;

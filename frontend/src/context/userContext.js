@@ -7,9 +7,11 @@ export const UserProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const verifyToken = async () => {
+      setIsLoading(true)
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/users/verify-token`,
@@ -18,17 +20,20 @@ export const UserProvider = ({ children }) => {
 
         if (response.status === 200) {
           setUser(response.data)
-          setIsLoggedIn(true)
           setUserEmail(response.data.email)
         }
       } catch (error) {
-        setIsLoggedIn(false)
         setUserEmail("")
+      } finally {
+        setIsLoading(false)
+        setIsLoggedIn(true)
       }
     }
 
     verifyToken()
   }, [isLoggedIn])
+
+  console.log(user)
 
   return (
     <UserContext.Provider
@@ -39,6 +44,7 @@ export const UserProvider = ({ children }) => {
         isLoggedIn,
         user,
         setUser,
+        isLoading,
       }}
     >
       {children}

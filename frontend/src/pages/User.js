@@ -13,7 +13,7 @@ const User = () => {
   const [showShippingData, setShowShippingData] = useState(false)
   const [notification, setNotification] = useState(null)
 
-  const { setUserEmail, setIsLoggedIn, userEmail, isLoggedIn, user } =
+  const { setUserEmail, setIsLoggedIn, userEmail, isLoggedIn, setUser } =
     useUserContext()
 
   const navigate = useNavigate()
@@ -82,7 +82,7 @@ const User = () => {
                 setNotification,
                 setIsLoggedIn,
                 setUserEmail,
-                user,
+                setUser,
               )
             }
           >
