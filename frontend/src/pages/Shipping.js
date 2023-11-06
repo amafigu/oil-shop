@@ -39,7 +39,7 @@ const Shipping = () => {
   const handleSubmit = (e) => {
     if (cart.length > 0) {
       e.preventDefault()
-      localStorage.getSetItem("yolo-shippment")
+      //localStorage.getSetItem("yolo-shippment")
       navigate("/checkout/payment", {
         state: { shippingData: formData },
       })

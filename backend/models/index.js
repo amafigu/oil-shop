@@ -36,9 +36,11 @@ db.productCategories.hasMany(db.products, { foreignKey: 'productCategoryId' });
 db.users.hasOne(db.usersShippingData, {
   foreignKey: 'userId',
   as: 'shippingData',
+  onDelete: 'CASCADE',
 });
 
 db.users.hasMany(db.userOrders, {
+  onDelete: 'SET NULL',
   foreignKey: 'userId',
 });
 

@@ -108,6 +108,7 @@ router.get('/current-user', decodeJWT, async (req, res) => {
     firstName: req.user.firstName,
     lastName: req.user.lastName,
     image: req.user.image,
+    roleId: req.user.roleId,
   });
 });
 
@@ -122,6 +123,8 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'Invalid email' });
     }
+
+    console.log('LOGIN USER ', user);
 
     const isPasswordValid = await comparePassword(
       req.body.password,
@@ -141,6 +144,7 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
         email: user.email,
         role: user.role,
         image: user.image,
+        roleId: user.roleId,
       },
       process.env.JWT_KEY,
       { expiresIn: '3600000' } // 1 hour

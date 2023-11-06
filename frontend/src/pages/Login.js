@@ -47,17 +47,15 @@ const Login = () => {
             )
 
             const userData = responseUser.data
-
+            console.log("LOGIN userdata ", userData)
             setUserEmail(userData.email)
             setIsLoggedIn(true)
             setUser(userData)
-            /*   if (userData.role === "admin") {
+            if (userData.roleId === 2) {
               navigate("/users/current-admin")
-            } else if (userData.role === "guest") {
+            } else if (userData.roleId === 5) {
               navigate("/users/current-user")
-            } else {
-              navigate("/login")
-            }*/
+            }
           } catch (error) {
             setErrorMessage(`${text.errorMessage}`)
             setTimeout(() => setErrorMessage(null), 10000)
