@@ -36,6 +36,16 @@ const userShippingDataModel = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
+    },
   });
 
   return UserShippingData;

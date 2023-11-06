@@ -21,8 +21,22 @@ const userModel = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    role: {
-      type: DataTypes.ENUM('admin', 'guest'),
+    roleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user_roles',
+        key: 'id',
+      },
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
       allowNull: false,
     },
   });
