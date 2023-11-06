@@ -12,8 +12,8 @@ const requestWithSupertest = supertest(app);
 
 describe('User Creation', () => {
   it('should successfully create a new user', async () => {
-    db.user.findOne.mockResolvedValue(null); // simulates email does not exists.
-    db.user.create.mockResolvedValue({
+    db.users.findOne.mockResolvedValue(null); // simulates email does not exists.
+    db.users.create.mockResolvedValue({
       id: 1,
       email: 'test@example.com',
     });
@@ -36,7 +36,7 @@ describe('User Creation', () => {
 
   it('should return error if email is already in use', async () => {
     // Mock database call
-    db.user.findOne.mockResolvedValue({ id: 1, email: 'test@example.com' }); //simulates given email already exists.
+    db.users.findOne.mockResolvedValue({ id: 1, email: 'test@example.com' }); //simulates given email already exists.
 
     const newUser = {
       firstName: 'Test',

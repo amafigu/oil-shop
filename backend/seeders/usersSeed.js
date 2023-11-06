@@ -20,11 +20,11 @@ const users = [
 async function seed() {
   try {
     for (const newUser of users) {
-      const existingUser = await db.user.findOne({
+      const existingUser = await db.users.findOne({
         where: { email: newUser.email },
       });
       if (!existingUser) {
-        await db.user.create(newUser);
+        await db.users.create(newUser);
       }
     }
     process.exit(0);

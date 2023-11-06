@@ -16,7 +16,7 @@ router.post(
 
   async (req, res) => {
     try {
-      const product = await db.product.findOne({
+      const product = await db.products.findOne({
         where: {
           name: req.body.name,
           productCategoryId: req.body.productCategoryId,
@@ -30,7 +30,7 @@ router.post(
             'Can not add product, please try with another name, size or category.',
         });
       } else {
-        const product = await db.product.create(req.body);
+        const product = await db.products.create(req.body);
         res.status(201).json(product);
       }
     } catch (err) {
@@ -41,13 +41,13 @@ router.post(
 
 router.get('/:productName', async (req, res) => {
   try {
-    const product = await db.product.findOne({
+    const product = await db.products.findOne({
       where: {
         name: req.params.productName,
       },
       include: [
         {
-          model: db.productCategory,
+          model: db.productCategories,
           as: 'category',
         },
       ],
@@ -66,7 +66,7 @@ router.delete(
   validateParams(ProductNameParamSchema),
   async (req, res) => {
     try {
-      const product = await db.product.findOne({
+      const product = await db.products.findOne({
         where: { name: req.params.productName },
       });
       if (!product) {
@@ -86,7 +86,7 @@ router.put(
   validateBody(UpdateProductSchema),
   async (req, res) => {
     try {
-      const product = await db.product.findOne({
+      const product = await db.products.findOne({
         where: { name: req.params.productName },
       });
       if (!product) {
@@ -102,10 +102,10 @@ router.put(
 
 router.get('/', async (req, res) => {
   try {
-    const products = await db.product.findAll({
+    const products = await db.products.findAll({
       include: [
         {
-          model: db.productCategory,
+          model: db.productCategories,
           as: 'category',
         },
       ],

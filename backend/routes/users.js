@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const users = await db.user.findAll();
+    const users = await db.users.findAll();
     return res.json(users);
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/user/:email', decodeJWT, async (req, res) => {
   try {
-    const user = await db.user.findOne({ where: { email: req.params.email } });
+    const user = await db.users.findOne({ where: { email: req.params.email } });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -41,7 +41,7 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
 
 router.post('/register-admin', async (req, res) => {
   try {
-    const existingUser = await db.user.findOne({
+    const existingUser = await db.users.findOne({
       where: { email: req.body.email },
     });
 
@@ -51,7 +51,7 @@ router.post('/register-admin', async (req, res) => {
 
     const hashedPassword = await hashPassword(req.body.password);
 
-    const newAdmin = await db.user.create({
+    const newAdmin = await db.users.create({
       ...req.body,
       password: hashedPassword,
       role: 'admin',
@@ -67,7 +67,7 @@ router.post('/register-admin', async (req, res) => {
 
 router.delete('/user/:email', decodeJWT, async (req, res) => {
   try {
-    const result = await db.user.destroy({
+    const result = await db.users.destroy({
       where: { email: req.params.email },
     });
     if (!result) {
@@ -81,7 +81,7 @@ router.delete('/user/:email', decodeJWT, async (req, res) => {
 
 router.put('/user/:email', decodeJWT, async (req, res) => {
   try {
-    const user = await db.user.findOne({ where: { email: req.params.email } });
+    const user = await db.users.findOne({ where: { email: req.params.email } });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -118,7 +118,7 @@ router.post('/logout', (req, res) => {
 
 router.post('/login', validateBody(LoginSchema), async (req, res) => {
   try {
-    const user = await db.user.findOne({ where: { email: req.body.email } });
+    const user = await db.users.findOne({ where: { email: req.body.email } });
     if (!user) {
       return res.status(404).json({ message: 'Invalid email' });
     }
@@ -163,7 +163,7 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
 
 router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
   try {
-    const existingUser = await db.user.findOne({
+    const existingUser = await db.users.findOne({
       where: { email: req.body.email },
     });
 
@@ -173,7 +173,7 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
 
     const hashedPassword = await hashPassword(req.body.password);
 
-    const newUser = await db.user.create({
+    const newUser = await db.users.create({
       ...req.body,
       password: hashedPassword,
       role: 'guest',
@@ -190,7 +190,7 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
 router.get('/user/shipping-data/:id', async (req, res) => {
   console.log(req.params.id);
   try {
-    const shippingData = await db.userShippingData.findOne({
+    const shippingData = await db.usersShippingData.findOne({
       where: { userId: req.params.id },
     });
     if (!shippingData) {
@@ -206,7 +206,7 @@ router.get('/user/shipping-data/:id', async (req, res) => {
 
 router.put('/user/shipping-data/:id', async (req, res) => {
   try {
-    const shippingData = await db.userShippingData.findOne({
+    const shippingData = await db.usersShippingData.findOne({
       where: { userId: req.params.id },
     });
 
@@ -214,7 +214,7 @@ router.put('/user/shipping-data/:id', async (req, res) => {
     console.log('router.put req.body ', req.body);
 
     if (!shippingData) {
-      await db.userShippingData.create({ ...req.body, userId: req.params.id });
+      await db.usersShippingData.create({ ...req.body, userId: req.params.id });
     } else {
       shippingData.street = req.body.street || shippingData.street;
       shippingData.number = req.body.number || shippingData.number;
