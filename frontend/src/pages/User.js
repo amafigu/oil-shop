@@ -25,8 +25,8 @@ const User = () => {
           `${process.env.REACT_APP_API_URL}/users/current-user`,
           { withCredentials: true },
         )
-
-        console.log("User response.data ", response.data)
+        /*
+  console.log("User response.data ", response.data)
         if (response.data.role === "admin") {
           navigate("/users/current-admin")
         }
@@ -36,6 +36,7 @@ const User = () => {
         } else {
           navigate("/login")
         }
+      */
         setUserData(response.data)
       } catch (error) {
         setNotification(`${error.response.data.message}`)

@@ -1,7 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
 import { getAdminData } from "#utils/utils"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import ToggleSectionsButtons from "./ToggleSectionsButtons"
 
 import UsersCrud from "#components//UsersCrud"
@@ -19,19 +18,17 @@ const Admin = () => {
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
 
-  const navigate = useNavigate()
-
   useEffect(() => {
     const checkData = async () => {
       const data = await getAdminData(setAdminData, setNotification)
       console.log("Admin - checkData() - data ", data)
-      if (data && data.role !== "admin") {
+      /*if (data && data.role !== "admin") {
         console.log("Admin - checkData() - data.role ", data.role)
         navigate("/login")
-      }
+      }*/
     }
     checkData()
-  }, [navigate])
+  }, [])
 
   return (
     <div className={styles.adminPageWrapper}>

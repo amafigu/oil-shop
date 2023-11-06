@@ -19,7 +19,7 @@ const Login = () => {
   useEffectScrollTop()
 
   useEffect(() => {
-    if (isLoggedIn) {
+    /* if (isLoggedIn) {
       console.log(isLoggedIn)
       if (user.role === "admin") {
         navigate("/users/current-admin")
@@ -27,7 +27,7 @@ const Login = () => {
       if (user.role === "guest") {
         navigate("/users/current-user")
       }
-    }
+    }*/
   })
 
   const login = async (e) => {
@@ -51,14 +51,13 @@ const Login = () => {
             setUserEmail(userData.email)
             setIsLoggedIn(true)
             setUser(userData)
-
-            if (userData.role === "admin") {
+            /*   if (userData.role === "admin") {
               navigate("/users/current-admin")
             } else if (userData.role === "guest") {
               navigate("/users/current-user")
             } else {
               navigate("/login")
-            }
+            }*/
           } catch (error) {
             setErrorMessage(`${text.errorMessage}`)
             setTimeout(() => setErrorMessage(null), 10000)
