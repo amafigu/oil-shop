@@ -13,19 +13,33 @@ module.exports = {
       },
       firstName: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       lastName: {
         type: Sequelize.STRING,
+
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
         unique: true,
+        allowNull: false,
       },
       password: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      role: {
+      image: {
         type: Sequelize.STRING,
+        allowNull: true,
+      },
+      roleId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'user_roles',
+          key: 'id',
+        },
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
