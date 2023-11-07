@@ -23,7 +23,7 @@ const Shop = ({ productCategories }) => {
       .catch((error) => {
         console.error("Error fetching data: ", error)
       })
-  }, [])
+  }, [products])
 
   useEffect(() => {
     if (queryCategory) {
