@@ -1,4 +1,5 @@
-import { CartContext } from "#context/cartContext"
+import useCartContext from "#context/cartContext"
+import useUserContext from "#context/userContext"
 import {
   getInputChangeAndOpenList,
   navigateToProductAndCloseDropdown,
@@ -17,7 +18,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
@@ -32,16 +33,17 @@ const Navbar = ({ productCategories }) => {
   const [products, setProducts] = useState([])
   const [category, setCategory] = useState("")
   const [matchedProducts, setMatchedProducts] = useState([])
-  const { getAllProductsQuantity } = useContext(CartContext)
   const [isDropdownOpen, setDropdownOpen] = useState(false)
 
-  const searchProductListDropdownRef = useRef(null)
-  const modalRef = useRef(null)
+  const { getAllProductsQuantity } = useCartContext()
+  const { isLoggedIn, userEmail, user } = useUserContext()
   const navigate = useNavigate()
-
   const location = useLocation()
   const params = new URLSearchParams(location.search)
   const queryCategory = params.get("category")
+
+  const searchProductListDropdownRef = useRef(null)
+  const modalRef = useRef(null)
 
   useEffect(() => {
     if (queryCategory) {
@@ -62,6 +64,10 @@ const Navbar = ({ productCategories }) => {
     setMatchedProducts,
   )
 
+  console.log("UserEmail", userEmail)
+  console.log("user", user)
+
+  console.log("navbar isLoggedIn", isLoggedIn)
   useGetProducts(setProducts)
 
   return (
@@ -220,9 +226,22 @@ const Navbar = ({ productCategories }) => {
                     </div>
                   </div>
                 </div>
-                <Link className={styles.linkChild} to='login'>
-                  <FontAwesomeIcon icon={faUser} />
-                </Link>
+                {isLoggedIn ? (
+                  <Link
+                    className={styles.linkChild}
+                    to={
+                      user && user.role === "admin"
+                        ? "/users/current-admin"
+                        : "/users/current-user"
+                    }
+                  >
+                    <FontAwesomeIcon icon={faUser} />
+                  </Link>
+                ) : (
+                  <Link className={styles.linkChild} to='/login'>
+                    <FontAwesomeIcon icon={faUser} />
+                  </Link>
+                )}
 
                 <div className={styles.cartAndQuantity}>
                   <Link className={styles.linkChild} to='/cart'>

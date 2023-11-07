@@ -5,23 +5,29 @@ import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./productCard.module.scss"
 
-const ProductCard = ({ name, image, size, price, description, category }) => {
+const ProductCard = ({ product }) => {
   const { translate } = useLocaleContext()
-  const product = { name, image, size, price, description, category }
-
   return (
     <div className={styles.productCardWrapper}>
-      <Link to={`/products/${name}`}>
+      <Link to={`/products/${product.name}`}>
         <div className={styles.productCardBody}>
-          <img className={styles.productCardImage} src={image} alt={name} />
-          <div className={styles.productCardName}>{titleCase(name, "_")}</div>
+          <img
+            className={styles.productCardImage}
+            src={product.image}
+            alt={product.name}
+          />
+          <div className={styles.productCardName}>
+            {titleCase(product.name, "_")}
+          </div>
           <div className={styles.productCardSize}>
-            {translate.components.products.oil.size}: {size} ml
+            {translate.components.products.oil.size}: {product.size} ml
           </div>
           <div className={styles.productCardPrice}>
-            {translate.components.products.oil.price} €{price}
+            {translate.components.products.oil.price} €{product.price}
           </div>
-          <div className={styles.productCardDescription}>{description}</div>
+          <div className={styles.productCardDescription}>
+            {product.description}
+          </div>
         </div>
       </Link>
       <div className={styles.addButtonContainer}>

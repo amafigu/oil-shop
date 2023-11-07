@@ -24,11 +24,11 @@ const productCategories = [
 async function seed() {
   try {
     for (const newCategory of productCategories) {
-      const existingCategory = await db.productCategory.findOne({
+      const existingCategory = await db.productCategories.findOne({
         where: { name: newCategory.name },
       });
       if (!existingCategory) {
-        await db.productCategory.create(newCategory);
+        await db.productCategories.create(newCategory);
       }
     }
     process.exit(0);

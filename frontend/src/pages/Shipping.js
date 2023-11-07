@@ -1,8 +1,8 @@
 import useCartContext from "#context/cartContext"
+import useLocaleContext from "#context/localeContext"
 import { useEffectScrollTop } from "#utils/utils"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import useLocaleContext from "../context/localeContext"
 import styles from "./shipping.module.scss"
 
 const Shipping = () => {
@@ -22,6 +22,7 @@ const Shipping = () => {
 
   const { translate } = useLocaleContext()
   const { cart } = useCartContext()
+
   const text = translate.pages.shipping
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Shipping = () => {
   const handleSubmit = (e) => {
     if (cart.length > 0) {
       e.preventDefault()
-
+      //localStorage.getSetItem("yolo-shippment")
       navigate("/checkout/payment", {
         state: { shippingData: formData },
       })
@@ -52,12 +53,17 @@ const Shipping = () => {
   return (
     <div className={styles.shippingPageWrapper}>
       <div className={styles.shippingPage}>
+        <div className={styles.emailRegistrationText}>
+          {text.title}{" "}
+          <span className={styles.linkLogin}>
+            <Link to='/login'>{text.titleLink}</Link>
+          </span>{" "}
+          {text.titleSubSentence}
+        </div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.emailFieldContainer}>
             <div className={styles.containerTitle}>{text.yourEmail}</div>
-            <div className={styles.emailFormTitel}>
-              <div className={styles.emailRegistrationText}>{text.title}</div>
-            </div>
+            <div className={styles.emailFormTitel}></div>
             <label className={styles.label} htmlFor='email'>
               {text.inputLabels.email}
             </label>

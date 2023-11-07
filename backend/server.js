@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import awsRoutes from './routes/aws.js';
+import orderRoutes from './routes/orders.js';
 import productCategoryRoutes from './routes/productCategory.js';
 import productRoutes from './routes/products.js';
 import userRoutes from './routes/users.js';
@@ -27,5 +28,6 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/product-categories', productCategoryRoutes);
 app.use('/api/aws', awsRoutes);
+app.use('/api/orders', orderRoutes);
 
 export default app;

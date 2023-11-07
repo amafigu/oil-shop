@@ -1,9 +1,13 @@
 import dotenv from 'dotenv';
 import Sequelize from 'sequelize';
+import cartItemsModel from './cartItems.js';
 import productModel from './product.js';
 import productCategoryModel from './productCategory.js';
 import userModel from './user.js';
+import userOrdersModel from './userOrders.js';
 import userShippingDataModel from './userShippingData.js';
+import userRolesModel from './usersRole.js';
+
 dotenv.config();
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
@@ -14,24 +18,56 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.users = userModel(sequelize, Sequelize);
 
-db.product = productModel(sequelize, Sequelize);
-db.productCategory = productCategoryModel(sequelize, Sequelize);
-db.user = userModel(sequelize, Sequelize);
-db.userShippingData = userShippingDataModel(sequelize, Sequelize);
+db.products = productModel(sequelize, Sequelize);
+db.productCategories = productCategoryModel(sequelize, Sequelize);
+db.usersShippingData = userShippingDataModel(sequelize, Sequelize);
+db.userRoles = userRolesModel(sequelize, Sequelize);
+db.userOrders = userOrdersModel(sequelize, Sequelize);
+db.cartItems = cartItemsModel(sequelize, Sequelize);
 
-db.product.belongsTo(db.productCategory, {
+db.products.belongsTo(db.productCategories, {
   foreignKey: 'productCategoryId',
   as: 'category',
 });
-db.productCategory.hasMany(db.product, { foreignKey: 'productCategoryId' });
+db.productCategories.hasMany(db.products, { foreignKey: 'productCategoryId' });
 
-db.user.hasOne(db.userShippingData, {
+db.users.hasOne(db.usersShippingData, {
   foreignKey: 'userId',
   as: 'shippingData',
+  onDelete: 'CASCADE',
 });
-db.userShippingData.belongsTo(db.user, {
+
+db.users.hasMany(db.userOrders, {
+  onDelete: 'SET NULL',
   foreignKey: 'userId',
+});
+
+db.userOrders.belongsTo(db.users, { foreignKey: 'userId' });
+
+db.usersShippingData.belongsTo(db.users, {
+  foreignKey: 'userId',
+});
+
+db.users.belongsTo(db.userRoles, {
+  foreignKey: 'roleId',
+});
+
+db.userRoles.hasMany(db.users, {
+  foreignKey: 'roleId',
+});
+
+db.products.hasMany(db.cartItems, {
+  foreignKey: 'productId',
+});
+
+db.cartItems.belongsTo(db.products, {
+  foreignKey: 'productId',
+});
+
+db.userOrders.hasMany(db.cartItems, {
+  foreignKey: 'userOrderId',
 });
 
 export default db;

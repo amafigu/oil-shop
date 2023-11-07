@@ -148,7 +148,9 @@
     "shipping": {
       "yourInfo": "Your Info",
       "yourEmail": "Your email",
-      "title": "If you are already registered just fill your email. Otherwise, by submitting your email you may checkout as a guest",
+      "title": "If you are already registered please",
+      "titleLink": "login",
+      "titleSubSentence": ". Otherwise, by submitting your data you may checkout as a guest",
       "inputLabels": {
         "email": "Email address",
         "firstName": "First name",

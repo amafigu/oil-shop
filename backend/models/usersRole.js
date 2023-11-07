@@ -1,8 +1,9 @@
-const productCategoryModel = (sequelize, DataTypes) => {
-  const productCategory = sequelize.define('product_categories', {
+const userRolesModel = (sequelize, DataTypes) => {
+  const UserRoles = sequelize.define('user_roles', {
     name: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
+      unique: true,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -16,7 +17,7 @@ const productCategoryModel = (sequelize, DataTypes) => {
     },
   });
 
-  return productCategory;
+  return UserRoles;
 };
 
-export default productCategoryModel;
+export default userRolesModel;

@@ -1,12 +1,28 @@
 import NotificationCard from "#components/NotificationCard"
 import { titleCase } from "#utils/utils"
-import React, { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([])
+  const getInitialCart = () => {
+    try {
+      const storageCart = localStorage.getItem("yolo-cart")
+      if (storageCart) {
+        return JSON.parse(storageCart)
+      }
+    } catch (error) {
+      console.error("Failed to parse cart data from local storage:", error)
+    }
+    return []
+  }
+
+  const [cart, setCart] = useState(getInitialCart)
   const [notification, setNotification] = useState(null)
+
+  useEffect(() => {
+    localStorage.setItem("yolo-cart", JSON.stringify(cart))
+  }, [cart])
 
   const addProduct = (product, quantity) => {
     const existingProduct = cart.find(
@@ -53,6 +69,8 @@ export const CartProvider = ({ children }) => {
     (total, item) => total + item.quantity,
     0,
   )
+
+  console.log(cart)
 
   return (
     <CartContext.Provider

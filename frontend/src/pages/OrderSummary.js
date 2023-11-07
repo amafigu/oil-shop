@@ -19,6 +19,8 @@ const OrderSummary = () => {
   let shippingData = {}
   let paymentMethod = ""
 
+  //Volver por ahi db
+
   if (location.state) {
     shippingData = location.state.shippingData
     paymentMethod = location.state.paymentMethod

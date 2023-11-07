@@ -1,4 +1,5 @@
 import NotificationCard from "#components/NotificationCard"
+import useUserContext from "#context/userContext"
 import { logout } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -12,6 +13,9 @@ const User = () => {
   const [showShippingData, setShowShippingData] = useState(false)
   const [notification, setNotification] = useState(null)
 
+  const { setUserEmail, setIsLoggedIn, userEmail, isLoggedIn, setUser } =
+    useUserContext()
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -21,9 +25,8 @@ const User = () => {
           `${process.env.REACT_APP_API_URL}/users/current-user`,
           { withCredentials: true },
         )
-
-        console.log(response.data)
-
+        /*
+  console.log("User response.data ", response.data)
         if (response.data.role === "admin") {
           navigate("/users/current-admin")
         }
@@ -33,6 +36,7 @@ const User = () => {
         } else {
           navigate("/login")
         }
+      */
         setUserData(response.data)
       } catch (error) {
         setNotification(`${error.response.data.message}`)
@@ -45,7 +49,9 @@ const User = () => {
     fetchUserData()
   }, [navigate])
 
-  console.log("userData", userData)
+  console.log("USER PAGE userData", userData)
+  console.log("USER PAGE isLoggedIn ", isLoggedIn)
+  console.log("USER PAGE userEmail ", userEmail)
 
   const getAndShowShippingData = async () => {
     try {
@@ -71,7 +77,15 @@ const User = () => {
           </div>
           <button
             className={styles.logoutButton}
-            onClick={() => logout(navigate, setNotification)}
+            onClick={() =>
+              logout(
+                navigate,
+                setNotification,
+                setIsLoggedIn,
+                setUserEmail,
+                setUser,
+              )
+            }
           >
             LOGOUT
           </button>

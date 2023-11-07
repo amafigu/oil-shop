@@ -1,12 +1,16 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
+import { logout } from "#utils/utils"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+
 import styles from "./header.module.scss"
-const Header = ({ data, logout }) => {
+const Header = ({ data }) => {
   const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
 
+  const { setUserEmail, setIsLoggedIn, setUser } = useUserContext()
   const text = translate.pages.admin
   const navigate = useNavigate()
 
@@ -19,9 +23,7 @@ const Header = ({ data, logout }) => {
           <div>
             <img src={data.image} alt='user' />
             <span>
-              {`${text.welcomeText.firstPart} ${data.firstName} ${data.lastName} ${text.welcomeText.secondPart}
-                 ${data.role} 
-                 ${text.welcomeText.thirdPart}`}
+              {`${text.welcomeText.firstPart} ${data.firstName} ${data.lastName} ${text.welcomeText.secondPart}`}
             </span>
           </div>
         ) : (
@@ -30,7 +32,15 @@ const Header = ({ data, logout }) => {
       </div>
       <button
         className={styles.formButton}
-        onClick={() => logout(navigate, setNotification)}
+        onClick={() =>
+          logout(
+            navigate,
+            setNotification,
+            setIsLoggedIn,
+            setUserEmail,
+            setUser,
+          )
+        }
       >
         {text.logout}
       </button>

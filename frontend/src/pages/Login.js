@@ -1,7 +1,8 @@
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./login.module.scss"
 
@@ -10,10 +11,23 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
+  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
   const text = translate.pages.login
   const navigate = useNavigate()
 
   useEffectScrollTop()
+
+  useEffect(() => {
+    /* if (isLoggedIn) {
+      console.log(isLoggedIn)
+      if (user.role === "admin") {
+        navigate("/users/current-admin")
+      }
+      if (user.role === "guest") {
+        navigate("/users/current-user")
+      }
+    }*/
+  })
 
   const login = async (e) => {
     e.preventDefault()
@@ -31,14 +45,15 @@ const Login = () => {
               { withCredentials: true },
             )
 
-            const userRole = responseUser.data.role
-
-            if (userRole === "admin") {
+            const userData = responseUser.data
+            console.log("LOGIN userdata ", userData)
+            setUserEmail(userData.email)
+            setIsLoggedIn(true)
+            setUser(userData)
+            if (userData.roleId === 2) {
               navigate("/users/current-admin")
-            } else if (userRole === "guest") {
+            } else if (userData.roleId === 5) {
               navigate("/users/current-user")
-            } else {
-              navigate("/login")
             }
           } catch (error) {
             setErrorMessage(`${text.errorMessage}`)

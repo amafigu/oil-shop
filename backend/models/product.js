@@ -30,6 +30,16 @@ const productModel = (sequelize, DataTypes) => {
     price: {
       type: DataTypes.DECIMAL(10, 2),
     },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
+    },
   });
 
   return Product;

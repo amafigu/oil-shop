@@ -269,7 +269,7 @@ const products = [
 ];
 
 async function seed() {
-  const categories = await db.productCategory.findAll();
+  const categories = await db.productCategories.findAll();
 
   const categoryIdMap = categories.reduce((map, category) => {
     map[category.name] = category.id;
@@ -288,11 +288,11 @@ async function seed() {
       delete productToInsert.category;
 
       // Check if product exists before creating to avoid duplication
-      const existingProduct = await db.product.findOne({
+      const existingProduct = await db.products.findOne({
         where: { name: productToInsert.name },
       });
       if (!existingProduct) {
-        await db.product.create(productToInsert);
+        await db.products.create(productToInsert);
       }
     }
 
