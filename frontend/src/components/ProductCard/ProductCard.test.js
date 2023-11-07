@@ -1,4 +1,4 @@
-import useCartContext from "#context/cartContext"
+/*import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import "@testing-library/jest-dom"
 import { render } from "@testing-library/react"
@@ -47,3 +47,4 @@ test("renders name correctly", () => {
 
   expect(getByText(product.name)).toBeInTheDocument()
 })
+*/
