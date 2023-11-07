@@ -1,6 +1,5 @@
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
 import { useEffectScrollTop } from "#utils/utils"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -23,7 +22,7 @@ const Shipping = () => {
 
   const { translate } = useLocaleContext()
   const { cart } = useCartContext()
-  const { isLoggedIn, userEmail } = useUserContext()
+
   const text = translate.pages.shipping
 
   useEffect(() => {

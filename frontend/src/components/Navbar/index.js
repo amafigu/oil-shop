@@ -36,7 +36,7 @@ const Navbar = ({ productCategories }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
 
   const { getAllProductsQuantity } = useCartContext()
-  const { isLoggedIn, userEmail, user, isLoading } = useUserContext()
+  const { isLoggedIn, userEmail, user } = useUserContext()
   const navigate = useNavigate()
   const location = useLocation()
   const params = new URLSearchParams(location.search)

@@ -11,8 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { translate } = useLocaleContext()
-  const { setIsLoggedIn, setUserEmail, setUser, isLoggedIn, user } =
-    useUserContext()
+  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
   const text = translate.pages.login
   const navigate = useNavigate()
 
