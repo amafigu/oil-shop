@@ -1,7 +1,7 @@
 import { totalCost, useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
-import { React, useEffect, useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { React, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./payment.module.scss"
 
@@ -12,64 +12,61 @@ const Payment = () => {
     totalAmount: "",
   })
 
-  const location = useLocation()
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
-  const shippingData = location.state?.shippingData
   const text = translate.pages.payment
-
-  useEffect(() => {
-    /* if (!location.state || !location.state.shippingData) {
-      navigate("/checkout/shipping")
-    }[location.state, navigate]*/
-  }, [])
 
   const submitPaymentMethod = async (e) => {
     e.preventDefault()
 
     try {
-      const userData = await axios.get(
+      const userDataResponse = await axios.get(
         `${process.env.REACT_APP_API_URL}/users/current-user`,
         { withCredentials: true },
       )
+      const userData = userDataResponse.data
+
+      console.log("userData 1", userData)
 
       if (userData) {
         const cart = JSON.parse(localStorage.getItem("yolo-cart"))
         console.log(cart)
         const cartTotalCost = totalCost(cart).toFixed(2)
         console.log(cartTotalCost)
-        setOrder({
-          userId: userData.response.id,
+        const newOrder = {
+          userId: userData.id,
           totalAmount: cartTotalCost,
-        })
+          paymentMethod: paymentMethod,
+        }
+        setOrder(newOrder)
+        console.log(newOrder)
+        const orderResponse = await axios.post(
+          `${process.env.REACT_APP_API_URL}/orders/create`,
+          newOrder,
+          { withCredentials: true },
+        )
 
-        try {
-          const newOrder = await axios.post(
-            `${process.env.REACT_APP_API_URL}/orders/create`,
-            order,
-            { withCredentials: true },
-          )
-          console.log(userData)
+        console.log("order ", order)
+        console.log("newOrder 1", newOrder)
+        console.log("orderResponse 1", orderResponse)
 
-          if ((newOrder.response.status = 200)) {
-            console.log(userData)
-            cart.map((item) => {
-              // HERE I SHOULD GET THE ORDER ID BUT I DID CREATE IT BEFORE SO I DO NOT KNOW
-              try {
-                axios.post(
-                  `${process.env.REACT_APP_API_URL}/cart-items`,
-                  { ...item }, // { ...item, orderId }
-                  {
-                    withCredentials: true,
-                  },
-                )
-              } catch (error) {
-                console.error(error)
-              }
-            })
+        if (orderResponse && orderResponse.status === 201) {
+          const orderId = orderResponse.data.id
+          for (const item of cart) {
+            try {
+              await axios.post(
+                `${process.env.REACT_APP_API_URL}/orders/cart-items`,
+                {
+                  quantity: item.quantity,
+                  productId: item.product.id,
+                  userOrderId: orderId,
+                },
+                { withCredentials: true },
+              )
+            } catch (error) {
+              console.error(error)
+            }
           }
-        } catch (error) {
-          console.error(error)
         }
       }
     } catch (error) {
@@ -78,9 +75,7 @@ const Payment = () => {
   }
 
   const backToShippingPage = () => {
-    navigate("/checkout/shipping", {
-      state: { shippingData },
-    })
+    navigate("/checkout/shipping")
   }
 
   const selectPaymentMethod = (e) => {
@@ -92,10 +87,7 @@ const Payment = () => {
   return (
     <div className={styles.paymentPageWrapper}>
       <div className={styles.paymentPage}>
-        <form
-          className={styles.paymentForm}
-          onSubmit={(e) => submitPaymentMethod(e)}
-        >
+        <form className={styles.paymentForm} onSubmit={submitPaymentMethod}>
           <div className={styles.titleContainer}>
             <span className={styles.title}>{text.title}</span>
           </div>
@@ -133,10 +125,7 @@ const Payment = () => {
             >
               {text.backButton}
             </button>
-            <button
-              className={styles.formButton}
-              onClick={() => submitPaymentMethod()}
-            >
+            <button className={styles.formButton} type='submit'>
               {text.paymentButton}
             </button>
           </div>

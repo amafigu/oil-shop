@@ -3,7 +3,7 @@ import db from '../models/index.js';
 
 const router = express.Router();
 
-router.get('/:userId', async (req, res) => {
+router.get('/all/:userId', async (req, res) => {
   try {
     const orders = await db.userOrders.findAll({
       where: (userId = req.params.userId),
@@ -28,7 +28,7 @@ router.post('/create', async (req, res) => {
         message: 'Can not create order',
       });
     } else {
-      const order = await db.products.create(req.body);
+      const order = await db.userOrders.create(req.body);
       res.status(201).json(order);
     }
   } catch (err) {
@@ -37,8 +37,14 @@ router.post('/create', async (req, res) => {
 });
 
 router.post('/cart-items', async (req, res) => {
+  console.log('CART ITEMS REQ BODY ', req.body);
   try {
+    const cartItem = await db.cartItems.create(req.body);
+    console.log('cartItem', cartItem);
+    res.status(201).json(cartItem);
   } catch (err) {
+    console.log('cartItem err ', cartItem);
+
     res.status(500).json({ message: err.message });
   }
 });

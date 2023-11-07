@@ -11,9 +11,11 @@ const userOrdersModel = (sequelize, DataTypes) => {
 
     totalAmount: {
       type: DataTypes.DECIMAL,
+      allowNull: false,
     },
     paymentMethod: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,

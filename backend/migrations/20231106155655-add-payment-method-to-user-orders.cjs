@@ -2,26 +2,13 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.changeColumn('user_orders', 'userId', {
-      type: Sequelize.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-      onDelete: 'SET NULL',
+    await queryInterface.addColumn('user_orders', 'paymentMethod', {
+      type: Sequelize.STRING,
+      allowNull: false,
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.changeColumn('user_orders', 'userId', {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-      onDelete: 'CASCADE',
-    });
+    await queryInterface.removeColumn('user_orders', 'paymentMethod');
   },
 };

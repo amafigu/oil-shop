@@ -1,6 +1,6 @@
 const cartItemsModel = (sequelize, DataTypes) => {
   const CartItems = sequelize.define('cart_items', {
-    orderId: {
+    userOrderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -15,6 +15,10 @@ const cartItemsModel = (sequelize, DataTypes) => {
         model: 'products',
         key: 'id',
       },
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
