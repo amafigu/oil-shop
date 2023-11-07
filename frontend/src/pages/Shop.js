@@ -17,6 +17,7 @@ const Shop = ({ productCategories }) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
+        console.log("products !", products)
         setProducts(response.data)
       })
       .catch((error) => {
@@ -54,14 +55,9 @@ const Shop = ({ productCategories }) => {
 
           <div className={style.sortedProducts}>
             {sortedProducts.map((product, index) => (
-              <ProductCard
-                key={index}
-                name={product.name}
-                image={product.image}
-                size={product.size}
-                price={product.price}
-                description={product.description}
-              />
+              <div key={index}>
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
         </div>

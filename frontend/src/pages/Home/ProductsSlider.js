@@ -45,6 +45,7 @@ const ProductSlider = () => {
     )
   }
 
+  console.log(products)
   const previousProduct = () => {
     const newIndex = currentProductIndex - 1
     setcurrentProductIndex(
@@ -60,14 +61,9 @@ const ProductSlider = () => {
       {products
         .slice(currentProductIndex, currentProductIndex + sliderQuantity)
         .map((product, index) => (
-          <ProductCard
-            key={index}
-            name={product.name}
-            image={product.image}
-            size={product.size}
-            price={product.price}
-            description={product.description}
-          />
+          <div key={index}>
+            <ProductCard product={product} />
+          </div>
         ))}
       <button onClick={nextProduct} className={styles.iconSlider}>
         <FontAwesomeIcon icon={faChevronRight} size='2xl' />
