@@ -109,8 +109,8 @@ export const getAdminData = async (setAdminData, setNotification, navigate) => {
     return response.data
   } catch (error) {
     setNotification(`${error.response.data.message}`)
-    setTimeout(() => navigate("/login"), 1900)
-    setTimeout(() => setNotification(null), 2000)
+    //setTimeout(() => navigate("/login"), 1900)
+    //setTimeout(() => setNotification(null), 2000)
 
     console.error("Error geting admin data", error)
   }
