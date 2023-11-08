@@ -1,11 +1,8 @@
-import NotificationCard from "#components/NotificationCard"
-import { getAdminData } from "#utils/utils"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ToggleSectionsButtons from "./ToggleSectionsButtons"
 
 import UsersCrud from "#components//UsersCrud"
 import ProductsCrud from "#components/ProductsCrud"
-import Header from "./Header"
 import styles from "./admin.module.scss"
 
 const Admin = () => {
@@ -13,26 +10,16 @@ const Admin = () => {
   const [refreshAllProductsCounter, setRefreshAllProductsCounter] = useState(0)
   const [showProductsSection, setShowProductsSection] = useState(false)
   const [showUsersSection, setShowUsersSection] = useState(false)
-  const [adminData, setAdminData] = useState({})
-  const [notification, setNotification] = useState(null)
+  //const [adminData] = useState({})
+  // const [notification, setNotification] = useState(null)
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
 
-  useEffect(() => {
-    const checkData = async () => {
-      const data = await getAdminData(setAdminData, setNotification)
-      /*if (data && data.role !== "admin") {
-        navigate("/login")
-      }*/
-    }
-    checkData()
-  }, [])
-
   return (
     <div className={styles.adminPageWrapper}>
-      {notification && <NotificationCard message={notification} />}
+      {/*notification && <NotificationCard message={notification} />*/}
       <div className={styles.adminPage}>
-        <Header data={adminData} />
+        {/* <Header data={adminData} />*/}
         <ToggleSectionsButtons
           showProductsSection={showProductsSection}
           setShowProductsSection={setShowProductsSection}

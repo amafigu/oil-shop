@@ -8,11 +8,11 @@ import styles from "./payment.module.scss"
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
-  const [order, setOrder] = useState({
+  /*  const [order, setOrder] = useState({
     userId: "",
     totalAmount: "",
   })
-
+*/
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
@@ -35,7 +35,7 @@ const Payment = () => {
           totalAmount: cartTotalCost,
           paymentMethod: paymentMethod,
         }
-        setOrder(newOrder)
+        // setOrder(newOrder)
         const orderResponse = await axios.post(
           `${process.env.REACT_APP_API_URL}/orders/create`,
           newOrder,
