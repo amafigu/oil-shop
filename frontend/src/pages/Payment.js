@@ -27,29 +27,20 @@ const Payment = () => {
       )
       const userData = userDataResponse.data
 
-      console.log("userData 1", userData)
-
       if (userData) {
         const cart = JSON.parse(localStorage.getItem("yolo-cart"))
-        console.log(cart)
         const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
-        console.log(cartTotalCost)
         const newOrder = {
           userId: userData.id,
           totalAmount: cartTotalCost,
           paymentMethod: paymentMethod,
         }
         setOrder(newOrder)
-        console.log(newOrder)
         const orderResponse = await axios.post(
           `${process.env.REACT_APP_API_URL}/orders/create`,
           newOrder,
           { withCredentials: true },
         )
-
-        console.log("order ", order)
-        console.log("newOrder 1", newOrder)
-        console.log("orderResponse 1", orderResponse)
 
         if (orderResponse && orderResponse.status === 201) {
           const orderId = orderResponse.data.id

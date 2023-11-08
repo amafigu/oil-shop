@@ -19,7 +19,6 @@ const Login = () => {
 
   useEffect(() => {
     /* if (isLoggedIn) {
-      console.log(isLoggedIn)
       if (user.role === "admin") {
         navigate("/users/current-admin")
       }

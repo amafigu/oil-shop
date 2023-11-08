@@ -22,7 +22,6 @@ const Admin = () => {
     const checkData = async () => {
       const data = await getAdminData(setAdminData, setNotification)
       /*if (data && data.role !== "admin") {
-        console.log("Admin - checkData() - data.role ", data.role)
         navigate("/login")
       }*/
     }

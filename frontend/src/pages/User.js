@@ -26,7 +26,6 @@ const User = () => {
           { withCredentials: true },
         )
         /*
-  console.log("User response.data ", response.data)
         if (response.data.role === "admin") {
           navigate("/users/current-admin")
         }
