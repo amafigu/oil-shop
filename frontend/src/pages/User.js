@@ -49,10 +49,6 @@ const User = () => {
     fetchUserData()
   }, [navigate])
 
-  console.log("USER PAGE userData", userData)
-  console.log("USER PAGE isLoggedIn ", isLoggedIn)
-  console.log("USER PAGE userEmail ", userEmail)
-
   const getAndShowShippingData = async () => {
     try {
       const response = await axios.get(

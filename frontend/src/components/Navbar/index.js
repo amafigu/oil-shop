@@ -64,10 +64,6 @@ const Navbar = ({ productCategories }) => {
     setMatchedProducts,
   )
 
-  console.log("UserEmail", userEmail)
-  console.log("user", user)
-
-  console.log("navbar isLoggedIn", isLoggedIn)
   useGetProducts(setProducts)
 
   return (

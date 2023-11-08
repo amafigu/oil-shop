@@ -27,7 +27,6 @@ const UpdateUserShippingDataForm = ({ userId, setUserShippingDataInUser }) => {
 
   useEffect(() => {
     async function getOriginalShippingData() {
-      console.log(userId)
       try {
         if (!userId) return
         const originalShippingData = await axios.get(

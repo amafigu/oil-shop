@@ -1,3 +1,4 @@
+import { SHIPPING_COST } from "#utils/constants"
 import { totalCost, useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { React, useState } from "react"
@@ -31,7 +32,7 @@ const Payment = () => {
       if (userData) {
         const cart = JSON.parse(localStorage.getItem("yolo-cart"))
         console.log(cart)
-        const cartTotalCost = totalCost(cart).toFixed(2)
+        const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
         console.log(cartTotalCost)
         const newOrder = {
           userId: userData.id,
