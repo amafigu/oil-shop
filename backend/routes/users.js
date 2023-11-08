@@ -39,6 +39,17 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
+router.get('/user/role/:roleId', async (req, res) => {
+  try {
+    const userRole = await db.userRoles.findOne({
+      where: { id: req.params.roleId },
+    });
+    return res.json(userRole);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/register-admin', async (req, res) => {
   try {
     const existingUser = await db.users.findOne({
@@ -100,7 +111,6 @@ router.put('/user/:email', decodeJWT, async (req, res) => {
 // End Admin routes
 
 router.get('/current-user', decodeJWT, async (req, res) => {
-  console.log(req.user);
   return res.json({
     id: req.user.id,
     email: req.user.email,
@@ -123,8 +133,6 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'Invalid email' });
     }
-
-    console.log('LOGIN USER ', user);
 
     const isPasswordValid = await comparePassword(
       req.body.password,
@@ -192,7 +200,6 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
 });
 
 router.get('/user/shipping-data/:id', async (req, res) => {
-  console.log(req.params.id);
   try {
     const shippingData = await db.usersShippingData.findOne({
       where: { userId: req.params.id },
@@ -213,9 +220,6 @@ router.put('/user/shipping-data/:id', async (req, res) => {
     const shippingData = await db.usersShippingData.findOne({
       where: { userId: req.params.id },
     });
-
-    console.log('router.put shippingData ', shippingData);
-    console.log('router.put req.body ', req.body);
 
     if (!shippingData) {
       await db.usersShippingData.create({ ...req.body, userId: req.params.id });

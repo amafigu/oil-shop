@@ -17,7 +17,6 @@ const Shop = ({ productCategories }) => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
-        console.log("products !", products)
         setProducts(response.data)
       })
       .catch((error) => {

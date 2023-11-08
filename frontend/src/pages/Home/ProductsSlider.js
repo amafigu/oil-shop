@@ -45,7 +45,6 @@ const ProductSlider = () => {
     )
   }
 
-  console.log(products)
   const previousProduct = () => {
     const newIndex = currentProductIndex - 1
     setcurrentProductIndex(

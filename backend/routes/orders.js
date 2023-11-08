@@ -8,8 +8,6 @@ router.get('/all/:userId', async (req, res) => {
     const orders = await db.userOrders.findAll({
       where: (userId = req.params.userId),
     });
-
-    console.log('ORDERS API GET ALL', orders);
     return res.json(orders);
   } catch (err) {
     return res.status(500).json({ message: 'No order for this id' });
@@ -37,14 +35,10 @@ router.post('/create', async (req, res) => {
 });
 
 router.post('/cart-items', async (req, res) => {
-  console.log('CART ITEMS REQ BODY ', req.body);
   try {
     const cartItem = await db.cartItems.create(req.body);
-    console.log('cartItem', cartItem);
     res.status(201).json(cartItem);
   } catch (err) {
-    console.log('cartItem err ', cartItem);
-
     res.status(500).json({ message: err.message });
   }
 });
