@@ -38,21 +38,27 @@ const Login = () => {
         { withCredentials: true },
       )
       if (response) {
-        const getUser = async () => {
+        const getLoggedInUser = async () => {
           try {
-            const responseUser = await axios.get(
+            const userResponse = await axios.get(
               `${process.env.REACT_APP_API_URL}/users/current-user`,
               { withCredentials: true },
             )
 
-            const userData = responseUser.data
-            console.log("LOGIN userdata ", userData)
+            const userData = userResponse.data
+
             setUserEmail(userData.email)
             setIsLoggedIn(true)
             setUser(userData)
-            if (userData.roleId === 2) {
+            const userRoleResponse = await axios.get(
+              `${process.env.REACT_APP_API_URL}/users/user/role/${userData.roleId}`,
+              { withCredentials: true },
+            )
+
+            const userRole = userRoleResponse.data.name
+            if (userRole === "admin") {
               navigate("/users/current-admin")
-            } else if (userData.roleId === 5) {
+            } else if (userRole === "customer") {
               navigate("/users/current-user")
             }
           } catch (error) {
@@ -63,7 +69,7 @@ const Login = () => {
           }
         }
 
-        getUser()
+        getLoggedInUser()
       }
     } catch (error) {
       setErrorMessage(`${text.errorMessage}`)

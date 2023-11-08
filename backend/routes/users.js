@@ -39,6 +39,17 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
+router.get('/user/role/:roleId', async (req, res) => {
+  try {
+    const userRole = await db.userRoles.findOne({
+      where: { id: req.params.roleId },
+    });
+    return res.json(userRole);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/register-admin', async (req, res) => {
   try {
     const existingUser = await db.users.findOne({
