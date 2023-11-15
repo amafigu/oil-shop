@@ -1,6 +1,6 @@
 export const SHIPPING_COST = 10
 
-export const TEASER_VIDEOS = [{ id: "orangeFlowers" }, { id: "violetFlowers" }]
+export const TEASER_VIDEOS = [{ id: "orangeFlowers" }]
 
 export const FORM_FIELDS_SHIPPING_DATA = [
   {
