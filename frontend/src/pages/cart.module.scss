@@ -3,7 +3,7 @@
 @import "#styles/helpers/mixins";
 
 .cartWrapper {
-  @include flex-horizontal-center;
+  @include flex-justify-center;
 
   margin-bottom: 80px;
 
@@ -165,7 +165,7 @@
       padding: 0;
       margin-left: 0;
 
-      @include flex-horizontal-center;
+      @include flex-justify-center;
     }
   }
 
@@ -226,6 +226,6 @@
     flex-grow: 1;
 
     @include action-button;
-    @include flex-horizontal-center;
+    @include flex-justify-center;
   }
 }

@@ -251,7 +251,7 @@
         }
 
         .languageDropdownContainer {
-          @include flex-horizontal-center;
+          @include flex-justify-center;
         }
       }
 
