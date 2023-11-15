@@ -7,6 +7,7 @@ export const UserProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState({})
+  const [userId, setUserId] = useState({})
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export const UserProvider = ({ children }) => {
         if (response.status === 200) {
           setUser(response.data)
           setUserEmail(response.data.email)
+          setUserId(response.data.id)
         }
       } catch (error) {
         setUserEmail("")
@@ -45,6 +47,7 @@ export const UserProvider = ({ children }) => {
         user,
         setUser,
         isLoading,
+        userId,
       }}
     >
       {children}
