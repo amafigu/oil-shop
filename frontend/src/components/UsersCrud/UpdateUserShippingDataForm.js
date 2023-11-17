@@ -27,7 +27,6 @@ const UpdateUserShippingDataForm = ({ userId, setUserShippingDataInUser }) => {
 
   useEffect(() => {
     async function getOriginalShippingData() {
-      console.log(userId)
       try {
         if (!userId) return
         const originalShippingData = await axios.get(
@@ -92,7 +91,7 @@ const UpdateUserShippingDataForm = ({ userId, setUserShippingDataInUser }) => {
   }
 
   return (
-    <div>
+    <div className={styles.updateUserShippingDataWrapper}>
       {notification && <NotificationCard message={notification} />}
       <ToggleButton
         show={showForm}
