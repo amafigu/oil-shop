@@ -1,3 +1,44 @@
 @use "#styles/theme" as theme;
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
+
+.getOrdersWrapper {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin-bottom: 1rem;
+    font-family: theme.$font-family-primary;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .ordersList {
+    width: 100%;
+    margin: theme.$margin-vertical-container-divider;
+
+    .order {
+      display: flex;
+    }
+
+    .orderDetails {
+      width: 24%;
+    }
+
+    .property {
+      font-size: theme.$font-size-generic-property;
+    }
+
+    .value {
+      font-size: theme.$font-size-generic-data;
+    }
+
+    .cartIttems {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 76%;
+      padding: 0 1rem;
+    }
+  }
+}
