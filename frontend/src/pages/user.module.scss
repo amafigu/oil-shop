@@ -21,6 +21,10 @@
       display: flex;
       justify-content: space-between;
     }
+
+    .componentContainer {
+      @include component-container;
+    }
   }
 
   .logoutButton {
