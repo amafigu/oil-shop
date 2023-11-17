@@ -232,3 +232,13 @@ export const uploadToS3 = async (file) => {
   }
   return newUrl
 }
+
+export const convertToReadableDate = (isoDate) => {
+  const date = new Date(isoDate)
+  return date.toLocaleDateString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  })
+}
