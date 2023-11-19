@@ -1,0 +1,45 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.userDataTable {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 10px;
+  margin-left: theme.$margin-divider-extra-large;
+  overflow-x: auto;
+  background-color: theme.$background-color-form-primary;
+  border-radius: theme.$border-radius-large;
+
+  @include media.mobile {
+    margin-left: theme.$margin-divider;
+  }
+
+  .tableRow {
+    display: flex;
+    width: 100%;
+
+    @include media.mobile {
+      flex-direction: column;
+    }
+  }
+
+  .tableCell {
+    @include media.mobile {
+      display: flex;
+    }
+  }
+
+  .tableHeaderCell,
+  .tableDataCell {
+    flex: 1;
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  .tableHeaderCell {
+    font-weight: theme.$font-weight-semibold;
+  }
+}
