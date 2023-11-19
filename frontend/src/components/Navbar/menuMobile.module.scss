@@ -35,6 +35,10 @@
     color: theme.$color-branding-primary;
   }
 
+  .userAndLogoutIconContainer {
+    text-align: left;
+  }
+
   .menuAndMailButtonContainer {
     width: 100%;
 
@@ -50,10 +54,10 @@
     .listItem {
       @include menu-list-item;
 
+      cursor: pointer;
+
       &:first-child {
         @include flex-justify-end;
-
-        cursor: pointer;
       }
     }
   }

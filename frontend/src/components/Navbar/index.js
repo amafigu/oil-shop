@@ -1,3 +1,4 @@
+import LogoutButton from "#components/LogoutButton"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import {
@@ -36,7 +37,8 @@ const Navbar = ({ productCategories }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
 
   const { getAllProductsQuantity } = useCartContext()
-  const { isLoggedIn, userEmail, user } = useUserContext()
+  const { isLoggedIn, setIsLoggedIn, setUserEmail, setUser, user } =
+    useUserContext()
   const navigate = useNavigate()
   const location = useLocation()
   const params = new URLSearchParams(location.search)
@@ -223,16 +225,26 @@ const Navbar = ({ productCategories }) => {
                   </div>
                 </div>
                 {isLoggedIn ? (
-                  <Link
-                    className={styles.linkChild}
-                    to={
-                      user && user.role === "admin"
-                        ? "/users/current-admin"
-                        : "/users/current-user"
-                    }
-                  >
-                    <FontAwesomeIcon icon={faUser} />
-                  </Link>
+                  <div className={styles.userAndLogoutIconContainer}>
+                    <Link
+                      className={styles.linkChild}
+                      to={
+                        user && user.role === "admin"
+                          ? "/users/current-admin"
+                          : "/users/current-user"
+                      }
+                    >
+                      <FontAwesomeIcon icon={faUser} />
+                    </Link>
+                    <div className={styles.logoutIconContainer}>
+                      <LogoutButton
+                        navigate={navigate}
+                        setIsLoggedIn={setIsLoggedIn}
+                        setUserEmail={setUserEmail}
+                        setUser={setUser}
+                      />
+                    </div>
+                  </div>
                 ) : (
                   <Link className={styles.linkChild} to='/login'>
                     <FontAwesomeIcon icon={faUser} />
