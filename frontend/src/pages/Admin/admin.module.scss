@@ -17,61 +17,8 @@
       width: 90%;
     }
 
-    .productsCrudContainer {
-      display: flex;
-    }
-
-    .usersCrudContainer {
-      display: flex;
-    }
-
-    .formsContainerWrapper {
-      display: flex;
-      width: 100%;
-    }
-
-    .formsContainer {
-      width: 100%;
-      border-radius: 4px;
-
-      @include flex-column-align-center;
-    }
-
-    .crudContainer {
-      width: 100%;
-      margin: 8px 0;
-      border-bottom: 1px grey solid;
-
-      @include flex-column;
-    }
-
-    .formButton {
-      @include action-button;
-
-      width: 260px;
-      height: 32px;
-      font-size: 1rem;
-      text-transform: none;
-
-      @include media.mobile {
-        width: 100%;
-        overflow: hidden;
-      }
-    }
-
-    .errorMessage {
-      @include error-message;
-    }
-
-    .sectionsToggleButtons {
-      display: flex;
-      gap: 48px;
-      margin-bottom: 24px;
-
-      @include media.mobile {
-        flex-direction: column;
-        width: 100%;
-      }
+    .componentContainer {
+      @include component-container;
     }
   }
 }
