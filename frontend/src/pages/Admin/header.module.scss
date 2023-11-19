@@ -30,24 +30,24 @@
     font-weight: 500;
 
     @include media.mobile {
-      margin: 16px;
       font-size: 16px;
     }
   }
 
   .dataContainer {
     display: flex;
+    align-items: center;
 
     .userDataTable {
       flex-grow: 1;
-      height: 80px;
-      margin-left: 16px;
+      height: 58px;
+      margin-left: theme.$margin-divider-extra-large;
       background-color: theme.$background-color-form-primary;
-      border-radius: 12px;
+      border-radius: theme.$border-radius-large;
 
       .tableHead,
       .tableBody {
-        margin: 0 16px;
+        height: 50%;
         text-align: left;
 
         td,

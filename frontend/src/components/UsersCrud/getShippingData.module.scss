@@ -5,6 +5,10 @@
 .getShippingDataWrapper {
   margin: 0;
 
+  .title {
+    @include component-title;
+  }
+
   .property {
     font-size: theme.$font-size-generic-property;
   }

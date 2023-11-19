@@ -7,10 +7,7 @@
   flex-direction: column;
 
   .title {
-    margin-bottom: 1rem;
-    font-family: theme.$font-family-primary;
-    font-size: 1.5rem;
-    font-weight: 600;
+    @include component-title;
   }
 
   .ordersList {
@@ -22,7 +19,12 @@
     }
 
     .orderDetails {
-      width: 24%;
+      width: 25%;
+
+      @include media.mobile {
+        width: 32%;
+        margin-left: 20px;
+      }
     }
 
     .property {
@@ -33,12 +35,16 @@
       font-size: theme.$font-size-generic-data;
     }
 
-    .cartIttems {
+    .cartItems {
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
-      width: 76%;
-      padding: 0 1rem;
+      width: 75%;
+
+      @include media.mobile {
+        width: 64%;
+        margin-left: 20px;
+      }
     }
   }
 }

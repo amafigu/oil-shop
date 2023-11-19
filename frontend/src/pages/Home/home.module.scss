@@ -66,9 +66,9 @@
 
   .title {
     margin-bottom: 20px;
-    font-family: theme.$font-family-primary;
-    font-size: 28px;
-    font-weight: bold;
+
+    @include title-text;
+
     text-align: center;
     text-transform: uppercase;
   }
@@ -107,11 +107,9 @@
 
   .subtitleText {
     width: 84%;
-    font-family: theme.$font-family-primary;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 128%;
     text-align: center;
+
+    @include subtitle-text;
 
     @include media.tablet-down {
       width: 100%;

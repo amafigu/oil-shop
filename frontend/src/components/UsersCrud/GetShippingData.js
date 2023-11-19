@@ -24,6 +24,7 @@ const GetShippingData = () => {
 
   return (
     <div className={styles.getShippingDataWrapper}>
+      <h2 className={styles.title}>Shipping Data</h2>
       <ToggleButton
         show={showShippingData}
         setToggle={getAndShowShippingData}

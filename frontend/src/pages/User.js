@@ -10,7 +10,7 @@ import styles from "./user.module.scss"
 
 const User = () => {
   const [userData, setUserData] = useState({})
-  const [userShippingData, setUserShippingData] = useState({})
+  const [, setUserShippingData] = useState({})
   const [notification, setNotification] = useState(null)
 
   const navigate = useNavigate()
