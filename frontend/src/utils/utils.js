@@ -8,6 +8,15 @@ export const titleCase = (str, separator) => {
     .join(" ")
 }
 
+export const camelCaseToTitleCase = (str) => {
+  // Insert space before each uppercase letter and trim any leading/trailing spaces
+  const spaced = str.replace(/([A-Z])/g, " $1").trim()
+
+  return spaced
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ")
+}
 export const totalCost = (cart) =>
   cart.reduce((total, item) => total + item.quantity * item.product.price, 0)
 
@@ -98,7 +107,7 @@ export const getProductByName = async (
   }
 }
 
-export const getAdminData = async (setAdminData, setNotification, navigate) => {
+export const getAdminData = async (setAdminData, setNotification) => {
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/current-user`,
@@ -108,8 +117,6 @@ export const getAdminData = async (setAdminData, setNotification, navigate) => {
     return response.data
   } catch (error) {
     setNotification(`${error.response.data.message}`)
-    setTimeout(() => navigate("/login"), 1900)
-    setTimeout(() => setNotification(null), 2000)
 
     console.error("Error geting admin data", error)
   }
@@ -119,7 +126,6 @@ export const getAdminData = async (setAdminData, setNotification, navigate) => {
 
 export const logout = async (
   navigate,
-  setNotification,
   setIsLoggedIn,
   setUserEmail,
   setUser,
@@ -132,13 +138,13 @@ export const logout = async (
         withCredentials: true,
       },
     )
+
+    console.log("logout response.data ")
     setIsLoggedIn(false)
     setUserEmail("")
     setUser({})
     setTimeout(() => navigate("/login"), 400)
   } catch (error) {
-    setNotification(`Error to logout: ${error.response.data.message}`)
-    setTimeout(() => setNotification(null), 2000)
     console.error(error)
   }
 }
@@ -230,4 +236,14 @@ export const uploadToS3 = async (file) => {
     return null
   }
   return newUrl
+}
+
+export const convertToReadableDate = (isoDate) => {
+  const date = new Date(isoDate)
+  return date.toLocaleDateString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  })
 }

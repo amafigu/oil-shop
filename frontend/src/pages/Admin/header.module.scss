@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.titleAndLogoutButtonContainer {
+.headerContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -12,29 +12,50 @@
     flex-direction: column;
   }
 
-  .adminFormTitel {
-    margin: 24px;
+  .avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+
+    @include media.mobile {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .header {
+    width: 100%;
     font-family: theme.$font-family-primary;
     font-size: 24px;
     font-weight: 500;
 
     @include media.mobile {
-      margin: 16px;
       font-size: 16px;
     }
   }
 
-  .formButton {
-    @include action-button;
+  .dataContainer {
+    display: flex;
+    align-items: center;
 
-    width: 260px;
-    height: 32px;
-    font-size: 1rem;
-    text-transform: none;
+    .userDataTable {
+      flex-grow: 1;
+      height: 58px;
+      margin-left: theme.$margin-divider-extra-large;
+      background-color: theme.$background-color-form-primary;
+      border-radius: theme.$border-radius-large;
 
-    @include media.mobile {
-      width: 100%;
-      overflow: hidden;
+      .tableHead,
+      .tableBody {
+        height: 50%;
+        text-align: left;
+
+        td,
+        th {
+          width: 33.33%;
+          padding: 0 24px;
+        }
+      }
     }
   }
 }

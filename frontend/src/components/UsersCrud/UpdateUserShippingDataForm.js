@@ -91,7 +91,7 @@ const UpdateUserShippingDataForm = ({ userId, setUserShippingDataInUser }) => {
   }
 
   return (
-    <div>
+    <div className={styles.updateUserShippingDataWrapper}>
       {notification && <NotificationCard message={notification} />}
       <ToggleButton
         show={showForm}

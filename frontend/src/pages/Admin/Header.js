@@ -1,49 +1,26 @@
-import NotificationCard from "#components/NotificationCard"
-import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
-import { logout } from "#utils/utils"
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-
+import TableRow from "#components/TableRow"
 import styles from "./header.module.scss"
-const Header = ({ data }) => {
-  const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
 
-  const { setUserEmail, setIsLoggedIn, setUser } = useUserContext()
-  const text = translate.pages.admin
-  const navigate = useNavigate()
+const Header = ({ data }) => {
+  const tableData = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    role: data.role,
+  }
 
   return (
-    <div className={styles.titleAndLogoutButtonContainer}>
-      {notification && <NotificationCard message={notification} />}
-
-      <div className={styles.adminFormTitel}>
+    <div className={styles.headerContainer}>
+      <div className={styles.header}>
         {data ? (
-          <div>
-            <img src={data.image} alt='user' />
-            <span>
-              {`${text.welcomeText.firstPart} ${data.firstName} ${data.lastName} ${text.welcomeText.secondPart}`}
-            </span>
+          <div className={styles.dataContainer}>
+            <img className={styles.avatar} src={data.image} alt='user' />
+            <TableRow data={tableData} />
           </div>
         ) : (
-          `${text.loadingData}`
+          `loading Data`
         )}
       </div>
-      <button
-        className={styles.formButton}
-        onClick={() =>
-          logout(
-            navigate,
-            setNotification,
-            setIsLoggedIn,
-            setUserEmail,
-            setUser,
-          )
-        }
-      >
-        {text.logout}
-      </button>
     </div>
   )
 }

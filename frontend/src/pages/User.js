@@ -1,19 +1,17 @@
 import NotificationCard from "#components/NotificationCard"
-import useUserContext from "#context/userContext"
-import { logout } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import GetOrders from "../components/UsersCrud/GetOrders"
+import GetShippingData from "../components/UsersCrud/GetShippingData"
 import UpdateUserShippingDataForm from "../components/UsersCrud/UpdateUserShippingDataForm"
+import Header from "./Admin/Header"
 import styles from "./user.module.scss"
 
 const User = () => {
   const [userData, setUserData] = useState({})
-  const [userShippingData, setUserShippingData] = useState({})
-  const [showShippingData, setShowShippingData] = useState(false)
+  const [, setUserShippingData] = useState({})
   const [notification, setNotification] = useState(null)
-
-  const { setUserEmail, setIsLoggedIn, setUser } = useUserContext()
 
   const navigate = useNavigate()
 
@@ -24,22 +22,12 @@ const User = () => {
           `${process.env.REACT_APP_API_URL}/users/current-user`,
           { withCredentials: true },
         )
-        /*
-        if (response.data.role === "admin") {
-          navigate("/users/current-admin")
-        }
 
-        if (response.data.role === "guest") {
-          navigate("/users/current-user")
-        } else {
-          navigate("/login")
-        }
-      */
         setUserData(response.data)
       } catch (error) {
         setNotification(`${error.response.data.message}`)
         setTimeout(() => setNotification(null), 2000)
-        setTimeout(() => navigate("/login"), 2500)
+
         console.error("Error fetching user data", error)
       }
     }
@@ -47,88 +35,27 @@ const User = () => {
     fetchUserData()
   }, [navigate])
 
-  const getAndShowShippingData = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userData.id}`,
-        { withCredentials: true },
-      )
-      setUserShippingData(response.data)
-      setShowShippingData(true)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   return (
     <div className={styles.userWrapper}>
       {notification && <NotificationCard message={notification} />}
 
       <div className={styles.userPage}>
-        <div className={styles.titleAndLogoutButtonContainer}>
-          <div className={styles.adminFormTitel}>
-            {`Hello ${userData.firstName} ${userData.lastName}`}
-          </div>
-          <button
-            className={styles.logoutButton}
-            onClick={() =>
-              logout(
-                navigate,
-                setNotification,
-                setIsLoggedIn,
-                setUserEmail,
-                setUser,
-              )
-            }
-          >
-            LOGOUT
-          </button>
-        </div>
-        <div className={styles.userData}>
-          {userData ? (
-            <div className={styles.userDataContainer}>
-              <img className={styles.avatar} src={userData.image} alt='user' />
-              <div className={styles.userData}>
-                <div>Email: {userData.email}</div>
-                <div>First Name: {userData.firstName}</div>
-                <div>Last Name: {userData.lastName}</div>
-              </div>
-            </div>
-          ) : (
-            `loading data ...`
-          )}
-        </div>
-        {showShippingData ? (
-          <button
-            onClick={() => setShowShippingData(false)}
-            className={styles.formButton}
-          >
-            HIDE SHIPPING DATA{" "}
-          </button>
-        ) : (
-          <button
-            onClick={() => getAndShowShippingData()}
-            className={styles.formButton}
-          >
-            SHOW SHIPPING DATA{" "}
-          </button>
-        )}
+        <Header data={userData} />
 
-        {showShippingData && (
-          <div className={styles.addressData}>
-            <div>Street: {userShippingData.street}</div>
-            <div>Number: {userShippingData.number}</div>
-            <div>Details: {userShippingData.details}</div>
-            <div>Postal Code: {userShippingData.postal_code}</div>
-            <div>City: {userShippingData.city}</div>
-            <div>State: {userShippingData.state}</div>
-            <div>Country: {userShippingData.country}</div>
-          </div>
-        )}
-        <UpdateUserShippingDataForm
-          userId={userData.id}
-          setUserShippingDataInUser={setUserShippingData}
-        />
+        <div className={styles.componentContainer}>
+          <GetShippingData userData={userData} />
+        </div>
+
+        <div className={styles.componentContainer}>
+          <UpdateUserShippingDataForm
+            userId={userData.id}
+            setUserShippingDataInUser={setUserShippingData}
+          />
+        </div>
+
+        <div className={styles.componentContainer}>
+          <GetOrders />
+        </div>
       </div>
     </div>
   )

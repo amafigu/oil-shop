@@ -2,54 +2,56 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.form {
-  @include flex-column;
+.updateUserShippingDataWrapper {
+  .form {
+    @include flex-column;
 
-  margin: 28px;
+    margin: 28px;
 
-  @include media.tablet-down {
-    margin: 18px;
+    @include media.tablet-down {
+      margin: 18px;
+    }
   }
-}
 
-.formField {
-  width: 100%;
-  height: 32px;
-  margin-bottom: 12px;
-  font-family: theme.$font-family-primary;
-  font-size: medium;
-}
+  .formField {
+    width: 100%;
+    height: 32px;
+    margin-bottom: 12px;
+    font-family: theme.$font-family-primary;
+    font-size: medium;
+  }
 
-.formFieldSelect {
-  width: 100%;
-  height: 38px;
-  margin-bottom: 12px;
-  font-family: theme.$font-family-primary;
-  font-size: medium;
-}
+  .formFieldSelect {
+    width: 100%;
+    height: 38px;
+    margin-bottom: 12px;
+    font-family: theme.$font-family-primary;
+    font-size: medium;
+  }
 
-.label {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 4px;
-}
+  .label {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 4px;
+  }
 
-.containerTitle {
-  margin-bottom: 24px;
-  font-size: 24px;
-}
+  .containerTitle {
+    margin-bottom: 24px;
+    font-size: 24px;
+  }
 
-.formButton {
-  @include action-button;
+  .formButton {
+    @include action-button;
 
-  width: 160px;
-  height: 36px;
-  margin-top: 24px;
-  font-size: 1rem;
-  text-transform: none;
+    width: 160px;
+    height: 36px;
+    margin-top: 24px;
+    font-size: 1rem;
+    text-transform: none;
 
-  @include media.mobile {
-    width: 120px;
-    overflow: hidden;
+    @include media.mobile {
+      width: 120px;
+      overflow: hidden;
+    }
   }
 }

@@ -1,0 +1,23 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.getShippingDataWrapper {
+  margin: 0;
+
+  .title {
+    @include component-title;
+  }
+
+  .property {
+    font-size: theme.$font-size-generic-property;
+  }
+
+  .value {
+    font-size: theme.$font-size-generic-data;
+  }
+
+  .shippingData {
+    margin-top: theme.$margin-divider;
+  }
+}

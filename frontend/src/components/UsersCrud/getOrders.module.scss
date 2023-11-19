@@ -1,0 +1,50 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.getOrdersWrapper {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    @include component-title;
+  }
+
+  .ordersList {
+    width: 100%;
+    margin: theme.$margin-vertical-container-divider;
+
+    .order {
+      display: flex;
+    }
+
+    .orderDetails {
+      width: 25%;
+
+      @include media.mobile {
+        width: 32%;
+        margin-left: 20px;
+      }
+    }
+
+    .property {
+      font-size: theme.$font-size-generic-property;
+    }
+
+    .value {
+      font-size: theme.$font-size-generic-data;
+    }
+
+    .cartItems {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 75%;
+
+      @include media.mobile {
+        width: 64%;
+        margin-left: 20px;
+      }
+    }
+  }
+}

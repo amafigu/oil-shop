@@ -1,4 +1,7 @@
+import LogoutButton from "#components/LogoutButton"
 import { CartContext } from "#context/cartContext"
+import useUserContext from "#context/userContext"
+import { Link, useNavigate } from "react-router-dom"
 
 import {
   faCartShopping,
@@ -8,9 +11,9 @@ import {
   faUser,
   faX,
 } from "@fortawesome/free-solid-svg-icons"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React, useContext, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import Sidebar from "../Sidebar"
 import LanguageDropdown from "./LanguageDropdown"
 import styles from "./menuMobile.module.scss"
@@ -23,6 +26,8 @@ const MenuMobile = ({
 }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const navigate = useNavigate()
+  const { isLoggedIn, setIsLoggedIn, setUserEmail, setUser, user } =
+    useUserContext()
 
   const navigateAndCloseMenu = (route) => {
     setMenuOpen(false)
@@ -66,14 +71,42 @@ const MenuMobile = ({
               </span>
             </div>
           </li>
-          <li
+          {isLoggedIn ? (
+            <div className={styles.userAndLogoutIconContainer}>
+              <div className={styles.listItem}>
+                <LogoutButton
+                  navigate={navigate}
+                  setIsLoggedIn={setIsLoggedIn}
+                  setUserEmail={setUserEmail}
+                  setUser={setUser}
+                />
+              </div>
+              <div className={styles.listItem}>
+                <Link
+                  className={styles.linkChild}
+                  to={
+                    user && user.role === "admin"
+                      ? "/users/current-admin"
+                      : "/users/current-user"
+                  }
+                >
+                  <FontAwesomeIcon icon={faUser} />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <Link className={styles.linkChild} to='/login'>
+              <FontAwesomeIcon icon={faUser} />
+            </Link>
+          )}
+          {/* <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu("/login")}
           >
             <span className={styles.linkContent}>
               <FontAwesomeIcon icon={faUser} />
             </span>
-          </li>
+          </li> */}
           <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu("/about")}

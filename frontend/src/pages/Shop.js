@@ -14,15 +14,19 @@ const Shop = ({ productCategories }) => {
   const queryCategory = params.get("category")
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/products`)
-      .then((response) => {
-        setProducts(response.data)
-      })
-      .catch((error) => {
+    const getProducts = async () => {
+      try {
+        const productsResponse = await axios.get(
+          `${process.env.REACT_APP_API_URL}/products`,
+        )
+        console.log("RESPONSE ", productsResponse)
+        setProducts(productsResponse.data)
+      } catch (error) {
         console.error("Error fetching data: ", error)
-      })
-  }, [products])
+      }
+    }
+    getProducts()
+  }, [])
 
   useEffect(() => {
     if (queryCategory) {

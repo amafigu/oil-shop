@@ -61,6 +61,30 @@ router.get('/:productName', async (req, res) => {
   }
 });
 
+router.get('/:productId', async (req, res) => {
+  try {
+    const product = await db.products.findOne({
+      where: {
+        name: req.params.productId,
+      },
+      include: [
+        {
+          model: db.productCategories,
+          as: 'category',
+        },
+      ],
+    });
+    if (product === null) {
+      return res
+        .status(404)
+        .json({ message: 'Product with this id not found' });
+    }
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.delete(
   '/:productName',
   validateParams(ProductNameParamSchema),
