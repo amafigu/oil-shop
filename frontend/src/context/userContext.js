@@ -35,8 +35,6 @@ export const UserProvider = ({ children }) => {
     verifyToken()
   }, [isLoggedIn])
 
-  console.log(user)
-
   return (
     <UserContext.Provider
       value={{
