@@ -1,12 +1,14 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import useLocaleContext from "#context/localeContext"
-import { titleCase } from "#utils/utils"
+import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+import { setDefaultImageByError, titleCase } from "#utils/utils"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./productCard.module.scss"
 
 const ProductCard = ({ product }) => {
   const { translate } = useLocaleContext()
+
   return (
     <div className={styles.productCardWrapper}>
       <Link to={`/products/${product.name}`}>
@@ -15,6 +17,7 @@ const ProductCard = ({ product }) => {
             className={styles.productCardImage}
             src={product.image}
             alt={product.name}
+            onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
           />
           <div className={styles.productCardName}>
             {titleCase(product.name, "_")}

@@ -2,7 +2,11 @@ import AddProductToCartButton from "#components/AddProductToCartButton"
 import ProductQuantity from "#components/ProductQuantity"
 import useLocaleContext from "#context/localeContext"
 import { setDefaultImageByError, titleCase } from "#utils/utils"
+
+import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+
 import axios from "axios"
+
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import styles from "./productDetails.module.scss"
@@ -49,7 +53,9 @@ const ProductDetails = () => {
                 className={styles.image}
                 src={image}
                 alt={name}
-                onError={(e) => setDefaultImageByError(e)}
+                onError={(e) =>
+                  setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                }
               />
             </div>
             <div className={styles.productInfo}>
