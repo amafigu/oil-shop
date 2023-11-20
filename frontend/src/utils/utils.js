@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect } from "react"
+import { DEFAULT_PRODUCT_IMAGE } from "./constants"
 
 export const titleCase = (str, separator) => {
   return str
@@ -9,7 +10,7 @@ export const titleCase = (str, separator) => {
 }
 
 export const camelCaseToTitleCase = (str) => {
-  // Insert space before each uppercase letter and trim any leading/trailing spaces
+  // Insert space before each uppercase letter and trim leading/trailing spaces
   const spaced = str.replace(/([A-Z])/g, " $1").trim()
 
   return spaced
@@ -246,4 +247,8 @@ export const convertToReadableDate = (isoDate) => {
     second: "2-digit",
     hour12: true,
   })
+}
+
+export const setDefaultImageByError = (e) => {
+  e.target.src = DEFAULT_PRODUCT_IMAGE
 }

@@ -1,7 +1,7 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import ProductQuantity from "#components/ProductQuantity"
 import useLocaleContext from "#context/localeContext"
-import { titleCase } from "#utils/utils"
+import { setDefaultImageByError, titleCase } from "#utils/utils"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
@@ -45,7 +45,12 @@ const ProductDetails = () => {
         <div className={styles.detailsAndButtonContainerWrapper}>
           <div className={styles.detailsAndButtonContainer}>
             <div className={styles.imageContainer}>
-              <img className={styles.image} src={image} alt={name} />
+              <img
+                className={styles.image}
+                src={image}
+                alt={name}
+                onError={(e) => setDefaultImageByError(e)}
+              />
             </div>
             <div className={styles.productInfo}>
               <div className={styles.rightContainerDetails}>

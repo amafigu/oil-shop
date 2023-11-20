@@ -3,9 +3,7 @@ import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import {
   getInputChangeAndOpenList,
-  navigateToProductAndCloseDropdown,
   searchAndNavigateToProduct,
-  titleCase,
   useGetProducts,
   useHideListOnOuterClick,
 } from "#utils/utils"
@@ -23,6 +21,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
+import ProductsDropdown from "./ProductsDropdown"
 import SubNavbar from "./SubNavbar"
 import styles from "./navbar.module.scss"
 
@@ -128,37 +127,14 @@ const Navbar = ({ productCategories }) => {
                           className={styles.searchDropdown}
                           ref={searchProductListDropdownRef}
                         >
-                          {matchedProducts.map((product) => (
-                            <div
-                              className={styles.dropdownListItem}
-                              key={product.name}
-                              onClick={() =>
-                                navigateToProductAndCloseDropdown(
-                                  product.name,
-                                  navigate,
-                                  setProductDropdownVisible,
-                                  setMatchedProducts,
-                                  setSearchText,
-                                )
-                              }
-                            >
-                              <div className={styles.dropdownListItemImage}>
-                                <img
-                                  src={
-                                    process.env.PUBLIC_URL +
-                                    "/assets/" +
-                                    product.image
-                                  }
-                                  alt={product.name}
-                                  className={styles.listItemImage}
-                                />
-                              </div>
-
-                              <div className={styles.dropdownListItemName}>
-                                {titleCase(product.name, "_")}
-                              </div>
-                            </div>
-                          ))}
+                          <ProductsDropdown
+                            setProductDropdownVisible={
+                              setProductDropdownVisible
+                            }
+                            setSearchText={setSearchText}
+                            setMatchedProducts={setMatchedProducts}
+                            matchedProducts={matchedProducts}
+                          />
                         </div>
                       </>
                     )}
