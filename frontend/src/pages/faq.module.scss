@@ -20,7 +20,7 @@
   .question {
     margin-bottom: 18px;
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: theme.$font-weight-regular;
     color: grey;
     text-align: center;
   }
@@ -28,7 +28,7 @@
   .answer {
     margin-bottom: 46px;
     font-size: 1.125rem;
-    font-weight: 100;
+    font-weight: theme.$font-weight-light;
     color: grey;
     text-align: center;
   }

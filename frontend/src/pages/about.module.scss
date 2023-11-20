@@ -15,8 +15,8 @@
   }
 
   .text {
-    font-size: 24px;
-    font-weight: 200;
+    font-size: theme.$font-size-subtitle;
+    font-weight: theme.$font-weight-light;
     color: grey;
     text-align: center;
   }

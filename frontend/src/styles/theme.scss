@@ -1,14 +1,17 @@
 // BORDER - SHADOW
-$background-color-form-primary: #f4f4f4;
 $box-shadow-primary: 0 3px 1px -2px rgb(0 0 0 / 20%),
   0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 $box-shadow-light: 0 1px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
   0 1px 2px 0 rgb(0 0 0 / 12%);
 $border-regular-component: solid 1px #757575;
+$border-radius-small: 4px;
 $border-radius-regular: 8px;
 $border-radius-large: 12px;
+$border-radius-circle: 50%;
 
 // COLOR
+$background-color-primary: #fff;
+$background-color-form-primary: #f4f4f4;
 $color-branding-primary: #b5cfaa;
 
 // FONT
@@ -19,18 +22,19 @@ $font-size-title: 2rem;
 $font-size-title-mobile: 1.5rem;
 $font-size-subtitle: 1.5rem;
 $font-size-subtitle-mobile: 1.25rem;
-$font-size-generic-property: 1.25rem;
-$font-size-generic-data: 1rem;
+$font-size-large: 1.75rem;
+$font-size-semi-large: 1.5rem;
+$font-size-medium: 1.25rem;
+$font-size-small: 1rem;
 $font-size-button: 1.25rem;
 $font-size-button-mobile: 1rem;
 $font-size-form-field: 1rem;
-$font-weight-thin: 100;
 $font-weight-light: 200;
 $font-weight-regular: 400;
 $font-weight-semibold: 600;
 $font-weight-bold: 800;
 
-// SPACING
+// SPACING - MARGIN OR PADDING
 $height-form-field: 2rem;
 $margin-divider: 1.5rem;
 $margin-divider-extra-large: 4.5rem;
@@ -41,6 +45,7 @@ $margin-form-container-mobile: 1.125rem;
 $margin-vertical-container-divider: 1.5rem 0;
 $min-height-page-primary: 65vh;
 $page-width-primary: 80%;
+$padding-divider-small: 0.75rem;
 $z-index: (
   sidebar-menu: 200,
   modal-product-search-dropdow: 300,

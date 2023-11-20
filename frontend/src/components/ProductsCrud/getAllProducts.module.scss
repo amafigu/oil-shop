@@ -9,11 +9,11 @@
     display: flex;
     gap: 48px;
     align-items: center;
-    margin: 24px 0;
+    margin: theme.$margin-divider 0;
 
     @include media.mobile {
       justify-content: space-between;
-      margin: 24px 0;
+      margin: theme.$margin-divider 0;
     }
   }
 

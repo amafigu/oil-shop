@@ -3,6 +3,6 @@
 @import "#styles/helpers/mixins";
 
 .errorMessage {
-  font-weight: 500;
+  font-weight: theme.$font-weight-semibold;
   color: red;
 }

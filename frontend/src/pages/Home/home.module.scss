@@ -78,7 +78,7 @@
     align-items: center;
     height: 80px;
     font-family: theme.$font-family-primary;
-    font-size: 18px;
+    font-size: theme.$font-size-medium;
     font-weight: bold;
     text-align: center;
   }
@@ -86,7 +86,7 @@
   .columnsTitle {
     align-items: center;
     font-family: theme.$font-family-primary;
-    font-size: 18px;
+    font-size: theme.$font-size-medium;
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
@@ -101,7 +101,7 @@
     overflow: hidden;
     font-family: theme.$font-family-primary;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: theme.$font-weight-semibold;
     text-align: center;
   }
 

@@ -53,7 +53,7 @@
     height: 32px;
     padding-left: 16px;
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: theme.$font-size-medium;
     background-color: white;
     border: solid 1px grey;
     border-radius: 8px;
@@ -79,7 +79,7 @@
       height: 18px;
       content: "";
       border: 1px solid grey;
-      border-radius: 50%;
+      border-radius: theme.$border-radius-circle;
     }
 
     &::after {
@@ -90,7 +90,7 @@
       height: 10px;
       content: "";
       background-color: theme.$color-branding-primary;
-      border-radius: 50%;
+      border-radius: theme.$border-radius-circle;
       opacity: 0;
       transition: opacity 0.3s, transform 0.3s;
       transform: scale(0);
@@ -106,7 +106,7 @@
 
   .title {
     margin-right: 8px;
-    font-size: 24px;
+    font-size: theme.$font-size-subtitle;
   }
 
   .separator {
@@ -129,14 +129,14 @@
   }
 
   .requirePaymentText {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: theme.$font-size-subtitle;
+    font-weight: theme.$font-weight-semibold;
     text-transform: uppercase;
   }
 
   .insertPaymentMethod {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: theme.$font-size-medium;
+    font-weight: theme.$font-weight-semibold;
   }
 
   .titleContainer {

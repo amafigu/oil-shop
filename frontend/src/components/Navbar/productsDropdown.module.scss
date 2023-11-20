@@ -26,7 +26,7 @@
   transition: background-color 0.3s ease;
 
   .dropdownListItemName {
-    font-weight: 400;
+    font-weight: theme.$font-weight-regular;
     color: theme.$font-color-primary;
   }
 
