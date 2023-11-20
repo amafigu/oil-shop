@@ -1,3 +1,4 @@
+import useUserContext from "#context/userContext"
 import { SHIPPING_COST } from "#utils/constants"
 import { totalCost, useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
@@ -5,22 +6,20 @@ import { React, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./payment.module.scss"
-
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
-  /*  const [order, setOrder] = useState({
-    userId: "",
-    totalAmount: "",
-  })
-*/
+
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
-
+  const { isLoggedIn, isLoading } = useUserContext()
   const submitPaymentMethod = async (e) => {
     e.preventDefault()
 
     try {
+      if (isLoggedIn) {
+      }
+
       const userDataResponse = await axios.get(
         `${process.env.REACT_APP_API_URL}/users/current-user`,
         { withCredentials: true },
@@ -59,6 +58,7 @@ const Payment = () => {
               console.error(error)
             }
           }
+          navigate("/checkout/order-summary")
         }
       }
     } catch (error) {

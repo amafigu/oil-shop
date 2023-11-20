@@ -1,5 +1,6 @@
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { useEffectScrollTop } from "#utils/utils"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -15,21 +16,28 @@ const Shipping = () => {
     state: "",
     city: "",
     address: "",
-    postalCode: "",
+    postal_code: "",
   })
 
   const navigate = useNavigate()
 
   const { translate } = useLocaleContext()
   const { cart } = useCartContext()
+  const { user, isLoggedIn, isLoading } = useUserContext()
 
   const text = translate.pages.shipping
 
   useEffect(() => {
-    if (cart.length <= 0) {
-      navigate("/cart")
+    if (!isLoading) {
+      console.log("isLoggedIn", isLoggedIn)
+      console.log("User", user)
+      if (cart.length <= 0) {
+        navigate("/cart")
+      } else if (isLoggedIn) {
+        navigate("/checkout/payment")
+      }
     }
-  }, [cart, navigate])
+  }, [cart, navigate, isLoggedIn, isLoading, user])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -38,7 +46,7 @@ const Shipping = () => {
   const handleSubmit = (e) => {
     if (cart.length > 0) {
       e.preventDefault()
-      //localStorage.getSetItem("yolo-shippment")
+      updateUserShippingData(e)
       navigate("/checkout/payment", {
         state: { shippingData: formData },
       })
@@ -48,138 +56,79 @@ const Shipping = () => {
     }
   }
 
+  const updateUserShippingData = async (e) => {
+    e.preventDefault()
+
+    try {
+      setUpdatedShippingData((prevData) => ({
+        ...prevData,
+        ...oldShippingData,
+      }))
+      if (
+        JSON.stringify(oldShippingData) === JSON.stringify(updatedShippingData)
+      ) {
+        setNotification("No changes made.")
+        setTimeout(() => setNotification(null), 1300)
+        return
+      }
+
+      await axios.put(
+        // `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+        //  updatedShippingData,
+        { withCredentials: true },
+      )
+      setOldShippingData(updatedShippingData)
+      setUserShippingDataInUser((prevData) => ({
+        ...prevData,
+        ...nonEmptyUpdates,
+      }))
+      // setUpdatedShippingData(initialShippingData)
+      setNotification("update shipping data")
+      setTimeout(() => setNotification(null), 1300)
+    } catch (error) {
+      console.error("Can not edit shipping data ", error)
+    }
+  }
+
   useEffectScrollTop()
 
   return (
     <div className={styles.shippingPageWrapper}>
       <div className={styles.shippingPage}>
         <div className={styles.emailRegistrationText}>
-          {text.title}{" "}
+          {"Please"}{" "}
           <span className={styles.linkLogin}>
-            <Link to='/login'>{text.titleLink}</Link>
+            <Link to='/sign-up'>sign up</Link>
           </span>{" "}
           {text.titleSubSentence}
         </div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <div className={styles.emailFieldContainer}>
-            <div className={styles.containerTitle}>{text.yourEmail}</div>
-            <div className={styles.emailFormTitel}></div>
-            <label className={styles.label} htmlFor='email'>
-              {text.inputLabels.email}
-            </label>
 
-            <input
-              className={styles.formField}
-              name='email'
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.customerInfo}>
             <div className={styles.infoColumn}>
               <div className={styles.containerTitle}>{text.yourInfo}</div>
-              <div className={styles.infoRow}>
-                <div className={styles.infoRowCellLeft}>
-                  <label className={styles.label} htmlFor='firstName'>
-                    {text.inputLabels.firstName}
-                  </label>
-                  <input
-                    className={styles.formField}
-                    name='firstName'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className={styles.infoRowCellRight}>
-                  <label className={styles.label} htmlFor='lastName'>
-                    {text.inputLabels.lastName}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    name='lastName'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className={styles.infoRow}>
-                <div className={styles.infoRowCellLeft}>
-                  <label className={styles.label} htmlFor='phone'>
-                    {text.inputLabels.phone}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    name='phone'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className={styles.infoRowCellRight}>
-                  <label className={styles.label} htmlFor='country'>
-                    {text.inputLabels.country}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    name='country'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className={styles.infoRow}>
-                <div className={styles.infoRowCellLeft}>
-                  <label className={styles.label} htmlFor='state'>
-                    {text.inputLabels.state}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    name='state'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className={styles.infoRowCellRight}>
-                  <label className={styles.label} htmlFor='city'>
-                    {text.inputLabels.city}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    name='city'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className={styles.infoRow}>
-                <div className={styles.infoRowCellLeft}>
-                  <label className={styles.label} htmlFor='postalCode'>
-                    {text.inputLabels.postalCode}
-                  </label>
-                  <input
-                    className={styles.formField}
-                    name='postalCode'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className={styles.infoRowCellRight}>
-                  <label className={styles.label} htmlFor='address'>
-                    {text.inputLabels.address}
-                  </label>
-
-                  <input
-                    className={styles.formField}
-                    name='address'
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
+              {FORM_FIELDS_GUEST_USER_DATA.map((field) => (
+                <FormInput
+                  classCss={field.classCss}
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  onChangeListener={(e) => listenInputChange(e)}
+                  placeholder={field.placeholder}
+                  value={updatedShippingData[field.name]}
+                />
+              ))}
+              {FORM_FIELDS_SHIPPING_DATA.map((field) => (
+                <FormInput
+                  classCss={field.classCss}
+                  key={field.name}
+                  label={field.label}
+                  name={field.name}
+                  onChangeListener={(e) => listenInputChange(e)}
+                  placeholder={field.placeholder}
+                  value={updatedShippingData[field.name]}
+                />
+              ))}
             </div>
           </div>
           <div className={styles.actionButtons}>
