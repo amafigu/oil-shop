@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useEffect } from "react"
-import { DEFAULT_PRODUCT_IMAGE } from "./constants"
 
 export const titleCase = (str, separator) => {
   return str
@@ -249,6 +248,6 @@ export const convertToReadableDate = (isoDate) => {
   })
 }
 
-export const setDefaultImageByError = (e) => {
-  e.target.src = DEFAULT_PRODUCT_IMAGE
+export const setDefaultImageByError = (event, image) => {
+  event.target.src = image
 }
