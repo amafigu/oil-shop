@@ -21,7 +21,6 @@ const Admin = () => {
     checkData()
   }, [])
 
-  console.log("adminData", adminData)
   return (
     <div className={styles.adminPageWrapper}>
       {notification && <NotificationCard message={notification} />}
