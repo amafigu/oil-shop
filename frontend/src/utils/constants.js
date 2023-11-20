@@ -5,6 +5,30 @@ export const TEASER_VIDEOS = [{ id: "orangeFlowers" }]
 export const DEFAULT_PRODUCT_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default.png"
 
+export const FORM_FIELDS_GUEST_USER_DATA = [
+  {
+    name: "firstName",
+    placeholder: "first name",
+    label: "First Name",
+    type: "text",
+    classCss: "formField",
+  },
+  {
+    name: "lastName",
+    placeholder: "lastName",
+    label: "Last Name",
+    type: "text",
+    classCss: "formField",
+  },
+  {
+    name: "email",
+    placeholder: "Email",
+    label: "Email",
+    type: "email",
+    classCss: "formField",
+  },
+]
+
 export const FORM_FIELDS_SHIPPING_DATA = [
   {
     name: "street",
