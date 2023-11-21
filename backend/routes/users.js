@@ -37,6 +37,18 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
+router.get('/guest/:id', async (req, res) => {
+  try {
+    const user = await db.users.findOne({ where: { id: req.params.id } });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.get('/user/role/:roleId', async (req, res) => {
   try {
     const userRole = await db.userRoles.findOne({
@@ -281,8 +293,6 @@ router.get('/user/shipping-data/:id', async (req, res) => {
 });
 
 router.post('/user/shipping-data/:id', async (req, res) => {
-  console.log('REQ.BODY1', req);
-
   try {
     const shippingData = await db.usersShippingData.findOne({
       where: { userId: req.params.id },
