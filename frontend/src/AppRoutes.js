@@ -2,7 +2,6 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import styles from "./appRoutes.module.scss"
-import { CartProvider } from "./context/cartContext"
 
 import Footer from "#components/Footer"
 import Navbar from "#components/Navbar"
@@ -41,34 +40,32 @@ const AppRoutes = () => {
 
   return (
     <div className={styles.wrapper}>
-      <CartProvider>
-        {!routesWithoutNavbar.includes(currentPath) && (
-          <Navbar productCategories={productCategories} />
-        )}
+      {!routesWithoutNavbar.includes(currentPath) && (
+        <Navbar productCategories={productCategories} />
+      )}
 
-        <Routes>
-          <Route path='/about' element={<About />} />
-          <Route
-            path='/shop'
-            element={<Shop productCategories={productCategories} />}
-          />
+      <Routes>
+        <Route path='/about' element={<About />} />
+        <Route
+          path='/shop'
+          element={<Shop productCategories={productCategories} />}
+        />
 
-          <Route path='/' element={<Home />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/faq' element={<Faq />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/sign-up' element={<SignUp />} />
-          <Route path='/users/current-user' element={<User />} />
-          <Route path='/users/current-admin' element={<Admin />} />
-          <Route path='/products/:productName' element={<ProductDetails />} />
-          <Route path='/checkout/shipping' element={<Shipping />} />
-          <Route path='/checkout/payment' element={<Payment />} />
-          <Route path='/checkout/summary' element={<OrderSummary />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/faq' element={<Faq />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/users/current-user' element={<User />} />
+        <Route path='/users/current-admin' element={<Admin />} />
+        <Route path='/products/:productName' element={<ProductDetails />} />
+        <Route path='/checkout/shipping' element={<Shipping />} />
+        <Route path='/checkout/payment' element={<Payment />} />
+        <Route path='/checkout/order-summary' element={<OrderSummary />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
 
-        <Footer />
-      </CartProvider>
+      <Footer />
     </div>
   )
 }

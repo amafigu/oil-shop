@@ -63,7 +63,6 @@ const UpdateProductForm = () => {
     if (e.target.type === "number" || e.target.name === "productCategoryId") {
       valueToCheck = Number(e.target.value)
     }
-    console.log(productNewData)
     setProductNewData({ ...productNewData, [e.target.name]: valueToCheck })
   }
 

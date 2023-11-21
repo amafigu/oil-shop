@@ -31,7 +31,7 @@
 
 .logo {
   width: 216px;
-  border-radius: 50%;
+  border-radius: theme.$border-radius-circle;
 }
 
 .form {
@@ -54,13 +54,13 @@
 
 .containerTitle {
   margin-bottom: 24px;
-  font-size: 24px;
+  font-size: theme.$font-size-subtitle;
 }
 
 .divider {
   width: 100%;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: theme.$font-size-medium;
+  font-weight: theme.$font-weight-regular;
 
   @include flex-all-center;
 }
@@ -104,7 +104,7 @@
 }
 
 .errorMessage {
-  font-weight: 500;
+  font-weight: theme.$font-weight-semibold;
   color: red;
 }
 

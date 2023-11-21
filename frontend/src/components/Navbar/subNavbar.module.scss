@@ -3,24 +3,23 @@
 @import "#styles/helpers/mixins";
 
 .subNavbarWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 40px;
-  font-family: "GFS Neohellenic", sans-serif;
-  color: grey;
-  background-color: white;
+  font-family: theme.$font-family-primary;
+  color: theme.$font-color-primary;
+  background-color: theme.$background-color-primary;
+
+  @include flex-all-center;
 
   .subNavbar {
-    display: flex;
-    justify-content: space-around;
     width: 440px;
+
+    @include flex-justify-around;
   }
 
   .navLink {
     width: 120px;
-    font-size: 18px;
-    color: grey;
+    font-size: theme.$font-size-medium;
+    color: theme.$font-color-primary;
     text-align: center;
     text-decoration: none;
   }

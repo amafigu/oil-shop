@@ -26,8 +26,11 @@
   }
 
   .tableCell {
+    flex-grow: 1;
+
     @include media.mobile {
       display: flex;
+      flex-direction: column;
     }
   }
 
@@ -36,7 +39,6 @@
     flex: 1;
     padding: 0.5rem;
     text-align: left;
-    border-bottom: 1px solid #eee;
   }
 
   .tableHeaderCell {

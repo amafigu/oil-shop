@@ -19,11 +19,11 @@
 
   .pageTitle {
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: theme.$font-size-subtitle;
   }
 
   .summaryTitle {
-    font-size: 24px;
+    font-size: theme.$font-size-subtitle;
   }
 
   .infoColumnContainer {
@@ -56,7 +56,7 @@
     justify-content: center;
     width: 100%;
     margin-bottom: 24px;
-    font-size: 24px;
+    font-size: theme.$font-size-subtitle;
   }
 
   .clientInfoContainer {

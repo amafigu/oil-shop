@@ -17,8 +17,8 @@
   .startSection {
     display: flex;
     justify-content: center;
-    font-size: 22px;
-    font-weight: 400;
+    font-size: theme.$font-size-semi-large;
+    font-weight: theme.$font-weight-regular;
     text-transform: capitalize;
   }
 
@@ -27,8 +27,8 @@
     flex-direction: row;
     justify-content: center;
     width: 90%;
-    font-size: 26px;
-    font-weight: 400;
+    font-size: theme.$font-size-large;
+    font-weight: theme.$font-weight-regular;
   }
 
   .startSectionText::before,
@@ -134,8 +134,8 @@
     align-items: center;
     margin-bottom: 12px;
     font-family: "GFS Neohellenic", sans-serif;
-    font-size: 24px;
-    font-weight: 400;
+    font-size: theme.$font-size-subtitle;
+    font-weight: theme.$font-weight-regular;
     text-align: center;
   }
 
@@ -183,8 +183,8 @@
 
     @include flex-all-center;
 
-    font-size: 18px;
-    font-weight: 300;
+    font-size: theme.$font-size-medium;
+    font-weight: theme.$font-weight-regular;
   }
 
   .iconsSectionItemIcons {
@@ -257,7 +257,7 @@
     justify-content: center;
     width: 90%;
     font-size: 28px;
-    font-weight: 400;
+    font-weight: theme.$font-weight-regular;
   }
 
   .underSectionText::before,

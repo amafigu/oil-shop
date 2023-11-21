@@ -9,7 +9,7 @@ export const titleCase = (str, separator) => {
 }
 
 export const camelCaseToTitleCase = (str) => {
-  // Insert space before each uppercase letter and trim any leading/trailing spaces
+  // Insert space before each uppercase letter and trim leading/trailing spaces
   const spaced = str.replace(/([A-Z])/g, " $1").trim()
 
   return spaced
@@ -139,7 +139,6 @@ export const logout = async (
       },
     )
 
-    console.log("logout response.data ")
     setIsLoggedIn(false)
     setUserEmail("")
     setUser({})
@@ -246,4 +245,8 @@ export const convertToReadableDate = (isoDate) => {
     second: "2-digit",
     hour12: true,
   })
+}
+
+export const setDefaultImageByError = (event, image) => {
+  event.target.src = image
 }

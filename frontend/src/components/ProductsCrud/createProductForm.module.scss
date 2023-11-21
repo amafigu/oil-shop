@@ -71,7 +71,7 @@
 
 .containerTitle {
   margin-bottom: 24px;
-  font-size: 24px;
+  font-size: theme.$font-size-subtitle;
 }
 
 .formButton {
@@ -89,7 +89,7 @@
 .actionButtonContainer {
   display: flex;
   align-content: center;
-  margin: 24px 0;
+  margin: theme.$margin-divider 0;
 
   @include media.mobile {
     width: 100%;

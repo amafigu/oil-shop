@@ -44,20 +44,20 @@
   .avatar {
     width: 160px;
     height: 160px;
-    margin-right: 24px;
-    border-radius: 50%;
+    margin-right: theme.$margin-divider;
+    border-radius: theme.$border-radius-circle;
   }
 
   .userDataContainer {
     display: flex;
-    margin: 24px 0;
+    margin: theme.$margin-divider 0;
 
     .userData {
-      font-size: 24px;
+      font-size: theme.$font-size-subtitle;
     }
   }
 
   .addressData {
-    font-size: theme.$font-size-generic-data;
+    font-size: theme.$font-size-small;
   }
 }

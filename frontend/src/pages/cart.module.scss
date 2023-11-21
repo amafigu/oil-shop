@@ -172,7 +172,7 @@
   .orderSummaryText {
     margin-bottom: 20px;
     font-size: 20px;
-    font-weight: 800;
+    font-weight: theme.$font-weight-bold;
     text-transform: uppercase;
 
     @include media.desktop-down {
@@ -193,7 +193,7 @@
   }
 
   .orderTotalText {
-    font-weight: 500;
+    font-weight: theme.$font-weight-semibold;
   }
 
   .quantityButtonsContainer {

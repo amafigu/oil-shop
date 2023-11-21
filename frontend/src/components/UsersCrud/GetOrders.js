@@ -12,8 +12,6 @@ const GetOrders = () => {
 
   const { userId } = useUserContext()
 
-  console.log("userId", userId)
-
   const getOrders = async () => {
     try {
       const response = await axios.get(

@@ -16,8 +16,6 @@ import {
 dotenv.config();
 const router = express.Router();
 
-// admin routes
-
 router.get('/', async (req, res) => {
   try {
     const users = await db.users.findAll();
@@ -39,38 +37,24 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
+router.get('/guest/:id', async (req, res) => {
+  try {
+    const user = await db.users.findOne({ where: { id: req.params.id } });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.get('/user/role/:roleId', async (req, res) => {
   try {
     const userRole = await db.userRoles.findOne({
       where: { id: req.params.roleId },
     });
     return res.json(userRole);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
-router.post('/register-admin', async (req, res) => {
-  try {
-    const existingUser = await db.users.findOne({
-      where: { email: req.body.email },
-    });
-
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email already in use' });
-    }
-
-    const hashedPassword = await hashPassword(req.body.password);
-
-    const newAdmin = await db.users.create({
-      ...req.body,
-      password: hashedPassword,
-      role: 'admin',
-    });
-
-    return res
-      .status(201)
-      .json({ message: 'Admin user created successfully', user: newAdmin });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -183,17 +167,110 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
 
+    const userRole = await db.userRoles.findOne({
+      where: { name: 'customer' },
+    });
+
     const hashedPassword = await hashPassword(req.body.password);
 
     const newUser = await db.users.create({
       ...req.body,
       password: hashedPassword,
-      role: 'guest',
+      roleId: userRole.id,
     });
 
     return res
       .status(201)
       .json({ message: 'Guest user created successfully', user: newUser });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.post(
+  '/create-guest',
+  validateBody(CreateUserSchema),
+  async (req, res) => {
+    try {
+      const existingUser = await db.users.findOne({
+        where: { email: req.body.email },
+      });
+
+      if (existingUser) {
+        return res.status(400).json({ message: 'Email already in use' });
+      }
+
+      const hashedPassword = await hashPassword(req.body.password);
+
+      const newUser = await db.users.create({
+        ...req.body,
+        password: hashedPassword,
+      });
+
+      return res.status(201).json({
+        message: 'Guest user created successfully',
+        guestUser: newUser,
+      });
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
+    }
+  }
+);
+
+router.post('/register-admin', async (req, res) => {
+  try {
+    const existingUser = await db.users.findOne({
+      where: { email: req.body.email },
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already in use' });
+    }
+    const userRole = await db.userRoles.findOne({
+      where: { name: 'admin' },
+    });
+
+    const hashedPassword = await hashPassword(req.body.password);
+
+    const newAdmin = await db.users.create({
+      ...req.body,
+      password: hashedPassword,
+      roleId: userRole.id,
+    });
+
+    return res
+      .status(201)
+      .json({ message: 'Admin user created successfully', user: newAdmin });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.post('/register-product-manager', async (req, res) => {
+  try {
+    const existingUser = await db.users.findOne({
+      where: { email: req.body.email },
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already in use' });
+    }
+    const userRole = await db.userRoles.findOne({
+      where: { name: 'product_manager' },
+    });
+
+    const hashedPassword = await hashPassword(req.body.password);
+
+    const newAdmin = await db.users.create({
+      ...req.body,
+      password: hashedPassword,
+      roleId: userRole.id,
+    });
+
+    return res.status(201).json({
+      message: 'Product Manager user created successfully',
+      user: newAdmin,
+    });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -210,6 +287,27 @@ router.get('/user/shipping-data/:id', async (req, res) => {
         .json({ message: 'user has no shipping data saved' });
     }
     return res.json(shippingData);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.post('/user/shipping-data/:id', async (req, res) => {
+  try {
+    const shippingData = await db.usersShippingData.findOne({
+      where: { userId: req.params.id },
+    });
+    if (!shippingData) {
+      const newShippingData = await db.usersShippingData.create({
+        ...req.body,
+        userId: req.params.id,
+      });
+
+      return res.status(201).json({
+        message: 'Shipping data created successfully',
+        data: newShippingData,
+      });
+    }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

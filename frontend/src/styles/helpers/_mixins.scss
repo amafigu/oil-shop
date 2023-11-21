@@ -70,7 +70,7 @@
   margin: 0;
   font-family: theme.$font-family-primary;
   font-size: 1.125rem;
-  font-weight: 500;
+  font-weight: theme.$font-weight-semibold;
   color: theme.$font-color-light;
   text-align: center;
 }
@@ -84,7 +84,7 @@
   overflow: hidden;
   font-family: theme.$font-family-primary;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: theme.$font-weight-semibold;
   color: theme.$font-color-primary;
   text-align: center;
   text-overflow: ellipsis;
@@ -177,7 +177,7 @@
 }
 
 @mixin error-message {
-  font-weight: 500;
+  font-weight: theme.$font-weight-semibold;
   color: red;
 }
 
