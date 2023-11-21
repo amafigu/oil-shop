@@ -34,7 +34,7 @@ router.get('/cart-items/:orderId', async (req, res) => {
       include: [
         {
           model: db.products,
-          as: 'product', // This alias must match the alias used in the association definition
+          as: 'product',
           include: [
             {
               model: db.productCategories,
@@ -46,7 +46,7 @@ router.get('/cart-items/:orderId', async (req, res) => {
     });
     return res.json(cartItems);
   } catch (err) {
-    console.error(err); // It's a good practice to log the actual error
+    console.error(err);
     return res
       .status(500)
       .json({ message: 'Error fetching cart items for this order' });

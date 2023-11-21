@@ -1,21 +1,23 @@
+import FormInput from "#components/FormInput"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { useEffectScrollTop } from "#utils/utils"
+import {
+  FORM_FIELDS_GUEST_USER_DATA,
+  FORM_FIELDS_SHIPPING_DATA,
+} from "#utils/constants"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./shipping.module.scss"
 
 const Shipping = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-    country: "",
-    state: "",
+    street: "",
+    number: "",
+    details: "",
     city: "",
-    address: "",
+    state: "",
+    country: "",
     postal_code: "",
   })
 
@@ -39,59 +41,24 @@ const Shipping = () => {
     }
   }, [cart, navigate, isLoggedIn, isLoading, user])
 
-  const handleChange = (e) => {
+  const listenFormDataChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const submitGuestUserWithOrders = async (e) => {
     if (cart.length > 0) {
       e.preventDefault()
-      updateUserShippingData(e)
-      navigate("/checkout/payment", {
-        state: { shippingData: formData },
-      })
-    } else {
-      e.preventDefault()
-      navigate("/cart")
-    }
-  }
-
-  const updateUserShippingData = async (e) => {
-    e.preventDefault()
-
-    try {
-      setUpdatedShippingData((prevData) => ({
-        ...prevData,
-        ...oldShippingData,
-      }))
-      if (
-        JSON.stringify(oldShippingData) === JSON.stringify(updatedShippingData)
-      ) {
-        setNotification("No changes made.")
-        setTimeout(() => setNotification(null), 1300)
-        return
+      if (cart.length > 0) {
+        if (!isLoggedIn) {
+          navigate("/checkout/payment", {
+            state: { formData: formData },
+          })
+        }
+      } else {
+        navigate("/cart")
       }
-
-      await axios.put(
-        // `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
-        //  updatedShippingData,
-        { withCredentials: true },
-      )
-      setOldShippingData(updatedShippingData)
-      setUserShippingDataInUser((prevData) => ({
-        ...prevData,
-        ...nonEmptyUpdates,
-      }))
-      // setUpdatedShippingData(initialShippingData)
-      setNotification("update shipping data")
-      setTimeout(() => setNotification(null), 1300)
-    } catch (error) {
-      console.error("Can not edit shipping data ", error)
     }
   }
-
-  useEffectScrollTop()
-
   return (
     <div className={styles.shippingPageWrapper}>
       <div className={styles.shippingPage}>
@@ -103,7 +70,7 @@ const Shipping = () => {
           {text.titleSubSentence}
         </div>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={submitGuestUserWithOrders}>
           <div className={styles.customerInfo}>
             <div className={styles.infoColumn}>
               <div className={styles.containerTitle}>{text.yourInfo}</div>
@@ -113,9 +80,9 @@ const Shipping = () => {
                   key={field.name}
                   label={field.label}
                   name={field.name}
-                  onChangeListener={(e) => listenInputChange(e)}
+                  onChangeListener={(e) => listenFormDataChange(e)}
                   placeholder={field.placeholder}
-                  value={updatedShippingData[field.name]}
+                  value={setFormData[field.name]}
                 />
               ))}
               {FORM_FIELDS_SHIPPING_DATA.map((field) => (
@@ -124,9 +91,9 @@ const Shipping = () => {
                   key={field.name}
                   label={field.label}
                   name={field.name}
-                  onChangeListener={(e) => listenInputChange(e)}
+                  onChangeListener={(e) => listenFormDataChange(e)}
                   placeholder={field.placeholder}
-                  value={updatedShippingData[field.name]}
+                  value={setFormData[field.name]}
                 />
               ))}
             </div>

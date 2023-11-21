@@ -1,64 +1,140 @@
+import NotificationCard from "#components/NotificationCard"
 import useUserContext from "#context/userContext"
 import { SHIPPING_COST } from "#utils/constants"
 import { totalCost, useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { React, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 import styles from "./payment.module.scss"
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
+  const [notification, setNotification] = useState(null)
 
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
-  const { isLoggedIn, isLoading } = useUserContext()
+  const { isLoggedIn } = useUserContext()
+  const location = useLocation()
+
+  const formData = location.state.formData
   const submitPaymentMethod = async (e) => {
     e.preventDefault()
-
+    console.log(formData)
     try {
-      if (isLoggedIn) {
-      }
+      if (!isLoggedIn) {
+        try {
+          const newGuestUser = await axios.post(
+            `${process.env.REACT_APP_API_URL}/users/create-guest`,
+            {
+              email: formData.email,
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              password: "Guest!!!",
+              role: "guest",
+              roleId: 4,
+            },
+          )
 
-      const userDataResponse = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/current-user`,
-        { withCredentials: true },
-      )
-      const userData = userDataResponse.data
+          const newGuestUserData = newGuestUser.data.guestUser
+          console.log("NEW GIEST", newGuestUserData)
 
-      if (userData) {
-        const cart = JSON.parse(localStorage.getItem("yolo-cart"))
-        const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
-        const newOrder = {
-          userId: userData.id,
-          totalAmount: cartTotalCost,
-          paymentMethod: paymentMethod,
-        }
-        // setOrder(newOrder)
-        const orderResponse = await axios.post(
-          `${process.env.REACT_APP_API_URL}/orders/create`,
-          newOrder,
-          { withCredentials: true },
-        )
+          const shippingDataObject = {
+            street: formData.street,
+            number: formData.number,
+            details: formData.details,
+            postal_code: formData.postal_code,
+            city: formData.city,
+            state: formData.state,
+            country: formData.country,
+          }
 
-        if (orderResponse && orderResponse.status === 201) {
-          const orderId = orderResponse.data.id
-          for (const item of cart) {
-            try {
-              await axios.post(
-                `${process.env.REACT_APP_API_URL}/orders/cart-items`,
-                {
-                  quantity: item.quantity,
-                  productId: item.product.id,
-                  userOrderId: orderId,
-                },
-                { withCredentials: true },
-              )
-            } catch (error) {
-              console.error(error)
+          const shippingData = await axios.post(
+            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${newGuestUserData.id}`,
+            shippingDataObject,
+          )
+
+          console.log("SHIPPING", shippingData)
+
+          if (newGuestUserData) {
+            console.log("IF newGuestUserData ", newGuestUserData)
+            const cart = JSON.parse(localStorage.getItem("yolo-cart"))
+            const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
+            const newOrder = {
+              userId: newGuestUserData.id,
+              totalAmount: cartTotalCost,
+              paymentMethod: paymentMethod,
+            }
+            // setOrder(newOrder)
+            const orderResponse = await axios.post(
+              `${process.env.REACT_APP_API_URL}/orders/create`,
+              newOrder,
+            )
+
+            if (orderResponse && orderResponse.status === 201) {
+              const orderId = orderResponse.data.id
+              for (const item of cart) {
+                try {
+                  await axios.post(
+                    `${process.env.REACT_APP_API_URL}/orders/cart-items`,
+                    {
+                      quantity: item.quantity,
+                      productId: item.product.id,
+                      userOrderId: orderId,
+                    },
+                  )
+                } catch (error) {
+                  setNotification(`Error by creating new guest user`)
+                  setTimeout(() => setNotification(null), 3000)
+                  console.error(error)
+                }
+              }
+              navigate("/checkout/order-summary")
             }
           }
-          navigate("/checkout/order-summary")
+        } catch (error) {
+          console.error(error)
+        }
+      } else {
+        const userDataResponse = await axios.get(
+          `${process.env.REACT_APP_API_URL}/users/current-user`,
+          { withCredentials: true },
+        )
+        const userData = userDataResponse.data
+        if (userData) {
+          const cart = JSON.parse(localStorage.getItem("yolo-cart"))
+          const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
+          const newOrder = {
+            userId: userData.id,
+            totalAmount: cartTotalCost,
+            paymentMethod: paymentMethod,
+          }
+
+          const orderResponse = await axios.post(
+            `${process.env.REACT_APP_API_URL}/orders/create`,
+            newOrder,
+            { withCredentials: true },
+          )
+
+          if (orderResponse && orderResponse.status === 201) {
+            const orderId = orderResponse.data.id
+            for (const item of cart) {
+              try {
+                await axios.post(
+                  `${process.env.REACT_APP_API_URL}/orders/cart-items`,
+                  {
+                    quantity: item.quantity,
+                    productId: item.product.id,
+                    userOrderId: orderId,
+                  },
+                  { withCredentials: true },
+                )
+              } catch (error) {
+                console.error(error)
+              }
+            }
+            navigate("/checkout/order-summary")
+          }
         }
       }
     } catch (error) {
@@ -78,6 +154,7 @@ const Payment = () => {
 
   return (
     <div className={styles.paymentPageWrapper}>
+      {notification && <NotificationCard message={notification} />}
       <div className={styles.paymentPage}>
         <form className={styles.paymentForm} onSubmit={submitPaymentMethod}>
           <div className={styles.titleContainer}>

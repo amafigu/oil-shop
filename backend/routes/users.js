@@ -16,8 +16,6 @@ import {
 dotenv.config();
 const router = express.Router();
 
-// admin routes
-
 router.get('/', async (req, res) => {
   try {
     const users = await db.users.findAll();
@@ -190,21 +188,17 @@ router.post(
         return res.status(400).json({ message: 'Email already in use' });
       }
 
-      const hashedPassword = await hashPassword('guest');
-
-      const userRole = await db.userRoles.findOne({
-        where: { name: 'guest' },
-      });
+      const hashedPassword = await hashPassword(req.body.password);
 
       const newUser = await db.users.create({
         ...req.body,
         password: hashedPassword,
-        roleId: userRole.id,
       });
 
-      return res
-        .status(201)
-        .json({ message: 'Guest user created successfully', user: newUser });
+      return res.status(201).json({
+        message: 'Guest user created successfully',
+        guestUser: newUser,
+      });
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }
@@ -261,12 +255,10 @@ router.post('/register-product-manager', async (req, res) => {
       roleId: userRole.id,
     });
 
-    return res
-      .status(201)
-      .json({
-        message: 'Product Manager user created successfully',
-        user: newAdmin,
-      });
+    return res.status(201).json({
+      message: 'Product Manager user created successfully',
+      user: newAdmin,
+    });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -283,6 +275,29 @@ router.get('/user/shipping-data/:id', async (req, res) => {
         .json({ message: 'user has no shipping data saved' });
     }
     return res.json(shippingData);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.post('/user/shipping-data/:id', async (req, res) => {
+  console.log('REQ.BODY1', req);
+
+  try {
+    const shippingData = await db.usersShippingData.findOne({
+      where: { userId: req.params.id },
+    });
+    if (!shippingData) {
+      const newShippingData = await db.usersShippingData.create({
+        ...req.body,
+        userId: req.params.id,
+      });
+
+      return res.status(201).json({
+        message: 'Shipping data created successfully',
+        data: newShippingData,
+      });
+    }
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
