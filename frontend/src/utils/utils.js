@@ -139,7 +139,6 @@ export const logout = async (
       },
     )
 
-    console.log("logout response.data ")
     setIsLoggedIn(false)
     setUserEmail("")
     setUser({})

@@ -20,8 +20,6 @@ export const UserProvider = ({ children }) => {
         )
 
         if (response.status === 200) {
-          console.log("response.data", response.data)
-
           setUser(response.data)
           setUserEmail(response.data.email)
           setUserId(response.data.id)
@@ -36,7 +34,6 @@ export const UserProvider = ({ children }) => {
     verifyToken()
   }, [isLoggedIn])
 
-  console.log("user isLoggedIn", isLoggedIn)
   return (
     <UserContext.Provider
       value={{
@@ -46,6 +43,7 @@ export const UserProvider = ({ children }) => {
         isLoggedIn,
         user,
         setUser,
+        setUserId,
         isLoading,
         userId,
       }}

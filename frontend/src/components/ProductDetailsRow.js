@@ -2,7 +2,6 @@ import { titleCase } from "#utils/utils"
 import styles from "./productDetailsRow.module.scss"
 
 const ProductDetailsRow = ({ product, quantity }) => {
-  console.log("product", product)
   return (
     <div className={styles.productDetailsRowWrapper}>
       <div className={styles.itemContainer}>

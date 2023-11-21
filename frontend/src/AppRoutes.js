@@ -61,7 +61,7 @@ const AppRoutes = () => {
         <Route path='/products/:productName' element={<ProductDetails />} />
         <Route path='/checkout/shipping' element={<Shipping />} />
         <Route path='/checkout/payment' element={<Payment />} />
-        <Route path='/checkout/summary' element={<OrderSummary />} />
+        <Route path='/checkout/order-summary' element={<OrderSummary />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
 
