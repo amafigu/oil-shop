@@ -31,8 +31,6 @@ const Shipping = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      console.log("isLoggedIn", isLoggedIn)
-      console.log("User", user)
       if (cart.length <= 0) {
         navigate("/cart")
       } else if (isLoggedIn) {

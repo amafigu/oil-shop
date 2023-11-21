@@ -1,117 +1,179 @@
 import { CartContext } from "#context/cartContext"
-import { SHIPPING_COST } from "#utils/constants"
-import { cartTotalSum, titleCase } from "#utils/utils"
-import React, { useContext, useEffect } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { titleCase } from "#utils/utils"
+import axios from "axios"
+import React, { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { useEffectScrollTop } from "#utils/utils"
 import styles from "./orderSummary.module.scss"
 
 const OrderSummary = () => {
-  const location = useLocation()
+  const [shippingData, setShippingData] = useState({})
+  const [userData, setUserData] = useState({})
+  const [orderAndCartItems, setOrderAndCartItems] = useState({})
   const { cart } = useContext(CartContext)
 
   const { translate } = useLocaleContext()
   const text = translate.pages.orderSummary
   const navigate = useNavigate()
-
-  let shippingData = {}
-  let paymentMethod = ""
-
-  //Volver por ahi db
-
-  if (location.state) {
-    shippingData = location.state.shippingData
-    paymentMethod = location.state.paymentMethod
-  }
+  const { isLoggedIn, userId } = useUserContext()
 
   useEffect(() => {
-    if (!location.state || !location.state.shippingData || cart.length <= 0) {
-      navigate("/cart")
+    const getShippingData = async () => {
+      try {
+        if (!isLoggedIn) {
+          const guestId = localStorage.getItem("yolo-guest-id")
+
+          const userData = await axios.get(
+            `${process.env.REACT_APP_API_URL}/users/guest/${guestId}`,
+          )
+          if (userData.status === 200) {
+            setUserData(userData.data)
+          }
+
+          const shippingData = await axios.get(
+            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${guestId}`,
+          )
+
+          if (shippingData.status === 200) {
+            setShippingData(shippingData.data)
+          }
+          const orderAndCartItems = await axios.get(
+            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${guestId}`,
+          )
+          setOrderAndCartItems(orderAndCartItems.data)
+        }
+
+        if (isLoggedIn) {
+          const userData = await axios.get(
+            `${process.env.REACT_APP_API_URL}/users/current-user`,
+            { withCredentials: true },
+          )
+
+          if (userData.status === 200) {
+            setUserData(userData.data)
+          }
+          const shippingData = await axios.get(
+            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userData.data.id}`,
+          )
+
+          if (shippingData.status === 200) {
+            setShippingData(shippingData.data)
+          }
+
+          const orderAndCartItems = await axios.get(
+            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${userData.data.id}`,
+          )
+          setOrderAndCartItems(orderAndCartItems.data)
+        }
+      } catch (error) {
+        console.error(error)
+      }
     }
-  }, [location.state, cart, navigate])
+    getShippingData()
+  }, [cart, navigate, setShippingData, userId, isLoggedIn])
 
   useEffectScrollTop()
 
   return (
-    <div className={styles.orderSummaryWrapper}>
-      <div className={styles.columnTitle}>
-        <span className={styles.pageTitle}>{text.thankClient}</span>
-        <span className={styles.summaryTitle}>{text.orderResume}:</span>
-      </div>
-      <div className={styles.orderSummary}>
-        <div className={styles.columns}>
-          <div className={styles.infoColumnContainer}>
-            <div className={styles.infoColumn}>
-              <div className={styles.clientInfoContainer}>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {shippingData.firstName}
-                  </div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {shippingData.lastName}
-                  </div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>{shippingData.phone}</div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>{shippingData.address}</div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>{shippingData.city}</div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>{shippingData.country}</div>
-                </div>
+    <>
+      <div className={styles.orderSummaryWrapper}>
+        <div className={styles.columnTitle}>
+          <span className={styles.pageTitle}>{text.thankClient}</span>
+          <span className={styles.summaryTitle}>{text.orderResume}:</span>
+        </div>
+        <div className={styles.orderSummary}>
+          <div className={styles.columns}>
+            <div className={styles.infoColumnContainer}>
+              <div className={styles.infoColumn}>
+                {shippingData && (
+                  <div className={styles.clientInfoContainer}>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {userData.firstName}
+                      </div>
+                    </div>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {userData.lastName}
+                      </div>
+                    </div>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {shippingData.street}
+                      </div>
+                    </div>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {shippingData.number}
+                      </div>
+                    </div>
 
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {shippingData.postalCode}
-                  </div>
-                </div>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {shippingData.city}
+                      </div>
+                    </div>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {shippingData.country}
+                      </div>
+                    </div>
 
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>{paymentMethod}</div>
-                </div>
-                <div className={styles.clientInfoItem}>
-                  <div className={styles.formField}>
-                    {`${cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €`}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {shippingData.postal_code}
+                      </div>
+                    </div>
 
-          <div className={styles.purchasedProducts}>
-            <div className={styles.cartItemsListWrapper}>
-              <div className={styles.cartItemsList}>
-                {cart.map((item, index) => (
-                  <div className={styles.cartItemWrapper}>
-                    <div key={index} className={styles.cartItem}>
-                      <img
-                        src={item.product.image}
-                        alt={item.product.name}
-                        className={styles.cartItemImage}
-                      />
-                      <div className={styles.cartItemDetails}>
-                        <h3>
-                          {item.quantity} {titleCase(item.product.name, "_")}
-                        </h3>
-                        <p>{item.product.size} ml</p>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>Payment </div>
+                    </div>
+                    <div className={styles.clientInfoItem}>
+                      <div className={styles.formField}>
+                        {/*   {`${Number(
+                          orderAndCartItems.lastOrder.totalAmount +
+                            SHIPPING_COST,
+                        ).toFixed(2)} 
+                        €`} */}
                       </div>
                     </div>
                   </div>
-                ))}
+                )}
+              </div>
+            </div>
+
+            <div className={styles.purchasedProducts}>
+              <div className={styles.cartItemsListWrapper}>
+                <div className={styles.cartItemsList}>
+                  {orderAndCartItems.cartItems &&
+                    orderAndCartItems.cartItems.map((item, index) => (
+                      <div key={index} className={styles.cartItemWrapper}>
+                        <div className={styles.cartItem}>
+                          <img
+                            src={item.product.image}
+                            alt={item.product.name}
+                            className={styles.cartItemImage}
+                          />
+                          <div className={styles.cartItemDetails}>
+                            <h3>
+                              {item.quantity}{" "}
+                              {titleCase(item.product.name, "_")}
+                            </h3>
+                            <p>{item.product.size} ml</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -14,13 +14,16 @@ const Payment = () => {
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
-  const { isLoggedIn } = useUserContext()
+  const { isLoggedIn, setUserId } = useUserContext()
   const location = useLocation()
+  let formData = {}
+  if (location.state) {
+    formData = location.state.formData
+  }
 
-  const formData = location.state.formData
   const submitPaymentMethod = async (e) => {
     e.preventDefault()
-    console.log(formData)
+
     try {
       if (!isLoggedIn) {
         try {
@@ -37,7 +40,8 @@ const Payment = () => {
           )
 
           const newGuestUserData = newGuestUser.data.guestUser
-          console.log("NEW GIEST", newGuestUserData)
+
+          setUserId(newGuestUserData.id)
 
           const shippingDataObject = {
             street: formData.street,
@@ -49,15 +53,16 @@ const Payment = () => {
             country: formData.country,
           }
 
-          const shippingData = await axios.post(
+          await axios.post(
             `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${newGuestUserData.id}`,
             shippingDataObject,
           )
-
-          console.log("SHIPPING", shippingData)
+          localStorage.setItem(
+            "yolo-guest-id",
+            JSON.stringify(newGuestUserData.id),
+          )
 
           if (newGuestUserData) {
-            console.log("IF newGuestUserData ", newGuestUserData)
             const cart = JSON.parse(localStorage.getItem("yolo-cart"))
             const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
             const newOrder = {
@@ -65,7 +70,7 @@ const Payment = () => {
               totalAmount: cartTotalCost,
               paymentMethod: paymentMethod,
             }
-            // setOrder(newOrder)
+
             const orderResponse = await axios.post(
               `${process.env.REACT_APP_API_URL}/orders/create`,
               newOrder,
@@ -89,6 +94,7 @@ const Payment = () => {
                   console.error(error)
                 }
               }
+              localStorage.removeItem("yolo-cart")
               navigate("/checkout/order-summary")
             }
           }
@@ -133,6 +139,8 @@ const Payment = () => {
                 console.error(error)
               }
             }
+            localStorage.removeItem("yolo-cart")
+
             navigate("/checkout/order-summary")
           }
         }
