@@ -7,6 +7,7 @@ router.get('/all/:userId', async (req, res) => {
   try {
     const orders = await db.userOrders.findAll({
       where: { userId: req.params.userId },
+      order: [['createdAt', 'DESC']],
     });
     return res.json(orders);
   } catch (err) {
@@ -14,18 +15,38 @@ router.get('/all/:userId', async (req, res) => {
   }
 });
 
-/* router.get('/cart-items/:orderId', async (req, res) => {
+router.get('/last-order-items/:userId', async (req, res) => {
   try {
-    console.log('CART ITEMS REQ PARAMS ', req.params.orderId);
-    const cartItems = await db.cartItems.findAll({
-      where: { userOrderId: req.params.orderId },
+    const lastOrder = await db.userOrders.findAll({
+      where: { userId: req.params.userId },
+      order: [['createdAt', 'DESC']],
+      limit: 1,
     });
-    console.log('CART ITEMS API GET ALL', cartItems);
-    return res.json(cartItems);
+
+    const orderId = lastOrder.map((order) => order.id);
+    const cartItems = await db.cartItems.findAll({
+      where: { userOrderId: orderId },
+      include: [
+        {
+          model: db.products,
+          as: 'product',
+          include: [
+            {
+              model: db.productCategories,
+              as: 'category',
+            },
+          ],
+        },
+      ],
+    });
+    return res.json({ cartItems, lastOrder });
   } catch (err) {
-    return res.status(500).json({ message: 'No order for this id' });
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: 'Error fetching cart items for this order' });
   }
-}); */
+});
 
 router.get('/cart-items/:orderId', async (req, res) => {
   try {
