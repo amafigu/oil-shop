@@ -11,6 +11,8 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { Link } from "react-router-dom"
+import { DEFAULT_PRODUCT_IMAGE } from "../utils/constants"
+import { setDefaultImageByError } from "../utils/utils"
 import styles from "./cart.module.scss"
 const Cart = () => {
   const { cart, removeProduct, updateProductQuantity } = useCartContext()
@@ -32,6 +34,9 @@ const Cart = () => {
                       src={item.product.image}
                       alt={item.product.name}
                       className={styles.cartItemImage}
+                      onError={(e) => {
+                        setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                      }}
                     />
                     <div className={styles.cartItemDetails}>
                       <h3>{titleCase(item.product.name, "_")}</h3>

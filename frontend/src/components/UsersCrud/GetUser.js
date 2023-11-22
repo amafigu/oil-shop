@@ -69,7 +69,7 @@ const GetUser = () => {
                 {userDataByEmail ? userDataByEmail.lastName : "no data"}
               </div>
               <div className={styles.item}>
-                {userDataByEmail ? userDataByEmail.role : "no data"}
+                {userDataByEmail ? userDataByEmail.roleId : "no data"}
               </div>
               <div className={styles.item}>
                 {userDataByEmail ? userDataByEmail.createdAt : "no data"}

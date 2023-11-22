@@ -1,7 +1,7 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 
-import { getUserByEmail } from "#utils/utils"
+import { getUserByEmail, uploadToS3 } from "#utils/utils"
 import axios from "axios"
 import { useState } from "react"
 import styles from "./updateUserForm.module.scss"
@@ -9,6 +9,7 @@ import styles from "./updateUserForm.module.scss"
 const UpdateUserForm = () => {
   const [notification, setNotification] = useState(null)
   const [email, setEmail] = useState("")
+  const [file, setFile] = useState(null)
 
   const [userOldData, setUserOldData] = useState({
     email: "",
@@ -27,10 +28,16 @@ const UpdateUserForm = () => {
 
   const updateUser = async (e) => {
     e.preventDefault()
+
     if (JSON.stringify(userOldData) === JSON.stringify(userNewData)) {
       setNotification("No changes made.")
       setTimeout(() => setNotification(null), 1300)
       return
+    }
+    let image = await uploadToS3(file)
+    if (!image) {
+      console.error("user image not selected. ")
+      image = ""
     }
     try {
       const response = await axios.put(

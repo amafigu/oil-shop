@@ -37,7 +37,6 @@ const GetOrders = () => {
     getOrders()
     setShowOrders(bool)
   }
-  console.log("orders", orders)
   return (
     <div className={styles.getOrdersWrapper}>
       <h1 className={styles.title}>Orders</h1>

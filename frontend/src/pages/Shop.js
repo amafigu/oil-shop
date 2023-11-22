@@ -19,7 +19,6 @@ const Shop = ({ productCategories }) => {
         const productsResponse = await axios.get(
           `${process.env.REACT_APP_API_URL}/products`,
         )
-        console.log("RESPONSE ", productsResponse)
         setProducts(productsResponse.data)
       } catch (error) {
         console.error("Error fetching data: ", error)
