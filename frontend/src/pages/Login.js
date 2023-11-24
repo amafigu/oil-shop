@@ -31,12 +31,13 @@ const Login = () => {
   const login = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(
+      const loginResponse = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/login`,
         { email, password },
         { withCredentials: true },
       )
-      if (response) {
+      if (loginResponse && loginResponse.status === 200) {
+        console.log("loginResponse", loginResponse.status)
         const getLoggedInUser = async () => {
           try {
             const userResponse = await axios.get(
@@ -45,10 +46,12 @@ const Login = () => {
             )
 
             const userData = userResponse.data
+            console.log("userData", userData)
 
             setUserEmail(userData.email)
             setIsLoggedIn(true)
             setUser(userData)
+
             const userRoleResponse = await axios.get(
               `${process.env.REACT_APP_API_URL}/users/user/role/${userData.roleId}`,
               { withCredentials: true },

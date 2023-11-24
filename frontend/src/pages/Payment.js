@@ -1,27 +1,28 @@
 import NotificationCard from "#components/NotificationCard"
+import useCartContext from "#context/cartContext"
+import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { SHIPPING_COST } from "#utils/constants"
 import { totalCost, useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { React, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import useLocaleContext from "../context/localeContext"
 import styles from "./payment.module.scss"
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [notification, setNotification] = useState(null)
-
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
   const { isLoggedIn, setUserId } = useUserContext()
+  const { setCart } = useCartContext()
   const location = useLocation()
   let formData = {}
   if (location.state) {
     formData = location.state.formData
   }
 
-  const submitPaymentMethod = async (e) => {
+  const submitOrderAndGuestUser = async (e) => {
     e.preventDefault()
 
     try {
@@ -33,9 +34,6 @@ const Payment = () => {
               email: formData.email,
               firstName: formData.firstName,
               lastName: formData.lastName,
-              password: "Guest!!!",
-
-              roleId: 4,
             },
           )
 
@@ -94,7 +92,9 @@ const Payment = () => {
                   console.error(error)
                 }
               }
+
               localStorage.removeItem("yolo-cart")
+              setCart([])
               navigate("/checkout/order-summary")
             }
           }
@@ -140,6 +140,7 @@ const Payment = () => {
               }
             }
             localStorage.removeItem("yolo-cart")
+            setCart([])
 
             navigate("/checkout/order-summary")
           }
@@ -164,7 +165,7 @@ const Payment = () => {
     <div className={styles.paymentPageWrapper}>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.paymentPage}>
-        <form className={styles.paymentForm} onSubmit={submitPaymentMethod}>
+        <form className={styles.paymentForm} onSubmit={submitOrderAndGuestUser}>
           <div className={styles.titleContainer}>
             <span className={styles.title}>{text.title}</span>
           </div>

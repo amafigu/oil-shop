@@ -2,12 +2,7 @@ import { CartContext } from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
-import {
-  setDefaultImageByError,
-  titleCase,
-  useEffectScrollTop,
-} from "#utils/utils"
-import { titleCase } from "#utils/utils"
+import { setDefaultImageByError, titleCase } from "#utils/utils"
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
