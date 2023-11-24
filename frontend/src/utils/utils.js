@@ -107,13 +107,16 @@ export const getProductByName = async (
   }
 }
 
-export const getAdminData = async (setAdminData, setNotification) => {
+export const getLoggedInUserData = async (
+  setLoggedInUserData,
+  setNotification,
+) => {
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/current-user`,
       { withCredentials: true },
     )
-    setAdminData(response.data)
+    setLoggedInUserData(response.data)
     return response.data
   } catch (error) {
     setNotification(`${error.response.data.message}`)

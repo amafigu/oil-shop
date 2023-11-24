@@ -1,7 +1,7 @@
 import UsersCrud from "#components//UsersCrud"
 import NotificationCard from "#components/NotificationCard"
 import ProductsCrud from "#components/ProductsCrud"
-import { getAdminData } from "#utils/utils"
+import { getLoggedInUserData } from "#utils/utils"
 import { useEffect, useState } from "react"
 import Header from "./Header"
 import styles from "./admin.module.scss"
@@ -16,7 +16,7 @@ const Admin = () => {
 
   useEffect(() => {
     const checkData = async () => {
-      await getAdminData(setAdminData, setNotification)
+      await getLoggedInUserData(setAdminData, setNotification)
     }
     checkData()
   }, [])
