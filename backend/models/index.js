@@ -52,6 +52,7 @@ db.usersShippingData.belongsTo(db.users, {
 
 db.users.belongsTo(db.userRoles, {
   foreignKey: 'roleId',
+  as: 'role',
 });
 
 db.userRoles.hasMany(db.users, {
