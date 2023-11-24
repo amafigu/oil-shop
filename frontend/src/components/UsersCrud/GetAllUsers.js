@@ -75,7 +75,7 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
                     {text.forms.commonProperties.email}: {availableUser.email}
                   </div>
                   <div className={styles.item}>
-                    {text.forms.commonProperties.role}: {availableUser.role}
+                    {text.forms.commonProperties.role}: {availableUser.roleId}
                   </div>
                 </div>
                 <div className={styles.actionButtons}>

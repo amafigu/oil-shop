@@ -5,7 +5,8 @@ import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation } from "react-router-dom"
+import { DEFAULT_USER_IMAGE } from "../../utils/constants"
 import styles from "./createUserForm.module.scss"
 
 const CreateUserForm = ({
@@ -23,13 +24,12 @@ const CreateUserForm = ({
 
   const [showPassword, setShowPassword] = useState(false)
 
-  const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.components.crud
   const location = useLocation()
   const currentPath = location.pathname
   const doNotRedirectFrom = ["/users/current-admin"]
-  const doNotShowImageInput = ["/login", "/sign-up"]
+  //   const doNotShowImageInput = ["/login", "/sign-up", "/users/current-admin"]
 
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
@@ -41,19 +41,18 @@ const CreateUserForm = ({
     let image = await uploadToS3(file)
 
     if (!image) {
-      console.error("!imageUrlFailed to upload user image to S3")
-      image = ""
+      console.error("user image not selected. ")
+      image = DEFAULT_USER_IMAGE
     }
+
+    const newUser = { firstName, lastName, email, password, image, roleId: 5 }
+
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/users/create`, {
-        firstName,
-        lastName,
-        email,
-        password,
-        image,
-      })
+      await axios.post(`${process.env.REACT_APP_API_URL}/users/create`, newUser)
+
       if (!currentPath.includes(doNotRedirectFrom)) {
-        navigate("/users/current-user")
+        //setTimeout(() => navigate("/users/current-user"), 400)
+        alert("go to login icon and click")
       }
 
       setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
@@ -61,7 +60,7 @@ const CreateUserForm = ({
       setNotification(text.createUser.success)
       setTimeout(() => setNotification(null), 6000)
     } catch (error) {
-      if (error.response.data.errors) {
+      /* if (error.response.data.errors) {
         const errorMessages = error.response.data.errors.reduce((acc, err) => {
           if (!acc[err.path[0]]) {
             acc[err.path[0]] = []
@@ -74,13 +73,15 @@ const CreateUserForm = ({
           return acc
         }, {})
 
-        setFieldErrors(errorMessages)
+        //  setFieldErrors(errorMessages)
+        setFieldErrors("error")
+
         setTimeout(() => setFieldErrors({}), 6000)
-      }
-      if (error.response.data.message === "Email already in use") {
+      } */
+      /*    if (error.response.data.message === "Email already in use") {
         setEmailInUserError(`${text.createUser.emailInUseErrorMessage}`)
         setTimeout(() => setEmailInUserError(null), 6000)
-      }
+      } */
       console.error("Signup error", error)
     }
   }
@@ -140,24 +141,23 @@ const CreateUserForm = ({
           )}
         </button>
       </div>
-      {currentPath.includes(doNotShowImageInput) && (
-        <div className={styles.labelAndInputContainer}>
-          <span className={styles.label}>
-            {file ? "Selected file: " : "Select a file"}
-          </span>
-          <label className={styles.labelForFile} htmlFor='fileInput'>
-            {file ? file.name : "Search on device"}
-          </label>
 
-          <input
-            type='file'
-            name='image'
-            id='fileInput'
-            onChange={setFileToUpload}
-            required
-          />
-        </div>
-      )}
+      <div className={styles.labelAndInputContainer}>
+        <span className={styles.label}>
+          {file ? "Selected file: " : "Select a file"}
+        </span>
+        <label className={styles.labelForFile} htmlFor='fileInput'>
+          {file ? file.name : "Search on device"}
+        </label>
+
+        <input
+          type='file'
+          name='image'
+          id='fileInput'
+          onChange={setFileToUpload}
+          required
+        />
+      </div>
 
       <button className={styles.formButton} type='submit'>
         {text.createUser.submitButton}

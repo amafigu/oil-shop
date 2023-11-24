@@ -207,7 +207,7 @@ const Navbar = ({ productCategories }) => {
                     <Link
                       className={styles.linkChild}
                       to={
-                        user && user.role === "admin"
+                        user && user.roleId === 2 // TODO admin roleId and send the user with role name from backend
                           ? "/users/current-admin"
                           : "/users/current-user"
                       }

@@ -34,7 +34,7 @@ const Payment = () => {
               firstName: formData.firstName,
               lastName: formData.lastName,
               password: "Guest!!!",
-              role: "guest",
+
               roleId: 4,
             },
           )

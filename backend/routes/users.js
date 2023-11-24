@@ -167,21 +167,19 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
 
-    const userRole = await db.userRoles.findOne({
-      where: { name: 'customer' },
-    });
+    console.log('NEW ...req.body,  ', req.body);
 
     const hashedPassword = await hashPassword(req.body.password);
 
     const newUser = await db.users.create({
       ...req.body,
       password: hashedPassword,
-      roleId: userRole.id,
     });
+    console.log('NEW USER 1 ', newUser);
 
     return res
       .status(201)
-      .json({ message: 'Guest user created successfully', user: newUser });
+      .json({ message: 'Customer user created successfully', user: newUser });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
