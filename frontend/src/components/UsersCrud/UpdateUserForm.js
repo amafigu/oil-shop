@@ -9,7 +9,7 @@ import styles from "./updateUserForm.module.scss"
 const UpdateUserForm = () => {
   const [notification, setNotification] = useState(null)
   const [email, setEmail] = useState("")
-  const [file, setFile] = useState(null)
+  const [file] = useState(null)
 
   const [userOldData, setUserOldData] = useState({
     email: "",

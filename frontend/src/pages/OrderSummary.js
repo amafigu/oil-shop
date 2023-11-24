@@ -7,6 +7,7 @@ import {
   titleCase,
   useEffectScrollTop,
 } from "#utils/utils"
+import { titleCase } from "#utils/utils"
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -17,7 +18,6 @@ const OrderSummary = () => {
   const [userData, setUserData] = useState({})
   const [orderAndCartItems, setOrderAndCartItems] = useState({})
   const { cart } = useContext(CartContext)
-
   const { translate } = useLocaleContext()
   const text = translate.pages.orderSummary
   const navigate = useNavigate()
@@ -78,8 +78,54 @@ const OrderSummary = () => {
     getShippingData()
   }, [cart, navigate, setShippingData, userId, isLoggedIn])
 
-  useEffectScrollTop()
+  /* useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const guestId = isLoggedIn
+          ? userId
+          : localStorage.getItem("yolo-guest-id")
 
+        const [
+          userDataResponse,
+          shippingDataResponse,
+          orderAndCartItemsResponse,
+        ] = await Promise.all([
+          axios.get(
+            `${process.env.REACT_APP_API_URL}/users/${
+              isLoggedIn ? "current-user" : `guest/${guestId}`
+            }`,
+            { withCredentials: isLoggedIn },
+          ),
+          axios.get(
+            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${
+              isLoggedIn ? userData.data.id : guestId
+            }`,
+          ),
+          axios.get(
+            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${
+              isLoggedIn ? userData.data.id : guestId
+            }`,
+          ),
+        ])
+
+        if (userDataResponse.status === 200) {
+          setUserData(userDataResponse.data)
+        }
+
+        if (shippingDataResponse.status === 200) {
+          setShippingData(shippingDataResponse.data)
+        }
+
+        setOrderAndCartItems(orderAndCartItemsResponse.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchData()
+  }, [cart, navigate, setShippingData, userId, isLoggedIn])
+  useEffectScrollTop()
+ */
   return (
     <>
       <div className={styles.orderSummaryWrapper}>
@@ -136,7 +182,7 @@ const OrderSummary = () => {
                     </div>
                     <div className={styles.clientInfoItem}>
                       <div className={styles.formField}>
-                        {/*   {`${Number(
+                        {/*  {`${Number(
                           orderAndCartItems.lastOrder.totalAmount +
                             SHIPPING_COST,
                         ).toFixed(2)} 
