@@ -1,12 +1,15 @@
 import { CartContext } from "#context/cartContext"
-import { titleCase } from "#utils/utils"
+import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
+import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+import {
+  setDefaultImageByError,
+  titleCase,
+  useEffectScrollTop,
+} from "#utils/utils"
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-
-import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
-import { useEffectScrollTop } from "#utils/utils"
 import styles from "./orderSummary.module.scss"
 
 const OrderSummary = () => {
@@ -156,6 +159,9 @@ const OrderSummary = () => {
                             src={item.product.image}
                             alt={item.product.name}
                             className={styles.cartItemImage}
+                            onError={(e) =>
+                              setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                            }
                           />
                           <div className={styles.cartItemDetails}>
                             <h3>
