@@ -1,4 +1,5 @@
-import { titleCase } from "#utils/utils"
+import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+import { setDefaultImageByError, titleCase } from "#utils/utils"
 import styles from "./productDetailsRow.module.scss"
 
 const ProductDetailsRow = ({ product, quantity }) => {
@@ -11,6 +12,7 @@ const ProductDetailsRow = ({ product, quantity }) => {
               src={product.image}
               alt={product.name}
               className={styles.itemImage}
+              onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
             />
             <div className={styles.itemDetails}>
               <h3>
