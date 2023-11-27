@@ -6,7 +6,7 @@ import {
   convertIsoToLocaleDateString,
   getUserOrdersWithProductsList,
 } from "#utils/utils"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import styles from "./getOrders.module.scss"
 
 const GetOrders = () => {
@@ -20,6 +20,43 @@ const GetOrders = () => {
       getOrdersWithProducts()
     }
   }, [showOrders])
+
+  const renderedOrders = useMemo(() => {
+    return orders.map((order) => (
+      <li className={styles.order} key={order.id}>
+        <div className={styles.orderDetails}>
+          <div className={styles.date}>
+            <span className={styles.property}>Ordered At:</span>
+            <span className={styles.value}>
+              {" "}
+              {convertIsoToLocaleDateString(order.createdAt)}
+            </span>
+          </div>
+          <div className={styles.total}>
+            <span className={styles.property}>Order Total: </span>
+            <span className={styles.value}>{order.totalAmount} €</span>
+          </div>
+
+          <div className={styles.paymentMethod}>
+            <span className={styles.property}>Payed with: </span>
+            <span className={styles.value}>{order.paymentMethod}</span>
+          </div>
+        </div>
+
+        <ul className={styles.cartItems}>
+          {order.cartItems &&
+            order.cartItems.map((cartItem) => (
+              <li key={cartItem.id}>
+                <ProductDetailsRow
+                  product={cartItem.product}
+                  quantity={cartItem.quantity}
+                />
+              </li>
+            ))}
+        </ul>
+      </li>
+    ))
+  }, [orders])
 
   const getOrdersWithProducts = async () => {
     try {
@@ -59,43 +96,7 @@ const GetOrders = () => {
       />
 
       <ul className={styles.ordersList}>
-        {showOrders &&
-          orders &&
-          orders.length > 0 &&
-          orders.map((order) => (
-            <li className={styles.order} key={order.id}>
-              <div className={styles.orderDetails}>
-                <div className={styles.date}>
-                  <span className={styles.property}>Ordered At:</span>
-                  <span className={styles.value}>
-                    {" "}
-                    {convertIsoToLocaleDateString(order.createdAt)}
-                  </span>
-                </div>
-                <div className={styles.total}>
-                  <span className={styles.property}>Order Total: </span>
-                  <span className={styles.value}>{order.totalAmount} €</span>
-                </div>
-
-                <div className={styles.paymentMethod}>
-                  <span className={styles.property}>Payed with: </span>
-                  <span className={styles.value}>{order.paymentMethod}</span>
-                </div>
-              </div>
-
-              <ul className={styles.cartItems}>
-                {order.cartItems &&
-                  order.cartItems.map((cartItem) => (
-                    <li key={cartItem.id}>
-                      <ProductDetailsRow
-                        product={cartItem.product}
-                        quantity={cartItem.quantity}
-                      />
-                    </li>
-                  ))}
-              </ul>
-            </li>
-          ))}
+        {showOrders && orders && orders.length > 0 && renderedOrders}
       </ul>
     </div>
   )
