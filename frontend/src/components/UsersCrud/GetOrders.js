@@ -1,51 +1,60 @@
+import NotificationCard from "#components/NotificationCard"
 import ProductDetailsRow from "#components/ProductDetailsRow"
 import ToggleButton from "#components/ToggleButton"
 import useUserContext from "#context/userContext"
-import { convertToReadableDate } from "#utils/utils"
-import axios from "axios"
-import React, { useState } from "react"
+import {
+  convertIsoToLocaleDateString,
+  getUserOrdersWithProductsList,
+} from "#utils/utils"
+import React, { useEffect, useState } from "react"
 import styles from "./getOrders.module.scss"
 
 const GetOrders = () => {
   const [orders, setOrders] = useState([])
   const [showOrders, setShowOrders] = useState(false)
-
+  const [notification, setNotification] = useState(null)
   const { userId } = useUserContext()
 
-  const getOrders = async () => {
+  useEffect(() => {
+    if (showOrders && orders.length === 0) {
+      getOrdersWithProducts()
+    }
+  }, [showOrders])
+
+  const getOrdersWithProducts = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/orders/all/${parseInt(userId)}`,
-      )
-
-      const ordersWithDetails = await Promise.all(
-        response.data.map(async (order) => {
-          const cartItemsResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}/orders/cart-items/${order.id}`,
-          )
-          return { ...order, cartItems: cartItemsResponse.data }
-        }),
-      )
-
+      const ordersWithDetails = await getUserOrdersWithProductsList(userId)
       setOrders(ordersWithDetails)
+      if (ordersWithDetails.length === 0) {
+        setShowOrders(false)
+        setNotification(
+          "You have no orders yet, please make an order and come back later",
+        )
+        setTimeout(() => setNotification(null), 2000)
+      }
     } catch (error) {
       console.error(error)
+      setNotification(
+        "It is not possible to get the orders at the moment, please try again",
+      )
+      setTimeout(() => setNotification(null), 3000)
     }
   }
 
   const showOrderListAndGetData = (bool) => {
-    getOrders()
     setShowOrders(bool)
   }
+
   return (
     <div className={styles.getOrdersWrapper}>
+      {notification && <NotificationCard message={notification} />}
       <h1 className={styles.title}>Orders</h1>
 
       <ToggleButton
         show={showOrders}
         setToggle={showOrderListAndGetData}
-        textHide={"Hide Orders"}
-        textShow={"Show Orders"}
+        textHide={"HIDE ORDERS"}
+        textShow={"SHOW ORDERS"}
         classCss='showHideButtons'
       />
 
@@ -56,18 +65,19 @@ const GetOrders = () => {
           orders.map((order) => (
             <li className={styles.order} key={order.id}>
               <div className={styles.orderDetails}>
-                <div>
+                <div className={styles.date}>
                   <span className={styles.property}>Ordered At:</span>
                   <span className={styles.value}>
-                    {convertToReadableDate(order.createdAt)}
+                    {" "}
+                    {convertIsoToLocaleDateString(order.createdAt)}
                   </span>
                 </div>
-                <div>
+                <div className={styles.total}>
                   <span className={styles.property}>Order Total: </span>
                   <span className={styles.value}>{order.totalAmount} €</span>
                 </div>
 
-                <div>
+                <div className={styles.paymentMethod}>
                   <span className={styles.property}>Payed with: </span>
                   <span className={styles.value}>{order.paymentMethod}</span>
                 </div>
