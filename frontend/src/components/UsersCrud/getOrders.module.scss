@@ -3,8 +3,7 @@
 @import "#styles/helpers/mixins";
 
 .getOrdersWrapper {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
 
   .title {
     @include component-title;
@@ -16,6 +15,7 @@
 
     .order {
       display: flex;
+      margin: theme.$margin-order-list 0;
     }
 
     .orderDetails {
@@ -23,7 +23,14 @@
 
       @include media.mobile {
         width: 32%;
-        margin-left: 20px;
+      }
+
+      .total,
+      .date,
+      .paymentMethod {
+        @include media.mobile {
+          @include flex-column;
+        }
       }
     }
 
@@ -43,7 +50,7 @@
 
       @include media.mobile {
         width: 64%;
-        margin-left: 20px;
+        margin-left: theme.$margin-form-container-mobile;
       }
     }
   }
