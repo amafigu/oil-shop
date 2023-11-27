@@ -7,7 +7,10 @@ import {
   hashPassword,
 } from '../middleware/passwordEncrypt.js';
 import { validateBody } from '../middleware/validationMiddleware.js';
-import { CreateUserSchema } from '../middleware/validationSchemas/userSchema.js';
+import {
+  CreateUserSchema,
+  LoginSchema,
+} from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
 dotenv.config();
 const router = express.Router();
