@@ -6,24 +6,23 @@ const ProductDetailsRow = ({ product, quantity }) => {
   return (
     <div className={styles.productDetailsRowWrapper}>
       <div className={styles.itemContainer}>
-        <div className={styles.item}>
-          <div className={styles.imagesAndDetails}>
-            <img
-              src={product.image}
-              alt={product.name}
-              className={styles.itemImage}
-              onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
-            />
-            <div className={styles.itemDetails}>
-              <h3>
-                {quantity} {titleCase(product.name, "_")}
-              </h3>
-              <p>{product.description}</p>
-              <p>{product.size} ml</p>
-              <p>{product.price} € Pro Unit</p>
-            </div>
+        <div className={styles.imagesAndDetails}>
+          <img
+            src={product.image}
+            alt={product.name}
+            className={styles.itemImage}
+            onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
+          />
+          <div className={styles.itemDetails}>
+            <h3>
+              {quantity} {titleCase(product.name, "_")}
+            </h3>
+            <p>{product.description}</p>
+            <p>{product.size} ml</p>
+            <p>{product.price} € Pro Unit</p>
           </div>
         </div>
+
         <hr />
       </div>
     </div>

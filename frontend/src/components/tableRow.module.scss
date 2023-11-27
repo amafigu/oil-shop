@@ -30,18 +30,21 @@
 
     @include media.mobile {
       display: flex;
-      flex-direction: column;
     }
+  }
+
+  .tableHeaderCell {
+    width: 34%;
+    font-weight: theme.$font-weight-semibold;
+  }
+
+  .tableDataCell {
+    width: 66%;
   }
 
   .tableHeaderCell,
   .tableDataCell {
-    flex: 1;
     padding: 0.5rem;
     text-align: left;
-  }
-
-  .tableHeaderCell {
-    font-weight: theme.$font-weight-semibold;
   }
 }
