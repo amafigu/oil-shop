@@ -40,6 +40,29 @@ export const searchAndNavigateToProduct = (products, searchText, navigate) => {
   }
 }
 
+// TODO: refactor custom hooks to let set the state in the componet, not in the hook
+
+export const getUserOrdersWithProductsList = async (userId) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/orders/all/${parseInt(userId)}`,
+    )
+
+    const ordersWithDetails = await Promise.all(
+      response.data.map(async (order) => {
+        const cartItemsResponse = await axios.get(
+          `${process.env.REACT_APP_API_URL}/orders/cart-items/${order.id}`,
+        )
+        return { ...order, cartItems: cartItemsResponse.data }
+      }),
+    )
+
+    return ordersWithDetails
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const navigateToProductAndCloseDropdown = (
   name,
   navigate,
@@ -193,6 +216,8 @@ export const getInputChangeAndOpenList =
     }
   }
 
+// END OF FUNCTIONS FOR REFACTORING IN THE TODO ABOVE
+
 export const increaseQuantity = (quantity, setQuantity) => {
   if (quantity < 20) {
     setQuantity((prevQuantity) => prevQuantity + 1)
@@ -240,13 +265,12 @@ export const uploadToS3 = async (file) => {
   return newUrl
 }
 
-export const convertToReadableDate = (isoDate) => {
+export const convertIsoToLocaleDateString = (isoDate) => {
   const date = new Date(isoDate)
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("de-De", {
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
+    hour12: false,
   })
 }
 
