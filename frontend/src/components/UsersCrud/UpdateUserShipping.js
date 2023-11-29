@@ -1,9 +1,13 @@
+import EditableInput from "#components/EditableInputField"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
+import useLocaleContext from "#context/localeContext"
+import { getUserShippingData } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from "./updateUserShippingDataForm.module.scss"
-const UpdateUserShipping = ({ userId, setUserShippingDataInUser }) => {
+
+const UpdateUserShipping = ({ userId }) => {
   const [showForm, setShowForm] = useState(false)
   const [editStreetForm, setEditStreetForm] = useState(false)
   const [editCountryForm, setEditCountryForm] = useState(false)
@@ -25,17 +29,23 @@ const UpdateUserShipping = ({ userId, setUserShippingDataInUser }) => {
     ...initialShippingData,
   })
   const [notification, setNotification] = useState(null)
+  const { translate } = useLocaleContext()
+  const text = translate.errors.requests
 
   useEffect(() => {
     async function getOriginalShippingData() {
       try {
         if (!userId) return
-        const originalShippingData = await axios.get(
-          `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
-          { withCredentials: true },
-        )
-        setOldShippingData(originalShippingData.data)
+        const shippingData = await getUserShippingData(userId)
+        if (!shippingData) {
+          setNotification(`${text.getShippingData} `)
+          setTimeout(() => setNotification(null), 3000)
+          return
+        }
+        setOldShippingData(shippingData)
       } catch (error) {
+        setNotification(`${error}`)
+        setTimeout(() => setNotification(null), 3000)
         console.error(error)
       }
     }
@@ -43,9 +53,7 @@ const UpdateUserShipping = ({ userId, setUserShippingDataInUser }) => {
     getOriginalShippingData()
   }, [userId])
 
-  console.log(editStreetForm)
-  console.log(editCountryForm)
-  const updateUserShippingDataAndSetEditForm = async (e, setEditForm) => {
+  const updateUserShippingData = async (e) => {
     e.preventDefault()
 
     try {
@@ -63,8 +71,6 @@ const UpdateUserShipping = ({ userId, setUserShippingDataInUser }) => {
         return
       }
 
-      console.log(updatedShippingData)
-
       await axios.put(
         `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
         updatedShippingData,
@@ -76,7 +82,6 @@ const UpdateUserShipping = ({ userId, setUserShippingDataInUser }) => {
       }))
       setUpdatedShippingData(initialShippingData)
       setNotification("update shipping data")
-      setEditForm(false)
       setTimeout(() => setNotification(null), 1300)
     } catch (error) {
       alert("Could not update user: " + error)
@@ -111,85 +116,29 @@ const UpdateUserShipping = ({ userId, setUserShippingDataInUser }) => {
         />
         {showForm && (
           <div>
-            <div className={styles.itemRow}>
-              {editCountryForm ? (
-                <input
-                  label='country'
-                  name='country'
-                  className={styles.formField}
-                  value={
-                    updatedShippingData.country
-                      ? updatedShippingData.country
-                      : oldShippingData.country
-                  }
-                  placeholder={oldShippingData.country}
-                  onChange={(e) => listenInputChange(e)}
-                />
-              ) : (
-                <div className={styles.nonUpdatedData}>
-                  <span className={styles.property}>Country:</span>
-                  <span
-                    className={styles.value}
-                  >{`${oldShippingData.country}`}</span>
-                </div>
-              )}
-              {editCountryForm ? (
-                <div
-                  className={styles.formButton}
-                  onMouseDown={(e) =>
-                    updateUserShippingDataAndSetEditForm(e, setEditCountryForm)
-                  }
-                >
-                  Save
-                </div>
-              ) : (
-                <div
-                  className={styles.formButton}
-                  onClick={() => setEditCountryForm(true)}
-                >
-                  Edit
-                </div>
-              )}
+            <div className={styles.inputContainer}>
+              <EditableInput
+                label={"country"}
+                name={"country"}
+                value={updatedShippingData.country}
+                onChange={(e) => listenInputChange(e)}
+                onSave={(e) => updateUserShippingData(e)}
+                classCss={"formField"}
+                originalPropertyData={oldShippingData}
+                updatedPropertyData={updatedShippingData}
+              />
             </div>
-            <div className={styles.itemRow}>
-              {editStreetForm ? (
-                <input
-                  label='street'
-                  name='street'
-                  className={styles.formField}
-                  value={
-                    updatedShippingData.street
-                      ? updatedShippingData.street
-                      : oldShippingData.street
-                  }
-                  placeholder={oldShippingData.street}
-                  onChange={(e) => listenInputChange(e)}
-                />
-              ) : (
-                <div className={styles.nonUpdatedData}>
-                  <span className={styles.property}>Street:</span>
-                  <span
-                    className={styles.value}
-                  >{`${oldShippingData.street}`}</span>
-                </div>
-              )}
-              {editStreetForm ? (
-                <div
-                  className={styles.formButton}
-                  onClick={(e) =>
-                    updateUserShippingDataAndSetEditForm(e, setEditStreetForm)
-                  }
-                >
-                  Save
-                </div>
-              ) : (
-                <div
-                  className={styles.formButton}
-                  onClick={() => setEditStreetForm(true)}
-                >
-                  Edit
-                </div>
-              )}
+            <div className={styles.inputContainer}>
+              <EditableInput
+                label={"street"}
+                name={"street"}
+                value={updatedShippingData.street}
+                onChange={(e) => listenInputChange(e)}
+                onSave={(e) => updateUserShippingData(e)}
+                classCss={"formField"}
+                originalPropertyData={oldShippingData}
+                updatedPropertyData={updatedShippingData}
+              />
             </div>
           </div>
         )}

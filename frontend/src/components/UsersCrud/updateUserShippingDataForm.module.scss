@@ -3,6 +3,14 @@
 @import "#styles/helpers/mixins";
 
 .updateUserShippingDataWrapper {
+  .nonUpdatedData {
+    width: 100%;
+    height: 32px;
+    font-family: theme.$font-family-primary;
+    font-size: theme.$font-size-medium;
+    border-bottom: theme.$border-regular-component;
+  }
+
   .form {
     @include flex-column;
 
@@ -13,10 +21,17 @@
     }
   }
 
+  .itemRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
   .formField {
     width: 100%;
     height: 32px;
-    margin-bottom: 12px;
+
+    // margin-bottom: 12px;
     font-family: theme.$font-family-primary;
     font-size: medium;
   }
@@ -35,9 +50,21 @@
     margin-bottom: 4px;
   }
 
+  .inputContainer {
+    margin: theme.$margin-divider 0;
+  }
+
   .containerTitle {
     margin-bottom: 24px;
     font-size: theme.$font-size-subtitle;
+  }
+
+  .property {
+    @include property-font;
+  }
+
+  .value {
+    @include value-font;
   }
 
   .formButton {
@@ -45,8 +72,8 @@
 
     width: 160px;
     height: 36px;
-    margin-top: 24px;
-    font-size: 1rem;
+    margin-left: theme.$margin-divider;
+    font-size: theme.$font-size-small;
     text-transform: none;
 
     @include media.mobile {
