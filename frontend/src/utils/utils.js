@@ -371,3 +371,9 @@ export const saveDataAndToggleInput = async (
   await asyncOnSaveFunction(e)
   setToggle(false)
 }
+
+export const cancelWithScape = (e, setState) => {
+  if (e.key === "Escape") {
+    setState(false)
+  }
+}
