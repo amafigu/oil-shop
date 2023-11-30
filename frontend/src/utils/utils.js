@@ -8,6 +8,22 @@ export const titleCase = (str, separator) => {
     .join(" ")
 }
 
+export const listenInputChangeAndSetDataObject = (
+  e,
+  updatedDataObj,
+  setUpdatedDataObj,
+) => {
+  const inputLength = e.target.value.length
+  if (inputLength > 60) {
+    console.error("input value too long")
+    return
+  }
+  setUpdatedDataObj({
+    ...updatedDataObj,
+    [e.target.name]: e.target.value,
+  })
+}
+
 export const camelCaseToTitleCase = (str) => {
   // Insert space before each uppercase letter and trim leading/trailing spaces
   const spaced = str.replace(/([A-Z])/g, " $1").trim()
@@ -40,7 +56,7 @@ export const searchAndNavigateToProduct = (products, searchText, navigate) => {
   }
 }
 
-// TODO: refactor custom hooks to let set the state in the componet, not in the hook
+// TODO: refactor custom hooks to let set the state in the componet
 
 export const getUserOrdersWithProductsList = async (userId) => {
   try {
@@ -60,6 +76,66 @@ export const getUserOrdersWithProductsList = async (userId) => {
     return ordersWithDetails
   } catch (error) {
     console.error(error)
+  }
+}
+
+export const getUserShippingData = async (userId) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+      { withCredentials: true },
+    )
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const updateUserShippingData = async (userId, updatedData) => {
+  try {
+    const response = await axios.put(
+      `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+      updatedData,
+      { withCredentials: true },
+    )
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const updateDataAndSetStates = async (
+  e,
+  request,
+  nonUpdatedData,
+  setNonUpdatedData,
+  updatedData,
+  setUpdatedData,
+  setNotification,
+  filterEmptyValues,
+) => {
+  e.preventDefault()
+
+  try {
+    setUpdatedData((prevData) => ({
+      ...prevData,
+      ...nonUpdatedData,
+    }))
+    if (JSON.stringify(nonUpdatedData) === JSON.stringify(updatedData)) {
+      setNotification("No changes made.")
+      setTimeout(() => setNotification(null), 1300)
+      return
+    }
+
+    await request
+
+    setNonUpdatedData((prevData) => ({
+      ...prevData,
+      ...filterEmptyValues(updatedData),
+    }))
+    setUpdatedData(nonUpdatedData)
+  } catch (error) {
+    alert("Could not update data: " + error)
   }
 }
 
@@ -276,4 +352,22 @@ export const convertIsoToLocaleDateString = (isoDate) => {
 
 export const setDefaultImageByError = (event, image) => {
   event.target.src = image
+}
+
+export const ignorePropertiesWithEmptyValue = (dataObject) => {
+  return Object.keys(dataObject)
+    .filter((key) => dataObject[key] !== "")
+    .reduce((object, key) => {
+      object[key] = dataObject[key]
+      return object
+    }, {})
+}
+
+export const saveDataAndToggleInput = async (
+  e,
+  asyncOnSaveFunction,
+  setToggle,
+) => {
+  await asyncOnSaveFunction(e)
+  setToggle(false)
 }
