@@ -1,5 +1,5 @@
 import useLocaleContext from "#context/localeContext"
-import { saveDataAndToggleInput } from "#utils/utils"
+import { cancelWithScape, saveDataAndToggleInput } from "#utils/utils"
 import { useState } from "react"
 import styles from "./editableInputField.module.scss"
 
@@ -26,8 +26,8 @@ const EditableInput = ({
           label={label}
           name={name}
           onChange={onChange}
+          onKeyDown={(e) => cancelWithScape(e, setIsEditing)}
           placeholder={name}
-          role='textbox'
           value={
             updatedPropertyData[name] || updatedPropertyData[name] === ""
               ? updatedPropertyData[name]

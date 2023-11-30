@@ -6,7 +6,7 @@ import {
   convertIsoToLocaleDateString,
   getUserOrdersWithProductsList,
 } from "#utils/utils"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import styles from "./getOrders.module.scss"
 
 const GetOrders = () => {
@@ -15,11 +15,35 @@ const GetOrders = () => {
   const [notification, setNotification] = useState(null)
   const { userId } = useUserContext()
 
+  const getOrdersWithProducts = useCallback(async () => {
+    try {
+      const ordersWithDetails = await getUserOrdersWithProductsList(userId)
+      setOrders(ordersWithDetails)
+      if (ordersWithDetails.length === 0) {
+        setShowOrders(false)
+        setNotification(
+          "You have no orders yet, please make an order and come back later",
+        )
+        setTimeout(() => setNotification(null), 2000)
+      }
+    } catch (error) {
+      console.error(error)
+      setNotification(
+        "It is not possible to get the orders at the moment, please try again",
+      )
+      setTimeout(() => setNotification(null), 3000)
+    }
+  }, [userId, setOrders, setShowOrders, setNotification])
+
   useEffect(() => {
     if (showOrders && orders.length === 0) {
       getOrdersWithProducts()
     }
-  }, [showOrders])
+  }, [showOrders, orders.length, getOrdersWithProducts])
+
+  const showOrderListAndGetData = (bool) => {
+    setShowOrders(bool)
+  }
 
   const renderedOrders = useMemo(() => {
     return orders.map((order) => (
@@ -57,30 +81,6 @@ const GetOrders = () => {
       </li>
     ))
   }, [orders])
-
-  const getOrdersWithProducts = async () => {
-    try {
-      const ordersWithDetails = await getUserOrdersWithProductsList(userId)
-      setOrders(ordersWithDetails)
-      if (ordersWithDetails.length === 0) {
-        setShowOrders(false)
-        setNotification(
-          "You have no orders yet, please make an order and come back later",
-        )
-        setTimeout(() => setNotification(null), 2000)
-      }
-    } catch (error) {
-      console.error(error)
-      setNotification(
-        "It is not possible to get the orders at the moment, please try again",
-      )
-      setTimeout(() => setNotification(null), 3000)
-    }
-  }
-
-  const showOrderListAndGetData = (bool) => {
-    setShowOrders(bool)
-  }
 
   return (
     <div className={styles.getOrdersWrapper}>

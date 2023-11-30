@@ -55,7 +55,7 @@ const ShippingData = ({ userId }) => {
     }
 
     getOriginalShippingData()
-  }, [userId])
+  }, [userId, errorText.getShippingData])
 
   const updateUserShippingDataAndSetStates = async (e) => {
     updateDataAndSetStates(
