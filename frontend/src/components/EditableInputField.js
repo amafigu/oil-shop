@@ -1,12 +1,11 @@
+import useLocaleContext from "#context/localeContext"
+import { saveDataAndToggleInput } from "#utils/utils"
 import { useState } from "react"
 import styles from "./editableInputField.module.scss"
-// (e) => listenInputChange(e)
-// updateUserShippingDataAndSetEditForm(e, setEditCountryForm)
 
 const EditableInput = ({
   label,
   name,
-  value,
   onChange,
   onSave,
   classCss,
@@ -14,24 +13,30 @@ const EditableInput = ({
   updatedPropertyData,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
+  const { translate } = useLocaleContext()
+  const textButtons = translate.components.crud.buttons
+  const textProperties = translate.components.crud.forms.shippingData
+
   return (
-    <div className={styles.itemRow}>
+    <div className={styles.itemRow} role='group' aria-labelledby={name}>
       {isEditing ? (
         <input
+          aria-label={label}
+          className={styles[classCss]}
           label={label}
           name={name}
-          className={styles[classCss]}
+          onChange={onChange}
+          placeholder={name}
+          role='textbox'
           value={
-            updatedPropertyData[name]
+            updatedPropertyData[name] || updatedPropertyData[name] === ""
               ? updatedPropertyData[name]
               : originalPropertyData[name]
           }
-          placeholder={originalPropertyData[name]}
-          onChange={onChange}
         />
       ) : (
         <div className={styles.nonUpdatedData}>
-          <span className={styles.property}>{name}:</span>
+          <span className={styles.property}>{textProperties[name]}: </span>
           <span
             className={styles.value}
           >{`${originalPropertyData[name]}`}</span>
@@ -39,15 +44,19 @@ const EditableInput = ({
       )}
       {isEditing ? (
         <div
+          aria-label={textButtons.save}
           className={styles.formButton}
-          onMouseDown={onSave}
-          onClick={() => setIsEditing(false)}
+          onClick={(e) => saveDataAndToggleInput(e, onSave, setIsEditing)}
         >
-          Save
+          {textButtons.save}
         </div>
       ) : (
-        <div className={styles.formButton} onClick={() => setIsEditing(true)}>
-          Edit
+        <div
+          aria-label={textButtons.edit}
+          className={styles.formButton}
+          onClick={() => setIsEditing(true)}
+        >
+          {textButtons.edit}
         </div>
       )}
     </div>

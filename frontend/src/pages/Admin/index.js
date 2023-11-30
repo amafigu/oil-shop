@@ -1,9 +1,9 @@
 import UsersCrud from "#components//UsersCrud"
+import Header from "#components/Header"
 import NotificationCard from "#components/NotificationCard"
 import ProductsCrud from "#components/ProductsCrud"
 import { getLoggedInUserData } from "#utils/utils"
 import { useEffect, useState } from "react"
-import Header from "./Header"
 import styles from "./admin.module.scss"
 
 const Admin = () => {

@@ -1,16 +1,14 @@
+import Header from "#components/Header"
 import NotificationCard from "#components/NotificationCard"
+import GetOrders from "#components/UsersCrud/GetOrders"
+import ShippingData from "#components/UsersCrud/ShippingData"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import GetOrders from "../components/UsersCrud/GetOrders"
-import GetShippingData from "../components/UsersCrud/GetShippingData"
-import UpdateUserShippingDataForm from "../components/UsersCrud/UpdateUserShippingDataForm"
-import Header from "./Admin/Header"
 import styles from "./user.module.scss"
 
 const User = () => {
   const [userData, setUserData] = useState({})
-  const [, setUserShippingData] = useState({})
   const [notification, setNotification] = useState(null)
 
   const navigate = useNavigate()
@@ -43,14 +41,7 @@ const User = () => {
         <Header data={userData} />
 
         <div className={styles.componentContainer}>
-          <GetShippingData userData={userData} />
-        </div>
-
-        <div className={styles.componentContainer}>
-          <UpdateUserShippingDataForm
-            userId={userData.id}
-            setUserShippingDataInUser={setUserShippingData}
-          />
+          <ShippingData userId={userData.id} />
         </div>
 
         <div className={styles.componentContainer}>
