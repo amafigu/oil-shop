@@ -232,3 +232,11 @@
   font-weight: theme.$font-weight-semibold;
   line-height: 128%;
 }
+
+@mixin property-font {
+  font-size: theme.$font-size-medium;
+}
+
+@mixin value-font {
+  font-size: theme.$font-size-small;
+}

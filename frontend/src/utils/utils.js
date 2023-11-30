@@ -8,6 +8,22 @@ export const titleCase = (str, separator) => {
     .join(" ")
 }
 
+export const listenInputChangeAndSetDataObject = (
+  e,
+  updatedDataObj,
+  setUpdatedDataObj,
+) => {
+  const inputLength = e.target.value.length
+  if (inputLength > 60) {
+    console.error("input value too long")
+    return
+  }
+  setUpdatedDataObj({
+    ...updatedDataObj,
+    [e.target.name]: e.target.value,
+  })
+}
+
 export const camelCaseToTitleCase = (str) => {
   // Insert space before each uppercase letter and trim leading/trailing spaces
   const spaced = str.replace(/([A-Z])/g, " $1").trim()
@@ -37,6 +53,89 @@ export const searchAndNavigateToProduct = (products, searchText, navigate) => {
     navigate(`/products/${match.name}`)
   } else {
     console.error("not able to navigate to product page ")
+  }
+}
+
+// TODO: refactor custom hooks to let set the state in the componet
+
+export const getUserOrdersWithProductsList = async (userId) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/orders/all/${parseInt(userId)}`,
+    )
+
+    const ordersWithDetails = await Promise.all(
+      response.data.map(async (order) => {
+        const cartItemsResponse = await axios.get(
+          `${process.env.REACT_APP_API_URL}/orders/cart-items/${order.id}`,
+        )
+        return { ...order, cartItems: cartItemsResponse.data }
+      }),
+    )
+
+    return ordersWithDetails
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getUserShippingData = async (userId) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+      { withCredentials: true },
+    )
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const updateUserShippingData = async (userId, updatedData) => {
+  try {
+    const response = await axios.put(
+      `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+      updatedData,
+      { withCredentials: true },
+    )
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const updateDataAndSetStates = async (
+  e,
+  request,
+  nonUpdatedData,
+  setNonUpdatedData,
+  updatedData,
+  setUpdatedData,
+  setNotification,
+  filterEmptyValues,
+) => {
+  e.preventDefault()
+
+  try {
+    setUpdatedData((prevData) => ({
+      ...prevData,
+      ...nonUpdatedData,
+    }))
+    if (JSON.stringify(nonUpdatedData) === JSON.stringify(updatedData)) {
+      setNotification("No changes made.")
+      setTimeout(() => setNotification(null), 1300)
+      return
+    }
+
+    await request
+
+    setNonUpdatedData((prevData) => ({
+      ...prevData,
+      ...filterEmptyValues(updatedData),
+    }))
+    setUpdatedData(nonUpdatedData)
+  } catch (error) {
+    alert("Could not update data: " + error)
   }
 }
 
@@ -107,13 +206,16 @@ export const getProductByName = async (
   }
 }
 
-export const getAdminData = async (setAdminData, setNotification) => {
+export const getLoggedInUserData = async (
+  setLoggedInUserData,
+  setNotification,
+) => {
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/current-user`,
       { withCredentials: true },
     )
-    setAdminData(response.data)
+    setLoggedInUserData(response.data)
     return response.data
   } catch (error) {
     setNotification(`${error.response.data.message}`)
@@ -190,6 +292,8 @@ export const getInputChangeAndOpenList =
     }
   }
 
+// END OF FUNCTIONS FOR REFACTORING IN THE TODO ABOVE
+
 export const increaseQuantity = (quantity, setQuantity) => {
   if (quantity < 20) {
     setQuantity((prevQuantity) => prevQuantity + 1)
@@ -237,16 +341,39 @@ export const uploadToS3 = async (file) => {
   return newUrl
 }
 
-export const convertToReadableDate = (isoDate) => {
+export const convertIsoToLocaleDateString = (isoDate) => {
   const date = new Date(isoDate)
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString("de-De", {
     hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
+    hour12: false,
   })
 }
 
 export const setDefaultImageByError = (event, image) => {
   event.target.src = image
+}
+
+export const ignorePropertiesWithEmptyValue = (dataObject) => {
+  return Object.keys(dataObject)
+    .filter((key) => dataObject[key] !== "")
+    .reduce((object, key) => {
+      object[key] = dataObject[key]
+      return object
+    }, {})
+}
+
+export const saveDataAndToggleInput = async (
+  e,
+  asyncOnSaveFunction,
+  setToggle,
+) => {
+  await asyncOnSaveFunction(e)
+  setToggle(false)
+}
+
+export const cancelWithScape = (e, setState) => {
+  if (e.key === "Escape") {
+    setState(false)
+  }
 }

@@ -192,6 +192,20 @@
     "addOneToCartButton": {
       "text": "add to cart"
     },
+    "buttons": {
+      "actions": {
+        "commons": {
+          "delete": "Delete",
+          "edit": "Edit",
+          "save": "Save",
+          "create": "Create"
+        },
+        "shipping": {
+          "show": "Show shipping data",
+          "hide": "Hide shipping data"
+        }
+      }
+    },
     "navbar": {
       "home": "Home",
       "shop": "Shop",
@@ -199,6 +213,15 @@
     },
     "crud": {
       "forms": {
+        "shippingData": {
+          "street": "Street",
+          "number": "Number",
+          "details": "Details",
+          "postal_code": "Postal code",
+          "city": "City",
+          "state": "State",
+          "country": "Country"
+        },
         "commonProperties": {
           "password": "Password",
           "createdAt": "Created at",
@@ -218,6 +241,12 @@
         "createProductForm": {
           "submitButton": "Create product"
         }
+      },
+      "buttons": {
+        "create": "Create",
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save"
       },
       "deleteUser": {
         "button": "Delete User",
@@ -324,6 +353,11 @@
       "returnProductsTitle": "Return buyed products policy",
       "faq": "Frequently Asked Questions / FAQ",
       "faqTitle": "Frequently Asked Questions"
+    }
+  },
+  "errors": {
+    "requests": {
+      "getShippingData": "Error while getting shipping data"
     }
   }
 }

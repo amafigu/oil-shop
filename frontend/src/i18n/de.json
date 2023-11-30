@@ -188,6 +188,20 @@
     "addOneToCartButton": {
       "text": "in den Warenkorb"
     },
+    "buttons": {
+      "actions": {
+        "commons": {
+          "delete": "Löschen",
+          "edit": "Editieren",
+          "save": "Speichern",
+          "create": "Erstellen"
+        },
+        "shipping": {
+          "show": "Versanddaten anzeigen",
+          "hide": "Versanddaten ausblenden"
+        }
+      }
+    },
     "navbar": {
       "home": "Home",
       "shop": "Shop",
@@ -195,6 +209,15 @@
     },
     "crud": {
       "forms": {
+        "shippingData": {
+          "street": "Straße",
+          "number": "Nummer",
+          "details": "Details",
+          "postal_code": "PLZ",
+          "city": "Stadt",
+          "state": "Bundesland",
+          "country": "Land"
+        },
         "commonProperties": {
           "password": "Passwort",
           "createdAt": "Erstellt am",
@@ -214,6 +237,12 @@
         "createProductForm": {
           "submitButton": "Produkt erstellen"
         }
+      },
+      "buttons": {
+        "create": "Erstellen",
+        "delete": "Löschen",
+        "edit": "Editieren",
+        "save": "Speichern"
       },
       "deleteUser": {
         "button": "Benutzer löschen",
@@ -320,6 +349,11 @@
       "returnProductsTitle": "Return buyed products policy",
       "faq": "Frequently Asked Questions / FAQ",
       "faqTitle": "Frequently Asked Questions"
+    }
+  },
+  "errors": {
+    "requests": {
+      "getShippingData": "Fehler beim Abrufen der Versanddaten"
     }
   }
 }

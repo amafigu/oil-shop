@@ -2,17 +2,16 @@ import dotenv from 'dotenv';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { decodeJWT } from '../middleware/decodeToken.js';
+import {
+  comparePassword,
+  hashPassword,
+} from '../middleware/passwordEncrypt.js';
 import { validateBody } from '../middleware/validationMiddleware.js';
 import {
   CreateUserSchema,
   LoginSchema,
 } from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
-
-import {
-  comparePassword,
-  hashPassword,
-} from '../middleware/passwordEncrypt.js';
 dotenv.config();
 const router = express.Router();
 
@@ -113,10 +112,15 @@ router.post('/logout', (req, res) => {
 
 router.post('/login', validateBody(LoginSchema), async (req, res) => {
   try {
-    const user = await db.users.findOne({ where: { email: req.body.email } });
+    const user = await db.users.findOne({
+      where: { email: req.body.email },
+      include: [{ model: db.userRoles, as: 'role' }],
+    });
     if (!user) {
       return res.status(404).json({ message: 'Invalid email' });
     }
+
+    console.log('USER ', user);
 
     const isPasswordValid = await comparePassword(
       req.body.password,
@@ -134,9 +138,9 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
         lastName: user.lastName,
         image: user.image,
         email: user.email,
-        role: user.role,
         image: user.image,
         roleId: user.roleId,
+        role: user.role.name,
       },
       process.env.JWT_KEY,
       { expiresIn: '3600000' } // 1 hour
@@ -167,15 +171,12 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
 
-    console.log('NEW ...req.body,  ', req.body);
-
     const hashedPassword = await hashPassword(req.body.password);
 
     const newUser = await db.users.create({
       ...req.body,
       password: hashedPassword,
     });
-    console.log('NEW USER 1 ', newUser);
 
     return res
       .status(201)
@@ -203,6 +204,9 @@ router.post(
       const newUser = await db.users.create({
         ...req.body,
         password: hashedPassword,
+        password: 'Guest!!!',
+
+        roleId: 4,
       });
 
       return res.status(201).json({

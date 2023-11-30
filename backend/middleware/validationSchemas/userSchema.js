@@ -23,7 +23,7 @@ const lastNameValidation = z
   });
 const emailValidation = z
   .string()
-  .min(8, 'Email should have at least 8 characters.')
+  .min(4, 'Email should have at least 4 characters.')
   .email('Invalid email format.')
   .max(40, "Email can't be longer than 40 characters.");
 

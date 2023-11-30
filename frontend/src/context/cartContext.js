@@ -6,9 +6,11 @@ export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
   const getInitialCart = () => {
+    console.log("getInitialCart")
     try {
       const storageCart = localStorage.getItem("yolo-cart")
       if (storageCart) {
+        console.log("getInitialCart storageCart", storageCart)
         return JSON.parse(storageCart)
       }
     } catch (error) {
@@ -16,11 +18,11 @@ export const CartProvider = ({ children }) => {
     }
     return []
   }
-
   const [cart, setCart] = useState(getInitialCart)
   const [notification, setNotification] = useState(null)
 
   useEffect(() => {
+    console.log("cart changed")
     localStorage.setItem("yolo-cart", JSON.stringify(cart))
   }, [cart])
 
@@ -78,6 +80,7 @@ export const CartProvider = ({ children }) => {
         updateProductQuantity,
         removeProduct,
         getAllProductsQuantity,
+        setCart,
       }}
     >
       {children}

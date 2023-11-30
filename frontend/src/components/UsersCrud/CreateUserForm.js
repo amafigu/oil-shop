@@ -155,7 +155,6 @@ const CreateUserForm = ({
           name='image'
           id='fileInput'
           onChange={setFileToUpload}
-          required
         />
       </div>
 

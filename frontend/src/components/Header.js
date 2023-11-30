@@ -6,7 +6,7 @@ const Header = ({ data }) => {
     firstName: data.firstName,
     lastName: data.lastName,
     email: data.email,
-    role: data.roleId, // TODO: change to role id for name that should come with user from somewhere
+    role: data.role, // TODO: change to role id for name that should come with user from somewhere
   }
 
   return (

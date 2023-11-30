@@ -1,6 +1,5 @@
 import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
-
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
@@ -11,7 +10,7 @@ export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const verifyToken = async () => {
+    const verifyCookie = async () => {
       setIsLoading(true)
       try {
         const response = await axios.get(
@@ -31,7 +30,7 @@ export const UserProvider = ({ children }) => {
       }
     }
 
-    verifyToken()
+    verifyCookie()
   }, [isLoggedIn])
 
   return (
