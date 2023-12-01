@@ -12,7 +12,7 @@ const userShippingDataModel = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    postal_code: {
+    postalCode: {
       type: DataTypes.STRING,
       allowNull: true,
     },

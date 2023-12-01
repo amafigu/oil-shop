@@ -327,8 +327,7 @@ router.put('/user/shipping-data/:id', async (req, res) => {
       shippingData.street = req.body.street || shippingData.street;
       shippingData.number = req.body.number || shippingData.number;
       shippingData.details = req.body.details || shippingData.details;
-      shippingData.postal_code =
-        req.body.postal_code || shippingData.postal_code;
+      shippingData.postalCode = req.body.postalCode || shippingData.postal_code;
       shippingData.city = req.body.city || shippingData.city;
       shippingData.state = req.body.state || shippingData.state;
       shippingData.country = req.body.country || shippingData.country;

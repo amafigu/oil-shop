@@ -19,7 +19,7 @@ const ShippingData = ({ userId }) => {
     street: "",
     number: "",
     details: "",
-    postal_code: "",
+    postalCode: "",
     city: "",
     state: "",
     country: "",

@@ -168,7 +168,7 @@ const OrderSummary = () => {
 
                     <div className={styles.clientInfoItem}>
                       <div className={styles.formField}>
-                        {shippingData.postal_code}
+                        {shippingData.postalCode}
                       </div>
                     </div>
 

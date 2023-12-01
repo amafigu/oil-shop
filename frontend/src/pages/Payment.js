@@ -45,7 +45,7 @@ const Payment = () => {
             street: formData.street,
             number: formData.number,
             details: formData.details,
-            postal_code: formData.postal_code,
+            postalCode: formData.postalCode,
             city: formData.city,
             state: formData.state,
             country: formData.country,
