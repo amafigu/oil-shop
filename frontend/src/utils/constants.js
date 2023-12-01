@@ -55,7 +55,7 @@ export const FORM_FIELDS_SHIPPING_DATA = [
     classCss: "formField",
   },
   {
-    name: "postal_code",
+    name: "postalCode",
     placeholder: "postal code",
     label: "Postal Code",
     type: "text",

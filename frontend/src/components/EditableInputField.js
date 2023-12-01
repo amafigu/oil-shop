@@ -18,10 +18,10 @@ const EditableInput = ({
   const textProperties = translate.components.crud.forms.shippingData
 
   return (
-    <div className={styles.itemRow} role='group' aria-labelledby={name}>
+    <div className={styles.itemRow}>
       {isEditing ? (
         <input
-          aria-label={label}
+          aria-label={`${label} input`}
           className={styles[classCss]}
           label={label}
           name={name}

@@ -217,7 +217,7 @@
           "street": "Street",
           "number": "Number",
           "details": "Details",
-          "postal_code": "Postal code",
+          "postalCode": "Postal code",
           "city": "City",
           "state": "State",
           "country": "Country"

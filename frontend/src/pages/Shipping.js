@@ -18,7 +18,7 @@ const Shipping = () => {
     city: "",
     state: "",
     country: "",
-    postal_code: "",
+    postalCode: "",
   })
 
   const navigate = useNavigate()

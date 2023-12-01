@@ -213,7 +213,7 @@
           "street": "Straße",
           "number": "Nummer",
           "details": "Details",
-          "postal_code": "PLZ",
+          "postalCode": "PLZ",
           "city": "Stadt",
           "state": "Bundesland",
           "country": "Land"
