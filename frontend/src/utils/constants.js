@@ -89,3 +89,5 @@ export const CSS_CLASSES = Object.freeze({
     USER_OPTIONS: "userOptionsButton",
   },
 })
+
+export const SPECIAL_CHARACTERS_REGEX = /[ !"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/
