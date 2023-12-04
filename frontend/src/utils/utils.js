@@ -1,6 +1,6 @@
+import { SPECIAL_CHARACTERS_REGEX } from "#utils/constants"
 import axios from "axios"
 import { useEffect } from "react"
-
 export const titleCase = (str, separator) => {
   return str
     .split(separator)
@@ -12,12 +12,27 @@ export const listenInputChangeAndSetDataObject = (
   e,
   updatedDataObj,
   setUpdatedDataObj,
+  setErrorNotification,
 ) => {
   const inputLength = e.target.value.length
   if (inputLength > 60) {
     console.error("input value too long")
+    setErrorNotification("input value too long")
+    setTimeout(() => setErrorNotification(null), 3000)
     return
   }
+  if (
+    e.target.value.match(SPECIAL_CHARACTERS_REGEX) &&
+    e.target.name !== "details" &&
+    e.target.value.match(SPECIAL_CHARACTERS_REGEX) &&
+    e.target.name !== "postalCode"
+  ) {
+    console.error(`${e.target.name} can not include special characters`)
+    setErrorNotification(`${e.target.name} can not include special characters`)
+    setTimeout(() => setErrorNotification(null), 3000)
+    return
+  }
+
   setUpdatedDataObj({
     ...updatedDataObj,
     [e.target.name]: e.target.value,
@@ -98,6 +113,7 @@ export const updateUserShippingData = async (userId, updatedData) => {
       updatedData,
       { withCredentials: true },
     )
+
     return response.data
   } catch (error) {
     console.error(error)
@@ -117,21 +133,22 @@ export const updateDataAndSetStates = async (
   e.preventDefault()
 
   try {
-    setUpdatedData((prevData) => ({
-      ...prevData,
-      ...nonUpdatedData,
-    }))
-    if (JSON.stringify(nonUpdatedData) === JSON.stringify(updatedData)) {
+    const cleanedUpdatedData = filterEmptyValues(updatedData)
+
+    if (
+      Object.keys(cleanedUpdatedData).length === 0 ||
+      JSON.stringify(nonUpdatedData) === JSON.stringify(cleanedUpdatedData)
+    ) {
       setNotification("No changes made.")
-      setTimeout(() => setNotification(null), 1300)
+      setTimeout(() => setNotification(null), 2000)
       return
     }
 
-    await request
+    await request(cleanedUpdatedData)
 
     setNonUpdatedData((prevData) => ({
       ...prevData,
-      ...filterEmptyValues(updatedData),
+      ...cleanedUpdatedData,
     }))
     setUpdatedData(nonUpdatedData)
   } catch (error) {
@@ -356,7 +373,12 @@ export const setDefaultImageByError = (event, image) => {
 
 export const ignorePropertiesWithEmptyValue = (dataObject) => {
   return Object.keys(dataObject)
-    .filter((key) => dataObject[key] !== "")
+    .filter(
+      (key) =>
+        dataObject[key] !== "" &&
+        dataObject[key] !== null &&
+        dataObject[key] !== undefined,
+    )
     .reduce((object, key) => {
       object[key] = dataObject[key]
       return object
