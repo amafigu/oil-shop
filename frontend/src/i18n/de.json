@@ -194,7 +194,8 @@
           "delete": "Löschen",
           "edit": "Editieren",
           "save": "Speichern",
-          "create": "Erstellen"
+          "create": "Erstellen",
+          "noChanges": "Keine Änderungen"
         },
         "shipping": {
           "show": "Versanddaten anzeigen",

@@ -41,6 +41,7 @@ const ShippingData = ({ userId }) => {
       try {
         if (!userId) return
         const shippingData = await getUserShippingData(userId)
+        console.log("1 shippingData useEffect ", shippingData)
         if (!shippingData) {
           setNotification(`${errorText.getShippingData} `)
           setTimeout(() => setNotification(null), 3000)
@@ -60,7 +61,7 @@ const ShippingData = ({ userId }) => {
   const updateUserShippingDataAndSetStates = async (e) => {
     updateDataAndSetStates(
       e,
-      updateUserShippingData(userId, updatedShippingData),
+      () => updateUserShippingData(userId, updatedShippingData),
       nonUpdatedShippingData,
       setNonUpdatedShippingData,
       updatedShippingData,
@@ -69,6 +70,9 @@ const ShippingData = ({ userId }) => {
       ignorePropertiesWithEmptyValue,
     )
   }
+  console.log("2 nonUpdatedShippingDataFr  ", nonUpdatedShippingData)
+
+  console.log("updatedShippingDataFr  ", updatedShippingData)
 
   return (
     <>
@@ -94,6 +98,7 @@ const ShippingData = ({ userId }) => {
                       e,
                       updatedShippingData,
                       setUpdatedShippingData,
+                      setNotification,
                     )
                   }
                   onSave={(e) => updateUserShippingDataAndSetStates(e)}

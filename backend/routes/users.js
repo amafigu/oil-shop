@@ -8,8 +8,9 @@ import {
 } from '../middleware/passwordEncrypt.js';
 import { validateBody } from '../middleware/validationMiddleware.js';
 import {
-  CreateUserSchema,
-  LoginSchema,
+  createUserValidation,
+  loginValidation,
+  shippingDataValidation,
 } from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
 dotenv.config();
@@ -110,7 +111,7 @@ router.post('/logout', (req, res) => {
   res.json({ message: 'Logged out successfully' });
 });
 
-router.post('/login', validateBody(LoginSchema), async (req, res) => {
+router.post('/login', validateBody(loginValidation), async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { email: req.body.email },
@@ -119,8 +120,6 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'Invalid email' });
     }
-
-    console.log('USER ', user);
 
     const isPasswordValid = await comparePassword(
       req.body.password,
@@ -161,7 +160,7 @@ router.post('/login', validateBody(LoginSchema), async (req, res) => {
   }
 });
 
-router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
+router.post('/create', validateBody(createUserValidation), async (req, res) => {
   try {
     const existingUser = await db.users.findOne({
       where: { email: req.body.email },
@@ -188,7 +187,7 @@ router.post('/create', validateBody(CreateUserSchema), async (req, res) => {
 
 router.post(
   '/create-guest',
-  validateBody(CreateUserSchema),
+  validateBody(createUserValidation),
   async (req, res) => {
     try {
       const existingUser = await db.users.findOne({
@@ -315,31 +314,74 @@ router.post('/user/shipping-data/:id', async (req, res) => {
   }
 });
 
-router.put('/user/shipping-data/:id', async (req, res) => {
-  try {
-    const shippingData = await db.usersShippingData.findOne({
-      where: { userId: req.params.id },
-    });
+router.put(
+  '/user/shipping-data/:id',
+  validateBody(shippingDataValidation),
 
-    if (!shippingData) {
-      await db.usersShippingData.create({ ...req.body, userId: req.params.id });
-    } else {
-      shippingData.street = req.body.street || shippingData.street;
-      shippingData.number = req.body.number || shippingData.number;
-      shippingData.details = req.body.details || shippingData.details;
-      shippingData.postalCode = req.body.postalCode || shippingData.postal_code;
-      shippingData.city = req.body.city || shippingData.city;
-      shippingData.state = req.body.state || shippingData.state;
-      shippingData.country = req.body.country || shippingData.country;
+  async (req, res) => {
+    try {
+      const shippingData = await db.usersShippingData.findOne({
+        where: { userId: req.params.id },
+      });
 
-      await shippingData.save();
+      if (!shippingData) {
+        await db.usersShippingData.create({
+          ...req.body,
+          userId: req.params.id,
+        });
+      } else {
+        shippingData.street =
+          req.body.street !== undefined &&
+          req.body.street !== '' &&
+          req.body.street !== null
+            ? req.body.street
+            : shippingData.street;
+        shippingData.number =
+          req.body.number !== undefined &&
+          req.body.number !== '' &&
+          req.body.number !== null
+            ? req.body.number
+            : shippingData.number;
+        shippingData.details =
+          req.body.details !== undefined &&
+          req.body.details !== '' &&
+          req.body.details !== null
+            ? req.body.details
+            : shippingData.details;
+        shippingData.postalCode =
+          req.body.postalCode !== undefined &&
+          req.body.postalCode !== '' &&
+          req.body.postalCode !== null
+            ? req.body.postalCode
+            : shippingData.postalCode;
+        shippingData.city =
+          req.body.city !== undefined &&
+          req.body.city !== '' &&
+          req.body.city !== null
+            ? req.body.city
+            : shippingData.city;
+        shippingData.state =
+          req.body.state !== undefined &&
+          req.body.state !== '' &&
+          req.body.state
+            ? req.body.state
+            : shippingData.state;
+        shippingData.country =
+          req.body.country !== undefined &&
+          req.body.country !== '' &&
+          req.body.country !== null
+            ? req.body.country
+            : shippingData.country;
+
+        await shippingData.save();
+      }
+
+      return res.json({ message: 'Shipping data updated successfully' });
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
     }
-
-    return res.json({ message: 'Shipping data updated successfully' });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
   }
-});
+);
 
 router.get('/verify-token', (req, res) => {
   try {
