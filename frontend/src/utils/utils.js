@@ -144,13 +144,16 @@ export const updateDataAndSetStates = async (
       return
     }
 
-    await request(cleanedUpdatedData)
+    const response = await request(cleanedUpdatedData)
 
+    setUpdatedData((prevData) => ({
+      ...prevData,
+      ...cleanedUpdatedData,
+    }))
     setNonUpdatedData((prevData) => ({
       ...prevData,
       ...cleanedUpdatedData,
     }))
-    setUpdatedData(nonUpdatedData)
   } catch (error) {
     alert("Could not update data: " + error)
   }
