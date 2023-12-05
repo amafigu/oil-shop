@@ -84,9 +84,12 @@ export const FORM_FIELDS_SHIPPING_DATA = [
   },
 ]
 
-export const CSS_CLASSES = Object.freeze({
+export const STYLES = Object.freeze({
   BUTTONS: {
     USER_OPTIONS: "userOptionsButton",
+  },
+  FORMS: {
+    FIELD: "formField",
   },
 })
 

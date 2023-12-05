@@ -1,8 +1,8 @@
-import EditableInput from "#components/EditableInputField"
+import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
-import { CSS_CLASSES } from "#utils/constants"
+import { STYLES } from "#utils/constants"
 import {
   getUserShippingData,
   ignorePropertiesWithEmptyValue,
@@ -83,7 +83,7 @@ const ShippingData = ({ userId }) => {
           setToggle={setShowForm}
           textHide={`${buttonsText.actions.shipping.hide}`}
           textShow={`${buttonsText.actions.shipping.show}`}
-          classCss={CSS_CLASSES.BUTTONS.USER_OPTIONS}
+          classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (
           <div>
@@ -102,7 +102,7 @@ const ShippingData = ({ userId }) => {
                     )
                   }
                   onSave={(e) => updateUserShippingDataAndSetStates(e)}
-                  classCss={"formField"}
+                  classCss={STYLES.FORMS.FIELD}
                   originalPropertyData={nonUpdatedShippingData}
                   updatedPropertyData={updatedShippingData}
                 />
