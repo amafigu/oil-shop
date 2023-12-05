@@ -8,6 +8,7 @@ import {
 } from '../middleware/passwordEncrypt.js';
 import { validateBody } from '../middleware/validationMiddleware.js';
 import {
+  createGuestUserValidation,
   createUserValidation,
   loginValidation,
   shippingDataValidation,
@@ -187,7 +188,7 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
 
 router.post(
   '/create-guest',
-  validateBody(createUserValidation),
+  validateBody(createGuestUserValidation),
   async (req, res) => {
     try {
       const existingUser = await db.users.findOne({
@@ -198,14 +199,12 @@ router.post(
         return res.status(400).json({ message: 'Email already in use' });
       }
 
-      const hashedPassword = await hashPassword(req.body.password);
+      const hashedPassword = await hashPassword('dummyPass');
 
       const newUser = await db.users.create({
         ...req.body,
-        password: hashedPassword,
-        password: 'Guest!!!',
-
         roleId: 4,
+        password: hashedPassword,
       });
 
       return res.status(201).json({
