@@ -14,23 +14,61 @@ export const listenInputChangeAndSetDataObject = (
   setUpdatedDataObj,
   setErrorNotification,
 ) => {
-  const inputLength = e.target.value.length
-  if (inputLength > 60) {
-    console.error("input value too long")
-    setErrorNotification("input value too long")
+  const inputValueLength = e.target.value.length
+  const inputValue = e.target.value
+  const inputName = e.target.name
+
+  if (
+    inputValue.match(SPECIAL_CHARACTERS_REGEX) &&
+    inputName !== "details" &&
+    inputName !== "postalCode" &&
+    inputName !== "email"
+  ) {
+    console.error(`${inputName} can not include special characters`)
+    setErrorNotification(`${inputName} can not include special characters`)
     setTimeout(() => setErrorNotification(null), 3000)
     return
   }
+
+  if (inputName === "firstName" || inputName === "lastName") {
+    if (!/^[A-Z]/.test(inputValue)) {
+      setErrorNotification("Name should start with a capital letter")
+      setTimeout(() => setErrorNotification(null), 3000)
+    }
+    if (inputValueLength > 30) {
+      console.error("Please enter a shorter name")
+      setErrorNotification("Please enter a shorter name")
+      setTimeout(() => setErrorNotification(null), 3000)
+      return
+    }
+    if (inputValueLength < 3) {
+      console.error("Please enter a longer name")
+      setErrorNotification("Please enter a longer name")
+      setTimeout(() => setErrorNotification(null), 3000)
+      return
+    }
+  }
+
+  if (inputName === "details" || inputName === "street") {
+    if (inputValueLength > 60) {
+      console.error("Please enter a shorter value")
+      setErrorNotification("Please enter a shorter value")
+      setTimeout(() => setErrorNotification(null), 3000)
+      return
+    }
+  }
+
   if (
-    e.target.value.match(SPECIAL_CHARACTERS_REGEX) &&
-    e.target.name !== "details" &&
-    e.target.value.match(SPECIAL_CHARACTERS_REGEX) &&
-    e.target.name !== "postalCode"
+    inputName === "postalCode" ||
+    inputName === "city" ||
+    inputName === "state"
   ) {
-    console.error(`${e.target.name} can not include special characters`)
-    setErrorNotification(`${e.target.name} can not include special characters`)
-    setTimeout(() => setErrorNotification(null), 3000)
-    return
+    if (inputValueLength > 30) {
+      console.error("Please enter a shorter value")
+      setErrorNotification("Please enter a shorter value")
+      setTimeout(() => setErrorNotification(null), 3000)
+      return
+    }
   }
 
   setUpdatedDataObj({
@@ -144,7 +182,7 @@ export const updateDataAndSetStates = async (
       return
     }
 
-    const response = await request(cleanedUpdatedData)
+    await request(cleanedUpdatedData)
 
     setUpdatedData((prevData) => ({
       ...prevData,
