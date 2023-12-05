@@ -22,6 +22,7 @@ const FormInput = ({
         value={value}
         placeholder={placeholder}
         id={name}
+        required
       />
     </div>
   )
