@@ -1,17 +1,20 @@
 import FormInput from "#components/FormInput"
+import NotificationCard from "#components/NotificationCard"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import {
-  FORM_FIELDS_GUEST_USER_DATA,
-  FORM_FIELDS_SHIPPING_DATA,
-} from "#utils/constants"
-import React, { useEffect, useState } from "react"
+import { STYLES } from "#utils/constants"
+import { listenInputChangeAndSetDataObject } from "#utils/utils"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./shipping.module.scss"
 
 const Shipping = () => {
+  const [notification, setNotification] = useState(null)
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
     street: "",
     number: "",
     details: "",
@@ -22,11 +25,9 @@ const Shipping = () => {
   })
 
   const navigate = useNavigate()
-
   const { translate } = useLocaleContext()
   const { cart } = useCartContext()
   const { user, isLoggedIn, isLoading } = useUserContext()
-
   const text = translate.pages.shipping
 
   useEffect(() => {
@@ -39,9 +40,7 @@ const Shipping = () => {
     }
   }, [cart, navigate, isLoggedIn, isLoading, user])
 
-  const listenFormDataChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  console.log(formData)
 
   const submitGuestUserWithOrders = async (e) => {
     if (cart.length > 0) {
@@ -59,6 +58,7 @@ const Shipping = () => {
   }
   return (
     <div className={styles.shippingPageWrapper}>
+      {notification && <NotificationCard message={notification} />}
       <div className={styles.shippingPage}>
         <div className={styles.emailRegistrationText}>
           {"Please"}{" "}
@@ -72,26 +72,21 @@ const Shipping = () => {
           <div className={styles.customerInfo}>
             <div className={styles.infoColumn}>
               <div className={styles.containerTitle}>{text.yourInfo}</div>
-              {FORM_FIELDS_GUEST_USER_DATA.map((field) => (
+              {Object.keys(formData).map((field) => (
                 <FormInput
-                  classCss={field.classCss}
-                  key={field.name}
-                  label={field.label}
-                  name={field.name}
-                  onChangeListener={(e) => listenFormDataChange(e)}
-                  placeholder={field.placeholder}
-                  value={setFormData[field.name]}
-                />
-              ))}
-              {FORM_FIELDS_SHIPPING_DATA.map((field) => (
-                <FormInput
-                  classCss={field.classCss}
-                  key={field.name}
-                  label={field.label}
-                  name={field.name}
-                  onChangeListener={(e) => listenFormDataChange(e)}
-                  placeholder={field.placeholder}
-                  value={setFormData[field.name]}
+                  classCss={STYLES.FORMS.FIELD}
+                  key={field}
+                  name={field}
+                  onChangeListener={(e) =>
+                    listenInputChangeAndSetDataObject(
+                      e,
+                      formData,
+                      setFormData,
+                      setNotification,
+                    )
+                  }
+                  placeholder={field}
+                  value={formData[field]}
                 />
               ))}
             </div>

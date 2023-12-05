@@ -1,7 +1,7 @@
 import useLocaleContext from "#context/localeContext"
 import { cancelWithScape, saveDataAndToggleInput } from "#utils/utils"
 import { useState } from "react"
-import styles from "./editableInputField.module.scss"
+import styles from "./editableInput.module.scss"
 
 const EditableInput = ({
   label,
