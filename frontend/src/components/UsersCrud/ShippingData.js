@@ -4,6 +4,7 @@ import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import { STYLES } from "#utils/constants"
 import {
+  checkIfAllObjectsValuesAreEmptyStrings,
   getUserShippingData,
   ignorePropertiesWithEmptyValue,
   listenInputChangeAndSetDataObject,
@@ -35,6 +36,7 @@ const ShippingData = ({ userId }) => {
   const { translate } = useLocaleContext()
   const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
+  const usersWarningText = translate.warningMessages.users
 
   useEffect(() => {
     async function getOriginalShippingData() {
@@ -56,6 +58,16 @@ const ShippingData = ({ userId }) => {
     getOriginalShippingData()
   }, [userId, errorText.getShippingData])
 
+  useEffect(() => {
+    if (
+      checkIfAllObjectsValuesAreEmptyStrings(nonUpdatedShippingData) &&
+      showForm
+    ) {
+      setNotification(usersWarningText.shippingDataIsEmpty)
+      setTimeout(() => setNotification(null), 3000)
+    }
+  }, [nonUpdatedShippingData, showForm, usersWarningText.shippingDataIsEmpty])
+
   const updateUserShippingDataAndSetStates = async (e) => {
     updateDataAndSetStates(
       e,
@@ -68,10 +80,6 @@ const ShippingData = ({ userId }) => {
       ignorePropertiesWithEmptyValue,
     )
   }
-
-  console.log(nonUpdatedShippingData == initialShippingData)
-  console.log(updatedShippingData)
-  console.log(initialShippingData)
 
   return (
     <>
