@@ -1,11 +1,12 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { uploadToS3 } from "#utils/utils"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { DEFAULT_USER_IMAGE } from "../../utils/constants"
 import styles from "./createUserForm.module.scss"
 
@@ -14,22 +15,26 @@ const CreateUserForm = ({
   setEmailInUserError,
   setRefreshAllUsersCounter,
 }) => {
-  const [notification, setNotification] = useState()
+  const [errorMessage, setErrorMessage] = useState("")
 
+  const [notification, setNotification] = useState()
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [file, setFile] = useState(null)
-
   const [showPassword, setShowPassword] = useState(false)
+  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
+
   const location = useLocation()
   const currentPath = location.pathname
+  const navigate = useNavigate()
+  console.log("currentPath", currentPath)
   const doNotRedirectFrom = ["/users/current-admin"]
-  //   const doNotShowImageInput = ["/login", "/sign-up", "/users/current-admin"]
+  console.log(currentPath.includes("/sign-up"))
 
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
@@ -37,9 +42,7 @@ const CreateUserForm = ({
 
   const createUser = async (e) => {
     e.preventDefault()
-
     let image = await uploadToS3(file)
-
     if (!image) {
       console.error("user image not selected. ")
       image = DEFAULT_USER_IMAGE
@@ -49,16 +52,47 @@ const CreateUserForm = ({
 
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/users/create`, newUser)
-
-      if (!currentPath.includes(doNotRedirectFrom)) {
-        //setTimeout(() => navigate("/users/current-user"), 400)
-        alert("go to login icon and click")
+      if (currentPath.includes("/admin")) {
+        setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
+        setNotification(text.createUser.success)
+        setTimeout(() => setNotification(null), 3000)
+        return
       }
 
-      setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
+      if (currentPath.includes("/sign-up")) {
+        const loginResponse = await axios.post(
+          `${process.env.REACT_APP_API_URL}/users/login`,
+          { email, password },
+          { withCredentials: true },
+        )
 
-      setNotification(text.createUser.success)
-      setTimeout(() => setNotification(null), 6000)
+        if (loginResponse && loginResponse.status === 200) {
+          console.log("loginResponse", loginResponse.status)
+          const getLoggedInUser = async () => {
+            try {
+              const userResponse = await axios.get(
+                `${process.env.REACT_APP_API_URL}/users/current-user`,
+                { withCredentials: true },
+              )
+
+              const userData = userResponse.data
+              console.log("userData", userData)
+
+              setUserEmail(userData.email)
+              setIsLoggedIn(true)
+              setUser(userData)
+            } catch (error) {
+              setErrorMessage(`${text.errorMessage}`)
+              setTimeout(() => setErrorMessage(null), 3000)
+
+              console.error("Error fetching user data", error)
+            }
+          }
+
+          getLoggedInUser()
+          navigate("/users/current-user")
+        }
+      }
     } catch (error) {
       /* if (error.response.data.errors) {
         const errorMessages = error.response.data.errors.reduce((acc, err) => {
@@ -142,21 +176,23 @@ const CreateUserForm = ({
         </button>
       </div>
 
-      <div className={styles.labelAndInputContainer}>
-        <span className={styles.label}>
-          {file ? "Selected file: " : "Select a file"}
-        </span>
-        <label className={styles.labelForFile} htmlFor='fileInput'>
-          {file ? file.name : "Search on device"}
-        </label>
+      {!currentPath.includes("/sign-up") && (
+        <div className={styles.labelAndInputContainer}>
+          <span className={styles.label}>
+            {file ? "Selected file: " : "Select a file"}
+          </span>
+          <label className={styles.labelForFile} htmlFor='fileInput'>
+            {file ? file.name : "Search on device"}
+          </label>
 
-        <input
-          type='file'
-          name='image'
-          id='fileInput'
-          onChange={setFileToUpload}
-        />
-      </div>
+          <input
+            type='file'
+            name='image'
+            id='fileInput'
+            onChange={setFileToUpload}
+          />
+        </div>
+      )}
 
       <button className={styles.formButton} type='submit'>
         {text.createUser.submitButton}

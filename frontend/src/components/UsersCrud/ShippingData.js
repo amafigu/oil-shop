@@ -41,13 +41,11 @@ const ShippingData = ({ userId }) => {
       try {
         if (!userId) return
         const shippingData = await getUserShippingData(userId)
-        console.log("1 shippingData useEffect ", shippingData)
         if (!shippingData) {
-          setNotification(`${errorText.getShippingData} `)
-          setTimeout(() => setNotification(null), 3000)
           return
+        } else {
+          setNonUpdatedShippingData(shippingData)
         }
-        setNonUpdatedShippingData(shippingData)
       } catch (error) {
         setNotification(`${errorText.getShippingData}`)
         setTimeout(() => setNotification(null), 3000)
@@ -70,9 +68,10 @@ const ShippingData = ({ userId }) => {
       ignorePropertiesWithEmptyValue,
     )
   }
-  console.log("2 nonUpdatedShippingDataFr  ", nonUpdatedShippingData)
 
-  console.log("updatedShippingDataFr  ", updatedShippingData)
+  console.log(nonUpdatedShippingData == initialShippingData)
+  console.log(updatedShippingData)
+  console.log(initialShippingData)
 
   return (
     <>
