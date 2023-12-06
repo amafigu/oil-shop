@@ -440,3 +440,12 @@ export const cancelWithScape = (e, setState) => {
     setState(false)
   }
 }
+
+export const validateObjectWithEmpty = (obj) => {
+  for (let key in obj) {
+    if (obj[key] !== "" || obj[key] !== null || obj[key] !== undefined) {
+      return false
+    }
+  }
+  return true
+}
