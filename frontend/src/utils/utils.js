@@ -441,9 +441,10 @@ export const cancelWithScape = (e, setState) => {
   }
 }
 
-export const validateObjectWithEmpty = (obj) => {
+export const checkIfAllObjectsValuesAreEmptyStrings = (obj) => {
+  console.log(obj)
   for (let key in obj) {
-    if (obj[key] !== "" || obj[key] !== null || obj[key] !== undefined) {
+    if (obj[key] !== "") {
       return false
     }
   }
