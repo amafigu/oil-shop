@@ -59,7 +59,7 @@ const UserData = ({ userId }) => {
     }
 
     getOriginalUserData()
-  }, [userId, errorText.getUserData])
+  }, [userId, errorText.user.getUserData])
 
   useEffect(() => {
     if (
