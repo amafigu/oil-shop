@@ -15,7 +15,7 @@ const CreateUserForm = ({
   setEmailInUserError,
   setRefreshAllUsersCounter,
 }) => {
-  const [errorMessage, setErrorMessage] = useState("")
+  const [, setErrorMessage] = useState("")
 
   const [notification, setNotification] = useState()
   const [firstName, setFirstName] = useState("")
@@ -33,7 +33,6 @@ const CreateUserForm = ({
   const currentPath = location.pathname
   const navigate = useNavigate()
   console.log("currentPath", currentPath)
-  const doNotRedirectFrom = ["/users/current-admin"]
   console.log(currentPath.includes("/sign-up"))
 
   const setFileToUpload = (e) => {
