@@ -22,7 +22,6 @@ export const CartProvider = ({ children }) => {
   const [notification, setNotification] = useState(null)
 
   useEffect(() => {
-    console.log("cart changed")
     localStorage.setItem("yolo-cart", JSON.stringify(cart))
   }, [cart])
 
