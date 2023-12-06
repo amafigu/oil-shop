@@ -2,7 +2,7 @@ import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
-import { API_SHIPPING_DATA, STYLES } from "#utils/constants"
+import { API_USER_CUSTOMER, STYLES } from "#utils/constants"
 import {
   checkIfAllObjectsValuesAreEmptyStrings,
   getDataAndSetErrorMessage,
@@ -14,23 +14,20 @@ import {
 import { useEffect, useState } from "react"
 import styles from "./shippingData.module.scss"
 
-const ShippingData = ({ userId }) => {
+const UserData = ({ userId }) => {
   const [showForm, setShowForm] = useState(false)
-  const initialShippingData = {
-    street: "",
-    number: "",
-    details: "",
-    postalCode: "",
-    city: "",
-    state: "",
-    country: "",
+  const initialUserData = {
+    firstName: "",
+    lastName: "",
+    email: "",
   }
-  const [nonUpdatedShippingData, setNonUpdatedShippingData] = useState({
-    ...initialShippingData,
+
+  const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
+    ...initialUserData,
   })
 
-  const [updatedShippingData, setUpdatedShippingData] = useState({
-    ...initialShippingData,
+  const [updatedUserData, setUpdatedUserData] = useState({
+    ...initialUserData,
   })
   const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
@@ -39,40 +36,49 @@ const ShippingData = ({ userId }) => {
   const usersWarningText = translate.warningMessages.users
 
   useEffect(() => {
-    async function getOriginalShippingData() {
-      if (!userId) return
-      const shippingData = await getDataAndSetErrorMessage(
-        userId,
-        API_SHIPPING_DATA,
-        setNotification,
-      )
-      if (!shippingData) {
-        return
-      } else {
-        setNonUpdatedShippingData(shippingData)
+    async function getOriginalUserData() {
+      try {
+        if (!userId) return
+        const userData = await getDataAndSetErrorMessage(
+          userId,
+          API_USER_CUSTOMER,
+          setNotification,
+        )
+
+        console.log("userData", userData)
+        if (!userData) {
+          return
+        } else {
+          setNonUpdatedUserData(userData)
+        }
+      } catch (error) {
+        setNotification(`${errorText.user.getUserData}`)
+        setTimeout(() => setNotification(null), 3000)
+        console.error(error)
       }
     }
-    getOriginalShippingData()
-  }, [userId, errorText.user.getShippingData])
+
+    getOriginalUserData()
+  }, [userId, errorText.user.getUserData])
 
   useEffect(() => {
     if (
-      checkIfAllObjectsValuesAreEmptyStrings(nonUpdatedShippingData) &&
+      checkIfAllObjectsValuesAreEmptyStrings(nonUpdatedUserData) &&
       showForm
     ) {
       setNotification(usersWarningText.shippingDataIsEmpty)
       setTimeout(() => setNotification(null), 3000)
     }
-  }, [nonUpdatedShippingData, showForm, usersWarningText.shippingDataIsEmpty])
+  }, [nonUpdatedUserData, showForm, usersWarningText.shippingDataIsEmpty])
 
-  const updateUserShippingDataAndSetStates = async (e) => {
+  const updateUserDataAndSetStates = async (e) => {
     updateDataAndSetStates(
       e,
-      () => updateDataRequest(userId, updatedShippingData, API_SHIPPING_DATA),
-      nonUpdatedShippingData,
-      setNonUpdatedShippingData,
-      updatedShippingData,
-      setUpdatedShippingData,
+      () => updateDataRequest(userId, updatedUserData, API_USER_CUSTOMER),
+      nonUpdatedUserData,
+      setNonUpdatedUserData,
+      updatedUserData,
+      setUpdatedUserData,
       setNotification,
       ignorePropertiesWithEmptyValue,
     )
@@ -85,30 +91,30 @@ const ShippingData = ({ userId }) => {
         <ToggleButton
           show={showForm}
           setToggle={setShowForm}
-          textHide={`${buttonsText.actions.shipping.hide}`}
-          textShow={`${buttonsText.actions.shipping.show}`}
+          textHide={`${buttonsText.actions.user.hide}`}
+          textShow={`${buttonsText.actions.user.show}`}
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (
           <div>
-            {Object.keys(initialShippingData).map((key) => (
+            {Object.keys(initialUserData).map((key) => (
               <div className={styles.inputContainer} key={key}>
                 <EditableInput
                   label={key}
                   name={key}
-                  value={updatedShippingData[key]}
+                  value={updatedUserData[key]}
                   onChange={(e) =>
                     listenInputChangeAndSetDataObject(
                       e,
-                      updatedShippingData,
-                      setUpdatedShippingData,
+                      updatedUserData,
+                      setUpdatedUserData,
                       setNotification,
                     )
                   }
-                  onSave={(e) => updateUserShippingDataAndSetStates(e)}
+                  onSave={(e) => updateUserDataAndSetStates(e)}
                   classCss={STYLES.FORMS.FIELD}
-                  originalPropertyData={nonUpdatedShippingData}
-                  updatedPropertyData={updatedShippingData}
+                  originalPropertyData={nonUpdatedUserData}
+                  updatedPropertyData={updatedUserData}
                 />
               </div>
             ))}
@@ -119,4 +125,4 @@ const ShippingData = ({ userId }) => {
   )
 }
 
-export default ShippingData
+export default UserData
