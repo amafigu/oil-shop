@@ -2,11 +2,11 @@ import Header from "#components/Header"
 import NotificationCard from "#components/NotificationCard"
 import GetOrders from "#components/UsersCrud/GetOrders"
 import ShippingData from "#components/UsersCrud/ShippingData"
+import UserData from "#components/UsersCrud/UserData"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./user.module.scss"
-
 const User = () => {
   const [userData, setUserData] = useState({})
   const [notification, setNotification] = useState(null)
@@ -40,6 +40,9 @@ const User = () => {
       <div className={styles.userPage}>
         <Header data={userData} />
 
+        <div className={styles.componentContainer}>
+          <UserData userId={userData.id} />
+        </div>
         <div className={styles.componentContainer}>
           <ShippingData userId={userData.id} />
         </div>

@@ -200,6 +200,10 @@
         "shipping": {
           "show": "Versanddaten anzeigen",
           "hide": "Versanddaten ausblenden"
+        },
+        "user": {
+          "show": "Benutzer Daten anzeigen",
+          "hide": "Benutzer Daten ausblenden"
         }
       }
     },
@@ -354,7 +358,10 @@
   },
   "errors": {
     "requests": {
-      "getShippingData": "Fehler beim Abrufen der Versanddaten"
+      "getShippingData": "Fehler beim Abrufen der Versanddaten",
+      "user": {
+        "getUserData": "Fehler beim Abrufen der Benutzerdaten"
+      }
     }
   },
   "warningMessages": {

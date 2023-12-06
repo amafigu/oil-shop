@@ -144,14 +144,32 @@ export const getUserShippingData = async (userId) => {
   }
 }
 
-export const updateUserShippingData = async (userId, updatedData) => {
+export const getDataAndSetErrorMessage = async (
+  dataId,
+  apiUrl,
+  setErrorMessage,
+) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}${apiUrl}${dataId}`,
+      { withCredentials: true },
+    )
+    return response.data
+  } catch (error) {
+    console.error(error)
+    if (typeof setErrorMessage === "function") {
+      setErrorMessage("Error by getting data")
+    }
+  }
+}
+
+export const updateDataRequest = async (dataId, updatedData, apiUrl) => {
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+      `${process.env.REACT_APP_API_URL}${apiUrl}${dataId}`,
       updatedData,
       { withCredentials: true },
     )
-
     return response.data
   } catch (error) {
     console.error(error)
@@ -193,7 +211,9 @@ export const updateDataAndSetStates = async (
       ...cleanedUpdatedData,
     }))
   } catch (error) {
-    alert("Could not update data: " + error)
+    console.log("Could not update data: " + error)
+    setNotification("Could not update data")
+    setTimeout(() => setNotification(null), 2000)
   }
 }
 

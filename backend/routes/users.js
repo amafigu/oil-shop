@@ -28,7 +28,10 @@ router.get('/', async (req, res) => {
 
 router.get('/user/:email', decodeJWT, async (req, res) => {
   try {
-    const user = await db.users.findOne({ where: { email: req.params.email } });
+    const user = await db.users.findOne({
+      where: { email: req.params.email },
+      attributes: { exclude: ['password'] },
+    });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -38,9 +41,13 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
-router.get('/guest/:id', async (req, res) => {
+router.get('/customer/:id', async (req, res) => {
   try {
-    const user = await db.users.findOne({ where: { id: req.params.id } });
+    const user = await db.users.findOne({
+      where: { id: req.params.id },
+      attributes: { exclude: ['password'] },
+    });
+    console.log('USER ', user);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -136,7 +143,6 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
-        image: user.image,
         email: user.email,
         image: user.image,
         roleId: user.roleId,

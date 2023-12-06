@@ -8,6 +8,10 @@ export const DEFAULT_PRODUCT_IMAGE =
 export const DEFAULT_USER_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default_user.png"
 
+export const API_USER = "/users/user/"
+export const API_USER_CUSTOMER = "/users/customer/"
+export const API_SHIPPING_DATA = "/users/user/shipping-data/"
+export const TIMEOUT_DURATION = 3000
 export const FORM_FIELDS_GUEST_USER_DATA = [
   {
     name: "firstName",
