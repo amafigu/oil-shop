@@ -359,5 +359,10 @@
     "requests": {
       "getShippingData": "Error while getting shipping data"
     }
+  },
+  "warningMessages": {
+    "users": {
+      "shippingDataIsEmpty": "enter your shipping data by editing and saving fields"
+    }
   }
 }

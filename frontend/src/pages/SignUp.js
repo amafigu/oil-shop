@@ -10,7 +10,6 @@ import styles from "./signUp.module.scss"
 const SignUp = () => {
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
-
   const { translate } = useLocaleContext()
   const text = translate.pages.signUp
 

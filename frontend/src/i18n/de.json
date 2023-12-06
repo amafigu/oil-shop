@@ -356,5 +356,10 @@
     "requests": {
       "getShippingData": "Fehler beim Abrufen der Versanddaten"
     }
+  },
+  "warningMessages": {
+    "users": {
+      "shippingDataIsEmpty": "Sie haben keine Versanddaten. Bitte füllen Sie die Versanddaten aus."
+    }
   }
 }

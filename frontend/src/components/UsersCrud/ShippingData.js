@@ -4,6 +4,7 @@ import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import { STYLES } from "#utils/constants"
 import {
+  checkIfAllObjectsValuesAreEmptyStrings,
   getUserShippingData,
   ignorePropertiesWithEmptyValue,
   listenInputChangeAndSetDataObject,
@@ -35,19 +36,18 @@ const ShippingData = ({ userId }) => {
   const { translate } = useLocaleContext()
   const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
+  const usersWarningText = translate.warningMessages.users
 
   useEffect(() => {
     async function getOriginalShippingData() {
       try {
         if (!userId) return
         const shippingData = await getUserShippingData(userId)
-        console.log("1 shippingData useEffect ", shippingData)
         if (!shippingData) {
-          setNotification(`${errorText.getShippingData} `)
-          setTimeout(() => setNotification(null), 3000)
           return
+        } else {
+          setNonUpdatedShippingData(shippingData)
         }
-        setNonUpdatedShippingData(shippingData)
       } catch (error) {
         setNotification(`${errorText.getShippingData}`)
         setTimeout(() => setNotification(null), 3000)
@@ -57,6 +57,16 @@ const ShippingData = ({ userId }) => {
 
     getOriginalShippingData()
   }, [userId, errorText.getShippingData])
+
+  useEffect(() => {
+    if (
+      checkIfAllObjectsValuesAreEmptyStrings(nonUpdatedShippingData) &&
+      showForm
+    ) {
+      setNotification(usersWarningText.shippingDataIsEmpty)
+      setTimeout(() => setNotification(null), 3000)
+    }
+  }, [nonUpdatedShippingData, showForm, usersWarningText.shippingDataIsEmpty])
 
   const updateUserShippingDataAndSetStates = async (e) => {
     updateDataAndSetStates(
@@ -70,9 +80,6 @@ const ShippingData = ({ userId }) => {
       ignorePropertiesWithEmptyValue,
     )
   }
-  console.log("2 nonUpdatedShippingDataFr  ", nonUpdatedShippingData)
-
-  console.log("updatedShippingDataFr  ", updatedShippingData)
 
   return (
     <>
