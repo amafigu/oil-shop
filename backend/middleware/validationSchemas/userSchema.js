@@ -11,6 +11,32 @@ const firstAndLastNameValidation = z
     message: 'First name can only contain letters.',
   });
 
+const updateUserValidation = z.object({
+  irstName: firstAndLastNameValidation
+    .refine((value) => value[0] === value[0].toUpperCase(), {
+      message: 'First name should start with a capital letter.',
+    })
+    .refine((value) => /^[A-Za-z\s]+$/.test(value), {
+      message: 'First name can only contain letters.',
+    })
+    .optional()
+    .default(''),
+  lastName: firstAndLastNameValidation
+    .refine((value) => value[0] === value[0].toUpperCase(), {
+      message: 'Last name should start with a capital letter.',
+    })
+    .refine((value) => /^[A-Za-z\s]+$/.test(value), {
+      message: 'Last name can only contain letters.',
+    })
+    .optional()
+    .default(''),
+  email: z
+    .string()
+    .email('Invalid email format.')
+    .max(40, "Email can't be longer than 40 characters.")
+    .optional()
+    .default(''),
+});
 const createUserValidation = z.object({
   firstName: firstAndLastNameValidation
     .refine((value) => value[0] === value[0].toUpperCase(), {
@@ -112,4 +138,5 @@ export {
   createUserValidation,
   loginValidation,
   shippingDataValidation,
+  updateUserValidation,
 };
