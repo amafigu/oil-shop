@@ -217,30 +217,35 @@
     },
     "crud": {
       "forms": {
-        "shippingData": {
-          "street": "Street",
-          "number": "Number",
-          "details": "Details",
-          "postalCode": "Postal code",
-          "city": "City",
-          "state": "State",
-          "country": "Country"
-        },
-        "commonProperties": {
-          "password": "Password",
-          "createdAt": "Created at",
-          "role": "Rolle",
+        "shippingData": {},
+        "user": {
           "firstName": "First name",
           "lastName": "Last name",
-          "name": "Name",
           "email": "Email",
+          "password": "Password",
+          "role": "Rolle"
+        },
+        "commonProperties": {
           "category": "Category",
-          "price": "Price",
-          "size": "Size",
+          "city": "City",
+          "country": "Country",
+          "createdAt": "Created at",
           "description": "Description",
           "details": "Details",
+          "email": "Email",
+          "firstName": "First name",
+          "imageUrl": "Image Url",
+          "lastName": "Last name",
+          "password": "Password",
           "measure": "Measure",
-          "imageUrl": "Image Url"
+          "name": "Name",
+          "number": "Number",
+          "postalCode": "Postal code",
+          "price": "Price",
+          "role": "Rolle",
+          "size": "Size",
+          "street": "Street",
+          "state": "State"
         },
         "createProductForm": {
           "submitButton": "Create product"

@@ -214,30 +214,27 @@
     },
     "crud": {
       "forms": {
-        "shippingData": {
-          "street": "Straße",
-          "number": "Nummer",
-          "details": "Details",
-          "postalCode": "PLZ",
-          "city": "Stadt",
-          "state": "Bundesland",
-          "country": "Land"
-        },
         "commonProperties": {
-          "password": "Passwort",
-          "createdAt": "Erstellt am",
-          "role": "Rolle",
-          "firstName": "Vorname",
-          "lastName": "Nachname",
-          "name": "Name",
-          "email": "E-Mail",
           "category": "Kategorie",
-          "price": "Preis",
-          "size": "Größe",
+          "city": "Stadt",
+          "country": "Land",
+          "createdAt": "Erstellt am",
           "description": "Beschreibung",
           "details": "Details",
+          "email": "E-Mail",
+          "firstName": "Vorname",
+          "imageUrl": "Bild URL",
+          "lastName": "Nachname",
           "measure": "Maß",
-          "imageUrl": "Bild URL"
+          "name": "Name",
+          "number": "Nummer",
+          "password": "Passwort",
+          "postalCode": "PLZ",
+          "price": "Preis",
+          "role": "Rolle",
+          "state": "Bundesland",
+          "size": "Größe",
+          "street": "Straße"
         },
         "createProductForm": {
           "submitButton": "Produkt erstellen"
