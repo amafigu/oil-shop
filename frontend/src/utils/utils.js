@@ -8,69 +8,77 @@ export const titleCase = (str, separator) => {
     .join(" ")
 }
 
+export const validateUserFieldsInDataObject = (
+  dataObject,
+  setErrorNotification,
+) => {
+  for (let property in dataObject) {
+    const propertyValueLength = dataObject[property].length
+    const propertyValue = dataObject[property]
+
+    if (
+      propertyValue.match(SPECIAL_CHARACTERS_REGEX) &&
+      property !== "details" &&
+      property !== "postalCode" &&
+      property !== "email" &&
+      property !== "image"
+    ) {
+      console.error(`${property} can not include special characters`)
+      setErrorNotification(`${property} can not include special characters`)
+      setTimeout(() => setErrorNotification(null), 3000)
+      return
+    }
+
+    if (property === "firstName" || property === "lastName") {
+      if (!/^[A-Z]/.test(propertyValue)) {
+        setErrorNotification("Name should start with a capital letter")
+        setTimeout(() => setErrorNotification(null), 3000)
+      }
+      if (propertyValueLength > 30) {
+        console.error("Please enter a shorter name")
+        setErrorNotification("Please enter a shorter name")
+        setTimeout(() => setErrorNotification(null), 3000)
+        return
+      }
+      if (propertyValueLength < 3) {
+        console.error("Please enter a longer name")
+        setErrorNotification("Please enter a longer name")
+        setTimeout(() => setErrorNotification(null), 3000)
+        return
+      }
+    }
+
+    if (property === "details" || property === "street") {
+      if (propertyValueLength > 60) {
+        console.error("Please enter a shorter value")
+        setErrorNotification("Please enter a shorter value")
+        setTimeout(() => setErrorNotification(null), 3000)
+        return
+      }
+    }
+
+    if (
+      property === "postalCode" ||
+      property === "city" ||
+      property === "state"
+    ) {
+      if (propertyValueLength > 30) {
+        console.error("Please enter a shorter value")
+        setErrorNotification("Please enter a shorter value")
+        setTimeout(() => setErrorNotification(null), 3000)
+        return
+      }
+    }
+  }
+  return dataObject
+}
+
 export const listenInputChangeAndSetDataObject = (
   e,
   updatedDataObj,
   setUpdatedDataObj,
   setErrorNotification,
 ) => {
-  const inputValueLength = e.target.value.length
-  const inputValue = e.target.value
-  const inputName = e.target.name
-
-  if (
-    inputValue.match(SPECIAL_CHARACTERS_REGEX) &&
-    inputName !== "details" &&
-    inputName !== "postalCode" &&
-    inputName !== "email"
-  ) {
-    console.error(`${inputName} can not include special characters`)
-    setErrorNotification(`${inputName} can not include special characters`)
-    setTimeout(() => setErrorNotification(null), 3000)
-    return
-  }
-
-  if (inputName === "firstName" || inputName === "lastName") {
-    if (!/^[A-Z]/.test(inputValue)) {
-      setErrorNotification("Name should start with a capital letter")
-      setTimeout(() => setErrorNotification(null), 3000)
-    }
-    if (inputValueLength > 30) {
-      console.error("Please enter a shorter name")
-      setErrorNotification("Please enter a shorter name")
-      setTimeout(() => setErrorNotification(null), 3000)
-      return
-    }
-    if (inputValueLength < 3) {
-      console.error("Please enter a longer name")
-      setErrorNotification("Please enter a longer name")
-      setTimeout(() => setErrorNotification(null), 3000)
-      return
-    }
-  }
-
-  if (inputName === "details" || inputName === "street") {
-    if (inputValueLength > 60) {
-      console.error("Please enter a shorter value")
-      setErrorNotification("Please enter a shorter value")
-      setTimeout(() => setErrorNotification(null), 3000)
-      return
-    }
-  }
-
-  if (
-    inputName === "postalCode" ||
-    inputName === "city" ||
-    inputName === "state"
-  ) {
-    if (inputValueLength > 30) {
-      console.error("Please enter a shorter value")
-      setErrorNotification("Please enter a shorter value")
-      setTimeout(() => setErrorNotification(null), 3000)
-      return
-    }
-  }
-
   setUpdatedDataObj({
     ...updatedDataObj,
     [e.target.name]: e.target.value,
@@ -170,7 +178,7 @@ export const updateDataRequest = async (dataId, updatedData, apiUrl) => {
       updatedData,
       { withCredentials: true },
     )
-    return response.data
+    return response
   } catch (error) {
     console.error(error)
   }
@@ -190,7 +198,6 @@ export const updateDataAndSetStates = async (
 
   try {
     const cleanedUpdatedData = filterEmptyValues(updatedData)
-
     if (
       Object.keys(cleanedUpdatedData).length === 0 ||
       JSON.stringify(nonUpdatedData) === JSON.stringify(cleanedUpdatedData)
@@ -200,18 +207,24 @@ export const updateDataAndSetStates = async (
       return
     }
 
-    await request(cleanedUpdatedData)
+    const validatedData = validateUserFieldsInDataObject(
+      cleanedUpdatedData,
+      setNotification,
+    )
 
-    setUpdatedData((prevData) => ({
-      ...prevData,
-      ...cleanedUpdatedData,
-    }))
-    setNonUpdatedData((prevData) => ({
-      ...prevData,
-      ...cleanedUpdatedData,
-    }))
+    const dataRequest = await request(validatedData)
+
+    if (dataRequest.status === 200) {
+      setUpdatedData((prevData) => ({
+        ...prevData,
+        ...cleanedUpdatedData,
+      }))
+      setNonUpdatedData((prevData) => ({
+        ...prevData,
+        ...cleanedUpdatedData,
+      }))
+    }
   } catch (error) {
-    console.log("Could not update data: " + error)
     setNotification("Could not update data")
     setTimeout(() => setNotification(null), 2000)
   }
@@ -461,8 +474,8 @@ export const cancelWithScape = (e, setState) => {
   }
 }
 
+// TODO: check if is necessary and avoid too many rerenders
 export const checkIfAllObjectsValuesAreEmptyStrings = (obj) => {
-  console.log(obj)
   for (let key in obj) {
     if (obj[key] !== "") {
       return false
