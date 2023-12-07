@@ -1,18 +1,19 @@
+import EditableImageInput from "#components/EditableImageInput"
 import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
-import { API_USER_CUSTOMER, STYLES } from "#utils/constants"
+import { API_USER_CUSTOMER, DEFAULT_USER_IMAGE, STYLES } from "#utils/constants"
 import {
-  checkIfAllObjectsValuesAreEmptyStrings,
   getDataAndSetErrorMessage,
   ignorePropertiesWithEmptyValue,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   updateDataRequest,
+  uploadToS3,
 } from "#utils/utils"
 import { useEffect, useState } from "react"
-import styles from "./shippingData.module.scss"
+import styles from "./userData.module.scss"
 
 const UserData = ({ userId }) => {
   const [showForm, setShowForm] = useState(false)
@@ -21,6 +22,7 @@ const UserData = ({ userId }) => {
     lastName: "",
     email: "",
   }
+  const [file, setFile] = useState(null)
 
   const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
     ...initialUserData,
@@ -33,7 +35,6 @@ const UserData = ({ userId }) => {
   const { translate } = useLocaleContext()
   const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
-  const usersWarningText = translate.warningMessages.users
 
   useEffect(() => {
     async function getOriginalUserData() {
@@ -61,28 +62,33 @@ const UserData = ({ userId }) => {
     getOriginalUserData()
   }, [userId, errorText.user.getUserData])
 
-  useEffect(() => {
-    if (
-      checkIfAllObjectsValuesAreEmptyStrings(nonUpdatedUserData) &&
-      showForm
-    ) {
-      setNotification(usersWarningText.shippingDataIsEmpty)
-      setTimeout(() => setNotification(null), 3000)
-    }
-  }, [nonUpdatedUserData, showForm, usersWarningText.shippingDataIsEmpty])
-
   const updateUserDataAndSetStates = async (e) => {
+    let image = await uploadToS3(file)
+    if (!image) {
+      console.error("user image not selected. ")
+      image = DEFAULT_USER_IMAGE
+    }
+
+    const updatedUserDataWithImage = { ...updatedUserData, image }
+    setUpdatedUserData(updatedUserDataWithImage) // Set the updated user data with the image
+
     updateDataAndSetStates(
       e,
-      () => updateDataRequest(userId, updatedUserData, API_USER_CUSTOMER),
+      () =>
+        updateDataRequest(userId, updatedUserDataWithImage, API_USER_CUSTOMER),
       nonUpdatedUserData,
       setNonUpdatedUserData,
-      updatedUserData,
+      updatedUserDataWithImage,
       setUpdatedUserData,
       setNotification,
       ignorePropertiesWithEmptyValue,
     )
   }
+  const setFileToUpload = (e) => {
+    setFile(e.target.files[0])
+  }
+
+  console.log(Object.keys(initialUserData))
 
   return (
     <>
@@ -118,6 +124,23 @@ const UserData = ({ userId }) => {
                 />
               </div>
             ))}
+            <div className={styles.inputContainer}>
+              <EditableImageInput
+                label={"image"}
+                name={"image"}
+                onChange={(e) => {
+                  setFileToUpload(e)
+                  listenInputChangeAndSetDataObject(
+                    e,
+                    updatedUserData,
+                    setUpdatedUserData,
+                    setNotification,
+                  )
+                }}
+                classCss={STYLES.FORMS.FIELD}
+                file={file}
+              />
+            </div>
           </div>
         )}
       </div>
