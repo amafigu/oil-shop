@@ -15,8 +15,7 @@ const EditableInput = ({
   const [isEditing, setIsEditing] = useState(false)
   const { translate } = useLocaleContext()
   const textButtons = translate.components.crud.buttons
-  const textProperties = translate.components.crud.forms.shippingData
-
+  const textProperties = translate.components.crud.forms.commonProperties
   return (
     <div className={styles.itemRow}>
       {isEditing ? (
