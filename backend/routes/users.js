@@ -12,12 +12,13 @@ import {
   createUserValidation,
   loginValidation,
   shippingDataValidation,
+  updateUserValidation,
 } from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
 dotenv.config();
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', decodeJWT, async (req, res) => {
   try {
     const users = await db.users.findAll();
     return res.json(users);
@@ -31,6 +32,7 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
     const user = await db.users.findOne({
       where: { email: req.params.email },
       attributes: { exclude: ['password'] },
+      include: [{ model: db.userRoles, as: 'role' }],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -41,10 +43,11 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
-router.get('/customer/:id', async (req, res) => {
+router.get('/customer/:id', decodeJWT, async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { id: req.params.id },
+      include: [{ model: db.userRoles, as: 'role' }],
       attributes: { exclude: ['password'] },
     });
 
@@ -82,36 +85,46 @@ router.delete('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
-router.put('/customer/:id', decodeJWT, async (req, res) => {
-  try {
-    const user = await db.users.findOne({ where: { id: req.params.id } });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    if (req.body.email && req.body.email !== user.email) {
-      const existingEmail = await db.users.findOne({
-        where: { email: req.body.email },
-      });
-      if (existingEmail) {
-        return res.status(400).json({ message: 'Email already in use' });
+router.put(
+  '/customer/:id',
+
+  decodeJWT,
+  validateBody(updateUserValidation),
+  async (req, res) => {
+    try {
+      const user = await db.users.findOne({ where: { id: req.params.id } });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
       }
+      if (req.body.email && req.body.email !== user.email) {
+        const existingEmail = await db.users.findOne({
+          where: { email: req.body.email },
+        });
+        if (existingEmail) {
+          return res.status(400).json({ message: 'Email already in use' });
+        }
+      }
+
+      user.email = req.body.email || user.email;
+      user.firstName = req.body.firstName || user.firstName;
+      user.lastName = req.body.lastName || user.lastName;
+      user.image = req.body.image || user.image;
+
+      const updatedUser = await user.save();
+
+      return res
+        .status(200)
+        .json({ message: 'User updated successfully', user: updatedUser });
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
     }
-
-    user.email = req.body.email || user.email;
-    user.firstName = req.body.firstName || user.firstName;
-    user.lastName = req.body.lastName || user.lastName;
-    user.image = req.body.image || user.image;
-
-    await user.save();
-    return res.status(200).json({ message: 'User updated successfully' });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
   }
-});
+);
 
 // End Admin routes
+// TODO: only use the used id
 
-router.get('/current-user', decodeJWT, async (req, res) => {
+router.get('/current', decodeJWT, async (req, res) => {
   return res.json({
     id: req.user.id,
     email: req.user.email,
