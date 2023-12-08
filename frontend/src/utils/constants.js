@@ -11,6 +11,7 @@ export const DEFAULT_USER_IMAGE =
 export const API_USER = "/users/user/"
 export const API_USER_CUSTOMER = "/users/customer/"
 export const API_SHIPPING_DATA = "/users/user/shipping-data/"
+export const API_VERIFY_TOKEN = "/users/verify-token"
 export const TIMEOUT_DURATION = 3000
 export const FORM_FIELDS_GUEST_USER_DATA = [
   {
@@ -94,6 +95,7 @@ export const STYLES = Object.freeze({
   },
   FORMS: {
     FIELD: "formField",
+    ITEM_ROW: "itemRow",
   },
 })
 

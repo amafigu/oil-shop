@@ -6,7 +6,6 @@ const Header = ({ data }) => {
     firstName: data.firstName,
     lastName: data.lastName,
     email: data.email,
-    role: data.role, // TODO: change to role id for name that should come with user from somewhere
   }
 
   return (
@@ -14,7 +13,7 @@ const Header = ({ data }) => {
       <div className={styles.header}>
         {data ? (
           <div className={styles.dataContainer}>
-            <img className={styles.avatar} src={data.image} alt='user' />
+            <img className={styles.avatar} src={data.image} alt='suser' />
             <TableRow data={tableData} />
           </div>
         ) : (

@@ -11,8 +11,24 @@ const firstAndLastNameValidation = z
     message: 'First name can only contain letters.',
   });
 
+const firstAndLastNameUpdateValidation = z
+  .string()
+  .max(30, "Can't be longer than 30 characters.")
+  .optional()
+  .default('');
+
+const updateUserValidation = z.object({
+  firstName: firstAndLastNameUpdateValidation.optional().default(''),
+  lastName: firstAndLastNameUpdateValidation.optional().default(''),
+  email: z
+    .string()
+    .max(40, "Email can't be longer than 40 characters.")
+    .optional()
+    .default(''),
+});
+
 const createUserValidation = z.object({
-  firstName: firstAndLastNameValidation
+  firstName: firstAndLastNameUpdateValidation
     .refine((value) => value[0] === value[0].toUpperCase(), {
       message: 'First name should start with a capital letter.',
     })
@@ -102,7 +118,6 @@ const loginValidation = z.object({
   email: z
     .string()
     .min(4, 'Email should have at least 4 characters.')
-    .email('Invalid email format. ')
     .max(40, "Email can't be longer than 40 characters."),
   password: z.string().optional(),
 });
@@ -112,4 +127,5 @@ export {
   createUserValidation,
   loginValidation,
   shippingDataValidation,
+  updateUserValidation,
 };

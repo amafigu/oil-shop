@@ -12,12 +12,13 @@ import {
   createUserValidation,
   loginValidation,
   shippingDataValidation,
+  updateUserValidation,
 } from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
 dotenv.config();
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', decodeJWT, async (req, res) => {
   try {
     const users = await db.users.findAll();
     return res.json(users);
@@ -31,6 +32,7 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
     const user = await db.users.findOne({
       where: { email: req.params.email },
       attributes: { exclude: ['password'] },
+      include: [{ model: db.userRoles, as: 'role' }],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -41,13 +43,14 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
-router.get('/customer/:id', async (req, res) => {
+router.get('/customer/:id', decodeJWT, async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { id: req.params.id },
+      include: [{ model: db.userRoles, as: 'role' }],
       attributes: { exclude: ['password'] },
     });
-    console.log('USER ', user);
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -82,27 +85,46 @@ router.delete('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
-router.put('/user/:email', decodeJWT, async (req, res) => {
-  try {
-    const user = await db.users.findOne({ where: { email: req.params.email } });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+router.put(
+  '/customer/:id',
+
+  decodeJWT,
+  validateBody(updateUserValidation),
+  async (req, res) => {
+    try {
+      const user = await db.users.findOne({ where: { id: req.params.id } });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      if (req.body.email && req.body.email !== user.email) {
+        const existingEmail = await db.users.findOne({
+          where: { email: req.body.email },
+        });
+        if (existingEmail) {
+          return res.status(400).json({ message: 'Email already in use' });
+        }
+      }
+
+      user.email = req.body.email || user.email;
+      user.firstName = req.body.firstName || user.firstName;
+      user.lastName = req.body.lastName || user.lastName;
+      user.image = req.body.image || user.image;
+
+      const updatedUser = await user.save();
+
+      return res
+        .status(200)
+        .json({ message: 'User updated successfully', user: updatedUser });
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
     }
-    user.email = req.body.email || user.email;
-    user.firstName = req.body.firstName || user.firstName;
-    user.lastName = req.body.lastName || user.lastName;
-
-    await user.save();
-
-    return res.json({ message: 'User updated successfully', user });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
   }
-});
+);
 
 // End Admin routes
+// TODO: only use the used id
 
-router.get('/current-user', decodeJWT, async (req, res) => {
+router.get('/current', decodeJWT, async (req, res) => {
   return res.json({
     id: req.user.id,
     email: req.user.email,
@@ -335,48 +357,14 @@ router.put(
           userId: req.params.id,
         });
       } else {
-        shippingData.street =
-          req.body.street !== undefined &&
-          req.body.street !== '' &&
-          req.body.street !== null
-            ? req.body.street
-            : shippingData.street;
-        shippingData.number =
-          req.body.number !== undefined &&
-          req.body.number !== '' &&
-          req.body.number !== null
-            ? req.body.number
-            : shippingData.number;
-        shippingData.details =
-          req.body.details !== undefined &&
-          req.body.details !== '' &&
-          req.body.details !== null
-            ? req.body.details
-            : shippingData.details;
+        shippingData.street = req.body.street || shippingData.street;
+        shippingData.number = req.body.number || shippingData.number;
+        shippingData.details = req.body.details || shippingData.details;
         shippingData.postalCode =
-          req.body.postalCode !== undefined &&
-          req.body.postalCode !== '' &&
-          req.body.postalCode !== null
-            ? req.body.postalCode
-            : shippingData.postalCode;
-        shippingData.city =
-          req.body.city !== undefined &&
-          req.body.city !== '' &&
-          req.body.city !== null
-            ? req.body.city
-            : shippingData.city;
-        shippingData.state =
-          req.body.state !== undefined &&
-          req.body.state !== '' &&
-          req.body.state
-            ? req.body.state
-            : shippingData.state;
-        shippingData.country =
-          req.body.country !== undefined &&
-          req.body.country !== '' &&
-          req.body.country !== null
-            ? req.body.country
-            : shippingData.country;
+          req.body.postalCode || shippingData.postalCode;
+        shippingData.city = req.body.city || shippingData.city;
+        shippingData.state = req.body.state || shippingData.state;
+        shippingData.country = req.body.country || shippingData.country;
 
         await shippingData.save();
       }

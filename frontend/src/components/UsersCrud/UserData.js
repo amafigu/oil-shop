@@ -1,26 +1,28 @@
+import EditableImageInput from "#components/EditableImageInput"
 import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { API_USER_CUSTOMER, STYLES } from "#utils/constants"
 import {
-  checkIfAllObjectsValuesAreEmptyStrings,
   getDataAndSetErrorMessage,
-  ignorePropertiesWithEmptyValue,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   updateDataRequest,
+  uploadToS3,
 } from "#utils/utils"
 import { useEffect, useState } from "react"
-import styles from "./shippingData.module.scss"
+import styles from "./userData.module.scss"
 
-const UserData = ({ userId }) => {
+const UserData = () => {
   const [showForm, setShowForm] = useState(false)
   const initialUserData = {
     firstName: "",
     lastName: "",
     email: "",
   }
+  const [file, setFile] = useState(null)
 
   const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
     ...initialUserData,
@@ -33,55 +35,73 @@ const UserData = ({ userId }) => {
   const { translate } = useLocaleContext()
   const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
-  const usersWarningText = translate.warningMessages.users
+  const { setUser, userId, isLoading } = useUserContext()
 
   useEffect(() => {
     async function getOriginalUserData() {
-      try {
-        if (!userId) return
-        const userData = await getDataAndSetErrorMessage(
-          userId,
-          API_USER_CUSTOMER,
-          setNotification,
-        )
+      console.log("USER DATA useEffect userId 2 ", userId)
+      if (!isLoading) {
+        try {
+          const userData = await getDataAndSetErrorMessage(
+            userId,
+            API_USER_CUSTOMER,
+            setNotification,
+          )
 
-        console.log("userData", userData)
-        if (!userData) {
-          return
-        } else {
-          setNonUpdatedUserData(userData)
+          console.log("USER DATA USER DATA useEffect userData 2 ", userData)
+
+          if (!userData) {
+            setNotification(`${errorText.user.getUserData}`)
+            setTimeout(() => setNotification(null), 2000)
+            return
+          }
+
+          if (userData.status === 200) {
+            console.log(
+              "USER DATA useEffect userData.data 2 userData.status === 200 ",
+              userData.data,
+            )
+            setUser(userData.data)
+            setNonUpdatedUserData(userData.data)
+          }
+        } catch (error) {
+          setTimeout(() => setNotification(null), 3000)
+          console.error(error)
         }
-      } catch (error) {
-        setNotification(`${errorText.user.getUserData}`)
-        setTimeout(() => setNotification(null), 3000)
-        console.error(error)
       }
     }
 
     getOriginalUserData()
-  }, [userId, errorText.user.getUserData])
-
-  useEffect(() => {
-    if (
-      checkIfAllObjectsValuesAreEmptyStrings(nonUpdatedUserData) &&
-      showForm
-    ) {
-      setNotification(usersWarningText.shippingDataIsEmpty)
-      setTimeout(() => setNotification(null), 3000)
-    }
-  }, [nonUpdatedUserData, showForm, usersWarningText.shippingDataIsEmpty])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, errorText.user.getUserData, isLoading])
 
   const updateUserDataAndSetStates = async (e) => {
-    updateDataAndSetStates(
+    let image = ""
+    if (file) {
+      image = await uploadToS3(file)
+    }
+
+    let updatedUserDataWithImage = { ...updatedUserData, image }
+    setUpdatedUserData(updatedUserDataWithImage) // Set the updated user data with the image
+
+    const updatedData = await updateDataAndSetStates(
       e,
-      () => updateDataRequest(userId, updatedUserData, API_USER_CUSTOMER),
+      () =>
+        updateDataRequest(userId, updatedUserDataWithImage, API_USER_CUSTOMER),
       nonUpdatedUserData,
       setNonUpdatedUserData,
-      updatedUserData,
+      updatedUserDataWithImage,
       setUpdatedUserData,
       setNotification,
-      ignorePropertiesWithEmptyValue,
     )
+
+    console.log(updatedData.data.user)
+    setUser(updatedData.data.user)
+
+    console.log("updatedUserDataWithImage", updatedUserDataWithImage)
+  }
+  const setFileToUpload = (e) => {
+    setFile(e.target.files[0])
   }
 
   return (
@@ -118,6 +138,18 @@ const UserData = ({ userId }) => {
                 />
               </div>
             ))}
+            <div className={styles.inputContainer}>
+              <EditableImageInput
+                label={"Image"}
+                name={"Image"}
+                onChange={(e) => {
+                  setFileToUpload(e)
+                }}
+                classCss={STYLES.FORMS.ITEM_ROW}
+                file={file}
+                onSave={(e) => updateUserDataAndSetStates(e)}
+              />
+            </div>
           </div>
         )}
       </div>

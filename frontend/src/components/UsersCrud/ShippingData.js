@@ -6,7 +6,6 @@ import { API_SHIPPING_DATA, STYLES } from "#utils/constants"
 import {
   checkIfAllObjectsValuesAreEmptyStrings,
   getDataAndSetErrorMessage,
-  ignorePropertiesWithEmptyValue,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   updateDataRequest,
@@ -74,7 +73,6 @@ const ShippingData = ({ userId }) => {
       updatedShippingData,
       setUpdatedShippingData,
       setNotification,
-      ignorePropertiesWithEmptyValue,
     )
   }
 

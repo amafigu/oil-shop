@@ -4,6 +4,8 @@ import { useEffectScrollTop } from "#utils/utils"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { API_USER_CUSTOMER } from "../utils/constants"
+import { getDataAndSetErrorMessage } from "../utils/utils"
 import styles from "./login.module.scss"
 
 const Login = () => {
@@ -40,28 +42,31 @@ const Login = () => {
         console.log("loginResponse", loginResponse.status)
         const getLoggedInUser = async () => {
           try {
-            const userResponse = await axios.get(
-              `${process.env.REACT_APP_API_URL}/users/current-user`,
+            const currentUserIdResponse = await axios.get(
+              `${process.env.REACT_APP_API_URL}/users/current`,
               { withCredentials: true },
             )
+            console.log("userResponse", currentUserIdResponse.data.id)
 
-            const userData = userResponse.data
-            console.log("userData", userData)
+            const userId = currentUserIdResponse.data.id
 
-            setUserEmail(userData.email)
-            setIsLoggedIn(true)
-            setUser(userData)
-
-            const userRoleResponse = await axios.get(
-              `${process.env.REACT_APP_API_URL}/users/user/role/${userData.roleId}`,
-              { withCredentials: true },
+            const userResponse = await getDataAndSetErrorMessage(
+              userId,
+              API_USER_CUSTOMER,
+              setErrorMessage,
             )
+            const loggedUser = userResponse.data
+            console.log("USUSUSU", loggedUser)
+            if (userResponse.status === 200) {
+              setUserEmail(loggedUser.email)
+              setIsLoggedIn(true)
+              setUser(loggedUser)
 
-            const userRole = userRoleResponse.data.name
-            if (userRole === "admin") {
-              navigate("/users/current-admin")
-            } else if (userRole === "customer") {
-              navigate("/users/current-user")
+              if (loggedUser.role.name === "admin") {
+                setTimeout(() => navigate("/users/current-admin"), 500)
+              } else if (loggedUser.role.name === "customer") {
+                setTimeout(() => navigate("/users/current-user"), 500)
+              }
             }
           } catch (error) {
             setErrorMessage(`${text.errorMessage}`)
