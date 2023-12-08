@@ -1,23 +1,32 @@
 import useLocaleContext from "#context/localeContext"
 import { useState } from "react"
-import styles from "./editableInput.module.scss"
+import styles from "./editableImageInput.module.scss"
 
-const EditableImageInput = ({ label, name, onChange, classCss, file }) => {
+const EditableImageInput = ({
+  label,
+  name,
+  onChange,
+  classCss,
+  file,
+  onSave,
+}) => {
   const [isEditing, setIsEditing] = useState(false)
   const { translate } = useLocaleContext()
   const textButtons = translate.components.crud.buttons
 
+  const saveAndSetIsEditing = (e) => {
+    onSave(e)
+    setIsEditing(false)
+  }
+
   return (
-    <div className={styles.itemRow}>
+    <div className={styles[classCss]}>
       {isEditing ? (
-        <div className={styles.inputContainer}>
+        <div className={styles.nonUpdatedData}>
           <div className={styles.labelAndInputContainer}>
             <span className={styles.label}>
-              {file ? "Selected file: " : "Select a file"}
+              {file ? "Selected file: " : "Select a file "}
             </span>
-            <label className={styles.labelForFile} htmlFor='fileInput'>
-              {file ? file.name : "Search on device"}
-            </label>
 
             <input type='file' name={name} id='fileInput' onChange={onChange} />
           </div>
@@ -34,7 +43,7 @@ const EditableImageInput = ({ label, name, onChange, classCss, file }) => {
         <div
           aria-label={textButtons.save}
           className={styles.formButton}
-          onClick={() => setIsEditing(false)}
+          onClick={(e) => saveAndSetIsEditing(e)}
         >
           {textButtons.save}
         </div>

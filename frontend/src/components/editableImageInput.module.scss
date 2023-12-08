@@ -11,6 +11,7 @@
 
 .itemRow {
   display: flex;
+  flex-grow: 1;
   align-items: center;
 }
 
@@ -38,6 +39,7 @@
   margin-left: theme.$margin-divider;
   font-size: theme.$font-size-small;
   text-transform: none;
+  cursor: pointer;
 
   @include media.mobile {
     width: 120px;
