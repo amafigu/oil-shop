@@ -1,4 +1,3 @@
-import { SPECIAL_CHARACTERS_REGEX } from "#utils/constants"
 import axios from "axios"
 import { useEffect } from "react"
 export const titleCase = (str, separator) => {
@@ -15,19 +14,6 @@ export const validateUserFieldsInDataObject = (
   for (let property in dataObject) {
     const propertyValueLength = dataObject[property].length
     const propertyValue = dataObject[property]
-
-    if (
-      propertyValue.match(SPECIAL_CHARACTERS_REGEX) &&
-      property !== "details" &&
-      property !== "postalCode" &&
-      property !== "email" &&
-      property !== "image"
-    ) {
-      console.error(`${property} can not include special characters`)
-      setErrorNotification(`${property} can not include special characters`)
-      setTimeout(() => setErrorNotification(null), 3000)
-      return
-    }
 
     if (property === "firstName" || property === "lastName") {
       if (!/^[A-Z]/.test(propertyValue)) {
@@ -77,7 +63,6 @@ export const listenInputChangeAndSetDataObject = (
   e,
   updatedDataObj,
   setUpdatedDataObj,
-  setErrorNotification,
 ) => {
   setUpdatedDataObj({
     ...updatedDataObj,
@@ -162,7 +147,7 @@ export const getDataAndSetErrorMessage = async (
       `${process.env.REACT_APP_API_URL}${apiUrl}${dataId}`,
       { withCredentials: true },
     )
-    return response.data
+    return response
   } catch (error) {
     console.error(error)
     if (typeof setErrorMessage === "function") {
@@ -192,12 +177,12 @@ export const updateDataAndSetStates = async (
   updatedData,
   setUpdatedData,
   setNotification,
-  filterEmptyValues,
 ) => {
   e.preventDefault()
 
   try {
-    const cleanedUpdatedData = filterEmptyValues(updatedData)
+    const cleanedUpdatedData = ignorePropertiesWithEmptyValue(updatedData)
+
     if (
       Object.keys(cleanedUpdatedData).length === 0 ||
       JSON.stringify(nonUpdatedData) === JSON.stringify(cleanedUpdatedData)
@@ -223,6 +208,8 @@ export const updateDataAndSetStates = async (
         ...prevData,
         ...cleanedUpdatedData,
       }))
+
+      return dataRequest
     }
   } catch (error) {
     setNotification("Could not update data")
@@ -407,6 +394,8 @@ export const translateZodValidationErrors = (error, text) => {
 }
 
 export const uploadToS3 = async (file) => {
+  console.log("UTILS uploadToS3 file 3", file)
+  if (!file) return ""
   let newUrl = ""
   try {
     const response = await axios.get(
