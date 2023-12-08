@@ -26,7 +26,7 @@ const EditableInput = ({
           name={name}
           onChange={onChange}
           onKeyDown={(e) => cancelWithScape(e, setIsEditing)}
-          placeholder={name}
+          placeholder={textProperties[name]}
           value={
             updatedPropertyData[name] || updatedPropertyData[name] === ""
               ? updatedPropertyData[name]
