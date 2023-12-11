@@ -32,8 +32,6 @@ const CreateUserForm = ({
   const location = useLocation()
   const currentPath = location.pathname
   const navigate = useNavigate()
-  console.log("currentPath", currentPath)
-  console.log(currentPath.includes("/sign-up"))
 
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
@@ -66,7 +64,6 @@ const CreateUserForm = ({
         )
 
         if (loginResponse && loginResponse.status === 200) {
-          console.log("loginResponse", loginResponse.status)
           const getLoggedInUser = async () => {
             try {
               const userResponse = await axios.get(
@@ -75,7 +72,6 @@ const CreateUserForm = ({
               )
 
               const userData = userResponse.data
-              console.log("userData", userData)
 
               setUserEmail(userData.email)
               setIsLoggedIn(true)

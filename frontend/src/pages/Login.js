@@ -39,14 +39,12 @@ const Login = () => {
         { withCredentials: true },
       )
       if (loginResponse && loginResponse.status === 200) {
-        console.log("loginResponse", loginResponse.status)
         const getLoggedInUser = async () => {
           try {
             const currentUserIdResponse = await axios.get(
               `${process.env.REACT_APP_API_URL}/users/current`,
               { withCredentials: true },
             )
-            console.log("userResponse", currentUserIdResponse.data.id)
 
             const userId = currentUserIdResponse.data.id
 
@@ -56,7 +54,6 @@ const Login = () => {
               setErrorMessage,
             )
             const loggedUser = userResponse.data
-            console.log("USUSUSU", loggedUser)
             if (userResponse.status === 200) {
               setUserEmail(loggedUser.email)
               setIsLoggedIn(true)

@@ -23,8 +23,6 @@ const Payment = () => {
     formData = location.state.formData
   }
 
-  console.log(formData)
-
   const submitOrderAndGuestUser = async (e) => {
     e.preventDefault()
 
@@ -54,8 +52,6 @@ const Payment = () => {
             state: formData.state,
             country: formData.country,
           }
-
-          console.log(shippingDataObject)
 
           await axios.post(
             `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${newGuestUserData.id}`,

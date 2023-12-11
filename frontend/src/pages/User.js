@@ -23,7 +23,6 @@ const User = () => {
           `${process.env.REACT_APP_API_URL}/users/current`,
           { withCredentials: true },
         )
-        console.log("userResponse", currentUserIdResponse.data.id)
 
         const userId = currentUserIdResponse.data.id
 
@@ -38,10 +37,9 @@ const User = () => {
           setUser(loggedUser)
         }
       } catch (error) {
-        setNotification(`aa`)
-        //setNotification(`${error.response.data.message}`)
+        setNotification(`${error.response.data.message}`)
         setTimeout(() => setNotification(null), 2000)
-
+        setTimeout(() => navigate("/login"), 2000)
         console.error("Error fetching user data", error)
       }
     }
@@ -49,16 +47,12 @@ const User = () => {
     fetchUserData()
   }, [navigate, setUser])
 
-  console.log("CONTEXT USER", user)
   const dataForHeader = {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
     image: user.image,
   }
-
-  console.log("CONTEXT USER HEADER", dataForHeader)
-  console.log("CONTEXT USER", user.id)
 
   return (
     <div className={styles.userWrapper}>

@@ -6,6 +6,11 @@ export const validateUserFieldsInDataObject = (
     const propertyValueLength = dataObject[property].length
     const propertyValue = dataObject[property]
 
+    if (propertyValue === "" || propertyValue === undefined) {
+      setErrorNotification("No changes made.")
+      setTimeout(() => setErrorNotification(null), 2000)
+      return
+    }
     if (property === "firstName" || property === "lastName") {
       if (!/^[A-Z]/.test(propertyValue)) {
         setErrorNotification("Name should start with a capital letter")
@@ -66,16 +71,6 @@ export const validateUserFieldsInDataObject = (
   return dataObject
 }
 
-// TODO: check if is necessary and avoid too many rerenders
-export const checkIfAllObjectsValuesAreEmptyStrings = (obj) => {
-  for (let key in obj) {
-    if (obj[key] !== "") {
-      return false
-    }
-  }
-  return true
-}
-
 export const ignorePropertiesWithEmptyValue = (dataObject) => {
   return Object.keys(dataObject)
     .filter(
@@ -88,4 +83,7 @@ export const ignorePropertiesWithEmptyValue = (dataObject) => {
       object[key] = dataObject[key]
       return object
     }, {})
+}
+export const ignoreUnsavedProperties = (dataObject, propertyName) => {
+  return { [propertyName]: dataObject[propertyName] }
 }

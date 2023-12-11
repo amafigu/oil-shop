@@ -40,8 +40,6 @@ const Shipping = () => {
     }
   }, [cart, navigate, isLoggedIn, isLoading, user])
 
-  console.log(formData)
-
   const submitGuestUserWithOrders = async (e) => {
     if (cart.length > 0) {
       e.preventDefault()

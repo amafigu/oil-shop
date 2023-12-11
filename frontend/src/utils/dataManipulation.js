@@ -1,6 +1,7 @@
+import { TIMEOUT_DURATION } from "#utils/constants"
 import axios from "axios"
 import {
-  ignorePropertiesWithEmptyValue,
+  ignoreUnsavedProperties,
   validateUserFieldsInDataObject,
 } from "./validation"
 export const getDataAndSetErrorMessage = async (
@@ -18,11 +19,17 @@ export const getDataAndSetErrorMessage = async (
     console.error(error)
     if (typeof setErrorMessage === "function") {
       setErrorMessage("Error by getting data")
+      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
     }
   }
 }
 
-export const updateDataRequest = async (dataId, updatedData, apiUrl) => {
+export const updateDataRequest = async (
+  dataId,
+  updatedData,
+  apiUrl,
+  setErrorMessage,
+) => {
   try {
     const response = await axios.put(
       `${process.env.REACT_APP_API_URL}${apiUrl}${dataId}`,
@@ -31,6 +38,16 @@ export const updateDataRequest = async (dataId, updatedData, apiUrl) => {
     )
     return response
   } catch (error) {
+    if (error.response.data.message) {
+      setErrorMessage(`${error.response.data.message}`)
+      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+    }
+
+    if (error.response.data.error) {
+      setErrorMessage(`${error.response.data.error[0]}`)
+      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+    }
+
     console.error(error)
   }
 }
@@ -46,33 +63,40 @@ export const saveDataAndToggleInput = async (
 
 export const updateDataAndSetStates = async (
   e,
-  request,
-  nonUpdatedData,
+  propertyName,
+  dataId,
+  dataApi,
+
   setNonUpdatedData,
   updatedData,
   setUpdatedData,
-  setNotification,
+  setErrorMessage,
 ) => {
   e.preventDefault()
 
   try {
-    const cleanedUpdatedData = ignorePropertiesWithEmptyValue(updatedData)
+    const cleanedUpdatedData = ignoreUnsavedProperties(
+      updatedData,
+      propertyName,
+    )
 
-    if (
-      Object.keys(cleanedUpdatedData).length === 0 ||
-      JSON.stringify(nonUpdatedData) === JSON.stringify(cleanedUpdatedData)
-    ) {
-      setNotification("No changes made.")
-      setTimeout(() => setNotification(null), 2000)
-      return
-    }
     const validatedData = validateUserFieldsInDataObject(
       cleanedUpdatedData,
-      setNotification,
+      setErrorMessage,
     )
-    const dataRequest = await request(validatedData)
 
-    if (dataRequest.status === 200) {
+    if (!validatedData) {
+      return
+    }
+
+    const dataRequest = await updateDataRequest(
+      dataId,
+      validatedData,
+      dataApi,
+      setErrorMessage,
+    )
+
+    if (dataRequest && dataRequest.status === 200) {
       setUpdatedData((prevData) => ({
         ...prevData,
         ...cleanedUpdatedData,
@@ -85,8 +109,9 @@ export const updateDataAndSetStates = async (
       return dataRequest
     }
   } catch (error) {
-    setNotification("Could not update data")
-    setTimeout(() => setNotification(null), 2000)
+    console.error(error)
+    setErrorMessage("Error by updating data")
+    setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
   }
 }
 
