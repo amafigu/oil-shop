@@ -1,7 +1,7 @@
 import { CartContext } from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+import { API_USER_CUSTOMER, DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import axios from "axios"
@@ -17,12 +17,12 @@ const OrderSummary = () => {
   const { translate } = useLocaleContext()
   const text = translate.pages.orderSummary
   const navigate = useNavigate()
-  const { isLoggedIn, userId } = useUserContext()
+  const { isLoggedIn, userId, isLoading } = useUserContext()
 
   useEffect(() => {
     const getShippingData = async () => {
       try {
-        if (!isLoggedIn) {
+        if (!isLoggedIn && !isLoading) {
           const guestId = localStorage.getItem("yolo-guest-id")
 
           const userData = await axios.get(
@@ -45,9 +45,9 @@ const OrderSummary = () => {
           setOrderAndCartItems(orderAndCartItems.data)
         }
 
-        if (isLoggedIn) {
+        if (isLoggedIn && !isLoading) {
           const userData = await axios.get(
-            `${process.env.REACT_APP_API_URL}/users/current-user`,
+            `${process.env.REACT_APP_API_URL}${API_USER_CUSTOMER}${userId}`,
             { withCredentials: true },
           )
 
@@ -72,56 +72,8 @@ const OrderSummary = () => {
       }
     }
     getShippingData()
-  }, [cart, navigate, setShippingData, userId, isLoggedIn])
+  }, [cart, navigate, setShippingData, userId, isLoggedIn, isLoading])
 
-  /* useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const guestId = isLoggedIn
-          ? userId
-          : localStorage.getItem("yolo-guest-id")
-
-        const [
-          userDataResponse,
-          shippingDataResponse,
-          orderAndCartItemsResponse,
-        ] = await Promise.all([
-          axios.get(
-            `${process.env.REACT_APP_API_URL}/users/${
-              isLoggedIn ? "current-user" : `guest/${guestId}`
-            }`,
-            { withCredentials: isLoggedIn },
-          ),
-          axios.get(
-            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${
-              isLoggedIn ? userData.data.id : guestId
-            }`,
-          ),
-          axios.get(
-            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${
-              isLoggedIn ? userData.data.id : guestId
-            }`,
-          ),
-        ])
-
-        if (userDataResponse.status === 200) {
-          setUserData(userDataResponse.data)
-        }
-
-        if (shippingDataResponse.status === 200) {
-          setShippingData(shippingDataResponse.data)
-        }
-
-        setOrderAndCartItems(orderAndCartItemsResponse.data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    fetchData()
-  }, [cart, navigate, setShippingData, userId, isLoggedIn])
-  useEffectScrollTop()
- */
   return (
     <>
       <div className={styles.orderSummaryWrapper}>

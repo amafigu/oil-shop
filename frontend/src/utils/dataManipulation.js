@@ -18,8 +18,19 @@ export const getDataAndSetErrorMessage = async (
   } catch (error) {
     console.error(error)
     if (typeof setErrorMessage === "function") {
-      setErrorMessage("Error by getting data")
-      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+      if (error.response && error.response.data.message) {
+        console.error(error.response.data.message)
+        setErrorMessage(
+          `Error by updating data: ${error.response.data.message}`,
+        )
+        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+        return
+      } else {
+        console.error("me ", error)
+        setErrorMessage("Error by updating data")
+        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+        return
+      }
     }
   }
 }
@@ -66,7 +77,6 @@ export const updateDataAndSetStates = async (
   propertyName,
   dataId,
   dataApi,
-
   setNonUpdatedData,
   updatedData,
   setUpdatedData,
@@ -110,8 +120,15 @@ export const updateDataAndSetStates = async (
     }
   } catch (error) {
     console.error(error)
-    setErrorMessage("Error by updating data")
-    setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+    if (error.response && error.response.data.message) {
+      console.error(error.response.data.message)
+      setErrorMessage(`Error by updating data: ${error.response.data.message}`)
+      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+    } else {
+      console.error("me ", error)
+      setErrorMessage("Error by updating data")
+      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+    }
   }
 }
 
