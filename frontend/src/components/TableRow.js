@@ -1,4 +1,4 @@
-import { camelCaseToTitleCase } from "#utils/utils"
+import { camelCaseToTitleCase } from "#utils/stringManipulation"
 import styles from "./tableRow.module.scss"
 
 const TableRow = ({ data }) => {

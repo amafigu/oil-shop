@@ -1,6 +1,7 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import { titleCase, uploadToS3 } from "#utils/utils"
+import { uploadToS3 } from "#utils/dataManipulation"
+import { titleCase } from "#utils/stringManipulation"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"

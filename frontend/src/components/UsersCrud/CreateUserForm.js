@@ -1,13 +1,13 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { uploadToS3 } from "#utils/utils"
+import { DEFAULT_USER_IMAGE } from "#utils/constants"
+import { uploadToS3 } from "#utils/dataManipulation"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { DEFAULT_USER_IMAGE } from "../../utils/constants"
 import styles from "./createUserForm.module.scss"
 
 const CreateUserForm = ({

@@ -1,7 +1,7 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-
-import { getUserByEmail, uploadToS3 } from "#utils/utils"
+import { uploadToS3 } from "#utils/dataManipulation"
+import { getUserByEmail } from "#utils/users"
 import axios from "axios"
 import { useState } from "react"
 import styles from "./updateUserForm.module.scss"

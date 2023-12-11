@@ -1,5 +1,5 @@
 import { API_USER_CUSTOMER, API_VERIFY_TOKEN } from "#utils/constants"
-import { getDataAndSetErrorMessage } from "#utils/utils"
+import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
 export const UserContext = createContext()

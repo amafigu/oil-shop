@@ -2,10 +2,8 @@ import NotificationCard from "#components/NotificationCard"
 import ProductDetailsRow from "#components/ProductDetailsRow"
 import ToggleButton from "#components/ToggleButton"
 import useUserContext from "#context/userContext"
-import {
-  convertIsoToLocaleDateString,
-  getUserOrdersWithProductsList,
-} from "#utils/utils"
+import { convertIsoToLocaleDateString } from "#utils/stringManipulation"
+import { getUserOrdersWithProductsList } from "#utils/users"
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import styles from "./getOrders.module.scss"
 

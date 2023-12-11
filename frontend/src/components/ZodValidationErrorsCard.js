@@ -1,4 +1,4 @@
-import { translateZodValidationErrors } from "#utils/utils"
+import { translateZodValidationErrors } from "#utils/errors"
 import styles from "./zodValidationErrorsCard.module.scss"
 
 const ZodValidationErrorsCard = ({ fieldErrors, text }) => {

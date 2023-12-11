@@ -1,5 +1,7 @@
 import NotificationCard from "#components/NotificationCard"
-import { getProductByName, titleCase, uploadToS3 } from "#utils/utils"
+import { uploadToS3 } from "#utils/dataManipulation"
+import { getProductByName } from "#utils/products"
+import { titleCase } from "#utils/stringManipulation"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from "./updateProductForm.module.scss"

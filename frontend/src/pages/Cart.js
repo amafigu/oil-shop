@@ -1,18 +1,14 @@
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
-import { SHIPPING_COST } from "#utils/constants"
-import {
-  cartTotalSum,
-  titleCase,
-  totalCost,
-  useEffectScrollTop,
-} from "#utils/utils"
+import { cartTotalSum, totalCost } from "#utils/cart"
+import { DEFAULT_PRODUCT_IMAGE, SHIPPING_COST } from "#utils/constants"
+import { setDefaultImageByError } from "#utils/dataManipulation"
+import { useEffectScrollTop } from "#utils/render"
+import { titleCase } from "#utils/stringManipulation"
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { Link } from "react-router-dom"
-import { DEFAULT_PRODUCT_IMAGE } from "../utils/constants"
-import { setDefaultImageByError } from "../utils/utils"
 import styles from "./cart.module.scss"
 const Cart = () => {
   const { cart, removeProduct, updateProductQuantity } = useCartContext()

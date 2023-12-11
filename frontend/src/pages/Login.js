@@ -1,11 +1,11 @@
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { useEffectScrollTop } from "#utils/utils"
+import { API_USER_CUSTOMER } from "#utils/constants"
+import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
+import { useEffectScrollTop } from "#utils/render"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { API_USER_CUSTOMER } from "../utils/constants"
-import { getDataAndSetErrorMessage } from "../utils/utils"
 import styles from "./login.module.scss"
 
 const Login = () => {

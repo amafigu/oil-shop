@@ -1,5 +1,6 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
-import { setDefaultImageByError, titleCase } from "#utils/utils"
+import { setDefaultImageByError } from "#utils/dataManipulation"
+import { titleCase } from "#utils/stringManipulation"
 import styles from "./productDetailsRow.module.scss"
 
 const ProductDetailsRow = ({ product, quantity }) => {

@@ -1,5 +1,5 @@
 import ProductCard from "#components/ProductCard/index"
-import { useEffectScrollTop } from "#utils/utils"
+import { useEffectScrollTop } from "#utils/render"
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"

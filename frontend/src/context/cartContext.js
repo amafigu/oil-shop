@@ -1,5 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
-import { titleCase } from "#utils/utils"
+import { titleCase } from "#utils/stringManipulation"
+
 import { createContext, useContext, useEffect, useState } from "react"
 
 export const CartContext = createContext()

@@ -1,7 +1,9 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import useLocaleContext from "#context/localeContext"
 import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
-import { setDefaultImageByError, titleCase } from "#utils/utils"
+import { titleCase } from "#utils/stringManipulation"
+
+import { setDefaultImageByError } from "#utils/dataManipulation"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./productCard.module.scss"

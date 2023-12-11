@@ -1,5 +1,5 @@
 import useLocaleContext from "#context/localeContext"
-import { useEffectScrollTop } from "#utils/utils"
+import { useEffectScrollTop } from "#utils/render"
 import React from "react"
 import styles from "./about.module.scss"
 
