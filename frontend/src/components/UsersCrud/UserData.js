@@ -39,7 +39,6 @@ const UserData = () => {
 
   useEffect(() => {
     async function getOriginalUserData() {
-      console.log("USER DATA useEffect userId 2 ", userId)
       if (!isLoading) {
         try {
           const userData = await getDataAndSetErrorMessage(
@@ -48,8 +47,6 @@ const UserData = () => {
             setNotification,
           )
 
-          console.log("USER DATA USER DATA useEffect userData 2 ", userData)
-
           if (!userData) {
             setNotification(`${errorText.user.getUserData}`)
             setTimeout(() => setNotification(null), 2000)
@@ -57,10 +54,6 @@ const UserData = () => {
           }
 
           if (userData.status === 200) {
-            console.log(
-              "USER DATA useEffect userData.data 2 userData.status === 200 ",
-              userData.data,
-            )
             setUser(userData.data)
             setNonUpdatedUserData(userData.data)
           }
@@ -94,11 +87,12 @@ const UserData = () => {
       setUpdatedUserData,
       setNotification,
     )
-
-    console.log(updatedData.data.user)
+    if (!updatedData) {
+      setNotification(`unable to update user data`)
+      setTimeout(() => setNotification(null), 2000)
+      return
+    }
     setUser(updatedData.data.user)
-
-    console.log("updatedUserDataWithImage", updatedUserDataWithImage)
   }
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
