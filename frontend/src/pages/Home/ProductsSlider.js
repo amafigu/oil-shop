@@ -1,5 +1,5 @@
 import ProductCard from "#components/ProductCard"
-import { useGetProducts } from "#utils/utils"
+import { useGetProducts } from "#utils/products"
 
 import {
   faChevronLeft,

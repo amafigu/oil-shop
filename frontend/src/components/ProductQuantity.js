@@ -1,4 +1,4 @@
-import { decreaseQuantity, increaseQuantity } from "#utils/utils"
+import { decreaseQuantity, increaseQuantity } from "#utils/cart"
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

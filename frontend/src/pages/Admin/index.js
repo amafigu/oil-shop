@@ -2,7 +2,7 @@ import UsersCrud from "#components//UsersCrud"
 import Header from "#components/Header"
 import NotificationCard from "#components/NotificationCard"
 import ProductsCrud from "#components/ProductsCrud"
-import { getLoggedInUserData } from "#utils/utils"
+import { getLoggedInUserData } from "#utils/users"
 import { useEffect, useState } from "react"
 import styles from "./admin.module.scss"
 

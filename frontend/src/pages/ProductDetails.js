@@ -1,12 +1,10 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import ProductQuantity from "#components/ProductQuantity"
 import useLocaleContext from "#context/localeContext"
-import { setDefaultImageByError, titleCase } from "#utils/utils"
-
 import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
-
+import { setDefaultImageByError } from "#utils/dataManipulation"
+import { titleCase } from "#utils/stringManipulation"
 import axios from "axios"
-
 import React, { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import styles from "./productDetails.module.scss"

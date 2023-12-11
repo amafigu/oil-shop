@@ -1,4 +1,4 @@
-import { useEffectScrollTop } from "#utils/utils"
+import { useEffectScrollTop } from "#utils/render"
 import { React } from "react"
 import useLocaleContext from "../context/localeContext"
 import styles from "./faq.module.scss"

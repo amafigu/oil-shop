@@ -4,12 +4,12 @@ import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import { API_SHIPPING_DATA, STYLES } from "#utils/constants"
 import {
-  checkIfAllObjectsValuesAreEmptyStrings,
   getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   updateDataRequest,
-} from "#utils/utils"
+} from "#utils/dataManipulation"
+import { checkIfAllObjectsValuesAreEmptyStrings } from "#utils/validation"
 import { useEffect, useState } from "react"
 import styles from "./shippingData.module.scss"
 

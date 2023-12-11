@@ -11,7 +11,7 @@ import {
   updateDataAndSetStates,
   updateDataRequest,
   uploadToS3,
-} from "#utils/utils"
+} from "#utils/dataManipulation"
 import { useEffect, useState } from "react"
 import styles from "./userData.module.scss"
 

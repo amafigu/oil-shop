@@ -7,7 +7,7 @@ import useUserContext from "#context/userContext"
 import axios from "axios"
 
 import { API_USER_CUSTOMER } from "#utils/constants"
-import { getDataAndSetErrorMessage } from "#utils/utils"
+import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./user.module.scss"

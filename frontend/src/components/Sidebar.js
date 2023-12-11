@@ -1,6 +1,6 @@
+import { titleCase } from "#utils/stringManipulation"
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { titleCase } from "../utils/utils"
 import styles from "./sidebar.module.scss"
 
 const Sidebar = ({ setCategory, setMenuOpen, productCategories }) => {

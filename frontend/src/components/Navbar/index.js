@@ -1,12 +1,11 @@
 import LogoutButton from "#components/LogoutButton"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
+import { searchAndNavigateToProduct, useGetProducts } from "#utils/products"
 import {
   getInputChangeAndOpenList,
-  searchAndNavigateToProduct,
-  useGetProducts,
   useHideListOnOuterClick,
-} from "#utils/utils"
+} from "#utils/render"
 import {
   faBars,
   faCartShopping,

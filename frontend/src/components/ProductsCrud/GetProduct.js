@@ -1,6 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import { getProductByName } from "#utils/utils"
+import { getProductByName } from "#utils/products"
 import { useState } from "react"
 import styles from "./getProduct.module.scss"
 

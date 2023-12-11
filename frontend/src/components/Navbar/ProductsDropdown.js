@@ -1,4 +1,5 @@
-import { navigateToProductAndCloseDropdown, titleCase } from "#utils/utils"
+import { navigateToProductAndCloseDropdown } from "#utils/products"
+import { titleCase } from "#utils/stringManipulation"
 import { React } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./productsDropdown.module.scss"

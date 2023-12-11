@@ -1,5 +1,5 @@
 import NotificationCard from "#components/NotificationCard"
-import { getUserByEmail } from "#utils/utils"
+import { getUserByEmail } from "#utils/users"
 import { useState } from "react"
 import styles from "./getUser.module.scss"
 
