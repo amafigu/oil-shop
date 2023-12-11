@@ -9,7 +9,7 @@ import {
   updateDataAndSetStates,
   updateDataRequest,
 } from "#utils/dataManipulation"
-import { checkIfAllObjectsValuesAreEmptyStrings } from "#utils/validation"
+import { ignorePropertiesWithEmptyValue } from "#utils/validation"
 import { useEffect, useState } from "react"
 import styles from "./shippingData.module.scss"
 
@@ -55,10 +55,7 @@ const ShippingData = ({ userId }) => {
   }, [userId, errorText.user.getShippingData])
 
   useEffect(() => {
-    if (
-      checkIfAllObjectsValuesAreEmptyStrings(nonUpdatedShippingData) &&
-      showForm
-    ) {
+    if (ignorePropertiesWithEmptyValue(nonUpdatedShippingData) && showForm) {
       setNotification(usersWarningText.shippingDataIsEmpty)
       setTimeout(() => setNotification(null), 3000)
     }

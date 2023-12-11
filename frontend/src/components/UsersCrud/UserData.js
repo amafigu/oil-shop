@@ -9,7 +9,6 @@ import {
   getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
-  updateDataRequest,
   uploadToS3,
 } from "#utils/dataManipulation"
 import { useEffect, useState } from "react"
@@ -68,7 +67,7 @@ const UserData = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, errorText.user.getUserData, isLoading])
 
-  const updateUserDataAndSetStates = async (e) => {
+  const updateUserDataAndSetStates = async (e, propertyName) => {
     let image = ""
     if (file) {
       image = await uploadToS3(file)
@@ -79,17 +78,15 @@ const UserData = () => {
 
     const updatedData = await updateDataAndSetStates(
       e,
-      () =>
-        updateDataRequest(userId, updatedUserDataWithImage, API_USER_CUSTOMER),
-      nonUpdatedUserData,
+      propertyName,
+      userId,
+      API_USER_CUSTOMER,
       setNonUpdatedUserData,
       updatedUserDataWithImage,
       setUpdatedUserData,
       setNotification,
     )
     if (!updatedData) {
-      setNotification(`unable to update user data`)
-      setTimeout(() => setNotification(null), 2000)
       return
     }
     setUser(updatedData.data.user)
@@ -125,7 +122,7 @@ const UserData = () => {
                       setNotification,
                     )
                   }
-                  onSave={(e) => updateUserDataAndSetStates(e)}
+                  onSave={(e) => updateUserDataAndSetStates(e, key)}
                   classCss={STYLES.FORMS.FIELD}
                   originalPropertyData={nonUpdatedUserData}
                   updatedPropertyData={updatedUserData}
@@ -135,13 +132,13 @@ const UserData = () => {
             <div className={styles.inputContainer}>
               <EditableImageInput
                 label={"Image"}
-                name={"Image"}
+                name={"image"}
                 onChange={(e) => {
                   setFileToUpload(e)
                 }}
                 classCss={STYLES.FORMS.ITEM_ROW}
                 file={file}
-                onSave={(e) => updateUserDataAndSetStates(e)}
+                onSave={(e) => updateUserDataAndSetStates(e, "image")}
               />
             </div>
           </div>

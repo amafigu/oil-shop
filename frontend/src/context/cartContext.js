@@ -7,11 +7,9 @@ export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
   const getInitialCart = () => {
-    console.log("getInitialCart")
     try {
       const storageCart = localStorage.getItem("yolo-cart")
       if (storageCart) {
-        console.log("getInitialCart storageCart", storageCart)
         return JSON.parse(storageCart)
       }
     } catch (error) {

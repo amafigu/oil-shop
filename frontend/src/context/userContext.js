@@ -20,14 +20,12 @@ export const UserProvider = ({ children }) => {
           `${process.env.REACT_APP_API_URL}${API_VERIFY_TOKEN}`,
           { withCredentials: true },
         )
-        console.log("response", response)
         userId = response.data.id
         if (response.status === 200) {
           const loggedInUser = await axios.get(
             `${process.env.REACT_APP_API_URL}/users/customer/${userId}`,
             { withCredentials: true },
           )
-          console.log("loggedInUser", loggedInUser)
           if (loggedInUser && loggedInUser.status === 200) {
             const response = getDataAndSetErrorMessage(
               loggedInUser.data.id,
@@ -48,7 +46,7 @@ export const UserProvider = ({ children }) => {
 
     verifyCookie()
   }, [isLoggedIn])
-  console.log("user", user)
+
   return (
     <UserContext.Provider
       value={{

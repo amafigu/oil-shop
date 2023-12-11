@@ -22,6 +22,7 @@
 
     @include media.mobile {
       flex-direction: column;
+      flex-grow: 1;
     }
   }
 
@@ -30,16 +31,18 @@
 
     @include media.mobile {
       display: flex;
+      flex-grow: 1;
     }
   }
 
   .tableHeaderCell {
-    width: 34%;
+    display: flex;
     font-weight: theme.$font-weight-semibold;
-  }
 
-  .tableDataCell {
-    width: 66%;
+    @include media.mobile {
+      flex-grow: 1;
+      max-width: 40%;
+    }
   }
 
   .tableHeaderCell,
