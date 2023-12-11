@@ -63,7 +63,6 @@ const ShippingData = () => {
   }, [userId, errorText.user.getShippingData, isLoading])
 
   useEffect(() => {
-    console.log(ignorePropertiesWithEmptyValue(nonUpdatedShippingData))
     if (
       // eslint-disable-next-line eqeqeq
       ignorePropertiesWithEmptyValue(nonUpdatedShippingData) == {} &&

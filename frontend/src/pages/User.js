@@ -18,7 +18,6 @@ const User = () => {
   const { setUser, user, isLoading } = useUserContext()
   useEffect(() => {
     if (!isLoading) {
-      console.log("user lpa")
       const fetchUserData = async () => {
         try {
           const currentUserIdResponse = await axios.get(

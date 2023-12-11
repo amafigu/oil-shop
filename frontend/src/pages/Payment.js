@@ -104,7 +104,6 @@ const Payment = () => {
           console.error(error)
         }
       } else {
-        console.log(userId)
         const userDataResponse = await axios.get(
           `${process.env.REACT_APP_API_URL}${API_USER_CUSTOMER}${userId}`,
           { withCredentials: true },
