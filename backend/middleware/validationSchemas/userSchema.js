@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const firstAndLastNameValidation = z
   .string()
-  .min(2, 'First name should have at least two characters.')
+  .min(1, 'First name should have at least two characters.')
   .max(30, "Can't be longer than 30 characters.")
   .refine((value) => value[0] === value[0].toUpperCase(), {
     message: 'First name should start with a capital letter.',
@@ -14,15 +14,45 @@ const firstAndLastNameValidation = z
 const firstAndLastNameUpdateValidation = z
   .string()
   .max(30, "Can't be longer than 30 characters.")
+  .refine((value) => value.length === 0 || value.length >= 2, {
+    message: 'First name should have at least two characters.',
+  })
+  .refine((value) => value === '' || value[0] === value[0].toUpperCase(), {
+    message: 'First name should start with a capital letter.',
+  })
+  .refine((value) => value === '' || /^[A-Za-z\s]+$/.test(value), {
+    message: 'First name can only contain letters.',
+  })
+  .optional()
+  .default('');
+
+const lastNameUpdateValidation = z
+  .string()
+  .max(30, "Can't be longer than 30 characters.")
+  .refine((value) => value.length === 0 || value.length >= 2, {
+    message: 'Last name should have at least two characters.',
+  })
+  .refine((value) => value === '' || value[0] === value[0].toUpperCase(), {
+    message: 'Last name should start with a capital letter.',
+  })
+  .refine((value) => value === '' || /^[A-Za-z\s]+$/.test(value), {
+    message: 'Last name can only contain letters.',
+  })
   .optional()
   .default('');
 
 const updateUserValidation = z.object({
-  firstName: firstAndLastNameUpdateValidation.optional().default(''),
-  lastName: firstAndLastNameUpdateValidation.optional().default(''),
+  firstName: firstAndLastNameUpdateValidation,
+  lastName: lastNameUpdateValidation,
   email: z
     .string()
-    .max(40, "Email can't be longer than 40 characters.")
+    .max(50, "Email can't be longer than 50 characters.")
+    .refine(
+      (value) => value === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+      {
+        message: 'Invalid email format.',
+      }
+    )
     .optional()
     .default(''),
 });
@@ -35,13 +65,8 @@ const createUserValidation = z.object({
     .refine((value) => /^[A-Za-z\s]+$/.test(value), {
       message: 'First name can only contain letters.',
     }),
-  lastName: firstAndLastNameValidation
-    .refine((value) => value[0] === value[0].toUpperCase(), {
-      message: 'Last name should start with a capital letter.',
-    })
-    .refine((value) => /^[A-Za-z\s]+$/.test(value), {
-      message: 'Last name can only contain letters.',
-    }),
+  lastName: firstAndLastNameValidation,
+
   email: z
     .string()
     .min(4, 'Email should have at least 4 characters.')

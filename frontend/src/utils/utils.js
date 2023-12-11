@@ -26,9 +26,25 @@ export const validateUserFieldsInDataObject = (
         setTimeout(() => setErrorNotification(null), 3000)
         return
       }
-      if (propertyValueLength < 3) {
+      if (propertyValueLength < 2) {
         console.error("Please enter a longer name")
         setErrorNotification("Please enter a longer name")
+        setTimeout(() => setErrorNotification(null), 3000)
+        return
+      }
+    }
+
+    if (property === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(propertyValue)) {
+        console.error("Invalid email format.")
+        setErrorNotification("Invalid email format.")
+        setTimeout(() => setErrorNotification(null), 3000)
+        return
+      }
+      if (propertyValueLength > 40) {
+        console.error("Email can't be longer than 40 characters.")
+        setErrorNotification("Email can't be longer than 40 characters.")
         setTimeout(() => setErrorNotification(null), 3000)
         return
       }
@@ -191,12 +207,10 @@ export const updateDataAndSetStates = async (
       setTimeout(() => setNotification(null), 2000)
       return
     }
-
     const validatedData = validateUserFieldsInDataObject(
       cleanedUpdatedData,
       setNotification,
     )
-
     const dataRequest = await request(validatedData)
 
     if (dataRequest.status === 200) {
@@ -394,7 +408,6 @@ export const translateZodValidationErrors = (error, text) => {
 }
 
 export const uploadToS3 = async (file) => {
-  console.log("UTILS uploadToS3 file 3", file)
   if (!file) return ""
   let newUrl = ""
   try {
