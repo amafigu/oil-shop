@@ -1,9 +1,8 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import useLocaleContext from "#context/localeContext"
 import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
-import { titleCase } from "#utils/stringManipulation"
-
 import { setDefaultImageByError } from "#utils/dataManipulation"
+import { titleCase } from "#utils/stringManipulation"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./productCard.module.scss"
@@ -13,35 +12,43 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className={styles.productCardWrapper}>
-      <Link to={`/products/${product.name}`}>
-        <div className={styles.productCardBody}>
-          <img
-            className={styles.productCardImage}
-            src={product.image}
-            alt={product.name}
-            onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
-          />
-          <div className={styles.productCardName}>
-            {titleCase(product.name, "_")}
-          </div>
-          <div className={styles.productCardSize}>
-            {translate.components.products.oil.size}: {product.size} ml
-          </div>
-          <div className={styles.productCardPrice}>
-            {translate.components.products.oil.price} €{product.price}
-          </div>
-          <div className={styles.productCardDescription}>
-            {product.description}
+      {product ? (
+        <div>
+          <Link to={`/products/${product.name}`}>
+            <div className={styles.productCardBody}>
+              <img
+                className={styles.productCardImage}
+                src={product.image}
+                alt={product.name}
+                onError={(e) =>
+                  setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                }
+              />
+              <div className={styles.productCardName}>
+                {titleCase(product.name, "_")}
+              </div>
+              <div className={styles.productCardSize}>
+                {translate.components.products.oil.size}: {product.size} ml
+              </div>
+              <div className={styles.productCardPrice}>
+                {translate.components.products.oil.price} €{product.price}
+              </div>
+              <div className={styles.productCardDescription}>
+                {product.description}
+              </div>
+            </div>
+          </Link>
+          <div className={styles.addButtonContainer}>
+            <AddProductToCartButton
+              product={product}
+              classname={styles.addButton}
+              quantity={1}
+            />
           </div>
         </div>
-      </Link>
-      <div className={styles.addButtonContainer}>
-        <AddProductToCartButton
-          product={product}
-          classname={styles.addButton}
-          quantity={1}
-        />
-      </div>
+      ) : (
+        <div>Loading Product</div>
+      )}
     </div>
   )
 }
