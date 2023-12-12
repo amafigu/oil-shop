@@ -5,7 +5,7 @@ import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { STYLES } from "#utils/constants"
 import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./shipping.module.scss"
 
