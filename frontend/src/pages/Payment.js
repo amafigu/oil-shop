@@ -3,7 +3,7 @@ import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { totalCost } from "#utils/cart"
-import { SHIPPING_COST } from "#utils/constants"
+import { API_USER_CUSTOMER, SHIPPING_COST } from "#utils/constants"
 import { useEffectScrollTop } from "#utils/render"
 import axios from "axios"
 import { React, useState } from "react"
@@ -15,7 +15,7 @@ const Payment = () => {
   const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
-  const { isLoggedIn, setUserId } = useUserContext()
+  const { isLoggedIn, setUserId, userId } = useUserContext()
   const { setCart } = useCartContext()
   const location = useLocation()
   let formData = {}
@@ -105,7 +105,7 @@ const Payment = () => {
         }
       } else {
         const userDataResponse = await axios.get(
-          `${process.env.REACT_APP_API_URL}/users/current-user`,
+          `${process.env.REACT_APP_API_URL}${API_USER_CUSTOMER}${userId}`,
           { withCredentials: true },
         )
         const userData = userDataResponse.data

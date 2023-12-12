@@ -15,37 +15,39 @@ const User = () => {
   const [notification, setNotification] = useState(null)
 
   const navigate = useNavigate()
-  const { setUser, user } = useUserContext()
+  const { setUser, user, isLoading } = useUserContext()
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const currentUserIdResponse = await axios.get(
-          `${process.env.REACT_APP_API_URL}/users/current`,
-          { withCredentials: true },
-        )
+    if (!isLoading) {
+      const fetchUserData = async () => {
+        try {
+          const currentUserIdResponse = await axios.get(
+            `${process.env.REACT_APP_API_URL}/users/current`,
+            { withCredentials: true },
+          )
 
-        const userId = currentUserIdResponse.data.id
+          const userId = currentUserIdResponse.data.id
 
-        const userResponse = await getDataAndSetErrorMessage(
-          userId,
-          API_USER_CUSTOMER,
-          setNotification,
-        )
-        const loggedUser = userResponse.data
+          const userResponse = await getDataAndSetErrorMessage(
+            userId,
+            API_USER_CUSTOMER,
+            setNotification,
+          )
+          const loggedUser = userResponse.data
 
-        if (userResponse.status === 200) {
-          setUser(loggedUser)
+          if (userResponse.status === 200) {
+            setUser(loggedUser)
+          }
+        } catch (error) {
+          setNotification(`${error.response.data.message}`)
+          setTimeout(() => setNotification(null), 2000)
+          setTimeout(() => navigate("/login"), 2000)
+          console.error("Error fetching user data", error)
         }
-      } catch (error) {
-        setNotification(`${error.response.data.message}`)
-        setTimeout(() => setNotification(null), 2000)
-        setTimeout(() => navigate("/login"), 2000)
-        console.error("Error fetching user data", error)
       }
-    }
 
-    fetchUserData()
-  }, [navigate, setUser])
+      fetchUserData()
+    }
+  }, [navigate, setUser, isLoading])
 
   const dataForHeader = {
     firstName: user.firstName,
@@ -59,18 +61,24 @@ const User = () => {
       {notification && <NotificationCard message={notification} />}
 
       <div className={styles.userPage}>
-        <Header data={dataForHeader} />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <Header data={dataForHeader} />
 
-        <div className={styles.componentContainer}>
-          <UserData />
-        </div>
-        <div className={styles.componentContainer}>
-          <ShippingData userId={user.id} />
-        </div>
+            <div className={styles.componentContainer}>
+              <UserData />
+            </div>
+            <div className={styles.componentContainer}>
+              <ShippingData />
+            </div>
 
-        <div className={styles.componentContainer}>
-          <GetOrders />
-        </div>
+            <div className={styles.componentContainer}>
+              <GetOrders />
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
