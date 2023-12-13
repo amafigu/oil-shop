@@ -58,6 +58,7 @@ const UserData = () => {
 
           if (userData.status === 200) {
             setUser(userData.data)
+            console.log(userData.data)
             setNonUpdatedUserData(userData.data)
           }
         } catch (error) {
@@ -79,7 +80,7 @@ const UserData = () => {
     }
 
     let updatedUserDataWithImage = { ...updatedUserData, image }
-    setUpdatedUserData(updatedUserDataWithImage) // Set the updated user data with the image
+    setUpdatedUserData(updatedUserDataWithImage)
 
     const updatedData = await updateDataAndSetStates(
       e,
@@ -107,8 +108,8 @@ const UserData = () => {
         <ToggleButton
           show={showForm}
           setToggle={setShowForm}
-          textHide={`${buttonsText.actions.user.hide}`}
-          textShow={`${buttonsText.actions.user.show}`}
+          textHide={`${buttonsText?.actions.user.hide}`}
+          textShow={`${buttonsText?.actions.user.show}`}
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (
