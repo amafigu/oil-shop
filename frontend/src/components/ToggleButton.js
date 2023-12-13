@@ -1,3 +1,4 @@
+import React from "react"
 import styles from "./toggleButton.module.scss"
 
 const ToggleButton = ({ show, setToggle, textHide, textShow, classCss }) => {

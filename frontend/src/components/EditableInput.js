@@ -1,7 +1,7 @@
 import useLocaleContext from "#context/localeContext"
 import { saveDataAndToggleInput } from "#utils/dataManipulation"
 import { cancelWithScape } from "#utils/render"
-import { useState } from "react"
+import React, { useState } from "react"
 import styles from "./editableInput.module.scss"
 
 const EditableInput = ({

@@ -11,7 +11,7 @@ import {
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./userData.module.scss"
 
 const UserData = () => {
@@ -47,7 +47,11 @@ const UserData = () => {
           )
 
           if (!userData) {
-            setNotification(`${errorText.user.getUserData}`)
+            const errorMessage =
+              errorText.user && errorText.user.getUserData
+                ? `${errorText.user.getUserData}`
+                : "Error getting user data"
+            setNotification(errorMessage)
             setTimeout(() => setNotification(null), 2000)
             return
           }
@@ -57,6 +61,7 @@ const UserData = () => {
             setNonUpdatedUserData(userData.data)
           }
         } catch (error) {
+          setNotification("Error by getting user data")
           setTimeout(() => setNotification(null), 3000)
           console.error(error)
         }
@@ -65,7 +70,7 @@ const UserData = () => {
 
     getOriginalUserData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, errorText.user.getUserData, isLoading])
+  }, [userId, isLoading])
 
   const updateUserDataAndSetStates = async (e, propertyName) => {
     let image = ""
