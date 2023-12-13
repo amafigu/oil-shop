@@ -4,6 +4,7 @@ import {
   ignoreUnsavedProperties,
   validateUserFieldsInDataObject,
 } from "./validation"
+
 export const getDataAndSetErrorMessage = async (
   dataId,
   apiUrl,
@@ -26,7 +27,7 @@ export const getDataAndSetErrorMessage = async (
         setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
         return
       } else {
-        console.error("me ", error)
+        console.error(error)
         setErrorMessage("Error by updating data")
         setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
         return
@@ -49,16 +50,17 @@ export const updateDataRequest = async (
     )
     return response
   } catch (error) {
-    if (error.response.data.message) {
-      setErrorMessage(`${error.response.data.message}`)
-      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
-    }
+    if (error.response && error.response.data) {
+      if (error.response.data.message) {
+        setErrorMessage(`${error.response.data.message}`)
+        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+      }
 
-    if (error.response.data.error) {
-      setErrorMessage(`${error.response.data.error[0]}`)
-      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+      if (error.response.data.error) {
+        setErrorMessage(`${error.response.data.error[0]}`)
+        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+      }
     }
-
     console.error(error)
   }
 }

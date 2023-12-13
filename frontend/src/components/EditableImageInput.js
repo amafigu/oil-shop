@@ -1,5 +1,5 @@
 import useLocaleContext from "#context/localeContext"
-import { useState } from "react"
+import React, { useState } from "react"
 import styles from "./editableImageInput.module.scss"
 
 const EditableImageInput = ({
