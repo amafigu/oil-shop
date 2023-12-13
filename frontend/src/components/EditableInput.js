@@ -48,7 +48,7 @@ const EditableInput = ({
           className={styles.formButton}
           onClick={(e) => saveDataAndToggleInput(e, onSave, setIsEditing)}
         >
-          {textButtons.save}
+          {textButtons ? textButtons.save : "Save"}
         </div>
       ) : (
         <div
