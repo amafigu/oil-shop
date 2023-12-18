@@ -1,4 +1,4 @@
-import translate from "#__mocks__/translate" // Change this line
+import translate from "#__mocks__/translate"
 import useLocaleContext from "#context/localeContext"
 import { render } from "@testing-library/react"
 import React from "react"
@@ -8,7 +8,6 @@ jest.mock("#context/localeContext")
 jest.mock("#context/userContext")
 
 describe("EditableInput", () => {
-  let component
   let mockOnChange
   let mockOnSave
 
@@ -18,6 +17,21 @@ describe("EditableInput", () => {
 
     useLocaleContext.mockReturnValue({ translate })
 
+    const textProperties = translate.components.crud.forms.commonProperties
+    const updatedPropertyData = {
+      firstName: "firstNameUpdated",
+      lastName: "lastNameUpdated",
+      email: "emailUpdated",
+      image: "imageUpdated",
+    }
+
+    const originalPropertyData = {
+      firstName: "firstNameOriginal",
+      lastName: "lastNameOriginal",
+      email: "emailOriginal",
+      image: "imageOriginal",
+    }
+
     component = render(
       <EditableInput
         label='firstName'
@@ -25,31 +39,21 @@ describe("EditableInput", () => {
         onChange={mockOnChange}
         onSave={mockOnSave}
         classCss='testClass'
-        originalPropertyData={{
-          firstName: "",
-        }}
-        updatedPropertyData={{
-          firstName: "",
-        }}
+        originalPropertyData={originalPropertyData}
+        updatedPropertyData={updatedPropertyData}
+        placeholder={textProperties[name]}
+        value={
+          updatedPropertyData[name] || updatedPropertyData[name] === ""
+            ? updatedPropertyData[name]
+            : originalPropertyData[name]
+        }
       />,
     )
   })
 
-  test("renders correctly", () => {
+  test("render correctly", () => {
     expect(component).toBeTruthy()
   })
-  /*
-  test("reads initial data correctly", () => {
-    const input = component.getByLabelText("Test input")
-    expect(input.value).toBe("Original")
-  }) */
-
-  /*  test("updates data correctly", () => {
-    const input = component.getByLabelText("Test input")
-    fireEvent.change(input, { target: { value: "New value" } })
-    expect(mockOnChange).toHaveBeenCalled()
-    expect(input.value).toBe("New value")
-  }) */
 
   // Add a similar test for the delete operation if your component supports it
 })

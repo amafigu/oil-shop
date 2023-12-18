@@ -1,3 +1,4 @@
+import product from "#__mocks__/product"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import "@testing-library/jest-dom"
@@ -11,15 +12,6 @@ jest.mock("#context/cartContext")
 
 describe("ProductCard should ", () => {
   test("renders properties value correctly", () => {
-    const product = {
-      name: "Test Product",
-      image: "image.jpg",
-      size: "15",
-      price: "25",
-      description: "description",
-      category: "massageOil",
-    }
-
     const translate = {
       components: {
         products: {
