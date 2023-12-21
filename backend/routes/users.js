@@ -60,7 +60,7 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
 router.get('/current-user/:id', decodeJWT, async (req, res) => {
   try {
     const token = req.cookies.token;
-    console.log('TOKEN ', token);
+
     if (!token) return res.status(401).json({ message: 'Not authenticated' });
 
     const user = await db.users.findOne({
@@ -141,18 +141,6 @@ router.put(
 
 // End Admin routes
 // TODO: only use the used id
-
-router.get('/current', decodeJWT, async (req, res) => {
-  return res.json({
-    id: req.user.id,
-    email: req.user.email,
-    role: req.user.role,
-    firstName: req.user.firstName,
-    lastName: req.user.lastName,
-    image: req.user.image,
-    roleId: req.user.roleId,
-  });
-});
 
 router.post('/logout', (req, res) => {
   res.clearCookie('token');
