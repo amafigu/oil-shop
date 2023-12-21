@@ -31,7 +31,6 @@ const EditableUserData = () => {
   })
 
   const [notification, setNotification] = useState(null)
-  const [searchedUser, setSearchedUser] = useState({})
   const [email, setEmail] = useState("")
   const { translate } = useLocaleContext()
   const buttonsText = translate.components.buttons
@@ -90,11 +89,23 @@ const EditableUserData = () => {
         />
         {showForm && (
           <div>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              type='text'
-            ></input>
-            <button onClick={() => searchUser()}>Search User</button>
+            <div className={styles.imageAndInputContainer}>
+              {nonUpdatedUserData !== initialUserData && (
+                <div className={styles.imageContainer}>
+                  <img
+                    className={styles.image}
+                    src={nonUpdatedUserData.image}
+                    alt='user'
+                  />
+                </div>
+              )}
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                type='text'
+              ></input>
+              <button onClick={() => searchUser()}>Search User</button>
+            </div>
+
             {Object.keys(initialUserData).map((key) => (
               <div className={styles.inputContainer} key={key}>
                 <EditableAndDeletableInput
