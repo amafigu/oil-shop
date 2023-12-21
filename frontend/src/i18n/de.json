@@ -357,7 +357,9 @@
     "requests": {
       "getShippingData": "Fehler beim Abrufen der Versanddaten",
       "user": {
-        "getUserData": "Fehler beim Abrufen der Benutzerdaten"
+        "getUserData": "Fehler beim Abrufen der Benutzerdaten",
+        "getShippingData": "Fehler beim Abrufen der Versanddaten",
+        "login": "Fehler beim Einloggen"
       }
     }
   },

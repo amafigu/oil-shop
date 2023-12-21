@@ -368,7 +368,8 @@
     "requests": {
       "user": {
         "getUserData": "Error while getting user data",
-        "getShippingData": "Error while getting shipping data"
+        "getShippingData": "Error while getting shipping data",
+        "login": "Error while login"
       }
     }
   },
