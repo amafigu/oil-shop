@@ -104,7 +104,7 @@ router.delete('/user/:email', decodeJWT, async (req, res) => {
 });
 
 router.put(
-  '/customer/:id',
+  '/user/:id',
 
   decodeJWT,
   validateBody(updateUserValidation),
