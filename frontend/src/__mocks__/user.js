@@ -1,10 +1,10 @@
 modele.exports = {
   id: 48,
-  firstName: "Asdds",
-  lastName: "Figueiredo",
-  email: "ada@mail.com",
+  firstName: "test firstName",
+  lastName: "test lastname",
+  email: "test@mail.com",
   image:
-    "https://oylo-images.s3.us-east-2.amazonaws.com/1702305642065-amaraDino.png",
+    "https://oylo-images.s3.us-east-2.amazonaws.com/1702305642065-test.png",
   roleId: 5,
   createdAt: "2023-10-18T15:52:56.026Z",
   updatedAt: "2023-12-11T15:14:22.010Z",

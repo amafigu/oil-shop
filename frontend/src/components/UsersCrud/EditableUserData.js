@@ -1,24 +1,19 @@
 import EditableImageInput from "#components/EditableImageInput"
-import EditableInput from "#components/EditableInput"
+import EditableAndDeletableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
+import { API_USERS_USER, STYLES } from "#utils/constants"
 import {
-  API_USERS_CURRENT_USER,
-  API_USERS_USER,
-  STYLES,
-} from "#utils/constants"
-import {
-  getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import React, { useEffect, useState } from "react"
-import styles from "./userData.module.scss"
+import { getUserByEmail } from "#utils/users"
+import React, { useState } from "react"
+import styles from "./editableUserData.module.scss"
 
-const UserData = () => {
+const EditableUserData = () => {
   const [showForm, setShowForm] = useState(false)
   const initialUserData = {
     firstName: "",
@@ -34,48 +29,11 @@ const UserData = () => {
   const [updatedUserData, setUpdatedUserData] = useState({
     ...initialUserData,
   })
+
   const [notification, setNotification] = useState(null)
+  const [email, setEmail] = useState("")
   const { translate } = useLocaleContext()
-  const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
-  const { setUser, userId, isLoading } = useUserContext()
-
-  useEffect(() => {
-    async function getOriginalUserData() {
-      if (!isLoading) {
-        try {
-          const userData = await getDataAndSetErrorMessage(
-            userId,
-            API_USERS_CURRENT_USER,
-            setNotification,
-          )
-
-          if (!userData) {
-            const errorMessage =
-              errorText.user && errorText.user.getUserData
-                ? `${errorText.user.getUserData}`
-                : "Error getting user data"
-            setNotification(errorMessage)
-            setTimeout(() => setNotification(null), 2000)
-            return
-          }
-
-          if (userData.status === 200) {
-            setUser(userData.data)
-            console.log(userData.data)
-            setNonUpdatedUserData(userData.data)
-          }
-        } catch (error) {
-          setNotification("Error by getting user data")
-          setTimeout(() => setNotification(null), 3000)
-          console.error(error)
-        }
-      }
-    }
-
-    getOriginalUserData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, isLoading])
 
   const updateUserDataAndSetStates = async (e, propertyName) => {
     let image = ""
@@ -89,7 +47,7 @@ const UserData = () => {
     const updatedData = await updateDataAndSetStates(
       e,
       propertyName,
-      userId,
+      nonUpdatedUserData.id,
       API_USERS_USER,
       setNonUpdatedUserData,
       updatedUserDataWithImage,
@@ -99,10 +57,23 @@ const UserData = () => {
     if (!updatedData) {
       return
     }
-    setUser(updatedData.data.user)
+    setUpdatedUserData(updatedData.data.user)
   }
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
+  }
+
+  const searchUser = async () => {
+    console.log(email)
+    const user = await getUserByEmail(email)
+    console.log("USEWUUSUEDAUSDUQWUDUQWDASD", user)
+    if (!user) {
+      setNotification("User not found")
+      setTimeout(() => setNotification(null), 2000)
+      return
+    }
+    console.log("USERUSERUSER", user)
+    setNonUpdatedUserData(user)
   }
 
   return (
@@ -118,9 +89,26 @@ const UserData = () => {
         />
         {showForm && (
           <div>
+            <div className={styles.imageAndInputContainer}>
+              {nonUpdatedUserData !== initialUserData && (
+                <div className={styles.imageContainer}>
+                  <img
+                    className={styles.image}
+                    src={nonUpdatedUserData.image}
+                    alt='user'
+                  />
+                </div>
+              )}
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                type='text'
+              ></input>
+              <button onClick={() => searchUser()}>Search User</button>
+            </div>
+
             {Object.keys(initialUserData).map((key) => (
               <div className={styles.inputContainer} key={key}>
-                <EditableInput
+                <EditableAndDeletableInput
                   label={key}
                   name={key}
                   value={updatedUserData[key]}
@@ -158,4 +146,4 @@ const UserData = () => {
   )
 }
 
-export default UserData
+export default EditableUserData

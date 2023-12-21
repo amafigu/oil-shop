@@ -5,10 +5,10 @@ import styles from "#pages/Admin/admin.module.scss"
 import { useState } from "react"
 import CreateUserForm from "./CreateUserForm"
 import DeleteUser from "./DeleteUser"
+import EditableUserData from "./EditableUserData"
 import GetAllUsers from "./GetAllUsers"
 import GetUser from "./GetUser"
-import UpdateUserForm from "./UpdateUserForm"
-
+import UserData from "./UserData"
 const UsersCrud = ({
   refreshAllUsersCounter,
   setEmailInUserError,
@@ -32,15 +32,23 @@ const UsersCrud = ({
       />
       {showUsersSection && (
         <div className={styles.formsContainer}>
-          USER CRUD SECTION
           <div className={styles.crudContainer}>
-            GET USER SECTION
+            USER CRUD SECTION
             <GetUser />
           </div>
           <div className={styles.crudContainer}>
             GET ALL USERS SECTION
             <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
           </div>
+          <div className={styles.crudContainer}>
+            UPDATE CURRENT USER
+            <UserData />
+          </div>
+          <div className={styles.crudContainer}>
+            UPDATE USER BY EMAIL
+            <EditableUserData />
+          </div>
+
           <div className={styles.crudContainer}>
             CREATE USER
             <CreateUserForm
@@ -57,10 +65,6 @@ const UsersCrud = ({
                 text={errorText}
               />
             )}
-          </div>
-          <div className={styles.crudContainer}>
-            UPDATE USER SECTION
-            <UpdateUserForm />
           </div>
           <div className={styles.crudContainer}>
             DELETE USER SECTION

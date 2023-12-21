@@ -1,4 +1,4 @@
-import { TIMEOUT_DURATION } from "#utils/constants"
+import { SHORT_MESSAGE_TIMEOUT } from "#utils/constants"
 import axios from "axios"
 import {
   ignoreUnsavedProperties,
@@ -24,12 +24,12 @@ export const getDataAndSetErrorMessage = async (
         setErrorMessage(
           `Error by updating data: ${error.response.data.message}`,
         )
-        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+        setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
         return
       } else {
         console.error(error)
         setErrorMessage("Error by updating data")
-        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+        setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
         return
       }
     }
@@ -53,12 +53,12 @@ export const updateDataRequest = async (
     if (error.response && error.response.data) {
       if (error.response.data.message) {
         setErrorMessage(`${error.response.data.message}`)
-        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+        setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
       }
 
       if (error.response.data.error) {
         setErrorMessage(`${error.response.data.error[0]}`)
-        setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+        setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
       }
     }
     console.error(error)
@@ -125,11 +125,11 @@ export const updateDataAndSetStates = async (
     if (error.response && error.response.data.message) {
       console.error(error.response.data.message)
       setErrorMessage(`Error by updating data: ${error.response.data.message}`)
-      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+      setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
     } else {
       console.error("me ", error)
       setErrorMessage("Error by updating data")
-      setTimeout(() => setErrorMessage(null), TIMEOUT_DURATION)
+      setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
     }
   }
 }
@@ -170,7 +170,13 @@ export const listenInputChangeAndSetDataObject = (
   updatedDataObj,
   setUpdatedDataObj,
 ) => {
+  console.log("UUUUUUUUUUUUUUUUUU", updatedDataObj)
   setUpdatedDataObj({
+    ...updatedDataObj,
+    [e.target.name]: e.target.value,
+  })
+
+  console.log("UUUUUUUUUUUUUUUUUU2222222", {
     ...updatedDataObj,
     [e.target.name]: e.target.value,
   })

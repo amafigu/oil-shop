@@ -18,6 +18,19 @@ import db from '../models/index.js';
 dotenv.config();
 const router = express.Router();
 
+router.get('/verify-token', (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.status(401).json({ message: 'Not authenticated' });
+    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+    return res.json(decodedToken);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+// GET ALL USERS
+
 router.get('/', decodeJWT, async (req, res) => {
   try {
     const users = await db.users.findAll();
@@ -27,6 +40,7 @@ router.get('/', decodeJWT, async (req, res) => {
   }
 });
 
+// GET USER BY EMAIL
 router.get('/user/:email', decodeJWT, async (req, res) => {
   try {
     const user = await db.users.findOne({
@@ -43,8 +57,12 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   }
 });
 
-router.get('/customer/:id', decodeJWT, async (req, res) => {
+router.get('/current-user/:id', decodeJWT, async (req, res) => {
   try {
+    const token = req.cookies.token;
+
+    if (!token) return res.status(401).json({ message: 'Not authenticated' });
+
     const user = await db.users.findOne({
       where: { id: req.params.id },
       include: [{ model: db.userRoles, as: 'role' }],
@@ -86,7 +104,7 @@ router.delete('/user/:email', decodeJWT, async (req, res) => {
 });
 
 router.put(
-  '/customer/:id',
+  '/user/:id',
 
   decodeJWT,
   validateBody(updateUserValidation),
@@ -124,18 +142,6 @@ router.put(
 // End Admin routes
 // TODO: only use the used id
 
-router.get('/current', decodeJWT, async (req, res) => {
-  return res.json({
-    id: req.user.id,
-    email: req.user.email,
-    role: req.user.role,
-    firstName: req.user.firstName,
-    lastName: req.user.lastName,
-    image: req.user.image,
-    roleId: req.user.roleId,
-  });
-});
-
 router.post('/logout', (req, res) => {
   res.clearCookie('token');
   res.json({ message: 'Logged out successfully' });
@@ -163,12 +169,6 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
     const token = jwt.sign(
       {
         id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        image: user.image,
-        roleId: user.roleId,
-        role: user.role.name,
       },
       process.env.JWT_KEY,
       { expiresIn: '3600000' } // 1 hour
@@ -375,17 +375,5 @@ router.put(
     }
   }
 );
-
-router.get('/verify-token', (req, res) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) return res.status(401).json({ message: 'Not authenticated' });
-
-    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
-    return res.json(decodedToken);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-});
 
 export default router;

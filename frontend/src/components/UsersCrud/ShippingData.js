@@ -3,7 +3,11 @@ import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { API_SHIPPING_DATA, STYLES, TIMEOUT_DURATION } from "#utils/constants"
+import {
+  API_SHIPPING_DATA,
+  SHORT_MESSAGE_TIMEOUT,
+  STYLES,
+} from "#utils/constants"
 import {
   getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
@@ -51,7 +55,7 @@ const ShippingData = () => {
           setNotification(
             `there is no shipping data for this user, in order to make purchases please add it`,
           )
-          setTimeout(() => setNotification(null), TIMEOUT_DURATION)
+          setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
           return
         }
         if (shippingData.status === 200) {

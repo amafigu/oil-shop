@@ -2,9 +2,9 @@ import useLocaleContext from "#context/localeContext"
 import { saveDataAndToggleInput } from "#utils/dataManipulation"
 import { cancelWithScape } from "#utils/render"
 import React, { useState } from "react"
-import styles from "./editableInput.module.scss"
+import styles from "./editableAndDeletableInput.module.scss"
 
-const EditableInput = ({
+const EditableAndDeletableInput = ({
   label,
   name,
   onChange,
@@ -68,4 +68,4 @@ const EditableInput = ({
     </div>
   )
 }
-export default EditableInput
+export default EditableAndDeletableInput

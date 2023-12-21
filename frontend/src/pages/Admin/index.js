@@ -1,31 +1,49 @@
-import UsersCrud from "#components//UsersCrud"
 import Header from "#components/Header"
 import NotificationCard from "#components/NotificationCard"
 import ProductsCrud from "#components/ProductsCrud"
-import { getLoggedInUserData } from "#utils/users"
+import UsersCrud from "#components/UsersCrud"
+import useUserContext from "#context/userContext"
+import {
+  REDIRECT_TIMEOUT,
+  ROUTES_LOGIN,
+  SHORT_MESSAGE_TIMEOUT,
+} from "#utils/constants"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import styles from "./admin.module.scss"
-
 const Admin = () => {
   const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
   const [refreshAllProductsCounter, setRefreshAllProductsCounter] = useState(0)
-  const [adminData, setAdminData] = useState({})
   const [notification, setNotification] = useState(null)
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
+  const [headerData, setHeaderData] = useState({})
+  const { user, isLoading } = useUserContext()
+  // const { translate } = useLocaleContext()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const checkData = async () => {
-      await getLoggedInUserData(setAdminData, setNotification)
+    if (!isLoading && user) {
+      setHeaderData({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        image: user.image,
+      })
     }
-    checkData()
-  }, [])
+
+    if (!user) {
+      setNotification("User not logged in")
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
+    }
+  }, [isLoading, user, navigate])
 
   return (
     <div className={styles.adminPageWrapper}>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.adminPage}>
-        <Header data={adminData} />
+        <Header data={headerData} />
         <div className={styles.componentContainer}>
           <ProductsCrud
             refreshAllProductsCounter={refreshAllProductsCounter}

@@ -7,6 +7,9 @@ module.exports = {
     },
   },
   components: {
+    addOneToCartButton: {
+      text: "add to cart",
+    },
     buttons: {
       actions: {
         user: {
@@ -27,6 +30,12 @@ module.exports = {
           imageUrl: "Image Url",
           lastName: "Last name",
         },
+      },
+    },
+    products: {
+      oil: {
+        size: "size",
+        price: "price",
       },
     },
   },

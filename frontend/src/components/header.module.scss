@@ -13,14 +13,20 @@
   }
 
   .avatar {
-    width: 160px;
-    height: 160px;
+    width: 80px;
+    height: 80px;
+    margin: theme.$margin-divider-small;
     border-radius: theme.$border-radius-circle;
 
     @include media.mobile {
       width: 100px;
       height: 100px;
     }
+  }
+
+  .avatarContainer {
+    background-color: theme.$color-branding-primary;
+    border-radius: theme.$border-radius-large;
   }
 
   .header {
@@ -42,7 +48,6 @@
       flex-grow: 1;
       height: 58px;
       margin-left: theme.$margin-divider-extra-large;
-      background-color: theme.$background-color-form-primary;
       border-radius: theme.$border-radius-large;
 
       .tableHead,
