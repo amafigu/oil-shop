@@ -1,5 +1,4 @@
-import { API_USER_CUSTOMER, API_VERIFY_TOKEN } from "#utils/constants"
-import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
+import { API_USERS_CURRENT_USER, API_VERIFY_TOKEN } from "#utils/constants"
 import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
 export const UserContext = createContext()
@@ -23,21 +22,18 @@ export const UserProvider = ({ children }) => {
         userId = response.data.id
         if (response.status === 200) {
           const loggedInUser = await axios.get(
-            `${process.env.REACT_APP_API_URL}/users/customer/${userId}`,
+            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}${userId}`,
             { withCredentials: true },
           )
+
           if (loggedInUser && loggedInUser.status === 200) {
-            const response = getDataAndSetErrorMessage(
-              loggedInUser.data.id,
-              API_USER_CUSTOMER,
-            )
-            setUser(response)
+            console.log(loggedInUser.data)
+            setUser(loggedInUser.data)
+            setUserEmail(loggedInUser.data.email)
+            setUserId(loggedInUser.data.id)
+            setIsLoggedIn(true)
+            setIsLoading(false)
           }
-          setUser(response.data)
-          setUserEmail(response.data.email)
-          setUserId(response.data.id)
-          setIsLoggedIn(true)
-          setIsLoading(false)
         }
       } catch (error) {
         setUserEmail("")

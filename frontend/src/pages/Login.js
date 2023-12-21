@@ -1,6 +1,6 @@
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { API_USER_CUSTOMER } from "#utils/constants"
+import { API_USERS_CURRENT_USER, API_VERIFY_TOKEN } from "#utils/constants"
 import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import { useEffectScrollTop } from "#utils/render"
 import axios from "axios"
@@ -39,18 +39,18 @@ const Login = () => {
         { withCredentials: true },
       )
       if (loginResponse && loginResponse.status === 200) {
-        const getLoggedInUser = async () => {
+        const setLoggedInUser = async () => {
           try {
             const currentUserIdResponse = await axios.get(
-              `${process.env.REACT_APP_API_URL}/users/current`,
+              `${process.env.REACT_APP_API_URL}${API_VERIFY_TOKEN}`,
               { withCredentials: true },
             )
 
             const userId = currentUserIdResponse.data.id
-
+            console.log(userId)
             const userResponse = await getDataAndSetErrorMessage(
               userId,
-              API_USER_CUSTOMER,
+              API_USERS_CURRENT_USER,
               setErrorMessage,
             )
             const loggedUser = userResponse.data
@@ -73,7 +73,7 @@ const Login = () => {
           }
         }
 
-        getLoggedInUser()
+        setLoggedInUser()
       }
     } catch (error) {
       setErrorMessage(`${text.errorMessage}`)

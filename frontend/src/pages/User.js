@@ -4,57 +4,34 @@ import GetOrders from "#components/UsersCrud/GetOrders"
 import ShippingData from "#components/UsersCrud/ShippingData"
 import UserData from "#components/UsersCrud/UserData"
 import useUserContext from "#context/userContext"
-import axios from "axios"
-
-import { API_USER_CUSTOMER } from "#utils/constants"
-import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
+import { REDIRECT_TIMEOUT, ROUTES_LOGIN } from "#utils/constants"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { SHORT_MESSAGE_TIMEOUT } from "../utils/constants"
 import styles from "./user.module.scss"
+
 const User = () => {
   const [notification, setNotification] = useState(null)
-
+  const [headerData, setHeaderData] = useState({})
+  const { user, isLoading } = useUserContext()
   const navigate = useNavigate()
-  const { setUser, user, isLoading } = useUserContext()
+
   useEffect(() => {
-    if (!isLoading) {
-      const fetchUserData = async () => {
-        try {
-          const currentUserIdResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}/users/current`,
-            { withCredentials: true },
-          )
-
-          const userId = currentUserIdResponse.data.id
-
-          const userResponse = await getDataAndSetErrorMessage(
-            userId,
-            API_USER_CUSTOMER,
-            setNotification,
-          )
-          const loggedUser = userResponse.data
-
-          if (userResponse.status === 200) {
-            setUser(loggedUser)
-          }
-        } catch (error) {
-          setNotification(`${error.response.data.message}`)
-          setTimeout(() => setNotification(null), 2000)
-          setTimeout(() => navigate("/login"), 2000)
-          console.error("Error fetching user data", error)
-        }
-      }
-
-      fetchUserData()
+    if (!isLoading && user) {
+      setHeaderData({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        image: user.image,
+      })
     }
-  }, [navigate, setUser, isLoading])
 
-  const dataForHeader = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    image: user.image,
-  }
+    if (!user) {
+      setNotification("User not logged in")
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
+    }
+  }, [isLoading, user, navigate])
 
   return (
     <div className={styles.userWrapper}>
@@ -65,8 +42,7 @@ const User = () => {
           <div>Loading...</div>
         ) : (
           <>
-            <Header data={dataForHeader} />
-
+            <Header data={headerData} />
             <div className={styles.componentContainer}>
               <UserData />
             </div>

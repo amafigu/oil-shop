@@ -13,7 +13,9 @@ const Header = ({ data }) => {
       <div className={styles.header}>
         {data ? (
           <div className={styles.dataContainer}>
-            <img className={styles.avatar} src={data.image} alt='suser' />
+            <div className={styles.avatarContainer}>
+              <img className={styles.avatar} src={data.image} alt='suser' />
+            </div>
             <TableRow data={tableData} />
           </div>
         ) : (

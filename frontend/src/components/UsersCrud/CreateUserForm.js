@@ -16,7 +16,6 @@ const CreateUserForm = ({
   setRefreshAllUsersCounter,
 }) => {
   const [, setErrorMessage] = useState("")
-
   const [notification, setNotification] = useState()
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")

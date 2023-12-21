@@ -25,28 +25,24 @@ export const logout = async (
 }
 
 export const getLoggedInUserData = async (
+  userId,
   setLoggedInUserData,
   setNotification,
 ) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/current-user`,
+      `${process.env.REACT_APP_API_URL}/users/current-user/${userId}`,
       { withCredentials: true },
     )
     setLoggedInUserData(response.data)
     return response.data
   } catch (error) {
     setNotification(`${error.response.data.message}`)
-
     console.error("Error geting admin data", error)
   }
 }
 
-export const getUserByEmail = async (
-  email,
-  setUserDataByEmail,
-  setNotification,
-) => {
+export const getUserByEmail = async (email) => {
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/users/user/${email}`,
@@ -55,10 +51,12 @@ export const getUserByEmail = async (
       },
     )
 
-    setUserDataByEmail(response.data)
+    // setUserDataByEmail(response.data)
+    console.log(response.data)
+    return response.data
   } catch (error) {
-    setNotification(`Error geting user: ${error.response.data.message}`)
-    setTimeout(() => setNotification(null), 2000)
+    //setNotification(`Error geting user: ${error.response.data.message}`)
+    // setTimeout(() => setNotification(null), 2000)
     console.error("Error geting user by email", error)
   }
 }
