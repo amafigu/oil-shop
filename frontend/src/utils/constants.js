@@ -98,6 +98,7 @@ export const STYLES = Object.freeze({
   },
   FORMS: {
     FIELD: "formField",
+    FIELD_SEARCH_INPUT: "formFieldSearchInput",
     ITEM_ROW: "itemRow",
   },
 })

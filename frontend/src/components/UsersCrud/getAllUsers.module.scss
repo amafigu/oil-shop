@@ -17,6 +17,24 @@
     }
   }
 
+  .editableInputsContainer {
+    flex-grow: 1;
+
+    @include flex-column;
+  }
+
+  .formField {
+    width: 100%;
+    height: 32px;
+    font-family: theme.$font-family-primary;
+    font-size: theme.$font-size-medium;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-grow: 1;
+  }
+
   .showHideButtons {
     @include action-button;
 
@@ -28,6 +46,30 @@
     @include media.mobile {
       width: 120px;
       overflow: hidden;
+    }
+  }
+
+  .itemRow {
+    display: flex;
+    width: 100%;
+  }
+
+  .atributesContainer {
+    display: flex;
+  }
+
+  .imageContainer {
+    @include flex-all-center;
+
+    width: 100px;
+    height: 100px;
+    background-color: theme.$background-color-form-primary;
+    border-radius: theme.$border-radius-regular;
+
+    .image {
+      width: 80px;
+      height: 80px;
+      border-radius: theme.$border-radius-circle;
     }
   }
 
