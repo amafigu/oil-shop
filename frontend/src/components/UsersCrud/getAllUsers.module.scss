@@ -31,6 +31,8 @@
   }
 
   .inputContainer {
+    @include input-container-spacing-small;
+
     display: flex;
     flex-grow: 1;
   }
@@ -51,7 +53,9 @@
 
   .itemRow {
     display: flex;
+    align-items: center;
     width: 100%;
+    margin: theme.$margin-divider 0;
   }
 
   .atributesContainer {
@@ -63,6 +67,7 @@
 
     width: 100px;
     height: 100px;
+    margin: 0 theme.$margin-divider;
     background-color: theme.$background-color-form-primary;
     border-radius: theme.$border-radius-regular;
 

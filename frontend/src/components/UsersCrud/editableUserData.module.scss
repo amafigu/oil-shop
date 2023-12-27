@@ -13,7 +13,7 @@
 }
 
 .inputContainer {
-  margin: theme.$margin-divider 0;
+  @include input-container-spacing;
 }
 
 .imageContainer {
