@@ -66,13 +66,11 @@ const EditableUserData = () => {
   const searchUser = async () => {
     console.log(email)
     const user = await getUserByEmail(email)
-    console.log("USEWUUSUEDAUSDUQWUDUQWDASD", user)
     if (!user) {
       setNotification("User not found")
       setTimeout(() => setNotification(null), 2000)
       return
     }
-    console.log("USERUSERUSER", user)
     setNonUpdatedUserData(user)
   }
 

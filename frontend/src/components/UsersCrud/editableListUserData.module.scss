@@ -1,0 +1,116 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.form {
+  @include flex-column;
+
+  margin: 28px;
+
+  @include media.tablet-down {
+    margin: 18px;
+  }
+}
+
+.inputContainer {
+  @include input-container-spacing;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: theme.$color-branding-primary;
+  border-radius: theme.$border-radius-small;
+
+  .image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+}
+
+.formField {
+  width: 100%;
+  height: 32px;
+  font-family: theme.$font-family-primary;
+  font-size: medium;
+}
+
+.formFieldSearchInput {
+  width: 60%;
+  height: 32px;
+  font-family: theme.$font-family-primary;
+  font-size: medium;
+}
+
+.formFieldSelect {
+  width: 100%;
+  height: 38px;
+  margin-bottom: 12px;
+  font-family: theme.$font-family-primary;
+  font-size: medium;
+}
+
+.label {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+}
+
+.labelForFile {
+  @include action-button;
+
+  width: 100%;
+  height: 28px;
+  margin-bottom: 12px;
+  overflow: auto;
+}
+
+.labelAndInputContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+    appearance: none;
+    background: none;
+    border: none;
+    outline: none;
+    opacity: 0;
+  }
+}
+
+.containerTitle {
+  margin-bottom: 24px;
+  font-size: theme.$font-size-subtitle;
+}
+
+.imageAndInputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formContainer {
+  margin: theme.$margin-divider 0;
+}
+
+.formButton {
+  @include action-button;
+
+  width: 140px;
+  height: 36px;
+  font-size: 1rem;
+  text-transform: none;
+
+  @include media.mobile {
+    width: 120px;
+    overflow: hidden;
+  }
+}
