@@ -73,6 +73,7 @@ db.cartItems.belongsTo(db.products, {
 
 db.userOrders.hasMany(db.cartItems, {
   foreignKey: 'userOrderId',
+  onDelete: 'CASCADE',
 });
 
 export default db;
