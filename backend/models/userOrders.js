@@ -7,6 +7,7 @@ const userOrdersModel = (sequelize, DataTypes) => {
         model: 'users',
         key: 'id',
       },
+      onDelete: 'CASCADE',
     },
 
     totalAmount: {
