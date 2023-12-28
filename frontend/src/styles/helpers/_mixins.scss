@@ -240,3 +240,11 @@
 @mixin value-font {
   font-size: theme.$font-size-small;
 }
+
+@mixin input-container-spacing {
+  margin: theme.$margin-divider 0;
+}
+
+@mixin input-container-spacing-small {
+  margin: theme.$margin-divider-small 0;
+}

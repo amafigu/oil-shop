@@ -40,14 +40,18 @@ db.users.hasOne(db.usersShippingData, {
 });
 
 db.users.hasMany(db.userOrders, {
-  onDelete: 'SET NULL',
   foreignKey: 'userId',
+  onDelete: 'CASCADE',
 });
 
-db.userOrders.belongsTo(db.users, { foreignKey: 'userId' });
+db.userOrders.belongsTo(db.users, {
+  foreignKey: 'userId',
+  onDelete: 'CASCADE',
+});
 
 db.usersShippingData.belongsTo(db.users, {
   foreignKey: 'userId',
+  onDelete: 'CASCADE',
 });
 
 db.users.belongsTo(db.userRoles, {
@@ -69,6 +73,7 @@ db.cartItems.belongsTo(db.products, {
 
 db.userOrders.hasMany(db.cartItems, {
   foreignKey: 'userOrderId',
+  onDelete: 'CASCADE',
 });
 
 export default db;

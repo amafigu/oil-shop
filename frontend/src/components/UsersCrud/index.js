@@ -7,7 +7,6 @@ import CreateUserForm from "./CreateUserForm"
 import DeleteUser from "./DeleteUser"
 import EditableUserData from "./EditableUserData"
 import GetAllUsers from "./GetAllUsers"
-import GetUser from "./GetUser"
 import UserData from "./UserData"
 const UsersCrud = ({
   refreshAllUsersCounter,
@@ -32,10 +31,6 @@ const UsersCrud = ({
       />
       {showUsersSection && (
         <div className={styles.formsContainer}>
-          <div className={styles.crudContainer}>
-            USER CRUD SECTION
-            <GetUser />
-          </div>
           <div className={styles.crudContainer}>
             GET ALL USERS SECTION
             <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />

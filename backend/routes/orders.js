@@ -76,6 +76,11 @@ router.get('/cart-items/:orderId', async (req, res) => {
 
 router.post('/create', async (req, res) => {
   try {
+    if (!req.body.userId) {
+      return res.status(400).json({
+        message: 'No userId provided',
+      });
+    }
     const user = await db.users.findOne({
       where: {
         id: req.body.userId,

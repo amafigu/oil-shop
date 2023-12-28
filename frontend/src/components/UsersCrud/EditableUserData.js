@@ -66,13 +66,11 @@ const EditableUserData = () => {
   const searchUser = async () => {
     console.log(email)
     const user = await getUserByEmail(email)
-    console.log("USEWUUSUEDAUSDUQWUDUQWDASD", user)
     if (!user) {
       setNotification("User not found")
       setTimeout(() => setNotification(null), 2000)
       return
     }
-    console.log("USERUSERUSER", user)
     setNonUpdatedUserData(user)
   }
 
@@ -88,7 +86,7 @@ const EditableUserData = () => {
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (
-          <div>
+          <div className={styles.formContainer}>
             <div className={styles.imageAndInputContainer}>
               {nonUpdatedUserData !== initialUserData && (
                 <div className={styles.imageContainer}>
@@ -100,10 +98,16 @@ const EditableUserData = () => {
                 </div>
               )}
               <input
+                className={styles[STYLES.FORMS.FIELD_SEARCH_INPUT]}
                 onChange={(e) => setEmail(e.target.value)}
                 type='text'
               ></input>
-              <button onClick={() => searchUser()}>Search User</button>
+              <button
+                className={styles.formButton}
+                onClick={() => searchUser()}
+              >
+                Search User
+              </button>
             </div>
 
             {Object.keys(initialUserData).map((key) => (

@@ -1,4 +1,5 @@
 import axios from "axios"
+import { API_USERS_USER, SHORT_MESSAGE_TIMEOUT } from "./constants"
 
 export const logout = async (
   navigate,
@@ -93,5 +94,25 @@ export const getUserShippingData = async (userId) => {
     return response.data
   } catch (error) {
     console.error(error)
+  }
+}
+
+export const deleteUserByEmail = async ({
+  userEmail,
+  setNotification,
+  setRefreshAllUsersCounter,
+}) => {
+  console.log("USEREMAIL", userEmail)
+  try {
+    await axios.delete(
+      `${process.env.REACT_APP_API_URL}${API_USERS_USER}${userEmail}`,
+      {
+        withCredentials: true,
+      },
+    )
+    setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+    setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
+  } catch (error) {
+    console.error("Can not delete user", error)
   }
 }
