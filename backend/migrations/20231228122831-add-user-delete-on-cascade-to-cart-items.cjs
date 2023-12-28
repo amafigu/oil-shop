@@ -1,18 +1,18 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.removeConstraint(
-      'user_orders',
-      'user_orders_userId_fkey'
+      'cart_items',
+      'cart_items_userOrderId_fkey'
     );
 
-    await queryInterface.addConstraint('user_orders', {
-      fields: ['userId'],
+    await queryInterface.addConstraint('cart_items', {
+      fields: ['userOrderId'],
       type: 'foreign key',
-      name: 'user_orders_userId_fkey',
+      name: 'cart_items_userOrderId_fkey',
       references: {
-        table: 'users',
+        table: 'user_orders',
         field: 'id',
       },
       onDelete: 'cascade',
@@ -22,16 +22,16 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.removeConstraint(
-      'user_orders',
-      'user_orders_userId_fkey'
+      'cart_items',
+      'cart_items_userOrderId_fkey'
     );
 
-    await queryInterface.addConstraint('user_orders', {
-      fields: ['userId'],
+    await queryInterface.addConstraint('cart_items', {
+      fields: ['userOrderId'],
       type: 'foreign key',
-      name: 'user_orders_userId_fkey',
+      name: 'cart_items_userOrderId_fkey',
       references: {
-        table: 'users',
+        table: 'user_orders',
         field: 'id',
       },
     });
