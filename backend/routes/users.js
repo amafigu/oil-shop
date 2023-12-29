@@ -63,9 +63,9 @@ router.get('/current-user/:id', decodeJWT, async (req, res) => {
 
     if (!token) return res.status(401).json({ message: 'Not authenticated' });
 
-    const user = await db.users.findOne({
+    const currentUser = await db.users.findOne({
       where: { id: req.params.id },
-      attributes: { exclude: ['password'] },
+      attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       include: [
         {
           model: db.userRoles,
@@ -75,15 +75,15 @@ router.get('/current-user/:id', decodeJWT, async (req, res) => {
       ],
     });
 
-    if (!user) {
+    if (!currentUser) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const currentUser = {
-      ...user.dataValues,
-      role: user.role.name,
+    const user = {
+      ...currentUser.dataValues,
+      role: currentUser.role.name,
     };
-    return res.json({ user: currentUser });
+    return res.json(user);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -214,8 +214,7 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
     const customerRole = await db.userRoles.findOne({
       where: { name: 'customer' },
     });
-    console.log('CUSTOMER ID', customerRole);
-    console.log('REQ BODY', req.body);
+
     const newUser = await db.users.create({
       ...req.body,
       password: hashedPassword,
@@ -225,6 +224,8 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
     const contextUser = {
       ...newUser.dataValues,
       password: undefined,
+      createdAt: undefined,
+      updatedAt: undefined,
       role: customerRole.name,
     };
 
