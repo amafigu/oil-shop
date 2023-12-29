@@ -1,7 +1,11 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { DEFAULT_USER_IMAGE } from "#utils/constants"
+import {
+  API_LOGIN,
+  API_USERS_CURRENT_USER,
+  DEFAULT_USER_IMAGE,
+} from "#utils/constants"
 import { uploadToS3 } from "#utils/dataManipulation"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -44,10 +48,14 @@ const CreateUserForm = ({
       image = DEFAULT_USER_IMAGE
     }
 
-    const newUser = { firstName, lastName, email, password, image, roleId: 5 }
+    const newUser = { firstName, lastName, email, password, image }
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/users/create`, newUser)
+      const newUserResponse = await axios.post(
+        `${process.env.REACT_APP_API_URL}/users/create`,
+        newUser,
+      )
+      console.log("newUserResponse", newUserResponse)
       if (currentPath.includes("/admin")) {
         setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
         setNotification(text.createUser.success)
@@ -57,7 +65,7 @@ const CreateUserForm = ({
 
       if (currentPath.includes("/sign-up")) {
         const loginResponse = await axios.post(
-          `${process.env.REACT_APP_API_URL}/users/login`,
+          `${process.env.REACT_APP_API_URL}${API_LOGIN}`,
           { email, password },
           { withCredentials: true },
         )
@@ -66,7 +74,7 @@ const CreateUserForm = ({
           const getLoggedInUser = async () => {
             try {
               const userResponse = await axios.get(
-                `${process.env.REACT_APP_API_URL}/users/current-user`,
+                `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${newUserResponse.data.user.id}`,
                 { withCredentials: true },
               )
 
@@ -84,7 +92,7 @@ const CreateUserForm = ({
           }
 
           getLoggedInUser()
-          navigate("/users/current-user")
+          navigate("/users/current-customer")
         }
       }
     } catch (error) {

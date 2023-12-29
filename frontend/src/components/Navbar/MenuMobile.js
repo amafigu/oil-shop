@@ -87,7 +87,7 @@ const MenuMobile = ({
                   to={
                     user && user.roleId === 2 // TODO: change the 2 for admin roleId and send the user with role name from backend
                       ? "/users/current-admin"
-                      : "/users/current-user"
+                      : "/users/current-customer"
                   }
                 >
                   <FontAwesomeIcon icon={faUser} />
