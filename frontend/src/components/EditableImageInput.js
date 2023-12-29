@@ -23,13 +23,15 @@ const EditableImageInput = ({
     <div className={styles[classCss]}>
       {isEditing ? (
         <div className={styles.nonUpdatedData}>
-          <div className={styles.labelAndInputContainer}>
-            <span className={styles.label}>
-              {file ? "Selected file: " : "Select a file "}
-            </span>
+          <span className={styles.label}></span>
 
-            <input type='file' name={name} id='fileInput' onChange={onChange} />
-          </div>
+          <input
+            className={styles.fileInput}
+            type='file'
+            name={name}
+            id='fileInput'
+            onChange={onChange}
+          />
         </div>
       ) : (
         <div className={styles.nonUpdatedData}>
