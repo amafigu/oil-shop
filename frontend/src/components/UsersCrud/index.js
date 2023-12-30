@@ -4,7 +4,6 @@ import useLocaleContext from "#context/localeContext"
 import styles from "#pages/Admin/admin.module.scss"
 import { useState } from "react"
 import CreateUserForm from "./CreateUserForm"
-import DeleteUser from "./DeleteUser"
 import EditableUserData from "./EditableUserData"
 import GetAllUsers from "./GetAllUsers"
 import UserData from "./UserData"
@@ -17,6 +16,7 @@ const UsersCrud = ({
   fieldErrors,
 }) => {
   const [showUsersSection, setShowUsersSection] = useState(false)
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false)
 
   const { translate } = useLocaleContext()
   const errorText = translate.pages.signUp
@@ -32,25 +32,31 @@ const UsersCrud = ({
       {showUsersSection && (
         <div className={styles.formsContainer}>
           <div className={styles.crudContainer}>
-            GET ALL USERS SECTION
             <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
           </div>
           <div className={styles.crudContainer}>
-            UPDATE CURRENT USER
             <UserData />
           </div>
           <div className={styles.crudContainer}>
-            UPDATE USER BY EMAIL
             <EditableUserData />
           </div>
 
           <div className={styles.crudContainer}>
-            CREATE USER
-            <CreateUserForm
-              setEmailInUserError={setEmailInUserError}
-              setFieldErrors={setFieldErrors}
-              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+            <ToggleButton
+              show={showCreateUserForm}
+              setToggle={setShowCreateUserForm}
+              textHide={"HIDE FORM"}
+              textShow={"SHOW CREATE USER FORM"}
+              classCss='showHideButtons'
             />
+            {showCreateUserForm && (
+              <CreateUserForm
+                setEmailInUserError={setEmailInUserError}
+                setFieldErrors={setFieldErrors}
+                setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+              />
+            )}
+
             {emailInUserError && (
               <div className={styles.errorMessage}>{emailInUserError}</div>
             )}
@@ -60,10 +66,6 @@ const UsersCrud = ({
                 text={errorText}
               />
             )}
-          </div>
-          <div className={styles.crudContainer}>
-            DELETE USER SECTION
-            <DeleteUser setRefreshAllUsersCounter={setRefreshAllUsersCounter} />
           </div>
         </div>
       )}

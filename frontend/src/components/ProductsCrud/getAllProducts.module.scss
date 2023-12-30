@@ -4,16 +4,15 @@
 
 .getAllProductsWrapper {
   width: 100%;
+  margin: theme.$margin-divider 0;
 
   .showHideButtonsContainer {
     display: flex;
     gap: 48px;
     align-items: center;
-    margin: theme.$margin-divider 0;
 
     @include media.mobile {
       justify-content: space-between;
-      margin: theme.$margin-divider 0;
     }
   }
 

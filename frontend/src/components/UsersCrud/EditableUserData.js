@@ -9,7 +9,7 @@ import {
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import { getUserByEmail } from "#utils/users"
+import { deleteUserByEmail, getUserByEmail } from "#utils/users"
 import React, { useState } from "react"
 import styles from "./editableUserData.module.scss"
 
@@ -33,7 +33,9 @@ const EditableUserData = () => {
   const [notification, setNotification] = useState(null)
   const [email, setEmail] = useState("")
   const { translate } = useLocaleContext()
-  const buttonsText = translate.components.buttons
+  const buttonsText = translate.components
+
+  const textCrud = translate.pages.admin.crud
 
   const updateUserDataAndSetStates = async (e, propertyName) => {
     let image = ""
@@ -63,9 +65,10 @@ const EditableUserData = () => {
     setFile(e.target.files[0])
   }
 
-  const searchUser = async () => {
+  const searchUser = async (email) => {
     console.log(email)
     const user = await getUserByEmail(email)
+
     if (!user) {
       setNotification("User not found")
       setTimeout(() => setNotification(null), 2000)
@@ -74,15 +77,34 @@ const EditableUserData = () => {
     setNonUpdatedUserData(user)
   }
 
+  const deleteUserAndUpdateState = async (
+    email,
+    setNotification,
+    successMessage,
+    errorMessage,
+  ) => {
+    try {
+      await deleteUserByEmail(
+        email,
+        setNotification,
+        successMessage,
+        errorMessage,
+      )
+      setNonUpdatedUserData({ ...initialUserData, image: "" })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  console.log(email)
   return (
     <>
-      <div>
+      <div className={styles.editableUserDataWrapper}>
         {notification && <NotificationCard message={notification} />}
         <ToggleButton
           show={showForm}
           setToggle={setShowForm}
-          textHide={`${buttonsText?.actions.user.hide}`}
-          textShow={`${buttonsText?.actions.user.show}`}
+          textHide={`${buttonsText?.buttons.actions.userByEmail.hide}`}
+          textShow={`${buttonsText?.buttons.actions.userByEmail.show}`}
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (
@@ -104,9 +126,22 @@ const EditableUserData = () => {
               ></input>
               <button
                 className={styles.formButton}
-                onClick={() => searchUser()}
+                onClick={() => searchUser(email)}
               >
                 Search User
+              </button>
+              <button
+                className={styles.formButton}
+                onClick={() =>
+                  deleteUserAndUpdateState(
+                    email,
+                    setNotification,
+                    textCrud.users.deletedByEmail,
+                    textCrud.users.deleteError,
+                  )
+                }
+              >
+                {buttonsText.crud.deleteUser.button}
               </button>
             </div>
 

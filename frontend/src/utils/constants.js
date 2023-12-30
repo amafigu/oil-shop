@@ -11,12 +11,15 @@ export const DEFAULT_USER_IMAGE =
 export const API_USERS_CURRENT_USER = "/users/current-user/"
 export const API_USERS_USER = "/users/user/"
 export const API_USER_ROLE = "/users/user/role/"
+export const API_USERS_CREATE = "/users/create"
 export const API_SHIPPING_DATA = "/users/user/shipping-data/"
 export const API_VERIFY_TOKEN = "/users/verify-token"
 export const API_LOGIN = "/users/login"
 export const ROUTES_LOGIN = "/login"
+export const ROUTES_CURRENT_CUSTOMER = "/users/current-customer"
+export const ROUTES_CURRENT_ADMIN = "/users/current-admin"
 export const SHORT_MESSAGE_TIMEOUT = 3000
-export const REDIRECT_TIMEOUT = 2000
+export const REDIRECT_TIMEOUT = 1000
 
 export const FORM_FIELDS_GUEST_USER_DATA = [
   {

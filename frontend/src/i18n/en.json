@@ -205,8 +205,12 @@
           "hide": "Hide shipping data"
         },
         "user": {
-          "show": "Show user data",
-          "hide": "Hide user data"
+          "show": "SHOW CURRENT USER DATA",
+          "hide": "HIDE  CURRENT USER DATA"
+        },
+        "userByEmail": {
+          "show": "GET USER BY EMAIL",
+          "hide": "HIDE FORM"
         }
       }
     },

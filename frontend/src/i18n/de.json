@@ -204,6 +204,10 @@
         "user": {
           "show": "Benutzer Daten anzeigen",
           "hide": "Benutzer Daten ausblenden"
+        },
+        "userByEmail": {
+          "show": "BENUTZER PER E-MAIL ANZEIGEN",
+          "hide": "AUSBLENDEN"
         }
       }
     },

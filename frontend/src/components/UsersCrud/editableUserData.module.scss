@@ -16,6 +16,10 @@
   @include input-container-spacing;
 }
 
+.editableUserDataWrapper {
+  margin: theme.$margin-divider 0;
+}
+
 .imageContainer {
   display: flex;
   align-items: center;

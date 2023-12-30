@@ -3,8 +3,11 @@ import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {
   API_LOGIN,
+  API_USERS_CREATE,
   API_USERS_CURRENT_USER,
   DEFAULT_USER_IMAGE,
+  REDIRECT_TIMEOUT,
+  ROUTES_CURRENT_CUSTOMER,
 } from "#utils/constants"
 import { uploadToS3 } from "#utils/dataManipulation"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
@@ -44,7 +47,7 @@ const CreateUserForm = ({
     e.preventDefault()
     let image = await uploadToS3(file)
     if (!image) {
-      console.error("user image not selected. ")
+      console.warn("user image not selected. ")
       image = DEFAULT_USER_IMAGE
     }
 
@@ -52,7 +55,7 @@ const CreateUserForm = ({
 
     try {
       const newUserResponse = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/create`,
+        `${process.env.REACT_APP_API_URL}${API_USERS_CREATE}`,
         newUser,
       )
       console.log("newUserResponse", newUserResponse)
@@ -74,25 +77,21 @@ const CreateUserForm = ({
           const getLoggedInUser = async () => {
             try {
               const userResponse = await axios.get(
-                `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${newUserResponse.data.user.id}`,
+                `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}${newUserResponse.data.user.id}`,
                 { withCredentials: true },
               )
-
               const userData = userResponse.data
-
               setUserEmail(userData.email)
               setIsLoggedIn(true)
               setUser(userData)
             } catch (error) {
               setErrorMessage(`${text.errorMessage}`)
               setTimeout(() => setErrorMessage(null), 3000)
-
               console.error("Error fetching user data", error)
             }
           }
-
           getLoggedInUser()
-          navigate("/users/current-customer")
+          setTimeout(() => navigate(ROUTES_CURRENT_CUSTOMER), REDIRECT_TIMEOUT)
         }
       }
     } catch (error) {
@@ -123,83 +122,85 @@ const CreateUserForm = ({
   }
 
   return (
-    <form className={styles.form} onSubmit={createUser}>
-      {notification && <NotificationCard message={notification} />}
+    <div className={styles.createUserFormWrapper}>
+      <form className={styles.form} onSubmit={createUser}>
+        {notification && <NotificationCard message={notification} />}
 
-      <input
-        className={styles.formField}
-        name='firstName'
-        type='text'
-        value={firstName}
-        placeholder={text.forms.commonProperties.firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        autoComplete='true'
-        required
-      ></input>
-
-      <input
-        className={styles.formField}
-        name='lastName'
-        type='text'
-        value={lastName}
-        placeholder={text.forms.commonProperties.lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        autoComplete='true'
-        required
-      ></input>
-
-      <input
-        className={styles.formField}
-        type='email'
-        value={email}
-        placeholder={text.forms.commonProperties.email}
-        onChange={(e) => setEmail(e.target.value)}
-        autoComplete='true'
-        required
-      ></input>
-
-      <div className={styles.passwordInputAndToggleButtonContainer}>
         <input
           className={styles.formField}
-          type={showPassword ? "text" : "password"}
-          value={password}
-          placeholder={text.forms.commonProperties.password}
-          onChange={(e) => setPassword(e.target.value)}
+          name='firstName'
+          type='text'
+          value={firstName}
+          placeholder={text.forms.commonProperties.firstName}
+          onChange={(e) => setFirstName(e.target.value)}
           autoComplete='true'
           required
         ></input>
 
-        <button type='button' onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? (
-            <FontAwesomeIcon icon={faUnlock} />
-          ) : (
-            <FontAwesomeIcon icon={faLock} />
-          )}
-        </button>
-      </div>
+        <input
+          className={styles.formField}
+          name='lastName'
+          type='text'
+          value={lastName}
+          placeholder={text.forms.commonProperties.lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          autoComplete='true'
+          required
+        ></input>
 
-      {!currentPath.includes("/sign-up") && (
-        <div className={styles.labelAndInputContainer}>
-          <span className={styles.label}>
-            {file ? "Selected file: " : "Select a file"}
-          </span>
-          <label className={styles.labelForFile} htmlFor='fileInput'>
-            {file ? file.name : "Search on device"}
-          </label>
+        <input
+          className={styles.formField}
+          type='email'
+          value={email}
+          placeholder={text.forms.commonProperties.email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete='true'
+          required
+        ></input>
 
+        <div className={styles.passwordInputAndToggleButtonContainer}>
           <input
-            type='file'
-            name='image'
-            id='fileInput'
-            onChange={setFileToUpload}
-          />
-        </div>
-      )}
+            className={styles.formField}
+            type={showPassword ? "text" : "password"}
+            value={password}
+            placeholder={text.forms.commonProperties.password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete='true'
+            required
+          ></input>
 
-      <button className={styles.formButton} type='submit'>
-        {text.createUser.submitButton}
-      </button>
-    </form>
+          <button type='button' onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? (
+              <FontAwesomeIcon icon={faUnlock} />
+            ) : (
+              <FontAwesomeIcon icon={faLock} />
+            )}
+          </button>
+        </div>
+
+        {!currentPath.includes("/sign-up") && (
+          <div className={styles.labelAndInputContainer}>
+            <span className={styles.label}>
+              {file ? "Selected file: " : "Select a file"}
+            </span>
+            <label className={styles.labelForFile} htmlFor='fileInput'>
+              {file ? file.name : "Search on device"}
+            </label>
+
+            <input
+              type='file'
+              name='image'
+              id='fileInput'
+              onChange={setFileToUpload}
+            />
+          </div>
+        )}
+
+        <button className={styles.formButton} type='submit'>
+          {text.createUser.submitButton}
+        </button>
+      </form>
+    </div>
   )
 }
 
