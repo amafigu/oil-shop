@@ -23,7 +23,7 @@
     }
 
     .componentContainer {
-      @include component-container;
+      @include component-container-large;
     }
   }
 
@@ -44,13 +44,13 @@
   .avatar {
     width: 160px;
     height: 160px;
-    margin-right: theme.$margin-divider;
+    margin-right: theme.$spacing-regular;
     border-radius: theme.$border-radius-circle;
   }
 
   .userDataContainer {
     display: flex;
-    margin: theme.$margin-divider 0;
+    margin: theme.$spacing-regular 0;
 
     .userData {
       font-size: theme.$font-size-subtitle;

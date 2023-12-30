@@ -21,6 +21,11 @@
   @include input-container-spacing;
 }
 
+.editableListUserDataWrapper {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
 .imageContainer {
   display: flex;
   align-items: center;
@@ -103,7 +108,7 @@
 }
 
 .formContainer {
-  margin: theme.$margin-divider 0;
+  margin: theme.$spacing-regular 0;
 }
 
 .formButton {

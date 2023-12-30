@@ -98,7 +98,7 @@ const EditableUserData = () => {
   console.log(email)
   return (
     <>
-      <div className={styles.editableUserDataWrapper}>
+      <div>
         {notification && <NotificationCard message={notification} />}
         <ToggleButton
           show={showForm}

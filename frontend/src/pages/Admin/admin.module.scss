@@ -18,7 +18,7 @@
     }
 
     .componentContainer {
-      @include component-container;
+      border-bottom: solid 1px theme.$color-branding-primary;
     }
   }
 }

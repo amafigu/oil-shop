@@ -89,7 +89,7 @@
 .actionButtonContainer {
   display: flex;
   align-content: center;
-  margin: theme.$margin-divider 0;
+  margin: theme.$spacing-regular 0;
 
   @include media.mobile {
     width: 100%;

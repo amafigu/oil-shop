@@ -208,8 +208,9 @@
   margin-bottom: theme.$margin-bottom-label-form-field;
 }
 
-@mixin component-container {
-  margin-bottom: theme.$margin-divider;
+@mixin component-container-large {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
 }
 
 @mixin component-title {
@@ -242,9 +243,9 @@
 }
 
 @mixin input-container-spacing {
-  margin: theme.$margin-divider 0;
+  margin: theme.$spacing-regular 0;
 }
 
 @mixin input-container-spacing-small {
-  margin: theme.$margin-divider-small 0;
+  margin: theme.$spacing-small 0;
 }

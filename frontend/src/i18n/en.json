@@ -208,6 +208,7 @@
           "show": "SHOW CURRENT USER DATA",
           "hide": "HIDE  CURRENT USER DATA"
         },
+
         "userByEmail": {
           "show": "GET USER BY EMAIL",
           "hide": "HIDE FORM"
@@ -253,6 +254,10 @@
         },
         "createProductForm": {
           "submitButton": "Create product"
+        },
+        "toggleUsersCrudOptions": {
+          "show": "show users actions",
+          "hide": "hide users actions"
         }
       },
       "buttons": {

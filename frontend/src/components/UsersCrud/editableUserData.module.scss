@@ -17,7 +17,7 @@
 }
 
 .editableUserDataWrapper {
-  margin: theme.$margin-divider 0;
+  @include component-container-large;
 }
 
 .imageContainer {
@@ -102,7 +102,7 @@
 }
 
 .formContainer {
-  margin: theme.$margin-divider 0;
+  margin: theme.$spacing-regular 0;
 }
 
 .formButton {

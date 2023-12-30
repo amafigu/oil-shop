@@ -1,12 +1,11 @@
 import ToggleButton from "#components/ToggleButton"
 import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
 import useLocaleContext from "#context/localeContext"
-import styles from "#pages/Admin/admin.module.scss"
 import { useState } from "react"
 import CreateUserForm from "./CreateUserForm"
 import EditableUserData from "./EditableUserData"
 import GetAllUsers from "./GetAllUsers"
-import UserData from "./UserData"
+import styles from "./usersCrud.module.scss"
 const UsersCrud = ({
   refreshAllUsersCounter,
   setEmailInUserError,
@@ -20,13 +19,15 @@ const UsersCrud = ({
 
   const { translate } = useLocaleContext()
   const errorText = translate.pages.signUp
+  const toggleButtonText =
+    translate.components.crud.forms.toggleUsersCrudOptions
   return (
-    <div className={styles.usersCrudContainer}>
+    <div className={styles.usersCrudWrapper}>
       <ToggleButton
         show={showUsersSection}
         setToggle={setShowUsersSection}
-        textHide={"HIDE USERS ACTIONS"}
-        textShow={"SHOW USERS ACTIONS"}
+        textHide={toggleButtonText.hide}
+        textShow={toggleButtonText.show}
         classCss='showHideButtons'
       />
       {showUsersSection && (
@@ -34,9 +35,7 @@ const UsersCrud = ({
           <div className={styles.crudContainer}>
             <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
           </div>
-          <div className={styles.crudContainer}>
-            <UserData />
-          </div>
+
           <div className={styles.crudContainer}>
             <EditableUserData />
           </div>

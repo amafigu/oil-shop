@@ -2,7 +2,7 @@ import EditableImageInput from "#components/EditableImageInput"
 import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import { API_USERS_USER, STYLES } from "#utils/constants"
+import { API_USERS_USER, DEFAULT_USER_IMAGE, STYLES } from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
@@ -10,7 +10,7 @@ import {
 } from "#utils/dataManipulation"
 import axios from "axios"
 import React, { useState } from "react"
-import styles from "./editableUserData.module.scss"
+import styles from "./editableListUserData.module.scss"
 
 const EditableListUserData = ({ user }) => {
   const initialUserData = {
@@ -88,7 +88,7 @@ const EditableListUserData = ({ user }) => {
 
   return (
     <>
-      <div>
+      <div className={styles.editableListUserDataWrapper}>
         {notification && <NotificationCard message={notification} />}
 
         <div className={styles.formContainer}>
@@ -97,7 +97,11 @@ const EditableListUserData = ({ user }) => {
               <div className={styles.imageContainer}>
                 <img
                   className={styles.image}
-                  src={nonUpdatedUserData.image}
+                  src={
+                    !nonUpdatedUserData.image
+                      ? DEFAULT_USER_IMAGE
+                      : nonUpdatedUserData.image
+                  }
                   alt='user'
                 />
               </div>

@@ -242,6 +242,10 @@
         },
         "createProductForm": {
           "submitButton": "Produkt erstellen"
+        },
+        "toggleUsersCrudOptions": {
+          "show": "Benutzern CRUD anzeigen",
+          "hide": "Benutzern CRUD ausblenden"
         }
       },
       "buttons": {

@@ -4,7 +4,7 @@
 
 .getAllUsersWrapper {
   width: 100%;
-  margin: theme.$margin-divider 0;
+  margin: theme.$spacing-regular 0;
 
   .showHideButtonsContainer {
     display: flex;
@@ -54,7 +54,6 @@
     display: flex;
     align-items: center;
     width: 100%;
-    margin: theme.$margin-divider 0;
   }
 
   .atributesContainer {
@@ -66,7 +65,7 @@
 
     width: 100px;
     height: 100px;
-    margin: 0 theme.$margin-divider;
+    margin: 0 theme.$spacing-regular;
     background-color: theme.$background-color-form-primary;
     border-radius: theme.$border-radius-regular;
 

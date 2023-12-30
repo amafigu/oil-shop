@@ -7,13 +7,13 @@
   flex-direction: column;
   flex-grow: 1;
   padding: 10px;
-  margin-left: theme.$margin-divider-extra-large;
+  margin-left: theme.$spacing-extra-large;
   overflow-x: auto;
   background-color: theme.$background-color-form-primary;
   border-radius: theme.$border-radius-large;
 
   @include media.mobile {
-    margin-left: theme.$margin-divider;
+    margin-left: theme.$spacing-regular;
   }
 
   .tableRow {

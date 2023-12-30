@@ -19,7 +19,6 @@ const Admin = () => {
   const [fieldErrors, setFieldErrors] = useState({})
   const [headerData, setHeaderData] = useState({})
   const { user, isLoading } = useUserContext()
-  // const { translate } = useLocaleContext()
   const navigate = useNavigate()
 
   useEffect(() => {
