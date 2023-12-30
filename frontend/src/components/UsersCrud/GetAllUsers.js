@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import EditableListUserData from "./EditableListUserData"
 import styles from "./getAllUsers.module.scss"
 
-const GetAllUsers = ({ refreshAllUsersCounter }) => {
+const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState()
   const [showUsers, setShowUsers] = useState(false)
   const [usersData, setUsersData] = useState([])
@@ -57,7 +57,10 @@ const GetAllUsers = ({ refreshAllUsersCounter }) => {
               <div className={styles.itemRow} key={user.id}>
                 <div className={styles.editableInputsContainer}>
                   <div className={styles.atributesContainer}>
-                    <EditableListUserData user={user} key={user.id} />
+                    <EditableListUserData
+                      user={user}
+                      setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+                    />
                   </div>
                 </div>
               </div>

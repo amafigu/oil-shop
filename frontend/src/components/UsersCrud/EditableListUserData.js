@@ -12,7 +12,7 @@ import axios from "axios"
 import React, { useState } from "react"
 import styles from "./editableListUserData.module.scss"
 
-const EditableListUserData = ({ user }) => {
+const EditableListUserData = ({ user, setRefreshAllUsersCounter }) => {
   const initialUserData = {
     firstName: "",
     lastName: "",
@@ -78,7 +78,10 @@ const EditableListUserData = ({ user }) => {
       )
       setNotification(`${userEmail} ${text.deleteUser.deletedByEmail}`)
       setTimeout(() => setNotification(null), 2000)
-      //  setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
+      setTimeout(
+        () => setRefreshAllUsersCounter((prevCounter) => prevCounter + 1),
+        2300,
+      )
     } catch (error) {
       setNotification(`${userEmail} ${text.deleteUser.error}`)
       setTimeout(() => setNotification(null), 3000)

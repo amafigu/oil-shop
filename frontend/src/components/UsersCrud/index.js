@@ -7,15 +7,14 @@ import EditableUserData from "./EditableUserData"
 import GetAllUsers from "./GetAllUsers"
 import styles from "./usersCrud.module.scss"
 const UsersCrud = ({
-  refreshAllUsersCounter,
   setEmailInUserError,
   setFieldErrors,
-  setRefreshAllUsersCounter,
   emailInUserError,
   fieldErrors,
 }) => {
   const [showUsersSection, setShowUsersSection] = useState(false)
   const [showCreateUserForm, setShowCreateUserForm] = useState(false)
+  const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
 
   const { translate } = useLocaleContext()
   const errorText = translate.pages.signUp
@@ -33,7 +32,10 @@ const UsersCrud = ({
       {showUsersSection && (
         <div className={styles.formsContainer}>
           <div className={styles.crudContainer}>
-            <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
+            <GetAllUsers
+              refreshAllUsersCounter={refreshAllUsersCounter}
+              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+            />
           </div>
 
           <div className={styles.crudContainer}>
