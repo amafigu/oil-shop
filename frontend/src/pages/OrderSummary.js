@@ -1,7 +1,11 @@
 import { CartContext } from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { API_USERS_CURRENT_USER, DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+import {
+  API_USERS_CURRENT_USER,
+  DEFAULT_PRODUCT_IMAGE,
+  LOCAL_STORAGE_GUEST_ID,
+} from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import axios from "axios"
@@ -23,7 +27,7 @@ const OrderSummary = () => {
     const getShippingData = async () => {
       try {
         if (!isLoggedIn && !isLoading) {
-          const guestId = localStorage.getItem("yolo-guest-id")
+          const guestId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
 
           const userData = await axios.get(
             `${process.env.REACT_APP_API_URL}/users/guest/${guestId}`,
@@ -47,7 +51,7 @@ const OrderSummary = () => {
 
         if (isLoggedIn && !isLoading) {
           const userData = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}${userId}`,
+            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
             { withCredentials: true },
           )
 

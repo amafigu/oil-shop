@@ -269,7 +269,8 @@
       "deleteUser": {
         "button": "Delete User",
         "error": "Can not delete user with this email: ",
-        "deletedByEmail": "was successfully deleted from system"
+        "deletedByEmail": "was successfully deleted from system",
+        "nonAuthorized": "you can not delete this user"
       },
       "getUser": {
         "button": "Get user data",

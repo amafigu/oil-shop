@@ -52,12 +52,8 @@ export const getUserByEmail = async (email) => {
       },
     )
 
-    // setUserDataByEmail(response.data)
-    console.log(response.data)
     return response.data
   } catch (error) {
-    //setNotification(`Error geting user: ${error.response.data.message}`)
-    // setTimeout(() => setNotification(null), 2000)
     console.error("Error geting user by email", error)
   }
 }
@@ -107,7 +103,7 @@ export const deleteUserByEmail = async (
 ) => {
   try {
     await axios.delete(
-      `${process.env.REACT_APP_API_URL}${API_USERS_USER}${userEmail}`,
+      `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${userEmail}`,
       {
         withCredentials: true,
       },

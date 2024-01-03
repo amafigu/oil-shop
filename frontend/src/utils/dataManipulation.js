@@ -12,7 +12,7 @@ export const getDataAndSetErrorMessage = async (
 ) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${apiUrl}${dataId}`,
+      `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,
       { withCredentials: true },
     )
     return response
@@ -44,7 +44,7 @@ export const updateDataRequest = async (
 ) => {
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}${apiUrl}${dataId}`,
+      `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,
       updatedData,
       { withCredentials: true },
     )
@@ -56,8 +56,8 @@ export const updateDataRequest = async (
         setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
       }
 
-      if (error.response.data.error) {
-        setErrorMessage(`${error.response.data.error[0]}`)
+      if (error.response.data.errors) {
+        setErrorMessage(`${error.response.data.errors[0].message}`)
         setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
       }
     }
@@ -170,13 +170,7 @@ export const listenInputChangeAndSetDataObject = (
   updatedDataObj,
   setUpdatedDataObj,
 ) => {
-  console.log("UUUUUUUUUUUUUUUUUU", updatedDataObj)
   setUpdatedDataObj({
-    ...updatedDataObj,
-    [e.target.name]: e.target.value,
-  })
-
-  console.log("UUUUUUUUUUUUUUUUUU2222222", {
     ...updatedDataObj,
     [e.target.name]: e.target.value,
   })

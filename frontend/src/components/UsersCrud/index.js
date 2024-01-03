@@ -20,6 +20,8 @@ const UsersCrud = ({
   const errorText = translate.pages.signUp
   const toggleButtonText =
     translate.components.crud.forms.toggleUsersCrudOptions
+
+  console.log("UsersCrud refreshAllUsersCounter", refreshAllUsersCounter)
   return (
     <div className={styles.usersCrudWrapper}>
       <ToggleButton
@@ -39,7 +41,9 @@ const UsersCrud = ({
           </div>
 
           <div className={styles.crudContainer}>
-            <EditableUserData />
+            <EditableUserData
+              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+            />
           </div>
 
           <div className={styles.crudContainer}>
@@ -50,13 +54,12 @@ const UsersCrud = ({
               textShow={"SHOW CREATE USER FORM"}
               classCss='showHideButtons'
             />
-            {showCreateUserForm && (
-              <CreateUserForm
-                setEmailInUserError={setEmailInUserError}
-                setFieldErrors={setFieldErrors}
-                setRefreshAllUsersCounter={setRefreshAllUsersCounter}
-              />
-            )}
+
+            <CreateUserForm
+              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+              setFieldErrors={setFieldErrors}
+              setEmailInUserError={setEmailInUserError}
+            />
 
             {emailInUserError && (
               <div className={styles.errorMessage}>{emailInUserError}</div>

@@ -41,7 +41,6 @@ const Login = () => {
             )
 
             const userId = currentUserIdResponse.data.id
-            console.log(userId)
             const userResponse = await getDataAndSetErrorMessage(
               userId,
               API_USERS_CURRENT_USER,
@@ -54,9 +53,8 @@ const Login = () => {
               setUser(loggedUser)
 
               const userRoleResponse = await axios.get(
-                `${process.env.REACT_APP_API_URL}${API_USER_ROLE}${loggedUser.roleId}`,
+                `${process.env.REACT_APP_API_URL}${API_USER_ROLE}/${loggedUser.roleId}`,
               )
-              console.log("response", userRoleResponse)
 
               setTimeout(
                 () => navigate(`/users/current-${userRoleResponse.data.name}`),

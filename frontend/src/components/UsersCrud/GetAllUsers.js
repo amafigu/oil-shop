@@ -21,9 +21,7 @@ const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
         ...user,
         updated: false,
       }))
-      console.log(response.data)
       setUsersData(userObjects)
-      console.log(response.data)
     } catch (error) {
       setNotification("Can not get all users")
     }

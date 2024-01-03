@@ -18,9 +18,9 @@ import { useLocation, useNavigate } from "react-router-dom"
 import styles from "./createUserForm.module.scss"
 
 const CreateUserForm = ({
+  setRefreshAllUsersCounter,
   setFieldErrors,
   setEmailInUserError,
-  setRefreshAllUsersCounter,
 }) => {
   const [, setErrorMessage] = useState("")
   const [notification, setNotification] = useState()
@@ -47,7 +47,6 @@ const CreateUserForm = ({
     e.preventDefault()
     let image = await uploadToS3(file)
     if (!image) {
-      console.warn("user image not selected. ")
       image = DEFAULT_USER_IMAGE
     }
 
@@ -59,9 +58,10 @@ const CreateUserForm = ({
         newUser,
       )
       console.log("newUserResponse", newUserResponse)
-      if (currentPath.includes("/admin")) {
+      if (newUserResponse && currentPath.includes("/current-admin")) {
+        console.log("newUsssss")
         setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
-        setNotification(text.createUser.success)
+        setNotification("user created")
         setTimeout(() => setNotification(null), 3000)
         return
       }
@@ -77,7 +77,7 @@ const CreateUserForm = ({
           const getLoggedInUser = async () => {
             try {
               const userResponse = await axios.get(
-                `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}${newUserResponse.data.user.id}`,
+                `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${newUserResponse.data.user.id}`,
                 { withCredentials: true },
               )
               const userData = userResponse.data
@@ -123,9 +123,8 @@ const CreateUserForm = ({
 
   return (
     <div className={styles.createUserFormWrapper}>
+      {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={createUser}>
-        {notification && <NotificationCard message={notification} />}
-
         <input
           className={styles.formField}
           name='firstName'

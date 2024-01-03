@@ -2,6 +2,7 @@ import EditableImageInput from "#components/EditableImageInput"
 import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { API_USERS_USER, DEFAULT_USER_IMAGE, STYLES } from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
@@ -12,13 +13,13 @@ import axios from "axios"
 import React, { useState } from "react"
 import styles from "./editableListUserData.module.scss"
 
-const EditableListUserData = ({ user, setRefreshAllUsersCounter }) => {
+const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   const initialUserData = {
     firstName: "",
     lastName: "",
     email: "",
+    image: "",
   }
-  const [file, setFile] = useState(null)
 
   const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
     firstName: user.firstName,
@@ -33,10 +34,11 @@ const EditableListUserData = ({ user, setRefreshAllUsersCounter }) => {
     email: user.email,
   })
 
-  console.log(user)
-
+  const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
+  const { userEmail } = useUserContext()
+
   const text = translate.components.crud
 
   const updateUserDataAndSetStates = async (e, propertyName) => {
@@ -67,23 +69,31 @@ const EditableListUserData = ({ user, setRefreshAllUsersCounter }) => {
     setFile(e.target.files[0])
   }
 
-  const deleteUser = async (userEmail) => {
+  const deleteUser = async (email) => {
+    console.log(email)
     console.log(userEmail)
+    console.log(email.trim() === userEmail)
+    if (email === userEmail) {
+      setNotification(text.deleteUser.nonAuthorized)
+      setTimeout(() => setNotification(null), 3000)
+      return
+    }
+    console.log(email)
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/users/user/${userEmail}`,
+        `${process.env.REACT_APP_API_URL}/users/user/${email.trim()}`,
         {
           withCredentials: true,
         },
       )
-      setNotification(`${userEmail} ${text.deleteUser.deletedByEmail}`)
+      setNotification(`${email} ${text.deleteUser.deletedByEmail}`)
       setTimeout(() => setNotification(null), 2000)
       setTimeout(
         () => setRefreshAllUsersCounter((prevCounter) => prevCounter + 1),
         2300,
       )
     } catch (error) {
-      setNotification(`${userEmail} ${text.deleteUser.error}`)
+      setNotification(`${text.deleteUser.error} ${email}`)
       setTimeout(() => setNotification(null), 3000)
       console.error("Can not delete user", error)
     }
@@ -114,43 +124,46 @@ const EditableListUserData = ({ user, setRefreshAllUsersCounter }) => {
               className={styles.formButton}
               onClick={(e) => deleteUser(user.email)}
             >
-              Delete User
+              {text.deleteUser.button}
             </button>
           </div>
 
-          {Object.keys(initialUserData).map((key) => (
-            <div className={styles.inputContainer} key={key}>
-              <EditableInput
-                label={key}
-                name={key}
-                value={updatedUserData[key]}
-                onChange={(e) =>
-                  listenInputChangeAndSetDataObject(
-                    e,
-                    updatedUserData,
-                    setUpdatedUserData,
-                    setNotification,
-                  )
-                }
-                onSave={(e) => updateUserDataAndSetStates(e, key)}
-                classCss={STYLES.FORMS.FIELD}
-                originalPropertyData={nonUpdatedUserData}
-                updatedPropertyData={updatedUserData}
-              />
-            </div>
-          ))}
-          <div className={styles.inputContainer}>
-            <EditableImageInput
-              label={"Image"}
-              name={"image"}
-              onChange={(e) => {
-                setFileToUpload(e)
-              }}
-              classCss={STYLES.FORMS.ITEM_ROW}
-              file={file}
-              onSave={(e) => updateUserDataAndSetStates(e, "image")}
-            />
-          </div>
+          {Object.keys(initialUserData).map((key) =>
+            key !== "image" ? (
+              <div className={styles.inputContainer} key={key}>
+                <EditableInput
+                  label={key}
+                  name={key}
+                  value={updatedUserData[key]}
+                  onChange={(e) =>
+                    listenInputChangeAndSetDataObject(
+                      e,
+                      updatedUserData,
+                      setUpdatedUserData,
+                      setNotification,
+                    )
+                  }
+                  onSave={(e) => updateUserDataAndSetStates(e, key)}
+                  classCss={STYLES.FORMS.FIELD}
+                  originalPropertyData={nonUpdatedUserData}
+                  updatedPropertyData={updatedUserData}
+                />
+              </div>
+            ) : (
+              <div className={styles.inputContainer} key={key}>
+                <EditableImageInput
+                  label={key}
+                  name={key}
+                  onChange={(e) => {
+                    setFileToUpload(e)
+                  }}
+                  classCss={STYLES.FORMS.ITEM_ROW}
+                  file={file}
+                  onSave={(e) => updateUserDataAndSetStates(e, key)}
+                />
+              </div>
+            ),
+          )}
         </div>
       </div>
     </>

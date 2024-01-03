@@ -17,11 +17,6 @@ const EditableAndDeletableInput = ({
   const { translate } = useLocaleContext()
   const textButtons = translate.components.crud.buttons
   const textProperties = translate.components.crud.forms.commonProperties
-  console.log(
-    "EditableInput updatedPropertyDataISEDITING",
-    isEditing,
-    updatedPropertyData[name],
-  )
 
   return (
     <div className={styles.itemRow}>

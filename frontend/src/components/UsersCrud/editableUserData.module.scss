@@ -42,10 +42,14 @@
 }
 
 .formFieldSearchInput {
-  width: 60%;
+  width: 50%;
   height: 32px;
   font-family: theme.$font-family-primary;
   font-size: medium;
+
+  @include media.mobile {
+    width: 30%;
+  }
 }
 
 .formFieldSelect {

@@ -257,7 +257,8 @@
       "deleteUser": {
         "button": "Benutzer löschen",
         "error": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
-        "deletedByEmail": "wurde erfolgreich aus dem System gelöscht"
+        "deletedByEmail": "wurde erfolgreich aus dem System gelöscht",
+        "nonAuthorized": "Sie sind nicht berechtigt, diesen Benutzer zu löschen"
       },
       "getUser": {
         "button": "Benutzer Daten sehen",

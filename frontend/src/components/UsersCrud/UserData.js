@@ -62,7 +62,6 @@ const UserData = () => {
 
           if (userData.status === 200) {
             setUser(userData.data)
-            console.log(userData.data)
             setNonUpdatedUserData(userData.data)
           }
         } catch (error) {
