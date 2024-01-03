@@ -1,56 +1,66 @@
 import ToggleButton from "#components/ToggleButton"
 import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
 import useLocaleContext from "#context/localeContext"
-import styles from "#pages/Admin/admin.module.scss"
 import { useState } from "react"
 import CreateUserForm from "./CreateUserForm"
-import DeleteUser from "./DeleteUser"
 import EditableUserData from "./EditableUserData"
 import GetAllUsers from "./GetAllUsers"
-import UserData from "./UserData"
+import styles from "./usersCrud.module.scss"
 const UsersCrud = ({
-  refreshAllUsersCounter,
   setEmailInUserError,
   setFieldErrors,
-  setRefreshAllUsersCounter,
   emailInUserError,
   fieldErrors,
 }) => {
   const [showUsersSection, setShowUsersSection] = useState(false)
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false)
+  const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
 
   const { translate } = useLocaleContext()
   const errorText = translate.pages.signUp
+  const toggleButtonText =
+    translate.components.crud.forms.toggleUsersCrudOptions
+
+  console.log("UsersCrud refreshAllUsersCounter", refreshAllUsersCounter)
   return (
-    <div className={styles.usersCrudContainer}>
+    <div className={styles.usersCrudWrapper}>
       <ToggleButton
         show={showUsersSection}
         setToggle={setShowUsersSection}
-        textHide={"HIDE USERS ACTIONS"}
-        textShow={"SHOW USERS ACTIONS"}
+        textHide={toggleButtonText.hide}
+        textShow={toggleButtonText.show}
         classCss='showHideButtons'
       />
       {showUsersSection && (
         <div className={styles.formsContainer}>
           <div className={styles.crudContainer}>
-            GET ALL USERS SECTION
-            <GetAllUsers refreshAllUsersCounter={refreshAllUsersCounter} />
-          </div>
-          <div className={styles.crudContainer}>
-            UPDATE CURRENT USER
-            <UserData />
-          </div>
-          <div className={styles.crudContainer}>
-            UPDATE USER BY EMAIL
-            <EditableUserData />
+            <GetAllUsers
+              refreshAllUsersCounter={refreshAllUsersCounter}
+              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+            />
           </div>
 
           <div className={styles.crudContainer}>
-            CREATE USER
-            <CreateUserForm
-              setEmailInUserError={setEmailInUserError}
-              setFieldErrors={setFieldErrors}
+            <EditableUserData
               setRefreshAllUsersCounter={setRefreshAllUsersCounter}
             />
+          </div>
+
+          <div className={styles.crudContainer}>
+            <ToggleButton
+              show={showCreateUserForm}
+              setToggle={setShowCreateUserForm}
+              textHide={"HIDE FORM"}
+              textShow={"SHOW CREATE USER FORM"}
+              classCss='showHideButtons'
+            />
+
+            <CreateUserForm
+              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
+              setFieldErrors={setFieldErrors}
+              setEmailInUserError={setEmailInUserError}
+            />
+
             {emailInUserError && (
               <div className={styles.errorMessage}>{emailInUserError}</div>
             )}
@@ -60,10 +70,6 @@ const UsersCrud = ({
                 text={errorText}
               />
             )}
-          </div>
-          <div className={styles.crudContainer}>
-            DELETE USER SECTION
-            <DeleteUser setRefreshAllUsersCounter={setRefreshAllUsersCounter} />
           </div>
         </div>
       )}

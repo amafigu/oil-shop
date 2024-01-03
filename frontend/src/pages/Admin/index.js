@@ -12,14 +12,12 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./admin.module.scss"
 const Admin = () => {
-  const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
   const [refreshAllProductsCounter, setRefreshAllProductsCounter] = useState(0)
   const [notification, setNotification] = useState(null)
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
   const [headerData, setHeaderData] = useState({})
   const { user, isLoading } = useUserContext()
-  // const { translate } = useLocaleContext()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -53,10 +51,8 @@ const Admin = () => {
 
         <div className={styles.componentContainer}>
           <UsersCrud
-            refreshAllUsersCounter={refreshAllUsersCounter}
             setEmailInUserError={setEmailInUserError}
             setFieldErrors={setFieldErrors}
-            setRefreshAllUsersCounter={setRefreshAllUsersCounter}
             emailInUserError={emailInUserError}
             fieldErrors={fieldErrors}
           />

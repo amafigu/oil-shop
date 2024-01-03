@@ -2,6 +2,11 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
+.editableUserDataWrapper {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
 .form {
   @include flex-column;
 
@@ -14,6 +19,11 @@
 
 .inputContainer {
   @include input-container-spacing;
+}
+
+.editableListUserDataWrapper {
+  width: 100%;
+  margin: 1.5rem 0;
 }
 
 .imageContainer {
@@ -98,7 +108,7 @@
 }
 
 .formContainer {
-  margin: theme.$margin-divider 0;
+  margin: theme.$spacing-regular 0;
 }
 
 .formButton {

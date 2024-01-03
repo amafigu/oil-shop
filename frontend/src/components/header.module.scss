@@ -15,7 +15,7 @@
   .avatar {
     width: 80px;
     height: 80px;
-    margin: theme.$margin-divider-small;
+    margin: theme.$spacing-small;
     border-radius: theme.$border-radius-circle;
 
     @include media.mobile {
@@ -47,7 +47,7 @@
     .userDataTable {
       flex-grow: 1;
       height: 58px;
-      margin-left: theme.$margin-divider-extra-large;
+      margin-left: theme.$spacing-extra-large;
       border-radius: theme.$border-radius-large;
 
       .tableHead,

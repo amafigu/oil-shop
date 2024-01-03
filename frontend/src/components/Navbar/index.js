@@ -208,7 +208,7 @@ const Navbar = ({ productCategories }) => {
                       to={
                         user && user.roleId === 2 // TODO admin roleId and send the user with role name from backend
                           ? "/users/current-admin"
-                          : "/users/current-user"
+                          : "/users/current-customer"
                       }
                     >
                       <FontAwesomeIcon icon={faUser} />

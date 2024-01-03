@@ -1,10 +1,15 @@
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { API_USERS_CURRENT_USER, API_VERIFY_TOKEN } from "#utils/constants"
+import {
+  API_LOGIN,
+  API_USERS_CURRENT_USER,
+  API_USER_ROLE,
+  API_VERIFY_TOKEN,
+} from "#utils/constants"
 import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import { useEffectScrollTop } from "#utils/render"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./login.module.scss"
 
@@ -19,22 +24,11 @@ const Login = () => {
 
   useEffectScrollTop()
 
-  useEffect(() => {
-    /* if (isLoggedIn) {
-      if (user.role === "admin") {
-        navigate("/users/current-admin")
-      }
-      if (user.role === "guest") {
-        navigate("/users/current-user")
-      }
-    }*/
-  })
-
   const login = async (e) => {
     e.preventDefault()
     try {
       const loginResponse = await axios.post(
-        `${process.env.REACT_APP_API_URL}/users/login`,
+        `${process.env.REACT_APP_API_URL}${API_LOGIN}`,
         { email, password },
         { withCredentials: true },
       )
@@ -47,7 +41,6 @@ const Login = () => {
             )
 
             const userId = currentUserIdResponse.data.id
-            console.log(userId)
             const userResponse = await getDataAndSetErrorMessage(
               userId,
               API_USERS_CURRENT_USER,
@@ -59,11 +52,14 @@ const Login = () => {
               setIsLoggedIn(true)
               setUser(loggedUser)
 
-              if (loggedUser.role.name === "admin") {
-                setTimeout(() => navigate("/users/current-admin"), 500)
-              } else if (loggedUser.role.name === "customer") {
-                setTimeout(() => navigate("/users/current-user"), 500)
-              }
+              const userRoleResponse = await axios.get(
+                `${process.env.REACT_APP_API_URL}${API_USER_ROLE}/${loggedUser.roleId}`,
+              )
+
+              setTimeout(
+                () => navigate(`/users/current-${userRoleResponse.data.name}`),
+                500,
+              )
             }
           } catch (error) {
             setErrorMessage(`${text.errorMessage}`)
@@ -78,7 +74,6 @@ const Login = () => {
     } catch (error) {
       setErrorMessage(`${text.errorMessage}`)
       setTimeout(() => setErrorMessage(null), 10000)
-
       console.error("Login error", error)
     }
   }

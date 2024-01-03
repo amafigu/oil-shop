@@ -56,7 +56,7 @@ const AppRoutes = () => {
         <Route path='/faq' element={<Faq />} />
         <Route path='/login' element={<Login />} />
         <Route path='/sign-up' element={<SignUp />} />
-        <Route path='/users/current-user' element={<User />} />
+        <Route path='/users/current-customer' element={<User />} />
         <Route path='/users/current-admin' element={<Admin />} />
         <Route path='/products/:productName' element={<ProductDetails />} />
         <Route path='/checkout/shipping' element={<Shipping />} />

@@ -63,15 +63,26 @@ router.get('/current-user/:id', decodeJWT, async (req, res) => {
 
     if (!token) return res.status(401).json({ message: 'Not authenticated' });
 
-    const user = await db.users.findOne({
+    const currentUser = await db.users.findOne({
       where: { id: req.params.id },
-      include: [{ model: db.userRoles, as: 'role' }],
-      attributes: { exclude: ['password'] },
+      attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+      include: [
+        {
+          model: db.userRoles,
+          as: 'role',
+          attributes: ['name'],
+        },
+      ],
     });
 
-    if (!user) {
+    if (!currentUser) {
       return res.status(404).json({ message: 'User not found' });
     }
+
+    const user = {
+      ...currentUser.dataValues,
+      role: currentUser.role.name,
+    };
     return res.json(user);
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -105,7 +116,6 @@ router.delete('/user/:email', decodeJWT, async (req, res) => {
 
 router.put(
   '/user/:id',
-
   decodeJWT,
   validateBody(updateUserValidation),
   async (req, res) => {
@@ -201,19 +211,34 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
 
     const hashedPassword = await hashPassword(req.body.password);
 
+    const customerRole = await db.userRoles.findOne({
+      where: { name: 'customer' },
+    });
+
     const newUser = await db.users.create({
       ...req.body,
       password: hashedPassword,
+      roleId: customerRole.id,
     });
 
-    return res
-      .status(201)
-      .json({ message: 'Customer user created successfully', user: newUser });
+    const contextUser = {
+      ...newUser.dataValues,
+      password: undefined,
+      createdAt: undefined,
+      updatedAt: undefined,
+      role: customerRole.name,
+    };
+
+    return res.status(201).json({
+      message: 'Customer user created successfully',
+      user: contextUser,
+    });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 });
 
+// TODO: make a password and check crud in db
 router.post(
   '/create-guest',
   validateBody(createGuestUserValidation),

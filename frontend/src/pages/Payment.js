@@ -3,7 +3,11 @@ import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { totalCost } from "#utils/cart"
-import { API_USERS_CURRENT_USER, SHIPPING_COST } from "#utils/constants"
+import {
+  API_USERS_CURRENT_USER,
+  LOCAL_STORAGE_GUEST_ID,
+  SHIPPING_COST,
+} from "#utils/constants"
 import { useEffectScrollTop } from "#utils/render"
 import axios from "axios"
 import { React, useState } from "react"
@@ -58,7 +62,7 @@ const Payment = () => {
             shippingDataObject,
           )
           localStorage.setItem(
-            "yolo-guest-id",
+            LOCAL_STORAGE_GUEST_ID,
             JSON.stringify(newGuestUserData.id),
           )
 
@@ -105,7 +109,7 @@ const Payment = () => {
         }
       } else {
         const userDataResponse = await axios.get(
-          `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}${userId}`,
+          `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
           { withCredentials: true },
         )
         const userData = userDataResponse.data

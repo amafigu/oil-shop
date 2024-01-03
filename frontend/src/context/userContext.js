@@ -1,14 +1,21 @@
-import { API_USERS_CURRENT_USER, API_VERIFY_TOKEN } from "#utils/constants"
+import {
+  API_USERS_CURRENT_USER,
+  API_VERIFY_TOKEN,
+  ROUTES_LOGIN,
+} from "#utils/constants"
 import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
-  const [userEmail, setUserEmail] = useState("")
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState({})
-  const [userId, setUserId] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState({})
+  const [userEmail, setUserEmail] = useState("")
+  const [userId, setUserId] = useState({})
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -22,12 +29,11 @@ export const UserProvider = ({ children }) => {
         userId = response.data.id
         if (response.status === 200) {
           const loggedInUser = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}${userId}`,
+            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
             { withCredentials: true },
           )
 
           if (loggedInUser && loggedInUser.status === 200) {
-            console.log(loggedInUser.data)
             setUser(loggedInUser.data)
             setUserEmail(loggedInUser.data.email)
             setUserId(loggedInUser.data.id)
@@ -37,23 +43,25 @@ export const UserProvider = ({ children }) => {
         }
       } catch (error) {
         setUserEmail("")
+        navigate(ROUTES_LOGIN)
       }
     }
 
     verifyCookie()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn])
 
   return (
     <UserContext.Provider
       value={{
-        userEmail,
-        setUserEmail,
-        setIsLoggedIn,
         isLoggedIn,
-        user,
-        setUser,
-        setUserId,
         isLoading,
+        setIsLoggedIn,
+        setUser,
+        setUserEmail,
+        setUserId,
+        user,
+        userEmail,
         userId,
       }}
     >

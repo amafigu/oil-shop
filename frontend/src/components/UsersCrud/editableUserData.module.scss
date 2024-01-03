@@ -16,6 +16,10 @@
   @include input-container-spacing;
 }
 
+.editableUserDataWrapper {
+  @include component-container-large;
+}
+
 .imageContainer {
   display: flex;
   align-items: center;
@@ -38,10 +42,14 @@
 }
 
 .formFieldSearchInput {
-  width: 60%;
+  width: 50%;
   height: 32px;
   font-family: theme.$font-family-primary;
   font-size: medium;
+
+  @include media.mobile {
+    width: 30%;
+  }
 }
 
 .formFieldSelect {
@@ -98,7 +106,7 @@
 }
 
 .formContainer {
-  margin: theme.$margin-divider 0;
+  margin: theme.$spacing-regular 0;
 }
 
 .formButton {

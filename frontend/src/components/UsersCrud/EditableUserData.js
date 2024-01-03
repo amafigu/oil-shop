@@ -3,24 +3,25 @@ import EditableAndDeletableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
-import { API_USERS_USER, STYLES } from "#utils/constants"
+import { API_USERS_USER, DEFAULT_USER_IMAGE, STYLES } from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
 import { getUserByEmail } from "#utils/users"
+import axios from "axios"
 import React, { useState } from "react"
 import styles from "./editableUserData.module.scss"
 
-const EditableUserData = () => {
+const EditableUserData = ({ setRefreshAllUsersCounter }) => {
   const [showForm, setShowForm] = useState(false)
   const initialUserData = {
     firstName: "",
     lastName: "",
     email: "",
+    image: "",
   }
-  const [file, setFile] = useState(null)
 
   const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
     ...initialUserData,
@@ -30,10 +31,13 @@ const EditableUserData = () => {
     ...initialUserData,
   })
 
-  const [notification, setNotification] = useState(null)
   const [email, setEmail] = useState("")
+  const [file, setFile] = useState(null)
+  const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
-  const buttonsText = translate.components.buttons
+  const buttonsText = translate.components
+  const textAdminCrud = translate.pages.admin.crud
+  const textComponentCrud = translate.components.crud
 
   const updateUserDataAndSetStates = async (e, propertyName) => {
     let image = ""
@@ -59,13 +63,14 @@ const EditableUserData = () => {
     }
     setUpdatedUserData(updatedData.data.user)
   }
+
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
   }
 
-  const searchUser = async () => {
-    console.log(email)
-    const user = await getUserByEmail(email)
+  const searchUser = async (email) => {
+    const user = await getUserByEmail(email.trim())
+
     if (!user) {
       setNotification("User not found")
       setTimeout(() => setNotification(null), 2000)
@@ -74,6 +79,30 @@ const EditableUserData = () => {
     setNonUpdatedUserData(user)
   }
 
+  const deleteUserAndUpdateState = async (userEmail) => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/users/user/${userEmail.trim()}`,
+        {
+          withCredentials: true,
+        },
+      )
+      setNotification(
+        `${userEmail} ${textComponentCrud.deleteUser.deletedByEmail}`,
+      )
+      setNonUpdatedUserData({ ...initialUserData })
+      setEmail("")
+      setTimeout(() => setNotification(null), 2000)
+      setTimeout(
+        () => setRefreshAllUsersCounter((prevCounter) => prevCounter + 1),
+        2300,
+      )
+    } catch (error) {
+      setNotification(`${userEmail} ${textComponentCrud.deleteUser.error}`)
+      setTimeout(() => setNotification(null), 3000)
+      console.error("Can not delete user", error)
+    }
+  }
   return (
     <>
       <div>
@@ -81,8 +110,8 @@ const EditableUserData = () => {
         <ToggleButton
           show={showForm}
           setToggle={setShowForm}
-          textHide={`${buttonsText?.actions.user.hide}`}
-          textShow={`${buttonsText?.actions.user.show}`}
+          textHide={`${buttonsText?.buttons.actions.userByEmail.hide}`}
+          textShow={`${buttonsText?.buttons.actions.userByEmail.show}`}
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (
@@ -92,7 +121,11 @@ const EditableUserData = () => {
                 <div className={styles.imageContainer}>
                   <img
                     className={styles.image}
-                    src={nonUpdatedUserData.image}
+                    src={
+                      !nonUpdatedUserData.image
+                        ? DEFAULT_USER_IMAGE
+                        : nonUpdatedUserData.image
+                    }
                     alt='user'
                   />
                 </div>
@@ -104,45 +137,61 @@ const EditableUserData = () => {
               ></input>
               <button
                 className={styles.formButton}
-                onClick={() => searchUser()}
+                onClick={() => searchUser(email)}
               >
-                Search User
+                {buttonsText.crud.getUser.getByEmail}
+              </button>
+              <button
+                className={styles.formButton}
+                onClick={() =>
+                  deleteUserAndUpdateState(
+                    email,
+                    setNotification,
+                    textAdminCrud.users.deletedByEmail,
+                    textAdminCrud.users.deleteError,
+                  )
+                }
+              >
+                {buttonsText.crud.deleteUser.button}
               </button>
             </div>
 
-            {Object.keys(initialUserData).map((key) => (
-              <div className={styles.inputContainer} key={key}>
-                <EditableAndDeletableInput
-                  label={key}
-                  name={key}
-                  value={updatedUserData[key]}
-                  onChange={(e) =>
-                    listenInputChangeAndSetDataObject(
-                      e,
-                      updatedUserData,
-                      setUpdatedUserData,
-                      setNotification,
-                    )
-                  }
-                  onSave={(e) => updateUserDataAndSetStates(e, key)}
-                  classCss={STYLES.FORMS.FIELD}
-                  originalPropertyData={nonUpdatedUserData}
-                  updatedPropertyData={updatedUserData}
-                />
-              </div>
-            ))}
-            <div className={styles.inputContainer}>
-              <EditableImageInput
-                label={"Image"}
-                name={"image"}
-                onChange={(e) => {
-                  setFileToUpload(e)
-                }}
-                classCss={STYLES.FORMS.ITEM_ROW}
-                file={file}
-                onSave={(e) => updateUserDataAndSetStates(e, "image")}
-              />
-            </div>
+            {Object.keys(initialUserData).map((key) =>
+              key !== "image" ? (
+                <div className={styles.inputContainer} key={key}>
+                  <EditableAndDeletableInput
+                    label={key}
+                    name={key}
+                    value={updatedUserData[key]}
+                    onChange={(e) =>
+                      listenInputChangeAndSetDataObject(
+                        e,
+                        updatedUserData,
+                        setUpdatedUserData,
+                        setNotification,
+                      )
+                    }
+                    onSave={(e) => updateUserDataAndSetStates(e, key)}
+                    classCss={STYLES.FORMS.FIELD}
+                    originalPropertyData={nonUpdatedUserData}
+                    updatedPropertyData={updatedUserData}
+                  />
+                </div>
+              ) : (
+                <div className={styles.inputContainer}>
+                  <EditableImageInput
+                    label={key}
+                    name={key}
+                    onChange={(e) => {
+                      setFileToUpload(e)
+                    }}
+                    classCss={STYLES.FORMS.ITEM_ROW}
+                    file={file}
+                    onSave={(e) => updateUserDataAndSetStates(e, key)}
+                  />
+                </div>
+              ),
+            )}
           </div>
         )}
       </div>
