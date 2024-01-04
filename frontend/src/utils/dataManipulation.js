@@ -2,7 +2,7 @@ import { SHORT_MESSAGE_TIMEOUT } from "#utils/constants"
 import axios from "axios"
 import {
   ignoreUnsavedProperties,
-  validateUserFieldsInDataObject,
+  validateUserAndProductFieldsInDataObject,
 } from "./validation"
 
 export const getDataAndSetErrorMessage = async (
@@ -42,6 +42,7 @@ export const updateDataRequest = async (
   apiUrl,
   setErrorMessage,
 ) => {
+  console.log("updateDataRequest -> dataId type", typeof dataId)
   try {
     const response = await axios.put(
       `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,
@@ -85,14 +86,13 @@ export const updateDataAndSetStates = async (
   setErrorMessage,
 ) => {
   e.preventDefault()
-
   try {
     const cleanedUpdatedData = ignoreUnsavedProperties(
       updatedData,
       propertyName,
     )
 
-    const validatedData = validateUserFieldsInDataObject(
+    const validatedData = validateUserAndProductFieldsInDataObject(
       cleanedUpdatedData,
       setErrorMessage,
     )
@@ -170,6 +170,9 @@ export const listenInputChangeAndSetDataObject = (
   updatedDataObj,
   setUpdatedDataObj,
 ) => {
+  console.log(e.target.name)
+  console.log(e.target.value)
+  console.log(updatedDataObj)
   setUpdatedDataObj({
     ...updatedDataObj,
     [e.target.name]: e.target.value,

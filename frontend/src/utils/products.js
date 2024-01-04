@@ -1,23 +1,16 @@
+import { API_PRODUCTS_PRODUCT_GET_BY_NAME } from "#utils/constants"
 import axios from "axios"
 import { useEffect } from "react"
 
-export const getProductByName = async (
-  name,
-  setProductDataByName,
-  setNotification,
-) => {
+export const getProductByName = async (name) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/products/${name}`,
+      `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_GET_BY_NAME}/${name}`,
     )
-
-    setNotification(`Selected Product: ${JSON.stringify(response.data.name)}`)
-    setProductDataByName(response.data)
-    setTimeout(() => setNotification(null), 2000)
+    console.log("getProductByName -> response", response)
+    return response.data
   } catch (error) {
-    setNotification(`Error geting user: ${error.response.data.message}`)
-    setTimeout(() => setNotification(null), 2000)
-    console.error("Error geting user by email", error)
+    console.error("Error geting product by name", error)
   }
 }
 

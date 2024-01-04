@@ -24,7 +24,11 @@
           "create": "Create product",
           "delete": "Delete product",
           "edit": "Edit product",
-          "getByName": "Get Product By Name",
+          "getByName": {
+            "show": "Get Product By Name",
+            "hide": "Hide Form"
+          },
+
           "getByNameAndQuantity": ""
         }
       },
@@ -285,7 +289,19 @@
       "createUser": {
         "success": "User created successfully",
         "submitButton": "Create an Account",
-        "emailInUseErrorMessage": "Email already registered"
+        "emailInUseErrorMessage": "Email already registered",
+        "hideForm": "Hide create user form",
+        "showForm": "Show create user form"
+      },
+      "deleteProduct": {
+        "button": "Delete Product",
+        "error": "Can not delete product with this name: ",
+        "deletedByName": "was successfully deleted from system"
+      },
+      "getProduct": {
+        "button": "Get product data",
+        "error": "Can not find product: ",
+        "getByName": "Get product by name"
       },
       "getAllProducts": {
         "showButton": "Show all products",

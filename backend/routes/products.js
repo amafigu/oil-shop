@@ -1,22 +1,27 @@
+import dotenv from 'dotenv';
 import express from 'express';
+import { decodeJWT } from '../middleware/decodeToken.js';
 import db from '../models/index.js';
+dotenv.config();
 
 import {
   validateBody,
   validateParams,
 } from '../middleware/validationMiddleware.js';
 import {
-  ProductNameParamSchema,
+  CreateProductSchema,
+  ProductIdParamSchema,
   UpdateProductSchema,
 } from '../middleware/validationSchemas/productSchema.js';
 const router = express.Router();
 
 router.post(
-  '/create',
-
+  '/product/create',
+  validateBody(CreateProductSchema),
+  decodeJWT,
   async (req, res) => {
     try {
-      const product = await db.products.findOne({
+      const existingProduct = await db.products.findOne({
         where: {
           name: req.body.name,
           productCategoryId: req.body.productCategoryId,
@@ -24,26 +29,27 @@ router.post(
         },
       });
 
-      if (product) {
+      if (existingProduct) {
         res.status(422).json({
           message:
             'Can not add product, please try with another name, size or category.',
         });
-      } else {
-        const product = await db.products.create(req.body);
-        res.status(201).json(product);
       }
+      const NewProduct = await db.products.create(req.body);
+      res
+        .status(201)
+        .json({ message: 'Product created successfully', product: NewProduct });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
   }
 );
 
-router.get('/:productName', async (req, res) => {
+router.get('/product/get-by-name/:name', async (req, res) => {
   try {
     const product = await db.products.findOne({
       where: {
-        name: req.params.productName,
+        name: req.params.name,
       },
       include: [
         {
@@ -61,11 +67,11 @@ router.get('/:productName', async (req, res) => {
   }
 });
 
-router.get('/:productId', async (req, res) => {
+router.get('/product/:id', async (req, res) => {
   try {
     const product = await db.products.findOne({
       where: {
-        name: req.params.productId,
+        id: req.params.id,
       },
       include: [
         {
@@ -86,12 +92,12 @@ router.get('/:productId', async (req, res) => {
 });
 
 router.delete(
-  '/:productName',
-  validateParams(ProductNameParamSchema),
+  '/product/:id',
+  validateParams(ProductIdParamSchema),
   async (req, res) => {
     try {
       const product = await db.products.findOne({
-        where: { name: req.params.productName },
+        where: { id: req.params.id },
       });
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
@@ -105,19 +111,32 @@ router.delete(
 );
 
 router.put(
-  '/:productName',
-  validateParams(ProductNameParamSchema),
+  '/product/:id',
+  validateParams(ProductIdParamSchema),
   validateBody(UpdateProductSchema),
   async (req, res) => {
     try {
       const product = await db.products.findOne({
-        where: { name: req.params.productName },
+        where: { id: req.params.id },
       });
+
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
       }
+
+      product.name = req.body.name || product.name;
+      product.size = req.body.size || product.size;
+      product.price = req.body.price || product.price;
+      product.productCategoryId =
+        req.body.productCategoryId || product.productCategoryId;
+      product.description = req.body.description || product.description;
+      product.image = req.body.image || product.image;
+
       const updatedProduct = await product.update(req.body);
-      res.json(updatedProduct);
+      return res.status(200).json({
+        message: 'Product updated successfully',
+        product: updatedProduct,
+      });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }

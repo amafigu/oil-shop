@@ -15,6 +15,7 @@ import Payment from "#pages/Payment"
 import ProductDetails from "#pages/ProductDetails"
 import Shipping from "#pages/Shipping"
 import Shop from "#pages/Shop"
+import { API_PRODUCT_CATEGORIES } from "#utils/constants"
 import Admin from "./pages/Admin"
 import NotFound from "./pages/NotFound"
 import SignUp from "./pages/SignUp"
@@ -25,7 +26,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/product-categories`)
+      .get(`${process.env.REACT_APP_API_URL}${API_PRODUCT_CATEGORIES}`)
       .then((response) => {
         setProductCategories(response.data)
       })

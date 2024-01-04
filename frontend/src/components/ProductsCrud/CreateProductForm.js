@@ -1,5 +1,11 @@
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
+import {
+  API_PRODUCTS_PRODUCT_CREATE,
+  API_PRODUCT_CATEGORIES,
+  ROUTES_LOGIN,
+  ROUTES_SIGN_UP,
+} from "#utils/constants"
 import { uploadToS3 } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import axios from "axios"
@@ -9,7 +15,6 @@ import styles from "./createProductForm.module.scss"
 
 const CreateProductForm = () => {
   const [notification, setNotification] = useState(null)
-  const [showFormInputs, setShowFormInputs] = useState(false)
   const [productCategories, setProductCategories] = useState(null)
   const [file, setFile] = useState(null)
 
@@ -24,17 +29,15 @@ const CreateProductForm = () => {
   })
 
   const { translate } = useLocaleContext()
-  const text = translate.components.crud
-
   const location = useLocation()
+  const text = translate.components.crud
   const currentPath = location.pathname
-
-  const routesWithoutImageUpload = ["/login", "/sign-up"]
+  const routesWithoutImageUpload = [ROUTES_LOGIN, ROUTES_SIGN_UP]
   useEffect(() => {
     try {
       const getProductCategories = async () => {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/product-categories`,
+          `${process.env.REACT_APP_API_URL}${API_PRODUCT_CATEGORIES}`,
         )
         setProductCategories(response.data)
       }
@@ -75,7 +78,7 @@ const CreateProductForm = () => {
 
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_URL}/products/create`,
+        `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_CREATE}`,
         productDataWithImage,
         { withCredentials: true },
       )
@@ -95,157 +98,138 @@ const CreateProductForm = () => {
     <div>
       {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={(e) => submitProductForm(e)}>
-        <div className={styles.actionButtonContainer}>
-          {showFormInputs ? (
-            <button
-              className={styles.formButton}
-              onClick={() => setShowFormInputs(false)}
-              type='button'
-            >
-              HIDE FORM
-            </button>
-          ) : (
-            <button
-              className={styles.formButton}
-              onClick={() => setShowFormInputs(true)}
-              type='button'
-            >
-              SHOW FORM
-            </button>
-          )}
-        </div>
-        {showFormInputs && (
-          <div>
-            <div className={styles.inputsContainer}>
-              <div className={styles.labelAndInputContainer}>
-                <label className={styles.label} htmlFor='name'>
-                  {text.forms.commonProperties.name}
-                </label>
-                <input
-                  className={styles.formField}
-                  type='text'
-                  name='name'
-                  onChange={listenInputChange}
-                  required
-                />
-              </div>
-              <div className={styles.labelAndInputContainer}>
-                <label className={styles.label} htmlFor='name'>
-                  {text.forms.commonProperties.category}
-                </label>
-                <select
-                  onChange={listenInputChange}
-                  className={styles.formFieldSelect}
-                  name='productCategoryId'
-                  value={productData.productCategoryId}
-                >
-                  <option value='' disabled>
-                    Select a category
-                  </option>
-                  {productCategories
-                    ? productCategories
-                        .filter((category) => category.name !== "all")
-                        .map((productCategory) => (
-                          <option
-                            key={productCategory.id}
-                            className={styles.formField}
-                            value={productCategory.id}
-                            name={productCategory.id}
-                          >
-                            {titleCase(productCategory.name, "_")}
-                          </option>
-                        ))
-                    : ""}
-                </select>
-              </div>
-              <div className={styles.labelAndInputContainer}>
-                <label className={styles.label} htmlFor='name'>
-                  {text.forms.commonProperties.price}
-                </label>
-                <input
-                  className={styles.formField}
-                  type='number'
-                  name='price'
-                  step='.01'
-                  onChange={listenInputChange}
-                  required
-                />
-              </div>
-              <div className={styles.labelAndInputContainer}>
-                <label className={styles.label} htmlFor='description'>
-                  {text.forms.commonProperties.description}
-                </label>
-                <input
-                  className={styles.formField}
-                  type='text'
-                  name='description'
-                  onChange={listenInputChange}
-                  required
-                />
-              </div>
-              <div className={styles.labelAndInputContainer}>
-                <label className={styles.label} htmlFor='details'>
-                  {text.forms.commonProperties.details}
-                </label>
-                <input
-                  className={styles.formField}
-                  type='text'
-                  name='details'
-                  onChange={listenInputChange}
-                  required
-                />
-              </div>
-              <div className={styles.labelAndInputContainer}>
-                <label className={styles.label} htmlFor='size'>
-                  {text.forms.commonProperties.size}
-                </label>
-                <input
-                  className={styles.formField}
-                  type='number'
-                  name='size'
-                  onChange={listenInputChange}
-                  min={1}
-                  required
-                />
-              </div>
-              <div className={styles.labelAndInputContainer}>
-                <label className={styles.label} htmlFor='measure'>
-                  {text.forms.commonProperties.measure}
-                </label>
-                <input
-                  className={styles.formField}
-                  type='text'
-                  name='measure'
-                  onChange={listenInputChange}
-                  required
-                />
-              </div>
+        <div className={styles.actionButtonContainer}></div>
 
-              {!routesWithoutImageUpload.includes(currentPath) && (
-                <div className={styles.labelAndInputContainer}>
-                  <span className={styles.label}>
-                    {file ? "Selected file: " : "Select a file"}
-                  </span>
-                  <label className={styles.labelForFile} htmlFor='fileInput'>
-                    {file ? file.name : "Search on device"}
-                  </label>
-
-                  <input
-                    type='file'
-                    name='image'
-                    id='fileInput'
-                    onChange={setFileToUpload}
-                    required
-                  />
-                </div>
-              )}
+        <div>
+          <div className={styles.inputsContainer}>
+            <div className={styles.labelAndInputContainer}>
+              <label className={styles.label} htmlFor='name'>
+                {text.forms.commonProperties.name}
+              </label>
+              <input
+                className={styles.formField}
+                type='text'
+                name='name'
+                onChange={listenInputChange}
+                required
+              />
+            </div>
+            <div className={styles.labelAndInputContainer}>
+              <label className={styles.label} htmlFor='name'>
+                {text.forms.commonProperties.category}
+              </label>
+              <select
+                onChange={listenInputChange}
+                className={styles.formFieldSelect}
+                name='productCategoryId'
+                value={productData.productCategoryId}
+              >
+                <option value='' disabled>
+                  Select a category
+                </option>
+                {productCategories
+                  ? productCategories
+                      .filter((category) => category.name !== "all")
+                      .map((productCategory) => (
+                        <option
+                          key={productCategory.id}
+                          className={styles.formField}
+                          value={productCategory.id}
+                          name={productCategory.id}
+                        >
+                          {titleCase(productCategory.name, "_")}
+                        </option>
+                      ))
+                  : ""}
+              </select>
+            </div>
+            <div className={styles.labelAndInputContainer}>
+              <label className={styles.label} htmlFor='name'>
+                {text.forms.commonProperties.price}
+              </label>
+              <input
+                className={styles.formField}
+                type='number'
+                name='price'
+                step='.01'
+                onChange={listenInputChange}
+                required
+              />
+            </div>
+            <div className={styles.labelAndInputContainer}>
+              <label className={styles.label} htmlFor='description'>
+                {text.forms.commonProperties.description}
+              </label>
+              <input
+                className={styles.formField}
+                type='text'
+                name='description'
+                onChange={listenInputChange}
+                required
+              />
+            </div>
+            <div className={styles.labelAndInputContainer}>
+              <label className={styles.label} htmlFor='details'>
+                {text.forms.commonProperties.details}
+              </label>
+              <input
+                className={styles.formField}
+                type='text'
+                name='details'
+                onChange={listenInputChange}
+                required
+              />
+            </div>
+            <div className={styles.labelAndInputContainer}>
+              <label className={styles.label} htmlFor='size'>
+                {text.forms.commonProperties.size}
+              </label>
+              <input
+                className={styles.formField}
+                type='number'
+                name='size'
+                onChange={listenInputChange}
+                min={1}
+                required
+              />
+            </div>
+            <div className={styles.labelAndInputContainer}>
+              <label className={styles.label} htmlFor='measure'>
+                {text.forms.commonProperties.measure}
+              </label>
+              <input
+                className={styles.formField}
+                type='text'
+                name='measure'
+                onChange={listenInputChange}
+                required
+              />
             </div>
 
-            <button className={styles.formButton} type='submit'>
-              {text.forms.createProductForm.submitButton}
-            </button>
+            {!routesWithoutImageUpload.includes(currentPath) && (
+              <div className={styles.labelAndInputContainer}>
+                <span className={styles.label}>
+                  {file ? "Selected file: " : "Select a file"}
+                </span>
+                <label className={styles.labelForFile} htmlFor='fileInput'>
+                  {file ? file.name : "Search on device"}
+                </label>
+
+                <input
+                  type='file'
+                  name='image'
+                  id='fileInput'
+                  onChange={setFileToUpload}
+                  required
+                />
+              </div>
+            )}
           </div>
-        )}
+
+          <button className={styles.formButton} type='submit'>
+            {text.forms.createProductForm.submitButton}
+          </button>
+        </div>
       </form>
     </div>
   )

@@ -70,15 +70,11 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   }
 
   const deleteUser = async (email) => {
-    console.log(email)
-    console.log(userEmail)
-    console.log(email.trim() === userEmail)
     if (email === userEmail) {
       setNotification(text.deleteUser.nonAuthorized)
       setTimeout(() => setNotification(null), 3000)
       return
     }
-    console.log(email)
     try {
       await axios.delete(
         `${process.env.REACT_APP_API_URL}/users/user/${email.trim()}`,
