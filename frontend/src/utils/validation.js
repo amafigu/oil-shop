@@ -11,7 +11,7 @@ export const validateUserAndProductFieldsInDataObject = (
       setTimeout(() => setErrorNotification(null), 2000)
       return
     }
-
+    // product validation
     if (property === "price") {
       propertyValue = propertyValue.trim()
       propertyValue = Number(propertyValue).toFixed(2)
@@ -19,17 +19,17 @@ export const validateUserAndProductFieldsInDataObject = (
       dataObject[property] = propertyValue
     }
 
-    if (property === "size") {
+    if (property === "size" || property === "productCategoryId") {
       propertyValue = propertyValue.toString().trim()
       propertyValue = Number(propertyValue)
       dataObject[property] = propertyValue
     }
-    //product name
+
     if (property === "name") {
       propertyValue = propertyValue.toString().trim()
       dataObject[property] = propertyValue
     }
-
+    // user validation
     if (property === "firstName" || property === "lastName") {
       if (!/^[A-Z]/.test(propertyValue)) {
         setErrorNotification("Name should start with a capital letter")

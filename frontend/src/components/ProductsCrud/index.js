@@ -1,10 +1,10 @@
 import ToggleButton from "#components/ToggleButton"
 import styles from "#pages/Admin/admin.module.scss"
 import { useState } from "react"
-
 import CreateProductForm from "./CreateProductForm"
 import EditableProductData from "./EditableProductData"
 import GetAllProducts from "./GetAllProducts"
+
 const ProductsCrud = () => {
   const [showProductsSection, setShowProductsSection] = useState(false)
   const [showCreateProductForm, setShowCreateProductForm] = useState(false)

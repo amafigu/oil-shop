@@ -66,6 +66,33 @@ export const updateDataRequest = async (
   }
 }
 
+export const createDataRequest = async (dataObject, apiUrl, setMessage) => {
+  console.log("updateDataRequest -> dataObject", dataObject)
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}${apiUrl}`,
+      dataObject,
+      { withCredentials: true },
+    )
+    setMessage(`Item Created`)
+    setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+    return response
+  } catch (error) {
+    if (error.response && error.response.data) {
+      if (error.response.data.message) {
+        setMessage(`${error.response.data.message}`)
+        setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+      }
+
+      if (error.response.data.errors) {
+        setMessage(`${error.response.data.errors[0].message}`)
+        setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+      }
+    }
+    console.error(error)
+  }
+}
+
 export const saveDataAndToggleInput = async (
   e,
   asyncOnSaveFunction,
@@ -73,6 +100,48 @@ export const saveDataAndToggleInput = async (
 ) => {
   await asyncOnSaveFunction(e)
   setToggle(false)
+}
+
+export const createDataAndSetStates = async (
+  e,
+  dataApi,
+  dataObject,
+  setErrorMessage,
+) => {
+  e.preventDefault()
+  try {
+    const cleanedUpdatedData = dataObject
+
+    const validatedData = validateUserAndProductFieldsInDataObject(
+      cleanedUpdatedData,
+      setErrorMessage,
+    )
+
+    if (!validatedData) {
+      return
+    }
+
+    const dataRequest = await createDataRequest(
+      validatedData,
+      dataApi,
+      setErrorMessage,
+    )
+
+    if (dataRequest && dataRequest.status === 200) {
+      return dataRequest
+    }
+  } catch (error) {
+    console.error(error)
+    if (error.response && error.response.data.message) {
+      console.error(error.response.data.message)
+      setErrorMessage(`Error by updating data: ${error.response.data.message}`)
+      setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
+    } else {
+      console.error("me ", error)
+      setErrorMessage("Error by updating data")
+      setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
+    }
+  }
 }
 
 export const updateDataAndSetStates = async (
@@ -170,9 +239,15 @@ export const listenInputChangeAndSetDataObject = (
   updatedDataObj,
   setUpdatedDataObj,
 ) => {
-  console.log(e.target.name)
-  console.log(e.target.value)
-  console.log(updatedDataObj)
+  console.log("listenInputChangeAndSetDataObject e.target.name", e.target.name)
+  console.log(
+    "listenInputChangeAndSetDataObject e.target.value",
+    e.target.value,
+  )
+  console.log(
+    "listenInputChangeAndSetDataObject updatedDataObj",
+    updatedDataObj,
+  )
   setUpdatedDataObj({
     ...updatedDataObj,
     [e.target.name]: e.target.value,

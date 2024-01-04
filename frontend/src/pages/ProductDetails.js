@@ -1,7 +1,10 @@
 import AddProductToCartButton from "#components/AddProductToCartButton"
 import ProductQuantity from "#components/ProductQuantity"
 import useLocaleContext from "#context/localeContext"
-import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+import {
+  API_PRODUCTS_PRODUCT_GET_BY_NAME,
+  DEFAULT_PRODUCT_IMAGE,
+} from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import axios from "axios"
@@ -13,7 +16,6 @@ const ProductDetails = () => {
   const { productName } = useParams()
   const [product, setProduct] = useState(null)
   const [quantity, setQuantity] = useState(1)
-
   const { translate } = useLocaleContext()
   const text = translate.pages.productsDetails
 
@@ -23,7 +25,7 @@ const ProductDetails = () => {
     const getProduct = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/products/${productName}`,
+          `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_GET_BY_NAME}/${productName}`,
         )
 
         setProduct(response.data)

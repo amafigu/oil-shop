@@ -6,20 +6,35 @@ import styles from "./appRoutes.module.scss"
 import Footer from "#components/Footer"
 import Navbar from "#components/Navbar"
 import About from "#pages/About"
+import Admin from "#pages/Admin"
 import Cart from "#pages/Cart"
 import Faq from "#pages/Faq"
 import Home from "#pages/Home"
 import Login from "#pages/Login"
+import NotFound from "#pages/NotFound"
 import OrderSummary from "#pages/OrderSummary"
 import Payment from "#pages/Payment"
 import ProductDetails from "#pages/ProductDetails"
 import Shipping from "#pages/Shipping"
 import Shop from "#pages/Shop"
-import { API_PRODUCT_CATEGORIES } from "#utils/constants"
-import Admin from "./pages/Admin"
-import NotFound from "./pages/NotFound"
-import SignUp from "./pages/SignUp"
-import User from "./pages/User"
+import SignUp from "#pages/SignUp"
+import User from "#pages/User"
+import {
+  API_PRODUCT_CATEGORIES,
+  ROUTES_ABOUT,
+  ROUTES_CART,
+  ROUTES_CHECKOUT_ORDER_SUMMARY,
+  ROUTES_CHECKOUT_PAYMENT,
+  ROUTES_CHECKOUT_SHIPPING,
+  ROUTES_CURRENT_ADMIN,
+  ROUTES_CURRENT_CUSTOMER,
+  ROUTES_FAQ,
+  ROUTES_HOME,
+  ROUTES_LOGIN,
+  ROUTES_PRODUCTS,
+  ROUTES_SHOP,
+  ROUTES_SIGN_UP,
+} from "#utils/constants"
 
 const AppRoutes = () => {
   const [productCategories, setProductCategories] = useState([])
@@ -37,7 +52,7 @@ const AppRoutes = () => {
   const location = useLocation()
   const currentPath = location.pathname
 
-  const routesWithoutNavbar = ["/login", "/sign-up"]
+  const routesWithoutNavbar = [ROUTES_LOGIN, ROUTES_SIGN_UP]
 
   return (
     <div className={styles.wrapper}>
@@ -46,23 +61,29 @@ const AppRoutes = () => {
       )}
 
       <Routes>
-        <Route path='/about' element={<About />} />
+        <Route path={`${ROUTES_ABOUT}`} element={<About />} />
         <Route
-          path='/shop'
+          path={`${ROUTES_SHOP}`}
           element={<Shop productCategories={productCategories} />}
         />
 
-        <Route path='/' element={<Home />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/faq' element={<Faq />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/sign-up' element={<SignUp />} />
-        <Route path='/users/current-customer' element={<User />} />
-        <Route path='/users/current-admin' element={<Admin />} />
-        <Route path='/products/:productName' element={<ProductDetails />} />
-        <Route path='/checkout/shipping' element={<Shipping />} />
-        <Route path='/checkout/payment' element={<Payment />} />
-        <Route path='/checkout/order-summary' element={<OrderSummary />} />
+        <Route path={`${ROUTES_HOME}`} element={<Home />} />
+        <Route path={`${ROUTES_CART}`} element={<Cart />} />
+        <Route path={`${ROUTES_FAQ}`} element={<Faq />} />
+        <Route path={`${ROUTES_LOGIN}`} element={<Login />} />
+        <Route path={`${ROUTES_SIGN_UP}`} element={<SignUp />} />
+        <Route path={`${ROUTES_CURRENT_CUSTOMER}`} element={<User />} />
+        <Route path={`${ROUTES_CURRENT_ADMIN}`} element={<Admin />} />
+        <Route
+          path={`${ROUTES_PRODUCTS}/:productName`}
+          element={<ProductDetails />}
+        />
+        <Route path={`${ROUTES_CHECKOUT_SHIPPING}`} element={<Shipping />} />
+        <Route path={`${ROUTES_CHECKOUT_PAYMENT}`} element={<Payment />} />
+        <Route
+          path={`${ROUTES_CHECKOUT_ORDER_SUMMARY}`}
+          element={<OrderSummary />}
+        />
         <Route path='*' element={<NotFound />} />
       </Routes>
 

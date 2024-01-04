@@ -26,15 +26,25 @@ export const API_VERIFY_TOKEN = "/users/verify-token"
 export const API_LOGIN = "/users/login"
 
 // ROUTES
-export const ROUTES_LOGIN = "/login"
-export const ROUTES_SIGN_UP = "/sign-up"
+export const ROUTES_ABOUT = "/about"
+export const ROUTES_CART = "/cart"
+export const ROUTES_CHECKOUT_ORDER_SUMMARY = "/checkout/order-summary"
+export const ROUTES_CHECKOUT_SHIPPING = "/checkout/shipping"
+export const ROUTES_CHECKOUT_PAYMENT = "/checkout/payment"
 export const ROUTES_CURRENT_CUSTOMER = "/users/current-customer"
 export const ROUTES_CURRENT_ADMIN = "/users/current-admin"
+export const ROUTES_FAQ = "/faq"
+export const ROUTES_HOME = "/"
+export const ROUTES_LOGIN = "/login"
+export const ROUTES_PRODUCTS = "/products"
+export const ROUTES_SIGN_UP = "/sign-up"
+export const ROUTES_SHOP = "/shop"
 
 // TIME CONSTANTS
 export const SHORT_MESSAGE_TIMEOUT = 3000
 export const REDIRECT_TIMEOUT = 1000
 
+// INPUTS CONSTANTS
 export const FORM_FIELDS_GUEST_USER_DATA = [
   {
     name: "firstName",
