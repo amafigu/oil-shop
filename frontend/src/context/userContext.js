@@ -1,11 +1,6 @@
-import {
-  API_USERS_CURRENT_USER,
-  API_VERIFY_TOKEN,
-  ROUTES_LOGIN,
-} from "#utils/constants"
+import { API_USERS_CURRENT_USER, API_VERIFY_TOKEN } from "#utils/constants"
 import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
@@ -14,8 +9,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({})
   const [userEmail, setUserEmail] = useState("")
   const [userId, setUserId] = useState({})
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -43,7 +36,6 @@ export const UserProvider = ({ children }) => {
         }
       } catch (error) {
         setUserEmail("")
-        navigate(ROUTES_LOGIN)
       }
     }
 

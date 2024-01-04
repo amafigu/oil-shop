@@ -18,8 +18,6 @@ export const updateDataAndSetStates = async (
     [propertyName]: updatedData[propertyName],
   }))
 
-  console.log("updatedData", updatedData)
-
   return {
     status: 200,
     data: {

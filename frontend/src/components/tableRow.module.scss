@@ -9,7 +9,7 @@
   padding: 10px;
   margin-left: theme.$spacing-extra-large;
   overflow-x: auto;
-  background-color: theme.$background-color-form-primary;
+  background-color: theme.$background-color-form-secondary;
   border-radius: theme.$border-radius-large;
 
   @include media.mobile {

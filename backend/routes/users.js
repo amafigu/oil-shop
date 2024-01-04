@@ -181,7 +181,7 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
         id: user.id,
       },
       process.env.JWT_KEY,
-      { expiresIn: '3600000' } // 1 hour
+      { expiresIn: '7200000' } // 2 hours
     );
 
     const isSecure = process.env.IS_SECURE;

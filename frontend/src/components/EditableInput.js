@@ -17,9 +17,6 @@ const EditableInput = ({
   const { translate } = useLocaleContext()
   const textButtons = translate.components.crud.buttons
   const textProperties = translate.components.crud.forms.commonProperties
-  console.log("EditableInput -> originalPropertyData", originalPropertyData)
-  console.log("EditableInput -> updatedPropertyData", updatedPropertyData)
-  console.log(isEditing)
 
   return (
     <div className={styles.itemRow}>
