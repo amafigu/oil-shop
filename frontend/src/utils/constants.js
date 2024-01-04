@@ -12,6 +12,10 @@ export const DEFAULT_USER_IMAGE =
 
 // API
 export const API_PRODUCTS = "/products"
+export const API_PRODUCT_CATEGORIES = "/product-categories"
+export const API_PRODUCTS_PRODUCT = "/products/product"
+export const API_PRODUCTS_PRODUCT_CREATE = "/products/product/create"
+export const API_PRODUCTS_PRODUCT_GET_BY_NAME = "/products/product/get-by-name"
 
 export const API_USERS_CURRENT_USER = "/users/current-user"
 export const API_USERS_USER = "/users/user"
@@ -23,6 +27,7 @@ export const API_LOGIN = "/users/login"
 
 // ROUTES
 export const ROUTES_LOGIN = "/login"
+export const ROUTES_SIGN_UP = "/sign-up"
 export const ROUTES_CURRENT_CUSTOMER = "/users/current-customer"
 export const ROUTES_CURRENT_ADMIN = "/users/current-admin"
 

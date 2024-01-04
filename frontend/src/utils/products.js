@@ -1,10 +1,11 @@
+import { API_PRODUCTS_PRODUCT_GET_BY_NAME } from "#utils/constants"
 import axios from "axios"
 import { useEffect } from "react"
 
 export const getProductByName = async (name) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/products/${name}`,
+      `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_GET_BY_NAME}/${name}`,
     )
     console.log("getProductByName -> response", response)
     return response.data

@@ -42,6 +42,7 @@ export const updateDataRequest = async (
   apiUrl,
   setErrorMessage,
 ) => {
+  console.log("updateDataRequest -> dataId type", typeof dataId)
   try {
     const response = await axios.put(
       `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,

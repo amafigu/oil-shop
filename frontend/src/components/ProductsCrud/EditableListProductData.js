@@ -2,7 +2,11 @@ import EditableImageInput from "#components/EditableImageInput"
 import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import { API_PRODUCTS, DEFAULT_PRODUCT_IMAGE, STYLES } from "#utils/constants"
+import {
+  API_PRODUCTS_PRODUCT,
+  DEFAULT_PRODUCT_IMAGE,
+  STYLES,
+} from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
@@ -66,8 +70,8 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
     const updatedData = await updateDataAndSetStates(
       e,
       propertyName,
-      nonUpdatedProductData.name,
-      API_PRODUCTS,
+      product.id,
+      API_PRODUCTS_PRODUCT,
       setNonUpdatedProductData,
       updatedProductDataWithImage,
       setUpdatedProductData,
@@ -83,27 +87,27 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
     setFile(e.target.files[0])
   }
 
-  const deleteProductAndUpdateState = async (productName) => {
+  const deleteProductAndUpdateState = async (id) => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}${API_PRODUCTS}/${productName.trim()}`,
+        `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT}/${id}`,
         {
           withCredentials: true,
         },
       )
-      setNotification(`${productName} deleted`)
+      setNotification(`Product deleted`)
       setTimeout(() => setNotification(null), 2000)
       setTimeout(
         () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
         2300,
       )
     } catch (error) {
-      setNotification(`${productName} not deleted`)
+      setNotification(`Product not deleted`)
       setTimeout(() => setNotification(null), 3000)
       console.error("Can not delete product", error)
     }
   }
-
+  console.log(product)
   return (
     <>
       <div className={styles.editableProductDataWrapper}>
@@ -126,7 +130,7 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
             className={styles.formButton}
             onClick={() =>
               deleteProductAndUpdateState(
-                product.name,
+                product.id,
                 setNotification,
                 textAdminCrud.users.deletedByEmail,
                 textAdminCrud.users.deleteError,

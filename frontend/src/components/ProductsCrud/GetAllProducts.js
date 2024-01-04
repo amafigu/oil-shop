@@ -1,5 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
+import { API_PRODUCTS } from "#utils/constants"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import EditableListProductData from "./EditableListProductData"
@@ -16,7 +17,7 @@ const GetAllProducts = ({
   const getAllProducts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/products/`,
+        `${process.env.REACT_APP_API_URL}${API_PRODUCTS}/`,
         { withCredentials: true },
       )
 
@@ -25,6 +26,7 @@ const GetAllProducts = ({
         updated: false,
       }))
       setProductsData(productObjects)
+      console.warn("products", productObjects)
     } catch (error) {
       setNotification("Can not get all products")
     }
@@ -37,6 +39,8 @@ const GetAllProducts = ({
   const showProductsListAndGetData = (bool) => {
     setShowProducts(bool)
   }
+
+  console.warn(refreshAllProductsCounter)
 
   return (
     <div className={styles.getAllUsersWrapper}>

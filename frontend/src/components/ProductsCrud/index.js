@@ -1,5 +1,4 @@
 import ToggleButton from "#components/ToggleButton"
-import useLocaleContext from "#context/localeContext"
 import styles from "#pages/Admin/admin.module.scss"
 import { useState } from "react"
 
@@ -11,10 +10,6 @@ const ProductsCrud = () => {
   const [showCreateProductForm, setShowCreateProductForm] = useState(false)
   const [refreshAllProductsCounter, setRefreshAllProductsCounter] = useState(0)
 
-  const { translate } = useLocaleContext()
-
-  const toggleButtonText =
-    translate.components.crud.forms.toggleUsersCrudOptions
   return (
     <div className={styles.productsCrudContainer}>
       <ToggleButton
@@ -28,15 +23,18 @@ const ProductsCrud = () => {
         <div className={styles.formsContainerWrapper}>
           <div className={styles.formsContainer}>
             <div className={styles.crudContainer}>
-              <EditableProductData />
-            </div>
-
-            <div className={styles.crudContainer}>
               <GetAllProducts
                 refreshAllProductsCounter={refreshAllProductsCounter}
                 setRefreshAllProductsCounter={setRefreshAllProductsCounter}
               />
             </div>
+            <div className={styles.crudContainer}>
+              <EditableProductData
+                refreshAllProductsCounter={refreshAllProductsCounter}
+                setRefreshAllProductsCounter={setRefreshAllProductsCounter}
+              />
+            </div>
+
             <div className={styles.crudContainer}>
               <ToggleButton
                 show={showCreateProductForm}
@@ -45,7 +43,11 @@ const ProductsCrud = () => {
                 textShow={"CREATE PRODUCT"}
                 classCss='showHideButtons'
               />
-              {showCreateProductForm && <CreateProductForm />}
+              {showCreateProductForm && (
+                <CreateProductForm
+                  setRefreshAllProductsCounter={setRefreshAllProductsCounter}
+                />
+              )}
             </div>
           </div>
         </div>

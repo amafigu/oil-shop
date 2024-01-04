@@ -3,7 +3,12 @@ import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
-import { API_PRODUCTS, DEFAULT_PRODUCT_IMAGE, STYLES } from "#utils/constants"
+import {
+  API_PRODUCTS,
+  API_PRODUCTS_PRODUCT,
+  DEFAULT_PRODUCT_IMAGE,
+  STYLES,
+} from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
@@ -14,9 +19,10 @@ import axios from "axios"
 import { useState } from "react"
 import styles from "./editableProductData.module.scss"
 
-const EditableProductData = ({ setRefreshAllProductsCounter }) => {
-  const [showForm, setShowForm] = useState(false)
-
+const EditableProductData = ({
+  refreshAllProductsCounter,
+  setRefreshAllProductsCounter,
+}) => {
   const initialProductData = {
     name: "",
     description: "",
@@ -28,23 +34,23 @@ const EditableProductData = ({ setRefreshAllProductsCounter }) => {
   const [nonUpdatedProductData, setNonUpdatedProductData] = useState({
     ...initialProductData,
   })
-
   const [updatedProductData, setUpdatedProductData] = useState({
     ...initialProductData,
   })
-
-  const [showProductForm, setShowProductForm] = useState(false)
-  const [productName, setProductName] = useState("")
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const [productName, setProductName] = useState("")
+  const [showForm, setShowForm] = useState(false)
+  const [showProductForm, setShowProductForm] = useState(false)
 
+  const { translate } = useLocaleContext()
   const textAdminCrud = translate.pages.admin.crud
   const buttonsText = translate.components
 
   console.log(Object.keys(initialProductData))
   console.log(nonUpdatedProductData)
   console.log(updatedProductData)
+
   const updateProductDataAndSetStates = async (e, propertyName) => {
     let image = ""
 
@@ -64,8 +70,8 @@ const EditableProductData = ({ setRefreshAllProductsCounter }) => {
     const updatedData = await updateDataAndSetStates(
       e,
       propertyName,
-      nonUpdatedProductData.name,
-      API_PRODUCTS,
+      nonUpdatedProductData.id,
+      API_PRODUCTS_PRODUCT,
       setNonUpdatedProductData,
       updatedProductDataWithImage,
       setUpdatedProductData,
@@ -75,6 +81,10 @@ const EditableProductData = ({ setRefreshAllProductsCounter }) => {
       return
     }
     setUpdatedProductData(updatedData.data.product)
+    setTimeout(
+      () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
+      2300,
+    )
   }
 
   const setFileToUpload = (e) => {

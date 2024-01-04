@@ -24,8 +24,8 @@ const UpdateProductSchema = z.object({
   price: z.number().optional(),
 });
 
-const ProductNameParamSchema = z.object({
-  productName: z.string(),
+const ProductIdParamSchema = z.object({
+  id: z.string(),
 });
 
 const ProductCategorySchema = z.object({
@@ -35,6 +35,6 @@ const ProductCategorySchema = z.object({
 export {
   CreateProductSchema,
   ProductCategorySchema,
-  ProductNameParamSchema,
+  ProductIdParamSchema,
   UpdateProductSchema,
 };
