@@ -11,6 +11,8 @@ export const DEFAULT_USER_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default_user.png"
 
 // API
+export const API_PRODUCTS = "/products"
+
 export const API_USERS_CURRENT_USER = "/users/current-user"
 export const API_USERS_USER = "/users/user"
 export const API_USER_ROLE = "/users/user/role"

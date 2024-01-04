@@ -86,6 +86,9 @@ export const updateDataAndSetStates = async (
 ) => {
   e.preventDefault()
 
+  console.log("updateDataAndSetStates -> propertyName", propertyName)
+  console.log("updateDataAndSetStates -> dataApi", dataApi)
+  console.log("updateDataAndSetStates -> updatedData", updatedData)
   try {
     const cleanedUpdatedData = ignoreUnsavedProperties(
       updatedData,
@@ -170,6 +173,9 @@ export const listenInputChangeAndSetDataObject = (
   updatedDataObj,
   setUpdatedDataObj,
 ) => {
+  console.log(e.target.name)
+  console.log(e.target.value)
+  console.log(updatedDataObj)
   setUpdatedDataObj({
     ...updatedDataObj,
     [e.target.name]: e.target.value,

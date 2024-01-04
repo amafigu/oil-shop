@@ -24,7 +24,11 @@
           "create": "Produkt erstellen",
           "delete": "Produkt löschen",
           "edit": "Produkt editieren",
-          "getByName": "Produkt per Name finden",
+          "getByName": {
+            "show": "Produkt per Name finden",
+            "hide": "Ausblenden"
+          },
+
           "getByNameAndQuantity": ""
         }
       },
@@ -273,7 +277,19 @@
       "createUser": {
         "success": "Benutzer wurde erfolgreich erstellt",
         "submitButton": "Konto erstellen",
-        "emailInUseErrorMessage": "E-Mail bereits registriert"
+        "emailInUseErrorMessage": "E-Mail bereits registriert",
+        "hideForm": "Hide create user form",
+        "showForm": "Show create user form"
+      },
+      "deleteProduct": {
+        "button": "Produkt löschen",
+        "error": "Das folgende Produkt kann nicht gelöscht werden: ",
+        "deletedByName": "wurde erfolgreich gelöscht"
+      },
+      "getProduct": {
+        "button": "Produkt Daten anzeigen",
+        "error": "Das folgende Produkt kann nicht gefunden werden: ",
+        "getByName": "Produkt per Name Daten anzeigen"
       },
       "getAllProducts": {
         "showButton": "Alle Produkte anzeigen",

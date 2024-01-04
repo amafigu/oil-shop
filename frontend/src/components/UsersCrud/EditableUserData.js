@@ -1,5 +1,5 @@
 import EditableImageInput from "#components/EditableImageInput"
-import EditableAndDeletableInput from "#components/EditableInput"
+import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
@@ -31,6 +31,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
     ...initialUserData,
   })
 
+  const [showUserForm, setShowUserForm] = useState(false)
   const [email, setEmail] = useState("")
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
@@ -77,6 +78,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
       return
     }
     setNonUpdatedUserData(user)
+    setShowUserForm(true)
   }
 
   const deleteUserAndUpdateState = async (userEmail) => {
@@ -92,6 +94,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
       )
       setNonUpdatedUserData({ ...initialUserData })
       setEmail("")
+      setShowUserForm(false)
       setTimeout(() => setNotification(null), 2000)
       setTimeout(
         () => setRefreshAllUsersCounter((prevCounter) => prevCounter + 1),
@@ -105,7 +108,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
   }
   return (
     <>
-      <div>
+      <div className={styles.editableUserDataWrapper}>
         {notification && <NotificationCard message={notification} />}
         <ToggleButton
           show={showForm}
@@ -130,17 +133,20 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
                   />
                 </div>
               )}
-              <input
-                className={styles[STYLES.FORMS.FIELD_SEARCH_INPUT]}
-                onChange={(e) => setEmail(e.target.value)}
-                type='text'
-              ></input>
-              <button
-                className={styles.formButton}
-                onClick={() => searchUser(email)}
-              >
-                {buttonsText.crud.getUser.getByEmail}
-              </button>
+              <div className={styles.inputAndSearchButtonContainer}>
+                <input
+                  className={styles[STYLES.FORMS.FIELD_SEARCH_INPUT]}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type='text'
+                ></input>
+                <button
+                  className={styles.formButton}
+                  onClick={() => searchUser(email)}
+                >
+                  {buttonsText.crud.getUser.getByEmail}
+                </button>
+              </div>
+
               <button
                 className={styles.formButton}
                 onClick={() =>
@@ -155,43 +161,43 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
                 {buttonsText.crud.deleteUser.button}
               </button>
             </div>
-
-            {Object.keys(initialUserData).map((key) =>
-              key !== "image" ? (
-                <div className={styles.inputContainer} key={key}>
-                  <EditableAndDeletableInput
-                    label={key}
-                    name={key}
-                    value={updatedUserData[key]}
-                    onChange={(e) =>
-                      listenInputChangeAndSetDataObject(
-                        e,
-                        updatedUserData,
-                        setUpdatedUserData,
-                        setNotification,
-                      )
-                    }
-                    onSave={(e) => updateUserDataAndSetStates(e, key)}
-                    classCss={STYLES.FORMS.FIELD}
-                    originalPropertyData={nonUpdatedUserData}
-                    updatedPropertyData={updatedUserData}
-                  />
-                </div>
-              ) : (
-                <div className={styles.inputContainer}>
-                  <EditableImageInput
-                    label={key}
-                    name={key}
-                    onChange={(e) => {
-                      setFileToUpload(e)
-                    }}
-                    classCss={STYLES.FORMS.ITEM_ROW}
-                    file={file}
-                    onSave={(e) => updateUserDataAndSetStates(e, key)}
-                  />
-                </div>
-              ),
-            )}
+            {showUserForm &&
+              Object.keys(initialUserData).map((key) =>
+                key !== "image" ? (
+                  <div className={styles.inputContainer} key={key}>
+                    <EditableInput
+                      label={key}
+                      name={key}
+                      value={updatedUserData[key]}
+                      onChange={(e) =>
+                        listenInputChangeAndSetDataObject(
+                          e,
+                          updatedUserData,
+                          setUpdatedUserData,
+                          setNotification,
+                        )
+                      }
+                      onSave={(e) => updateUserDataAndSetStates(e, key)}
+                      classCss={STYLES.FORMS.FIELD}
+                      originalPropertyData={nonUpdatedUserData}
+                      updatedPropertyData={updatedUserData}
+                    />
+                  </div>
+                ) : (
+                  <div className={styles.inputContainer}>
+                    <EditableImageInput
+                      label={key}
+                      name={key}
+                      onChange={(e) => {
+                        setFileToUpload(e)
+                      }}
+                      classCss={STYLES.FORMS.ITEM_ROW}
+                      file={file}
+                      onSave={(e) => updateUserDataAndSetStates(e, key)}
+                    />
+                  </div>
+                ),
+              )}
           </div>
         )}
       </div>
