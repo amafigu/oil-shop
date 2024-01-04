@@ -39,7 +39,6 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
 
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const [productName, setProductName] = useState("")
   const { translate } = useLocaleContext()
 
   const textAdminCrud = translate.pages.admin.crud
@@ -109,40 +108,40 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
     <>
       <div className={styles.editableProductDataWrapper}>
         {notification && <NotificationCard message={notification} />}
+        <div className={styles.imageAndButtonContainer}>
+          {nonUpdatedProductData !== initialProductData && (
+            <div className={styles.imageContainer}>
+              <img
+                className={styles.image}
+                src={
+                  !nonUpdatedProductData.image
+                    ? DEFAULT_PRODUCT_IMAGE
+                    : nonUpdatedProductData.image
+                }
+                alt='product'
+              />
+            </div>
+          )}
+          <button
+            className={styles.formButton}
+            onClick={() =>
+              deleteProductAndUpdateState(
+                product.name,
+                setNotification,
+                textAdminCrud.users.deletedByEmail,
+                textAdminCrud.users.deleteError,
+              )
+            }
+          >
+            {buttonsText.crud.deleteProduct.button}
+          </button>
+        </div>
 
         <div className={styles.formContainer}>
-          <div className={styles.imageAndInputContainer}>
-            {nonUpdatedProductData !== initialProductData && (
-              <div className={styles.imageContainer}>
-                <img
-                  className={styles.image}
-                  src={
-                    !nonUpdatedProductData.image
-                      ? DEFAULT_PRODUCT_IMAGE
-                      : nonUpdatedProductData.image
-                  }
-                  alt='product'
-                />
-              </div>
-            )}
-            <button
-              className={styles.formButton}
-              onClick={() =>
-                deleteProductAndUpdateState(
-                  productName,
-                  setNotification,
-                  textAdminCrud.users.deletedByEmail,
-                  textAdminCrud.users.deleteError,
-                )
-              }
-            >
-              {buttonsText.crud.deleteProduct.button}
-            </button>
-          </div>
           {Object.keys(initialProductData).map((key) =>
             key !== "image" ? (
               <div className={styles.inputContainer} key={key}>
-                {updatedProductData[key] && (
+                {updatedProductData[key] !== undefined && (
                   <EditableInput
                     label={key}
                     name={key}

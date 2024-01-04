@@ -2,7 +2,7 @@ import { SHORT_MESSAGE_TIMEOUT } from "#utils/constants"
 import axios from "axios"
 import {
   ignoreUnsavedProperties,
-  validateUserFieldsInDataObject,
+  validateUserAndProductFieldsInDataObject,
 } from "./validation"
 
 export const getDataAndSetErrorMessage = async (
@@ -42,17 +42,9 @@ export const updateDataRequest = async (
   apiUrl,
   setErrorMessage,
 ) => {
-  let id
-  if (typeof dataId === "number") {
-    const str = String(dataId).trim()
-    id = Number(str)
-  } else if (typeof dataId === "string") {
-    id = dataId.trim()
-  }
-
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}${apiUrl}/${id}`,
+      `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,
       updatedData,
       { withCredentials: true },
     )
@@ -93,17 +85,13 @@ export const updateDataAndSetStates = async (
   setErrorMessage,
 ) => {
   e.preventDefault()
-
-  console.log("updateDataAndSetStates -> propertyName", propertyName)
-  console.log("updateDataAndSetStates -> dataApi", dataApi)
-  console.log("updateDataAndSetStates -> updatedData", updatedData)
   try {
     const cleanedUpdatedData = ignoreUnsavedProperties(
       updatedData,
       propertyName,
     )
 
-    const validatedData = validateUserFieldsInDataObject(
+    const validatedData = validateUserAndProductFieldsInDataObject(
       cleanedUpdatedData,
       setErrorMessage,
     )

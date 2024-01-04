@@ -1,16 +1,35 @@
-export const validateUserFieldsInDataObject = (
+export const validateUserAndProductFieldsInDataObject = (
   dataObject,
   setErrorNotification,
 ) => {
   for (let property in dataObject) {
     const propertyValueLength = dataObject[property].length
-    const propertyValue = dataObject[property]
+    let propertyValue = dataObject[property]
 
     if (propertyValue === "" || propertyValue === undefined) {
       setErrorNotification("No changes made.")
       setTimeout(() => setErrorNotification(null), 2000)
       return
     }
+
+    if (property === "price") {
+      propertyValue = propertyValue.trim()
+      propertyValue = Number(propertyValue).toFixed(2)
+      propertyValue = Number(propertyValue)
+      dataObject[property] = propertyValue
+    }
+
+    if (property === "size") {
+      propertyValue = propertyValue.toString().trim()
+      propertyValue = Number(propertyValue)
+      dataObject[property] = propertyValue
+    }
+    //product name
+    if (property === "name") {
+      propertyValue = propertyValue.toString().trim()
+      dataObject[property] = propertyValue
+    }
+
     if (property === "firstName" || property === "lastName") {
       if (!/^[A-Z]/.test(propertyValue)) {
         setErrorNotification("Name should start with a capital letter")
@@ -38,6 +57,7 @@ export const validateUserFieldsInDataObject = (
         setTimeout(() => setErrorNotification(null), 3000)
         return
       }
+
       if (propertyValueLength > 40) {
         console.error("Email can't be longer than 40 characters.")
         setErrorNotification("Email can't be longer than 40 characters.")
@@ -68,6 +88,10 @@ export const validateUserFieldsInDataObject = (
       }
     }
   }
+  for (let property in dataObject) {
+    console.log(`Type of ${property}: ${typeof dataObject[property]}`)
+  }
+  console.log("dataObject ", dataObject)
   return dataObject
 }
 

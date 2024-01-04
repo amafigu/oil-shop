@@ -178,7 +178,7 @@ const EditableProductData = ({ setRefreshAllProductsCounter }) => {
               Object.keys(initialProductData).map((key) =>
                 key !== "image" ? (
                   <div className={styles.inputContainer} key={key}>
-                    {updatedProductData[key] && (
+                    {updatedProductData[key] !== undefined && (
                       <EditableInput
                         label={key}
                         name={key}

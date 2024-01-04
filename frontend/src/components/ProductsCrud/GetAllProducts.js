@@ -10,7 +10,7 @@ const GetAllProducts = ({
   setRefreshAllProductsCounter,
 }) => {
   const [notification, setNotification] = useState()
-  const [showUsers, setShowUsers] = useState(false)
+  const [showProducts, setShowProducts] = useState(false)
   const [productsData, setProductsData] = useState([])
 
   const getAllProducts = async () => {
@@ -34,8 +34,8 @@ const GetAllProducts = ({
     getAllProducts()
   }, [refreshAllProductsCounter])
 
-  const showUserListAndGetData = (bool) => {
-    setShowUsers(bool)
+  const showProductsListAndGetData = (bool) => {
+    setShowProducts(bool)
   }
 
   return (
@@ -44,15 +44,15 @@ const GetAllProducts = ({
 
       <div className={styles.showHideButtonsContainer}>
         <ToggleButton
-          show={showUsers}
-          setToggle={showUserListAndGetData}
-          textHide='HIDE ALL USERS'
-          textShow='GET ALL USERS'
+          show={showProducts}
+          setToggle={showProductsListAndGetData}
+          textHide='HIDE ALL PRODCUTS'
+          textShow='GET ALL PRODUCT'
           classCss='showHideButtons'
         />
       </div>
       {
-        <div className={showUsers ? `${styles.show}` : `${styles.hide}`}>
+        <div className={showProducts ? `${styles.show}` : `${styles.hide}`}>
           {productsData &&
             productsData.map((product) => (
               <div className={styles.itemRow} key={product.id}>
