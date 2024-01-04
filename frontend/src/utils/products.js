@@ -7,7 +7,7 @@ export const getProductByName = async (name) => {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_GET_BY_NAME}/${name}`,
     )
-    console.log("getProductByName -> response", response)
+
     return response.data
   } catch (error) {
     console.error("Error geting product by name", error)

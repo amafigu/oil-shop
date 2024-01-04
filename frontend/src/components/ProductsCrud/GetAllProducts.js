@@ -26,7 +26,6 @@ const GetAllProducts = ({
         updated: false,
       }))
       setProductsData(productObjects)
-      console.warn("products", productObjects)
     } catch (error) {
       setNotification("Can not get all products")
     }
@@ -39,8 +38,6 @@ const GetAllProducts = ({
   const showProductsListAndGetData = (bool) => {
     setShowProducts(bool)
   }
-
-  console.warn(refreshAllProductsCounter)
 
   return (
     <div className={styles.getAllUsersWrapper}>

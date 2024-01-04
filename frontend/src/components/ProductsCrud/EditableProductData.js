@@ -47,10 +47,6 @@ const EditableProductData = ({
   const textAdminCrud = translate.pages.admin.crud
   const buttonsText = translate.components
 
-  console.log(Object.keys(initialProductData))
-  console.log(nonUpdatedProductData)
-  console.log(updatedProductData)
-
   const updateProductDataAndSetStates = async (e, propertyName) => {
     let image = ""
 
@@ -58,12 +54,6 @@ const EditableProductData = ({
       image = await uploadToS3(file)
     }
 
-    console.log(
-      "updateProductDataAndSetStates -> updatedProductData",
-      updatedProductData,
-    )
-
-    console.log("updateProductDataAndSetStates -> propertyName", propertyName)
     let updatedProductDataWithImage = { ...updatedProductData, image }
     setUpdatedProductData(updatedProductDataWithImage)
 
@@ -92,9 +82,7 @@ const EditableProductData = ({
   }
 
   const searchProduct = async (name) => {
-    console.log("searchProduct -> name", name)
     const product = await getProductByName(name.trim())
-    console.log("searchProduct -> product", product)
 
     if (!product) {
       setNotification("Product not found")

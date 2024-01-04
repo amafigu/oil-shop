@@ -57,9 +57,7 @@ const CreateUserForm = ({
         `${process.env.REACT_APP_API_URL}${API_USERS_CREATE}`,
         newUser,
       )
-      console.log("newUserResponse", newUserResponse)
       if (newUserResponse && currentPath.includes("/current-admin")) {
-        console.log("newUsssss")
         setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
         setNotification("user created")
         setTimeout(() => setNotification(null), 3000)

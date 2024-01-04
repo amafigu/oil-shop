@@ -88,10 +88,7 @@ export const validateUserAndProductFieldsInDataObject = (
       }
     }
   }
-  for (let property in dataObject) {
-    console.log(`Type of ${property}: ${typeof dataObject[property]}`)
-  }
-  console.log("dataObject ", dataObject)
+
   return dataObject
 }
 

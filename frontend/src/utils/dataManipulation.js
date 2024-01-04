@@ -42,7 +42,6 @@ export const updateDataRequest = async (
   apiUrl,
   setErrorMessage,
 ) => {
-  console.log("updateDataRequest -> dataId type", typeof dataId)
   try {
     const response = await axios.put(
       `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,
@@ -67,7 +66,6 @@ export const updateDataRequest = async (
 }
 
 export const createDataRequest = async (dataObject, apiUrl, setMessage) => {
-  console.log("updateDataRequest -> dataObject", dataObject)
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}${apiUrl}`,
@@ -239,15 +237,6 @@ export const listenInputChangeAndSetDataObject = (
   updatedDataObj,
   setUpdatedDataObj,
 ) => {
-  console.log("listenInputChangeAndSetDataObject e.target.name", e.target.name)
-  console.log(
-    "listenInputChangeAndSetDataObject e.target.value",
-    e.target.value,
-  )
-  console.log(
-    "listenInputChangeAndSetDataObject updatedDataObj",
-    updatedDataObj,
-  )
   setUpdatedDataObj({
     ...updatedDataObj,
     [e.target.name]: e.target.value,

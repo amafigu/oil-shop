@@ -48,9 +48,6 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
   const textAdminCrud = translate.pages.admin.crud
   const buttonsText = translate.components
 
-  console.log(Object.keys(initialProductData))
-  console.log(nonUpdatedProductData)
-  console.log(updatedProductData)
   const updateProductDataAndSetStates = async (e, propertyName) => {
     let image = ""
 
@@ -58,12 +55,6 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
       image = await uploadToS3(file)
     }
 
-    console.log(
-      "updateProductDataAndSetStates -> updatedProductData",
-      updatedProductData,
-    )
-
-    console.log("updateProductDataAndSetStates -> propertyName", propertyName)
     let updatedProductDataWithImage = { ...updatedProductData, image }
     setUpdatedProductData(updatedProductDataWithImage)
 
@@ -107,7 +98,6 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
       console.error("Can not delete product", error)
     }
   }
-  console.log(product)
   return (
     <>
       <div className={styles.editableProductDataWrapper}>
