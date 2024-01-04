@@ -70,7 +70,7 @@
     @include flex-all-center;
 
     height: 9rem;
-    font-size: 20px;
+    font-size: theme.$spacing-semi-regular-large;
   }
 
   .imagesAndDetails {
@@ -170,13 +170,14 @@
   }
 
   .orderSummaryText {
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: theme.$spacing-semi-regular-large;
+    font-size: theme.$spacing-semi-regular-large;
     font-weight: theme.$font-weight-bold;
     text-transform: uppercase;
 
     @include media.desktop-down {
-      padding: 20px 0 0 20px;
+      padding: theme.$spacing-semi-regular-large 0 0
+        theme.$spacing-semi-regular-large;
     }
   }
 
@@ -188,7 +189,7 @@
     margin-bottom: 40px;
 
     @include media.desktop-down {
-      padding: 0 20px;
+      padding: 0 theme.$spacing-semi-regular-large;
     }
   }
 
@@ -211,7 +212,7 @@
     .deleteButton {
       width: 96px;
       height: 60px;
-      margin-right: 20px;
+      margin-right: theme.$spacing-semi-regular-large;
       cursor: pointer;
 
       @include flex-all-center;

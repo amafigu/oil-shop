@@ -69,7 +69,7 @@
 @mixin product-card-name {
   margin: 0;
   font-family: theme.$font-family-primary;
-  font-size: 1.125rem;
+  font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-semibold;
   color: theme.$font-color-light;
   text-align: center;
@@ -92,7 +92,7 @@
   cursor: pointer;
   background-color: theme.$color-branding-primary;
   border: none;
-  border-radius: 4px;
+  border-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
 }
 
@@ -117,10 +117,10 @@
 }
 
 @mixin shipping-info-cell {
-  display: flex;
-  flex-direction: column;
   width: 50%;
-  margin-bottom: 20px;
+  margin-bottom: theme.$spacing-semi-regular-large;
+
+  @include flex-column;
 }
 
 @mixin z-index($key) {
@@ -130,18 +130,18 @@
 @mixin newsleter-input-and-button-wrapper {
   width: 30%;
   padding: 10px;
-  font-size: 16px;
-  color: #fff;
+  font-size: theme.$font-size-medium;
+  color: theme.$font-color-primary;
   text-align: center;
   cursor: pointer;
-  background-color: #333;
+  background-color: theme.$background-color-secondary-button;
   border: none;
-  border-radius: 5px;
+  border-radius: theme.$border-radius-small;
 }
 
 @mixin menu-list-cell {
   width: 100%;
-  padding: 20px;
+  padding: theme.$spacing-semi-regular-large;
   font-size: 16px;
   line-height: 1.3em;
   text-transform: uppercase;
@@ -153,7 +153,7 @@
   align-items: center;
   width: 90%;
   height: 60px;
-  padding: 20px;
+  padding: theme.$spacing-semi-regular-large;
   margin: auto;
   font-size: 16px;
   line-height: 1.3em;
@@ -222,7 +222,7 @@
 
 @mixin subtitle-text {
   font-family: theme.$font-family-primary;
-  font-size: 20px;
+  font-size: theme.$spacing-semi-regular-large;
   font-weight: theme.$font-weight-regular;
   line-height: 128%;
 }

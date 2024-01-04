@@ -11,8 +11,12 @@ $border-radius-circle: 50%;
 
 // COLOR
 $background-color-primary: #fff;
+$background-color-secondary: #f0f0f0;
 $background-color-form-primary: #f4f4f4;
 $background-color-form-secondary: #e9e9e9;
+$background-color-secondary-button: #333;
+$background-color-secondary-button-hover: #444;
+$border-color-custom-input: #ddd;
 $color-branding-primary: #b5cfaa;
 $font-color-primary: #686868;
 $font-color-light: #757575;
@@ -36,9 +40,13 @@ $font-weight-semibold: 600;
 $font-weight-bold: 800;
 
 // SPACING - MARGIN OR PADDING
-$spacing-regular: 1.5rem;
-$spacing-small: 0.7rem;
 $spacing-extra-large: 4.5rem;
+$spacing-large: 2.5rem;
+$spacing-semi-large: 2rem;
+$spacing-regular: 1.5rem;
+$spacing-semi-regular-large: 1.25rem;
+$spacing-semi-regular: 1rem;
+$spacing-small: 0.75rem;
 $margin-order-list: 2rem;
 $margin-order-list-mobile: 1.75rem;
 $margin-bottom-form-field: 0.75rem;

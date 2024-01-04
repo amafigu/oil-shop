@@ -10,6 +10,15 @@ import React from "react"
 import { Link } from "react-router-dom"
 import useLocaleContext from "../context/localeContext"
 
+import {
+  ROUTES_FAQ,
+  ROUTES_LOGIN,
+  ROUTES_SHOP,
+  ROUTES_SIGN_UP,
+  SOCIAL_MEDIA_URL_FACEBOOK,
+  SOCIAL_MEDIA_URL_INSTAGRAM,
+  SOCIAL_MEDIA_URL_YOUTUBE,
+} from "#utils/constants"
 import styles from "./footer.module.scss"
 
 const Footer = () => {
@@ -33,6 +42,7 @@ const Footer = () => {
                     <input
                       name='email'
                       type='email'
+                      className={styles.registrationEmailInput}
                       placeholder={text.newsletter.emailAddressPlaceholder}
                     />
                   </div>
@@ -74,13 +84,13 @@ const Footer = () => {
               </div>
               <div className={styles.columnsSectionItemLinks}>
                 <Link
-                  to='/shop'
+                  to={ROUTES_SHOP}
                   title={text.linksColumns.forClient.returnToShopTitle}
                 >
                   {text.linksColumns.forClient.returnToShop}
                 </Link>
 
-                <Link to='/faq' title='FAQ'>
+                <Link to={ROUTES_FAQ} title='FAQ'>
                   {text.linksColumns.forClient.faq}
                 </Link>
               </div>
@@ -91,11 +101,11 @@ const Footer = () => {
                 {text.linksColumns.users.title}
               </div>
               <div className={styles.columnsSectionItemLinks}>
-                <Link to='/login' title='account & login'>
+                <Link to={ROUTES_LOGIN} title='account & login'>
                   {text.linksColumns.users.accountAndLogin}
                 </Link>
 
-                <Link to='/registration' title='registration'>
+                <Link to={ROUTES_SIGN_UP} title='registration'>
                   {text.linksColumns.users.registration}
                 </Link>
               </div>
@@ -134,7 +144,7 @@ const Footer = () => {
 
               <div className={styles.iconsSectionItemIcons}>
                 <a
-                  href='https://www.facebook.com/'
+                  href={SOCIAL_MEDIA_URL_FACEBOOK}
                   target='_blank'
                   rel='noreferrer'
                   title={text.iconsColumns.socialMedia.facebook}
@@ -143,7 +153,7 @@ const Footer = () => {
                   <FontAwesomeIcon icon={faSquareFacebook} size='2xl' />
                 </a>
                 <a
-                  href='https://www.instagram.com/'
+                  href={SOCIAL_MEDIA_URL_INSTAGRAM}
                   target='_blank'
                   rel='noreferrer'
                   title={text.iconsColumns.socialMedia.instagram}
@@ -152,7 +162,7 @@ const Footer = () => {
                   <FontAwesomeIcon icon={faSquareInstagram} size='2xl' />
                 </a>
                 <a
-                  href='https://www.youtube.com/user/'
+                  href={SOCIAL_MEDIA_URL_YOUTUBE}
                   target='_blank'
                   rel='noreferrer'
                   title={text.iconsColumns.socialMedia.youtube}
