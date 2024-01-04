@@ -4,6 +4,8 @@
 
 .editableProductDataWrapper {
   @include input-container-spacing;
+
+  width: 100%;
 }
 
 .form {

@@ -42,9 +42,17 @@ export const updateDataRequest = async (
   apiUrl,
   setErrorMessage,
 ) => {
+  let id
+  if (typeof dataId === "number") {
+    const str = String(dataId).trim()
+    id = Number(str)
+  } else if (typeof dataId === "string") {
+    id = dataId.trim()
+  }
+
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,
+      `${process.env.REACT_APP_API_URL}${apiUrl}/${id}`,
       updatedData,
       { withCredentials: true },
     )
