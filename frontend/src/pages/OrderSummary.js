@@ -4,6 +4,7 @@ import useUserContext from "#context/userContext"
 import {
   API_SHIPPING_DATA,
   API_USERS_CURRENT_USER,
+  API_USERS_GUEST_BY_ID,
   DEFAULT_PRODUCT_IMAGE,
   LOCAL_STORAGE_GUEST_ID,
 } from "#utils/constants"
@@ -25,15 +26,21 @@ const OrderSummary = () => {
   const { isLoggedIn, userId, isLoading } = useUserContext()
 
   useEffect(() => {
-    const getShippingData = async () => {
+    const getSummaryData = async () => {
+      console.log("cart", cart)
+      console.log("!isLoading", !isLoading)
+      console.log("isLoggedIn", isLoggedIn)
+      console.log("isLoggedIn", isLoggedIn)
       try {
-        if (!isLoggedIn && !isLoading) {
+        if (!isLoggedIn) {
+          console.log("cart", cart)
           const guestId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
 
           const userData = await axios.get(
-            `${process.env.REACT_APP_API_URL}/users/guest/${guestId}`,
+            `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${guestId}`,
           )
           if (userData.status === 200) {
+            console.log("userData", userData.data)
             setUserData(userData.data)
           }
 
@@ -51,6 +58,7 @@ const OrderSummary = () => {
         }
 
         if (isLoggedIn && !isLoading) {
+          console.log(isLoggedIn)
           const userData = await axios.get(
             `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
             { withCredentials: true },
@@ -76,7 +84,7 @@ const OrderSummary = () => {
         console.error(error)
       }
     }
-    getShippingData()
+    getSummaryData()
   }, [cart, navigate, setShippingData, userId, isLoggedIn, isLoading])
 
   return (

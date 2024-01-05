@@ -20,6 +20,10 @@
     }
   }
 
+  .linkContent {
+    cursor: pointer;
+  }
+
   @include media.tablet {
     position: absolute;
     display: flex;

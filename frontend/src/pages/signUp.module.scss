@@ -2,12 +2,12 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.newUserPageWrapper {
+.signUpPageWrapper {
   @include flex-all-center;
 
   min-height: 80vh;
 
-  .newUserPage {
+  .signUpPage {
     width: 20%;
     min-width: 340px;
 
@@ -22,6 +22,10 @@
     }
   }
 
+  .logoAndFormContainer {
+    border: 1px solid red;
+  }
+
   .formContainer {
     width: 100%;
     padding: theme.$spacing-regular;
@@ -29,7 +33,7 @@
     border-radius: theme.$border-radius-small;
   }
 
-  .loginContainer {
+  .loginLinkContainer {
     width: 100%;
     height: 68px;
     padding: theme.$spacing-regular;

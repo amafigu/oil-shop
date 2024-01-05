@@ -1,3 +1,4 @@
+import LanguageDropdown from "#components/LanguageDropdown"
 import LogoutButton from "#components/LogoutButton"
 import Sidebar from "#components/Sidebar"
 import useCartContext from "#context/cartContext"
@@ -19,7 +20,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import LanguageDropdown from "./LanguageDropdown"
 import styles from "./menuMobile.module.scss"
 
 const MenuMobile = ({

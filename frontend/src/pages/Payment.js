@@ -50,13 +50,13 @@ const Payment = () => {
   }
 
   const registeredUserEmptyShippingDataObject = {
-    street: "please add data",
-    number: "please add data",
-    details: "please add data",
-    postalCode: "please add data",
-    city: "please add data",
-    state: "please add data",
-    country: "please add data",
+    street: "please add data for shipping",
+    number: "please add data for shipping",
+    details: "please add data for shipping",
+    postalCode: "please add data for shipping",
+    city: "please add data for shipping",
+    state: "please add data for shipping",
+    country: "please add data for shipping",
   }
 
   const submitOrderAndGuestUser = async (e) => {
@@ -84,9 +84,13 @@ const Payment = () => {
               password: "",
             },
           )
+
           customerId = guestUser.data.guestUser.id
           console.log("not log created guestUserId", customerId)
-
+          await axios.post(
+            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
+            stateShippingDataObject,
+          )
           localStorage.setItem(
             LOCAL_STORAGE_GUEST_ID,
             JSON.stringify(customerId),
@@ -95,7 +99,17 @@ const Payment = () => {
         if (checkGuestUser) {
           customerId = checkGuestUser.data.id
 
-          console.log("not log do not create new guest user id", customerId)
+          const shippingDataResponse = await getUserShippingData(customerId)
+
+          if (!shippingDataResponse) {
+            const saveEmptyShippingData = await axios.post(
+              `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
+              registeredUserEmptyShippingDataObject,
+            )
+
+            console.log("saveEmptyShippingData", saveEmptyShippingData.data)
+          }
+
           localStorage.setItem(
             LOCAL_STORAGE_GUEST_ID,
             JSON.stringify(customerId),
@@ -103,15 +117,6 @@ const Payment = () => {
           console.log("guestUserId", customerId)
         }
         // if user doesn't exist, create a new one and save the id in local storage
-
-        await axios.post(
-          `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
-          stateShippingDataObject,
-        )
-
-        localStorage.setItem(LOCAL_STORAGE_GUEST_ID, JSON.stringify(customerId))
-
-        setUserId(customerId)
       } else {
         console.log("log")
         // if user is logged in
@@ -120,14 +125,14 @@ const Payment = () => {
           { withCredentials: true },
         )
         customerId = userDataResponse.data.id
+        // if user is logged in, get the id from the user data and check if it has shipping data
         const shippingDataResponse = await getUserShippingData(customerId)
+
         if (!shippingDataResponse) {
           const saveEmptyShippingData = await axios.post(
             `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
             registeredUserEmptyShippingDataObject,
           )
-
-          console.log("saveEmptyShippingData", saveEmptyShippingData.data)
         }
 
         localStorage.setItem(LOCAL_STORAGE_GUEST_ID, JSON.stringify(customerId))

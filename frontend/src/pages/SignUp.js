@@ -1,4 +1,4 @@
-import LanguageDropdown from "#components/Navbar/LanguageDropdown"
+import LanguageDropdown from "#components/LanguageDropdown"
 import CreateUserForm from "#components/UsersCrud/CreateUserForm"
 import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
 import useLocaleContext from "#context/localeContext"
@@ -16,38 +16,43 @@ const SignUp = () => {
   useEffectScrollTop()
 
   return (
-    <div className={styles.newUserPageWrapper}>
-      <div className={styles.newUserPage}>
-        <div className={styles.languagesContainer}>
-          <LanguageDropdown />
-        </div>
-
-        <div className={styles.formContainer}>
-          <div className={styles.logoContainer}>
-            <img
-              className={styles.logo}
-              src={`${process.env.PUBLIC_URL}/assets/logo.png`}
-              alt='logo'
-            />
+    <div className={styles.signUpPageWrapper}>
+      <div className={styles.signUpPage}>
+        <div className={styles.component}>
+          <div className={styles.languagesContainer}>
+            <LanguageDropdown />
           </div>
-          <CreateUserForm
-            setFieldErrors={setFieldErrors}
-            setEmailInUserError={setEmailInUserError}
-          />
-        </div>
 
-        <div className={styles.loginContainer}>
-          <span>
-            {text.haveAccount} <Link to='/login'>{text.login}</Link>
-          </span>
-        </div>
-        <div className={styles.errorsContainer}>
-          {emailInUserError && (
-            <div className={styles.errorMessage}>{emailInUserError}</div>
-          )}
-          {fieldErrors && (
-            <ZodValidationErrorsCard fieldErrors={fieldErrors} text={text} />
-          )}
+          <div className={styles.formContainer}>
+            <div className={styles.logoContainer}>
+              <img
+                className={styles.logo}
+                src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                alt='logo'
+              />
+            </div>
+
+            <div className={styles.formContainer}>
+              <CreateUserForm
+                setFieldErrors={setFieldErrors}
+                setEmailInUserError={setEmailInUserError}
+              />
+            </div>
+          </div>
+
+          <div className={styles.loginLinkContainer}>
+            <span>
+              {text.haveAccount} <Link to='/login'>{text.login}</Link>
+            </span>
+          </div>
+          <div className={styles.errorsContainer}>
+            {emailInUserError && (
+              <div className={styles.errorMessage}>{emailInUserError}</div>
+            )}
+            {fieldErrors && (
+              <ZodValidationErrorsCard fieldErrors={fieldErrors} text={text} />
+            )}
+          </div>
         </div>
       </div>
     </div>

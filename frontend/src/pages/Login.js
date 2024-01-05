@@ -1,3 +1,4 @@
+import LanguageDropdown from "#components/LanguageDropdown"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {
@@ -81,63 +82,71 @@ const Login = () => {
   return (
     <div className={styles.loginPageWrapper}>
       <div className={styles.loginPage}>
-        <div className={styles.formContainer}>
-          <div className={styles.logoContainer}>
-            <img
-              className={styles.logo}
-              src={`${process.env.PUBLIC_URL}/assets/logo.png`}
-              alt='logo'
-            />
+        <div className={styles.component}>
+          <div className={styles.languagesContainer}>
+            <LanguageDropdown />
           </div>
-          <form className={styles.form} onSubmit={login}>
-            <label className={styles.label} htmlFor='email'>
-              {text.email}
-            </label>
-            <input
-              className={styles.formField}
-              type='email'
-              value={email}
-              placeholder={text.emailPlaceholder}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete='true'
-              name='email'
-              required
-            ></input>
+          <div className={styles.logoAndFormContainer}>
+            <div className={styles.logoContainer}>
+              <img
+                className={styles.logo}
+                src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                alt='logo'
+              />
+            </div>
+            <div className={styles.formContainer}>
+              <form className={styles.form} onSubmit={login}>
+                <label className={styles.label} htmlFor='email'>
+                  {text.email}
+                </label>
+                <input
+                  className={styles.formField}
+                  type='email'
+                  value={email}
+                  placeholder={text.emailPlaceholder}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete='true'
+                  name='email'
+                  required
+                ></input>
 
-            <label className={styles.label} htmlFor='password'>
-              {text.password}
-            </label>
-            <input
-              type='password'
-              value={password}
-              placeholder={text.passwordPlaceholder}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete='true'
-              name='email'
-              required
-              className={styles.formField}
-            ></input>
+                <label className={styles.label} htmlFor='password'>
+                  {text.password}
+                </label>
+                <input
+                  type='password'
+                  value={password}
+                  placeholder={text.passwordPlaceholder}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete='true'
+                  name='email'
+                  required
+                  className={styles.formField}
+                ></input>
 
-            <button className={styles.formButton} type='submit'>
-              {text.loginButton}
-            </button>
-          </form>
-          <div className={styles.divider}>{text.or}</div>
-          {errorMessage && (
-            <span className={styles.errorMessage}>{errorMessage}</span>
-          )}
-          <div className={styles.lostPasswordContainer}>
-            <Link to='/accounts/password/reset'>{text.passwordLost}</Link>
+                <button className={styles.formButton} type='submit'>
+                  {text.loginButton}
+                </button>
+              </form>
+            </div>
+
+            <div className={styles.divider}>{text.or}</div>
+            {errorMessage && (
+              <span className={styles.errorMessage}>{errorMessage}</span>
+            )}
+            <div className={styles.lostPasswordContainer}>
+              <Link to='/accounts/password/reset'>{text.passwordLost}</Link>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.signUpLinkContainer}>
-          <span>
-            {text.haveAccount}{" "}
-            <Link to='/sign-up' className={styles.signUpLink}>
-              {text.signUp}
-            </Link>
-          </span>
+          <div className={styles.signUpLinkContainer}>
+            <span>
+              {text.haveAccount}{" "}
+              <Link to='/sign-up' className={styles.signUpLink}>
+                {text.signUp}
+              </Link>
+            </span>
+          </div>
         </div>
       </div>
     </div>

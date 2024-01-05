@@ -1,3 +1,4 @@
+import LanguageDropdown from "#components/LanguageDropdown"
 import LogoutButton from "#components/LogoutButton"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
@@ -25,7 +26,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
 import ProductsDropdown from "./ProductsDropdown"
 import SubNavbar from "./SubNavbar"
