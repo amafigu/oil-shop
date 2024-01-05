@@ -94,7 +94,7 @@
 
     gap: 48px;
     padding: 8px;
-    border-bottom: solid 1px theme.$color-branding-primary;
+    border-bottom: solid 1px theme.$branding-color-primary;
     border-radius: theme.$border-radius-small;
 
     @include media.mobile {
@@ -107,7 +107,7 @@
     min-height: 120px;
     max-height: 12px;
     margin-right: theme.$spacing-small;
-    border: solid 1px theme.$color-branding-primary;
+    border: solid 1px theme.$branding-color-primary;
     object-fit: contain;
 
     @include media.desktop-down {

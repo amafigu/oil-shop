@@ -40,11 +40,17 @@ export const navigateToProductAndCloseDropdown = (
 
 export const useGetProducts = (setProducts) => {
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/products`)
-      .then((response) => {
+    const productsResponse = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/products`,
+        )
+
         setProducts(response.data)
-      })
-      .catch((e) => console.error("Error getting products data", e))
+      } catch (error) {
+        console.error("Error fetching product: ", error)
+      }
+    }
+    productsResponse()
   }, [setProducts])
 }
