@@ -41,11 +41,11 @@
   .emailFormTitel {
     margin-bottom: theme.$spacing-regular;
     font-family: theme.$font-family-primary;
-    font-size: medium;
+    font-size: theme.$font-size-medium;
   }
 
   .formField {
-    font-size: medium;
+    font-size: theme.$font-size-medium;
   }
 
   .emailFieldContainer {
@@ -142,7 +142,7 @@
   }
 
   .linkLogin {
-    font-size: theme.$spacing-semi-regular-large;
+    font-size: theme.$font-size-medium;
     color: theme.$color-branding-primary;
   }
 }

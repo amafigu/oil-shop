@@ -102,7 +102,7 @@
     margin-bottom: theme.$spacing-regular;
     overflow: hidden;
     font-family: theme.$font-family-primary;
-    font-size: theme.$spacing-semi-regular;
+    font-size: theme.$font-size-small;
     font-weight: theme.$font-weight-semibold;
     text-align: center;
   }
@@ -126,7 +126,7 @@
   }
 
   .iconColumns {
-    font-size: 46px;
+    font-size: theme.$font-size-teaser;
   }
 
   .teaserSingleCard {

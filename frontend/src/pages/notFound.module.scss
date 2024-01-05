@@ -32,7 +32,7 @@
   }
 
   .message {
-    font-size: 32px;
+    font-size: theme.$font-size-title;
     font-weight: theme.$font-weight-semibold;
     line-height: theme.$line-height-primary;
   }

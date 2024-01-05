@@ -44,14 +44,14 @@
   width: 100%;
   height: 32px;
   font-family: theme.$font-family-primary;
-  font-size: medium;
+  font-size: theme.$font-size-medium;
 }
 
 .formFieldSearchInput {
   width: 60%;
   height: 32px;
   font-family: theme.$font-family-primary;
-  font-size: medium;
+  font-size: theme.$font-size-medium;
 }
 
 .formFieldSelect {
@@ -59,7 +59,7 @@
   height: 38px;
   margin-bottom: theme.$spacing-small;
   font-family: theme.$font-family-primary;
-  font-size: medium;
+  font-size: theme.$font-size-medium;
 }
 
 .label {

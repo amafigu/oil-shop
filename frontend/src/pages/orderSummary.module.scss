@@ -124,7 +124,7 @@
     @include flex-column-all-center;
 
     padding: 40px;
-    font-size: 48px;
+    font-size: theme.$font-size-teaser;
 
     @include media.mobile {
       width: 90%;
@@ -138,7 +138,7 @@
     margin-bottom: theme.$spacing-semi-regular;
 
     input {
-      font-size: theme.$spacing-semi-regular;
+      font-size: theme.$font-size-small;
       color: theme.$font-color-light;
     }
   }

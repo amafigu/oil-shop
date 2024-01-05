@@ -116,7 +116,7 @@
   }
 
   .productInfoCategory {
-    font-size: 1.5rem;
+    font-size: theme.$font-size-semi-large;
     font-weight: theme.$font-weight-regular;
     line-height: 1;
     color: theme.$font-color-primary;
@@ -132,7 +132,7 @@
   .productName {
     margin-top: theme.$spacing-regular;
     margin-bottom: 40px;
-    font-size: 1.5rem;
+    font-size: theme.$font-size-semi-large;
     font-weight: theme.$font-weight-semibold;
     line-height: theme.$line-height-primary;
   }
@@ -162,9 +162,9 @@
   .productSize {
     flex: 1;
     margin-right: 1.25rem;
-    font-size: 0.8rem;
+    font-size: theme.$font-size-small;
     font-weight: theme.$font-weight-regular;
-    line-height: 1.125rem;
+    line-height: theme.$line-height-primary;
   }
 
   .productPrice {

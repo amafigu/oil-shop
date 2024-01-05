@@ -70,7 +70,7 @@
     @include flex-all-center;
 
     height: 9rem;
-    font-size: theme.$spacing-semi-regular-large;
+    font-size: theme.$font-size-semi-medium;
   }
 
   .imagesAndDetails {
@@ -171,7 +171,7 @@
 
   .orderSummaryText {
     margin-bottom: theme.$spacing-semi-regular-large;
-    font-size: theme.$spacing-semi-regular-large;
+    font-size: theme.$font-size-semi-medium;
     font-weight: theme.$font-weight-bold;
     text-transform: uppercase;
 

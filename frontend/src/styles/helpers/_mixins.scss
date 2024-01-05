@@ -142,7 +142,7 @@
 @mixin menu-list-cell {
   width: 100%;
   padding: theme.$spacing-semi-regular-large;
-  font-size: b;
+  font-size: theme.$font-size-medium;
   line-height: 1.3em;
   text-transform: uppercase;
   border-bottom: solid grey 1px;
@@ -222,7 +222,7 @@
 
 @mixin subtitle-text {
   font-family: theme.$font-family-primary;
-  font-size: theme.$spacing-semi-regular-large;
+  font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-regular;
   line-height: theme.$line-height-primary;
 }

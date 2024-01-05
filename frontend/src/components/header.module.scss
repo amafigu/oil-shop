@@ -36,7 +36,7 @@
     font-weight: theme.$font-weight-semibold;
 
     @include media.mobile {
-      font-size: theme.$spacing-semi-regular;
+      font-size: theme.$font-size-small;
     }
   }
 
