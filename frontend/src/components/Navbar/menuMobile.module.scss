@@ -11,8 +11,8 @@
   max-width: 320px;
   min-height: fit-content;
   overflow-y: auto;
-  background-color: white;
-  border-bottom-left-radius: 4px;
+  background-color: theme.$background-color-primary;
+  border-bottom-left-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
 
   @include media.mobile {
@@ -32,6 +32,7 @@
   }
 
   .closeMenuIconContainer {
+    justify-content: flex-end;
     color: theme.$branding-color-primary;
   }
 
@@ -55,10 +56,6 @@
       @include menu-list-item;
 
       cursor: pointer;
-
-      &:first-child {
-        @include flex-justify-end;
-      }
     }
   }
 }

@@ -3,7 +3,12 @@
 @import "#styles/helpers/mixins";
 
 .dropdownMenu {
-  color: grey;
+  color: theme.$font-color-primary;
+  border: theme.$border-regular-component;
+
+  @include media.mobile {
+    border: none;
+  }
 
   .activeCategory {
     color: theme.$branding-color-primary;

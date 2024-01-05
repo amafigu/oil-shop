@@ -9,6 +9,8 @@
 .sidebarItem {
   @include menu-list-item;
 
+  font-size: theme.$font-size-medium;
+
   @include media.tablet {
     border-bottom: 0;
   }

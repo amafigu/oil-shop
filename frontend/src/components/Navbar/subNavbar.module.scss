@@ -11,14 +11,22 @@
   @include flex-all-center;
 
   .subNavbar {
-    width: 440px;
+    width: 33.33%;
 
     @include flex-justify-around;
+
+    @include media.tablet-down {
+      width: 50%;
+    }
+
+    @include media.mobile {
+      width: 80%;
+    }
   }
 
   .navLink {
-    width: 120px;
-    font-size: theme.$font-size-medium;
+    font-size: theme.$font-size-semi-large;
+    font-weight: theme.$font-weight-medium;
     color: theme.$font-color-primary;
     text-align: center;
     text-decoration: none;
