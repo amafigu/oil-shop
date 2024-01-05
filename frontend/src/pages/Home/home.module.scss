@@ -67,7 +67,7 @@
   }
 
   .title {
-    margin-bottom: 20px;
+    margin-bottom: theme.$spacing-semi-regular-large;
 
     @include title-text;
 
@@ -99,10 +99,10 @@
     align-items: flex-start;
     min-height: 120px;
     max-height: 200px;
-    margin-bottom: 24px;
+    margin-bottom: theme.$spacing-regular;
     overflow: hidden;
     font-family: theme.$font-family-primary;
-    font-size: 16px;
+    font-size: theme.$font-size-small;
     font-weight: theme.$font-weight-semibold;
     text-align: center;
   }
@@ -122,18 +122,18 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: theme.$spacing-semi-regular;
   }
 
   .iconColumns {
-    font-size: 46px;
+    font-size: theme.$font-size-teaser;
   }
 
   .teaserSingleCard {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: theme.$spacing-semi-regular-large;
   }
 
   .columnsContainer {

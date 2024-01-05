@@ -9,6 +9,6 @@ a {
 
 body {
   font-family: theme.$font-family-primary;
-  font-size: 16px;
+  font-size: theme.$font-size-medium;
   color: theme.$font-color-primary;
 }

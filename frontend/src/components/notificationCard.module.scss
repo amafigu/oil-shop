@@ -1,3 +1,5 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
 .modal {
@@ -17,5 +19,5 @@
 
   width: 300px;
   height: 100px;
-  padding: 0 20px;
+  padding: 0 theme.$spacing-semi-regular-large;
 }

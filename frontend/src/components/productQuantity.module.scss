@@ -7,7 +7,7 @@
   align-items: center;
   width: 80px;
   background-color: rgb(244 244 244);
-  border-radius: 4px;
+  border-radius: theme.$border-radius-small;
 }
 
 .quantityInput {

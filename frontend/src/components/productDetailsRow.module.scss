@@ -4,14 +4,14 @@
 
 .productDetailsRowWrapper {
   display: flex;
-  padding: 16px;
-  margin-bottom: 16px;
+  padding: theme.$spacing-semi-regular;
+  margin-bottom: theme.$spacing-semi-regular;
   border: solid 1px theme.$font-color-light;
-  border-radius: 4px;
+  border-radius: theme.$border-radius-small;
 
   .itemContainer {
     hr {
-      margin-top: 24px;
+      margin-top: theme.$spacing-regular;
       margin-right: 38px;
 
       @include media.desktop-down {
@@ -54,7 +54,7 @@
     min-height: 90px;
     max-height: 90px;
     object-fit: contain;
-    margin-right: 12px;
+    margin-right: theme.$spacing-small;
 
     @include media.desktop-down {
       width: 2.75rem;

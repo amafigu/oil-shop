@@ -11,21 +11,29 @@ $border-radius-circle: 50%;
 
 // COLOR
 $background-color-primary: #fff;
+$background-color-secondary: #f0f0f0;
 $background-color-form-primary: #f4f4f4;
 $background-color-form-secondary: #e9e9e9;
+$background-color-secondary-button: #333;
+$background-color-secondary-button-hover: #444;
+$border-color-custom-input: #ddd;
 $color-branding-primary: #b5cfaa;
 $font-color-primary: #686868;
+$font-color-contrast: #fff;
 $font-color-light: #757575;
 
 // FONT ATTRIBUTES
 $font-family-primary: "Alumni Sans", sans-serif;
+$font-size-teaser: 3rem;
 $font-size-title: 2rem;
+$font-size-semi-title: 1.75rem;
 $font-size-title-mobile: 1.5rem;
 $font-size-subtitle: 1.5rem;
 $font-size-subtitle-mobile: 1.25rem;
 $font-size-large: 1.75rem;
 $font-size-semi-large: 1.5rem;
 $font-size-medium: 1.25rem;
+$font-size-semi-medium: 1.125rem;
 $font-size-small: 1rem;
 $font-size-button: 1.25rem;
 $font-size-button-mobile: 1rem;
@@ -36,9 +44,16 @@ $font-weight-semibold: 600;
 $font-weight-bold: 800;
 
 // SPACING - MARGIN OR PADDING
-$spacing-regular: 1.5rem;
-$spacing-small: 0.7rem;
 $spacing-extra-large: 4.5rem;
+$spacing-large: 2.5rem;
+$spacing-semi-large: 2rem;
+$spacing-regular-large: 1.75rem;
+$spacing-regular: 1.5rem;
+$spacing-semi-regular-large: 1.25rem;
+$spacing-semi-regular-semi-large: 1.125em;
+$spacing-semi-regular: 1rem;
+$spacing-small: 0.75rem;
+$spacing-smaller: 0.5rem;
 $margin-order-list: 2rem;
 $margin-order-list-mobile: 1.75rem;
 $margin-bottom-form-field: 0.75rem;
@@ -49,6 +64,7 @@ $margin-vertical-container-divider: 1.5rem 0;
 $padding-divider-small: 0.75rem;
 
 // SIZING - WIDTH / HEIGHT
+$line-height-primary: 128%;
 $height-form-field: 2rem;
 $min-height-page-primary: 65vh;
 $page-width-primary: 80%;

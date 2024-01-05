@@ -18,10 +18,10 @@
   @include media.tablet {
     position: absolute;
     display: flex;
-    gap: 16px;
+    gap: theme.$spacing-semi-regular;
     padding: 0 4px;
     margin-top: 8px;
     background-color: #fff;
-    border-radius: 4px;
+    border-radius: theme.$border-radius-small;
   }
 }

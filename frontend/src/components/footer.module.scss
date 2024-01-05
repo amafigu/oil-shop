@@ -4,31 +4,29 @@
 
 .footerWrapper {
   width: 100%;
-  font-family: "GFS Neohellenic", sans-serif;
-  color: grey;
+  font-family: theme.$font-family-primary;
+  color: theme.$font-color-primary;
   text-align: center;
-  background-color: white;
+  background-color: theme.$background-color-primary;
 
   .footer {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
   }
 
   .startSection {
-    display: flex;
-    justify-content: center;
     font-size: theme.$font-size-semi-large;
     font-weight: theme.$font-weight-regular;
     text-transform: capitalize;
+
+    @include flex-justify-center;
   }
 
   .startSectionText {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     width: 90%;
     font-size: theme.$font-size-large;
     font-weight: theme.$font-weight-regular;
+
+    @include flex-justify-center;
   }
 
   .startSectionText::before,
@@ -40,11 +38,11 @@
   }
 
   .startSectionText::before {
-    margin-right: 10px;
+    margin-right: theme.$spacing-small;
   }
 
   .startSectionText::after {
-    margin-left: 10px;
+    margin-left: theme.$spacing-small;
   }
 
   .pageFooter li {
@@ -58,26 +56,24 @@
   }
 
   .newsletterSection {
-    display: flex;
-    justify-content: center;
-    margin: 32px 0;
+    margin: theme.$spacing-semi-large 0;
+
+    @include flex-justify-center;
   }
 
   .registrationFormContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex-column-align-center;
   }
 
   .registrationFormLabel {
-    font-size: 16px;
+    font-size: theme.$font-size-medium;
   }
 
   .registrationFormWrapper {
     width: 60%;
-    padding: 1em;
-    background: #f0f0f0;
-    border-radius: 5px;
+    padding: theme.$spacing-semi-regular;
+    background: theme.$background-color-secondary;
+    border-radius: theme.$border-radius-regular;
     box-shadow: theme.$box-shadow-primary;
 
     @include media.tablet-down {
@@ -89,42 +85,36 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 1em;
+    margin-bottom: theme.$spacing-semi-regular;
   }
 
   .registrationEmailInputWrapper {
     width: 65%;
   }
 
-  .registrationEmailInputWrapper input {
+  .registrationEmailInput {
     width: 90%;
-    padding: 20px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: theme.$spacing-semi-regular-large;
+    font-family: theme.$font-family-primary;
+    font-size: theme.$font-size-medium;
+    border: 1px solid theme.$border-color-custom-input;
+    border-radius: theme.$border-radius-small;
   }
 
   .registrationEmailButtonWrapper {
-    width: 30%;
-    padding: 10px;
-    font-size: 16px;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
-    background-color: #333;
-    border: none;
-    border-radius: 5px;
+    @include newsleter-input-and-button-wrapper;
+    @include flex-align-center;
   }
 
   .registrationEmailButtonWrapper:hover {
-    background-color: #444;
+    background-color: theme.$background-color-secondary-button-hover;
   }
 
   .registrationDataConsentText {
     min-width: 300px;
     max-width: 90%;
-    margin-top: 1em;
-    font-size: 14px;
+    margin-top: theme.$spacing-semi-regular;
+    font-size: theme.$font-size-small;
     font-style: italic;
     text-align: center;
   }
@@ -132,15 +122,15 @@
   .columnsSectionItemTitle {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
-    font-family: "GFS Neohellenic", sans-serif;
+    margin-bottom: theme.$spacing-small;
+    font-family: theme.$font-family-primary;
     font-size: theme.$font-size-subtitle;
     font-weight: theme.$font-weight-regular;
     text-align: center;
   }
 
   .columnsSectionItemLinks a {
-    color: grey;
+    color: theme.$font-color-light;
     text-decoration: none;
   }
 
@@ -160,38 +150,36 @@
     margin: 0;
 
     @include media.desktop-down {
-      margin: 0 20px;
+      margin: 0 theme.$spacing-regular;
     }
 
     @include media.tablet-down {
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-      margin-bottom: 32px;
+      gap: theme.$spacing-regular;
+      margin-bottom: theme.$spacing-semi-large;
+
+      @include flex-column-align-center;
     }
   }
 
   .iconsSectionItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
+
+    @include flex-column-align-center;
   }
 
   .iconsSectionItemTitle {
     height: 40px;
-
-    @include flex-all-center;
-
     font-size: theme.$font-size-medium;
     font-weight: theme.$font-weight-regular;
+
+    @include flex-all-center;
   }
 
   .iconsSectionItemIcons {
-    display: flex;
-    align-items: center;
     justify-content: space-evenly;
     width: 100%;
+
+    @include flex-align-center;
 
     svg[data-icon="dhl"] {
       width: 60px;
@@ -207,7 +195,7 @@
   .columnsSection {
     display: flex;
     height: auto;
-    margin-bottom: 32px;
+    margin-bottom: theme.$spacing-semi-large;
   }
 
   .columnsSectionElements {
@@ -220,35 +208,31 @@
     margin: 0;
 
     @include media.tablet-down {
-      flex-direction: column;
-      align-items: center;
+      @include flex-column-align-center;
     }
   }
 
   .columnsSectionItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
-    margin: 12px 0;
+    margin: theme.$spacing-small 0;
+
+    @include flex-column-align-center;
   }
 
   .columnsSectionItemLinks {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
+    gap: theme.$spacing-semi-regular;
     justify-content: space-evenly;
     width: 100%;
+
+    @include flex-column-align-center;
   }
 
   .underSection {
-    display: flex;
-    justify-content: center;
+    @include flex-justify-center;
   }
 
   .underSectionTextIcon {
-    font-size: 16px;
+    font-size: theme.$font-size-subtitle;
   }
 
   .underSectionText {
@@ -256,7 +240,7 @@
     flex-direction: row;
     justify-content: center;
     width: 90%;
-    font-size: 28px;
+    font-size: theme.$font-size-subtitle;
     font-weight: theme.$font-weight-regular;
   }
 
@@ -269,10 +253,10 @@
   }
 
   .underSectionText::before {
-    margin-right: 10px;
+    margin-right: theme.$spacing-small;
   }
 
   .underSectionText::after {
-    margin-left: 10px;
+    margin-left: theme.$spacing-small;
   }
 }

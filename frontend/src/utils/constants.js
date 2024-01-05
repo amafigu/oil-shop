@@ -1,14 +1,20 @@
 // VARIABLES
 export const SHIPPING_COST = 10
 export const LOCAL_STORAGE_GUEST_ID = "yolo-guest-id"
-// MEDIA
-export const TEASER_VIDEOS = [{ id: "orangeFlowers" }]
-
+// MEDIA URLS
 export const DEFAULT_PRODUCT_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default.png"
 
 export const DEFAULT_USER_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default_user.png"
+
+// MEDIA
+export const TEASER_VIDEOS = [{ id: "orangeFlowers" }]
+
+// SOCIAL MEDIA URLS
+export const SOCIAL_MEDIA_URL_FACEBOOK = "https://www.facebook.com"
+export const SOCIAL_MEDIA_URL_INSTAGRAM = "https://www.instagram.com"
+export const SOCIAL_MEDIA_URL_YOUTUBE = "https://www.youtube.com"
 
 // API
 export const API_PRODUCTS = "/products"
@@ -131,5 +137,7 @@ export const STYLES = Object.freeze({
     ITEM_ROW: "itemRow",
   },
 })
+
+// REGEX
 
 export const SPECIAL_CHARACTERS_REGEX = /[ !"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/

@@ -3,9 +3,9 @@
 
 .productSliderWrapper {
   display: flex;
-  gap: 16px;
+  gap: theme.$spacing-semi-regular;
   align-items: center;
-  padding: 20px 0;
+  padding: theme.$spacing-semi-regular-large 0;
 
   .iconSlider {
     @include reset-button;

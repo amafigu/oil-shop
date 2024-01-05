@@ -32,7 +32,7 @@
     width: 100%;
 
     @include media.mobile {
-      margin: 0 20px;
+      margin: 0 theme.$spacing-semi-regular-large;
     }
   }
 
@@ -41,14 +41,14 @@
 
     @include media.mobile {
       display: flex;
-      gap: 16px;
+      gap: theme.$spacing-semi-regular;
       width: 100%;
     }
   }
 
   .selectorAndButtonContainerDesktop {
     display: flex;
-    gap: 16px;
+    gap: theme.$spacing-semi-regular;
     width: 100%;
 
     @include media.mobile {
@@ -116,9 +116,9 @@
   }
 
   .productInfoCategory {
-    font-size: 1.5rem;
+    font-size: theme.$font-size-semi-large;
     font-weight: theme.$font-weight-regular;
-    line-height: 1;
+    line-height: theme.$line-height-primary;
     color: theme.$font-color-primary;
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -130,16 +130,16 @@
   }
 
   .productName {
-    margin-top: 24px;
+    margin-top: theme.$spacing-regular;
     margin-bottom: 40px;
-    font-size: 1.5rem;
+    font-size: theme.$font-size-semi-large;
     font-weight: theme.$font-weight-semibold;
-    line-height: 128%;
+    line-height: theme.$line-height-primary;
   }
 
   .descriptionPoints {
     font-size: theme.$font-size-medium;
-    line-height: 14px;
+    line-height: theme.$line-height-primary;
     text-align: left;
     letter-spacing: 0.08em;
     list-style-type: disc;
@@ -147,7 +147,7 @@
 
   .descriptionPoint {
     margin-bottom: 1.2rem;
-    font-size: 16px;
+    font-size: theme.$font-size-small;
     list-style-type: none;
   }
 
@@ -162,16 +162,16 @@
   .productSize {
     flex: 1;
     margin-right: 1.25rem;
-    font-size: 0.8rem;
+    font-size: theme.$font-size-small;
     font-weight: theme.$font-weight-regular;
-    line-height: 1.125rem;
+    line-height: theme.$line-height-primary;
   }
 
   .productPrice {
     margin-bottom: 0;
-    font-size: 1rem;
+    font-size: theme.$font-size-small;
     font-weight: theme.$font-weight-regular;
-    line-height: 1;
+    line-height: theme.$line-height-primary;
     letter-spacing: 0.04em;
   }
 
