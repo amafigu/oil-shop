@@ -13,7 +13,7 @@ const ProductsDropdown = ({
   const navigate = useNavigate()
 
   return (
-    <>
+    <div className={styles.productsDropdownWrapper}>
       {matchedProducts.map((product) => (
         <div
           className={styles.dropdownListItem}
@@ -28,20 +28,22 @@ const ProductsDropdown = ({
             )
           }
         >
-          <div className={styles.dropdownListItemImage}>
+          <div className={styles.imageContainer}>
             <img
               src={product.image}
               alt={product.name}
-              className={styles.listItemImage}
+              className={styles.image}
             />
           </div>
-
-          <div className={styles.dropdownListItemName}>
-            {titleCase(product.name, "_")}
+          <div className={styles.dataContainer}>
+            <div className={styles.data}>{titleCase(product.name, "_")}</div>
+            <div className={styles.dropdownListItemName}>
+              {`${product.size} ml`}
+            </div>
           </div>
         </div>
       ))}
-    </>
+    </div>
   )
 }
 
