@@ -29,7 +29,7 @@
     border-radius: theme.$border-radius-small;
   }
 
-  .signUpContainer {
+  .signUpLinkContainer {
     width: 100%;
     height: 68px;
     padding: theme.$spacing-regular;
@@ -39,7 +39,8 @@
 
     @include flex-all-center;
 
-    a {
+    .signUpLink {
+      font-weight: theme.$font-weight-semibold;
       color: theme.$branding-color-primary;
     }
   }

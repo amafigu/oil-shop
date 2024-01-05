@@ -1,7 +1,12 @@
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import { cartTotalSum, totalCost } from "#utils/cart"
-import { DEFAULT_PRODUCT_IMAGE, SHIPPING_COST } from "#utils/constants"
+import {
+  DEFAULT_PRODUCT_IMAGE,
+  ROUTES_CART,
+  ROUTES_CHECKOUT_SHIPPING,
+  SHIPPING_COST,
+} from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { useEffectScrollTop } from "#utils/render"
 import { titleCase } from "#utils/stringManipulation"
@@ -114,11 +119,14 @@ const Cart = () => {
             </div>
           </div>
           {cart.length ? (
-            <Link className={styles.confirmOrderButton} to='/checkout/shipping'>
+            <Link
+              className={styles.confirmOrderButton}
+              to={ROUTES_CHECKOUT_SHIPPING}
+            >
               {text.confirmPurchase}
             </Link>
           ) : (
-            <Link className={styles.confirmOrderButton} to='/cart'>
+            <Link className={styles.confirmOrderButton} to={ROUTES_CART}>
               {text.orderToContinue}
             </Link>
           )}

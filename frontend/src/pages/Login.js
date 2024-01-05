@@ -131,9 +131,12 @@ const Login = () => {
           </div>
         </div>
 
-        <div className={styles.signUpContainer}>
+        <div className={styles.signUpLinkContainer}>
           <span>
-            {text.haveAccount} <Link to='/sign-up'>{text.signUp}</Link>
+            {text.haveAccount}{" "}
+            <Link to='/sign-up' className={styles.signUpLink}>
+              {text.signUp}
+            </Link>
           </span>
         </div>
       </div>

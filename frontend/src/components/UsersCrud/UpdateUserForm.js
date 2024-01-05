@@ -41,7 +41,7 @@ const UpdateUserForm = () => {
     }
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/users/user/${email}`,
+        `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${email}`,
         userNewData,
         { withCredentials: true },
       )

@@ -2,6 +2,7 @@ import { CartContext } from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {
+  API_SHIPPING_DATA,
   API_USERS_CURRENT_USER,
   DEFAULT_PRODUCT_IMAGE,
   LOCAL_STORAGE_GUEST_ID,
@@ -37,7 +38,7 @@ const OrderSummary = () => {
           }
 
           const shippingData = await axios.get(
-            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${guestId}`,
+            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${guestId}`,
           )
 
           if (shippingData.status === 200) {
@@ -59,7 +60,7 @@ const OrderSummary = () => {
             setUserData(userData.data)
           }
           const shippingData = await axios.get(
-            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userData.data.id}`,
+            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${userData.data.id}`,
           )
 
           if (shippingData.status === 200) {

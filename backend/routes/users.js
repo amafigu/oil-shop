@@ -56,6 +56,22 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 });
+router.get('/user/user-without-credentials/:email', async (req, res) => {
+  console.log('getUserByEmail', req.params.email);
+  try {
+    const user = await db.users.findOne({
+      where: { email: req.params.email },
+      attributes: { exclude: ['password'] },
+      include: [{ model: db.userRoles, as: 'role' }],
+    });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
 
 router.get('/current-user/:id', decodeJWT, async (req, res) => {
   try {

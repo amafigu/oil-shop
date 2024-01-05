@@ -1,6 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
+import { LOCAL_STORAGE_CART } from "#utils/constants"
 import { titleCase } from "#utils/stringManipulation"
-
 import { createContext, useContext, useEffect, useState } from "react"
 
 export const CartContext = createContext()
@@ -8,7 +8,7 @@ export const CartContext = createContext()
 export const CartProvider = ({ children }) => {
   const getInitialCart = () => {
     try {
-      const storageCart = localStorage.getItem("yolo-cart")
+      const storageCart = localStorage.getItem(LOCAL_STORAGE_CART)
       if (storageCart) {
         return JSON.parse(storageCart)
       }
@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
   const [notification, setNotification] = useState(null)
 
   useEffect(() => {
-    localStorage.setItem("yolo-cart", JSON.stringify(cart))
+    localStorage.setItem(LOCAL_STORAGE_CART, JSON.stringify(cart))
   }, [cart])
 
   const addProduct = (product, quantity) => {
