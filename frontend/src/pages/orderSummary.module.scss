@@ -55,7 +55,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: theme.$spacing-regular;
     font-size: theme.$font-size-subtitle;
   }
 
@@ -80,7 +80,7 @@
   }
 
   .cartItemWrapper {
-    margin-bottom: 16px;
+    margin-bottom: theme.$spacing-semi-regular;
 
     @include media.tablet {
       width: 200px;
@@ -91,9 +91,9 @@
     @include flex-align-center;
 
     height: 4.5rem;
-    margin-bottom: 16px;
+    margin-bottom: theme.$spacing-semi-regular;
     background-color: #fff;
-    border-radius: 4px;
+    border-radius: theme.$border-radius-small;
   }
 
   .cartItemImage {
@@ -104,7 +104,7 @@
   }
 
   .cartItemDetails {
-    margin: 12px;
+    margin: theme.$spacing-small;
     overflow: hidden;
   }
 
@@ -135,10 +135,10 @@
   .clientInfoItem {
     display: flex;
     flex-direction: column;
-    margin-bottom: 16px;
+    margin-bottom: theme.$spacing-semi-regular;
 
     input {
-      font-size: 16px;
+      font-size: theme.$spacing-semi-regular;
       color: theme.$font-color-light;
     }
   }

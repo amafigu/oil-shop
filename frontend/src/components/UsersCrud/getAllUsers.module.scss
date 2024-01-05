@@ -41,7 +41,7 @@
 
     width: 160px;
     height: 36px;
-    font-size: 1rem;
+    font-size: theme.$font-size-small;
     text-transform: none;
 
     @include media.mobile {
@@ -86,7 +86,7 @@
   }
 
   .availableUserContainer {
-    padding: 12px;
+    padding: theme.$spacing-small;
   }
 
   .availableUser {
@@ -95,10 +95,10 @@
     gap: 48px;
     padding: 8px;
     border-bottom: solid 1px theme.$color-branding-primary;
-    border-radius: 4px;
+    border-radius: theme.$border-radius-small;
 
     @include media.mobile {
-      gap: 18px;
+      gap: theme.$spacing-semi-regular-semi-large;
     }
   }
 
@@ -106,7 +106,7 @@
     width: 8.4rem;
     min-height: 120px;
     max-height: 12px;
-    margin-right: 12px;
+    margin-right: theme.$spacing-small;
     border: solid 1px theme.$color-branding-primary;
     object-fit: contain;
 
@@ -128,7 +128,7 @@
   .actionButtons {
     display: flex;
     flex-direction: row;
-    gap: 24px;
+    gap: theme.$spacing-regular;
     align-items: center;
 
     @include media.widescreen-down {

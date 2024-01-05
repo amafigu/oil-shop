@@ -10,10 +10,10 @@
 .form {
   @include flex-column;
 
-  margin: 28px;
+  margin: theme.$spacing-regular-large;
 
   @include media.tablet-down {
-    margin: 18px;
+    margin: theme.$spacing-semi-regular-semi-large;
   }
 }
 
@@ -57,7 +57,7 @@
 .formFieldSelect {
   width: 100%;
   height: 38px;
-  margin-bottom: 12px;
+  margin-bottom: theme.$spacing-small;
   font-family: theme.$font-family-primary;
   font-size: medium;
 }
@@ -73,7 +73,7 @@
 
   width: 100%;
   height: 28px;
-  margin-bottom: 12px;
+  margin-bottom: theme.$spacing-small;
   overflow: auto;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .containerTitle {
-  margin-bottom: 24px;
+  margin-bottom: theme.$spacing-regular;
   font-size: theme.$font-size-subtitle;
 }
 
@@ -116,7 +116,7 @@
 
   width: 140px;
   height: 36px;
-  font-size: 1rem;
+  font-size: theme.$font-size-small;
   text-transform: none;
 
   @include media.mobile {

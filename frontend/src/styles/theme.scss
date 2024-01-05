@@ -24,6 +24,7 @@ $font-color-light: #757575;
 // FONT ATTRIBUTES
 $font-family-primary: "Alumni Sans", sans-serif;
 $font-size-title: 2rem;
+$font-size-semi-title: 1.75rem;
 $font-size-title-mobile: 1.5rem;
 $font-size-subtitle: 1.5rem;
 $font-size-subtitle-mobile: 1.25rem;
@@ -43,8 +44,10 @@ $font-weight-bold: 800;
 $spacing-extra-large: 4.5rem;
 $spacing-large: 2.5rem;
 $spacing-semi-large: 2rem;
+$spacing-regular-large: 1.75rem;
 $spacing-regular: 1.5rem;
 $spacing-semi-regular-large: 1.25rem;
+$spacing-semi-regular-semi-large: 1.125em;
 $spacing-semi-regular: 1rem;
 $spacing-small: 0.75rem;
 $margin-order-list: 2rem;
@@ -57,6 +60,7 @@ $margin-vertical-container-divider: 1.5rem 0;
 $padding-divider-small: 0.75rem;
 
 // SIZING - WIDTH / HEIGHT
+$line-height-primary: 128%;
 $height-form-field: 2rem;
 $min-height-page-primary: 65vh;
 $page-width-primary: 80%;

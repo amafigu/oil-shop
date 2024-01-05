@@ -83,7 +83,7 @@
   height: 60px;
   overflow: hidden;
   font-family: theme.$font-family-primary;
-  font-size: 1rem;
+  font-size: theme.$font-size-small;
   font-weight: theme.$font-weight-semibold;
   color: theme.$font-color-primary;
   text-align: center;
@@ -142,7 +142,7 @@
 @mixin menu-list-cell {
   width: 100%;
   padding: theme.$spacing-semi-regular-large;
-  font-size: 16px;
+  font-size: b;
   line-height: 1.3em;
   text-transform: uppercase;
   border-bottom: solid grey 1px;
@@ -155,7 +155,7 @@
   height: 60px;
   padding: theme.$spacing-semi-regular-large;
   margin: auto;
-  font-size: 16px;
+  font-size: theme.$font-size-small;
   line-height: 1.3em;
   text-transform: uppercase;
   letter-spacing: 0.0094em;
@@ -172,7 +172,7 @@
   }
 
   @include media.mobile {
-    margin-bottom: 28px;
+    margin-bottom: theme.$spacing-regular-large;
   }
 }
 
@@ -187,7 +187,7 @@
   width: 160px;
   height: 36px;
   overflow: hidden;
-  font-size: 1rem;
+  font-size: theme.$font-size-small;
   text-transform: none;
 
   @include media.mobile {
@@ -214,7 +214,7 @@
 }
 
 @mixin component-title {
-  margin-bottom: 1rem;
+  margin-bottom: theme.$spacing-semi-regular;
   font-family: theme.$font-family-primary;
   font-size: theme.$font-size-subtitle;
   font-weight: theme.$font-weight-semibold;
@@ -224,14 +224,14 @@
   font-family: theme.$font-family-primary;
   font-size: theme.$spacing-semi-regular-large;
   font-weight: theme.$font-weight-regular;
-  line-height: 128%;
+  line-height: theme.$line-height-primary;
 }
 
 @mixin title-text {
   font-family: theme.$font-family-primary;
-  font-size: 28px;
+  font-size: theme.$font-size-semi-title;
   font-weight: theme.$font-weight-semibold;
-  line-height: 128%;
+  line-height: theme.$line-height-primary;
 }
 
 @mixin property-font {

@@ -41,14 +41,14 @@
 
     @include media.mobile {
       display: flex;
-      gap: 16px;
+      gap: theme.$spacing-semi-regular;
       width: 100%;
     }
   }
 
   .selectorAndButtonContainerDesktop {
     display: flex;
-    gap: 16px;
+    gap: theme.$spacing-semi-regular;
     width: 100%;
 
     @include media.mobile {
@@ -130,11 +130,11 @@
   }
 
   .productName {
-    margin-top: 24px;
+    margin-top: theme.$spacing-regular;
     margin-bottom: 40px;
     font-size: 1.5rem;
     font-weight: theme.$font-weight-semibold;
-    line-height: 128%;
+    line-height: theme.$line-height-primary;
   }
 
   .descriptionPoints {
@@ -147,7 +147,7 @@
 
   .descriptionPoint {
     margin-bottom: 1.2rem;
-    font-size: 16px;
+    font-size: theme.$font-size-small;
     list-style-type: none;
   }
 
@@ -169,7 +169,7 @@
 
   .productPrice {
     margin-bottom: 0;
-    font-size: 1rem;
+    font-size: theme.$font-size-small;
     font-weight: theme.$font-weight-regular;
     line-height: 1;
     letter-spacing: 0.04em;

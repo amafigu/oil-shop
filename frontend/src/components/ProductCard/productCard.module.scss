@@ -9,7 +9,7 @@
   width: 260px;
   min-height: 406px;
   margin: 8px;
-  margin-bottom: 16px;
+  margin-bottom: theme.$spacing-semi-regular;
   overflow: hidden;
   text-align: center;
 
@@ -34,7 +34,7 @@
     max-width: 80%;
     height: 200px;
     min-height: 200px;
-    margin: 16px 0;
+    margin: theme.$spacing-semi-regular 0;
     background-color: white;
     object-fit: contain;
   }

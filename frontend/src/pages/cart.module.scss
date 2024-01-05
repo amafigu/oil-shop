@@ -31,15 +31,15 @@
 
     @include media.desktop-down {
       width: 100%;
-      margin-bottom: 24px;
+      margin-bottom: theme.$spacing-regular;
     }
   }
 
   .cartItemContainer {
-    margin-top: 24px;
+    margin-top: theme.$spacing-regular;
 
     hr {
-      margin-top: 24px;
+      margin-top: theme.$spacing-regular;
       margin-right: 38px;
 
       @include media.desktop-down {
@@ -81,7 +81,7 @@
 
     @include media.desktop-down {
       width: 100%;
-      margin-bottom: 16px;
+      margin-bottom: theme.$spacing-semi-regular;
     }
   }
 
@@ -90,7 +90,7 @@
     min-height: 90px;
     max-height: 90px;
     object-fit: contain;
-    margin-right: 12px;
+    margin-right: theme.$spacing-small;
 
     @include media.desktop-down {
       width: 2.75rem;
@@ -155,7 +155,7 @@
     padding: 32px;
     margin-left: 3rem;
     background: #f4f4f4;
-    border-radius: 4px;
+    border-radius: theme.$border-radius-small;
     box-shadow: theme.$box-shadow-primary;
 
     @include media.desktop-down {

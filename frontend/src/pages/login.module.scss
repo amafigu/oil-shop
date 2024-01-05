@@ -24,18 +24,18 @@
 
   .formContainer {
     width: 100%;
-    padding: 24px;
+    padding: theme.$spacing-regular;
     border: solid grey 1px;
-    border-radius: 4px;
+    border-radius: theme.$border-radius-small;
   }
 
   .signUpContainer {
     width: 100%;
     height: 68px;
-    padding: 24px;
+    padding: theme.$spacing-regular;
     margin: 32px 0;
     border: solid grey 1px;
-    border-radius: 4px;
+    border-radius: theme.$border-radius-small;
 
     @include flex-all-center;
 
@@ -61,7 +61,7 @@
   .formField {
     width: 100%;
     height: 32px;
-    margin-bottom: 12px;
+    margin-bottom: theme.$spacing-small;
     font-family: theme.$font-family-primary;
     font-size: medium;
   }
@@ -73,7 +73,7 @@
   }
 
   .containerTitle {
-    margin-bottom: 24px;
+    margin-bottom: theme.$spacing-regular;
     font-size: theme.$font-size-subtitle;
   }
 
@@ -113,8 +113,8 @@
     width: 100%;
     height: 36px;
     margin-top: 8px;
-    margin-bottom: 24px;
-    font-size: 1rem;
+    margin-bottom: theme.$spacing-regular;
+    font-size: theme.$font-size-small;
     text-transform: none;
 
     @include media.mobile {

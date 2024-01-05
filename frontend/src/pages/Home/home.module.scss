@@ -99,10 +99,10 @@
     align-items: flex-start;
     min-height: 120px;
     max-height: 200px;
-    margin-bottom: 24px;
+    margin-bottom: theme.$spacing-regular;
     overflow: hidden;
     font-family: theme.$font-family-primary;
-    font-size: 16px;
+    font-size: theme.$spacing-semi-regular;
     font-weight: theme.$font-weight-semibold;
     text-align: center;
   }
@@ -122,7 +122,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: theme.$spacing-semi-regular;
   }
 
   .iconColumns {

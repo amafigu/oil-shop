@@ -34,6 +34,6 @@
   .message {
     font-size: 32px;
     font-weight: theme.$font-weight-semibold;
-    line-height: 128%;
+    line-height: theme.$line-height-primary;
   }
 }

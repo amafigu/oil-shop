@@ -27,7 +27,7 @@
 
   .itemsContainer {
     display: flex;
-    gap: 16px;
+    gap: theme.$spacing-semi-regular;
     align-items: center;
   }
 
