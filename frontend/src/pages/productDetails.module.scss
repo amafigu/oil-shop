@@ -118,7 +118,7 @@
   .productInfoCategory {
     font-size: theme.$font-size-semi-large;
     font-weight: theme.$font-weight-regular;
-    line-height: 1;
+    line-height: theme.$line-height-primary;
     color: theme.$font-color-primary;
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -139,7 +139,7 @@
 
   .descriptionPoints {
     font-size: theme.$font-size-medium;
-    line-height: 14px;
+    line-height: theme.$line-height-primary;
     text-align: left;
     letter-spacing: 0.08em;
     list-style-type: disc;
@@ -171,7 +171,7 @@
     margin-bottom: 0;
     font-size: theme.$font-size-small;
     font-weight: theme.$font-weight-regular;
-    line-height: 1;
+    line-height: theme.$line-height-primary;
     letter-spacing: 0.04em;
   }
 

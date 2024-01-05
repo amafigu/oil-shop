@@ -182,11 +182,11 @@
   }
 
   .totalCostDivider {
-    margin: 40px 0;
+    margin: theme.$spacing-large 0;
   }
 
   .cartOrderSummaryDetails {
-    margin-bottom: 40px;
+    margin-bottom: theme.$spacing-large;
 
     @include media.desktop-down {
       padding: 0 theme.$spacing-semi-regular-large;

@@ -5,7 +5,7 @@
 .formContainer {
   width: 100%;
   padding: theme.$spacing-regular;
-  border: solid grey 1px;
+  border: theme.$border-regular-component;
   border-radius: theme.$border-radius-small;
 }
 

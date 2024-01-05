@@ -131,7 +131,7 @@
   width: 30%;
   padding: 10px;
   font-size: theme.$font-size-medium;
-  color: theme.$font-color-primary;
+  color: theme.$font-color-contrast;
   text-align: center;
   cursor: pointer;
   background-color: theme.$background-color-secondary-button;
@@ -143,9 +143,9 @@
   width: 100%;
   padding: theme.$spacing-semi-regular-large;
   font-size: theme.$font-size-medium;
-  line-height: 1.3em;
+  line-height: theme.$line-height-primary;
   text-transform: uppercase;
-  border-bottom: solid grey 1px;
+  border-bottom: theme.$border-regular-component;
 }
 
 @mixin menu-list-item {
@@ -156,7 +156,7 @@
   padding: theme.$spacing-semi-regular-large;
   margin: auto;
   font-size: theme.$font-size-small;
-  line-height: 1.3em;
+  line-height: theme.$line-height-primary;
   text-transform: uppercase;
   letter-spacing: 0.0094em;
   list-style-type: none;
