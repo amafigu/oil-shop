@@ -1,4 +1,5 @@
 import LanguageDropdown from "#components/LanguageDropdown"
+import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {
@@ -6,20 +7,28 @@ import {
   API_USERS_CURRENT_USER,
   API_USER_ROLE,
   API_VERIFY_TOKEN,
+  LOGO_IMAGE,
+  LONG_MESSAGE_TIMEOUT,
 } from "#utils/constants"
 import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import { useEffectScrollTop } from "#utils/render"
+import {
+  faChevronDown,
+  faChevronUp,
+  faGlobe,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./login.module.scss"
-
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [email, setEmail] = useState("")
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [password, setPassword] = useState("")
-  const { translate } = useLocaleContext()
   const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
+  const { translate } = useLocaleContext()
   const text = translate.pages.login
   const navigate = useNavigate()
 
@@ -64,7 +73,7 @@ const Login = () => {
             }
           } catch (error) {
             setErrorMessage(`${text.errorMessage}`)
-            setTimeout(() => setErrorMessage(null), 10000)
+            setTimeout(() => setErrorMessage(null), LONG_MESSAGE_TIMEOUT)
 
             console.error("Error fetching user data", error)
           }
@@ -74,23 +83,42 @@ const Login = () => {
       }
     } catch (error) {
       setErrorMessage(`${text.errorMessage}`)
-      setTimeout(() => setErrorMessage(null), 10000)
+      setTimeout(() => setErrorMessage(null), LONG_MESSAGE_TIMEOUT)
       console.error("Login error", error)
     }
   }
 
   return (
     <div className={styles.loginPageWrapper}>
+      {errorMessage && <NotificationCard message={errorMessage} />}
       <div className={styles.loginPage}>
-        <div className={styles.component}>
-          <div className={styles.languagesContainer}>
-            <LanguageDropdown />
+        <div className={styles.languageOptionsAndFormContainer}>
+          <div className={styles.languageOptionsContainer}>
+            <div
+              onClick={() =>
+                setDropdownOpen((isDropdownOpen) => !isDropdownOpen)
+              }
+            >
+              <div className={styles.languageChevronContainer}>
+                <FontAwesomeIcon
+                  icon={faGlobe}
+                  className={styles.languageIcon}
+                />
+                {!isDropdownOpen && <FontAwesomeIcon icon={faChevronDown} />}
+                {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
+              </div>
+            </div>
+            {isDropdownOpen && (
+              <div className={styles.languageDropdownContainer}>
+                <LanguageDropdown />
+              </div>
+            )}
           </div>
           <div className={styles.logoAndFormContainer}>
             <div className={styles.logoContainer}>
               <img
                 className={styles.logo}
-                src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
                 alt='logo'
               />
             </div>
@@ -131,9 +159,7 @@ const Login = () => {
             </div>
 
             <div className={styles.divider}>{text.or}</div>
-            {errorMessage && (
-              <span className={styles.errorMessage}>{errorMessage}</span>
-            )}
+
             <div className={styles.lostPasswordContainer}>
               <Link to='/accounts/password/reset'>{text.passwordLost}</Link>
             </div>

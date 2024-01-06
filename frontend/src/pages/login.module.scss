@@ -8,29 +8,127 @@
   min-height: 80vh;
 
   .loginPage {
-    width: 20%;
+    width: 360px;
     min-width: 340px;
 
     @include flex-column-all-center;
 
-    @include media.tablet-down {
-      width: 60%;
-    }
-
     @include media.mobile {
-      width: 90%;
+      width: 320px;
+      min-width: 280px;
+    }
+
+    .languageOptionsAndFormContainer {
+      width: 100%;
+    }
+
+    .languageOptionsContainer {
+      display: flex;
+      border: 1px solid green;
+    }
+
+    .logoAndFormContainer {
+      border: 1px solid blue;
+
+      .logoContainer {
+        display: flex;
+        justify-content: center;
+
+        .logo {
+          width: 216px;
+          border-radius: theme.$border-radius-circle;
+        }
+      }
+
+      .formContainer {
+        width: 100%;
+
+        // padding: theme.$spacing-regular;
+        border: theme.$border-regular-component;
+        border-radius: theme.$border-radius-small;
+
+        .form {
+          width: 100%;
+
+          .label {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 4px;
+          }
+
+          .formField {
+            width: 100%;
+            height: 32px;
+            margin-bottom: theme.$spacing-small;
+            font-family: theme.$font-family-primary;
+            font-size: theme.$font-size-medium;
+          }
+
+          .formButton {
+            @include action-button;
+
+            width: 100%;
+            height: 36px;
+            margin-top: 8px;
+            margin-bottom: theme.$spacing-regular;
+            font-size: theme.$font-size-small;
+            text-transform: none;
+
+            @include media.mobile {
+              width: 100%;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+
+      .divider {
+        width: 100%;
+        font-size: theme.$font-size-medium;
+        font-weight: theme.$font-weight-regular;
+
+        @include flex-all-center;
+      }
+
+      .divider::before,
+      .divider::after {
+        flex: 1 1;
+        margin: auto;
+        content: "";
+        border-bottom: 1px solid;
+      }
+
+      .divider::before {
+        margin-right: 10px;
+      }
+
+      .divider::after {
+        margin-left: 10px;
+      }
+
+      .lostPasswordContainer {
+        width: 100%;
+        margin-top: theme.$spacing-regular;
+        margin-bottom: theme.$spacing-regular;
+        font-size: theme.$font-size-small;
+        border: 1px solid red;
+
+        @include flex-all-center;
+
+        .lostPasswordLink {
+          font-weight: theme.$font-weight-semibold;
+          color: theme.$branding-color-primary;
+        }
+      }
     }
   }
 
-  .logoAndFormContainer {
-    border: 1px solid red;
+  .languageIcon {
+    margin-right: theme.$spacing-smaller;
   }
 
-  .formContainer {
-    width: 100%;
-    padding: theme.$spacing-regular;
-    border: theme.$border-regular-component;
-    border-radius: theme.$border-radius-small;
+  .languageDropdownContainer {
+    margin-left: theme.$spacing-smaller;
   }
 
   .signUpLinkContainer {
@@ -49,87 +147,8 @@
     }
   }
 
-  .logoContainer {
-    display: flex;
-    justify-content: center;
-  }
-
-  .logo {
-    width: 216px;
-    border-radius: theme.$border-radius-circle;
-  }
-
-  .form {
-    width: 100%;
-  }
-
-  .formField {
-    width: 100%;
-    height: 32px;
-    margin-bottom: theme.$spacing-small;
-    font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-medium;
-  }
-
-  .label {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 4px;
-  }
-
   .containerTitle {
     margin-bottom: theme.$spacing-regular;
     font-size: theme.$font-size-subtitle;
-  }
-
-  .divider {
-    width: 100%;
-    font-size: theme.$font-size-medium;
-    font-weight: theme.$font-weight-regular;
-
-    @include flex-all-center;
-  }
-
-  .divider::before,
-  .divider::after {
-    flex: 1 1;
-    margin: auto;
-    content: "";
-    border-bottom: 1px solid;
-  }
-
-  .divider::before {
-    margin-right: 10px;
-  }
-
-  .divider::after {
-    margin-left: 10px;
-  }
-
-  .lostPasswordContainer {
-    margin-top: 32px;
-    margin-bottom: 8px;
-    text-align: center;
-  }
-
-  .formButton {
-    @include action-button;
-
-    width: 100%;
-    height: 36px;
-    margin-top: 8px;
-    margin-bottom: theme.$spacing-regular;
-    font-size: theme.$font-size-small;
-    text-transform: none;
-
-    @include media.mobile {
-      width: 100%;
-      overflow: hidden;
-    }
-  }
-
-  .errorMessage {
-    font-weight: theme.$font-weight-semibold;
-    color: red;
   }
 }

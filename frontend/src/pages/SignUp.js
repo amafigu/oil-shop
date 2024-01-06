@@ -2,6 +2,7 @@ import LanguageDropdown from "#components/LanguageDropdown"
 import CreateUserForm from "#components/UsersCrud/CreateUserForm"
 import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
 import useLocaleContext from "#context/localeContext"
+import { LOGO_IMAGE } from "#utils/constants"
 import { useEffectScrollTop } from "#utils/render"
 import { useState } from "react"
 import { Link } from "react-router-dom"
@@ -19,7 +20,7 @@ const SignUp = () => {
     <div className={styles.signUpPageWrapper}>
       <div className={styles.signUpPage}>
         <div className={styles.component}>
-          <div className={styles.languagesContainer}>
+          <div className={styles.languageDropdownContainer}>
             <LanguageDropdown />
           </div>
 
@@ -27,7 +28,7 @@ const SignUp = () => {
             <div className={styles.logoContainer}>
               <img
                 className={styles.logo}
-                src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
                 alt='logo'
               />
             </div>

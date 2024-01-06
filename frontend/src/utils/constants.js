@@ -9,9 +9,9 @@ export const DEFAULT_PRODUCT_IMAGE =
 export const DEFAULT_USER_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default_user.png"
 
-// MEDIA
+// INTERNAL MEDIA PATHS AND VARIABLES
 export const TEASER_VIDEOS = [{ id: "orangeFlowers" }]
-
+export const LOGO_IMAGE = "/assets/logo.png"
 // SOCIAL MEDIA URLS
 export const SOCIAL_MEDIA_URL_FACEBOOK = "https://www.facebook.com"
 export const SOCIAL_MEDIA_URL_INSTAGRAM = "https://www.instagram.com"
@@ -56,6 +56,7 @@ export const ROUTES_SHOP = "/shop"
 
 // TIME CONSTANTS
 export const SHORT_MESSAGE_TIMEOUT = 3000
+export const LONG_MESSAGE_TIMEOUT = 6000
 export const REDIRECT_TIMEOUT = 1000
 
 // INPUTS CONSTANTS

@@ -3,6 +3,7 @@ import LogoutButton from "#components/LogoutButton"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import {
+  LOGO_IMAGE,
   ROUTES_CART,
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
@@ -155,7 +156,7 @@ const Navbar = ({ productCategories }) => {
               <Link className={styles.linkChild} to={ROUTES_HOME}>
                 <img
                   className={styles.logo}
-                  src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                  src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
                   alt='logo'
                 />
               </Link>
