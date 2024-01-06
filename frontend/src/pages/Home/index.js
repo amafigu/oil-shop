@@ -46,7 +46,7 @@ const Home = () => {
           </div>
           <div className={styles.columnsContainer}>
             <div className={styles.teaserCardsWrapper}>
-              <div>
+              <div className={styles.columsTitleContainer}>
                 <p className={styles.columnsTitle}>
                   {translate.pages.welcome.subTeaser.title}
                 </p>

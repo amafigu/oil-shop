@@ -78,7 +78,7 @@
   .teaserCardTitle {
     display: flex;
     align-items: flex-start;
-    min-height: 60px;
+    min-height: 48px;
     font-family: theme.$font-family-primary;
     font-size: theme.$font-size-medium;
     font-weight: theme.$font-weight-medium;
@@ -94,11 +94,15 @@
     text-transform: uppercase;
   }
 
+  .columsTitleContainer {
+    margin-bottom: theme.$spacing-semi-regular-large;
+  }
+
   .teaserCardText {
     display: flex;
     align-items: center;
     height: fit-content;
-    min-height: 242px;
+    min-height: 120px;
     margin-bottom: theme.$spacing-small;
     overflow: hidden;
     font-family: theme.$font-family-primary;
@@ -107,19 +111,23 @@
     text-align: center;
 
     @include media.fullscreen-down {
-      min-height: 302px;
+      height: 168px;
     }
 
     @include media.widescreen-down {
-      min-height: 322px;
+      height: 180px;
     }
 
     @include media.desktop-down {
-      min-height: 462px;
+      height: 240px;
     }
 
     @include media.tablet-down {
-      min-height: unset;
+      height: 140px;
+    }
+
+    @include media.mobile {
+      height: 120px;
     }
   }
 
