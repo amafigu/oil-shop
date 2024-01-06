@@ -24,6 +24,7 @@ export const API_PRODUCTS_PRODUCT = "/products/product"
 export const API_PRODUCTS_PRODUCT_CREATE = "/products/product/create"
 export const API_PRODUCTS_PRODUCT_GET_BY_NAME = "/products/product/get-by-name"
 
+export const API_USERS_CURRENT_PREFIX = "/users/current-" // + admin or customer;
 export const API_USERS_CURRENT_USER = "/users/current-user"
 export const API_USERS_USER = "/users/user"
 export const API_USER_ROLE = "/users/user/role"

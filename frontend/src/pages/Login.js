@@ -4,6 +4,7 @@ import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {
   API_LOGIN,
+  API_USERS_CURRENT_PREFIX,
   API_USERS_CURRENT_USER,
   API_USER_ROLE,
   API_VERIFY_TOKEN,
@@ -67,7 +68,10 @@ const Login = () => {
               )
 
               setTimeout(
-                () => navigate(`/users/current-${userRoleResponse.data.name}`),
+                () =>
+                  navigate(
+                    `${API_USERS_CURRENT_PREFIX}${userRoleResponse.data.name}`,
+                  ),
                 500,
               )
             }
@@ -124,9 +128,6 @@ const Login = () => {
             </div>
             <div className={styles.formContainer}>
               <form className={styles.form} onSubmit={login}>
-                <label className={styles.label} htmlFor='email'>
-                  {text.email}
-                </label>
                 <input
                   className={styles.formField}
                   type='email'
@@ -138,9 +139,6 @@ const Login = () => {
                   required
                 ></input>
 
-                <label className={styles.label} htmlFor='password'>
-                  {text.password}
-                </label>
                 <input
                   type='password'
                   value={password}

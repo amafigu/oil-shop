@@ -23,7 +23,7 @@ const LanguageDropdown = ({ setMenuOpen }) => {
       style={
         currentPath.includes(ROUTES_SIGN_UP) ||
         currentPath.includes(ROUTES_LOGIN)
-          ? { border: "none", display: "flex", margin: "0" }
+          ? { margin: "0" }
           : {}
       }
     >

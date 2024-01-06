@@ -5,21 +5,18 @@
 .loginPageWrapper {
   @include flex-all-center;
 
-  min-height: 80vh;
+  min-height: theme.$min-height-page-primary;
 
   .loginPage {
-    width: 360px;
-    min-width: 340px;
+    width: 100%;
 
-    @include flex-column-all-center;
-
-    @include media.mobile {
-      width: 320px;
-      min-width: 280px;
-    }
+    @include flex-column-align-center;
 
     .languageOptionsAndFormContainer {
-      width: 100%;
+      width: 360px;
+      border: 1px solid rgb(3 244 128);
+
+      @include flex-column;
     }
 
     .languageOptionsContainer {
@@ -28,6 +25,8 @@
     }
 
     .logoAndFormContainer {
+      height: 400px;
+      padding: 0 theme.$spacing-large;
       border: 1px solid blue;
 
       .logoContainer {
