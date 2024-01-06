@@ -8,6 +8,8 @@ import {
   DEFAULT_USER_IMAGE,
   REDIRECT_TIMEOUT,
   ROUTES_CURRENT_CUSTOMER,
+  ROUTES_LOGIN,
+  ROUTES_SIGN_UP,
 } from "#utils/constants"
 import { uploadToS3 } from "#utils/dataManipulation"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
@@ -120,7 +122,15 @@ const CreateUserForm = ({
   }
 
   return (
-    <div className={styles.createUserFormWrapper}>
+    <div
+      className={styles.createUserFormWrapper}
+      style={
+        currentPath.includes(ROUTES_SIGN_UP) ||
+        currentPath.includes(ROUTES_LOGIN)
+          ? { width: "300px", margin: "0" }
+          : {}
+      }
+    >
       {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={createUser}>
         <input

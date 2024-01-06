@@ -250,7 +250,9 @@ const Navbar = ({ productCategories }) => {
             </div>
           </div>
         </div>
-        <SubNavbar />
+        <div className={styles.subNavbarContainer}>
+          <SubNavbar />
+        </div>
       </div>
     </div>
   )

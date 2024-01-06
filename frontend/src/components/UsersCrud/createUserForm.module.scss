@@ -122,8 +122,6 @@
     cursor: pointer;
     background: transparent;
     border: none;
-    transform: translateY(
-      -20%
-    ); /* This centers the button vertically inside the input */
+    transform: translateY(-80%);
   }
 }

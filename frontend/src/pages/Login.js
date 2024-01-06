@@ -1,4 +1,5 @@
 import LanguageDropdown from "#components/LanguageDropdown"
+import SubNavbar from "#components/Navbar/SubNavbar"
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
@@ -10,6 +11,7 @@ import {
   API_VERIFY_TOKEN,
   LOGO_IMAGE,
   LONG_MESSAGE_TIMEOUT,
+  ROUTES_SIGN_UP,
 } from "#utils/constants"
 import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import { useEffectScrollTop } from "#utils/render"
@@ -35,7 +37,7 @@ const Login = () => {
 
   useEffectScrollTop()
 
-  const login = async (e) => {
+  const loginUser = async (e) => {
     e.preventDefault()
     try {
       const loginResponse = await axios.post(
@@ -95,30 +97,37 @@ const Login = () => {
   return (
     <div className={styles.loginPageWrapper}>
       {errorMessage && <NotificationCard message={errorMessage} />}
+      <div className={styles.subNavbarContainer}>
+        <SubNavbar />
+      </div>
       <div className={styles.loginPage}>
         <div className={styles.languageOptionsAndFormContainer}>
-          <div className={styles.languageOptionsContainer}>
-            <div
-              onClick={() =>
-                setDropdownOpen((isDropdownOpen) => !isDropdownOpen)
-              }
-            >
-              <div className={styles.languageChevronContainer}>
-                <FontAwesomeIcon
-                  icon={faGlobe}
-                  className={styles.languageIcon}
-                />
-                {!isDropdownOpen && <FontAwesomeIcon icon={faChevronDown} />}
-                {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
-              </div>
-            </div>
-            {isDropdownOpen && (
-              <div className={styles.languageDropdownContainer}>
-                <LanguageDropdown />
-              </div>
-            )}
-          </div>
           <div className={styles.logoAndFormContainer}>
+            <div className={styles.languageOptionsContainer}>
+              <div
+                onClick={() =>
+                  setDropdownOpen((isDropdownOpen) => !isDropdownOpen)
+                }
+              >
+                <div className={styles.languageChevronContainer}>
+                  <FontAwesomeIcon
+                    icon={faGlobe}
+                    className={styles.languageIcon}
+                  />
+                  {!isDropdownOpen && (
+                    <FontAwesomeIcon icon={faChevronDown} size='2xs' />
+                  )}
+                  {isDropdownOpen && (
+                    <FontAwesomeIcon icon={faChevronUp} size='2xs' />
+                  )}
+                </div>
+              </div>
+              {isDropdownOpen && (
+                <div className={styles.languageDropdownContainer}>
+                  <LanguageDropdown />
+                </div>
+              )}
+            </div>
             <div className={styles.logoContainer}>
               <img
                 className={styles.logo}
@@ -127,7 +136,7 @@ const Login = () => {
               />
             </div>
             <div className={styles.formContainer}>
-              <form className={styles.form} onSubmit={login}>
+              <form className={styles.form} onSubmit={loginUser}>
                 <input
                   className={styles.formField}
                   type='email'
@@ -163,10 +172,10 @@ const Login = () => {
             </div>
           </div>
 
-          <div className={styles.signUpLinkContainer}>
+          <div className={styles.linkContainer}>
             <span>
               {text.haveAccount}{" "}
-              <Link to='/sign-up' className={styles.signUpLink}>
+              <Link to={ROUTES_SIGN_UP} className={styles.signUpLink}>
                 {text.signUp}
               </Link>
             </span>

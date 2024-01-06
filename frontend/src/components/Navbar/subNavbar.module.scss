@@ -11,17 +11,9 @@
   @include flex-all-center;
 
   .subNavbar {
-    width: 33.33%;
+    width: 100%;
 
     @include flex-justify-around;
-
-    @include media.tablet-down {
-      width: 50%;
-    }
-
-    @include media.mobile {
-      width: 80%;
-    }
   }
 
   .navLink {

@@ -3,31 +3,26 @@
 @import "#styles/helpers/mixins";
 
 .loginPageWrapper {
-  @include flex-all-center;
-
-  min-height: theme.$min-height-page-primary;
+  @include flex-column-all-center;
 
   .loginPage {
     width: 100%;
+    min-height: theme.$min-height-page-regular;
 
-    @include flex-column-align-center;
+    @include flex-column-all-center;
 
     .languageOptionsAndFormContainer {
-      width: 360px;
-      border: 1px solid rgb(3 244 128);
+      width: 348px;
 
       @include flex-column;
     }
 
     .languageOptionsContainer {
       display: flex;
-      border: 1px solid green;
     }
 
     .logoAndFormContainer {
       height: 400px;
-      padding: 0 theme.$spacing-large;
-      border: 1px solid blue;
 
       .logoContainer {
         display: flex;
@@ -41,9 +36,7 @@
 
       .formContainer {
         width: 100%;
-
-        // padding: theme.$spacing-regular;
-        border: theme.$border-regular-component;
+        padding: theme.$spacing-regular;
         border-radius: theme.$border-radius-small;
 
         .form {
@@ -107,16 +100,16 @@
 
       .lostPasswordContainer {
         width: 100%;
-        margin-top: theme.$spacing-regular;
-        margin-bottom: theme.$spacing-regular;
         font-size: theme.$font-size-small;
-        border: 1px solid red;
 
         @include flex-all-center;
 
-        .lostPasswordLink {
-          font-weight: theme.$font-weight-semibold;
-          color: theme.$branding-color-primary;
+        a {
+          font-weight: theme.$font-weight-regular;
+
+          &:hover {
+            color: theme.$branding-color-primary;
+          }
         }
       }
     }
@@ -130,12 +123,24 @@
     margin-left: theme.$spacing-smaller;
   }
 
-  .signUpLinkContainer {
+  .subNavbarContainer {
+    width: 100%;
+    margin: theme.$spacing-regular auto;
+
+    @include media.tablet-down {
+      width: 50%;
+    }
+
+    @include media.mobile {
+      width: 80%;
+    }
+  }
+
+  .linkContainer {
     width: 100%;
     height: 68px;
     padding: theme.$spacing-regular;
     margin: theme.$spacing-semi-large 0;
-    border: theme.$border-regular-component;
     border-radius: theme.$border-radius-small;
 
     @include flex-all-center;
@@ -143,6 +148,11 @@
     .signUpLink {
       font-weight: theme.$font-weight-semibold;
       color: theme.$branding-color-primary;
+
+      &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+      }
     }
   }
 
