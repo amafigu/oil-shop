@@ -1,6 +1,5 @@
 import LanguageDropdown from "#components/LanguageDropdown"
 import SubNavbar from "#components/Navbar/SubNavbar"
-import NotificationCard from "#components/NotificationCard"
 import CreateUserForm from "#components/UsersCrud/CreateUserForm"
 import useLocaleContext from "#context/localeContext"
 import { LOGO_IMAGE, ROUTES_LOGIN } from "#utils/constants"
@@ -16,9 +15,6 @@ import { Link } from "react-router-dom"
 import styles from "./signUp.module.scss"
 
 const SignUp = () => {
-  const [errorMessage, setErrorMessage] = useState("")
-  const [emailInUserError, setEmailInUserError] = useState("")
-  const [fieldErrors, setFieldErrors] = useState({})
   const [isDropdownOpen, setDropdownOpen] = useState(false)
 
   const { translate } = useLocaleContext()
@@ -28,7 +24,6 @@ const SignUp = () => {
 
   return (
     <div className={styles.signUpPageWrapper}>
-      {errorMessage && <NotificationCard message={errorMessage} />}
       <div className={styles.subNavbarContainer}>
         <SubNavbar />
       </div>
@@ -69,28 +64,21 @@ const SignUp = () => {
             </div>
             <div className={styles.formContainer}>
               <div className={styles.form}>
-                <CreateUserForm
-                  setFieldErrors={setFieldErrors}
-                  setEmailInUserError={setEmailInUserError}
-                />
+                <CreateUserForm />
               </div>
             </div>
           </div>
 
           <div className={styles.linkContainer}>
             <span>
-              {text.haveAccount} <Link to={ROUTES_LOGIN}>{text.login}</Link>
+              {text.haveAccount}{" "}
+              <Link className={styles.link} to={ROUTES_LOGIN}>
+                {text.login}
+              </Link>
             </span>
           </div>
         </div>
-        {/* <div className={styles.errorsContainer}>
-          {emailInUserError && (
-            <div className={styles.errorMessage}>{emailInUserError}</div>
-          )}
-          {fieldErrors && (
-            <ZodValidationErrorsCard fieldErrors={fieldErrors} text={text} />
-          )}
-        </div> */}
+        <div className={styles.errorsContainer}></div>
       </div>
     </div>
   )

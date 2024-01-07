@@ -1,8 +1,3 @@
 @use "#styles/theme" as theme;
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
-
-.errorMessage {
-  font-weight: theme.$font-weight-semibold;
-  color: red;
-}

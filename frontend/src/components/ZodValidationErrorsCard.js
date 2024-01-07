@@ -1,36 +1,37 @@
-import { translateZodValidationErrors } from "#utils/errors"
-import styles from "./zodValidationErrorsCard.module.scss"
+import React, { useEffect, useState } from "react"
 
-const ZodValidationErrorsCard = ({ fieldErrors, text }) => {
-  return (
-    <div>
-      {fieldErrors.firstName &&
-        fieldErrors.firstName.map((error) => (
-          <div key={error.message} className={styles.errorMessage}>
-            {translateZodValidationErrors(error, text)}
-          </div>
-        ))}
-      {fieldErrors.lastName &&
-        fieldErrors.lastName.map((error) => (
-          <div key={error.message} className={styles.errorMessage}>
-            {translateZodValidationErrors(error, text)}
-          </div>
-        ))}
-      {fieldErrors.email &&
-        fieldErrors.email.map((error) => (
-          <div key={error.message} className={styles.errorMessage}>
-            {translateZodValidationErrors(error, text)}
-          </div>
-        ))}
+const ZodValidationErrorsCard = ({ errorsArray, translationObj }) => {
+  const [errorsObject, setErrorsObject] = useState({
+    firstName: [],
+    lastName: [],
+    email: [],
+    password: [],
+  })
 
-      {fieldErrors.password &&
-        fieldErrors.password.map((error) => (
-          <div key={error.message} className={styles.errorMessage}>
-            {translateZodValidationErrors(error, text)}
-          </div>
-        ))}
-    </div>
-  )
+  useEffect(() => {
+    let newErrorsObject = { ...errorsObject }
+
+    errorsArray.forEach((err) => {
+      if (err.path[0] === "firstName") {
+        if (err.message === "First name should start with a capital letter.") {
+          newErrorsObject.firstName = [
+            ...newErrorsObject.firstName,
+            "shouldStartWithACapitalLetter",
+          ]
+        }
+        if (err.message === "First name can only contain letters.") {
+          newErrorsObject.firstName = [
+            ...newErrorsObject.firstName,
+            "shouldContainOnlyLetters",
+          ]
+        }
+      }
+    })
+
+    setErrorsObject(newErrorsObject)
+  }, [errorsArray])
+
+  return <div>{JSON.stringify(errorsObject)}</div>
 }
 
 export default ZodValidationErrorsCard

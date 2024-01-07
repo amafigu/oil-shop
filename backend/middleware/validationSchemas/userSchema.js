@@ -65,7 +65,14 @@ const createUserValidation = z.object({
     .refine((value) => /^[A-Za-z\s]+$/.test(value), {
       message: 'First name can only contain letters.',
     }),
-  lastName: firstAndLastNameValidation,
+  lastName: firstAndLastNameUpdateValidation
+    .refine((value) => value[0] === value[0].toUpperCase(), {
+      message: 'Last name should start with a capital letter.',
+    })
+    .refine((value) => /^[A-Za-z\s]+$/.test(value), {
+      message: 'Last name can only contain letters.',
+      errorNr: 2,
+    }),
 
   email: z
     .string()

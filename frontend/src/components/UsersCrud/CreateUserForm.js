@@ -17,14 +17,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import ZodValidationErrorsCard from "../ZodValidationErrorsCard"
 import styles from "./createUserForm.module.scss"
 
-const CreateUserForm = ({
-  setRefreshAllUsersCounter,
-  setFieldErrors,
-  setEmailInUserError,
-}) => {
-  const [, setErrorMessage] = useState("")
+const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState()
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -32,10 +28,12 @@ const CreateUserForm = ({
   const [password, setPassword] = useState("")
   const [file, setFile] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
+  const [validationErrors, setValidationErrors] = useState([])
   const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
+  const textValidationErrors = translate.errors.validationErrors
 
   const location = useLocation()
   const currentPath = location.pathname
@@ -85,8 +83,8 @@ const CreateUserForm = ({
               setIsLoggedIn(true)
               setUser(userData)
             } catch (error) {
-              setErrorMessage(`${text.errorMessage}`)
-              setTimeout(() => setErrorMessage(null), 3000)
+              setNotification(`${text.errorMessage}`)
+              setTimeout(() => setNotification(null), 3000)
               console.error("Error fetching user data", error)
             }
           }
@@ -95,32 +93,29 @@ const CreateUserForm = ({
         }
       }
     } catch (error) {
+      if (error.response.data.errors) {
+        const errorMessages = error.response.data.errors
+        setValidationErrors(errorMessages)
+        setNotification(errorMessages[0].message)
+        setTimeout(() => setNotification(null), 3000)
+      }
       /* if (error.response.data.errors) {
-        const errorMessages = error.response.data.errors.reduce((acc, err) => {
-          if (!acc[err.path[0]]) {
-            acc[err.path[0]] = []
-          }
-          acc[err.path[0]].push({
-            code: err.code,
-            message: err.message,
-            path: err.path[0],
-          })
-          return acc
-        }, {})
+       
 
         //  setFieldErrors(errorMessages)
-        setFieldErrors("error")
+ 
 
         setTimeout(() => setFieldErrors({}), 6000)
       } */
-      /*    if (error.response.data.message === "Email already in use") {
-        setEmailInUserError(`${text.createUser.emailInUseErrorMessage}`)
-        setTimeout(() => setEmailInUserError(null), 6000)
-      } */
+      if (error.response.data.message === "Email already in use") {
+        setNotification(`Email already in use`)
+        setTimeout(() => setNotification(null), 6000)
+      }
       console.error("Signup error", error)
     }
   }
-
+  console.log(validationErrors)
+  console.log(typeof validationErrors)
   return (
     <div
       className={styles.createUserFormWrapper}
@@ -131,6 +126,12 @@ const CreateUserForm = ({
           : {}
       }
     >
+      {validationErrors.length > 0 && (
+        <ZodValidationErrorsCard
+          errorsArray={validationErrors}
+          translationObj={textValidationErrors}
+        />
+      )}
       {notification && <NotificationCard message={notification} />}
       <form className={styles.form} onSubmit={createUser}>
         <input

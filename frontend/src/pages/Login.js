@@ -175,7 +175,7 @@ const Login = () => {
           <div className={styles.linkContainer}>
             <span>
               {text.haveAccount}{" "}
-              <Link to={ROUTES_SIGN_UP} className={styles.signUpLink}>
+              <Link to={ROUTES_SIGN_UP} className={styles.link}>
                 {text.signUp}
               </Link>
             </span>
