@@ -5,7 +5,6 @@ const NotFound = () => {
   return (
     <div className={styles.notFoundPageWrapper}>
       <div className={styles.notFoundPage}>
-        \
         <div className={styles.container}>
           <img
             className={styles.logo}

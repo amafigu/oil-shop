@@ -28,10 +28,29 @@ const ZodValidationErrorsCard = ({ errorsArray, translationObj }) => {
       }
     })
 
+    let cleanedErrorsObject = Object.entries(errorsObject).reduce(
+      (acc, [key, value]) => {
+        if (value.length > 0) {
+          acc[key] = value
+        }
+        return acc
+      },
+      {},
+    )
     setErrorsObject(newErrorsObject)
   }, [errorsArray])
 
-  return <div>{JSON.stringify(errorsObject)}</div>
+  let cleanedErrorsObject = Object.entries(errorsObject).reduce(
+    (acc, [key, value]) => {
+      if (value.length > 0) {
+        acc[key] = value
+      }
+      return acc
+    },
+    {},
+  )
+
+  return <div>{JSON.stringify(cleanedErrorsObject)}</div>
 }
 
 export default ZodValidationErrorsCard

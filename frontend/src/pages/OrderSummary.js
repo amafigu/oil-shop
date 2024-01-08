@@ -7,17 +7,34 @@ import {
   API_USERS_GUEST_BY_ID,
   DEFAULT_PRODUCT_IMAGE,
   LOCAL_STORAGE_GUEST_ID,
+  SHIPPING_COST,
 } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
-import { titleCase } from "#utils/stringManipulation"
+import { camelCaseToTitleCase } from "#utils/stringManipulation"
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./orderSummary.module.scss"
 
 const OrderSummary = () => {
-  const [shippingData, setShippingData] = useState({})
-  const [userData, setUserData] = useState({})
+  const [shippingData, setShippingData] = useState({
+    street: "",
+    number: "",
+    postalCode: "",
+    city: "",
+    state: "",
+    country: "",
+  })
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  })
+
+  const [orderData, setOrderData] = useState({
+    paymentMethod: "",
+    totalAmount: "",
+  })
   const [orderAndCartItems, setOrderAndCartItems] = useState({})
   const { cart } = useContext(CartContext)
   const { translate } = useLocaleContext()
@@ -28,47 +45,77 @@ const OrderSummary = () => {
   useEffect(() => {
     const getSummaryData = async () => {
       console.log("cart", cart)
+      console.log("shippingData", shippingData)
+      console.log("userData", userData)
       console.log("!isLoading", !isLoading)
       console.log("isLoggedIn", isLoggedIn)
       console.log("isLoggedIn", isLoggedIn)
+
       try {
         if (!isLoggedIn) {
           console.log("cart", cart)
           const guestId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
 
-          const userData = await axios.get(
+          const guestDataResponse = await axios.get(
             `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${guestId}`,
           )
-          if (userData.status === 200) {
-            console.log("userData", userData.data)
-            setUserData(userData.data)
+          if (guestDataResponse.status === 200) {
+            const guest = guestDataResponse.data
+            console.log("guestDataResponse", guest)
+            setUserData({
+              firstName: guest.firstName,
+              lastName: guest.lastName,
+              email: guest.email,
+            })
+
+            console.log(userData)
           }
 
-          const shippingData = await axios.get(
+          const shippingDataResponse = await axios.get(
             `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${guestId}`,
           )
 
-          if (shippingData.status === 200) {
-            setShippingData(shippingData.data)
+          console.log(shippingDataResponse)
+
+          if (shippingDataResponse.status === 200) {
+            const data = shippingDataResponse.data
+            setShippingData({
+              street: data.street,
+              number: data.number,
+              postalCode: data.postalCode,
+              city: data.city,
+              state: data.state,
+              country: data.country,
+            })
           }
-          const orderAndCartItems = await axios.get(
+          const orderAndCartItemsResponse = await axios.get(
             `${process.env.REACT_APP_API_URL}/orders/last-order-items/${guestId}`,
           )
-          setOrderAndCartItems(orderAndCartItems.data)
+          console.log(orderAndCartItemsResponse)
+          if (orderAndCartItemsResponse.status === 200) {
+            setOrderAndCartItems(orderAndCartItemsResponse.data)
+            setOrderData({
+              paymentMethod:
+                orderAndCartItemsResponse.data.lastOrder[0].paymentMethod,
+              totalAmount:
+                orderAndCartItemsResponse.data.lastOrder[0].totalAmount,
+            })
+            console.log(orderData)
+          }
         }
 
         if (isLoggedIn && !isLoading) {
           console.log(isLoggedIn)
-          const userData = await axios.get(
+          const userDataResponse = await axios.get(
             `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
             { withCredentials: true },
           )
 
-          if (userData.status === 200) {
+          if (userDataResponse.status === 200) {
             setUserData(userData.data)
           }
           const shippingData = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${userData.data.id}`,
+            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${userDataResponse.data.id}`,
           )
 
           if (shippingData.status === 200) {
@@ -76,7 +123,7 @@ const OrderSummary = () => {
           }
 
           const orderAndCartItems = await axios.get(
-            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${userData.data.id}`,
+            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${userDataResponse.data.id}`,
           )
           setOrderAndCartItems(orderAndCartItems.data)
         }
@@ -87,6 +134,7 @@ const OrderSummary = () => {
     getSummaryData()
   }, [cart, navigate, setShippingData, userId, isLoggedIn, isLoading])
 
+  console.log("orderAndCartItems", orderAndCartItems)
   return (
     <>
       <div className={styles.orderSummaryWrapper}>
@@ -100,56 +148,40 @@ const OrderSummary = () => {
               <div className={styles.infoColumn}>
                 {shippingData && (
                   <div className={styles.clientInfoContainer}>
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {userData.firstName}
-                      </div>
-                    </div>
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {userData.lastName}
-                      </div>
-                    </div>
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {shippingData.street}
-                      </div>
-                    </div>
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {shippingData.number}
-                      </div>
-                    </div>
-
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {shippingData.city}
-                      </div>
-                    </div>
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {shippingData.country}
-                      </div>
-                    </div>
-
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {shippingData.postalCode}
-                      </div>
-                    </div>
-
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>Payment </div>
-                    </div>
-                    <div className={styles.clientInfoItem}>
-                      <div className={styles.formField}>
-                        {/*  {`${Number(
-                          orderAndCartItems.lastOrder.totalAmount +
-                            SHIPPING_COST,
-                        ).toFixed(2)} 
-                        €`} */}
-                      </div>
-                    </div>
+                    {userData &&
+                      Object.keys(userData).map((key) => (
+                        <div className={styles.clientInfoItem}>
+                          <div key={key} className={styles.formField}>
+                            {camelCaseToTitleCase(key)}: {userData[key]}
+                          </div>
+                        </div>
+                      ))}
+                    {shippingData &&
+                      Object.keys(shippingData).map((key) => (
+                        <div className={styles.clientInfoItem}>
+                          <div key={key} className={styles.formField}>
+                            {camelCaseToTitleCase(key)}: {shippingData[key]}
+                          </div>
+                        </div>
+                      ))}
+                    {orderData &&
+                      Object.keys(orderData).map((key) =>
+                        key === "totalAmount" ? (
+                          <div className={styles.clientInfoItem}>
+                            <div key={key} className={styles.formField}>
+                              {camelCaseToTitleCase(key)}:{" "}
+                              {`${Number(orderData[key]) + SHIPPING_COST} €`}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className={styles.clientInfoItem}>
+                            <div key={key} className={styles.formField}>
+                              {camelCaseToTitleCase(key)}:{" "}
+                              {camelCaseToTitleCase(orderData[key])}
+                            </div>
+                          </div>
+                        ),
+                      )}
                   </div>
                 )}
               </div>
@@ -162,18 +194,20 @@ const OrderSummary = () => {
                     orderAndCartItems.cartItems.map((item, index) => (
                       <div key={index} className={styles.cartItemWrapper}>
                         <div className={styles.cartItem}>
-                          <img
-                            src={item.product.image}
-                            alt={item.product.name}
-                            className={styles.cartItemImage}
-                            onError={(e) =>
-                              setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
-                            }
-                          />
+                          <div className={styles.imageContainer}>
+                            <img
+                              src={item.product.image}
+                              alt={item.product.name}
+                              className={styles.image}
+                              onError={(e) =>
+                                setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                              }
+                            />
+                          </div>
+
                           <div className={styles.cartItemDetails}>
                             <h3>
-                              {item.quantity}{" "}
-                              {titleCase(item.product.name, "_")}
+                              {item.quantity} {item.product.name}
                             </h3>
                             <p>{item.product.size} ml</p>
                           </div>

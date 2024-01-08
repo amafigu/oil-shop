@@ -8,7 +8,7 @@
   margin: theme.$spacing-small;
   overflow: hidden;
   text-align: center;
-  border: 1px solid theme.$branding-color-primary;
+  border: theme.$border-regular-component;
   border-radius: theme.$border-radius-regular;
 
   @include flex-align-center;
