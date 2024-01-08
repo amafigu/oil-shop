@@ -12,33 +12,24 @@ const ZodValidationErrorsCard = ({ errorsArray, translationObj }) => {
     let newErrorsObject = { ...errorsObject }
 
     errorsArray.forEach((err) => {
-      if (err.path[0] === "firstName") {
-        if (err.message === "First name should start with a capital letter.") {
-          newErrorsObject.firstName = [
-            ...newErrorsObject.firstName,
-            "shouldStartWithACapitalLetter",
-          ]
-        }
-        if (err.message === "First name can only contain letters.") {
-          newErrorsObject.firstName = [
-            ...newErrorsObject.firstName,
-            "shouldContainOnlyLetters",
+      const path = err.path[0]
+      const message = err.message
+      if (translationObj[path]) {
+        const translationKey = Object.keys(translationObj[path]).find(
+          (key) => translationObj[path][key] === message,
+        )
+
+        if (translationKey && !newErrorsObject[path].includes(translationKey)) {
+          newErrorsObject[path] = [
+            ...(newErrorsObject[path] || []),
+            translationKey,
           ]
         }
       }
     })
 
-    let cleanedErrorsObject = Object.entries(errorsObject).reduce(
-      (acc, [key, value]) => {
-        if (value.length > 0) {
-          acc[key] = value
-        }
-        return acc
-      },
-      {},
-    )
     setErrorsObject(newErrorsObject)
-  }, [errorsArray])
+  }, [errorsArray, translationObj])
 
   let cleanedErrorsObject = Object.entries(errorsObject).reduce(
     (acc, [key, value]) => {
@@ -50,7 +41,23 @@ const ZodValidationErrorsCard = ({ errorsArray, translationObj }) => {
     {},
   )
 
-  return <div>{JSON.stringify(cleanedErrorsObject)}</div>
+  const getTranslatedErrorMessage = (field, errorKey) => {
+    return translationObj[field][errorKey]
+  }
+
+  return (
+    <div>
+      {Object.entries(cleanedErrorsObject).map(([field, errorKeys]) => (
+        <div key={field}>
+          {errorKeys.map((errorKey) => (
+            <p key={`${field}${errorKey}`}>
+              {getTranslatedErrorMessage(field, errorKey)}
+            </p>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default ZodValidationErrorsCard

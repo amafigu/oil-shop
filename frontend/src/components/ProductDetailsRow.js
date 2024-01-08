@@ -16,7 +16,7 @@ const ProductDetailsRow = ({ product, quantity }) => {
           />
           <div className={styles.itemDetails}>
             <h3>
-              {quantity} {titleCase(product.name, "_")}
+              {quantity} X {titleCase(product.name, "_")}
             </h3>
             <p>{product.description}</p>
             <p>{product.size} ml</p>

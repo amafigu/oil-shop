@@ -28,6 +28,10 @@
   font-size: theme.$font-size-medium;
 }
 
+.title {
+  @include component-title;
+}
+
 .formFieldSelect {
   width: 100%;
   height: 38px;

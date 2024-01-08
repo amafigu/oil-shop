@@ -6,7 +6,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 48px;
 
   @include media.mobile {
     flex-direction: column;
@@ -25,15 +24,13 @@
   }
 
   .avatarContainer {
-    background-color: theme.$background-color-form-secondary;
-    border-radius: theme.$border-radius-large;
+    width: 164px;
+
+    @include flex-all-center;
   }
 
   .header {
     width: 100%;
-    font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-subtitle;
-    font-weight: theme.$font-weight-semibold;
 
     @include media.mobile {
       font-size: theme.$font-size-small;

@@ -108,6 +108,8 @@ const UserData = () => {
     <>
       <div className={styles.userDataWrapper}>
         {notification && <NotificationCard message={notification} />}
+        <h1 className={styles.title}>User Data</h1>
+
         <ToggleButton
           show={showForm}
           setToggle={setShowForm}

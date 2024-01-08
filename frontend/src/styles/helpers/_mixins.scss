@@ -96,6 +96,24 @@
   box-shadow: theme.$box-shadow-primary;
 }
 
+@mixin notification-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-small;
+  font-weight: theme.$font-weight-semibold;
+  color: theme.$font-color-primary;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  background-color: theme.$branding-color-primary;
+  border: none;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+}
+
 @mixin input-styles-reset {
   appearance: none;
   background: none;

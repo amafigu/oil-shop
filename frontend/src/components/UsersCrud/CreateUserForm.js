@@ -6,6 +6,7 @@ import {
   API_USERS_CREATE,
   API_USERS_CURRENT_USER,
   DEFAULT_USER_IMAGE,
+  LONG_MESSAGE_TIMEOUT,
   REDIRECT_TIMEOUT,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
@@ -17,7 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import ZodValidationErrorsCard from "../ZodValidationErrorsCard"
+import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./createUserForm.module.scss"
 
 const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
@@ -96,20 +97,13 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
       if (error.response.data.errors) {
         const errorMessages = error.response.data.errors
         setValidationErrors(errorMessages)
-        setNotification(errorMessages[0].message)
-        setTimeout(() => setNotification(null), 3000)
+
+        setTimeout(() => setValidationErrors([]), LONG_MESSAGE_TIMEOUT)
       }
-      /* if (error.response.data.errors) {
-       
 
-        //  setFieldErrors(errorMessages)
- 
-
-        setTimeout(() => setFieldErrors({}), 6000)
-      } */
       if (error.response.data.message === "Email already in use") {
         setNotification(`Email already in use`)
-        setTimeout(() => setNotification(null), 6000)
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
       console.error("Signup error", error)
     }
@@ -126,13 +120,21 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
           : {}
       }
     >
-      {validationErrors.length > 0 && (
-        <ZodValidationErrorsCard
-          errorsArray={validationErrors}
-          translationObj={textValidationErrors}
+      {notification && (
+        <NotificationCard
+          message={notification}
+          errosMessageArray={validationErrors}
+          textValidationErrorsObject={textValidationErrors}
         />
       )}
-      {notification && <NotificationCard message={notification} />}
+      {validationErrors && validationErrors.length > 0 && (
+        <NotificationCard
+          message={""}
+          errorsMessageArray={validationErrors}
+          textValidationErrorsObject={textValidationErrors}
+        />
+      )}
+
       <form className={styles.form} onSubmit={createUser}>
         <input
           className={styles.formField}
