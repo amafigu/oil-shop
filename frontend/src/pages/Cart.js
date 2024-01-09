@@ -1,10 +1,13 @@
+import NotificationCard from "#components/NotificationCard"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { cartTotalSum, totalCost } from "#utils/cart"
 import {
   DEFAULT_PRODUCT_IMAGE,
   ROUTES_CART,
   ROUTES_CHECKOUT_SHIPPING,
+  ROUTES_CURRENT_ADMIN,
   SHIPPING_COST,
 } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
@@ -12,18 +15,30 @@ import { useEffectScrollTop } from "#utils/render"
 import { titleCase } from "#utils/stringManipulation"
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styles from "./cart.module.scss"
 const Cart = () => {
+  const [notification, setNotification] = useState(null)
   const { cart, removeProduct, updateProductQuantity } = useCartContext()
   const { translate } = useLocaleContext()
   const text = translate.pages.cart
+  const { user } = useUserContext()
+  const navigate = useNavigate()
+  console.log(user)
 
   useEffectScrollTop()
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      setNotification("as admin you can not buy products")
+      setTimeout(() => setNotification(null), 3000)
+      setTimeout(() => navigate(ROUTES_CURRENT_ADMIN), 3000)
+    }
+  }, [user, navigate])
 
   return (
     <div className={styles.cartWrapper}>
+      {notification && <NotificationCard message={notification} />}
       <div className={styles.cart}>
         <div className={styles.cartItemsList}>
           {cart.length > 0 ? (
@@ -118,7 +133,7 @@ const Cart = () => {
               <span>{cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €</span>
             </div>
           </div>
-          {cart.length ? (
+          {cart.length > 0 ? (
             <Link
               className={styles.confirmOrderButton}
               to={ROUTES_CHECKOUT_SHIPPING}

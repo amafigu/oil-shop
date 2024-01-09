@@ -15,7 +15,9 @@
     width: 80px;
     height: 80px;
     margin: theme.$spacing-small;
+    border: theme.$border-regular-image;
     border-radius: theme.$border-radius-circle;
+    box-shadow: theme.$box-shadow-light;
 
     @include media.mobile {
       width: 100px;

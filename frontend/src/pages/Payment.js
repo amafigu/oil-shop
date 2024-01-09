@@ -13,6 +13,7 @@ import {
   LOCAL_STORAGE_GUEST_ID,
   ROUTES_CHECKOUT_ORDER_SUMMARY,
   ROUTES_CHECKOUT_SHIPPING,
+  ROUTES_CURRENT_ADMIN,
   SHIPPING_COST,
 } from "#utils/constants"
 import { useEffectScrollTop } from "#utils/render"
@@ -21,20 +22,21 @@ import {
   getUserWithoutCredentialsByEmail,
 } from "#utils/users"
 import axios from "axios"
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import styles from "./payment.module.scss"
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [notification, setNotification] = useState(null)
-  const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
-  const { isLoggedIn, setUserId, userId } = useUserContext()
+  const { isLoggedIn, userId, user } = useUserContext()
   const { setCart } = useCartContext()
   const location = useLocation()
+  const navigate = useNavigate()
   let formData = {}
+
   if (location.state) {
     formData = location.state.formData
   }
@@ -59,6 +61,14 @@ const Payment = () => {
     country: "please add data for shipping",
   }
 
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      setNotification("as admin you can not buy products")
+      setTimeout(() => setNotification(null), 3000)
+      setTimeout(() => navigate(ROUTES_CURRENT_ADMIN), 3000)
+    }
+  }, [user, navigate])
+
   const submitOrderAndGuestUser = async (e) => {
     e.preventDefault()
 
@@ -66,15 +76,10 @@ const Payment = () => {
       let customerId
 
       if (!isLoggedIn) {
-        // if user is not logged in
-        console.log("not log")
         const checkGuestUser = await getUserWithoutCredentialsByEmail(
           formData.email,
         )
-        console.log("checkGuestUser", checkGuestUser)
         if (!checkGuestUser) {
-          // if user doesn't exist, create a new one
-          console.log("not log create new guest user")
           const guestUser = await axios.post(
             `${process.env.REACT_APP_API_URL}${API_USERS_CREATE_GUEST}`,
             {
@@ -86,7 +91,6 @@ const Payment = () => {
           )
 
           customerId = guestUser.data.guestUser.id
-          console.log("not log created guestUserId", customerId)
           await axios.post(
             `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
             stateShippingDataObject,
@@ -102,34 +106,27 @@ const Payment = () => {
           const shippingDataResponse = await getUserShippingData(customerId)
 
           if (!shippingDataResponse) {
-            const saveEmptyShippingData = await axios.post(
+            await axios.post(
               `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
               registeredUserEmptyShippingDataObject,
             )
-
-            console.log("saveEmptyShippingData", saveEmptyShippingData.data)
           }
 
           localStorage.setItem(
             LOCAL_STORAGE_GUEST_ID,
             JSON.stringify(customerId),
           )
-          console.log("guestUserId", customerId)
         }
-        // if user doesn't exist, create a new one and save the id in local storage
       } else {
-        console.log("log")
-        // if user is logged in
         const userDataResponse = await axios.get(
           `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
           { withCredentials: true },
         )
         customerId = userDataResponse.data.id
-        // if user is logged in, get the id from the user data and check if it has shipping data
         const shippingDataResponse = await getUserShippingData(customerId)
 
         if (!shippingDataResponse) {
-          const saveEmptyShippingData = await axios.post(
+          await axios.post(
             `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
             registeredUserEmptyShippingDataObject,
           )
@@ -138,10 +135,7 @@ const Payment = () => {
         localStorage.setItem(LOCAL_STORAGE_GUEST_ID, JSON.stringify(customerId))
       }
 
-      console.log("customerIdAfter ifs", customerId)
-
       if (customerId) {
-        console.log("common customerId", customerId)
         const cart = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CART))
         const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
         const newOrder = {
@@ -155,8 +149,6 @@ const Payment = () => {
           newOrder,
         )
 
-        console.log("order", orderResponse)
-
         if (orderResponse && orderResponse.status === 201) {
           const orderId = orderResponse.data.id
           for (const item of cart) {
@@ -169,11 +161,6 @@ const Payment = () => {
                   userOrderId: orderId,
                 },
               )
-              console.log("items obj", {
-                quantity: item.quantity,
-                productId: item.product.id,
-                userOrderId: orderId,
-              })
             } catch (error) {
               setNotification(`Error by adding product into new order`)
               setTimeout(() => setNotification(null), 3000)

@@ -11,24 +11,29 @@ const ZodValidationErrorsCard = ({ errorsArray, translationObj }) => {
   useEffect(() => {
     let newErrorsObject = { ...errorsObject }
 
-    errorsArray.forEach((err) => {
-      const path = err.path[0]
-      const message = err.message
-      if (translationObj[path]) {
-        const translationKey = Object.keys(translationObj[path]).find(
-          (key) => translationObj[path][key] === message,
-        )
+    errorsArray &&
+      errorsArray.forEach((err) => {
+        const path = err.path[0]
+        const message = err.message
+        if (translationObj[path]) {
+          const translationKey = Object.keys(translationObj[path]).find(
+            (key) => translationObj[path][key] === message,
+          )
 
-        if (translationKey && !newErrorsObject[path].includes(translationKey)) {
-          newErrorsObject[path] = [
-            ...(newErrorsObject[path] || []),
-            translationKey,
-          ]
+          if (
+            translationKey &&
+            !newErrorsObject[path].includes(translationKey)
+          ) {
+            newErrorsObject[path] = [
+              ...(newErrorsObject[path] || []),
+              translationKey,
+            ]
+          }
         }
-      }
-    })
+      })
 
     setErrorsObject(newErrorsObject)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errorsArray, translationObj])
 
   let cleanedErrorsObject = Object.entries(errorsObject).reduce(

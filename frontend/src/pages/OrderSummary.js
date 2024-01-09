@@ -44,20 +44,14 @@ const OrderSummary = () => {
 
   useEffect(() => {
     const getSummaryData = async () => {
-      console.log("cart", cart)
-      console.log("shippingData", shippingData)
-      console.log("userData", userData)
-      console.log("!isLoading", !isLoading)
-      console.log("isLoggedIn", isLoggedIn)
-      console.log("isLoggedIn", isLoggedIn)
-
       try {
+        let customerId
         if (!isLoggedIn) {
           console.log("cart", cart)
-          const guestId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
-
+          customerId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
+          console.log("isLoggedIn", customerId)
           const guestDataResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${guestId}`,
+            `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${customerId}`,
           )
           if (guestDataResponse.status === 200) {
             const guest = guestDataResponse.data
@@ -67,72 +61,69 @@ const OrderSummary = () => {
               lastName: guest.lastName,
               email: guest.email,
             })
-
-            console.log(userData)
-          }
-
-          const shippingDataResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${guestId}`,
-          )
-
-          console.log(shippingDataResponse)
-
-          if (shippingDataResponse.status === 200) {
-            const data = shippingDataResponse.data
-            setShippingData({
-              street: data.street,
-              number: data.number,
-              postalCode: data.postalCode,
-              city: data.city,
-              state: data.state,
-              country: data.country,
-            })
-          }
-          const orderAndCartItemsResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${guestId}`,
-          )
-          console.log(orderAndCartItemsResponse)
-          if (orderAndCartItemsResponse.status === 200) {
-            setOrderAndCartItems(orderAndCartItemsResponse.data)
-            setOrderData({
-              paymentMethod:
-                orderAndCartItemsResponse.data.lastOrder[0].paymentMethod,
-              totalAmount:
-                orderAndCartItemsResponse.data.lastOrder[0].totalAmount,
-            })
-            console.log(orderData)
           }
         }
 
         if (isLoggedIn && !isLoading) {
-          console.log(isLoggedIn)
+          console.log(userId)
+          console.log(customerId)
+          customerId = userId
+          console.log(customerId)
           const userDataResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
+            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${customerId}`,
             { withCredentials: true },
           )
 
+          console.log("userDatares", userDataResponse)
           if (userDataResponse.status === 200) {
-            setUserData(userData.data)
-          }
-          const shippingData = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${userDataResponse.data.id}`,
-          )
+            const user = userDataResponse.data
 
-          if (shippingData.status === 200) {
-            setShippingData(shippingData.data)
+            setUserData({
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+            })
           }
+        }
 
-          const orderAndCartItems = await axios.get(
-            `${process.env.REACT_APP_API_URL}/orders/last-order-items/${userDataResponse.data.id}`,
-          )
-          setOrderAndCartItems(orderAndCartItems.data)
+        const shippingDataResponse = await axios.get(
+          `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
+        )
+
+        console.log(shippingDataResponse)
+
+        if (shippingDataResponse.status === 200) {
+          const data = shippingDataResponse.data
+          setShippingData({
+            street: data.street,
+            number: data.number,
+            postalCode: data.postalCode,
+            city: data.city,
+            state: data.state,
+            country: data.country,
+          })
+        }
+        const orderAndCartItemsResponse = await axios.get(
+          `${process.env.REACT_APP_API_URL}/orders/last-order-items/${customerId}`,
+        )
+        console.log(orderAndCartItemsResponse)
+        if (orderAndCartItemsResponse.status === 200) {
+          setOrderAndCartItems(orderAndCartItemsResponse.data)
+          setOrderData({
+            paymentMethod:
+              orderAndCartItemsResponse.data.lastOrder[0].paymentMethod,
+            totalAmount:
+              orderAndCartItemsResponse.data.lastOrder[0].totalAmount,
+          })
+          console.log(orderData)
         }
       } catch (error) {
         console.error(error)
       }
     }
     getSummaryData()
-  }, [cart, navigate, setShippingData, userId, isLoggedIn, isLoading])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart, navigate, userId, isLoggedIn, isLoading])
 
   console.log("orderAndCartItems", orderAndCartItems)
   return (
@@ -206,10 +197,9 @@ const OrderSummary = () => {
                           </div>
 
                           <div className={styles.cartItemDetails}>
-                            <h3>
-                              {item.quantity} {item.product.name}
-                            </h3>
+                            <p>{item.product.name}</p>
                             <p>{item.product.size} ml</p>
+                            <p>Quantity: {item.quantity}</p>
                           </div>
                         </div>
                       </div>

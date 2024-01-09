@@ -156,7 +156,7 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
                 )}
               </div>
             ) : (
-              <div className={styles.inputContainer}>
+              <div className={styles.inputContainer} key={key}>
                 <EditableImageInput
                   label={key}
                   name={key}

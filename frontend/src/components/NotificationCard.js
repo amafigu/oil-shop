@@ -7,8 +7,6 @@ const NotificationCard = ({
   errorsMessageArray,
   textValidationErrorsObject,
 }) => {
-  console.log(errorsMessageArray)
-  console.log(textValidationErrorsObject)
   return (
     <div>
       {message && message !== "" && (
@@ -22,7 +20,6 @@ const NotificationCard = ({
         errorsMessageArray.length > 0 && (
           <div className={styles.modal}>
             <div className={styles.notificationCard}>
-              {" "}
               <ZodValidationErrorsCard
                 errorsArray={errorsMessageArray}
                 translationObj={textValidationErrorsObject}
