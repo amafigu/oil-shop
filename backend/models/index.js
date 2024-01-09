@@ -69,6 +69,7 @@ db.products.hasMany(db.cartItems, {
 
 db.cartItems.belongsTo(db.products, {
   foreignKey: 'productId',
+  onDelete: 'CASCADE',
 });
 
 db.userOrders.hasMany(db.cartItems, {

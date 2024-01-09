@@ -16,6 +16,7 @@ const cartItemsModel = (sequelize, DataTypes) => {
         model: 'products',
         key: 'id',
       },
+      onDelete: 'CASCADE',
     },
     quantity: {
       type: DataTypes.INTEGER,
