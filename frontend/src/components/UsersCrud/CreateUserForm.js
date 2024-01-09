@@ -7,7 +7,6 @@ import {
   API_USERS_CURRENT_USER,
   DEFAULT_USER_IMAGE,
   LONG_MESSAGE_TIMEOUT,
-  REDIRECT_TIMEOUT,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
   ROUTES_SIGN_UP,
@@ -73,12 +72,15 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
         )
 
         if (loginResponse && loginResponse.status === 200) {
+          console.log("LOGIN RESPONSE", loginResponse)
           const getLoggedInUser = async () => {
             try {
               const userResponse = await axios.get(
                 `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${newUserResponse.data.user.id}`,
                 { withCredentials: true },
               )
+              console.log("CREATE USER FORM GETLOGGED USER", userResponse.data)
+
               const userData = userResponse.data
               setUserEmail(userData.email)
               setIsLoggedIn(true)
@@ -90,7 +92,7 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
             }
           }
           getLoggedInUser()
-          setTimeout(() => navigate(ROUTES_CURRENT_CUSTOMER), REDIRECT_TIMEOUT)
+          setTimeout(() => navigate(ROUTES_CURRENT_CUSTOMER), 2000)
         }
       }
     } catch (error) {
