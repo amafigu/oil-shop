@@ -1,3 +1,4 @@
+import { camelCaseToTitleCase } from "#utils/stringManipulation"
 import React from "react"
 import styles from "./formInput.module.scss"
 
@@ -21,7 +22,7 @@ const FormInput = ({
         name={name}
         onChange={onChangeListener}
         value={value}
-        placeholder={placeholder}
+        placeholder={camelCaseToTitleCase(placeholder)}
         id={name}
         required
       />

@@ -1,6 +1,15 @@
+import LanguageDropdown from "#components/LanguageDropdown"
 import LogoutButton from "#components/LogoutButton"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
+import {
+  LOGO_IMAGE,
+  ROUTES_CART,
+  ROUTES_CURRENT_ADMIN,
+  ROUTES_CURRENT_CUSTOMER,
+  ROUTES_HOME,
+  ROUTES_LOGIN,
+} from "#utils/constants"
 import { searchAndNavigateToProduct, useGetProducts } from "#utils/products"
 import {
   getInputChangeAndOpenList,
@@ -18,7 +27,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import LanguageDropdown from "./LanguageDropdown"
 import MenuMobile from "./MenuMobile"
 import ProductsDropdown from "./ProductsDropdown"
 import SubNavbar from "./SubNavbar"
@@ -145,11 +153,13 @@ const Navbar = ({ productCategories }) => {
 
           <div className={`${styles.navbarColumn} ${styles.navbarColumnLogo}`}>
             <div className={styles.logoContainer}>
-              <img
-                className={styles.logo}
-                src={`${process.env.PUBLIC_URL}/assets/logo.png`}
-                alt='logo'
-              />
+              <Link className={styles.linkChild} to={ROUTES_HOME}>
+                <img
+                  className={styles.logo}
+                  src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
+                  alt='logo'
+                />
+              </Link>
             </div>
 
             <div className={styles.menuWrapper}>
@@ -207,8 +217,8 @@ const Navbar = ({ productCategories }) => {
                       className={styles.linkChild}
                       to={
                         user && user.roleId === 2 // TODO admin roleId and send the user with role name from backend
-                          ? "/users/current-admin"
-                          : "/users/current-customer"
+                          ? ROUTES_CURRENT_ADMIN
+                          : ROUTES_CURRENT_CUSTOMER
                       }
                     >
                       <FontAwesomeIcon icon={faUser} />
@@ -223,13 +233,13 @@ const Navbar = ({ productCategories }) => {
                     </div>
                   </div>
                 ) : (
-                  <Link className={styles.linkChild} to='/login'>
+                  <Link className={styles.linkChild} to={ROUTES_LOGIN}>
                     <FontAwesomeIcon icon={faUser} />
                   </Link>
                 )}
 
                 <div className={styles.cartAndQuantity}>
-                  <Link className={styles.linkChild} to='/cart'>
+                  <Link className={styles.linkChild} to={ROUTES_CART}>
                     <FontAwesomeIcon icon={faCartShopping} />
                   </Link>
                   <span className={styles.productsQuantity}>
@@ -240,7 +250,9 @@ const Navbar = ({ productCategories }) => {
             </div>
           </div>
         </div>
-        <SubNavbar />
+        <div className={styles.subNavbarContainer}>
+          <SubNavbar />
+        </div>
       </div>
     </div>
   )

@@ -13,17 +13,20 @@ const ProductCard = ({ product }) => {
   return (
     <div className={styles.productCardWrapper}>
       {product ? (
-        <div>
+        <div className={styles.productCardBodyWrapper}>
           <Link to={`/products/${product.name}`}>
             <div className={styles.productCardBody}>
-              <img
-                className={styles.productCardImage}
-                src={product.image}
-                alt={product.name}
-                onError={(e) =>
-                  setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
-                }
-              />
+              <div className={styles.imageContainer}>
+                <img
+                  className={styles.image}
+                  src={product.image}
+                  alt={product.name}
+                  onError={(e) =>
+                    setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                  }
+                />
+              </div>
+
               <div className={styles.productCardName}>
                 {titleCase(product.name, "_")}
               </div>

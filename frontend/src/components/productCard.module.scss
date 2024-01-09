@@ -3,23 +3,30 @@
 @import "#styles/helpers/mixins";
 
 .productCardWrapper {
-  display: flex;
   flex-flow: column nowrap;
-  align-items: center;
-  width: 260px;
   min-height: 406px;
   margin: theme.$spacing-small;
-  margin-bottom: theme.$spacing-semi-regular;
   overflow: hidden;
   text-align: center;
+  border: theme.$border-regular-component;
+  border-radius: theme.$border-radius-regular;
 
-  .addButtonContainer {
-    pointer-events: auto;
-    opacity: 1;
-  }
+  @include flex-align-center;
 
-  .productCardBody {
-    margin-bottom: theme.$spacing-semi-regular-large;
+  .productCardBodyWrapper {
+    width: 200px;
+    margin: theme.$spacing-regular;
+
+    @include flex-column-align-center;
+
+    .productCardBody {
+      margin-bottom: theme.$spacing-semi-regular-large;
+    }
+
+    .addButtonContainer {
+      pointer-events: auto;
+      opacity: 1;
+    }
   }
 
   .addButton {
@@ -30,13 +37,17 @@
     @include product-card-name;
   }
 
-  .productCardImage {
-    max-width: 80%;
-    height: 200px;
-    min-height: 200px;
-    margin: theme.$spacing-semi-regular 0;
-    background-color: white;
-    object-fit: contain;
+  .imageContainer {
+    @include flex-all-center;
+
+    .image {
+      max-width: 130px;
+      height: 200px;
+      min-height: 200px;
+      margin: theme.$spacing-semi-regular 0;
+      background-color: theme.$background-color-primary;
+      object-fit: contain;
+    }
   }
 
   .productCardSize,

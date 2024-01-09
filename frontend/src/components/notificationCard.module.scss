@@ -5,19 +5,21 @@
 .modal {
   position: fixed;
   inset: 0;
+  display: flex;
+  justify-content: flex-end;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background: rgb(0 0 0 / 50%);
   transition: opacity 0.3s ease-in-out;
-
-  @include flex-all-center;
 }
 
 .notificationCard {
-  @include action-button;
+  width: fit-content;
+  height: fit-content;
+  padding: theme.$spacing-semi-regular-large;
+  margin: theme.$spacing-semi-regular-large theme.$spacing-large;
+  border: theme.$border-regular-component;
 
-  width: 300px;
-  height: 100px;
-  padding: 0 theme.$spacing-semi-regular-large;
+  @include notification-card-content;
 }

@@ -3,7 +3,7 @@
 @import "#styles/helpers/mixins";
 
 .userDataWrapper {
-  @include component-container-large;
+  margin: 0;
 }
 
 .form {
@@ -26,6 +26,10 @@
   margin-bottom: theme.$spacing-small;
   font-family: theme.$font-family-primary;
   font-size: theme.$font-size-medium;
+}
+
+.title {
+  @include component-title;
 }
 
 .formFieldSelect {

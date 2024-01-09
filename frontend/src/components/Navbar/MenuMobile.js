@@ -1,8 +1,14 @@
+import LanguageDropdown from "#components/LanguageDropdown"
 import LogoutButton from "#components/LogoutButton"
-import { CartContext } from "#context/cartContext"
+import Sidebar from "#components/Sidebar"
+import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
-import { Link, useNavigate } from "react-router-dom"
-
+import {
+  ROUTES_CART,
+  ROUTES_CURRENT_ADMIN,
+  ROUTES_CURRENT_CUSTOMER,
+  ROUTES_LOGIN,
+} from "#utils/constants"
 import {
   faCartShopping,
   faChevronDown,
@@ -11,11 +17,9 @@ import {
   faUser,
   faX,
 } from "@fortawesome/free-solid-svg-icons"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { React, useContext, useState } from "react"
-import Sidebar from "../Sidebar"
-import LanguageDropdown from "./LanguageDropdown"
+import { React, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styles from "./menuMobile.module.scss"
 
 const MenuMobile = ({
@@ -24,7 +28,7 @@ const MenuMobile = ({
   setCategory,
   productCategories,
 }) => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false)
+  const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const navigate = useNavigate()
   const { isLoggedIn, setIsLoggedIn, setUserEmail, setUser, user } =
     useUserContext()
@@ -34,7 +38,7 @@ const MenuMobile = ({
     navigate(route)
   }
 
-  const { getAllProductsQuantity } = useContext(CartContext)
+  const { getAllProductsQuantity } = useCartContext()
 
   return (
     <div className={styles.menuWrapper}>
@@ -49,19 +53,27 @@ const MenuMobile = ({
 
           <li
             className={`${styles.listDropdownItem} ${styles.listItem}`}
-            onClick={() => setDropdownOpen((isDropdownOpen) => !isDropdownOpen)}
+            onClick={() =>
+              setLanguageDropdownOpen(
+                (isLanguageDropdownOpen) => !isLanguageDropdownOpen,
+              )
+            }
           >
             <div className={styles.itemsContainer}>
               <FontAwesomeIcon icon={faGlobe} />
 
-              {!isDropdownOpen && <FontAwesomeIcon icon={faChevronDown} />}
-              {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
+              {!isLanguageDropdownOpen && (
+                <FontAwesomeIcon icon={faChevronDown} />
+              )}
+              {isLanguageDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
             </div>
           </li>
-          {isDropdownOpen && <LanguageDropdown setMenuOpen={setMenuOpen} />}
+          {isLanguageDropdownOpen && (
+            <LanguageDropdown setMenuOpen={setMenuOpen} />
+          )}
           <li
             className={styles.listItem}
-            onClick={() => navigateAndCloseMenu("/cart")}
+            onClick={() => navigateAndCloseMenu(ROUTES_CART)}
           >
             <div className={styles.itemsContainer}>
               <FontAwesomeIcon icon={faCartShopping} />
@@ -73,7 +85,10 @@ const MenuMobile = ({
           </li>
           {isLoggedIn ? (
             <div className={styles.userAndLogoutIconContainer}>
-              <div className={styles.listItem}>
+              <div
+                className={styles.listItem}
+                onClick={() => setMenuOpen(false)}
+              >
                 <LogoutButton
                   navigate={navigate}
                   setIsLoggedIn={setIsLoggedIn}
@@ -81,13 +96,16 @@ const MenuMobile = ({
                   setUser={setUser}
                 />
               </div>
-              <div className={styles.listItem}>
+              <div
+                className={styles.listItem}
+                onClick={() => setMenuOpen(false)}
+              >
                 <Link
                   className={styles.linkChild}
                   to={
                     user && user.roleId === 2 // TODO: change the 2 for admin roleId and send the user with role name from backend
-                      ? "/users/current-admin"
-                      : "/users/current-customer"
+                      ? ROUTES_CURRENT_ADMIN
+                      : ROUTES_CURRENT_CUSTOMER
                   }
                 >
                   <FontAwesomeIcon icon={faUser} />
@@ -95,18 +113,13 @@ const MenuMobile = ({
               </div>
             </div>
           ) : (
-            <Link className={styles.linkChild} to='/login'>
-              <FontAwesomeIcon icon={faUser} />
-            </Link>
+            <div className={styles.listItem}>
+              <Link className={styles.linkChild} to={ROUTES_LOGIN}>
+                <FontAwesomeIcon icon={faUser} />
+              </Link>
+            </div>
           )}
-          {/* <li
-            className={styles.listItem}
-            onClick={() => navigateAndCloseMenu("/login")}
-          >
-            <span className={styles.linkContent}>
-              <FontAwesomeIcon icon={faUser} />
-            </span>
-          </li> */}
+
           <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu("/about")}

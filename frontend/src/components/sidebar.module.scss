@@ -3,11 +3,13 @@
 @import "#styles/helpers/mixins";
 
 .activeCategory {
-  color: theme.$color-branding-primary;
+  color: theme.$branding-color-primary;
 }
 
 .sidebarItem {
   @include menu-list-item;
+
+  font-size: theme.$font-size-medium;
 
   @include media.tablet {
     border-bottom: 0;

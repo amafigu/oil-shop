@@ -3,7 +3,8 @@ $box-shadow-primary: 0 3px 1px -2px rgb(0 0 0 / 20%),
   0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%);
 $box-shadow-light: 0 1px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
   0 1px 2px 0 rgb(0 0 0 / 12%);
-$border-regular-component: solid 1px #757575;
+$border-regular-component: solid 1px #686868;
+$border-regular-image: solid 1px #b5cfaa;
 $border-radius-small: 4px;
 $border-radius-regular: 8px;
 $border-radius-large: 12px;
@@ -17,7 +18,7 @@ $background-color-form-secondary: #e9e9e9;
 $background-color-secondary-button: #333;
 $background-color-secondary-button-hover: #444;
 $border-color-custom-input: #ddd;
-$color-branding-primary: #b5cfaa;
+$branding-color-primary: #b5cfaa;
 $font-color-primary: #686868;
 $font-color-contrast: #fff;
 $font-color-light: #757575;
@@ -40,6 +41,7 @@ $font-size-button-mobile: 1rem;
 $font-size-form-field: 1rem;
 $font-weight-light: 200;
 $font-weight-regular: 400;
+$font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 800;
 
@@ -54,6 +56,7 @@ $spacing-semi-regular-semi-large: 1.125em;
 $spacing-semi-regular: 1rem;
 $spacing-small: 0.75rem;
 $spacing-smaller: 0.5rem;
+$spacing-smallest: 0.25rem;
 $margin-order-list: 2rem;
 $margin-order-list-mobile: 1.75rem;
 $margin-bottom-form-field: 0.75rem;
@@ -66,7 +69,8 @@ $padding-divider-small: 0.75rem;
 // SIZING - WIDTH / HEIGHT
 $line-height-primary: 128%;
 $height-form-field: 2rem;
-$min-height-page-primary: 65vh;
+$min-height-page-small: 65vh;
+$min-height-page-regular: 80vh;
 $page-width-primary: 80%;
 $z-index: (
   sidebar-menu: 200,

@@ -3,7 +3,7 @@ import NotificationCard from "#components/NotificationCard"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { STYLES } from "#utils/constants"
+import { ROUTES_CURRENT_ADMIN, STYLES } from "#utils/constants"
 import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -36,6 +36,13 @@ const Shipping = () => {
         navigate("/cart")
       } else if (isLoggedIn) {
         navigate("/checkout/payment")
+      }
+
+      if (user && user.role === "admin") {
+        console.log("user", user)
+        setNotification("as admin you can add shipping data")
+        setTimeout(() => setNotification(null), 3000)
+        setTimeout(() => navigate(ROUTES_CURRENT_ADMIN), 3000)
       }
     }
   }, [cart, navigate, isLoggedIn, isLoading, user])

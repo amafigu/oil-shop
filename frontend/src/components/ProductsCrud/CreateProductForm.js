@@ -111,7 +111,7 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
                 value={productData[field]}
               />
             ) : field === "productCategoryId" ? (
-              <div className={styles.labelAndInputContainer}>
+              <div className={styles.labelAndInputContainer} key={field}>
                 <label className={styles.label} htmlFor='name'>
                   {text.forms.commonProperties.category}
                 </label>
@@ -148,7 +148,7 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
                 </select>
               </div>
             ) : (
-              <div className={styles.labelAndInputContainer}>
+              <div className={styles.labelAndInputContainer} key={field}>
                 <span className={styles.label}>
                   {file ? "Selected file: " : "Select a file"}
                 </span>
@@ -157,6 +157,7 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
                 </label>
 
                 <input
+                  key={field}
                   type='file'
                   name='image'
                   id='fileInput'

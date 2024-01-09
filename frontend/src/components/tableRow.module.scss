@@ -4,50 +4,48 @@
 
 .userDataTable {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
   padding: 10px;
   margin-left: theme.$spacing-extra-large;
   overflow-x: auto;
-  background-color: theme.$background-color-form-secondary;
-  border-radius: theme.$border-radius-large;
 
   @include media.mobile {
     margin-left: theme.$spacing-regular;
   }
 
   .tableRow {
-    display: flex;
     width: 100%;
 
+    @include flex-column;
+
     @include media.mobile {
-      flex-direction: column;
       flex-grow: 1;
     }
   }
 
   .tableCell {
-    flex-grow: 1;
+    display: flex;
 
     @include media.mobile {
-      display: flex;
-      flex-grow: 1;
+      flex-direction: column;
     }
   }
 
   .tableHeaderCell {
     display: flex;
-    font-weight: theme.$font-weight-semibold;
+    font-weight: theme.$font-weight-regular;
 
     @include media.mobile {
-      flex-grow: 1;
       max-width: 40%;
     }
   }
 
   .tableHeaderCell,
   .tableDataCell {
-    padding: 0.5rem;
     text-align: left;
+  }
+
+  .tableDataCell {
+    margin-left: theme.$spacing-smallest;
   }
 }

@@ -10,8 +10,10 @@ const TableRow = ({ data }) => {
         {headers.map((header, index) => (
           <div key={index} className={styles.tableCell}>
             <div className={styles.tableHeaderCell}>
-              {camelCaseToTitleCase(header)}
+              {`${camelCaseToTitleCase(header)}`}
+              <span>: </span>
             </div>
+
             <div key={index} className={styles.tableDataCell}>
               {data[header]}
             </div>

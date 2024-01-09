@@ -24,6 +24,7 @@ const UserData = () => {
     firstName: "",
     lastName: "",
     email: "",
+    image: "",
   }
   const [file, setFile] = useState(null)
 
@@ -108,6 +109,8 @@ const UserData = () => {
     <>
       <div className={styles.userDataWrapper}>
         {notification && <NotificationCard message={notification} />}
+        <h1 className={styles.title}>User Data</h1>
+
         <ToggleButton
           show={showForm}
           setToggle={setShowForm}
@@ -117,39 +120,42 @@ const UserData = () => {
         />
         {showForm && (
           <div>
-            {Object.keys(initialUserData).map((key) => (
-              <div className={styles.inputContainer} key={key}>
-                <EditableInput
-                  label={key}
-                  name={key}
-                  value={updatedUserData[key]}
-                  onChange={(e) =>
-                    listenInputChangeAndSetDataObject(
-                      e,
-                      updatedUserData,
-                      setUpdatedUserData,
-                      setNotification,
-                    )
-                  }
-                  onSave={(e) => updateUserDataAndSetStates(e, key)}
-                  classCss={STYLES.FORMS.FIELD}
-                  originalPropertyData={nonUpdatedUserData}
-                  updatedPropertyData={updatedUserData}
-                />
-              </div>
-            ))}
-            <div className={styles.inputContainer}>
-              <EditableImageInput
-                label={"Image"}
-                name={"image"}
-                onChange={(e) => {
-                  setFileToUpload(e)
-                }}
-                classCss={STYLES.FORMS.ITEM_ROW}
-                file={file}
-                onSave={(e) => updateUserDataAndSetStates(e, "image")}
-              />
-            </div>
+            {Object.keys(initialUserData).map((key) =>
+              key === "image" ? (
+                <div className={styles.inputContainer} key={key}>
+                  <EditableImageInput
+                    label={key}
+                    name={key}
+                    onChange={(e) => {
+                      setFileToUpload(e)
+                    }}
+                    classCss={STYLES.FORMS.ITEM_ROW}
+                    file={file}
+                    onSave={(e) => updateUserDataAndSetStates(e, key)}
+                  />
+                </div>
+              ) : (
+                <div className={styles.inputContainer} key={key}>
+                  <EditableInput
+                    label={key}
+                    name={key}
+                    value={updatedUserData[key]}
+                    onChange={(e) =>
+                      listenInputChangeAndSetDataObject(
+                        e,
+                        updatedUserData,
+                        setUpdatedUserData,
+                        setNotification,
+                      )
+                    }
+                    onSave={(e) => updateUserDataAndSetStates(e, key)}
+                    classCss={STYLES.FORMS.FIELD}
+                    originalPropertyData={nonUpdatedUserData}
+                    updatedPropertyData={updatedUserData}
+                  />
+                </div>
+              ),
+            )}
           </div>
         )}
       </div>

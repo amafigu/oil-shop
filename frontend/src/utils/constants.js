@@ -1,6 +1,7 @@
 // VARIABLES
 export const SHIPPING_COST = 10
 export const LOCAL_STORAGE_GUEST_ID = "yolo-guest-id"
+export const LOCAL_STORAGE_CART = "yolo-cart"
 // MEDIA URLS
 export const DEFAULT_PRODUCT_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default.png"
@@ -8,9 +9,9 @@ export const DEFAULT_PRODUCT_IMAGE =
 export const DEFAULT_USER_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default_user.png"
 
-// MEDIA
+// INTERNAL MEDIA PATHS AND VARIABLES
 export const TEASER_VIDEOS = [{ id: "orangeFlowers" }]
-
+export const LOGO_IMAGE = "/assets/logo.png"
 // SOCIAL MEDIA URLS
 export const SOCIAL_MEDIA_URL_FACEBOOK = "https://www.facebook.com"
 export const SOCIAL_MEDIA_URL_INSTAGRAM = "https://www.instagram.com"
@@ -23,13 +24,21 @@ export const API_PRODUCTS_PRODUCT = "/products/product"
 export const API_PRODUCTS_PRODUCT_CREATE = "/products/product/create"
 export const API_PRODUCTS_PRODUCT_GET_BY_NAME = "/products/product/get-by-name"
 
+export const API_USERS_CURRENT_PREFIX = "/users/current-" // + admin or customer;
 export const API_USERS_CURRENT_USER = "/users/current-user"
 export const API_USERS_USER = "/users/user"
 export const API_USER_ROLE = "/users/user/role"
 export const API_USERS_CREATE = "/users/create"
+export const API_USERS_CREATE_GUEST = "/users/create-guest"
+export const API_USERS_GUEST_BY_ID = "/users/guest/id"
+export const API_USERS_GUEST_BY_EMAIL = "/users/guest/email"
 export const API_SHIPPING_DATA = "/users/user/shipping-data"
 export const API_VERIFY_TOKEN = "/users/verify-token"
 export const API_LOGIN = "/users/login"
+export const API_LOGOUT = "/users/logout"
+export const API_ORDERS_ALL = "/orders/all"
+export const API_ORDERS_CART_ITEMS = "/orders/cart-items"
+export const API_ORDERS_CREATE = "/orders/create"
 
 // ROUTES
 export const ROUTES_ABOUT = "/about"
@@ -48,6 +57,7 @@ export const ROUTES_SHOP = "/shop"
 
 // TIME CONSTANTS
 export const SHORT_MESSAGE_TIMEOUT = 3000
+export const LONG_MESSAGE_TIMEOUT = 6000
 export const REDIRECT_TIMEOUT = 1000
 
 // INPUTS CONSTANTS

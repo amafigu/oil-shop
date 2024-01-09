@@ -50,6 +50,7 @@
     height: 100%;
     min-height: min(var(--calculated-height), var(--max-height));
     overflow: hidden;
+    border-radius: theme.$border-radius-regular;
 
     @include flex-all-center;
 

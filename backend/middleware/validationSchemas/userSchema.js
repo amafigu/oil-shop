@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-const firstAndLastNameValidation = z
+const createGuestFirstNameValidation = z
   .string()
   .min(1, 'First name should have at least two characters.')
-  .max(30, "Can't be longer than 30 characters.")
+  .max(30, "First name can't be longer than 30 characters.")
   .refine((value) => value[0] === value[0].toUpperCase(), {
     message: 'First name should start with a capital letter.',
   })
@@ -11,9 +11,20 @@ const firstAndLastNameValidation = z
     message: 'First name can only contain letters.',
   });
 
-const firstAndLastNameUpdateValidation = z
+const createGuestLastNameValidation = z
   .string()
-  .max(30, "Can't be longer than 30 characters.")
+  .min(1, 'Last name should have at least two characters.')
+  .max(30, "Last name can't be longer than 30 characters.")
+  .refine((value) => value[0] === value[0].toUpperCase(), {
+    message: 'Last name should start with a capital letter.',
+  })
+  .refine((value) => /^[A-Za-z\s]+$/.test(value), {
+    message: 'Last name can only contain letters.',
+  });
+
+const firstNameUpdateValidation = z
+  .string()
+  .max(30, "First name can't be longer than 30 characters.")
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: 'First name should have at least two characters.',
   })
@@ -28,7 +39,7 @@ const firstAndLastNameUpdateValidation = z
 
 const lastNameUpdateValidation = z
   .string()
-  .max(30, "Can't be longer than 30 characters.")
+  .max(30, "Last name can't be longer than 30 characters.")
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: 'Last name should have at least two characters.',
   })
@@ -41,8 +52,34 @@ const lastNameUpdateValidation = z
   .optional()
   .default('');
 
+const firstNameCreateUserValidation = z
+  .string()
+  .max(30, "First name can't be longer than 30 characters.")
+  .refine((value) => value.length === 0 || value.length >= 2, {
+    message: 'First name should have at least two characters.',
+  })
+  .refine((value) => value === '' || value[0] === value[0].toUpperCase(), {
+    message: 'First name should start with a capital letter.',
+  })
+  .refine((value) => value === '' || /^[A-Za-z\s]+$/.test(value), {
+    message: 'First name can only contain letters.',
+  });
+
+const lastNameCreateUserValidation = z
+  .string()
+  .max(30, "Last name can't be longer than 30 characters.")
+  .refine((value) => value.length === 0 || value.length >= 2, {
+    message: 'Last name should have at least two characters.',
+  })
+  .refine((value) => value === '' || value[0] === value[0].toUpperCase(), {
+    message: 'Last name should start with a capital letter.',
+  })
+  .refine((value) => value === '' || /^[A-Za-z\s]+$/.test(value), {
+    message: 'Last name can only contain letters.',
+  });
+
 const updateUserValidation = z.object({
-  firstName: firstAndLastNameUpdateValidation,
+  firstName: firstNameUpdateValidation,
   lastName: lastNameUpdateValidation,
   email: z
     .string()
@@ -58,19 +95,14 @@ const updateUserValidation = z.object({
 });
 
 const createUserValidation = z.object({
-  firstName: firstAndLastNameUpdateValidation
-    .refine((value) => value[0] === value[0].toUpperCase(), {
-      message: 'First name should start with a capital letter.',
-    })
-    .refine((value) => /^[A-Za-z\s]+$/.test(value), {
-      message: 'First name can only contain letters.',
-    }),
-  lastName: firstAndLastNameValidation,
+  firstName: firstNameCreateUserValidation,
+
+  lastName: lastNameCreateUserValidation,
 
   email: z
     .string()
-    .min(4, 'Email should have at least 4 characters.')
-    .email('Invalid email format. ')
+    .min(4, 'Invalid email format. ')
+    .email('Invalid email format.')
     .max(40, "Email can't be longer than 40 characters."),
   password: z
     .string()
@@ -87,24 +119,10 @@ const createUserValidation = z.object({
 });
 
 const createGuestUserValidation = z.object({
-  firstName: firstAndLastNameValidation
-    .refine((value) => value[0] === value[0].toUpperCase(), {
-      message: 'First name should start with a capital letter.',
-    })
-    .refine((value) => /^[A-Za-z\s]+$/.test(value), {
-      message: 'First name can only contain letters.',
-    }),
-  lastName: firstAndLastNameValidation
-    .refine((value) => value[0] === value[0].toUpperCase(), {
-      message: 'Last name should start with a capital letter.',
-    })
-    .refine((value) => /^[A-Za-z\s]+$/.test(value), {
-      message: 'Last name can only contain letters.',
-    }),
+  firstName: createGuestFirstNameValidation,
+  lastName: createGuestLastNameValidation,
   email: z.string(),
-
   password: z.string(),
-
   image: z.string().optional(),
   createdAt: z.string().or(z.date()).optional(),
   updatedAt: z.string().or(z.date()).optional(),

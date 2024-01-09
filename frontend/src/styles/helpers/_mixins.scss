@@ -90,7 +90,25 @@
   text-overflow: ellipsis;
   text-transform: uppercase;
   cursor: pointer;
-  background-color: theme.$color-branding-primary;
+  background-color: theme.$branding-color-primary;
+  border: none;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+}
+
+@mixin notification-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-small;
+  font-weight: theme.$font-weight-semibold;
+  color: theme.$font-color-primary;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  background-color: theme.$branding-color-primary;
   border: none;
   border-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
@@ -155,7 +173,7 @@
   height: 60px;
   padding: theme.$spacing-semi-regular-large;
   margin: auto;
-  font-size: theme.$font-size-small;
+  font-size: theme.$font-size-medium;
   line-height: theme.$line-height-primary;
   text-transform: uppercase;
   letter-spacing: 0.0094em;

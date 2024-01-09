@@ -1,5 +1,7 @@
 import useLocaleContext from "#context/localeContext"
+import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#utils/constants"
 import React from "react"
+import { useLocation } from "react-router-dom"
 import styles from "./LanguageDropdown.module.scss"
 
 const LanguageDropdown = ({ setMenuOpen }) => {
@@ -12,8 +14,19 @@ const LanguageDropdown = ({ setMenuOpen }) => {
     }
   }
 
+  const location = useLocation()
+  const currentPath = location.pathname
+
   return (
-    <ul className={styles.dropdownMenu}>
+    <ul
+      className={styles.dropdownMenu}
+      style={
+        currentPath.includes(ROUTES_SIGN_UP) ||
+        currentPath.includes(ROUTES_LOGIN)
+          ? { margin: "0" }
+          : {}
+      }
+    >
       <li
         className={`${styles.listItem} ${
           language === "en" ? styles.activeCategory : ""

@@ -84,43 +84,6 @@
       "passwordLost": "Did you forget your password?",
       "errorMessage": "Unfortunately your password or email address was incorrect."
     },
-    "signUp": {
-      "newCustomer": "New Customer?",
-      "email": "Email",
-      "password": "Password",
-      "loginButton": "Login",
-      "emailPlaceholder": "enter email",
-      "passwordPlaceholder": "enter password",
-      "login": "Login",
-      "haveAccount": "Do you have an account?",
-      "or": "or",
-      "passwordLost": "Did you forget your password?",
-      "firstName": "First name",
-      "lastName": "Last name",
-      "submitButton": "Create an Account",
-      "emailInUseErrorMessage": "Email already registered",
-      "validationErrors": {
-        "firstName": {
-          "too_small": "First name should have at least two letters",
-          "too_big": "First name can't be longer than 30 characters.",
-          "custom": "First name should start with a capital letter and can only contain letters."
-        },
-        "lastName": {
-          "too_small": "Last name should have at least two letters",
-          "too_big": "Last name can't be longer than 40 characters.",
-          "custom": "Last name should start with a capital letter and can only contain letters."
-        },
-        "password": {
-          "too_small": "Password should be at least 8 characters long.",
-          "custom": "Password should have at least 8 characters and 1 symbol."
-        },
-        "email": {
-          "too_big": "Email can't be longer than 40 characters.",
-          "invalid_string": "Invalid email format.",
-          "too_small": "Email should have at least 8 characters."
-        }
-      }
-    },
     "orderSummary": {
       "thankClient": "Thank you for shopping at Oylo!",
       "orderResume": "Order Summary",
@@ -138,6 +101,22 @@
         "paidWith": "Payment method",
         "totalAmount": "Amount"
       }
+    },
+    "signUp": {
+      "newCustomer": "New Customer?",
+      "email": "Email",
+      "password": "Password",
+      "loginButton": "Login",
+      "emailPlaceholder": "enter email",
+      "passwordPlaceholder": "enter password",
+      "login": "Login",
+      "haveAccount": "Do you have an account?",
+      "or": "or",
+      "passwordLost": "Did you forget your password?",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "submitButton": "Create an Account",
+      "emailInUseErrorMessage": "Email already registered"
     },
     "payment": {
       "paymentButton": "Proceed",
@@ -176,13 +155,13 @@
       "subTeaser": {
         "title": "At Oylo, our appreciation for nature's treasured gifts is boundless",
         "teaserFirstSubtitle": "UTILIZING ESSENTIAL OILS",
-        "teaserFirstSentence": "From diffusers to massage oils, from invigorating baths to aromatic culinary infusions, essential oils serve various purposes. A simple whiff can ignite transformation. Oylo brings the perfect oil to cater to all your needs, promoting your well-being.",
-        "teaserSecondSubtitle": "THE POWER OF ESSENTIAL OILS",
-        "teaserSecondSentence": "Essential oils stir emotions, leading to a positive shift. Enhance your mood with citrus or sharpen your focus with rosemary. Recharge with laurel or unwind with the calming tones of silver fir.",
+        "teaserFirstSentence": "From diffusers to massage oils, from invigorating baths to aromatic culinary infusions, essential oils serve various purposes.",
+        "teaserSecondSubtitle": "THE POWER OF ESSENTIAL",
+        "teaserSecondSentence": "Essential oils stir emotions, leading to a positive shift. Enhance your mood with citrus or sharpen your focus with rosemary.",
         "teaserThirthSubtitle": "THE OYLO COLLECTION",
-        "teaserThirthSentence": "Our online store offers a range of aromatherapy oils, unique Ayurveda blends, wellness products, natural cosmetics, and enchanting gift sets. Discover top sellers like our divine rose water!",
+        "teaserThirthSentence": "Our online store offers a range of aromatherapy oils, unique Ayurveda blends, wellness products, natural cosmetics, and enchanting gift sets.",
         "teaserFourthSubtitle": "OYLO'S QUALITY PROMISE",
-        "teaserFourthSentence": "Oylo ensures completely natural products, free of synthetic additives, parabens, or genetically modified substances. We prioritize quality, offering mostly organic certified products. At Oylo, natural essence shines."
+        "teaserFourthSentence": "Oylo ensures completely natural products, free of synthetic additives, parabens, or genetically modified substances."
       },
       "title": "Welcome to our world of natural wellness ",
       "teaserSentence": "where we believe in the power of plants and our Essential Oil Shop is a place for those seeking to boost their health, improve their mood, or simply create a home that smells wonderful and fresh.",
@@ -349,7 +328,7 @@
       },
       "newsletter": {
         "subscriptionText": "Your regular Oylo update",
-        "subscriptionButton": "Subscribe to Newsletter",
+        "subscriptionButton": "Subscribe",
         "emailAddressPlaceholder": "Enter email",
         "registrationDataConsentText": "The data you enter here will only be used to send the Newsletters used and not passed on to third parties. You can unsubscribe from the newsletter at any time withdraw your consent by sending us an email. Your data after completion of the newsletter receipt within 3 Months deleted, provided that the deletion is not legal conflict with retention requirements. By sending the entered data you agree to the data processing and confirm our privacy policy."
       },
@@ -396,6 +375,30 @@
         "getUserData": "Error while getting user data",
         "getShippingData": "Error while getting shipping data",
         "login": "Error while login"
+      }
+    },
+    "validationErrors": {
+      "firstName": {
+        "tooLong": "First name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "First name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "First name should start with a capital letter.",
+        "shouldContainOnlyLetters": "First name can only contain letters."
+      },
+      "lastName": {
+        "tooLong": "Last name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "Last name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "Last name should start with a capital letter.",
+        "shouldContainOnlyLetters": "Last name can only contain letters."
+      },
+      "password": {
+        "tooShort": "Password should have at least 8 characters.",
+        "shouldHaveAtLeastOneUppercase": "Password should have at least one uppercase character.",
+        "shouldHaveAtLeastOneSymbol": "Password should have at least one symbol."
+      },
+      "email": {
+        "tooLong": "Email can't be longer than 40 characters.",
+        "invalidFormat": "Invalid email format.",
+        "tooShort": "Email should have at least 4 characters."
       }
     }
   },

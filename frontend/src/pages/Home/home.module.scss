@@ -5,9 +5,9 @@
 
 .homePageWrapper {
   @include flex-justify-center;
-  @include margin-page-wrapper;
 
   margin-top: 0 !important;
+  margin-bottom: theme.$spacing-semi-regular-large;
 
   .homePage {
     @include flex-justify-center;
@@ -53,16 +53,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 100%;
   }
 
   .teaserCards {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 60px;
 
     @include media.tablet-down {
       flex-direction: column;
+      align-items: center;
     }
   }
 
@@ -75,36 +75,60 @@
     text-transform: uppercase;
   }
 
-  .homeSubtitle {
+  .teaserCardTitle {
     display: flex;
-    align-items: center;
-    height: 80px;
+    align-items: flex-start;
+    min-height: 48px;
     font-family: theme.$font-family-primary;
     font-size: theme.$font-size-medium;
-    font-weight: bold;
+    font-weight: theme.$font-weight-medium;
     text-align: center;
   }
 
   .columnsTitle {
     align-items: center;
     font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-medium;
-    font-weight: bold;
+    font-size: theme.$font-size-subtitle;
+    font-weight: theme.$font-weight-semibold;
     text-align: center;
     text-transform: uppercase;
   }
 
-  .homeSubtitleText {
+  .columsTitleContainer {
+    margin-bottom: theme.$spacing-semi-regular-large;
+  }
+
+  .teaserCardText {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    height: fit-content;
     min-height: 120px;
-    max-height: 200px;
-    margin-bottom: theme.$spacing-regular;
+    margin-bottom: theme.$spacing-small;
     overflow: hidden;
     font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-small;
-    font-weight: theme.$font-weight-semibold;
+    font-size: theme.$font-size-semi-medium;
+    font-weight: theme.$font-weight-regular;
     text-align: center;
+
+    @include media.fullscreen-down {
+      height: 168px;
+    }
+
+    @include media.widescreen-down {
+      height: 180px;
+    }
+
+    @include media.desktop-down {
+      height: 240px;
+    }
+
+    @include media.tablet-down {
+      height: 140px;
+    }
+
+    @include media.mobile {
+      height: 120px;
+    }
   }
 
   .subtitleText {
@@ -133,7 +157,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 20%;
     padding: theme.$spacing-semi-regular-large;
+
+    @include media.tablet-down {
+      width: 40%;
+    }
+
+    @include media.mobile {
+      width: 100%;
+    }
   }
 
   .columnsContainer {

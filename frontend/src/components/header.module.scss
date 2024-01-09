@@ -6,7 +6,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 48px;
 
   @include media.mobile {
     flex-direction: column;
@@ -16,7 +15,9 @@
     width: 80px;
     height: 80px;
     margin: theme.$spacing-small;
+    border: theme.$border-regular-image;
     border-radius: theme.$border-radius-circle;
+    box-shadow: theme.$box-shadow-light;
 
     @include media.mobile {
       width: 100px;
@@ -25,15 +26,13 @@
   }
 
   .avatarContainer {
-    background-color: theme.$background-color-form-secondary;
-    border-radius: theme.$border-radius-large;
+    width: 164px;
+
+    @include flex-all-center;
   }
 
   .header {
     width: 100%;
-    font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-subtitle;
-    font-weight: theme.$font-weight-semibold;
 
     @include media.mobile {
       font-size: theme.$font-size-small;

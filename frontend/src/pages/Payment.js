@@ -4,37 +4,84 @@ import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { totalCost } from "#utils/cart"
 import {
+  API_ORDERS_CART_ITEMS,
+  API_ORDERS_CREATE,
+  API_SHIPPING_DATA,
+  API_USERS_CREATE_GUEST,
   API_USERS_CURRENT_USER,
+  LOCAL_STORAGE_CART,
   LOCAL_STORAGE_GUEST_ID,
+  ROUTES_CHECKOUT_ORDER_SUMMARY,
+  ROUTES_CHECKOUT_SHIPPING,
+  ROUTES_CURRENT_ADMIN,
   SHIPPING_COST,
 } from "#utils/constants"
 import { useEffectScrollTop } from "#utils/render"
+import {
+  getUserShippingData,
+  getUserWithoutCredentialsByEmail,
+} from "#utils/users"
 import axios from "axios"
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import styles from "./payment.module.scss"
+
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [notification, setNotification] = useState(null)
-  const navigate = useNavigate()
   const { translate } = useLocaleContext()
   const text = translate.pages.payment
-  const { isLoggedIn, setUserId, userId } = useUserContext()
+  const { isLoggedIn, userId, user } = useUserContext()
   const { setCart } = useCartContext()
   const location = useLocation()
+  const navigate = useNavigate()
   let formData = {}
+
   if (location.state) {
     formData = location.state.formData
   }
+
+  const stateShippingDataObject = {
+    street: formData.street,
+    number: formData.number,
+    details: formData.details,
+    postalCode: formData.postalCode,
+    city: formData.city,
+    state: formData.state,
+    country: formData.country,
+  }
+
+  const registeredUserEmptyShippingDataObject = {
+    street: "please add data for shipping",
+    number: "please add data for shipping",
+    details: "please add data for shipping",
+    postalCode: "please add data for shipping",
+    city: "please add data for shipping",
+    state: "please add data for shipping",
+    country: "please add data for shipping",
+  }
+
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      setNotification("as admin you can not buy products")
+      setTimeout(() => setNotification(null), 3000)
+      setTimeout(() => navigate(ROUTES_CURRENT_ADMIN), 3000)
+    }
+  }, [user, navigate])
 
   const submitOrderAndGuestUser = async (e) => {
     e.preventDefault()
 
     try {
+      let customerId
+
       if (!isLoggedIn) {
-        try {
-          const newGuestUser = await axios.post(
-            `${process.env.REACT_APP_API_URL}/users/create-guest`,
+        const checkGuestUser = await getUserWithoutCredentialsByEmail(
+          formData.email,
+        )
+        if (!checkGuestUser) {
+          const guestUser = await axios.post(
+            `${process.env.REACT_APP_API_URL}${API_USERS_CREATE_GUEST}`,
             {
               email: formData.email,
               firstName: formData.firstName,
@@ -43,113 +90,86 @@ const Payment = () => {
             },
           )
 
-          const newGuestUserData = newGuestUser.data.guestUser
-
-          setUserId(newGuestUserData.id)
-
-          const shippingDataObject = {
-            street: formData.street,
-            number: formData.number,
-            details: formData.details,
-            postalCode: formData.postalCode,
-            city: formData.city,
-            state: formData.state,
-            country: formData.country,
-          }
-
+          customerId = guestUser.data.guestUser.id
           await axios.post(
-            `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${newGuestUserData.id}`,
-            shippingDataObject,
+            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
+            stateShippingDataObject,
           )
           localStorage.setItem(
             LOCAL_STORAGE_GUEST_ID,
-            JSON.stringify(newGuestUserData.id),
+            JSON.stringify(customerId),
           )
+        }
+        if (checkGuestUser) {
+          customerId = checkGuestUser.data.id
 
-          if (newGuestUserData) {
-            const cart = JSON.parse(localStorage.getItem("yolo-cart"))
-            const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
-            const newOrder = {
-              userId: newGuestUserData.id,
-              totalAmount: cartTotalCost,
-              paymentMethod: paymentMethod,
-            }
+          const shippingDataResponse = await getUserShippingData(customerId)
 
-            const orderResponse = await axios.post(
-              `${process.env.REACT_APP_API_URL}/orders/create`,
-              newOrder,
+          if (!shippingDataResponse) {
+            await axios.post(
+              `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
+              registeredUserEmptyShippingDataObject,
             )
-
-            if (orderResponse && orderResponse.status === 201) {
-              const orderId = orderResponse.data.id
-              for (const item of cart) {
-                try {
-                  await axios.post(
-                    `${process.env.REACT_APP_API_URL}/orders/cart-items`,
-                    {
-                      quantity: item.quantity,
-                      productId: item.product.id,
-                      userOrderId: orderId,
-                    },
-                  )
-                } catch (error) {
-                  setNotification(`Error by creating new guest user`)
-                  setTimeout(() => setNotification(null), 3000)
-                  console.error(error)
-                }
-              }
-
-              localStorage.removeItem("yolo-cart")
-              setCart([])
-              navigate("/checkout/order-summary")
-            }
           }
-        } catch (error) {
-          console.error(error)
+
+          localStorage.setItem(
+            LOCAL_STORAGE_GUEST_ID,
+            JSON.stringify(customerId),
+          )
         }
       } else {
         const userDataResponse = await axios.get(
           `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
           { withCredentials: true },
         )
-        const userData = userDataResponse.data
-        if (userData) {
-          const cart = JSON.parse(localStorage.getItem("yolo-cart"))
-          const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
-          const newOrder = {
-            userId: userData.id,
-            totalAmount: cartTotalCost,
-            paymentMethod: paymentMethod,
-          }
+        customerId = userDataResponse.data.id
+        const shippingDataResponse = await getUserShippingData(customerId)
 
-          const orderResponse = await axios.post(
-            `${process.env.REACT_APP_API_URL}/orders/create`,
-            newOrder,
-            { withCredentials: true },
+        if (!shippingDataResponse) {
+          await axios.post(
+            `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
+            registeredUserEmptyShippingDataObject,
           )
+        }
 
-          if (orderResponse && orderResponse.status === 201) {
-            const orderId = orderResponse.data.id
-            for (const item of cart) {
-              try {
-                await axios.post(
-                  `${process.env.REACT_APP_API_URL}/orders/cart-items`,
-                  {
-                    quantity: item.quantity,
-                    productId: item.product.id,
-                    userOrderId: orderId,
-                  },
-                  { withCredentials: true },
-                )
-              } catch (error) {
-                console.error(error)
-              }
+        localStorage.setItem(LOCAL_STORAGE_GUEST_ID, JSON.stringify(customerId))
+      }
+
+      if (customerId) {
+        const cart = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CART))
+        const cartTotalCost = totalCost(cart, SHIPPING_COST).toFixed(2)
+        const newOrder = {
+          userId: customerId,
+          totalAmount: cartTotalCost,
+          paymentMethod: paymentMethod,
+        }
+
+        const orderResponse = await axios.post(
+          `${process.env.REACT_APP_API_URL}${API_ORDERS_CREATE}`,
+          newOrder,
+        )
+
+        if (orderResponse && orderResponse.status === 201) {
+          const orderId = orderResponse.data.id
+          for (const item of cart) {
+            try {
+              await axios.post(
+                `${process.env.REACT_APP_API_URL}${API_ORDERS_CART_ITEMS}`,
+                {
+                  quantity: item.quantity,
+                  productId: item.product.id,
+                  userOrderId: orderId,
+                },
+              )
+            } catch (error) {
+              setNotification(`Error by adding product into new order`)
+              setTimeout(() => setNotification(null), 3000)
+              console.error(error)
             }
-            localStorage.removeItem("yolo-cart")
-            setCart([])
-
-            navigate("/checkout/order-summary")
           }
+          localStorage.removeItem(LOCAL_STORAGE_CART)
+          setCart([])
+          setTimeout(() => navigate(ROUTES_CHECKOUT_ORDER_SUMMARY), 1000)
         }
       }
     } catch (error) {
@@ -158,7 +178,7 @@ const Payment = () => {
   }
 
   const backToShippingPage = () => {
-    navigate("/checkout/shipping")
+    navigate(ROUTES_CHECKOUT_SHIPPING)
   }
 
   const selectPaymentMethod = (e) => {
@@ -192,14 +212,14 @@ const Payment = () => {
             <div className={styles.row}>
               <input
                 type='radio'
-                id='klarna'
+                id='googlePay'
                 name='paymentMethod'
-                value='klarna'
-                checked={paymentMethod === "klarna"}
+                value='googlePay'
+                checked={paymentMethod === "googlePay"}
                 onChange={selectPaymentMethod}
                 required
               />
-              <label htmlFor='klarna'>Klarna</label>
+              <label htmlFor='googlePay'>Google Pay</label>
             </div>
           </div>
           <div className={styles.navigateButtons}>

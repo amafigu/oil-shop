@@ -3,16 +3,25 @@
 @import "#styles/helpers/mixins";
 
 .dropdownMenu {
-  color: grey;
+  color: theme.$font-color-primary;
+  border: theme.$border-regular-component;
+
+  @include media.mobile {
+    border: none;
+  }
 
   .activeCategory {
-    color: theme.$color-branding-primary;
+    color: theme.$branding-color-primary;
   }
 
   .listItem {
     @include media.tablet-down {
       @include menu-list-item;
     }
+  }
+
+  .linkContent {
+    cursor: pointer;
   }
 
   @include media.tablet {

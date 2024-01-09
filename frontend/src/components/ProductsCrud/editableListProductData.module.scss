@@ -28,20 +28,6 @@
   @include input-container-spacing;
 }
 
-/* .imageContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: theme.$color-branding-primary;
-  border-radius: theme.$border-radius-small;
-
-  .image {
-    width: 200px;
-    height: 300px;
-    border-radius: 50%;
-  }
-} */
-
 .imageAndButtonContainer {
   width: 20%;
   min-width: 120px;

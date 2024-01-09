@@ -2,36 +2,38 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.hidden {
-  display: none;
-}
+.productsDropdownWrapper {
+  .hidden {
+    display: none;
+  }
 
-.dropdownListItem {
-  @include media.desktop {
+  .dropdownListItem {
+    display: flex;
+    align-items: center;
     height: 100px;
-  }
+    padding: theme.$spacing-smaller;
+    margin: theme.$spacing-smaller 0;
+    font-size: theme.$font-size-small;
+    line-height: theme.$line-height-primary;
+    list-style-type: none;
+    cursor: pointer;
+    background-color: theme.$background-color-primary;
+    border-radius: theme.$border-radius-small;
+    box-shadow: theme.$box-shadow-light;
+    transition: background-color 0.3s ease;
 
-  display: flex;
-  align-items: center;
-  padding: theme.$spacing-smaller;
-  margin: theme.$spacing-smaller 0;
-  font-size: theme.$font-size-small;
-  line-height: theme.$line-height-primary;
-  list-style-type: none;
-  cursor: pointer;
-  background-color: theme.$background-color-primary;
-  border-radius: theme.$border-radius-small;
-  box-shadow: theme.$box-shadow-light;
-  transition: background-color 0.3s ease;
+    .data {
+      font-weight: theme.$font-weight-regular;
+      color: theme.$font-color-primary;
+    }
 
-  .dropdownListItemName {
-    font-weight: theme.$font-weight-regular;
-    color: theme.$font-color-primary;
-  }
-
-  .listItemImage {
-    width: 22px;
-    height: 56px;
-    margin-right: theme.$spacing-regular;
+    .imageContainer {
+      .image {
+        max-width: 33px;
+        max-height: 84px;
+        object-fit: contain;
+        margin-right: theme.$spacing-regular;
+      }
+    }
   }
 }

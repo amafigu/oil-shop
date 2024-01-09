@@ -11,21 +11,22 @@
   @include flex-all-center;
 
   .subNavbar {
-    width: 440px;
+    width: 100%;
 
     @include flex-justify-around;
   }
 
   .navLink {
-    width: 120px;
-    font-size: theme.$font-size-medium;
+    width: 100px;
+    font-size: theme.$font-size-semi-large;
+    font-weight: theme.$font-weight-medium;
     color: theme.$font-color-primary;
     text-align: center;
     text-decoration: none;
   }
 
   .activeCategory {
-    color: theme.$color-branding-primary;
+    color: theme.$branding-color-primary;
   }
 
   .logo {

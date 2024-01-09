@@ -1,5 +1,16 @@
 import axios from "axios"
-import { API_USERS_USER, SHORT_MESSAGE_TIMEOUT } from "./constants"
+import {
+  API_LOGOUT,
+  API_ORDERS_ALL,
+  API_ORDERS_CART_ITEMS,
+  API_SHIPPING_DATA,
+  API_USERS_CURRENT_USER,
+  API_USERS_GUEST_BY_EMAIL,
+  API_USERS_GUEST_BY_ID,
+  API_USERS_USER,
+  ROUTES_LOGIN,
+  SHORT_MESSAGE_TIMEOUT,
+} from "./constants"
 
 export const logout = async (
   navigate,
@@ -9,7 +20,7 @@ export const logout = async (
 ) => {
   try {
     await axios.post(
-      `${process.env.REACT_APP_API_URL}/users/logout`,
+      `${process.env.REACT_APP_API_URL}${API_LOGOUT}`,
       {},
       {
         withCredentials: true,
@@ -19,7 +30,7 @@ export const logout = async (
     setIsLoggedIn(false)
     setUserEmail("")
     setUser({})
-    setTimeout(() => navigate("/login"), 400)
+    setTimeout(() => navigate(ROUTES_LOGIN), 400)
   } catch (error) {
     console.error(error)
   }
@@ -32,7 +43,7 @@ export const getLoggedInUserData = async (
 ) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/current-user/${userId}`,
+      `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
       { withCredentials: true },
     )
     setLoggedInUserData(response.data)
@@ -43,14 +54,42 @@ export const getLoggedInUserData = async (
   }
 }
 
+export const getUserWithoutCredentialsByEmail = async (email) => {
+  console.log("getUserByEmail", email)
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_EMAIL}/${email}`,
+    )
+    console.log("getUserByEmail response", response)
+
+    return response
+  } catch (error) {
+    console.error("Error geting user by email", error)
+  }
+}
+export const getUserWithoutCredentialsById = async (id) => {
+  console.log("getUserByEmail", id)
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${id}`,
+    )
+    console.log("getUserByEmail response", response)
+
+    return response
+  } catch (error) {
+    console.error("Error geting user by email", error)
+  }
+}
+
 export const getUserByEmail = async (email) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/user/${email}`,
+      `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${email}`,
       {
         withCredentials: true,
       },
     )
+    console.log("getUserByEmail response", response)
 
     return response.data
   } catch (error) {
@@ -63,13 +102,13 @@ export const getUserByEmail = async (email) => {
 export const getUserOrdersWithProductsList = async (userId) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/orders/all/${parseInt(userId)}`,
+      `${process.env.REACT_APP_API_URL}${API_ORDERS_ALL}/${parseInt(userId)}`,
     )
 
     const ordersWithDetails = await Promise.all(
       response.data.map(async (order) => {
         const cartItemsResponse = await axios.get(
-          `${process.env.REACT_APP_API_URL}/orders/cart-items/${order.id}`,
+          `${process.env.REACT_APP_API_URL}${API_ORDERS_CART_ITEMS}/${order.id}`,
         )
         return { ...order, cartItems: cartItemsResponse.data }
       }),
@@ -84,7 +123,7 @@ export const getUserOrdersWithProductsList = async (userId) => {
 export const getUserShippingData = async (userId) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/user/shipping-data/${userId}`,
+      `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${userId}`,
       { withCredentials: true },
     )
     return response.data
@@ -96,7 +135,6 @@ export const getUserShippingData = async (userId) => {
 export const deleteUserByEmail = async (
   userEmail,
   setNotification,
-
   successMessage,
   errorMessage,
   setRefreshUsersList,

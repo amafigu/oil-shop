@@ -77,7 +77,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
     }
     try {
       await axios.delete(
-        `${process.env.REACT_APP_API_URL}/users/user/${email.trim()}`,
+        `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${email.trim()}`,
         {
           withCredentials: true,
         },

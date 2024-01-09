@@ -81,6 +81,14 @@
     }
   }
 
+  .registrationForm {
+    width: 80%;
+
+    @include media.mobile {
+      width: 100%;
+    }
+  }
+
   .registrationEmailInputAndButtonWrapper {
     display: flex;
     justify-content: space-between;
@@ -103,7 +111,7 @@
 
   .registrationEmailButtonWrapper {
     @include newsleter-input-and-button-wrapper;
-    @include flex-align-center;
+    @include flex-all-center;
   }
 
   .registrationEmailButtonWrapper:hover {
@@ -178,6 +186,7 @@
   .iconsSectionItemIcons {
     justify-content: space-evenly;
     width: 100%;
+    height: 60px;
 
     @include flex-align-center;
 

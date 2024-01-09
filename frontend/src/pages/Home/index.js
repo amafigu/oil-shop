@@ -46,17 +46,17 @@ const Home = () => {
           </div>
           <div className={styles.columnsContainer}>
             <div className={styles.teaserCardsWrapper}>
-              <div>
+              <div className={styles.columsTitleContainer}>
                 <p className={styles.columnsTitle}>
                   {translate.pages.welcome.subTeaser.title}
                 </p>
               </div>
               <div className={styles.teaserCards}>
                 <div className={styles.teaserSingleCard}>
-                  <p className={styles.homeSubtitle}>
+                  <p className={styles.teaserCardTitle}>
                     {translate.pages.welcome.subTeaser.teaserFirstSubtitle}
                   </p>
-                  <p className={styles.homeSubtitleText}>
+                  <p className={styles.teaserCardText}>
                     {translate.pages.welcome.subTeaser.teaserFirstSentence}
                   </p>
                   <span className={styles.iconColumns}>
@@ -64,10 +64,10 @@ const Home = () => {
                   </span>
                 </div>
                 <div className={styles.teaserSingleCard}>
-                  <p className={styles.homeSubtitle}>
+                  <p className={styles.teaserCardTitle}>
                     {translate.pages.welcome.subTeaser.teaserSecondSubtitle}
                   </p>
-                  <p className={styles.homeSubtitleText}>
+                  <p className={styles.teaserCardText}>
                     {translate.pages.welcome.subTeaser.teaserSecondSentence}
                   </p>
 
@@ -76,10 +76,10 @@ const Home = () => {
                   </span>
                 </div>
                 <div className={styles.teaserSingleCard}>
-                  <p className={styles.homeSubtitle}>
+                  <p className={styles.teaserCardTitle}>
                     {translate.pages.welcome.subTeaser.teaserThirthSubtitle}
                   </p>
-                  <p className={styles.homeSubtitleText}>
+                  <p className={styles.teaserCardText}>
                     {translate.pages.welcome.subTeaser.teaserThirthSentence}
                   </p>
                   <span className={styles.iconColumns}>
@@ -87,10 +87,10 @@ const Home = () => {
                   </span>
                 </div>
                 <div className={styles.teaserSingleCard}>
-                  <p className={styles.homeSubtitle}>
+                  <p className={styles.teaserCardTitle}>
                     {translate.pages.welcome.subTeaser.teaserFourthSubtitle}
                   </p>
-                  <p className={styles.homeSubtitleText}>
+                  <p className={styles.teaserCardText}>
                     {translate.pages.welcome.subTeaser.teaserFourthSentence}
                   </p>
                   <span

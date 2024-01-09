@@ -10,6 +10,19 @@
     display: none;
   }
 
+  .subNavbarContainer {
+    width: 33%;
+    margin: 0 auto;
+
+    @include media.tablet-down {
+      width: 50%;
+    }
+
+    @include media.mobile {
+      width: 80%;
+    }
+  }
+
   .productsDropdownWrapper {
     position: fixed;
     top: 0;

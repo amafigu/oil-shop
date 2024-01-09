@@ -1,15 +1,4 @@
-import {
-  faDhl,
-  faSquareFacebook,
-  faSquareInstagram,
-  faSquareYoutube,
-  faUps,
-} from "@fortawesome/free-brands-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import { Link } from "react-router-dom"
-import useLocaleContext from "../context/localeContext"
-
+import useLocaleContext from "#context/localeContext"
 import {
   ROUTES_FAQ,
   ROUTES_LOGIN,
@@ -19,6 +8,18 @@ import {
   SOCIAL_MEDIA_URL_INSTAGRAM,
   SOCIAL_MEDIA_URL_YOUTUBE,
 } from "#utils/constants"
+import {
+  faDhl,
+  faGooglePay,
+  faPaypal,
+  faSquareFacebook,
+  faSquareInstagram,
+  faSquareYoutube,
+  faUps,
+} from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react"
+import { Link } from "react-router-dom"
 import styles from "./footer.module.scss"
 
 const Footer = () => {
@@ -119,12 +120,10 @@ const Footer = () => {
                 <h4>{text.iconsColumns.creditCards.title}</h4>
               </div>
               <div className={styles.iconsSectionItemIcons}>
-                <img
-                  src={`${process.env.PUBLIC_URL}/assets/iconPay.png`}
-                  alt=''
-                  id='last'
-                  width='316'
-                />
+                <div className={styles.iconsSectionItemIcons}>
+                  <FontAwesomeIcon icon={faPaypal} size='2xl' />
+                  <FontAwesomeIcon icon={faGooglePay} size='2xl' />
+                </div>
               </div>
             </li>
             <li className={styles.iconsSectionItem}>

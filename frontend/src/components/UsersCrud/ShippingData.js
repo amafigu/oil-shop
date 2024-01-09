@@ -98,11 +98,12 @@ const ShippingData = () => {
     <>
       <div className={styles.updateUserShippingDataWrapper}>
         {notification && <NotificationCard message={notification} />}
+        <h1 className={styles.title}>Shipping Data</h1>
         <ToggleButton
           show={showForm}
           setToggle={setShowForm}
-          textHide={`${buttonsText.actions.shipping.hide}`}
-          textShow={`${buttonsText.actions.shipping.show}`}
+          textHide={`${buttonsText.actions.shipping.hide.toUpperCase()}`}
+          textShow={`${buttonsText.actions.shipping.show.toUpperCase()}`}
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && nonUpdatedShippingData !== initialShippingData && (

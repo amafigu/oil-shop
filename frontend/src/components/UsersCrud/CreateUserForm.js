@@ -6,8 +6,11 @@ import {
   API_USERS_CREATE,
   API_USERS_CURRENT_USER,
   DEFAULT_USER_IMAGE,
+  LONG_MESSAGE_TIMEOUT,
   REDIRECT_TIMEOUT,
   ROUTES_CURRENT_CUSTOMER,
+  ROUTES_LOGIN,
+  ROUTES_SIGN_UP,
 } from "#utils/constants"
 import { uploadToS3 } from "#utils/dataManipulation"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
@@ -15,14 +18,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
+import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./createUserForm.module.scss"
 
-const CreateUserForm = ({
-  setRefreshAllUsersCounter,
-  setFieldErrors,
-  setEmailInUserError,
-}) => {
-  const [, setErrorMessage] = useState("")
+const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState()
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -30,10 +29,12 @@ const CreateUserForm = ({
   const [password, setPassword] = useState("")
   const [file, setFile] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
+  const [validationErrors, setValidationErrors] = useState([])
   const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
+  const textValidationErrors = translate.errors.validationErrors
 
   const location = useLocation()
   const currentPath = location.pathname
@@ -83,8 +84,8 @@ const CreateUserForm = ({
               setIsLoggedIn(true)
               setUser(userData)
             } catch (error) {
-              setErrorMessage(`${text.errorMessage}`)
-              setTimeout(() => setErrorMessage(null), 3000)
+              setNotification(`${text.errorMessage}`)
+              setTimeout(() => setNotification(null), 3000)
               console.error("Error fetching user data", error)
             }
           }
@@ -93,35 +94,47 @@ const CreateUserForm = ({
         }
       }
     } catch (error) {
-      /* if (error.response.data.errors) {
-        const errorMessages = error.response.data.errors.reduce((acc, err) => {
-          if (!acc[err.path[0]]) {
-            acc[err.path[0]] = []
-          }
-          acc[err.path[0]].push({
-            code: err.code,
-            message: err.message,
-            path: err.path[0],
-          })
-          return acc
-        }, {})
+      if (error.response.data.errors) {
+        const errorMessages = error.response.data.errors
+        setValidationErrors(errorMessages)
 
-        //  setFieldErrors(errorMessages)
-        setFieldErrors("error")
+        setTimeout(() => setValidationErrors([]), LONG_MESSAGE_TIMEOUT)
+      }
 
-        setTimeout(() => setFieldErrors({}), 6000)
-      } */
-      /*    if (error.response.data.message === "Email already in use") {
-        setEmailInUserError(`${text.createUser.emailInUseErrorMessage}`)
-        setTimeout(() => setEmailInUserError(null), 6000)
-      } */
+      if (error.response.data.message === "Email already in use") {
+        setNotification(`Email already in use`)
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
       console.error("Signup error", error)
     }
   }
-
+  console.log(validationErrors)
+  console.log(typeof validationErrors)
   return (
-    <div className={styles.createUserFormWrapper}>
-      {notification && <NotificationCard message={notification} />}
+    <div
+      className={styles.createUserFormWrapper}
+      style={
+        currentPath.includes(ROUTES_SIGN_UP) ||
+        currentPath.includes(ROUTES_LOGIN)
+          ? { width: "300px", margin: "0" }
+          : {}
+      }
+    >
+      {notification && (
+        <NotificationCard
+          message={notification}
+          errosMessageArray={validationErrors}
+          textValidationErrorsObject={textValidationErrors}
+        />
+      )}
+      {validationErrors && validationErrors.length > 0 && (
+        <NotificationCard
+          message={""}
+          errorsMessageArray={validationErrors}
+          textValidationErrorsObject={textValidationErrors}
+        />
+      )}
+
       <form className={styles.form} onSubmit={createUser}>
         <input
           className={styles.formField}

@@ -2,12 +2,176 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.newUserPageWrapper {
+.signUpPageWrapper {
+  @include flex-column-all-center;
+
+  .signUpPage {
+    width: 100%;
+    min-height: theme.$min-height-page-regular;
+
+    @include flex-column-all-center;
+
+    .languageOptionsAndFormContainer {
+      width: 348px;
+
+      @include flex-column;
+    }
+
+    .languageOptionsContainer {
+      display: flex;
+    }
+
+    .logoAndFormContainer {
+      height: 400px;
+
+      .logoContainer {
+        display: flex;
+        justify-content: center;
+
+        .logo {
+          width: 216px;
+          border-radius: theme.$border-radius-circle;
+        }
+      }
+
+      .formContainer {
+        width: 100%;
+        padding: theme.$spacing-regular;
+        border-radius: theme.$border-radius-small;
+
+        .form {
+          width: 100%;
+
+          .label {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 4px;
+          }
+
+          .formField {
+            width: 100%;
+            height: 32px;
+            margin-bottom: theme.$spacing-small;
+            font-family: theme.$font-family-primary;
+            font-size: theme.$font-size-medium;
+          }
+
+          .formButton {
+            @include action-button;
+
+            width: 100%;
+            height: 36px;
+            margin-top: 8px;
+            margin-bottom: theme.$spacing-regular;
+            font-size: theme.$font-size-small;
+            text-transform: none;
+
+            @include media.mobile {
+              width: 100%;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+
+      .divider {
+        width: 100%;
+        font-size: theme.$font-size-medium;
+        font-weight: theme.$font-weight-regular;
+
+        @include flex-all-center;
+      }
+
+      .divider::before,
+      .divider::after {
+        flex: 1 1;
+        margin: auto;
+        content: "";
+        border-bottom: 1px solid;
+      }
+
+      .divider::before {
+        margin-right: 10px;
+      }
+
+      .divider::after {
+        margin-left: 10px;
+      }
+
+      .lostPasswordContainer {
+        width: 100%;
+        font-size: theme.$font-size-small;
+
+        @include flex-all-center;
+
+        a {
+          font-weight: theme.$font-weight-regular;
+
+          &:hover {
+            color: theme.$branding-color-primary;
+          }
+        }
+      }
+    }
+  }
+
+  .languageIcon {
+    margin-right: theme.$spacing-smaller;
+  }
+
+  .languageDropdownContainer {
+    margin-left: theme.$spacing-smaller;
+  }
+
+  .subNavbarContainer {
+    width: 100%;
+    margin: theme.$spacing-regular auto;
+
+    @include media.tablet-down {
+      width: 50%;
+    }
+
+    @include media.mobile {
+      width: 80%;
+    }
+  }
+
+  .linkContainer {
+    width: 100%;
+    height: 68px;
+    padding: theme.$spacing-regular;
+    margin: theme.$spacing-semi-large 0;
+    border-radius: theme.$border-radius-small;
+
+    @include flex-all-center;
+
+    .link {
+      font-weight: theme.$font-weight-semibold;
+      color: theme.$branding-color-primary;
+
+      &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+      }
+    }
+  }
+
+  .containerTitle {
+    margin-bottom: theme.$spacing-regular;
+    font-size: theme.$font-size-subtitle;
+  }
+}
+
+/* @use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.signUpPageWrapper {
   @include flex-all-center;
 
   min-height: 80vh;
 
-  .newUserPage {
+  .signUpPage {
     width: 20%;
     min-width: 340px;
 
@@ -20,127 +184,139 @@
     @include media.mobile {
       width: 90%;
     }
-  }
 
-  .formContainer {
-    width: 100%;
-    padding: theme.$spacing-regular;
-    border: theme.$border-regular-component;
-    border-radius: theme.$border-radius-small;
-  }
-
-  .loginContainer {
-    width: 100%;
-    height: 68px;
-    padding: theme.$spacing-regular;
-    margin: theme.$spacing-semi-large 0;
-    border: theme.$border-regular-component;
-    border-radius: theme.$border-radius-small;
-
-    @include flex-all-center;
-
-    a {
-      color: theme.$color-branding-primary;
+    .logoAndFormContainer {
+      border: 1px solid red;
     }
-  }
 
-  .logoContainer {
-    display: flex;
-    justify-content: center;
-  }
+    .languageDropdownContainer {
+      margin-left: theme.$spacing-semi-regular;
+      border: 1px solid red;
+    }
 
-  .logo {
-    width: 216px;
-    border-radius: theme.$border-radius-circle;
-  }
-
-  .form {
-    width: 100%;
-  }
-
-  .formField {
-    width: 100%;
-    height: 32px;
-    margin-bottom: theme.$spacing-small;
-    font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-medium;
-  }
-
-  .label {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 4px;
-  }
-
-  .containerTitle {
-    margin-bottom: theme.$spacing-regular;
-    font-size: theme.$font-size-subtitle;
-  }
-
-  .divider {
-    width: 100%;
-    font-size: theme.$font-size-medium;
-    font-weight: theme.$font-weight-regular;
-
-    @include flex-all-center;
-  }
-
-  .divider::before,
-  .divider::after {
-    flex: 1 1;
-    margin: auto;
-    content: "";
-    border-bottom: 1px solid;
-  }
-
-  .divider::before {
-    margin-right: 10px;
-  }
-
-  .divider::after {
-    margin-left: 10px;
-  }
-
-  .lostPasswordContainer {
-    margin-top: 32px;
-    margin-bottom: 8px;
-    text-align: center;
-  }
-
-  .formButton {
-    @include action-button;
-
-    width: 100%;
-    height: 36px;
-    margin-top: 8px;
-    margin-bottom: theme.$spacing-regular;
-    font-size: theme.$font-size-small;
-    text-transform: none;
-
-    @include media.mobile {
+    .formContainer {
       width: 100%;
-      overflow: hidden;
+      padding: theme.$spacing-regular;
+      border: theme.$border-regular-component;
+      border-radius: theme.$border-radius-small;
     }
-  }
 
-  .errorMessage {
-    font-weight: theme.$font-weight-semibold;
-    color: red;
-  }
+    .loginLinkContainer {
+      width: 100%;
+      height: 68px;
+      padding: theme.$spacing-regular;
+      margin: theme.$spacing-semi-large 0;
+      border: theme.$border-regular-component;
+      border-radius: theme.$border-radius-small;
 
-  .passwordInputAndToggleButtonContainer {
-    position: relative;
+      @include flex-all-center;
 
-    button {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      transform: translateY(
-        -20%
-      ); /* This centers the button vertically inside the input */
+      a {
+        color: theme.$branding-color-primary;
+      }
+    }
+
+    .logoContainer {
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo {
+      width: 216px;
+      border-radius: theme.$border-radius-circle;
+    }
+
+    .form {
+      width: 100%;
+    }
+
+    .formField {
+      width: 100%;
+      height: 32px;
+      margin-bottom: theme.$spacing-small;
+      font-family: theme.$font-family-primary;
+      font-size: theme.$font-size-medium;
+    }
+
+    .label {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 4px;
+    }
+
+    .containerTitle {
+      margin-bottom: theme.$spacing-regular;
+      font-size: theme.$font-size-subtitle;
+    }
+
+    .divider {
+      width: 100%;
+      font-size: theme.$font-size-medium;
+      font-weight: theme.$font-weight-regular;
+
+      @include flex-all-center;
+    }
+
+    .divider::before,
+    .divider::after {
+      flex: 1 1;
+      margin: auto;
+      content: "";
+      border-bottom: 1px solid;
+    }
+
+    .divider::before {
+      margin-right: 10px;
+    }
+
+    .divider::after {
+      margin-left: 10px;
+    }
+
+    .lostPasswordContainer {
+      margin-top: 32px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .formButton {
+      @include action-button;
+
+      width: 100%;
+      height: 36px;
+      margin-top: 8px;
+      margin-bottom: theme.$spacing-regular;
+      font-size: theme.$font-size-small;
+      text-transform: none;
+
+      @include media.mobile {
+        width: 100%;
+        overflow: hidden;
+      }
+    }
+
+    .errorMessage {
+      font-weight: theme.$font-weight-semibold;
+      color: red;
+    }
+
+    .passwordInputAndToggleButtonContainer {
+      position: relative;
+
+      button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        transform: translateY(
+          -20%
+        );
+      }
     }
   }
 }
+ */
+
+/* This centers the button vertically inside the input */

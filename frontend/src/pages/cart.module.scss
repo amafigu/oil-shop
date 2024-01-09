@@ -90,7 +90,7 @@
     min-height: 90px;
     max-height: 90px;
     object-fit: contain;
-    margin-right: theme.$spacing-small;
+    margin-right: theme.$spacing-large;
 
     @include media.desktop-down {
       width: 2.75rem;
