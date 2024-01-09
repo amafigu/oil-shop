@@ -25,7 +25,6 @@ const Cart = () => {
   const text = translate.pages.cart
   const { user } = useUserContext()
   const navigate = useNavigate()
-  console.log(user)
 
   useEffectScrollTop()
   useEffect(() => {

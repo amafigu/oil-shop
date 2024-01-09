@@ -39,7 +39,6 @@ const Shipping = () => {
       }
 
       if (user && user.role === "admin") {
-        console.log("user", user)
         setNotification("as admin you can add shipping data")
         setTimeout(() => setNotification(null), 3000)
         setTimeout(() => navigate(ROUTES_CURRENT_ADMIN), 3000)
