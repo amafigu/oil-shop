@@ -66,7 +66,7 @@ const GetOrders = () => {
         </div>
 
         <ul className={styles.cartItems}>
-          {order.cartItems &&
+          {order.cartItems.length > 0 ? (
             order.cartItems.map((cartItem) => (
               <li key={cartItem.id}>
                 <ProductDetailsRow
@@ -74,11 +74,18 @@ const GetOrders = () => {
                   quantity={cartItem.quantity}
                 />
               </li>
-            ))}
+            ))
+          ) : (
+            <li className={styles.noItems}>
+              The products of this order have been deleted
+            </li>
+          )}
         </ul>
       </li>
     ))
   }, [orders])
+
+  console.log("orders", orders)
 
   return (
     <div className={styles.getOrdersWrapper}>
