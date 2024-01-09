@@ -70,9 +70,9 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
           { email, password },
           { withCredentials: true },
         )
-
+        console.log("LOGIN RESPONSE1", loginResponse)
         if (loginResponse && loginResponse.status === 200) {
-          console.log("LOGIN RESPONSE", loginResponse)
+          console.log("LOGIN RESPONSE IF 200", loginResponse)
           const getLoggedInUser = async () => {
             try {
               const userResponse = await axios.get(
