@@ -85,8 +85,6 @@ const GetOrders = () => {
     ))
   }, [orders])
 
-  console.log("orders", orders)
-
   return (
     <div className={styles.getOrdersWrapper}>
       {notification && <NotificationCard message={notification} />}

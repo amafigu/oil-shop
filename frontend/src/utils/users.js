@@ -55,25 +55,20 @@ export const getLoggedInUserData = async (
 }
 
 export const getUserWithoutCredentialsByEmail = async (email) => {
-  console.log("getUserByEmail", email)
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_EMAIL}/${email}`,
     )
-    console.log("getUserByEmail response", response)
-
     return response
   } catch (error) {
     console.error("Error geting user by email", error)
   }
 }
 export const getUserWithoutCredentialsById = async (id) => {
-  console.log("getUserByEmail", id)
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${id}`,
     )
-    console.log("getUserByEmail response", response)
 
     return response
   } catch (error) {
@@ -89,8 +84,6 @@ export const getUserByEmail = async (email) => {
         withCredentials: true,
       },
     )
-    console.log("getUserByEmail response", response)
-
     return response.data
   } catch (error) {
     console.error("Error geting user by email", error)

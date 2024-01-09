@@ -4,7 +4,6 @@ import { titleCase } from "#utils/stringManipulation"
 import styles from "./productDetailsRow.module.scss"
 
 const ProductDetailsRow = ({ product, quantity }) => {
-  console.log("product", product)
   return (
     <div className={styles.productDetailsRowWrapper}>
       {product ? (

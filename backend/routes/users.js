@@ -58,7 +58,6 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
 });
 
 router.get('/guest/email/:email', async (req, res) => {
-  console.log('getUserByEmail', req.params.email);
   try {
     const user = await db.users.findOne({
       where: { email: req.params.email },
@@ -75,8 +74,6 @@ router.get('/guest/email/:email', async (req, res) => {
 });
 
 router.get('/guest/id/:id', async (req, res) => {
-  console.log('GET BY ID', req.params.id);
-  console.log('GET BY ID TYPE', typeof req.params.id);
   try {
     const user = await db.users.findOne({
       where: { id: req.params.id },

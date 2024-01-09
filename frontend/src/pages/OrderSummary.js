@@ -47,15 +47,12 @@ const OrderSummary = () => {
       try {
         let customerId
         if (!isLoggedIn) {
-          console.log("cart", cart)
           customerId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
-          console.log("isLoggedIn", customerId)
           const guestDataResponse = await axios.get(
             `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${customerId}`,
           )
           if (guestDataResponse.status === 200) {
             const guest = guestDataResponse.data
-            console.log("guestDataResponse", guest)
             setUserData({
               firstName: guest.firstName,
               lastName: guest.lastName,
@@ -65,16 +62,12 @@ const OrderSummary = () => {
         }
 
         if (isLoggedIn && !isLoading) {
-          console.log(userId)
-          console.log(customerId)
           customerId = userId
-          console.log(customerId)
           const userDataResponse = await axios.get(
             `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${customerId}`,
             { withCredentials: true },
           )
 
-          console.log("userDatares", userDataResponse)
           if (userDataResponse.status === 200) {
             const user = userDataResponse.data
 
@@ -90,8 +83,6 @@ const OrderSummary = () => {
           `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
         )
 
-        console.log(shippingDataResponse)
-
         if (shippingDataResponse.status === 200) {
           const data = shippingDataResponse.data
           setShippingData({
@@ -106,7 +97,6 @@ const OrderSummary = () => {
         const orderAndCartItemsResponse = await axios.get(
           `${process.env.REACT_APP_API_URL}/orders/last-order-items/${customerId}`,
         )
-        console.log(orderAndCartItemsResponse)
         if (orderAndCartItemsResponse.status === 200) {
           setOrderAndCartItems(orderAndCartItemsResponse.data)
           setOrderData({
@@ -115,7 +105,6 @@ const OrderSummary = () => {
             totalAmount:
               orderAndCartItemsResponse.data.lastOrder[0].totalAmount,
           })
-          console.log(orderData)
         }
       } catch (error) {
         console.error(error)
@@ -125,7 +114,6 @@ const OrderSummary = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart, navigate, userId, isLoggedIn, isLoading])
 
-  console.log("orderAndCartItems", orderAndCartItems)
   return (
     <>
       <div className={styles.orderSummaryWrapper}>

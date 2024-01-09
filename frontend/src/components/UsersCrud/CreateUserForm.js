@@ -108,8 +108,7 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
       console.error("Signup error", error)
     }
   }
-  console.log(validationErrors)
-  console.log(typeof validationErrors)
+
   return (
     <div
       className={styles.createUserFormWrapper}
