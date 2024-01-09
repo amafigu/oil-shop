@@ -190,6 +190,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.post('/login', validateBody(loginValidation), async (req, res) => {
+  res.clearCookie('token');
   try {
     const user = await db.users.findOne({
       where: { email: req.body.email },
