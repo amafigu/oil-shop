@@ -29,7 +29,8 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
   const [file, setFile] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
   const [validationErrors, setValidationErrors] = useState([])
-  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
+  //const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
+  const { setIsLoggedIn } = useUserContext()
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
@@ -81,10 +82,10 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
               )
               console.log("CREATE USER FORM GETLOGGED USER", userResponse.data)
 
-              const userData = userResponse.data
-              setUserEmail(userData.email)
+              //              const userData = userResponse.data
+              //            setUserEmail(userData.email)
               setIsLoggedIn(true)
-              setUser(userData)
+              //          setUser(userData)
             } catch (error) {
               setNotification(`${text.errorMessage}`)
               setTimeout(() => setNotification(null), 3000)
