@@ -1,29 +1,25 @@
-# oil-shop
-
-Portfolio application CMS
+Portfolio application, simulates an online-shop
 
 Technologies stack -
 
 Backend: Node / Express
-Tests:Jest
-Database:Postgres
+Tests: Jest
+Database: Postgres
 ORM: Sequelize
 Frontend: React / Sass
 
 Functionalities -
 
-Login system with authentication and authorization
+Translation - English and German.
 
-There are 4 Roles for users -
+Responsive design - Mobile, Tablet, Desktop.
 
-1 - Admin: can execute all CRUD operatios available.
+Login and registration system.
 
-2 - Product Manager:can execute all CRUD operatios available for products.
+There are 3 Roles for users -
 
-3 - Customer: registered user, which can execute CRUD operations available for a customer as edit personal data as address for example.
+1 - Admin: can execute CRUD operations with users and products.
 
-4 - Guest: unregistered user, which just make an order, as in the real world.
+2 - Customer: registered user, which can execute CRUD operations available for a customer as edit personal data.
 
-Translation - English and German
-
-Responsive desing - Mobile, Tablet, Desktop
+3 - Guest: unregistered user, which just make an order.
