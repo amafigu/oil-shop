@@ -17,7 +17,7 @@ export const logout = async (navigate, setIsLoggedIn) => {
   try {
     const logoutResponse = await axios.post(
       `${process.env.REACT_APP_API_URL}${API_LOGOUT}`,
-
+      {},
       {
         withCredentials: true,
       },
@@ -32,7 +32,7 @@ export const logout = async (navigate, setIsLoggedIn) => {
   }
 }
 
-export const getLoggedInUserData = async (
+export const getLoggedInUser = async (
   userId,
   setLoggedInUserData,
   setNotification,

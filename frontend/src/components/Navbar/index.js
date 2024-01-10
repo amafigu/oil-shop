@@ -41,16 +41,13 @@ const Navbar = ({ productCategories }) => {
   const [category, setCategory] = useState("")
   const [matchedProducts, setMatchedProducts] = useState([])
   const [isDropdownOpen, setDropdownOpen] = useState(false)
-
   const { getAllProductsQuantity } = useCartContext()
-
   const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
 
   const navigate = useNavigate()
   const location = useLocation()
   const params = new URLSearchParams(location.search)
   const queryCategory = params.get("category")
-
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
 
