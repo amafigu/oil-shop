@@ -71,21 +71,15 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
           { email, password },
           { withCredentials: true },
         )
-        console.log("LOGIN RESPONSE1", loginResponse)
         if (loginResponse && loginResponse.status === 200) {
-          console.log("LOGIN RESPONSE IF 200", loginResponse)
           const getLoggedInUser = async () => {
             try {
               const userResponse = await axios.get(
                 `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${newUserResponse.data.user.id}`,
                 { withCredentials: true },
               )
-              console.log("CREATE USER FORM GETLOGGED USER", userResponse.data)
 
-              //              const userData = userResponse.data
-              //            setUserEmail(userData.email)
               setIsLoggedIn(true)
-              //          setUser(userData)
             } catch (error) {
               setNotification(`${text.errorMessage}`)
               setTimeout(() => setNotification(null), 3000)

@@ -15,17 +15,9 @@ const User = () => {
   const [headerData, setHeaderData] = useState({})
   const { user, isLoading } = useUserContext()
   const navigate = useNavigate()
-  console.log("User user", user)
 
   useEffect(() => {
-    console.log("User user effect", user)
     if (!isLoading && user) {
-      console.log("User user effect setHeaderData ", {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        image: user.image,
-      })
       setHeaderData({
         firstName: user.firstName,
         lastName: user.lastName,
