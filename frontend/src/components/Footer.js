@@ -31,11 +31,12 @@ const Footer = () => {
       <div className={styles.footer}>
         <div className={styles.startSection}>
           <span className={styles.startSectionText}>
-            {text.newsletter.subscriptionText}
+            {/* text.newsletter.subscriptionText*/}
+            {text.newsletter.usefulLinks}
           </span>
         </div>
         <div className={styles.newsletterSection}>
-          <div className={styles.registrationFormWrapper}>
+          {/* <div className={styles.registrationFormWrapper}>
             <div className={styles.registrationFormContent}>
               <form className={styles.registrationForm}>
                 <div className={styles.registrationEmailInputAndButtonWrapper}>
@@ -59,7 +60,7 @@ const Footer = () => {
                 {text.newsletter.registrationDataConsentText}
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className={styles.columnsSection}>
           <ul className={styles.columnsSectionElements}>
