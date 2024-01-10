@@ -74,7 +74,7 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
         if (loginResponse && loginResponse.status === 200) {
           const getLoggedInUser = async () => {
             try {
-              const userResponse = await axios.get(
+              await axios.get(
                 `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${newUserResponse.data.user.id}`,
                 { withCredentials: true },
               )
