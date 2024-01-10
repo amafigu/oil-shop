@@ -24,7 +24,6 @@ export const logout = async (navigate, setIsLoggedIn) => {
     )
     if (logoutResponse.status === 200) {
       setIsLoggedIn(false)
-      console.log("logoutResonse", logoutResponse)
       setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
     }
   } catch (error) {
