@@ -44,8 +44,7 @@ const Navbar = ({ productCategories }) => {
 
   const { getAllProductsQuantity } = useCartContext()
 
-  const { isLoggedIn, setIsLoggedIn, setUserEmail, setUser, user } =
-    useUserContext()
+  const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -227,8 +226,6 @@ const Navbar = ({ productCategories }) => {
                       <LogoutButton
                         navigate={navigate}
                         setIsLoggedIn={setIsLoggedIn}
-                        setUserEmail={setUserEmail}
-                        setUser={setUser}
                       />
                     </div>
                   </div>

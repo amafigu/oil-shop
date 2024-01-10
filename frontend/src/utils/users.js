@@ -8,29 +8,25 @@ import {
   API_USERS_GUEST_BY_EMAIL,
   API_USERS_GUEST_BY_ID,
   API_USERS_USER,
+  REDIRECT_TIMEOUT,
   ROUTES_LOGIN,
   SHORT_MESSAGE_TIMEOUT,
 } from "./constants"
 
-export const logout = async (
-  navigate,
-  setIsLoggedIn,
-  setUserEmail,
-  setUser,
-) => {
+export const logout = async (navigate, setIsLoggedIn) => {
   try {
-    await axios.post(
+    const logoutResponse = await axios.post(
       `${process.env.REACT_APP_API_URL}${API_LOGOUT}`,
-      {},
+
       {
         withCredentials: true,
       },
     )
-
-    setIsLoggedIn(false)
-    setUserEmail("")
-    setUser({})
-    setTimeout(() => navigate(ROUTES_LOGIN), 400)
+    if (logoutResponse.status === 200) {
+      setIsLoggedIn(false)
+      console.log("logoutResonse", logoutResponse)
+      setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
+    }
   } catch (error) {
     console.error(error)
   }
