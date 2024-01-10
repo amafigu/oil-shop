@@ -168,7 +168,7 @@ const Login = () => {
             <div className={styles.divider}>{text.or}</div>
 
             <div className={styles.lostPasswordContainer}>
-              <Link to='/accounts/password/reset'>{text.passwordLost}</Link>
+              {/* <Link to='/accounts/password/reset'>{text.passwordLost}</Link> */}
             </div>
           </div>
 
