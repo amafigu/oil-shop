@@ -30,8 +30,7 @@ const MenuMobile = ({
 }) => {
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const navigate = useNavigate()
-  const { isLoggedIn, setIsLoggedIn, setUserEmail, setUser, user } =
-    useUserContext()
+  const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
 
   const navigateAndCloseMenu = (route) => {
     setMenuOpen(false)
@@ -92,8 +91,6 @@ const MenuMobile = ({
                 <LogoutButton
                   navigate={navigate}
                   setIsLoggedIn={setIsLoggedIn}
-                  setUserEmail={setUserEmail}
-                  setUser={setUser}
                 />
               </div>
               <div

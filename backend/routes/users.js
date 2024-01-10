@@ -185,12 +185,19 @@ router.put(
 // TODO: only use the used id
 
 router.post('/logout', (req, res) => {
-  res.clearCookie('token');
+  const isSecure = process.env.IS_SECURE;
+
+  res.clearCookie('token', {
+    httpOnly: true,
+    sameSite: 'none',
+    path: '/',
+    secure: isSecure,
+  });
+
   res.json({ message: 'Logged out successfully' });
 });
 
 router.post('/login', validateBody(loginValidation), async (req, res) => {
-  res.clearCookie('token');
   try {
     const user = await db.users.findOne({
       where: { email: req.body.email },

@@ -41,17 +41,13 @@ const Navbar = ({ productCategories }) => {
   const [category, setCategory] = useState("")
   const [matchedProducts, setMatchedProducts] = useState([])
   const [isDropdownOpen, setDropdownOpen] = useState(false)
-
   const { getAllProductsQuantity } = useCartContext()
-
-  const { isLoggedIn, setIsLoggedIn, setUserEmail, setUser, user } =
-    useUserContext()
+  const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
 
   const navigate = useNavigate()
   const location = useLocation()
   const params = new URLSearchParams(location.search)
   const queryCategory = params.get("category")
-
   const searchProductListDropdownRef = useRef(null)
   const modalRef = useRef(null)
 
@@ -227,8 +223,6 @@ const Navbar = ({ productCategories }) => {
                       <LogoutButton
                         navigate={navigate}
                         setIsLoggedIn={setIsLoggedIn}
-                        setUserEmail={setUserEmail}
-                        setUser={setUser}
                       />
                     </div>
                   </div>
