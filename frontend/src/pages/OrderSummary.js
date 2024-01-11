@@ -1,11 +1,12 @@
-import { CartContext } from "#context/cartContext"
+import NotificationCard from "#components/NotificationCard"
+import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import { DEFAULT_PRODUCT_IMAGE, SHIPPING_COST } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { camelCaseToTitleCase } from "#utils/stringManipulation"
 import { getSummaryData } from "#utils/users"
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./orderSummary.module.scss"
 
@@ -28,28 +29,39 @@ const OrderSummary = () => {
     paymentMethod: "",
     totalAmount: "",
   })
+  const [notification, setNotification] = useState(null)
   const [orderAndCartItems, setOrderAndCartItems] = useState({})
-  const { cart } = useContext(CartContext)
+  const { cart } = useCartContext()
   const { translate } = useLocaleContext()
   const text = translate.pages.orderSummary
   const navigate = useNavigate()
+
   const { isLoggedIn, userId, isLoading } = useUserContext()
 
-  useEffect(async () => {
-    await getSummaryData(
-      userId,
-      isLoggedIn,
-      isLoading,
-      setShippingData,
-      setUserData,
-      setOrderData,
-    )
+  useEffect(() => {
+    const getUserSummary = async () => {
+      const userSummaryResponse = await getSummaryData(
+        userId,
+        isLoggedIn,
+        isLoading,
+        setNotification,
+      )
+      console.log("userSummaryResponse", userSummaryResponse)
+      if (userSummaryResponse) {
+        setShippingData(userSummaryResponse.shippingData)
+        setUserData(userSummaryResponse.userData)
+        setOrderData(userSummaryResponse.orderData)
+        setOrderAndCartItems(userSummaryResponse.orderAndCartItems)
+      }
+    }
+
+    getUserSummary()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart, navigate, userId, isLoggedIn, isLoading])
-
   return (
     <>
       <div className={styles.orderSummaryWrapper}>
+        {notification && <NotificationCard message={notification} />}
         <div className={styles.columnTitle}>
           <span className={styles.pageTitle}>{text.thankClient}</span>
           <span className={styles.summaryTitle}>{text.orderResume}:</span>
@@ -62,7 +74,7 @@ const OrderSummary = () => {
                   <div className={styles.clientInfoContainer}>
                     {userData &&
                       Object.keys(userData).map((key) => (
-                        <div className={styles.clientInfoItem}>
+                        <div key={key} className={styles.clientInfoItem}>
                           <div key={key} className={styles.formField}>
                             {camelCaseToTitleCase(key)}: {userData[key]}
                           </div>
@@ -70,7 +82,7 @@ const OrderSummary = () => {
                       ))}
                     {shippingData &&
                       Object.keys(shippingData).map((key) => (
-                        <div className={styles.clientInfoItem}>
+                        <div key={key} className={styles.clientInfoItem}>
                           <div key={key} className={styles.formField}>
                             {camelCaseToTitleCase(key)}: {shippingData[key]}
                           </div>
@@ -79,14 +91,14 @@ const OrderSummary = () => {
                     {orderData &&
                       Object.keys(orderData).map((key) =>
                         key === "totalAmount" ? (
-                          <div className={styles.clientInfoItem}>
+                          <div key={key} className={styles.clientInfoItem}>
                             <div key={key} className={styles.formField}>
                               {camelCaseToTitleCase(key)}:{" "}
                               {`${Number(orderData[key]) + SHIPPING_COST} €`}
                             </div>
                           </div>
                         ) : (
-                          <div className={styles.clientInfoItem}>
+                          <div key={key} className={styles.clientInfoItem}>
                             <div key={key} className={styles.formField}>
                               {camelCaseToTitleCase(key)}:{" "}
                               {camelCaseToTitleCase(orderData[key])}
@@ -102,7 +114,8 @@ const OrderSummary = () => {
             <div className={styles.purchasedProducts}>
               <div className={styles.cartItemsListWrapper}>
                 <div className={styles.cartItemsList}>
-                  {orderAndCartItems.cartItems &&
+                  {orderAndCartItems &&
+                    orderAndCartItems.cartItems &&
                     orderAndCartItems.cartItems.map((item, index) => (
                       <div key={index} className={styles.cartItemWrapper}>
                         <div className={styles.cartItem}>
