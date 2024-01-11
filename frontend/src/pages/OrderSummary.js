@@ -1,17 +1,10 @@
 import { CartContext } from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import {
-  API_SHIPPING_DATA,
-  API_USERS_CURRENT_USER,
-  API_USERS_GUEST_BY_ID,
-  DEFAULT_PRODUCT_IMAGE,
-  LOCAL_STORAGE_GUEST_ID,
-  SHIPPING_COST,
-} from "#utils/constants"
+import { DEFAULT_PRODUCT_IMAGE, SHIPPING_COST } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { camelCaseToTitleCase } from "#utils/stringManipulation"
-import axios from "axios"
+import { getSummaryData } from "#utils/users"
 import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./orderSummary.module.scss"
@@ -42,75 +35,15 @@ const OrderSummary = () => {
   const navigate = useNavigate()
   const { isLoggedIn, userId, isLoading } = useUserContext()
 
-  useEffect(() => {
-    const getSummaryData = async () => {
-      try {
-        let customerId
-        if (!isLoggedIn) {
-          customerId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
-          const guestDataResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${customerId}`,
-          )
-          if (guestDataResponse.status === 200) {
-            const guest = guestDataResponse.data
-            setUserData({
-              firstName: guest.firstName,
-              lastName: guest.lastName,
-              email: guest.email,
-            })
-          }
-        }
-
-        if (isLoggedIn && !isLoading) {
-          customerId = userId
-          const userDataResponse = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${customerId}`,
-            { withCredentials: true },
-          )
-
-          if (userDataResponse.status === 200) {
-            const user = userDataResponse.data
-
-            setUserData({
-              firstName: user.firstName,
-              lastName: user.lastName,
-              email: user.email,
-            })
-          }
-        }
-
-        const shippingDataResponse = await axios.get(
-          `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
-        )
-
-        if (shippingDataResponse.status === 200) {
-          const data = shippingDataResponse.data
-          setShippingData({
-            street: data.street,
-            number: data.number,
-            postalCode: data.postalCode,
-            city: data.city,
-            state: data.state,
-            country: data.country,
-          })
-        }
-        const orderAndCartItemsResponse = await axios.get(
-          `${process.env.REACT_APP_API_URL}/orders/last-order-items/${customerId}`,
-        )
-        if (orderAndCartItemsResponse.status === 200) {
-          setOrderAndCartItems(orderAndCartItemsResponse.data)
-          setOrderData({
-            paymentMethod:
-              orderAndCartItemsResponse.data.lastOrder[0].paymentMethod,
-            totalAmount:
-              orderAndCartItemsResponse.data.lastOrder[0].totalAmount,
-          })
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getSummaryData()
+  useEffect(async () => {
+    await getSummaryData(
+      userId,
+      isLoggedIn,
+      isLoading,
+      setShippingData,
+      setUserData,
+      setOrderData,
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart, navigate, userId, isLoggedIn, isLoading])
 

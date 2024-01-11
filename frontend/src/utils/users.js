@@ -3,11 +3,13 @@ import {
   API_LOGOUT,
   API_ORDERS_ALL,
   API_ORDERS_CART_ITEMS,
+  API_ORDERS_LAST_ORDER_ITEMS,
   API_SHIPPING_DATA,
   API_USERS_CURRENT_USER,
   API_USERS_GUEST_BY_EMAIL,
   API_USERS_GUEST_BY_ID,
   API_USERS_USER,
+  LOCAL_STORAGE_GUEST_ID,
   REDIRECT_TIMEOUT,
   ROUTES_LOGIN,
   SHORT_MESSAGE_TIMEOUT,
@@ -145,5 +147,79 @@ export const deleteUserByEmail = async (
     setNotification(`${userEmail} ${errorMessage}`)
     setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     console.error("Can not delete user", error)
+  }
+}
+
+export const getSummaryData = async (
+  userId,
+  isLoggedIn,
+  isLoading,
+  setShippingData,
+  setUserData,
+  setOrderData,
+) => {
+  try {
+    let customerId
+    if (!isLoggedIn) {
+      customerId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
+      const guestDataResponse = await axios.get(
+        `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${customerId}`,
+      )
+      if (guestDataResponse.status === 200) {
+        const guest = guestDataResponse.data
+        setUserData({
+          firstName: guest.firstName,
+          lastName: guest.lastName,
+          email: guest.email,
+        })
+      }
+    }
+
+    if (isLoggedIn && !isLoading) {
+      customerId = userId
+      const userDataResponse = await axios.get(
+        `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${customerId}`,
+        { withCredentials: true },
+      )
+
+      if (userDataResponse.status === 200) {
+        const user = userDataResponse.data
+
+        setUserData({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+        })
+      }
+    }
+
+    const shippingDataResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${customerId}`,
+    )
+
+    if (shippingDataResponse.status === 200) {
+      const data = shippingDataResponse.data
+      setShippingData({
+        street: data.street,
+        number: data.number,
+        postalCode: data.postalCode,
+        city: data.city,
+        state: data.state,
+        country: data.country,
+      })
+    }
+    const orderAndCartItemsResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_ORDERS_LAST_ORDER_ITEMS}/${customerId}`,
+    )
+    if (orderAndCartItemsResponse.status === 200) {
+      setOrderAndCartItems(orderAndCartItemsResponse.data)
+      setOrderData({
+        paymentMethod:
+          orderAndCartItemsResponse.data.lastOrder[0].paymentMethod,
+        totalAmount: orderAndCartItemsResponse.data.lastOrder[0].totalAmount,
+      })
+    }
+  } catch (error) {
+    console.error(error)
   }
 }

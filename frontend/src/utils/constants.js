@@ -39,6 +39,7 @@ export const API_LOGOUT = "/users/logout"
 export const API_ORDERS_ALL = "/orders/all"
 export const API_ORDERS_CART_ITEMS = "/orders/cart-items"
 export const API_ORDERS_CREATE = "/orders/create"
+export const API_ORDERS_LAST_ORDER_ITEMS = "/orders/last-order-items"
 
 // ROUTES
 export const ROUTES_ABOUT = "/about"
