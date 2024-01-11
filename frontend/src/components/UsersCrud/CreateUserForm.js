@@ -29,7 +29,6 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
   const [file, setFile] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
   const [validationErrors, setValidationErrors] = useState([])
-  //const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
   const { setIsLoggedIn } = useUserContext()
 
   const { translate } = useLocaleContext()

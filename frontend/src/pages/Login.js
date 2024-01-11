@@ -19,6 +19,8 @@ import {
   faChevronDown,
   faChevronUp,
   faGlobe,
+  faLock,
+  faUnlock,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
@@ -30,9 +32,12 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [password, setPassword] = useState("")
-  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
+  const [showPassword, setShowPassword] = useState(false)
   const { translate } = useLocaleContext()
+  const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
   const text = translate.pages.login
+  const textPassword = translate.components.crud
+
   const navigate = useNavigate()
 
   useEffectScrollTop()
@@ -148,30 +153,39 @@ const Login = () => {
                   required
                 ></input>
 
-                <input
-                  type='password'
-                  value={password}
-                  placeholder={text.passwordPlaceholder}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete='true'
-                  name='email'
-                  required
-                  className={styles.formField}
-                ></input>
+                <div className={styles.passwordInputAndToggleButtonContainer}>
+                  <input
+                    className={styles.formField}
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    placeholder={textPassword.forms.commonProperties.password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete='true'
+                    name='password'
+                    required
+                  ></input>
 
+                  <button
+                    type='button'
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <FontAwesomeIcon icon={faUnlock} />
+                    ) : (
+                      <FontAwesomeIcon icon={faLock} />
+                    )}
+                  </button>
+                </div>
                 <button className={styles.formButton} type='submit'>
                   {text.loginButton}
                 </button>
               </form>
             </div>
-
             <div className={styles.divider}>{text.or}</div>
-
             <div className={styles.lostPasswordContainer}>
               {/* <Link to='/accounts/password/reset'>{text.passwordLost}</Link> */}
             </div>
           </div>
-
           <div className={styles.linkContainer}>
             <span>
               {text.haveAccount}{" "}
