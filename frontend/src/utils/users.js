@@ -178,9 +178,10 @@ export const getSummaryData = async (
 
     if (!isLoggedIn) {
       customerId = localStorage.getItem(LOCAL_STORAGE_GUEST_ID)
-      userData = await getUserData(
-        `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${customerId}`,
-      )
+      if (customerId)
+        userData = await getUserData(
+          `${process.env.REACT_APP_API_URL}${API_USERS_GUEST_BY_ID}/${customerId}`,
+        )
     }
     if (isLoggedIn && !isLoading) {
       customerId = userId
@@ -221,7 +222,7 @@ export const getSummaryData = async (
 
       return { shippingData, userData, orderData, orderAndCartItems }
     } else {
-      if (userId) {
+      if (!customerId && userId) {
         customerId = userId
       }
     }
