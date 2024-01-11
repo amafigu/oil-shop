@@ -11,6 +11,20 @@
 
     @include flex-column-all-center;
 
+    .passwordInputAndToggleButtonContainer {
+      position: relative;
+
+      button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        transform: translateY(-80%);
+      }
+    }
+
     .languageOptionsAndFormContainer {
       width: 348px;
 
