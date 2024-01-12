@@ -1,7 +1,9 @@
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import useLocaleContext from "#context/localeContext"
+import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#utils/constants"
+import { getAllUsersList } from "#utils/users"
+import { useCallback, useEffect, useState } from "react"
 import EditableListUserData from "./EditableListUserData"
 import styles from "./getAllUsers.module.scss"
 
@@ -9,32 +11,29 @@ const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState()
   const [showUsers, setShowUsers] = useState(false)
   const [usersData, setUsersData] = useState([])
+  const { translate } = useLocaleContext()
+  const text = translate.components.crud.getAllUsers
 
-  const getAllUsers = async () => {
+  const getUsersList = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/`,
-        { withCredentials: true },
-      )
-
-      const userObjects = response.data.map((user) => ({
-        ...user,
-        updated: false,
-      }))
-      setUsersData(userObjects)
+      const listResponse = await getAllUsersList()
+      if (listResponse) {
+        setUsersData(listResponse)
+      }
     } catch (error) {
-      setNotification("Can not get all users")
+      setNotification(text.error)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     }
-  }
+  }, [text.error, setUsersData, setNotification])
 
   useEffect(() => {
-    getAllUsers()
-  }, [refreshAllUsersCounter])
+    getUsersList()
+  }, [refreshAllUsersCounter, getUsersList])
 
   const showUserListAndGetData = (bool) => {
     setShowUsers(bool)
   }
-
+  usersData && console.log(usersData)
   return (
     <div className={styles.getAllUsersWrapper}>
       {notification && <NotificationCard message={notification} />}
@@ -43,11 +42,12 @@ const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
         <ToggleButton
           show={showUsers}
           setToggle={showUserListAndGetData}
-          textHide='HIDE ALL USERS'
-          textShow='GET ALL USERS'
-          classCss='showHideButtons'
+          textHide={text.hideButton.toUpperCase()}
+          textShow={text.showButton.toUpperCase()}
+          classCss={STYLES.BUTTONS.SHOW_HIDE}
         />
       </div>
+
       {
         <div className={showUsers ? `${styles.show}` : `${styles.hide}`}>
           {usersData &&

@@ -7,6 +7,7 @@ import {
   API_ORDERS_CREATE,
   API_ORDERS_LAST_ORDER_ITEMS,
   API_SHIPPING_DATA,
+  API_USERS,
   API_USERS_CREATE_GUEST,
   API_USERS_CURRENT_USER,
   API_USERS_GUEST_BY_EMAIL,
@@ -339,6 +340,24 @@ export const submitOrderAndGuestUser = async (
     }
   } catch (error) {
     console.error(error)
+    throw error
+  }
+}
+
+export const getAllUsersList = async () => {
+  try {
+    const getAllUsersResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_USERS}`,
+      { withCredentials: true },
+    )
+    if (getAllUsersResponse.status === 200) {
+      const userObjects = getAllUsersResponse.data.map((user) => ({
+        ...user,
+        updated: false,
+      }))
+      return userObjects
+    }
+  } catch (error) {
     throw error
   }
 }

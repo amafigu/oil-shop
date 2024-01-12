@@ -22,6 +22,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   }
 
   const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
+    id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
@@ -29,6 +30,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   })
 
   const [updatedUserData, setUpdatedUserData] = useState({
+    id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
