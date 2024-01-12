@@ -1,7 +1,7 @@
 import useLocaleContext from "#context/localeContext"
 import { saveDataAndToggleInput } from "#utils/dataManipulation"
 import { cancelWithScape } from "#utils/render"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./editableInput.module.scss"
 
 const EditableInput = ({
@@ -12,12 +12,15 @@ const EditableInput = ({
   classCss,
   originalPropertyData,
   updatedPropertyData,
+  refreshAllProductsCounter,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
   const { translate } = useLocaleContext()
   const textButtons = translate.components.crud.buttons
   const textProperties = translate.components.crud.forms.commonProperties
 
+  useEffect(() => {}, [refreshAllProductsCounter])
+  console.log("eff", refreshAllProductsCounter)
   return (
     <div className={styles.itemRow}>
       {isEditing ? (

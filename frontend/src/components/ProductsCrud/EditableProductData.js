@@ -4,9 +4,9 @@ import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import {
-  API_PRODUCTS,
   API_PRODUCTS_PRODUCT,
   DEFAULT_PRODUCT_IMAGE,
+  SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#utils/constants"
 import {
@@ -14,8 +14,7 @@ import {
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import { getProductByName } from "#utils/products"
-import axios from "axios"
+import { deleteProductById, getProductByName } from "#utils/products"
 import { useState } from "react"
 import styles from "./editableProductData.module.scss"
 
@@ -45,7 +44,7 @@ const EditableProductData = ({
 
   const { translate } = useLocaleContext()
   const textAdminCrud = translate.pages.admin.crud
-  const buttonsText = translate.components
+  const buttonsText = translate.components.crud
 
   const updateProductDataAndSetStates = async (e, propertyName) => {
     let image = ""
@@ -82,41 +81,41 @@ const EditableProductData = ({
   }
 
   const searchProduct = async (name) => {
-    const product = await getProductByName(name.trim())
-
-    if (!product) {
+    console.log("name", name)
+    const productResponse = await getProductByName(name.trim())
+    console.log("productResponse", productResponse)
+    if (!productResponse) {
       setNotification("Product not found")
-      setTimeout(() => setNotification(null), 2000)
+      setNonUpdatedProductData({ ...initialProductData })
+
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       return
     }
-    setNonUpdatedProductData(product)
+    setNonUpdatedProductData(productResponse.data)
     setShowProductForm(true)
   }
 
-  const deleteProductAndUpdateState = async (productName) => {
+  const deleteProductAndUpdateState = async (productId) => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API_URL}${API_PRODUCTS}/${productName.trim()}`,
-        {
-          withCredentials: true,
-        },
-      )
-      setNotification(`${productName} deleted`)
-      setNonUpdatedProductData({ ...initialProductData })
-      setProductName("")
-      setShowProductForm(false)
-      setTimeout(() => setNotification(null), 2000)
-      setTimeout(
-        () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
-        2300,
-      )
+      const deleteResponse = await deleteProductById(productId)
+      if (deleteResponse.status === 200) {
+        setNotification(`product deleted`)
+        setNonUpdatedProductData({ ...initialProductData })
+        setProductName("")
+        setShowProductForm(false)
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+        setTimeout(
+          () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
+          SHORT_MESSAGE_TIMEOUT,
+        )
+      }
     } catch (error) {
       setNotification(`${productName} not deleted`)
-      setTimeout(() => setNotification(null), 3000)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       console.error("Can not delete product", error)
     }
   }
-
+  console.log(productName)
   return (
     <>
       <div className={styles.editableProductDataWrapper}>
@@ -154,22 +153,17 @@ const EditableProductData = ({
                   className={styles.formButton}
                   onClick={() => searchProduct(productName)}
                 >
-                  {buttonsText.crud.getProduct.getByName}
+                  {"GET"}
                 </button>
               </div>
 
               <button
                 className={styles.formButton}
                 onClick={() =>
-                  deleteProductAndUpdateState(
-                    productName,
-                    setNotification,
-                    textAdminCrud.users.deletedByEmail,
-                    textAdminCrud.users.deleteError,
-                  )
+                  deleteProductAndUpdateState(nonUpdatedProductData.id)
                 }
               >
-                {buttonsText.crud.deleteProduct.button}
+                {"DELETE"}
               </button>
             </div>
             {showProductForm &&
@@ -197,7 +191,7 @@ const EditableProductData = ({
                     )}
                   </div>
                 ) : (
-                  <div className={styles.inputContainer}>
+                  <div className={styles.inputContainer} key={key}>
                     <EditableImageInput
                       label={key}
                       name={key}

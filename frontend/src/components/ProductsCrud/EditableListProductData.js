@@ -13,10 +13,15 @@ import {
   uploadToS3,
 } from "#utils/dataManipulation"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./editableListProductData.module.scss"
 
-const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
+const EditableListProductData = ({
+  setRefreshAllProductsCounter,
+  product,
+  refreshAllProductsCounter,
+}) => {
   const initialProductData = {
     name: "",
     description: "",
@@ -47,6 +52,9 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
 
   const textAdminCrud = translate.pages.admin.crud
   const buttonsText = translate.components
+  const textDelete = translate.components.crud
+
+  useEffect(() => {}, [refreshAllProductsCounter])
 
   const updateProductDataAndSetStates = async (e, propertyName) => {
     let image = ""
@@ -72,6 +80,10 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
       return
     }
     setUpdatedProductData(updatedData.data.product)
+    setTimeout(
+      () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
+      SHORT_MESSAGE_TIMEOUT,
+    )
   }
 
   const setFileToUpload = (e) => {
@@ -86,15 +98,15 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
           withCredentials: true,
         },
       )
-      setNotification(`Product deleted`)
-      setTimeout(() => setNotification(null), 2000)
+      setNotification(textDelete.deleteProduct.success)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       setTimeout(
         () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
-        2300,
+        SHORT_MESSAGE_TIMEOUT,
       )
     } catch (error) {
-      setNotification(`Product not deleted`)
-      setTimeout(() => setNotification(null), 3000)
+      setNotification(textDelete.deleteProduct.error)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       console.error("Can not delete product", error)
     }
   }
@@ -152,6 +164,7 @@ const EditableListProductData = ({ setRefreshAllProductsCounter, product }) => {
                     classCss={STYLES.FORMS.FIELD}
                     originalPropertyData={nonUpdatedProductData}
                     updatedPropertyData={updatedProductData}
+                    refreshAllProductsCounter={refreshAllProductsCounter}
                   />
                 )}
               </div>

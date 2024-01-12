@@ -124,7 +124,7 @@ export const createDataAndSetStates = async (
       dataApi,
       setErrorMessage,
     )
-
+    console.log("dataRequest", dataRequest)
     if (dataRequest && dataRequest.status === 200) {
       return dataRequest
     }

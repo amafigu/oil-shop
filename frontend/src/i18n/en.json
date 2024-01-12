@@ -280,8 +280,8 @@
       },
       "deleteProduct": {
         "button": "Delete Product",
-        "error": "Can not delete product with this name: ",
-        "deletedByName": "was successfully deleted from system"
+        "error": "Can not delete product",
+        "success": "was successfully deleted from system"
       },
       "getProduct": {
         "button": "Get product data",
