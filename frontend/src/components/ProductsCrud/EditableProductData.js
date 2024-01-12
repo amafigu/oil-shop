@@ -44,7 +44,6 @@ const EditableProductData = ({
 
   const { translate } = useLocaleContext()
   const textAdminCrud = translate.pages.admin.crud
-  const buttonsText = translate.components.crud
 
   const updateProductDataAndSetStates = async (e, propertyName) => {
     let image = ""
