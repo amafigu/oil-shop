@@ -1,4 +1,7 @@
-import { API_PRODUCTS_PRODUCT_GET_BY_NAME } from "#utils/constants"
+import {
+  API_PRODUCT_CATEGORIES,
+  API_PRODUCTS_PRODUCT_GET_BY_NAME,
+} from "#utils/constants"
 import axios from "axios"
 import { useEffect } from "react"
 
@@ -53,4 +56,17 @@ export const useGetProducts = (setProducts) => {
     }
     productsResponse()
   }, [setProducts])
+}
+
+export const getProductCategories = async () => {
+  console.log("asasd")
+  try {
+    const productCategoriesResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_PRODUCT_CATEGORIES}`,
+    )
+    console.log(productCategoriesResponse)
+    return productCategoriesResponse
+  } catch (error) {
+    throw error
+  }
 }
