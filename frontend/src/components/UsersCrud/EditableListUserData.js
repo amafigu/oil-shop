@@ -2,14 +2,18 @@ import EditableImageInput from "#components/EditableImageInput"
 import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
-import { API_USERS_USER, DEFAULT_USER_IMAGE, STYLES } from "#utils/constants"
+import {
+  API_USERS_USER,
+  DEFAULT_USER_IMAGE,
+  SHORT_MESSAGE_TIMEOUT,
+  STYLES,
+} from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import axios from "axios"
+import { deleteUserByEmail } from "#utils/users"
 import React, { useState } from "react"
 import styles from "./editableListUserData.module.scss"
 
@@ -22,6 +26,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   }
 
   const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
+    id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
@@ -29,6 +34,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   })
 
   const [updatedUserData, setUpdatedUserData] = useState({
+    id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
@@ -37,7 +43,6 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
-  const { userEmail } = useUserContext()
 
   const text = translate.components.crud
 
@@ -69,28 +74,19 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
     setFile(e.target.files[0])
   }
 
-  const deleteUser = async (email) => {
-    if (email === userEmail) {
-      setNotification(text.deleteUser.nonAuthorized)
-      setTimeout(() => setNotification(null), 3000)
-      return
-    }
+  const deleteUserAndUpdateState = async (e, email) => {
+    e.preventDefault()
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${email.trim()}`,
-        {
-          withCredentials: true,
-        },
-      )
+      await deleteUserByEmail(email)
       setNotification(`${email} ${text.deleteUser.deletedByEmail}`)
-      setTimeout(() => setNotification(null), 2000)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       setTimeout(
         () => setRefreshAllUsersCounter((prevCounter) => prevCounter + 1),
         2300,
       )
     } catch (error) {
       setNotification(`${text.deleteUser.error} ${email}`)
-      setTimeout(() => setNotification(null), 3000)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       console.error("Can not delete user", error)
     }
   }
@@ -99,7 +95,6 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
     <>
       <div className={styles.editableListUserDataWrapper}>
         {notification && <NotificationCard message={notification} />}
-
         <div className={styles.formContainer}>
           <div className={styles.imageAndInputContainer}>
             {nonUpdatedUserData !== initialUserData && (
@@ -118,12 +113,11 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
 
             <button
               className={styles.formButton}
-              onClick={(e) => deleteUser(user.email)}
+              onClick={(e) => deleteUserAndUpdateState(e, user.email)}
             >
               {text.deleteUser.button}
             </button>
           </div>
-
           {Object.keys(initialUserData).map((key) =>
             key !== "image" ? (
               <div className={styles.inputContainer} key={key}>

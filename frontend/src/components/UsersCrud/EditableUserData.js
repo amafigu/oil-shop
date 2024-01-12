@@ -9,9 +9,9 @@ import {
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import { getUserByEmail } from "#utils/users"
-import axios from "axios"
+import { deleteUserByEmail, getUserByEmail } from "#utils/users"
 import React, { useState } from "react"
+import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./editableUserData.module.scss"
 
 const EditableUserData = ({ setRefreshAllUsersCounter }) => {
@@ -37,8 +37,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
   const buttonsText = translate.components
-  const textAdminCrud = translate.pages.admin.crud
-  const textComponentCrud = translate.components.crud
+  const text = translate.components.crud
 
   const updateUserDataAndSetStates = async (e, propertyName) => {
     let image = ""
@@ -74,38 +73,34 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
 
     if (!user) {
       setNotification("User not found")
-      setTimeout(() => setNotification(null), 2000)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       return
     }
     setNonUpdatedUserData(user)
     setShowUserForm(true)
   }
 
-  const deleteUserAndUpdateState = async (userEmail) => {
+  const deleteUserAndUpdateState = async (e, userEmail) => {
+    e.preventDefault()
+
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${userEmail.trim()}`,
-        {
-          withCredentials: true,
-        },
-      )
-      setNotification(
-        `${userEmail} ${textComponentCrud.deleteUser.deletedByEmail}`,
-      )
+      await deleteUserByEmail(userEmail)
+      setNotification(`${text.deleteUser.deletedByEmail}`)
       setNonUpdatedUserData({ ...initialUserData })
       setEmail("")
       setShowUserForm(false)
-      setTimeout(() => setNotification(null), 2000)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       setTimeout(
         () => setRefreshAllUsersCounter((prevCounter) => prevCounter + 1),
-        2300,
+        SHORT_MESSAGE_TIMEOUT,
       )
     } catch (error) {
-      setNotification(`${userEmail} ${textComponentCrud.deleteUser.error}`)
-      setTimeout(() => setNotification(null), 3000)
+      setNotification(`${text.deleteUser.deleteError}`)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       console.error("Can not delete user", error)
     }
   }
+
   return (
     <>
       <div className={styles.editableUserDataWrapper}>
@@ -149,14 +144,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
 
               <button
                 className={styles.formButton}
-                onClick={() =>
-                  deleteUserAndUpdateState(
-                    email,
-                    setNotification,
-                    textAdminCrud.users.deletedByEmail,
-                    textAdminCrud.users.deleteError,
-                  )
-                }
+                onClick={(e) => deleteUserAndUpdateState(e, email)}
               >
                 {buttonsText.crud.deleteUser.button}
               </button>

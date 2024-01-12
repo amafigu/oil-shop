@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import styles from "./appRoutes.module.scss"
@@ -20,7 +19,6 @@ import Shop from "#pages/Shop"
 import SignUp from "#pages/SignUp"
 import User from "#pages/User"
 import {
-  API_PRODUCT_CATEGORIES,
   ROUTES_ABOUT,
   ROUTES_CART,
   ROUTES_CHECKOUT_ORDER_SUMMARY,
@@ -35,23 +33,27 @@ import {
   ROUTES_SHOP,
   ROUTES_SIGN_UP,
 } from "#utils/constants"
+import { getProductCategories } from "#utils/products"
 
 const AppRoutes = () => {
   const [productCategories, setProductCategories] = useState([])
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}${API_PRODUCT_CATEGORIES}`)
-      .then((response) => {
-        setProductCategories(response.data)
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error)
-      })
+    const getCategories = async () => {
+      try {
+        const getCategoriesResponse = await getProductCategories()
+        if (getCategoriesResponse.status === 200) {
+          setProductCategories(getCategoriesResponse.data)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getCategories()
   }, [])
+
   const location = useLocation()
   const currentPath = location.pathname
-
   const routesWithoutNavbar = [ROUTES_LOGIN, ROUTES_SIGN_UP]
 
   return (
@@ -86,7 +88,6 @@ const AppRoutes = () => {
         />
         <Route path='*' element={<NotFound />} />
       </Routes>
-
       <Footer />
     </div>
   )

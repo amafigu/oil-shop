@@ -23,7 +23,7 @@ export const API_PRODUCT_CATEGORIES = "/product-categories"
 export const API_PRODUCTS_PRODUCT = "/products/product"
 export const API_PRODUCTS_PRODUCT_CREATE = "/products/product/create"
 export const API_PRODUCTS_PRODUCT_GET_BY_NAME = "/products/product/get-by-name"
-
+export const API_USERS = "/users"
 export const API_USERS_CURRENT_PREFIX = "/users/current-" // + admin or customer;
 export const API_USERS_CURRENT_USER = "/users/current-user"
 export const API_USERS_USER = "/users/user"
@@ -39,6 +39,7 @@ export const API_LOGOUT = "/users/logout"
 export const API_ORDERS_ALL = "/orders/all"
 export const API_ORDERS_CART_ITEMS = "/orders/cart-items"
 export const API_ORDERS_CREATE = "/orders/create"
+export const API_ORDERS_LAST_ORDER_ITEMS = "/orders/last-order-items"
 
 // ROUTES
 export const ROUTES_ABOUT = "/about"
@@ -52,6 +53,7 @@ export const ROUTES_FAQ = "/faq"
 export const ROUTES_HOME = "/"
 export const ROUTES_LOGIN = "/login"
 export const ROUTES_PRODUCTS = "/products"
+export const ROUTES_SHOP_QUERY_CATEGORY_PREFIX = "/shop?category="
 export const ROUTES_SIGN_UP = "/sign-up"
 export const ROUTES_SHOP = "/shop"
 
@@ -140,6 +142,7 @@ export const FORM_FIELDS_SHIPPING_DATA = [
 export const STYLES = Object.freeze({
   BUTTONS: {
     USER_OPTIONS: "userOptionsButton",
+    SHOW_HIDE: "showHideButtons",
   },
   FORMS: {
     FIELD: "formField",

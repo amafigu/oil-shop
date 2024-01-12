@@ -122,11 +122,13 @@
       "paymentButton": "Proceed",
       "title": "Payment with:",
       "backButton": "Go Back",
-      "insertPaymentMethod": "Please choose a payment method."
+      "insertPaymentMethod": "Please choose a payment method.",
+      "emptyShippingData": "please add data for shipping"
     },
     "productsDetails": {
       "loading": "Loading",
-      "addToCartButton": "Add To Cart"
+      "addToCartButton": "Add To Cart",
+      "errorByGettingProduct": "We can not get that product, please try again later"
     },
     "shipping": {
       "yourInfo": "Your Info",
@@ -248,6 +250,10 @@
         "delete": "Delete",
         "edit": "Edit",
         "save": "Save"
+      },
+      "updateUser": {
+        "success": "User updated successfully",
+        "error": "Can not update user"
       },
       "deleteUser": {
         "button": "Delete User",
