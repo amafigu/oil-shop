@@ -4,24 +4,20 @@ import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {
-  API_LOGIN,
   API_USERS_CURRENT_PREFIX,
-  API_USERS_CURRENT_USER,
-  API_USER_ROLE,
-  API_VERIFY_TOKEN,
   LOGO_IMAGE,
   LONG_MESSAGE_TIMEOUT,
+  REDIRECT_TIMEOUT,
   ROUTES_SIGN_UP,
 } from "#utils/constants"
-import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import { useEffectScrollTop } from "#utils/render"
+import { loginUser } from "#utils/users"
 import {
   faChevronDown,
   faChevronUp,
   faGlobe,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import axios from "axios"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./login.module.scss"
@@ -37,55 +33,21 @@ const Login = () => {
 
   useEffectScrollTop()
 
-  const loginUser = async (e) => {
+  const loginUserAndSetState = async (e) => {
     e.preventDefault()
     try {
-      const loginResponse = await axios.post(
-        `${process.env.REACT_APP_API_URL}${API_LOGIN}`,
-        { email, password },
-        { withCredentials: true },
-      )
-      if (loginResponse && loginResponse.status === 200) {
-        const setLoggedInUser = async () => {
-          try {
-            const currentUserIdResponse = await axios.get(
-              `${process.env.REACT_APP_API_URL}${API_VERIFY_TOKEN}`,
-              { withCredentials: true },
-            )
-
-            const userId = currentUserIdResponse.data.id
-            const userResponse = await getDataAndSetErrorMessage(
-              userId,
-              API_USERS_CURRENT_USER,
-              setErrorMessage,
-            )
-            const loggedUser = userResponse.data
-            if (userResponse.status === 200) {
-              setUserEmail(loggedUser.email)
-              setIsLoggedIn(true)
-              setUser(loggedUser)
-
-              const userRoleResponse = await axios.get(
-                `${process.env.REACT_APP_API_URL}${API_USER_ROLE}/${loggedUser.roleId}`,
-              )
-
-              setTimeout(
-                () =>
-                  navigate(
-                    `${API_USERS_CURRENT_PREFIX}${userRoleResponse.data.name}`,
-                  ),
-                500,
-              )
-            }
-          } catch (error) {
-            setErrorMessage(`${text.errorMessage}`)
-            setTimeout(() => setErrorMessage(null), LONG_MESSAGE_TIMEOUT)
-
-            console.error("Error fetching user data", error)
-          }
-        }
-
-        setLoggedInUser()
+      const loginUserResponse = await loginUser(email, password)
+      if (loginUserResponse) {
+        setUserEmail(loginUserResponse.userEmail)
+        setIsLoggedIn(loginUserResponse.isLoggedIn)
+        setUser(loginUserResponse.user)
+        setTimeout(
+          () =>
+            navigate(
+              `${API_USERS_CURRENT_PREFIX}${loginUserResponse.userRole}`,
+            ),
+          REDIRECT_TIMEOUT,
+        )
       }
     } catch (error) {
       setErrorMessage(`${text.errorMessage}`)
@@ -136,7 +98,7 @@ const Login = () => {
               />
             </div>
             <div className={styles.formContainer}>
-              <form className={styles.form} onSubmit={loginUser}>
+              <form className={styles.form} onSubmit={loginUserAndSetState}>
                 <input
                   className={styles.formField}
                   type='email'
