@@ -74,14 +74,13 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
       productDataWithImage,
       setNotification,
     )
+    console.log("createdData", createdData)
+    setRefreshAllProductsCounter((prevCounter) => prevCounter + 1)
+
     if (!createdData) {
+      console.log("!createdData", createdData)
       return
     }
-
-    setTimeout(
-      () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
-      2300,
-    )
   }
 
   return (

@@ -1,5 +1,6 @@
 import {
   API_PRODUCTS,
+  API_PRODUCTS_PRODUCT,
   API_PRODUCTS_PRODUCT_GET_BY_NAME,
   API_PRODUCT_CATEGORIES,
 } from "#utils/constants"
@@ -14,7 +15,6 @@ export const getProductByName = async (name) => {
     return getProductResponse
   } catch (error) {
     console.error("Error geting product by name", error)
-    throw error
   }
 }
 
@@ -86,5 +86,22 @@ export const getProductCategories = async () => {
     return productCategoriesResponse
   } catch (error) {
     throw error
+  }
+}
+
+export const deleteProductById = async (id) => {
+  try {
+    const deleteProductResponse = await axios.delete(
+      `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT}/${id}`,
+      {
+        withCredentials: true,
+      },
+    )
+    if (deleteProductResponse) {
+      console.log("deleteProductResponse", deleteProductResponse)
+      return deleteProductResponse
+    }
+  } catch (error) {
+    console.error(error)
   }
 }
