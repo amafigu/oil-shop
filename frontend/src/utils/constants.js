@@ -53,6 +53,7 @@ export const ROUTES_FAQ = "/faq"
 export const ROUTES_HOME = "/"
 export const ROUTES_LOGIN = "/login"
 export const ROUTES_PRODUCTS = "/products"
+export const ROUTES_SHOP_QUERY_CATEGORY_PREFIX = "/shop?category="
 export const ROUTES_SIGN_UP = "/sign-up"
 export const ROUTES_SHOP = "/shop"
 

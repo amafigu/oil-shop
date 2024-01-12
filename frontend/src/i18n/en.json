@@ -127,7 +127,8 @@
     },
     "productsDetails": {
       "loading": "Loading",
-      "addToCartButton": "Add To Cart"
+      "addToCartButton": "Add To Cart",
+      "errorByGettingProduct": "We can not get that product, please try again later"
     },
     "shipping": {
       "yourInfo": "Your Info",

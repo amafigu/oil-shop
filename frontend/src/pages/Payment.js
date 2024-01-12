@@ -101,7 +101,6 @@ const Payment = () => {
           <div className={styles.titleContainer}>
             <span className={styles.title}>{text.title}</span>
           </div>
-
           <div className={styles.methods}>
             <div className={styles.row}>
               <input

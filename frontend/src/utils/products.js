@@ -4,13 +4,13 @@ import { useEffect } from "react"
 
 export const getProductByName = async (name) => {
   try {
-    const response = await axios.get(
+    const getProductResponse = await axios.get(
       `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_GET_BY_NAME}/${name}`,
     )
-
-    return response.data
+    return getProductResponse
   } catch (error) {
     console.error("Error geting product by name", error)
+    throw error
   }
 }
 

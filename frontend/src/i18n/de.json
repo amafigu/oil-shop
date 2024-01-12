@@ -144,7 +144,8 @@
     },
     "productsDetails": {
       "loading": "Wird geladen",
-      "addToCartButton": "In den Warenkorb"
+      "addToCartButton": "In den Warenkorb",
+      "errorByGettingProduct": "Wir konnen das Produkt nicht finden, versuchen Sie später."
     },
     "shipping": {
       "yourInfo": "Ihren Daten",
