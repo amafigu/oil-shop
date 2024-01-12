@@ -71,7 +71,6 @@ const Payment = () => {
       )
 
       if (orderResponse) {
-        console.log(orderResponse)
         setCart([])
         setTimeout(
           () => navigate(ROUTES_CHECKOUT_ORDER_SUMMARY),

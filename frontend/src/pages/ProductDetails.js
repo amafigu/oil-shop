@@ -23,7 +23,7 @@ const ProductDetails = () => {
   const { translate } = useLocaleContext()
   const text = translate.pages.productsDetails
   const navigate = useNavigate()
-  console.log(text)
+
   useEffect(() => {
     window.scrollTo(0, 0)
     const getProduct = async () => {

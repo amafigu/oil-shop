@@ -46,7 +46,6 @@ const OrderSummary = () => {
         isLoading,
         setNotification,
       )
-      console.log("userSummaryResponse", userSummaryResponse)
       if (userSummaryResponse) {
         setShippingData(userSummaryResponse.shippingData)
         setUserData(userSummaryResponse.userData)

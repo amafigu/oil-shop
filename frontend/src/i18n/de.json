@@ -260,6 +260,10 @@
         "edit": "Editieren",
         "save": "Speichern"
       },
+      "updateUser": {
+        "success": "Benutzer wurde erfolgreich aktualisiert.",
+        "error": "Benutzer kann nicht aktualisiert werden."
+      },
       "deleteUser": {
         "button": "Benutzer löschen",
         "error": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",

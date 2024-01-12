@@ -33,7 +33,7 @@ const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
   const showUserListAndGetData = (bool) => {
     setShowUsers(bool)
   }
-  usersData && console.log(usersData)
+
   return (
     <div className={styles.getAllUsersWrapper}>
       {notification && <NotificationCard message={notification} />}

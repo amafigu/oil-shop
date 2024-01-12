@@ -131,31 +131,16 @@ export const getUserShippingData = async (userId) => {
   }
 }
 
-export const deleteUserByEmail = async (
-  userEmail,
-  setNotification,
-  successMessage,
-  errorMessage,
-  setRefreshUsersList,
-) => {
+export const deleteUserByEmail = async (email) => {
   try {
-    await axios.delete(
-      `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${userEmail}`,
-      {
-        withCredentials: true,
-      },
+    const deleteUserResponse = await axios.delete(
+      `${process.env.REACT_APP_API_URL}${API_USERS_USER}/${email}`,
+      { withCredentials: true },
     )
-    if (setNotification) {
-      setNotification(`${userEmail} ${successMessage}`)
-      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-    }
-    if (setRefreshUsersList) {
-      setRefreshUsersList((prevCounter) => prevCounter + 1)
-    }
+
+    return deleteUserResponse.data
   } catch (error) {
-    setNotification(`${userEmail} ${errorMessage}`)
-    setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-    console.error("Can not delete user", error)
+    throw error
   }
 }
 

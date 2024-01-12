@@ -176,14 +176,18 @@ export const updateDataAndSetStates = async (
     )
 
     if (dataRequest && dataRequest.status === 200) {
-      setUpdatedData((prevData) => ({
-        ...prevData,
-        ...cleanedUpdatedData,
-      }))
-      setNonUpdatedData((prevData) => ({
-        ...prevData,
-        ...cleanedUpdatedData,
-      }))
+      if (setUpdatedData) {
+        setUpdatedData((prevData) => ({
+          ...prevData,
+          ...cleanedUpdatedData,
+        }))
+      }
+      if (setNonUpdatedData) {
+        setNonUpdatedData((prevData) => ({
+          ...prevData,
+          ...cleanedUpdatedData,
+        }))
+      }
 
       return dataRequest
     }
@@ -191,12 +195,19 @@ export const updateDataAndSetStates = async (
     console.error(error)
     if (error.response && error.response.data.message) {
       console.error(error.response.data.message)
-      setErrorMessage(`Error by updating data: ${error.response.data.message}`)
-      setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
+
+      if (setErrorMessage) {
+        setErrorMessage(
+          `Error by updating data: ${error.response.data.message}`,
+        )
+        setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
+      }
     } else {
-      console.error("me ", error)
-      setErrorMessage("Error by updating data")
-      setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
+      console.error(error)
+      if (setErrorMessage) {
+        setErrorMessage("Error by updating data")
+        setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
+      }
     }
   }
 }

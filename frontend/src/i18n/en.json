@@ -251,6 +251,10 @@
         "edit": "Edit",
         "save": "Save"
       },
+      "updateUser": {
+        "success": "User updated successfully",
+        "error": "Can not update user"
+      },
       "deleteUser": {
         "button": "Delete User",
         "error": "Can not delete user with this email: ",
