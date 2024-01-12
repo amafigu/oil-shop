@@ -122,7 +122,8 @@
       "paymentButton": "Proceed",
       "title": "Payment with:",
       "backButton": "Go Back",
-      "insertPaymentMethod": "Please choose a payment method."
+      "insertPaymentMethod": "Please choose a payment method.",
+      "emptyShippingData": "please add data for shipping"
     },
     "productsDetails": {
       "loading": "Loading",

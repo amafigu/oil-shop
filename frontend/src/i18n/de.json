@@ -139,7 +139,8 @@
       "backButton": "Zurück",
       "paymentButton": "Bezahlen",
       "title": "Bezahlen mit:",
-      "insertPaymentMethod": "Bitte, wählen Sie eine Zahlungsart."
+      "insertPaymentMethod": "Bitte, wählen Sie eine Zahlungsart.",
+      "emptyShippingData": "Bitte, füllen Sie die Versanddaten aus."
     },
     "productsDetails": {
       "loading": "Wird geladen",

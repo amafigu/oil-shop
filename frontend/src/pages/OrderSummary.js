@@ -94,7 +94,9 @@ const OrderSummary = () => {
                           <div key={key} className={styles.clientInfoItem}>
                             <div key={key} className={styles.formField}>
                               {camelCaseToTitleCase(key)}:{" "}
-                              {`${Number(orderData[key]) + SHIPPING_COST} €`}
+                              {`${Number(
+                                orderData[key] + SHIPPING_COST,
+                              ).toFixed(2)} €`}
                             </div>
                           </div>
                         ) : (
