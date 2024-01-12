@@ -6,13 +6,13 @@ import {
   DEFAULT_PRODUCT_IMAGE,
   ROUTES_SHOP,
   ROUTES_SHOP_QUERY_CATEGORY_PREFIX,
-  SHORT_MESSAGE_TIMEOUT,
 } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { getProductByName } from "#utils/products"
 import { titleCase } from "#utils/stringManipulation"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { LONG_MESSAGE_TIMEOUT } from "../utils/constants"
 import styles from "./productDetails.module.scss"
 
 const ProductDetails = () => {
@@ -23,7 +23,7 @@ const ProductDetails = () => {
   const { translate } = useLocaleContext()
   const text = translate.pages.productsDetails
   const navigate = useNavigate()
-
+  console.log(text)
   useEffect(() => {
     window.scrollTo(0, 0)
     const getProduct = async () => {
@@ -33,22 +33,13 @@ const ProductDetails = () => {
           setProduct(getProductResponse.data)
         }
       } catch (error) {
-        console.error(error)
         setNotification(text.errorByGettingProduct)
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+        setTimeout(() => navigate(ROUTES_SHOP), LONG_MESSAGE_TIMEOUT)
+        setTimeout(() => setNotification(null), LONG_MESSAGE_TIMEOUT)
       }
     }
     getProduct()
-  }, [productName])
-
-  if (!product) {
-    {
-      setTimeout(() => navigate(ROUTES_SHOP), SHORT_MESSAGE_TIMEOUT)
-    }
-    return (
-      <div>{notification && <NotificationCard message={notification} />}</div>
-    )
-  }
+  }, [productName, text.errorByGettingProduct, navigate])
 
   return (
     <div className={styles.productDetailsPageWrapper}>

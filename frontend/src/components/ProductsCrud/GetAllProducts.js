@@ -1,11 +1,11 @@
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
-import { API_PRODUCTS } from "#utils/constants"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import useLocaleContext from "#context/localeContext"
+import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#utils/constants"
+import { getAllProductsList } from "#utils/products"
+import { useCallback, useEffect, useState } from "react"
 import EditableListProductData from "./EditableListProductData"
 import styles from "./getAllProducts.module.scss"
-
 const GetAllProducts = ({
   refreshAllProductsCounter,
   setRefreshAllProductsCounter,
@@ -13,27 +13,24 @@ const GetAllProducts = ({
   const [notification, setNotification] = useState()
   const [showProducts, setShowProducts] = useState(false)
   const [productsData, setProductsData] = useState([])
+  const { translate } = useLocaleContext()
+  const text = translate.components.crud.getAllProducts
 
-  const getAllProducts = async () => {
+  const getProductsList = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}${API_PRODUCTS}/`,
-        { withCredentials: true },
-      )
-
-      const productObjects = response.data.map((product) => ({
-        ...product,
-        updated: false,
-      }))
-      setProductsData(productObjects)
+      const listResponse = await getAllProductsList()
+      if (listResponse) {
+        setProductsData(listResponse)
+      }
     } catch (error) {
-      setNotification("Can not get all products")
+      setNotification(text.error)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     }
-  }
+  }, [text.error, setProductsData, setNotification])
 
   useEffect(() => {
-    getAllProducts()
-  }, [refreshAllProductsCounter])
+    getProductsList()
+  }, [refreshAllProductsCounter, getProductsList])
 
   const showProductsListAndGetData = (bool) => {
     setShowProducts(bool)
@@ -47,9 +44,9 @@ const GetAllProducts = ({
         <ToggleButton
           show={showProducts}
           setToggle={showProductsListAndGetData}
-          textHide='HIDE ALL PRODCUTS'
-          textShow='GET ALL PRODUCT'
-          classCss='showHideButtons'
+          textHide={text.hideButton.toUpperCase()}
+          textShow={text.showButton.toUpperCase()}
+          classCss={STYLES.BUTTONS.SHOW_HIDE}
         />
       </div>
       {

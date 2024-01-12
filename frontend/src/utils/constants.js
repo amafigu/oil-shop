@@ -142,6 +142,7 @@ export const FORM_FIELDS_SHIPPING_DATA = [
 export const STYLES = Object.freeze({
   BUTTONS: {
     USER_OPTIONS: "userOptionsButton",
+    SHOW_HIDE: "showHideButtons",
   },
   FORMS: {
     FIELD: "formField",

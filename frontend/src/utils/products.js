@@ -1,6 +1,7 @@
 import {
-  API_PRODUCT_CATEGORIES,
+  API_PRODUCTS,
   API_PRODUCTS_PRODUCT_GET_BY_NAME,
+  API_PRODUCT_CATEGORIES,
 } from "#utils/constants"
 import axios from "axios"
 import { useEffect } from "react"
@@ -58,13 +59,30 @@ export const useGetProducts = (setProducts) => {
   }, [setProducts])
 }
 
+export const getAllProductsList = async () => {
+  try {
+    const getAllProductsResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_PRODUCTS}`,
+      { withCredentials: true },
+    )
+
+    if (getAllProductsResponse.status === 200) {
+      const productObjects = getAllProductsResponse.data.map((product) => ({
+        ...product,
+        updated: false,
+      }))
+      return productObjects
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
 export const getProductCategories = async () => {
-  console.log("asasd")
   try {
     const productCategoriesResponse = await axios.get(
       `${process.env.REACT_APP_API_URL}${API_PRODUCT_CATEGORIES}`,
     )
-    console.log(productCategoriesResponse)
     return productCategoriesResponse
   } catch (error) {
     throw error
