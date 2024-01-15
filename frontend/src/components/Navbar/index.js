@@ -66,7 +66,7 @@ const Navbar = ({ productCategories }) => {
   }
   useHideListOnOuterClick(
     searchProductListDropdownRef,
-    setSearchDropdownOpen,
+    setProductDropdownVisible,
     setMatchedProducts,
   )
 

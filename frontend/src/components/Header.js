@@ -1,4 +1,6 @@
 import TableRow from "#components/TableRow"
+import { DEFAULT_USER_IMAGE } from "#utils/constants"
+import { setDefaultImageByError } from "#utils/dataManipulation"
 import styles from "./header.module.scss"
 
 const Header = ({ data }) => {
@@ -14,7 +16,12 @@ const Header = ({ data }) => {
         {data ? (
           <div className={styles.dataContainer}>
             <div className={styles.avatarContainer}>
-              <img className={styles.avatar} src={data.image} alt='suser' />
+              <img
+                className={styles.avatar}
+                src={data.image}
+                alt='user'
+                onError={(e) => setDefaultImageByError(e, DEFAULT_USER_IMAGE)}
+              />
             </div>
             <TableRow data={tableData} />
           </div>
