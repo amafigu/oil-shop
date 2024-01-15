@@ -11,24 +11,28 @@
     flex-direction: column;
   }
 
+  .avatarContainer {
+    width: 164px;
+    height: 164px;
+
+    @include flex-all-center;
+  }
+
   .avatar {
+    display: block;
     width: 80px;
     height: 80px;
     margin: theme.$spacing-small;
+    background-repeat: no-repeat;
     border: theme.$border-regular-image;
     border-radius: theme.$border-radius-circle;
     box-shadow: theme.$box-shadow-light;
+    object-fit: contain;
 
     @include media.mobile {
       width: 100px;
       height: 100px;
     }
-  }
-
-  .avatarContainer {
-    width: 164px;
-
-    @include flex-all-center;
   }
 
   .header {

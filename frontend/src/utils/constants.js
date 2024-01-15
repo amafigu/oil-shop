@@ -58,7 +58,7 @@ export const ROUTES_SIGN_UP = "/sign-up"
 export const ROUTES_SHOP = "/shop"
 
 // TIME CONSTANTS
-export const SHORT_MESSAGE_TIMEOUT = 3000
+export const SHORT_MESSAGE_TIMEOUT = 4000
 export const LONG_MESSAGE_TIMEOUT = 6000
 export const REDIRECT_TIMEOUT = 1000
 
