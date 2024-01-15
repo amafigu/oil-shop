@@ -67,7 +67,8 @@ const ShippingData = () => {
 
   useEffect(() => {
     if (
-      ignorePropertiesWithEmptyValue(nonUpdatedShippingData) == {} &&
+      Object.keys(ignorePropertiesWithEmptyValue(nonUpdatedShippingData))
+        .length === 0 &&
       showForm
     ) {
       setNotification(usersWarningText.shippingDataIsEmpty)
