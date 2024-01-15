@@ -3,8 +3,8 @@ import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import {
   API_PRODUCTS_PRODUCT_CREATE,
-  API_PRODUCT_CATEGORIES,
   DEFAULT_PRODUCT_IMAGE,
+  SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#utils/constants"
 
@@ -13,8 +13,8 @@ import {
   listenInputChangeAndSetDataObject,
   uploadToS3,
 } from "#utils/dataManipulation"
+import { getProductCategories } from "#utils/products"
 import { titleCase } from "#utils/stringManipulation"
-import axios from "axios"
 import { useEffect, useState } from "react"
 import styles from "./createProductForm.module.scss"
 
@@ -36,18 +36,17 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
 
   const { translate } = useLocaleContext()
   const text = translate.components.crud
+
   useEffect(() => {
-    try {
-      const getProductCategories = async () => {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}${API_PRODUCT_CATEGORIES}`,
-        )
-        setProductCategories(response.data)
+    const fetchProductCategories = async () => {
+      try {
+        const productCategoriesResponse = await getProductCategories()
+        setProductCategories(productCategoriesResponse.data)
+      } catch (error) {
+        console.error("Can not get product categories ", error)
       }
-      getProductCategories()
-    } catch (error) {
-      console.error("Can not get product categories ", error)
     }
+    fetchProductCategories()
   }, [])
 
   const setFileToUpload = (e) => {
@@ -55,31 +54,35 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
   }
 
   const createProduct = async (e) => {
-    e.preventDefault()
+    try {
+      e.preventDefault()
 
-    let image = await uploadToS3(file)
+      let image = await uploadToS3(file)
 
-    if (!image) {
-      image = DEFAULT_PRODUCT_IMAGE
-      return
-    }
-    const productDataWithImage = {
-      ...productData,
-      image,
-    }
+      if (!image) {
+        image = DEFAULT_PRODUCT_IMAGE
+      }
+      const productDataWithImage = {
+        ...productData,
+        image,
+      }
 
-    const createdData = await createDataAndSetStates(
-      e,
-      API_PRODUCTS_PRODUCT_CREATE,
-      productDataWithImage,
-      setNotification,
-    )
-    console.log("createdData", createdData)
-    setRefreshAllProductsCounter((prevCounter) => prevCounter + 1)
+      const createdData = await createDataAndSetStates(
+        e,
+        API_PRODUCTS_PRODUCT_CREATE,
+        productDataWithImage,
+        setNotification,
+      )
 
-    if (!createdData) {
-      console.log("!createdData", createdData)
-      return
+      if (!createdData) {
+        console.error("no created data")
+      }
+
+      setRefreshAllProductsCounter((prevCounter) => prevCounter + 1)
+    } catch (error) {
+      console.error(error)
+      setNotification("Product creation failed")
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     }
   }
 

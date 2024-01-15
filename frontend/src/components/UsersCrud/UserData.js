@@ -43,8 +43,10 @@ const UserData = () => {
 
   useEffect(() => {
     async function getOriginalUserData() {
+      console.log(userId)
       if (!isLoading) {
         try {
+          console.log(userId)
           const userData = await getDataAndSetErrorMessage(
             userId,
             API_USERS_CURRENT_USER,

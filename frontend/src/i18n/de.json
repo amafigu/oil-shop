@@ -290,7 +290,7 @@
       "deleteProduct": {
         "button": "Produkt löschen",
         "error": "Das Produkt kann nicht gelöscht werden",
-        "success": "wurde erfolgreich gelöscht"
+        "success": "Das Produkt wurde erfolgreich gelöscht"
       },
       "getProduct": {
         "button": "Produkt Daten anzeigen",

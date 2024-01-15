@@ -98,7 +98,6 @@ export const deleteProductById = async (id) => {
       },
     )
     if (deleteProductResponse) {
-      console.log("deleteProductResponse", deleteProductResponse)
       return deleteProductResponse
     }
   } catch (error) {

@@ -281,7 +281,7 @@
       "deleteProduct": {
         "button": "Delete Product",
         "error": "Can not delete product",
-        "success": "was successfully deleted from system"
+        "success": "The product was successfully deleted from system"
       },
       "getProduct": {
         "button": "Get product data",

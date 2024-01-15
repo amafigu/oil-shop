@@ -49,7 +49,6 @@ const ShippingData = () => {
         const shippingData = await getDataAndSetErrorMessage(
           userId,
           API_SHIPPING_DATA,
-          setNotification,
         )
         if (!shippingData) {
           setNotification(
@@ -68,11 +67,10 @@ const ShippingData = () => {
 
   useEffect(() => {
     if (
-      // eslint-disable-next-line eqeqeq
       ignorePropertiesWithEmptyValue(nonUpdatedShippingData) == {} &&
       showForm
     ) {
-      setNotification("ss")
+      setNotification(usersWarningText.shippingDataIsEmpty)
       setTimeout(() => setNotification(null), 3000)
     }
   }, [nonUpdatedShippingData, showForm, usersWarningText.shippingDataIsEmpty])
