@@ -1,5 +1,4 @@
-import { API_USERS_CURRENT_USER, API_VERIFY_TOKEN } from "#utils/constants"
-import axios from "axios"
+import { getLoggedInUser, verifyToken } from "#utils/users"
 import { createContext, useContext, useEffect, useState } from "react"
 export const UserContext = createContext()
 
@@ -13,30 +12,25 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const verifyCookie = async () => {
       setIsLoading(true)
-      let userId = ""
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}${API_VERIFY_TOKEN}`,
-          { withCredentials: true },
-        )
-        userId = response.data.id
-        if (response.status === 200) {
-          const loggedInUser = await axios.get(
-            `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
-            { withCredentials: true },
-          )
-
-          if (loggedInUser && loggedInUser.status === 200) {
-            setUser(loggedInUser.data)
-            setUserEmail(loggedInUser.data.email)
-            setUserId(loggedInUser.data.id)
+        const authToken = await verifyToken()
+        if (authToken) {
+          const loggedInUserResponse = await getLoggedInUser(authToken)
+          if (loggedInUserResponse && loggedInUserResponse.status === 200) {
+            const userData = loggedInUserResponse.data
+            setUser(userData)
+            setUserEmail(userData.email)
+            setUserId(userData.id)
             setIsLoggedIn(true)
-            setIsLoading(false)
           }
+        } else {
+          setUserEmail("")
         }
       } catch (error) {
+        console.error("Error during user verification:", error)
         setUserEmail("")
       }
+      setIsLoading(false)
     }
 
     verifyCookie()
