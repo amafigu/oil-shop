@@ -10,7 +10,6 @@ export const getDataAndSetErrorMessage = async (
   apiUrl,
   setErrorMessage,
 ) => {
-  console.log("dataId", dataId)
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}${apiUrl}/${dataId}`,
@@ -125,7 +124,6 @@ export const createDataAndSetStates = async (
       dataApi,
       setErrorMessage,
     )
-    console.log("dataRequest", dataRequest)
     if (dataRequest && dataRequest.status === 201) {
       return dataRequest
     }

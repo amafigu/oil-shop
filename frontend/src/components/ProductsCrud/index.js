@@ -9,7 +9,6 @@ const ProductsCrud = () => {
   const [showProductsSection, setShowProductsSection] = useState(false)
   const [showCreateProductForm, setShowCreateProductForm] = useState(false)
   const [refreshAllProductsCounter, setRefreshAllProductsCounter] = useState(0)
-  console.log("refreshAllProductsCounter", refreshAllProductsCounter)
 
   return (
     <div className={styles.productsCrudWrapper}>
