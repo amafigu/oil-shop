@@ -5,6 +5,7 @@ import useLocaleContext from "#context/localeContext"
 import {
   API_PRODUCTS_PRODUCT,
   DEFAULT_PRODUCT_IMAGE,
+  SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#utils/constants"
 import {
@@ -12,9 +13,8 @@ import {
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import axios from "axios"
+import { deleteProductById } from "#utils/products"
 import { useEffect, useState } from "react"
-import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./editableListProductData.module.scss"
 
 const EditableListProductData = ({
@@ -92,24 +92,22 @@ const EditableListProductData = ({
 
   const deleteProductAndUpdateState = async (id) => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT}/${id}`,
-        {
-          withCredentials: true,
-        },
-      )
-      setNotification(textDelete.deleteProduct.success)
-      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      setTimeout(
-        () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
-        SHORT_MESSAGE_TIMEOUT,
-      )
+      const deleteProductResponse = await deleteProductById(id)
+      if (deleteProductResponse) {
+        setNotification(textDelete.deleteProduct.success)
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+        setTimeout(
+          () => setRefreshAllProductsCounter((prevCounter) => prevCounter + 1),
+          SHORT_MESSAGE_TIMEOUT,
+        )
+      }
     } catch (error) {
       setNotification(textDelete.deleteProduct.error)
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       console.error("Can not delete product", error)
     }
   }
+
   return (
     <>
       <div className={styles.editableProductDataWrapper}>

@@ -10,6 +10,7 @@ import {
   API_ORDERS_LAST_ORDER_ITEMS,
   API_SHIPPING_DATA,
   API_USERS,
+  API_USERS_CREATE,
   API_USERS_CREATE_GUEST,
   API_USERS_CURRENT_USER,
   API_USERS_GUEST_BY_EMAIL,
@@ -42,20 +43,14 @@ export const logout = async (navigate, setIsLoggedIn) => {
   }
 }
 
-export const getLoggedInUser = async (
-  userId,
-  setLoggedInUserData,
-  setNotification,
-) => {
+export const getLoggedInUser = async (userId) => {
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${userId}`,
       { withCredentials: true },
     )
-    setLoggedInUserData(response.data)
-    return response.data
+    return response
   } catch (error) {
-    setNotification(`${error.response.data.message}`)
     console.error("Error geting admin data", error)
   }
 }
@@ -385,5 +380,55 @@ export const loginUser = async (email, password) => {
     }
   } catch (error) {
     throw error
+  }
+}
+
+export const createNewUser = async (user) => {
+  try {
+    const userResponse = await axios.post(
+      `${process.env.REACT_APP_API_URL}${API_USERS_CREATE}`,
+      user,
+    )
+    if (userResponse.status === 201) {
+      return userResponse
+    }
+  } catch (error) {
+    console.error("Error creating new user", error)
+  }
+}
+
+export const loginUserWithIdAfterCreation = async (email, password, userId) => {
+  try {
+    const loginResponse = await axios.post(
+      `${process.env.REACT_APP_API_URL}${API_LOGIN}`,
+      { email, password },
+      { withCredentials: true },
+    )
+
+    if (loginResponse && loginResponse.status === 200) {
+      return loginResponse
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+export const verifyToken = async () => {
+  try {
+    const verifyTokenResponse = await axios.get(
+      `${process.env.REACT_APP_API_URL}${API_VERIFY_TOKEN}`,
+      { withCredentials: true },
+    )
+    if (
+      verifyTokenResponse &&
+      verifyTokenResponse.status === 200 &&
+      verifyTokenResponse.data.id
+    ) {
+      return verifyTokenResponse.data.id
+    }
+    return null
+  } catch (error) {
+    console.error("Error verifying token", error)
+    return null
   }
 }

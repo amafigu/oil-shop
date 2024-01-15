@@ -16,6 +16,7 @@ import {
   uploadToS3,
 } from "#utils/dataManipulation"
 import React, { useEffect, useState } from "react"
+import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./userData.module.scss"
 
 const UserData = () => {
@@ -50,24 +51,22 @@ const UserData = () => {
             API_USERS_CURRENT_USER,
             setNotification,
           )
-
           if (!userData) {
             const errorMessage =
               errorText.user && errorText.user.getUserData
                 ? `${errorText.user.getUserData}`
                 : "Error getting user data"
             setNotification(errorMessage)
-            setTimeout(() => setNotification(null), 2000)
+            setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
             return
           }
-
           if (userData.status === 200) {
             setUser(userData.data)
             setNonUpdatedUserData(userData.data)
           }
         } catch (error) {
           setNotification("Error by getting user data")
-          setTimeout(() => setNotification(null), 3000)
+          setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
           console.error(error)
         }
       }

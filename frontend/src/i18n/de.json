@@ -284,13 +284,14 @@
         "success": "Benutzer wurde erfolgreich erstellt",
         "submitButton": "Konto erstellen",
         "emailInUseErrorMessage": "E-Mail bereits registriert",
-        "hideForm": "Hide create user form",
-        "showForm": "Show create user form"
+        "hideForm": "Benutzer Formular ausblenden",
+        "showForm": "Benutzer Formular anzeigen",
+        "error": "Benutzer kann nicht erstellt werden"
       },
       "deleteProduct": {
         "button": "Produkt löschen",
         "error": "Das Produkt kann nicht gelöscht werden",
-        "success": "wurde erfolgreich gelöscht"
+        "success": "Das Produkt wurde erfolgreich gelöscht"
       },
       "getProduct": {
         "button": "Produkt Daten anzeigen",

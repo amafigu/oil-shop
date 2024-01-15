@@ -124,9 +124,14 @@ export const createDataAndSetStates = async (
       dataApi,
       setErrorMessage,
     )
-    console.log("dataRequest", dataRequest)
-    if (dataRequest && dataRequest.status === 200) {
+    if (dataRequest && dataRequest.status === 201) {
       return dataRequest
+    }
+    if (dataRequest && dataRequest.status === 422) {
+      setErrorMessage(
+        `Error by updating data: Can not add product, this product is already existent. Please try with another name, size or category.`,
+      )
+      setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
     }
   } catch (error) {
     console.error(error)
@@ -135,7 +140,7 @@ export const createDataAndSetStates = async (
       setErrorMessage(`Error by updating data: ${error.response.data.message}`)
       setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
     } else {
-      console.error("me ", error)
+      console.error("error by updating data", error)
       setErrorMessage("Error by updating data")
       setTimeout(() => setErrorMessage(null), SHORT_MESSAGE_TIMEOUT)
     }

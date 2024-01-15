@@ -2,19 +2,21 @@ import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {
-  API_LOGIN,
-  API_USERS_CREATE,
-  API_USERS_CURRENT_USER,
   DEFAULT_USER_IMAGE,
   LONG_MESSAGE_TIMEOUT,
+  ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
   ROUTES_SIGN_UP,
 } from "#utils/constants"
 import { uploadToS3 } from "#utils/dataManipulation"
+import {
+  createNewUser,
+  getLoggedInUser,
+  loginUserWithIdAfterCreation,
+} from "#utils/users"
 import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import axios from "axios"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
@@ -53,52 +55,48 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
     const newUser = { firstName, lastName, email, password, image }
 
     try {
-      const newUserResponse = await axios.post(
-        `${process.env.REACT_APP_API_URL}${API_USERS_CREATE}`,
-        newUser,
-      )
-      if (newUserResponse && currentPath.includes("/current-admin")) {
+      const newUserResponse = await createNewUser(newUser)
+      if (
+        newUserResponse &&
+        newUserResponse.data &&
+        currentPath.includes(ROUTES_CURRENT_ADMIN)
+      ) {
         setRefreshAllUsersCounter((prevCounter) => prevCounter + 1)
-        setNotification("user created")
-        setTimeout(() => setNotification(null), 3000)
+        setNotification(text.createUser.success)
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
         return
       }
 
-      if (currentPath.includes("/sign-up")) {
-        const loginResponse = await axios.post(
-          `${process.env.REACT_APP_API_URL}${API_LOGIN}`,
-          { email, password },
-          { withCredentials: true },
+      if (currentPath.includes(ROUTES_SIGN_UP)) {
+        const loginResponse = await loginUserWithIdAfterCreation(
+          email,
+          password,
         )
         if (loginResponse && loginResponse.status === 200) {
-          const getLoggedInUser = async () => {
-            try {
-              await axios.get(
-                `${process.env.REACT_APP_API_URL}${API_USERS_CURRENT_USER}/${newUserResponse.data.user.id}`,
-                { withCredentials: true },
-              )
-
+          try {
+            const loggedInUserResponse = await getLoggedInUser(
+              newUserResponse.data.user.id,
+            )
+            if (loggedInUserResponse && loggedInUserResponse.status === 200) {
               setIsLoggedIn(true)
-            } catch (error) {
-              setNotification(`${text.errorMessage}`)
-              setTimeout(() => setNotification(null), 3000)
-              console.error("Error fetching user data", error)
+              setTimeout(() => navigate(ROUTES_CURRENT_CUSTOMER), 2000)
             }
+          } catch (error) {
+            setNotification(`${text.createUser.error}`)
+            setTimeout(() => setNotification(null), 3000)
+            console.error("Error fetching user data", error)
           }
-          getLoggedInUser()
-          setTimeout(() => navigate(ROUTES_CURRENT_CUSTOMER), 2000)
         }
       }
     } catch (error) {
       if (error.response.data.errors) {
         const errorMessages = error.response.data.errors
         setValidationErrors(errorMessages)
-
         setTimeout(() => setValidationErrors([]), LONG_MESSAGE_TIMEOUT)
       }
 
       if (error.response.data.message === "Email already in use") {
-        setNotification(`Email already in use`)
+        setNotification(text.createUser.emailInUseErrorMessage)
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
       console.error("Signup error", error)

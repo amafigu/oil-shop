@@ -36,8 +36,6 @@ const GetAllProducts = ({
     setShowProducts(bool)
   }
 
-  console.log(refreshAllProductsCounter)
-
   return (
     <div className={styles.getAllUsersWrapper}>
       {notification && <NotificationCard message={notification} />}

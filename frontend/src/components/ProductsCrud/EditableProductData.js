@@ -80,9 +80,7 @@ const EditableProductData = ({
   }
 
   const searchProduct = async (name) => {
-    console.log("name", name)
     const productResponse = await getProductByName(name.trim())
-    console.log("productResponse", productResponse)
     if (!productResponse) {
       setNotification("Product not found")
       setNonUpdatedProductData({ ...initialProductData })
@@ -114,7 +112,6 @@ const EditableProductData = ({
       console.error("Can not delete product", error)
     }
   }
-  console.log(productName)
   return (
     <>
       <div className={styles.editableProductDataWrapper}>

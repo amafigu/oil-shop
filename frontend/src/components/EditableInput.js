@@ -20,7 +20,7 @@ const EditableInput = ({
   const textProperties = translate.components.crud.forms.commonProperties
 
   useEffect(() => {}, [refreshAllProductsCounter])
-  console.log("eff", refreshAllProductsCounter)
+
   return (
     <div className={styles.itemRow}>
       {isEditing ? (

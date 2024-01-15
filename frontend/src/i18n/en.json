@@ -276,12 +276,13 @@
         "submitButton": "Create an Account",
         "emailInUseErrorMessage": "Email already registered",
         "hideForm": "Hide create user form",
-        "showForm": "Show create user form"
+        "showForm": "Show create user form",
+        "error": "Can not create user"
       },
       "deleteProduct": {
         "button": "Delete Product",
         "error": "Can not delete product",
-        "success": "was successfully deleted from system"
+        "success": "The product was successfully deleted from system"
       },
       "getProduct": {
         "button": "Get product data",
