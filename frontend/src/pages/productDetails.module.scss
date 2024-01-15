@@ -5,6 +5,7 @@
 .productDetailsPageWrapper {
   display: flex;
   justify-content: center;
+  min-height: theme.$min-height-page-small;
 
   .productDetailsPage {
     display: flex;

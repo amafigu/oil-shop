@@ -4,7 +4,7 @@ export const LOCAL_STORAGE_GUEST_ID = "yolo-guest-id"
 export const LOCAL_STORAGE_CART = "yolo-cart"
 // MEDIA URLS
 export const DEFAULT_PRODUCT_IMAGE =
-  "https://oylo-images.s3.us-east-2.amazonaws.com/default.png"
+  "https://oylo-images.s3.us-east-2.amazonaws.com/default_product.png"
 
 export const DEFAULT_USER_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default_user.png"
@@ -58,7 +58,7 @@ export const ROUTES_SIGN_UP = "/sign-up"
 export const ROUTES_SHOP = "/shop"
 
 // TIME CONSTANTS
-export const SHORT_MESSAGE_TIMEOUT = 3000
+export const SHORT_MESSAGE_TIMEOUT = 4000
 export const LONG_MESSAGE_TIMEOUT = 6000
 export const REDIRECT_TIMEOUT = 1000
 

@@ -1,3 +1,5 @@
+import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
+import { setDefaultImageByError } from "#utils/dataManipulation"
 import { navigateToProductAndCloseDropdown } from "#utils/products"
 import { titleCase } from "#utils/stringManipulation"
 import { React } from "react"
@@ -33,6 +35,7 @@ const ProductsDropdown = ({
               src={product.image}
               alt={product.name}
               className={styles.image}
+              onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
             />
           </div>
           <div className={styles.dataContainer}>
