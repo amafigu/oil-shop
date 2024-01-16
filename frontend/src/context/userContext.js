@@ -1,5 +1,13 @@
+import NotificationCard from "#components/NotificationCard"
+import {
+  ROUTES_CURRENT_ADMIN,
+  ROUTES_CURRENT_CUSTOMER,
+  ROUTES_LOGIN,
+  SHORT_MESSAGE_TIMEOUT,
+} from "#utils/constants"
 import { getLoggedInUser, verifyToken } from "#utils/users"
 import { createContext, useContext, useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
@@ -8,7 +16,10 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({})
   const [userEmail, setUserEmail] = useState("")
   const [userId, setUserId] = useState({})
-
+  const [notification, setNotification] = useState(null)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const currentPath = location.pathname
   useEffect(() => {
     const verifyCookie = async () => {
       setIsLoading(true)
@@ -28,13 +39,21 @@ export const UserProvider = ({ children }) => {
         }
       } catch (error) {
         console.error("Error during user verification:", error)
+        if (
+          currentPath === ROUTES_CURRENT_ADMIN ||
+          currentPath === ROUTES_CURRENT_CUSTOMER
+        ) {
+          navigate(ROUTES_LOGIN)
+          setNotification("Error during user verification")
+          setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+        }
+
         setUserEmail("")
       }
       setIsLoading(false)
     }
 
-    verifyCookie()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    verifyCookie() // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn])
 
   return (
@@ -51,6 +70,7 @@ export const UserProvider = ({ children }) => {
         userId,
       }}
     >
+      {notification && <NotificationCard message={notification} />}
       {children}
     </UserContext.Provider>
   )

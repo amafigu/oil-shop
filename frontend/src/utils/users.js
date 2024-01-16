@@ -428,7 +428,6 @@ export const verifyToken = async () => {
     }
     return null
   } catch (error) {
-    console.error("Error verifying token", error)
-    return null
+    throw error
   }
 }
