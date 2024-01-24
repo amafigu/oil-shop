@@ -4,10 +4,10 @@ export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [user, setUser] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState(null)
   const [userEmail, setUserEmail] = useState("")
-  const [userId, setUserId] = useState({})
+  const [userId, setUserId] = useState(null)
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -22,17 +22,26 @@ export const UserProvider = ({ children }) => {
             setUserEmail(userData.email)
             setUserId(userData.id)
             setIsLoggedIn(true)
+          } else {
+            setUser(null)
+            setUserEmail("")
+            setUserId(null)
+            setIsLoggedIn(false)
           }
         } else {
+          setUser(null)
           setUserEmail("")
+          setUserId(null)
+          setIsLoggedIn(false)
         }
       } catch (error) {
-        console.error("Error during user verification:", error)
+        setUser(null)
         setUserEmail("")
+        setUserId(null)
+        setIsLoggedIn(false)
       }
       setIsLoading(false)
     }
-
     verifyCookie()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn])

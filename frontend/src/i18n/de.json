@@ -79,17 +79,41 @@
       "emailPlaceholder": "E-Mail eingeben",
       "passwordPlaceholder": "Passwort eingeben",
       "signUp": "Zur Registrierung",
+      "loginAsAdmin": "Als Testadministrator einlogen",
       "haveAccount": "Sie haben noch kein Konto?",
       "or": "oder",
       "passwordLost": "Haben Sie Ihr Passwort vergessen?",
       "errorMessage": "Leider war Ihre E-Mail-Adresse oder Ihr Passwort falsch."
+    },
+    "orderSummary": {
+      "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",
+      "orderResume": "Bestellübersicht",
+      "deliveryInformation": "Lieferinformationen",
+      "inputLabels": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "phone": "Telefonnummer",
+        "address": "Adresse",
+        "state": "Bundesland",
+        "postalCode": "PLZ",
+        "city": "Stadt",
+        "country": "Land",
+        "paidWith": "Zahlungsart",
+        "totalAmount": "Gesamt"
+      }
     },
     "signUp": {
       "email": "E-Mail",
       "password": "Passwort",
       "loginButton": "Einlogen",
       "login": "Anmelden",
+      "createAdminText": "Erstellen Sie ein",
+      "createAdminLink": "Testadministratorkonto",
       "haveAccount": "Haben Sie ein Konto?",
+      "createCustomer": "Kundenkonto erstellen",
+      "doNotHaveAccount": "Haben Sie kein Konto?",
+
       "or": "oder",
       "passwordLost": "Haben Sie Ihr Passwort vergessen?",
       "firstName": "Vorname",
@@ -117,24 +141,8 @@
         }
       }
     },
-    "orderSummary": {
-      "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",
-      "orderResume": "Bestellübersicht",
-      "deliveryInformation": "Lieferinformationen",
-      "inputLabels": {
-        "firstName": "Vorname",
-        "lastName": "Nachname",
-        "email": "E-Mail",
-        "phone": "Telefonnummer",
-        "address": "Adresse",
-        "state": "Bundesland",
-        "postalCode": "PLZ",
-        "city": "Stadt",
-        "country": "Land",
-        "paidWith": "Zahlungsart",
-        "totalAmount": "Gesamt"
-      }
-    },
+    "signUpAdmin": {},
+
     "payment": {
       "backButton": "Zurück",
       "paymentButton": "Bezahlen",
@@ -282,7 +290,8 @@
       },
       "createUser": {
         "success": "Benutzer wurde erfolgreich erstellt",
-        "submitButton": "Konto erstellen",
+        "submitCustomerButton": "Benutzer Konto erstellen",
+        "submitAdminButton": "Admin Konto erstellen",
         "emailInUseErrorMessage": "E-Mail bereits registriert",
         "hideForm": "Benutzer Formular ausblenden",
         "showForm": "Benutzer Formular anzeigen",

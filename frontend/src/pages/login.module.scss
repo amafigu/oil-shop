@@ -157,7 +157,7 @@
     margin: theme.$spacing-semi-large 0;
     border-radius: theme.$border-radius-small;
 
-    @include flex-all-center;
+    @include flex-column-all-center;
 
     .link {
       font-weight: theme.$font-weight-semibold;

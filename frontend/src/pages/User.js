@@ -4,10 +4,14 @@ import GetOrders from "#components/UsersCrud/GetOrders"
 import ShippingData from "#components/UsersCrud/ShippingData"
 import UserData from "#components/UsersCrud/UserData"
 import useUserContext from "#context/userContext"
-import { REDIRECT_TIMEOUT, ROUTES_LOGIN } from "#utils/constants"
+import {
+  REDIRECT_TIMEOUT,
+  ROUTES_CURRENT_ADMIN,
+  ROUTES_LOGIN,
+  SHORT_MESSAGE_TIMEOUT,
+} from "#utils/constants"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { SHORT_MESSAGE_TIMEOUT } from "../utils/constants"
 import styles from "./user.module.scss"
 
 const User = () => {
@@ -17,19 +21,22 @@ const User = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isLoading && user) {
-      setHeaderData({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        image: user.image,
-      })
-    }
-
-    if (!user) {
-      setNotification("User not logged in")
-      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
+    if (!isLoading) {
+      if (user && Object.keys(user).length !== 0) {
+        setHeaderData({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          image: user.image,
+        })
+        if (user.role === "admin") {
+          navigate(ROUTES_CURRENT_ADMIN)
+        }
+      } else if (!user) {
+        setNotification("User not logged in")
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+        setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
+      }
     }
   }, [isLoading, user, navigate])
 
