@@ -3,15 +3,22 @@ import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import ToggleButton from "#components/ToggleButton"
 import useLocaleContext from "#context/localeContext"
-import { API_USERS_USER, DEFAULT_USER_IMAGE, STYLES } from "#utils/constants"
+import useUserContext from "#context/userContext"
+
+import {
+  API_USERS_USER,
+  DEFAULT_USER_IMAGE,
+  SHORT_MESSAGE_TIMEOUT,
+  STYLES,
+} from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
+  setDefaultImageByError,
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
 import { deleteUserByEmail, getUserByEmail } from "#utils/users"
 import React, { useState } from "react"
-import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./editableUserData.module.scss"
 
 const EditableUserData = ({ setRefreshAllUsersCounter }) => {
@@ -36,6 +43,8 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
+  const { userEmail } = useUserContext()
+
   const buttonsText = translate.components
   const text = translate.components.crud
 
@@ -80,11 +89,15 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
     setShowUserForm(true)
   }
 
-  const deleteUserAndUpdateState = async (e, userEmail) => {
+  const deleteUserAndUpdateState = async (e, email) => {
     e.preventDefault()
-
+    if (email === userEmail) {
+      setNotification(text.deleteUser.cannotDeleteYourself)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      return
+    }
     try {
-      await deleteUserByEmail(userEmail)
+      await deleteUserByEmail(email)
       setNotification(`${text.deleteUser.deletedByEmail}`)
       setNonUpdatedUserData({ ...initialUserData })
       setEmail("")
@@ -125,6 +138,9 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
                         : nonUpdatedUserData.image
                     }
                     alt='user'
+                    onError={(e) =>
+                      setDefaultImageByError(e, DEFAULT_USER_IMAGE)
+                    }
                   />
                 </div>
               )}
@@ -172,7 +188,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
                     />
                   </div>
                 ) : (
-                  <div className={styles.inputContainer}>
+                  <div className={styles.inputContainer} key={key}>
                     <EditableImageInput
                       label={key}
                       name={key}

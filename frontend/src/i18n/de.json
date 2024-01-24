@@ -16,7 +16,6 @@
           "delete": "Benutzer löschen",
           "deletedByEmail": "wurde erfolgreich aus dem System gelöscht",
           "deleteError": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
-          "edit": "Benutzer editieren",
           "getUserButton": "Benutzer Daten sehen",
           "getByEmail": "Benutzer per E-Mail Daten sehen"
         },
@@ -276,6 +275,7 @@
         "button": "Benutzer löschen",
         "error": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
         "deletedByEmail": "wurde erfolgreich aus dem System gelöscht",
+        "cannotDeleteYourself": "Du kannst dich nicht selbst löschen",
         "nonAuthorized": "Sie sind nicht berechtigt, diesen Benutzer zu löschen"
       },
       "getUser": {

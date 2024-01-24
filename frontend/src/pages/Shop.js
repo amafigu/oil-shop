@@ -15,7 +15,7 @@ const Shop = ({ productCategories }) => {
   const queryCategory = params.get("category")
 
   useGetProducts(setProducts)
-
+  console.log(products)
   useEffect(() => {
     if (queryCategory) {
       setCategory(queryCategory)

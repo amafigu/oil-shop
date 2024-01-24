@@ -2,6 +2,7 @@ import EditableImageInput from "#components/EditableImageInput"
 import EditableInput from "#components/EditableInput"
 import NotificationCard from "#components/NotificationCard"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import {
   API_USERS_USER,
   DEFAULT_USER_IMAGE,
@@ -10,6 +11,7 @@ import {
 } from "#utils/constants"
 import {
   listenInputChangeAndSetDataObject,
+  setDefaultImageByError,
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
@@ -43,6 +45,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
   const { translate } = useLocaleContext()
+  const { userEmail } = useUserContext()
 
   const text = translate.components.crud
 
@@ -76,6 +79,11 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
 
   const deleteUserAndUpdateState = async (e, email) => {
     e.preventDefault()
+    if (email === userEmail) {
+      setNotification(text.deleteUser.cannotDeleteYourself)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      return
+    }
     try {
       await deleteUserByEmail(email)
       setNotification(`${email} ${text.deleteUser.deletedByEmail}`)
@@ -107,6 +115,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
                       : nonUpdatedUserData.image
                   }
                   alt='user'
+                  onError={(e) => setDefaultImageByError(e, DEFAULT_USER_IMAGE)}
                 />
               </div>
             )}
