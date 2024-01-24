@@ -34,6 +34,7 @@ import {
   ROUTES_SIGN_UP,
 } from "#utils/constants"
 import { getProductCategories } from "#utils/products"
+import { ROUTES_SIGN_UP_ADMIN } from "./utils/constants"
 
 const AppRoutes = () => {
   const [productCategories, setProductCategories] = useState([])
@@ -54,7 +55,11 @@ const AppRoutes = () => {
 
   const location = useLocation()
   const currentPath = location.pathname
-  const routesWithoutNavbar = [ROUTES_LOGIN, ROUTES_SIGN_UP]
+  const routesWithoutNavbar = [
+    ROUTES_LOGIN,
+    ROUTES_SIGN_UP,
+    ROUTES_SIGN_UP_ADMIN,
+  ]
 
   return (
     <div className={styles.wrapper}>
@@ -74,6 +79,7 @@ const AppRoutes = () => {
         <Route path={`${ROUTES_FAQ}`} element={<Faq />} />
         <Route path={`${ROUTES_LOGIN}`} element={<Login />} />
         <Route path={`${ROUTES_SIGN_UP}`} element={<SignUp />} />
+        <Route path={`${ROUTES_SIGN_UP_ADMIN}`} element={<SignUp />} />
         <Route path={`${ROUTES_CURRENT_CUSTOMER}`} element={<User />} />
         <Route path={`${ROUTES_CURRENT_ADMIN}`} element={<Admin />} />
         <Route

@@ -8,9 +8,12 @@ import {
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
   ROUTES_SIGN_UP,
+  ROUTES_SIGN_UP_ADMIN,
+  SHORT_MESSAGE_TIMEOUT,
 } from "#utils/constants"
 import { uploadToS3 } from "#utils/dataManipulation"
 import {
+  createNewAdmin,
   createNewUser,
   getLoggedInUser,
   loginUserWithIdAfterCreation,
@@ -19,7 +22,6 @@ import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./createUserForm.module.scss"
 
 const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
@@ -32,14 +34,13 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [validationErrors, setValidationErrors] = useState([])
   const { setIsLoggedIn } = useUserContext()
-
   const { translate } = useLocaleContext()
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const text = translate.components.crud
   const textValidationErrors = translate.errors.validationErrors
-
-  const location = useLocation()
   const currentPath = location.pathname
-  const navigate = useNavigate()
 
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
@@ -53,9 +54,13 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
     }
 
     const newUser = { firstName, lastName, email, password, image }
-
+    let newUserResponse
     try {
-      const newUserResponse = await createNewUser(newUser)
+      if (currentPath.includes(ROUTES_SIGN_UP_ADMIN)) {
+        newUserResponse = await createNewAdmin(newUser)
+      } else {
+        newUserResponse = await createNewUser(newUser)
+      }
       if (
         newUserResponse &&
         newUserResponse.data &&
@@ -181,26 +186,29 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
           </button>
         </div>
 
-        {!currentPath.includes("/sign-up") && (
-          <div className={styles.labelAndInputContainer}>
-            <span className={styles.label}>
-              {file ? "Selected file: " : "Select a file"}
-            </span>
-            <label className={styles.labelForFile} htmlFor='fileInput'>
-              {file ? file.name : "Search on device"}
-            </label>
+        {!currentPath.includes("/sign-up") &&
+          !currentPath.includes("/sign-up-admin") && (
+            <div className={styles.labelAndInputContainer}>
+              <span className={styles.label}>
+                {file ? "Selected file: " : "Select a file"}
+              </span>
+              <label className={styles.labelForFile} htmlFor='fileInput'>
+                {file ? file.name : "Search on device"}
+              </label>
 
-            <input
-              type='file'
-              name='image'
-              id='fileInput'
-              onChange={setFileToUpload}
-            />
-          </div>
-        )}
+              <input
+                type='file'
+                name='image'
+                id='fileInput'
+                onChange={setFileToUpload}
+              />
+            </div>
+          )}
 
         <button className={styles.formButton} type='submit'>
-          {text.createUser.submitButton}
+          {currentPath.includes("/sign-up-admin")
+            ? text.createUser.submitAdminButton
+            : text.createUser.submitCustomerButton}
         </button>
       </form>
     </div>

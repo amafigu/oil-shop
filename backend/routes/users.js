@@ -239,6 +239,48 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
   }
 });
 
+router.post('/login', validateBody(loginValidation), async (req, res) => {
+  try {
+    const user = await db.users.findOne({
+      where: { email: req.body.email },
+      include: [{ model: db.userRoles, as: 'role' }],
+    });
+    if (!user) {
+      return res.status(404).json({ message: 'Invalid email' });
+    }
+
+    const isPasswordValid = await comparePassword(
+      req.body.password,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+      },
+      process.env.JWT_KEY,
+      { expiresIn: '7200000' } // 2 hours
+    );
+
+    const isSecure = process.env.IS_SECURE;
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: 'none',
+      path: '/',
+      secure: isSecure,
+    });
+
+    return res.json({ message: 'Logged in successfully' });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/create', validateBody(createUserValidation), async (req, res) => {
   try {
     const existingUser = await db.users.findOne({
@@ -310,34 +352,48 @@ router.post(
   }
 );
 
-router.post('/register-admin', async (req, res) => {
-  try {
-    const existingUser = await db.users.findOne({
-      where: { email: req.body.email },
-    });
+router.post(
+  '/create-admin',
+  validateBody(createUserValidation),
+  async (req, res) => {
+    try {
+      const existingUser = await db.users.findOne({
+        where: { email: req.body.email },
+      });
 
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email already in use' });
+      if (existingUser) {
+        return res.status(400).json({ message: 'Email already in use' });
+      }
+
+      const hashedPassword = await hashPassword(req.body.password);
+
+      const customerRole = await db.userRoles.findOne({
+        where: { name: 'admin' },
+      });
+
+      const newUser = await db.users.create({
+        ...req.body,
+        password: hashedPassword,
+        roleId: customerRole.id,
+      });
+
+      const contextUser = {
+        ...newUser.dataValues,
+        password: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        role: customerRole.name,
+      };
+
+      return res.status(201).json({
+        message: 'Customer user created successfully',
+        user: contextUser,
+      });
+    } catch (err) {
+      return res.status(500).json({ message: err.message });
     }
-    const userRole = await db.userRoles.findOne({
-      where: { name: 'admin' },
-    });
-
-    const hashedPassword = await hashPassword(req.body.password);
-
-    const newAdmin = await db.users.create({
-      ...req.body,
-      password: hashedPassword,
-      roleId: userRole.id,
-    });
-
-    return res
-      .status(201)
-      .json({ message: 'Admin user created successfully', user: newAdmin });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
   }
-});
+);
 
 router.post('/register-product-manager', async (req, res) => {
   try {

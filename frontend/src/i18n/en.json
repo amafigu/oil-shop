@@ -80,6 +80,7 @@
       "passwordPlaceholder": "enter password",
       "signUp": "Create an Account",
       "haveAccount": "Don't have an account?",
+      "loginAsAdmin": "Login as test Admin",
       "or": "or",
       "passwordLost": "Did you forget your password?",
       "errorMessage": "Unfortunately your password or email address was incorrect."
@@ -110,6 +111,10 @@
       "emailPlaceholder": "enter email",
       "passwordPlaceholder": "enter password",
       "login": "Login",
+      "createAdminText": "Create a",
+      "createAdminLink": "test admin account",
+      "createCustomer": "Create a customer account",
+      "doNotHaveAccount": "Don't you have?",
       "haveAccount": "Do you have an account?",
       "or": "or",
       "passwordLost": "Did you forget your password?",
@@ -118,6 +123,7 @@
       "submitButton": "Create an Account",
       "emailInUseErrorMessage": "Email already registered"
     },
+    "signUpAdmin": {},
     "payment": {
       "paymentButton": "Proceed",
       "title": "Payment with:",
@@ -273,7 +279,8 @@
       },
       "createUser": {
         "success": "User created successfully",
-        "submitButton": "Create an Account",
+        "submitAdminButton": "Create an admin account",
+        "submitCustomerButton": "Create a customer account",
         "emailInUseErrorMessage": "Email already registered",
         "hideForm": "Hide create user form",
         "showForm": "Show create user form",

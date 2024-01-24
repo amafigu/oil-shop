@@ -11,6 +11,7 @@ import {
   API_SHIPPING_DATA,
   API_USERS,
   API_USERS_CREATE,
+  API_USERS_CREATE_ADMIN,
   API_USERS_CREATE_GUEST,
   API_USERS_CURRENT_USER,
   API_USERS_GUEST_BY_EMAIL,
@@ -37,6 +38,8 @@ export const logout = async (navigate, setIsLoggedIn) => {
     if (logoutResponse.status === 200) {
       setIsLoggedIn(false)
       setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
+      localStorage.removeItem(LOCAL_STORAGE_CART)
+      localStorage.removeItem(LOCAL_STORAGE_GUEST_ID)
     }
   } catch (error) {
     console.error(error)
@@ -397,7 +400,21 @@ export const createNewUser = async (user) => {
   }
 }
 
-export const loginUserWithIdAfterCreation = async (email, password, userId) => {
+export const createNewAdmin = async (user) => {
+  try {
+    const adminResponse = await axios.post(
+      `${process.env.REACT_APP_API_URL}${API_USERS_CREATE_ADMIN}`,
+      user,
+    )
+    if (adminResponse.status === 201) {
+      return adminResponse
+    }
+  } catch (error) {
+    console.error("Error creating new admin", error)
+  }
+}
+
+export const loginUserWithIdAfterCreation = async (email, password) => {
   try {
     const loginResponse = await axios.post(
       `${process.env.REACT_APP_API_URL}${API_LOGIN}`,
