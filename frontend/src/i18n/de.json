@@ -396,7 +396,6 @@
   },
   "errors": {
     "requests": {
-      "getShippingData": "Fehler beim Abrufen der Versanddaten",
       "user": {
         "getUserData": "Fehler beim Abrufen der Benutzerdaten",
         "getShippingData": "Fehler beim Abrufen der Versanddaten",
@@ -405,26 +404,26 @@
     },
     "validationErrors": {
       "firstName": {
-        "tooLong": "Vorname darf nicht länger als 30 Zeichen sein.",
-        "shouldHaveAtLeastTwoCharacters": "Vorname sollte mindestens zwei Zeichen enthalten.",
-        "shouldStartWithACapitalLetter": "Vorname sollte mit einem Großbuchstaben beginnen.",
-        "shouldContainOnlyLetters": "Vorname darf nur Buchstaben enthalten."
+        "tooLong": "First name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "First name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "First name should start with a capital letter.",
+        "shouldContainOnlyLetters": "First name can only contain letters."
       },
       "lastName": {
-        "tooLong": "Vorname darf nicht länger als 30 Zeichen sein.",
-        "shouldHaveAtLeastTwoCharacters": "Vorname sollte mindestens zwei Zeichen enthalten.",
-        "shouldStartWithACapitalLetter": "Vorname sollte mit einem Großbuchstaben beginnen.",
-        "shouldContainOnlyLetters": "Vorname darf nur Buchstaben enthalten."
+        "tooLong": "Last name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "Last name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "Last name should start with a capital letter.",
+        "shouldContainOnlyLetters": "Last name can only contain letters."
       },
       "password": {
-        "tooShort": "Passwort sollte mindestens 8 Zeichen lang sein.",
-        "shouldHaveAtLeastOneUppercase": "Passwort sollte mindestens einen Großbuchstaben enthalten.",
-        "shouldHaveAtLeastOneSymbol": "Passwort sollte mindestens ein Symbol enthalten."
+        "tooShort": "Password should have at least 8 characters.",
+        "shouldHaveAtLeastOneUppercase": "Password should have at least one uppercase character.",
+        "shouldHaveAtLeastOneSymbol": "Password should have at least one symbol."
       },
       "email": {
-        "tooLong": "E-Mail darf nicht länger als 40 Zeichen sein.",
-        "invalidFormat": "Ungültiges E-Mail-Format.",
-        "tooShort": "E-Mail sollte mindestens 4 Zeichen lang sein."
+        "tooLong": "Email can't be longer than 40 characters.",
+        "invalidFormat": "Invalid email format.",
+        "tooShort": "Email should have at least 4 characters."
       }
     }
   },

@@ -63,6 +63,7 @@ export const ROUTES_SHOP = "/shop"
 export const SHORT_MESSAGE_TIMEOUT = 4000
 export const LONG_MESSAGE_TIMEOUT = 6000
 export const REDIRECT_TIMEOUT = 1000
+export const LONG_REDIRECT_TIMEOUT = 2000
 
 // INPUTS CONSTANTS
 export const FORM_FIELDS_GUEST_USER_DATA = [
