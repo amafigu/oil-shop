@@ -4,6 +4,7 @@ import useUserContext from "#context/userContext"
 import {
   DEFAULT_USER_IMAGE,
   LONG_MESSAGE_TIMEOUT,
+  LONG_REDIRECT_TIMEOUT,
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
@@ -54,13 +55,15 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
     }
 
     const newUser = { firstName, lastName, email, password, image }
-    let newUserResponse
     try {
+      let newUserResponse
+
       if (currentPath.includes(ROUTES_SIGN_UP_ADMIN)) {
         newUserResponse = await createNewAdmin(newUser)
       } else {
         newUserResponse = await createNewUser(newUser)
       }
+
       if (
         newUserResponse &&
         newUserResponse.data &&
@@ -72,7 +75,12 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
         return
       }
 
-      if (currentPath.includes(ROUTES_SIGN_UP)) {
+      if (
+        newUserResponse &&
+        newUserResponse.data &&
+        (currentPath.includes(ROUTES_SIGN_UP_ADMIN) ||
+          currentPath.includes(ROUTES_SIGN_UP))
+      ) {
         const loginResponse = await loginUserWithIdAfterCreation(
           email,
           password,
@@ -84,27 +92,39 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
             )
             if (loggedInUserResponse && loggedInUserResponse.status === 200) {
               setIsLoggedIn(true)
-              setTimeout(() => navigate(ROUTES_CURRENT_CUSTOMER), 2000)
+              setTimeout(
+                () => navigate(ROUTES_CURRENT_CUSTOMER),
+                LONG_REDIRECT_TIMEOUT,
+              )
             }
           } catch (error) {
             setNotification(`${text.createUser.error}`)
-            setTimeout(() => setNotification(null), 3000)
+            setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
             console.error("Error fetching user data", error)
           }
         }
       }
     } catch (error) {
-      if (error.response.data.errors) {
-        const errorMessages = error.response.data.errors
-        setValidationErrors(errorMessages)
-        setTimeout(() => setValidationErrors([]), LONG_MESSAGE_TIMEOUT)
-      }
-
-      if (error.response.data.message === "Email already in use") {
-        setNotification(text.createUser.emailInUseErrorMessage)
+      setNotification(null)
+      setValidationErrors([])
+      if (error.response && error.response.data) {
+        if (error.response.data.errors) {
+          const errorMessages = error.response.data.errors
+          setValidationErrors(errorMessages)
+          setTimeout(() => setValidationErrors([]), LONG_MESSAGE_TIMEOUT)
+        } else if (error.response.data.message) {
+          if (error.response.data.message === "Email already in use") {
+            setNotification(text.createUser.emailInUseErrorMessage)
+            setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+          } else {
+            setNotification(error.response.data.message)
+            setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+          }
+        }
+      } else {
+        setNotification("error by creating user")
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
-      console.error("Signup error", error)
     }
   }
 
