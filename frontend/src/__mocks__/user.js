@@ -1,4 +1,4 @@
-modele.exports = {
+module.exports = {
   id: 48,
   firstName: "test firstName",
   lastName: "test lastname",

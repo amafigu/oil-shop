@@ -6,6 +6,15 @@ module.exports = {
       },
     },
   },
+  pages: {
+    cart: {
+      deleteButton: "Delete",
+      orderSummary: "Order Summary",
+      orderSubtotal: "Order Subtotal",
+      orderShipping: "Shipping",
+      orderTotal: "Total",
+    },
+  },
   components: {
     addOneToCartButton: {
       text: "add to cart",
