@@ -7,7 +7,11 @@ const AddProductToCartButton = ({ product, classname, quantity }) => {
   const { translate } = useLocaleContext()
 
   return (
-    <button className={classname} onClick={() => addProduct(product, quantity)}>
+    <button
+      className={classname}
+      aria-label='Add to cart button'
+      onClick={() => addProduct(product, quantity)}
+    >
       <span style={{ margin: "0 8px" }}>
         {translate.components.addOneToCartButton.text}
       </span>

@@ -1,53 +1,66 @@
 import product from "#__mocks__/product"
+import translate from "#__mocks__/translate"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import "@testing-library/jest-dom"
-import { render } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 import { MemoryRouter } from "react-router-dom"
-import ProductCard from "./index"
+import ProductCard from "./ProductCard"
 
 jest.mock("#context/localeContext")
 jest.mock("#context/cartContext")
 
-describe("ProductCard should ", () => {
-  test("renders properties value correctly", () => {
-    const translate = {
-      components: {
-        products: {
-          oil: { size: "size", price: "price" },
-        },
-        addOneToCartButton: {
-          text: "Add to cart",
-        },
-      },
-    }
+function renderCard() {
+  render(
+    <MemoryRouter>
+      <ProductCard product={product} />
+    </MemoryRouter>,
+  )
+}
 
-    useLocaleContext.mockReturnValue({ translate })
-
+describe("ProductCard", () => {
+  let mockAddProduct
+  beforeEach(() => {
+    mockAddProduct = jest.fn()
     useCartContext.mockReturnValue({
-      addProduct: jest.fn(),
-      updateProductQuantity: jest.fn(),
-      removeProduct: jest.fn(),
-      getAllProductsQuantity: 0,
-      cart: [],
+      addProduct: mockAddProduct,
     })
+    useLocaleContext.mockReturnValue({ translate })
+  })
 
-    const { getByText } = render(
-      <MemoryRouter>
-        <ProductCard product={product} />
-      </MemoryRouter>,
-    )
+  test("renders product name correctly", () => {
+    renderCard()
+    expect(screen.getByText(product.name)).toHaveTextContent(product.name)
+  })
 
-    expect(getByText(product.name)).toBeInTheDocument()
+  test("renders product price correctly", () => {
+    renderCard()
     expect(
-      getByText(`${translate.components.products.oil.price} €${product.price}`),
+      screen.getByText(
+        `${translate.components.products.oil.price} €${product.price}`,
+      ),
     ).toBeInTheDocument()
-    expect(getByText(product.description)).toBeInTheDocument()
+  })
+
+  test("renders product description correctly", () => {
+    renderCard()
+    expect(screen.getByText(product.description)).toBeInTheDocument()
+  })
+
+  test("renders product size correctly", () => {
+    renderCard()
     expect(
-      getByText(
+      screen.getByText(
         `${translate.components.products.oil.size}: ${product.size} ml`,
       ),
     ).toBeInTheDocument()
+  })
+
+  test("add product button is clickable", () => {
+    renderCard()
+    const button = screen.getByLabelText("Add to cart button")
+    fireEvent.click(button)
+    expect(mockAddProduct).toHaveBeenCalledTimes(1)
   })
 })
