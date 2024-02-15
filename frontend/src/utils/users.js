@@ -397,6 +397,7 @@ export const createNewUser = async (user) => {
     }
   } catch (error) {
     console.error("Error creating new user", error)
+    throw error
   }
 }
 
@@ -411,6 +412,7 @@ export const createNewAdmin = async (user) => {
     }
   } catch (error) {
     console.error("Error creating new admin", error)
+    throw error
   }
 }
 
