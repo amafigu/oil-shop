@@ -1,20 +1,59 @@
+import translate from "#__mocks__/translate"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import "@testing-library/jest-dom"
-import { fireEvent, render } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 import { MemoryRouter } from "react-router-dom"
 import Cart from "./Cart"
 
 jest.mock("#context/cartContext")
 jest.mock("#context/localeContext")
+jest.mock("#context/userContext")
 
-beforeAll(() => {
-  window.scrollTo = jest.fn()
-})
+function renderCart() {
+  render(
+    <MemoryRouter>
+      <Cart />
+    </MemoryRouter>,
+  )
+}
+describe("Cart should", () => {
+  let mockRemoveProduct
+  beforeEach(() => {
+    window.scrollTo = jest.fn()
+    mockRemoveProduct = jest.fn()
 
-describe("Cart should ", () => {
-  test("renders products correctly", () => {
+    useUserContext.mockReturnValue({})
+    useCartContext.mockReturnValue({
+      cart: [
+        {
+          product: {
+            name: "Test Product",
+            image: "image.jpg",
+            description: "Description",
+            size: 100,
+            price: 10,
+          },
+          quantity: 2,
+        },
+      ],
+      removeProduct: mockRemoveProduct,
+      updateProductQuantity: jest.fn(),
+    })
+    useLocaleContext.mockReturnValue({
+      translate,
+    })
+  })
+
+  test("removes product correctly", () => {
+    renderCart()
+    fireEvent.click(screen.getByText("Delete"))
+    expect(mockRemoveProduct).toHaveBeenCalledWith("Test Product")
+  })
+  test("render products correctly", () => {
+    renderCart()
     useCartContext.mockReturnValue({
       cart: [
         {
@@ -32,7 +71,6 @@ describe("Cart should ", () => {
       updateProductQuantity: jest.fn(),
     })
 
-    // use i18n of translate text object
     useLocaleContext.mockReturnValue({
       translate: {
         pages: {
@@ -43,56 +81,6 @@ describe("Cart should ", () => {
       },
     })
 
-    const { getByText } = render(
-      <MemoryRouter>
-        <Cart />
-      </MemoryRouter>,
-    )
-    expect(getByText("Test Product")).toBeInTheDocument()
-  })
-
-  test("removes product correctly", () => {
-    const mockRemoveProduct = jest.fn()
-
-    useCartContext.mockReturnValue({
-      cart: [
-        {
-          product: {
-            name: "Test Product",
-            image: "image.jpg",
-            description: "Description",
-            size: 100,
-            price: 10,
-          },
-          quantity: 2,
-        },
-      ],
-      removeProduct: mockRemoveProduct,
-      updateProductQuantity: jest.fn(),
-    })
-    // use i18n of translate text object
-    useLocaleContext.mockReturnValue({
-      translate: {
-        pages: {
-          cart: {
-            deleteButton: "Delete",
-            orderSummary: "Order Summary",
-            orderSubtotal: "Order Subtotal",
-            orderShipping: "Shipping",
-            orderTotal: "Total",
-          },
-        },
-      },
-    })
-
-    const { getByText } = render(
-      <MemoryRouter>
-        <Cart />
-      </MemoryRouter>,
-    )
-
-    fireEvent.click(getByText("Delete"))
-
-    expect(mockRemoveProduct).toHaveBeenCalledWith("Test Product")
+    expect(screen.getByText("Test Product")).toBeInTheDocument()
   })
 })
