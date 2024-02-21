@@ -50,8 +50,6 @@ export const cancelWithScape = (e, setState) => {
   }
 }
 
-export const useEffectScrollTop = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+export const scrollToTop = () => {
+  window.scrollTo(0, 0)
 }
