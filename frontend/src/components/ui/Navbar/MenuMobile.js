@@ -1,6 +1,6 @@
-import LanguageDropdown from "#components/LanguageDropdown"
-import LogoutButton from "#components/LogoutButton"
-import Sidebar from "#components/Sidebar"
+import LanguageDropdown from "#components/ui/LanguageDropdown"
+import LogoutButton from "#components/ui/LogoutButton"
+import Sidebar from "#components/ui/Sidebar"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import {

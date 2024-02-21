@@ -1,6 +1,6 @@
-import LanguageDropdown from "#components/LanguageDropdown"
-import SubNavbar from "#components/Navbar/SubNavbar"
-import NotificationCard from "#components/NotificationCard"
+import LanguageDropdown from "#components/ui/LanguageDropdown"
+import SubNavbar from "#components/ui/Navbar/SubNavbar"
+import NotificationCard from "#components/ui/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {

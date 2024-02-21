@@ -1,6 +1,6 @@
-import LanguageDropdown from "#components/LanguageDropdown"
-import SubNavbar from "#components/Navbar/SubNavbar"
 import CreateUserForm from "#components/UsersCrud/CreateUserForm"
+import LanguageDropdown from "#components/ui/LanguageDropdown"
+import SubNavbar from "#components/ui/Navbar/SubNavbar"
 import useLocaleContext from "#context/localeContext"
 import {
   LOGO_IMAGE,

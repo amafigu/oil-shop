@@ -1,4 +1,4 @@
-import TableRow from "#components/TableRow"
+import TableRow from "#components/ui/TableRow"
 import { DEFAULT_USER_IMAGE } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import styles from "./header.module.scss"

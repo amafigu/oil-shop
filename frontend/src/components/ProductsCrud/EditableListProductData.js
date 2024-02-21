@@ -1,6 +1,6 @@
-import EditableImageInput from "#components/EditableImageInput"
-import EditableInput from "#components/EditableInput"
-import NotificationCard from "#components/NotificationCard"
+import EditableImageInput from "#components/ui/EditableImageInput"
+import EditableInput from "#components/ui/EditableInput"
+import NotificationCard from "#components/ui/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import {
   API_PRODUCTS_PRODUCT,

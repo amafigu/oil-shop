@@ -1,5 +1,5 @@
-import LanguageDropdown from "#components/LanguageDropdown"
-import LogoutButton from "#components/LogoutButton"
+import LanguageDropdown from "#components/ui/LanguageDropdown"
+import LogoutButton from "#components/ui/LogoutButton"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import {

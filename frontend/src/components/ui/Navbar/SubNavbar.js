@@ -1,6 +1,6 @@
+import useLocaleContext from "#context/localeContext"
 import React from "react"
 import { NavLink, useLocation } from "react-router-dom"
-import useLocaleContext from "../../context/localeContext"
 import styles from "./subNavbar.module.scss"
 const SubNavbar = () => {
   const { translate } = useLocaleContext()

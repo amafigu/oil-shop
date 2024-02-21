@@ -1,4 +1,4 @@
-import NotificationCard from "#components/NotificationCard"
+import NotificationCard from "#components/ui/NotificationCard"
 import useCartContext from "#context/cartContext"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"

@@ -1,7 +1,7 @@
-import NotificationCard from "#components/NotificationCard"
+import { ProductDetailsCard } from "#components/products/ProductDetailsCard"
+import NotificationCard from "#components/ui/NotificationCard"
 import { useProductDetails } from "#hooks/useProductDetails"
 import React, { useEffect, useState } from "react"
-import { ProductDetailsCard } from "../components/products/ProductDetailsCard"
 import styles from "./productDetails.module.scss"
 
 const ProductDetails = () => {

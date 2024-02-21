@@ -1,4 +1,4 @@
-import ToggleButton from "#components/ToggleButton"
+import ToggleButton from "#components/ui/ToggleButton"
 import { useState } from "react"
 import CreateProductForm from "./CreateProductForm"
 import EditableProductData from "./EditableProductData"
