@@ -1,6 +1,6 @@
 import NotificationCard from "#components/NotificationCard"
-import ProductDetailsRow from "#components/ProductDetailsRow"
 import ToggleButton from "#components/ToggleButton"
+import ProductDetailsRow from "#components/products/ProductDetailsRow"
 import useUserContext from "#context/userContext"
 import { convertIsoToLocaleDateString } from "#utils/stringManipulation"
 import { getUserOrdersWithProductsList } from "#utils/users"

@@ -1,5 +1,5 @@
-import ProductCard from "#components/ProductCard"
 import Sidebar from "#components/Sidebar"
+import ProductCard from "#components/products/ProductCard"
 import { useGetProducts } from "#utils/products"
 import { useEffectScrollTop } from "#utils/render"
 import React, { useEffect, useState } from "react"
