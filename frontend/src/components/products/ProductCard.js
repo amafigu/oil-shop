@@ -1,10 +1,10 @@
-import AddProductToCartButton from "#components/AddProductToCartButton"
 import useLocaleContext from "#context/localeContext"
 import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import React from "react"
 import { Link } from "react-router-dom"
+import AddProductToCartButton from "./AddProductToCartButton"
 import styles from "./productCard.module.scss"
 
 const ProductCard = ({ product }) => {
@@ -35,9 +35,6 @@ const ProductCard = ({ product }) => {
               </div>
               <div className={styles.productCardPrice}>
                 {translate.components.products.oil.price} €{product.price}
-              </div>
-              <div className={styles.productCardDescription}>
-                {product.description}
               </div>
             </div>
           </Link>

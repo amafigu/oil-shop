@@ -8,7 +8,7 @@ import {
   ROUTES_CURRENT_ADMIN,
   SHORT_MESSAGE_TIMEOUT,
 } from "#utils/constants"
-import { useEffectScrollTop } from "#utils/render"
+import { scrollToTop } from "#utils/render"
 import { submitOrderAndGuestUser } from "#utils/users"
 import { React, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -90,7 +90,7 @@ const Payment = () => {
     setPaymentMethod(e.target.value)
   }
 
-  useEffectScrollTop()
+  scrollToTop()
 
   return (
     <div className={styles.paymentPageWrapper}>

@@ -1,28 +1,16 @@
-import ProductCard from "#components/ProductCard"
 import Sidebar from "#components/Sidebar"
+import ProductCard from "#components/products/ProductCard"
+import { useProductCategory } from "#hooks/useProductCategory"
 import { useGetProducts } from "#utils/products"
-import { useEffectScrollTop } from "#utils/render"
-import React, { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { scrollToTop } from "#utils/render"
+import React, { useState } from "react"
 import style from "./shop.module.scss"
 
 const Shop = ({ productCategories }) => {
   const [products, setProducts] = useState([])
-  const [category, setCategory] = useState("")
-
-  const location = useLocation()
-  const params = new URLSearchParams(location.search)
-  const queryCategory = params.get("category")
-
+  const { category, setCategory } = useProductCategory()
+  scrollToTop()
   useGetProducts(setProducts)
-
-  useEffect(() => {
-    if (queryCategory) {
-      setCategory(queryCategory)
-    } else {
-      setCategory("all")
-    }
-  }, [queryCategory])
 
   const filteredProducts = (category) =>
     products.filter(
@@ -30,8 +18,6 @@ const Shop = ({ productCategories }) => {
     )
 
   const sortedProducts = filteredProducts(category)
-
-  useEffectScrollTop()
 
   return (
     <>

@@ -8,7 +8,7 @@ import {
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
 } from "#utils/constants"
-import { useEffectScrollTop } from "#utils/render"
+import { scrollToTop } from "#utils/render"
 import {
   faChevronDown,
   faChevronUp,
@@ -27,7 +27,7 @@ const SignUp = () => {
   const location = useLocation()
   const currentPath = location.pathname
 
-  useEffectScrollTop()
+  scrollToTop()
 
   return (
     <div className={styles.signUpPageWrapper}>

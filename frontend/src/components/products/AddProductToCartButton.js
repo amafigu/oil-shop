@@ -1,6 +1,6 @@
 import useCartContext from "#context/cartContext"
 import React from "react"
-import useLocaleContext from "../context/localeContext"
+import useLocaleContext from "../../context/localeContext"
 
 const AddProductToCartButton = ({ product, classname, quantity }) => {
   const { addProduct } = useCartContext()

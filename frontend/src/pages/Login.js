@@ -10,7 +10,7 @@ import {
   REDIRECT_TIMEOUT,
   ROUTES_SIGN_UP,
 } from "#utils/constants"
-import { useEffectScrollTop } from "#utils/render"
+import { scrollToTop } from "#utils/render"
 import { loginUser } from "#utils/users"
 import {
   faChevronDown,
@@ -36,7 +36,7 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-  useEffectScrollTop()
+  scrollToTop()
 
   const loginUserAndSetState = async (e) => {
     e.preventDefault()

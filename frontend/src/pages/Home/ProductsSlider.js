@@ -1,4 +1,4 @@
-import ProductCard from "#components/ProductCard"
+import ProductCard from "#components/products/ProductCard"
 import { useGetProducts } from "#utils/products"
 
 import {
