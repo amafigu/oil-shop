@@ -1,12 +1,11 @@
-import { useEffectScrollTop } from "#utils/render"
+import { scrollToTop } from "#utils/render"
 import { React } from "react"
 import useLocaleContext from "../context/localeContext"
 import styles from "./faq.module.scss"
 
 const Faq = () => {
   const { translate } = useLocaleContext()
-
-  useEffectScrollTop()
+  scrollToTop()
   return (
     <div className={styles.faqPageWrapper}>
       <div className={styles.faqPage}>

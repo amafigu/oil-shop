@@ -11,7 +11,7 @@ import {
   SHIPPING_COST,
 } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
-import { useEffectScrollTop } from "#utils/render"
+import { scrollToTop } from "#utils/render"
 import { titleCase } from "#utils/stringManipulation"
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -26,7 +26,7 @@ const Cart = () => {
   const { user } = useUserContext()
   const navigate = useNavigate()
 
-  useEffectScrollTop()
+  scrollToTop()
   useEffect(() => {
     if (user && user.role === "admin") {
       setNotification("as admin you can not buy products")
