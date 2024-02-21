@@ -1,5 +1,5 @@
-import NotificationCard from "#components/NotificationCard"
-import ToggleButton from "#components/ToggleButton"
+import NotificationCard from "#components/ui/NotificationCard"
+import ToggleButton from "#components/ui/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#utils/constants"
 import { getAllProductsList } from "#utils/products"

@@ -1,7 +1,7 @@
-import EditableImageInput from "#components/EditableImageInput"
-import EditableInput from "#components/EditableInput"
-import NotificationCard from "#components/NotificationCard"
-import ToggleButton from "#components/ToggleButton"
+import EditableImageInput from "#components/ui/EditableImageInput"
+import EditableInput from "#components/ui/EditableInput"
+import NotificationCard from "#components/ui/NotificationCard"
+import ToggleButton from "#components/ui/ToggleButton"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
 import {

@@ -1,5 +1,5 @@
-import ToggleButton from "#components/ToggleButton"
-import ZodValidationErrorsCard from "#components/ZodValidationErrorsCard"
+import ToggleButton from "#components/ui/ToggleButton"
+import ZodValidationErrorsCard from "#components/ui/ZodValidationErrorsCard"
 import useLocaleContext from "#context/localeContext"
 import { useState } from "react"
 import CreateUserForm from "./CreateUserForm"

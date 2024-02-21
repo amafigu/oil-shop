@@ -1,5 +1,5 @@
-import FormInput from "#components/FormInput"
-import NotificationCard from "#components/NotificationCard"
+import FormInput from "#components/ui/FormInput"
+import NotificationCard from "#components/ui/NotificationCard"
 import useLocaleContext from "#context/localeContext"
 import {
   API_PRODUCTS_PRODUCT_CREATE,

@@ -1,5 +1,5 @@
-import Sidebar from "#components/Sidebar"
 import ProductCard from "#components/products/ProductCard"
+import Sidebar from "#components/ui/Sidebar"
 import { useProductCategory } from "#hooks/useProductCategory"
 import { useGetProducts } from "#utils/products"
 import { scrollToTop } from "#utils/render"

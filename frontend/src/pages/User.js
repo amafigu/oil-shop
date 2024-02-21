@@ -1,8 +1,8 @@
-import Header from "#components/Header"
-import NotificationCard from "#components/NotificationCard"
 import GetOrders from "#components/UsersCrud/GetOrders"
 import ShippingData from "#components/UsersCrud/ShippingData"
 import UserData from "#components/UsersCrud/UserData"
+import Header from "#components/ui/Header"
+import NotificationCard from "#components/ui/NotificationCard"
 import useUserContext from "#context/userContext"
 import {
   REDIRECT_TIMEOUT,
