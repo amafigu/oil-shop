@@ -1,7 +1,7 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
 import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { getAllProductsList } from "#utils/products"
 import { useCallback, useEffect, useState } from "react"
 import EditableListProductData from "./EditableListProductData"
@@ -13,7 +13,7 @@ const GetAllProducts = ({
   const [notification, setNotification] = useState()
   const [showProducts, setShowProducts] = useState(false)
   const [productsData, setProductsData] = useState([])
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const text = translate.components.crud.getAllProducts
 
   const getProductsList = useCallback(async () => {

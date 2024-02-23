@@ -1,4 +1,4 @@
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import React, { useState } from "react"
 import styles from "./editableImageInput.module.scss"
 
@@ -11,7 +11,7 @@ const EditableImageInput = ({
   onSave,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const textButtons = translate.components.crud.buttons
 
   const saveAndSetIsEditing = (e) => {

@@ -10,8 +10,8 @@ import {
   ROUTES_SIGN_UP_ADMIN,
   SHORT_MESSAGE_TIMEOUT,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { uploadToS3 } from "#utils/dataManipulation"
 import {
   createNewAdmin,
@@ -35,7 +35,7 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [validationErrors, setValidationErrors] = useState([])
   const { setIsLoggedIn } = useUserContext()
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
 

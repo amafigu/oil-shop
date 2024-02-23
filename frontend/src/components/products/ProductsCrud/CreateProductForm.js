@@ -6,7 +6,7 @@ import {
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 
 import {
   createDataAndSetStates,
@@ -34,7 +34,7 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
     image: "",
   })
 
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const text = translate.components.crud
 
   useEffect(() => {

@@ -7,8 +7,8 @@ import {
   SHORT_MESSAGE_TIMEOUT,
 } from "#constants/constants"
 import useCartContext from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
 import { submitOrderAndGuestUser } from "#utils/users"
 import { React, useEffect, useState } from "react"
@@ -18,7 +18,7 @@ import styles from "./payment.module.scss"
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const text = translate.pages.payment
   const { isLoggedIn, userId, user } = useUserContext()
   const { setCart } = useCartContext()

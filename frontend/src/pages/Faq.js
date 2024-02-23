@@ -1,10 +1,10 @@
+import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
 import { React } from "react"
-import useLocaleContext from "../context/localeContext"
 import styles from "./faq.module.scss"
 
 const Faq = () => {
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   scrollToTop()
   return (
     <div className={styles.faqPageWrapper}>

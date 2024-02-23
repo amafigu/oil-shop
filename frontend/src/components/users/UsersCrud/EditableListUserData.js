@@ -7,8 +7,8 @@ import {
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import {
   listenInputChangeAndSetDataObject,
   setDefaultImageByError,
@@ -44,7 +44,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
 
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const { userEmail } = useUserContext()
 
   const text = translate.components.crud

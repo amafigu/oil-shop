@@ -1,5 +1,5 @@
 import { LONG_MESSAGE_TIMEOUT, ROUTES_SHOP } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { getProductByName } from "#utils/products"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom"
 export const useProductDetails = () => {
   const [product, setProduct] = useState(null)
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const text = translate.pages.productsDetails
   const navigate = useNavigate()
   const { productName } = useParams()

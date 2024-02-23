@@ -1,10 +1,10 @@
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
 import React from "react"
 import styles from "./about.module.scss"
 
 const About = () => {
-  const { translate } = useLocaleContext()
+  const translate = useTranslation()
   const text = translate.pages.about
   scrollToTop()
   return (
