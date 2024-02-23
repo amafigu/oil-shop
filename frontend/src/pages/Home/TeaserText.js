@@ -3,7 +3,7 @@ import React from "react"
 import styles from "./teaserText.module.scss"
 
 export const TeaserText = () => {
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   return (
     <div className={styles.teaserTextWrapper}>
       <div className={styles.teaserText}>

@@ -1,8 +1,8 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import { DEFAULT_PRODUCT_IMAGE, SHIPPING_COST } from "#constants/constants"
 import useCartContext from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { camelCaseToTitleCase } from "#utils/stringManipulation"
 import { getSummaryData } from "#utils/users"
@@ -32,7 +32,7 @@ const OrderSummary = () => {
   const [notification, setNotification] = useState(null)
   const [orderAndCartItems, setOrderAndCartItems] = useState({})
   const { cart } = useCartContext()
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const text = translate.pages.orderSummary
   const navigate = useNavigate()
 

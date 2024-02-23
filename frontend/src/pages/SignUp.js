@@ -7,7 +7,7 @@ import {
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
 import {
   faChevronDown,
@@ -21,8 +21,7 @@ import styles from "./signUp.module.scss"
 
 const SignUp = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
-
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const text = translate.pages.signUp
   const location = useLocation()
   const currentPath = location.pathname

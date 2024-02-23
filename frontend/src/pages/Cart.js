@@ -7,8 +7,8 @@ import {
   SHIPPING_COST,
 } from "#constants/constants"
 import useCartContext from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { cartTotalSum, totalCost } from "#utils/cart"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { scrollToTop } from "#utils/render"
@@ -21,7 +21,7 @@ import styles from "./cart.module.scss"
 const Cart = () => {
   const [notification, setNotification] = useState(null)
   const { cart, removeProduct, updateProductQuantity } = useCartContext()
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const text = translate.pages.cart
   const { user } = useUserContext()
   const navigate = useNavigate()

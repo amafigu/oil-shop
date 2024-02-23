@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "./teaserCard.module.scss"
 
 export const TeaserCard = ({ title, text, iconName }) => {
-  const translate = useTranslation()
+  const { translate } = useTranslation()
 
   return (
     <div className={styles.teaserSingleCard}>

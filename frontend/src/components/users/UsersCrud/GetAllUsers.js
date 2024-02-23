@@ -1,7 +1,7 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
 import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { getAllUsersList } from "#utils/users"
 import { useCallback, useEffect, useState } from "react"
 import EditableListUserData from "./EditableListUserData"
@@ -11,7 +11,7 @@ const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState()
   const [showUsers, setShowUsers] = useState(false)
   const [usersData, setUsersData] = useState([])
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const text = translate.components.crud.getAllUsers
 
   const getUsersList = useCallback(async () => {

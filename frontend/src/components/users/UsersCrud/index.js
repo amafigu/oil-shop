@@ -1,6 +1,6 @@
 import ToggleButton from "#components/ui/ToggleButton"
 import ZodValidationErrorsCard from "#components/ui/ZodValidationErrorsCard"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { useState } from "react"
 import CreateUserForm from "./CreateUserForm"
 import EditableUserData from "./EditableUserData"
@@ -16,7 +16,7 @@ const UsersCrud = ({
   const [showCreateUserForm, setShowCreateUserForm] = useState(false)
   const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
 
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const errorText = translate.pages.signUp
   const toggleButtonText =
     translate.components.crud.forms.toggleUsersCrudOptions

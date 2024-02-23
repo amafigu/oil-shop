@@ -2,8 +2,8 @@ import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
 import { API_SHIPPING_DATA, STYLES } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import {
   getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
@@ -32,7 +32,7 @@ const ShippingData = () => {
     ...initialShippingData,
   })
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const { userId, isLoading } = useUserContext()
 
   const errorText = translate.errors.requests

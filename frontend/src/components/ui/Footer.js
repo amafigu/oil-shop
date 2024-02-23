@@ -7,7 +7,7 @@ import {
   SOCIAL_MEDIA_URL_INSTAGRAM,
   SOCIAL_MEDIA_URL_YOUTUBE,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import {
   faDhl,
   faGooglePay,
@@ -23,7 +23,7 @@ import { Link } from "react-router-dom"
 import styles from "./footer.module.scss"
 
 const Footer = () => {
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const text = translate.components.footer
 
   return (

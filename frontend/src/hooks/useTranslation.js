@@ -1,7 +1,7 @@
 import useLocaleContext from "#context/localeContext"
 
 export const useTranslation = () => {
-  const { translate } = useLocaleContext()
+  const { translate, language, setLanguage } = useLocaleContext()
 
-  return translate
+  return { translate, language, setLanguage }
 }

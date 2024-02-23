@@ -8,7 +8,7 @@ import {
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
@@ -42,7 +42,7 @@ const EditableProductData = ({
   const [showForm, setShowForm] = useState(false)
   const [showProductForm, setShowProductForm] = useState(false)
 
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const textAdminCrud = translate.pages.admin.crud
 
   const updateProductDataAndSetStates = async (e, propertyName) => {

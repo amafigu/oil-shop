@@ -5,7 +5,7 @@ import { TeaserCard } from "./TeaserCard"
 import styles from "./teaserCards.module.scss"
 
 export const TeaserCards = () => {
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   return (
     <div className={styles.teaserCardsWrapper}>
       <div className={styles.columsTitleContainer}>

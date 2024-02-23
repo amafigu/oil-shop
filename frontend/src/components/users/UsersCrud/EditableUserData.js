@@ -2,8 +2,8 @@ import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 
 import {
   API_USERS_USER,
@@ -42,7 +42,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
   const [email, setEmail] = useState("")
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const { userEmail } = useUserContext()
 
   const buttonsText = translate.components

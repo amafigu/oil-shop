@@ -1,12 +1,12 @@
 import product from "#__mocks__/product"
 import translate from "#__mocks__/translate"
 import useCartContext, { CartContext } from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 import AddProductToCartButton from "./AddProductToCartButton"
 
-jest.mock("#context/localeContext")
+jest.mock("#hooks/useTranslation")
 jest.mock("#context/cartContext")
 
 function renderButton(mockedFn) {
@@ -31,7 +31,7 @@ describe("AddProductToCartButton should", () => {
     useCartContext.mockReturnValue({
       addProduct: addProductFnMocked,
     })
-    useLocaleContext.mockReturnValue({ translate })
+    useTranslation.mockReturnValue({ translate })
   })
 
   test("fire add product to cart correctly", () => {

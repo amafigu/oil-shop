@@ -1,10 +1,9 @@
 import useCartContext from "#context/cartContext"
+import { useTranslation } from "#hooks/useTranslation"
 import React from "react"
-import useLocaleContext from "../../context/localeContext"
-
 const AddProductToCartButton = ({ product, classname, quantity }) => {
   const { addProduct } = useCartContext()
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
 
   return (
     <button

@@ -1,15 +1,15 @@
-import translate from "#__mocks__/translate" // Change this line
-import useLocaleContext from "#context/localeContext"
+import translate from "#__mocks__/translate"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { render } from "@testing-library/react"
 import React from "react"
 import UserData from "./UserData"
 
 jest.mock("#context/userContext")
-jest.mock("#context/localeContext")
+jest.mock("#hooks/useTranslation")
 
 describe("UserData should", () => {
-  useLocaleContext.mockReturnValue({ translate })
+  useTranslation.mockReturnValue({ translate })
 
   beforeEach(() => {
     useUserContext.mockReturnValue({

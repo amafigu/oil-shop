@@ -8,8 +8,8 @@ import {
   REDIRECT_TIMEOUT,
   ROUTES_SIGN_UP,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
 import { loginUser } from "#utils/users"
 import {
@@ -29,7 +29,7 @@ const Login = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
   const text = translate.pages.login
   const textPassword = translate.components.crud

@@ -1,4 +1,4 @@
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { saveDataAndToggleInput } from "#utils/dataManipulation"
 import { cancelWithScape } from "#utils/render"
 import React, { useEffect, useState } from "react"
@@ -15,7 +15,7 @@ const EditableInput = ({
   refreshAllProductsCounter,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const textButtons = translate.components.crud.buttons
   const textProperties = translate.components.crud.forms.commonProperties
 

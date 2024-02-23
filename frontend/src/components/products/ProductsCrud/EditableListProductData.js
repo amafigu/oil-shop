@@ -7,7 +7,7 @@ import {
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
@@ -48,7 +48,7 @@ const EditableListProductData = ({
 
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
 
   const textAdminCrud = translate.pages.admin.crud
   const buttonsText = translate.components
