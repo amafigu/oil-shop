@@ -1,5 +1,5 @@
-import ProductsCrud from "#components/ProductsCrud"
 import UsersCrud from "#components/UsersCrud"
+import ProductsCrud from "#components/products/ProductsCrud"
 import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
 import useUserContext from "#context/userContext"
