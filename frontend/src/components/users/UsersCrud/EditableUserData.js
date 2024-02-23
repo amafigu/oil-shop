@@ -10,7 +10,7 @@ import {
   DEFAULT_USER_IMAGE,
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
-} from "#utils/constants"
+} from "#constants/constants"
 import {
   listenInputChangeAndSetDataObject,
   setDefaultImageByError,

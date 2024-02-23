@@ -1,14 +1,14 @@
 import LanguageDropdown from "#components/ui/LanguageDropdown"
 import LogoutButton from "#components/ui/LogoutButton"
 import Sidebar from "#components/ui/Sidebar"
-import useCartContext from "#context/cartContext"
-import useUserContext from "#context/userContext"
 import {
   ROUTES_CART,
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
-} from "#utils/constants"
+} from "#constants/constants"
+import useCartContext from "#context/cartContext"
+import useUserContext from "#context/userContext"
 import {
   faCartShopping,
   faChevronDown,

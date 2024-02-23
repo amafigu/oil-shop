@@ -1,15 +1,15 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import useCartContext from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
-import { cartTotalSum, totalCost } from "#utils/cart"
 import {
   DEFAULT_PRODUCT_IMAGE,
   ROUTES_CART,
   ROUTES_CHECKOUT_SHIPPING,
   ROUTES_CURRENT_ADMIN,
   SHIPPING_COST,
-} from "#utils/constants"
+} from "#constants/constants"
+import useCartContext from "#context/cartContext"
+import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
+import { cartTotalSum, totalCost } from "#utils/cart"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { scrollToTop } from "#utils/render"
 import { titleCase } from "#utils/stringManipulation"

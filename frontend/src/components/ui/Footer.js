@@ -1,4 +1,3 @@
-import useLocaleContext from "#context/localeContext"
 import {
   ROUTES_FAQ,
   ROUTES_LOGIN,
@@ -7,7 +6,8 @@ import {
   SOCIAL_MEDIA_URL_FACEBOOK,
   SOCIAL_MEDIA_URL_INSTAGRAM,
   SOCIAL_MEDIA_URL_YOUTUBE,
-} from "#utils/constants"
+} from "#constants/constants"
+import useLocaleContext from "#context/localeContext"
 import {
   faDhl,
   faGooglePay,

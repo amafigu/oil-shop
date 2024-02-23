@@ -1,14 +1,14 @@
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
 import {
   API_USERS_USER,
   DEFAULT_USER_IMAGE,
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
-} from "#utils/constants"
+} from "#constants/constants"
+import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import {
   listenInputChangeAndSetDataObject,
   setDefaultImageByError,

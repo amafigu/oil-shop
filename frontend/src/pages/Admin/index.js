@@ -1,16 +1,16 @@
-import ProductsCrud from "#components/ProductsCrud"
-import UsersCrud from "#components/UsersCrud"
+import ProductsCrud from "#components/products/ProductsCrud"
 import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
-import useUserContext from "#context/userContext"
+import UsersCrud from "#components/users/UsersCrud"
 import {
   REDIRECT_TIMEOUT,
+  ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
   SHORT_MESSAGE_TIMEOUT,
-} from "#utils/constants"
+} from "#constants/constants"
+import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ROUTES_CURRENT_CUSTOMER } from "../../utils/constants"
 import styles from "./admin.module.scss"
 const Admin = () => {
   const [refreshAllProductsCounter, setRefreshAllProductsCounter] = useState(0)

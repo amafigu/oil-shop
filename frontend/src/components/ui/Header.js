@@ -1,5 +1,5 @@
 import TableRow from "#components/ui/TableRow"
-import { DEFAULT_USER_IMAGE } from "#utils/constants"
+import { DEFAULT_USER_IMAGE } from "#constants/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import styles from "./header.module.scss"
 

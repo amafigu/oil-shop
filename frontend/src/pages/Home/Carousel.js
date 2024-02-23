@@ -1,4 +1,4 @@
-import { TEASER_VIDEOS } from "#utils/constants"
+import { TEASER_VIDEOS } from "#constants/constants"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import styles from "./carousel.module.scss"
 

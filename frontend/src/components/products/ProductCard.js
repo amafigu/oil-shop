@@ -1,5 +1,5 @@
+import { DEFAULT_PRODUCT_IMAGE } from "#constants/constants"
 import useLocaleContext from "#context/localeContext"
-import { DEFAULT_PRODUCT_IMAGE } from "#utils/constants"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import React from "react"

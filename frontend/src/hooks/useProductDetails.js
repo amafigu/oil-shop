@@ -1,5 +1,5 @@
+import { LONG_MESSAGE_TIMEOUT, ROUTES_SHOP } from "#constants/constants"
 import useLocaleContext from "#context/localeContext"
-import { LONG_MESSAGE_TIMEOUT, ROUTES_SHOP } from "#utils/constants"
 import { getProductByName } from "#utils/products"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
