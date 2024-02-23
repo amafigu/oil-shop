@@ -34,7 +34,7 @@ const CreateProductForm = ({ setRefreshAllProductsCounter }) => {
     image: "",
   })
 
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.components.crud
 
   useEffect(() => {

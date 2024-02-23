@@ -1,5 +1,5 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import React from "react"
@@ -8,7 +8,7 @@ import AddProductToCartButton from "./AddProductToCartButton"
 import styles from "./productCard.module.scss"
 
 const ProductCard = ({ product }) => {
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
 
   return (
     <div className={styles.productCardWrapper}>

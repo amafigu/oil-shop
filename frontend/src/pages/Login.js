@@ -29,7 +29,7 @@ const Login = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const { setIsLoggedIn, setUserEmail, setUser } = useUserContext()
   const text = translate.pages.login
   const textPassword = translate.components.crud

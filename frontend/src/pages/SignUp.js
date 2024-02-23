@@ -21,7 +21,7 @@ import styles from "./signUp.module.scss"
 
 const SignUp = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.pages.signUp
   const location = useLocation()
   const currentPath = location.pathname

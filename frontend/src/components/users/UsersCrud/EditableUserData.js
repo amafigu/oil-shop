@@ -42,7 +42,7 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
   const [email, setEmail] = useState("")
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const { userEmail } = useUserContext()
 
   const buttonsText = translate.components

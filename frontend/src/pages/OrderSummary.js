@@ -32,7 +32,7 @@ const OrderSummary = () => {
   const [notification, setNotification] = useState(null)
   const [orderAndCartItems, setOrderAndCartItems] = useState({})
   const { cart } = useCartContext()
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.pages.orderSummary
   const navigate = useNavigate()
 

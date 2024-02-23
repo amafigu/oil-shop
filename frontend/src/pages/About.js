@@ -4,7 +4,7 @@ import React from "react"
 import styles from "./about.module.scss"
 
 const About = () => {
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.pages.about
   scrollToTop()
   return (

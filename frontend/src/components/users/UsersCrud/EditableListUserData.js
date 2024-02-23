@@ -44,7 +44,7 @@ const EditableListUserData = ({ setRefreshAllUsersCounter, user }) => {
 
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const { userEmail } = useUserContext()
 
   const text = translate.components.crud

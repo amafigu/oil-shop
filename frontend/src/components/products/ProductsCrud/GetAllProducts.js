@@ -13,7 +13,7 @@ const GetAllProducts = ({
   const [notification, setNotification] = useState()
   const [showProducts, setShowProducts] = useState(false)
   const [productsData, setProductsData] = useState([])
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.components.crud.getAllProducts
 
   const getProductsList = useCallback(async () => {

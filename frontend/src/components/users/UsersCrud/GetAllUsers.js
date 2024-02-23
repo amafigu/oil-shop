@@ -11,7 +11,7 @@ const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
   const [notification, setNotification] = useState()
   const [showUsers, setShowUsers] = useState(false)
   const [usersData, setUsersData] = useState([])
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.components.crud.getAllUsers
 
   const getUsersList = useCallback(async () => {

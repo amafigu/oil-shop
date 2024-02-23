@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom"
 export const useProductDetails = () => {
   const [product, setProduct] = useState(null)
   const [notification, setNotification] = useState(null)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.pages.productsDetails
   const navigate = useNavigate()
   const { productName } = useParams()

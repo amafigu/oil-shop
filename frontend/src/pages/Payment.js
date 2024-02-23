@@ -18,7 +18,7 @@ import styles from "./payment.module.scss"
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [notification, setNotification] = useState(null)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.pages.payment
   const { isLoggedIn, userId, user } = useUserContext()
   const { setCart } = useCartContext()

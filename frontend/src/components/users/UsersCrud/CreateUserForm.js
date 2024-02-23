@@ -35,7 +35,7 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [validationErrors, setValidationErrors] = useState([])
   const { setIsLoggedIn } = useUserContext()
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
 

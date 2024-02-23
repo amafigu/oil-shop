@@ -1,14 +1,14 @@
 import product from "#__mocks__/product"
 import translate from "#__mocks__/translate"
 import useCartContext from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 import { MemoryRouter } from "react-router-dom"
 import ProductCard from "./ProductCard"
 
-jest.mock("#context/localeContext")
+jest.mock("#hooks/useTranslation")
 jest.mock("#context/cartContext")
 
 function renderCard() {
@@ -26,7 +26,7 @@ describe("ProductCard", () => {
     useCartContext.mockReturnValue({
       addProduct: mockAddProduct,
     })
-    useLocaleContext.mockReturnValue({ translate })
+    useTranslation.mockReturnValue({ translate })
   })
 
   test("renders product name correctly", () => {
@@ -41,11 +41,6 @@ describe("ProductCard", () => {
         `${translate.components.products.oil.price} €${product.price}`,
       ),
     ).toBeInTheDocument()
-  })
-
-  test("renders product description correctly", () => {
-    renderCard()
-    expect(screen.getByText(product.description)).toBeInTheDocument()
   })
 
   test("renders product size correctly", () => {

@@ -14,7 +14,7 @@ const EditableAndDeletableInput = ({
   updatedPropertyData,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const textButtons = translate.components.crud.buttons
   const textProperties = translate.components.crud.forms.commonProperties
 

@@ -4,7 +4,7 @@ import { React } from "react"
 import styles from "./faq.module.scss"
 
 const Faq = () => {
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   scrollToTop()
   return (
     <div className={styles.faqPageWrapper}>

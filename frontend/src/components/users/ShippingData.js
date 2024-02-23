@@ -32,7 +32,7 @@ const ShippingData = () => {
     ...initialShippingData,
   })
   const [notification, setNotification] = useState(null)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const { userId, isLoading } = useUserContext()
 
   const errorText = translate.errors.requests

@@ -48,7 +48,7 @@ const EditableListProductData = ({
 
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
 
   const textAdminCrud = translate.pages.admin.crud
   const buttonsText = translate.components

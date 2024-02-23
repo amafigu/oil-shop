@@ -16,7 +16,7 @@ const UsersCrud = ({
   const [showCreateUserForm, setShowCreateUserForm] = useState(false)
   const [refreshAllUsersCounter, setRefreshAllUsersCounter] = useState(0)
 
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const errorText = translate.pages.signUp
   const toggleButtonText =
     translate.components.crud.forms.toggleUsersCrudOptions

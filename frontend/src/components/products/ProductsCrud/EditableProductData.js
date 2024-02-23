@@ -42,7 +42,7 @@ const EditableProductData = ({
   const [showForm, setShowForm] = useState(false)
   const [showProductForm, setShowProductForm] = useState(false)
 
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const textAdminCrud = translate.pages.admin.crud
 
   const updateProductDataAndSetStates = async (e, propertyName) => {

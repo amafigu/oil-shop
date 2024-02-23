@@ -23,7 +23,7 @@ import { Link } from "react-router-dom"
 import styles from "./footer.module.scss"
 
 const Footer = () => {
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const text = translate.components.footer
 
   return (

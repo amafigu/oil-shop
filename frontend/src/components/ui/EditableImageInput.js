@@ -11,7 +11,7 @@ const EditableImageInput = ({
   onSave,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const translate = useTranslation()
+  const { translate } = useTranslation()
   const textButtons = translate.components.crud.buttons
 
   const saveAndSetIsEditing = (e) => {
