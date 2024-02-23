@@ -1,6 +1,5 @@
 @use "#styles/theme" as theme;
 @use "#styles/media" as media;
-@import "https://fonts.googleapis.com/css2?family=GFS+Neohellenic&display=swap";
 @import "#styles/helpers/mixins";
 
 .homePageWrapper {
@@ -23,7 +22,7 @@
     width: 100%;
   }
 
-  .carouselWrapper {
+  .carouselContainer {
     position: relative;
     z-index: -1;
     display: flex;
@@ -32,146 +31,16 @@
     margin-bottom: 38px;
   }
 
-  .teaserTextWrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-  .teaserText {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
-    text-align: center;
-
-    @include media.tablet-down {
-      width: 90%;
-    }
-  }
-
-  .teaserCardsWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .teaserCards {
-    display: flex;
-    justify-content: space-between;
-
-    @include media.tablet-down {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
-  .title {
-    margin-bottom: theme.$spacing-semi-regular-large;
-
-    @include title-text;
-
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  .teaserCardTitle {
-    display: flex;
-    align-items: flex-start;
-    min-height: 48px;
-    font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-medium;
-    font-weight: theme.$font-weight-medium;
-    text-align: center;
-  }
-
-  .columnsTitle {
-    align-items: center;
-    font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-subtitle;
-    font-weight: theme.$font-weight-semibold;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  .columsTitleContainer {
-    margin-bottom: theme.$spacing-semi-regular-large;
-  }
-
-  .teaserCardText {
-    display: flex;
-    align-items: center;
-    height: fit-content;
-    min-height: 120px;
-    margin-bottom: theme.$spacing-small;
-    overflow: hidden;
-    font-family: theme.$font-family-primary;
-    font-size: theme.$font-size-semi-medium;
-    font-weight: theme.$font-weight-regular;
-    text-align: center;
-
-    @include media.fullscreen-down {
-      height: 168px;
-    }
-
-    @include media.widescreen-down {
-      height: 180px;
-    }
-
-    @include media.desktop-down {
-      height: 240px;
-    }
-
-    @include media.tablet-down {
-      height: 140px;
-    }
-
-    @include media.mobile {
-      height: 120px;
-    }
-  }
-
-  .subtitleText {
-    width: 84%;
-    text-align: center;
-
-    @include subtitle-text;
-
-    @include media.tablet-down {
-      width: 100%;
-    }
-  }
-
   .productSliderContainer {
     display: flex;
     justify-content: center;
     width: 100%;
     margin-bottom: theme.$spacing-semi-regular;
-  }
 
-  .iconColumns {
-    font-size: theme.$font-size-teaser;
-  }
-
-  .teaserSingleCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 20%;
-    padding: theme.$spacing-semi-regular-large;
-
-    @include media.tablet-down {
-      width: 40%;
+    .columnsContainer {
+      display: flex;
+      justify-content: center;
+      width: 95%;
     }
-
-    @include media.mobile {
-      width: 100%;
-    }
-  }
-
-  .columnsContainer {
-    display: flex;
-    justify-content: center;
-    width: 95%;
   }
 }
