@@ -9,6 +9,8 @@ export const DEFAULT_PRODUCT_IMAGE =
 export const DEFAULT_USER_IMAGE =
   "https://oylo-images.s3.us-east-2.amazonaws.com/default_user.png"
 
+export const VIDEO_BANNER_PATH = `${process.env.PUBLIC_URL}/assets/orangeFlowers.mp4`
+
 // INTERNAL MEDIA PATHS AND VARIABLES
 export const TEASER_VIDEOS = [{ id: "orangeFlowers" }]
 export const LOGO_IMAGE = "/assets/logo.png"
