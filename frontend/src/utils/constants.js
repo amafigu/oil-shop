@@ -58,6 +58,11 @@ export const ROUTES_SHOP_QUERY_CATEGORY_PREFIX = "/shop?category="
 export const ROUTES_SIGN_UP = "/sign-up"
 export const ROUTES_SIGN_UP_ADMIN = "/sign-up-admin"
 export const ROUTES_SHOP = "/shop"
+export const ROUTES_WITHOUT_NAVBAR = [
+  ROUTES_LOGIN,
+  ROUTES_SIGN_UP,
+  ROUTES_SIGN_UP_ADMIN,
+]
 
 // TIME CONSTANTS
 export const SHORT_MESSAGE_TIMEOUT = 4000
