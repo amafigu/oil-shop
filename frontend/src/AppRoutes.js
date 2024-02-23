@@ -8,7 +8,7 @@ import About from "#pages/About"
 import Admin from "#pages/Admin"
 import Cart from "#pages/Cart"
 import Faq from "#pages/Faq"
-import Home from "#pages/Home"
+import { Home } from "#pages/Home"
 import Login from "#pages/Login"
 import NotFound from "#pages/NotFound"
 import OrderSummary from "#pages/OrderSummary"
@@ -32,6 +32,7 @@ import {
   ROUTES_PRODUCTS,
   ROUTES_SHOP,
   ROUTES_SIGN_UP,
+  ROUTES_WITHOUT_NAVBAR,
 } from "#utils/constants"
 import { getProductCategories } from "#utils/products"
 import { ROUTES_SIGN_UP_ADMIN } from "./utils/constants"
@@ -55,25 +56,18 @@ const AppRoutes = () => {
 
   const location = useLocation()
   const currentPath = location.pathname
-  const routesWithoutNavbar = [
-    ROUTES_LOGIN,
-    ROUTES_SIGN_UP,
-    ROUTES_SIGN_UP_ADMIN,
-  ]
 
   return (
     <div className={styles.wrapper}>
-      {!routesWithoutNavbar.includes(currentPath) && (
+      {!ROUTES_WITHOUT_NAVBAR.includes(currentPath) && (
         <Navbar productCategories={productCategories} />
       )}
-
       <Routes>
         <Route path={`${ROUTES_ABOUT}`} element={<About />} />
         <Route
           path={`${ROUTES_SHOP}`}
           element={<Shop productCategories={productCategories} />}
         />
-
         <Route path={`${ROUTES_HOME}`} element={<Home />} />
         <Route path={`${ROUTES_CART}`} element={<Cart />} />
         <Route path={`${ROUTES_FAQ}`} element={<Faq />} />
