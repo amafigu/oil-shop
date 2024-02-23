@@ -7,6 +7,7 @@ import useUserContext from "#context/userContext"
 import {
   API_USERS_CURRENT_USER,
   API_USERS_USER,
+  SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#utils/constants"
 import {
@@ -16,7 +17,6 @@ import {
   uploadToS3,
 } from "#utils/dataManipulation"
 import React, { useEffect, useState } from "react"
-import { SHORT_MESSAGE_TIMEOUT } from "../../utils/constants"
 import styles from "./userData.module.scss"
 
 const UserData = () => {

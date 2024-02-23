@@ -1,8 +1,8 @@
-import GetOrders from "#components/UsersCrud/GetOrders"
-import ShippingData from "#components/UsersCrud/ShippingData"
-import UserData from "#components/UsersCrud/UserData"
 import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
+import GetOrders from "#components/users/UsersCrud/GetOrders"
+import ShippingData from "#components/users/UsersCrud/ShippingData"
+import UserData from "#components/users/UsersCrud/UserData"
 import useUserContext from "#context/userContext"
 import {
   REDIRECT_TIMEOUT,

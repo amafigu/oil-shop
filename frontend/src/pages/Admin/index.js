@@ -1,7 +1,7 @@
-import UsersCrud from "#components/UsersCrud"
 import ProductsCrud from "#components/products/ProductsCrud"
 import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
+import UsersCrud from "#components/users/UsersCrud"
 import useUserContext from "#context/userContext"
 import {
   REDIRECT_TIMEOUT,
