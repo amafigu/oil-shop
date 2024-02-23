@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from "react"
 import styles from "./productSlider.module.scss"
 
-const ProductSlider = () => {
+export const ProductsSlider = () => {
   const [products, setProducts] = useState([])
   const [currentProductIndex, setcurrentProductIndex] = useState(0)
   const [sliderQuantity, setSliderQuantity] = useState(1)
@@ -70,5 +70,3 @@ const ProductSlider = () => {
     </div>
   )
 }
-
-export default ProductSlider

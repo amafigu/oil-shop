@@ -2,7 +2,7 @@ import { TEASER_VIDEOS } from "#utils/constants"
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import styles from "./carousel.module.scss"
 
-const Carousel = () => {
+export const Carousel = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
   const nextVideo = useCallback(() => {
@@ -49,5 +49,3 @@ const Carousel = () => {
     </div>
   )
 }
-
-export default Carousel
