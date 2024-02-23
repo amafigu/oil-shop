@@ -1,5 +1,5 @@
+import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#constants/constants"
 import useLocaleContext from "#context/localeContext"
-import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#utils/constants"
 import React from "react"
 import { useLocation } from "react-router-dom"
 import styles from "./LanguageDropdown.module.scss"

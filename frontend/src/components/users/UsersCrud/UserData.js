@@ -2,14 +2,14 @@ import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
-import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
 import {
   API_USERS_CURRENT_USER,
   API_USERS_USER,
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
-} from "#utils/constants"
+} from "#constants/constants"
+import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import {
   getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,

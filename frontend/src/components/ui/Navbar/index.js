@@ -1,7 +1,5 @@
 import LanguageDropdown from "#components/ui/LanguageDropdown"
 import LogoutButton from "#components/ui/LogoutButton"
-import useCartContext from "#context/cartContext"
-import useUserContext from "#context/userContext"
 import {
   LOGO_IMAGE,
   ROUTES_CART,
@@ -9,7 +7,9 @@ import {
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_HOME,
   ROUTES_LOGIN,
-} from "#utils/constants"
+} from "#constants/constants"
+import useCartContext from "#context/cartContext"
+import useUserContext from "#context/userContext"
 import { searchAndNavigateToProduct, useGetProducts } from "#utils/products"
 import {
   getInputChangeAndOpenList,

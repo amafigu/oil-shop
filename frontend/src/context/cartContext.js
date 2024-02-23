@@ -1,5 +1,5 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import { LOCAL_STORAGE_CART } from "#utils/constants"
+import { LOCAL_STORAGE_CART } from "#constants/constants"
 import { titleCase } from "#utils/stringManipulation"
 import { createContext, useContext, useEffect, useState } from "react"
 

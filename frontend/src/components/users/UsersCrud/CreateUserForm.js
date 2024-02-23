@@ -1,6 +1,4 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
 import {
   DEFAULT_USER_IMAGE,
   LONG_MESSAGE_TIMEOUT,
@@ -11,7 +9,9 @@ import {
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
   SHORT_MESSAGE_TIMEOUT,
-} from "#utils/constants"
+} from "#constants/constants"
+import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { uploadToS3 } from "#utils/dataManipulation"
 import {
   createNewAdmin,

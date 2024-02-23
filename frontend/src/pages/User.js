@@ -1,15 +1,15 @@
 import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
+import ShippingData from "#components/users/ShippingData"
 import GetOrders from "#components/users/UsersCrud/GetOrders"
-import ShippingData from "#components/users/UsersCrud/ShippingData"
 import UserData from "#components/users/UsersCrud/UserData"
-import useUserContext from "#context/userContext"
 import {
   REDIRECT_TIMEOUT,
   ROUTES_CURRENT_ADMIN,
   ROUTES_LOGIN,
   SHORT_MESSAGE_TIMEOUT,
-} from "#utils/constants"
+} from "#constants/constants"
+import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./user.module.scss"

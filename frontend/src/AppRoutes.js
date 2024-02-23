@@ -4,20 +4,6 @@ import styles from "./appRoutes.module.scss"
 
 import Footer from "#components/ui/Footer"
 import Navbar from "#components/ui/Navbar"
-import About from "#pages/About"
-import Admin from "#pages/Admin"
-import Cart from "#pages/Cart"
-import Faq from "#pages/Faq"
-import { Home } from "#pages/Home"
-import Login from "#pages/Login"
-import NotFound from "#pages/NotFound"
-import OrderSummary from "#pages/OrderSummary"
-import Payment from "#pages/Payment"
-import ProductDetails from "#pages/ProductDetails"
-import Shipping from "#pages/Shipping"
-import Shop from "#pages/Shop"
-import SignUp from "#pages/SignUp"
-import User from "#pages/User"
 import {
   ROUTES_ABOUT,
   ROUTES_CART,
@@ -32,10 +18,24 @@ import {
   ROUTES_PRODUCTS,
   ROUTES_SHOP,
   ROUTES_SIGN_UP,
+  ROUTES_SIGN_UP_ADMIN,
   ROUTES_WITHOUT_NAVBAR,
-} from "#utils/constants"
+} from "#constants/constants"
+import About from "#pages/About"
+import Admin from "#pages/Admin"
+import Cart from "#pages/Cart"
+import Faq from "#pages/Faq"
+import { Home } from "#pages/Home"
+import Login from "#pages/Login"
+import NotFound from "#pages/NotFound"
+import OrderSummary from "#pages/OrderSummary"
+import Payment from "#pages/Payment"
+import ProductDetails from "#pages/ProductDetails"
+import Shipping from "#pages/Shipping"
+import Shop from "#pages/Shop"
+import SignUp from "#pages/SignUp"
+import User from "#pages/User"
 import { getProductCategories } from "#utils/products"
-import { ROUTES_SIGN_UP_ADMIN } from "./utils/constants"
 
 const AppRoutes = () => {
   const [productCategories, setProductCategories] = useState([])

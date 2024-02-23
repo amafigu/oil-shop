@@ -1,13 +1,13 @@
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import useLocaleContext from "#context/localeContext"
 import {
   API_PRODUCTS_PRODUCT,
   DEFAULT_PRODUCT_IMAGE,
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
-} from "#utils/constants"
+} from "#constants/constants"
+import useLocaleContext from "#context/localeContext"
 import {
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,

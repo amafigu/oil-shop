@@ -1,12 +1,12 @@
 import FormInput from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import useLocaleContext from "#context/localeContext"
 import {
   API_PRODUCTS_PRODUCT_CREATE,
   DEFAULT_PRODUCT_IMAGE,
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
-} from "#utils/constants"
+} from "#constants/constants"
+import useLocaleContext from "#context/localeContext"
 
 import {
   createDataAndSetStates,

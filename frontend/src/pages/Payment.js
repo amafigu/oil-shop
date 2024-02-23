@@ -1,18 +1,18 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import useCartContext from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
-import useUserContext from "#context/userContext"
 import {
+  REDIRECT_TIMEOUT,
   ROUTES_CHECKOUT_ORDER_SUMMARY,
   ROUTES_CHECKOUT_SHIPPING,
   ROUTES_CURRENT_ADMIN,
   SHORT_MESSAGE_TIMEOUT,
-} from "#utils/constants"
+} from "#constants/constants"
+import useCartContext from "#context/cartContext"
+import useLocaleContext from "#context/localeContext"
+import useUserContext from "#context/userContext"
 import { scrollToTop } from "#utils/render"
 import { submitOrderAndGuestUser } from "#utils/users"
 import { React, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { REDIRECT_TIMEOUT } from "../utils/constants"
 import styles from "./payment.module.scss"
 
 const Payment = () => {

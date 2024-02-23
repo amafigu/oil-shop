@@ -1,6 +1,3 @@
-import { totalCost } from "#utils/cart"
-import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
-import axios from "axios"
 import {
   API_LOGIN,
   API_LOGOUT,
@@ -25,7 +22,10 @@ import {
   ROUTES_LOGIN,
   SHIPPING_COST,
   SHORT_MESSAGE_TIMEOUT,
-} from "./constants"
+} from "#constants/constants"
+import { totalCost } from "#utils/cart"
+import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
+import axios from "axios"
 export const logout = async (navigate, setIsLoggedIn) => {
   try {
     const logoutResponse = await axios.post(

@@ -1,9 +1,9 @@
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
+import { API_SHIPPING_DATA, STYLES } from "#constants/constants"
 import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
-import { API_SHIPPING_DATA, STYLES } from "#utils/constants"
 import {
   getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,

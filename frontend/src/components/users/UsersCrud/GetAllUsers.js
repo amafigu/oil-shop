@@ -1,7 +1,7 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
+import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#constants/constants"
 import useLocaleContext from "#context/localeContext"
-import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#utils/constants"
 import { getAllUsersList } from "#utils/users"
 import { useCallback, useEffect, useState } from "react"
 import EditableListUserData from "./EditableListUserData"
