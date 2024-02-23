@@ -8,8 +8,8 @@ import {
   SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import {
   getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
@@ -37,7 +37,7 @@ const UserData = () => {
     ...initialUserData,
   })
   const [notification, setNotification] = useState(null)
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
   const { setUser, userId, isLoading } = useUserContext()

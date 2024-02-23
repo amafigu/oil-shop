@@ -2,8 +2,8 @@ import FormInput from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import { ROUTES_CURRENT_ADMIN, STYLES } from "#constants/constants"
 import useCartContext from "#context/cartContext"
-import useLocaleContext from "#context/localeContext"
 import useUserContext from "#context/userContext"
+import { useTranslation } from "#hooks/useTranslation"
 import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -25,7 +25,7 @@ const Shipping = () => {
   })
 
   const navigate = useNavigate()
-  const { translate } = useLocaleContext()
+  const { translate } = useTranslation()
   const { cart } = useCartContext()
   const { user, isLoggedIn, isLoading } = useUserContext()
   const text = translate.pages.shipping

@@ -1,11 +1,11 @@
 import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#constants/constants"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import React from "react"
 import { useLocation } from "react-router-dom"
 import styles from "./LanguageDropdown.module.scss"
 
 const LanguageDropdown = ({ setMenuOpen }) => {
-  const { setLanguage, language } = useLocaleContext()
+  const { setLanguage, language } = useTranslation()
 
   const handleChangeLanguage = (lang) => {
     setLanguage(lang)

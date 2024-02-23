@@ -1,11 +1,11 @@
 import translate from "#__mocks__/translate"
-import useLocaleContext from "#context/localeContext"
+import { useTranslation } from "#hooks/useTranslation"
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 import React from "react"
 import EditableInput from "./EditableInput"
 
-jest.mock("#context/localeContext")
+jest.mock("#hooks/useTranslation")
 jest.mock("#context/userContext")
 
 function renderInput(onChangeMocked, onSaveMocked, textData) {
@@ -53,7 +53,7 @@ describe("EditableInput", () => {
     mockOnSave = jest.fn()
 
     textProperties = translate.components.crud.forms.commonProperties
-    useLocaleContext.mockReturnValue({ translate })
+    useTranslation.mockReturnValue({ translate })
   })
 
   test("renders correctly", () => {
