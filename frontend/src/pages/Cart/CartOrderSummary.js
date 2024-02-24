@@ -6,6 +6,7 @@ import {
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import { cartTotalSum } from "#utils/cart"
+import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./cartOrderSummary.module.scss"
 
