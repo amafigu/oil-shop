@@ -3,12 +3,19 @@ import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
-import styles from "./cart.module.scss"
+import styles from "./cartItem.module.scss"
 
-export const CartItem = ({ item }) => {
+export const CartItem = ({
+  description,
+  image,
+  name,
+  price,
+  quantity,
+  size,
+}) => {
   const { translate } = useTranslation()
   const { removeProduct, updateProductQuantity } = useCart()
   const text = translate.pages.cart
@@ -16,50 +23,49 @@ export const CartItem = ({ item }) => {
     <figure className={styles.cartItem}>
       <div className={styles.imagesAndDetails}>
         <img
-          src={item.product.image}
-          alt={item.product.name}
+          src={image}
+          alt={name}
           className={styles.cartItemImage}
           onError={(e) => {
             setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
           }}
         />
         <figcaption className={styles.cartItemDetails}>
-          <h3>{titleCase(item.product.name, "_")}</h3>
-          <p>{item.product.description}</p>
-          <p>{item.product.size} ml</p>
+          <h3>{titleCase(name, "_")}</h3>
+          <p>{description}</p>
+          <p>{size} ml</p>
         </figcaption>
       </div>
 
       <div className={styles.cartItemSelectors}>
         <div className={styles.quantityButtonsContainer}>
           <button
+            aria-label={`Substract one ${name} from cart`}
             className={styles.cartItemQuantityButton}
-            onClick={() =>
-              updateProductQuantity(item.product.name, item.quantity - 1)
-            }
+            onClick={() => updateProductQuantity(name, quantity - 1)}
           >
             <FontAwesomeIcon icon={faMinus} />
           </button>
-          <span className={styles.cartItemQuantityInput}>{item.quantity}</span>
+          <span className={styles.cartItemQuantityInput}>{quantity}</span>
           <button
+            aria-label={`Add one ${name} to cart`}
             className={styles.cartItemQuantityButton}
-            onClick={() =>
-              updateProductQuantity(item.product.name, item.quantity + 1)
-            }
+            onClick={() => updateProductQuantity(name, quantity + 1)}
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
         <div className={styles.cartItemTotalCost}>
-          {(item.quantity * Number(item.product.price)).toFixed(2)} €
+          {(quantity * Number(price)).toFixed(2)} €
         </div>
         <div className={styles.deleteButtonWrapper}>
-          <span
+          <button
             className={styles.deleteButton}
-            onClick={() => removeProduct(item.product.name)}
+            onClick={() => removeProduct(name)}
           >
             {text.deleteButton}
-          </span>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
         </div>
       </div>
     </figure>
