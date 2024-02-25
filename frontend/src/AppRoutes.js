@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react"
-import { Route, Routes, useLocation } from "react-router-dom"
-import styles from "./appRoutes.module.scss"
-
 import Footer from "#components/ui/Footer"
 import Navbar from "#components/ui/Navbar"
 import {
@@ -23,7 +19,7 @@ import {
 } from "#constants/constants"
 import About from "#pages/About"
 import Admin from "#pages/Admin"
-import Cart from "#pages/Cart"
+import { Cart } from "#pages/Cart/Cart"
 import Faq from "#pages/Faq"
 import { Home } from "#pages/Home"
 import Login from "#pages/Login"
@@ -36,6 +32,9 @@ import Shop from "#pages/Shop"
 import SignUp from "#pages/SignUp"
 import User from "#pages/User"
 import { getProductCategories } from "#utils/products"
+import { useEffect, useState } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
+import styles from "./appRoutes.module.scss"
 
 const AppRoutes = () => {
   const [productCategories, setProductCategories] = useState([])

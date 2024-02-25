@@ -1,14 +1,14 @@
 import translate from "#__mocks__/translate"
-import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
+import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 import { MemoryRouter } from "react-router-dom"
-import Cart from "./Cart"
+import { Cart } from "./Cart"
 
-jest.mock("#context/cartContext")
+jest.mock("#hooks/useCart")
 jest.mock("#hooks/useTranslation")
 jest.mock("#context/userContext")
 
@@ -26,7 +26,7 @@ describe("Cart should", () => {
     mockRemoveProduct = jest.fn()
 
     useUserContext.mockReturnValue({})
-    useCartContext.mockReturnValue({
+    useCart.mockReturnValue({
       cart: [
         {
           product: {
@@ -54,7 +54,7 @@ describe("Cart should", () => {
   })
   test("render products correctly", () => {
     renderCart()
-    useCartContext.mockReturnValue({
+    useCart.mockReturnValue({
       cart: [
         {
           product: {

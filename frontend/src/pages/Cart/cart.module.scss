@@ -1,0 +1,67 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.cartWrapper {
+  @include flex-justify-center;
+
+  margin: theme.$spacing-component-divider-vertical 0;
+}
+
+.cart {
+  display: flex;
+  width: 86%;
+
+  @include media.widescreen-down {
+    width: 90%;
+  }
+
+  @include media.desktop-down {
+    flex-direction: column;
+    width: 90%;
+  }
+}
+
+.cartItemsList {
+  @include flex-column;
+
+  flex-grow: 1;
+  flex-shrink: 1;
+  justify-content: center;
+  width: 60%;
+
+  @include media.desktop-down {
+    width: 100%;
+    margin-bottom: theme.$spacing-regular;
+  }
+}
+
+.cartItemContainer {
+  margin-top: theme.$spacing-regular;
+
+  hr {
+    margin-top: theme.$spacing-regular;
+    margin-right: 38px;
+
+    @include media.desktop-down {
+      margin-top: 0;
+    }
+  }
+
+  &:last-child hr {
+    display: none;
+  }
+
+  &:first-child {
+    @include media.desktop-down {
+      margin-top: 0;
+    }
+  }
+}
+
+.cartEmptyMessage {
+  @include flex-all-center;
+
+  height: 9rem;
+  font-size: theme.$font-size-semi-medium;
+}
