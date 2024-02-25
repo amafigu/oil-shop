@@ -1,4 +1,4 @@
-import { VIDEO_BANNER_PATH } from "#constants/constants"
+import { VIDEO_BANNER_PATH } from "#constants/media"
 import React from "react"
 import styles from "./videoBanner.module.scss"
 

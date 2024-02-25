@@ -1,4 +1,4 @@
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/constants"
+import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import axios from "axios"
 import {
   ignoreUnsavedProperties,

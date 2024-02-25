@@ -2,15 +2,12 @@ import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
+import { API_USERS_USER } from "#constants/api"
+import { DEFAULT_USER_IMAGE } from "#constants/media"
+import { STYLES } from "#constants/styles"
+import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
-
-import {
-  API_USERS_USER,
-  DEFAULT_USER_IMAGE,
-  SHORT_MESSAGE_TIMEOUT,
-  STYLES,
-} from "#constants/constants"
 import {
   listenInputChangeAndSetDataObject,
   setDefaultImageByError,

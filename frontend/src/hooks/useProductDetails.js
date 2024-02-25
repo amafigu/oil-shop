@@ -1,4 +1,5 @@
-import { LONG_MESSAGE_TIMEOUT, ROUTES_SHOP } from "#constants/constants"
+import { ROUTES_SHOP } from "#constants/routes"
+import { LONG_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
 import { getProductByName } from "#utils/products"
 import { useEffect, useState } from "react"
@@ -7,10 +8,10 @@ import { useNavigate, useParams } from "react-router-dom"
 export const useProductDetails = () => {
   const [product, setProduct] = useState(null)
   const [notification, setNotification] = useState(null)
+  const { productName } = useParams()
   const { translate } = useTranslation()
   const text = translate.pages.productsDetails
   const navigate = useNavigate()
-  const { productName } = useParams()
 
   useEffect(() => {
     const getProductDetails = async () => {

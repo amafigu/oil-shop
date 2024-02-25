@@ -6,7 +6,7 @@ import {
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
-} from "#constants/constants"
+} from "#constants/routes"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import {

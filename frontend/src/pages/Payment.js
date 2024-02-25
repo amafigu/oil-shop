@@ -1,11 +1,10 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import {
-  REDIRECT_TIMEOUT,
   ROUTES_CHECKOUT_ORDER_SUMMARY,
   ROUTES_CHECKOUT_SHIPPING,
   ROUTES_CURRENT_ADMIN,
-  SHORT_MESSAGE_TIMEOUT,
-} from "#constants/constants"
+} from "#constants/routes"
+import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"

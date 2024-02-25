@@ -16,13 +16,14 @@ import {
   API_USERS_USER,
   API_USER_ROLE,
   API_VERIFY_TOKEN,
+} from "#constants/api"
+import { SHIPPING_COST } from "#constants/cart"
+import {
   LOCAL_STORAGE_CART,
   LOCAL_STORAGE_GUEST_ID,
-  REDIRECT_TIMEOUT,
-  ROUTES_LOGIN,
-  SHIPPING_COST,
-  SHORT_MESSAGE_TIMEOUT,
-} from "#constants/constants"
+} from "#constants/localStorage"
+import { ROUTES_LOGIN } from "#constants/routes"
+import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { totalCost } from "#utils/cart"
 import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import axios from "axios"
