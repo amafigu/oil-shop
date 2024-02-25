@@ -1,12 +1,12 @@
 import NotificationCard from "#components/ui/NotificationCard"
+import { DEFAULT_USER_IMAGE } from "#constants/media"
 import {
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
-} from "#constants/constants"
-import { DEFAULT_USER_IMAGE } from "#constants/media"
+} from "#constants/routes"
 import {
   LONG_MESSAGE_TIMEOUT,
   LONG_REDIRECT_TIMEOUT,

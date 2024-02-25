@@ -17,11 +17,12 @@ import {
   API_USER_ROLE,
   API_VERIFY_TOKEN,
 } from "#constants/api"
-import { ROUTES_LOGIN, SHIPPING_COST } from "#constants/constants"
+import { SHIPPING_COST } from "#constants/constants"
 import {
   LOCAL_STORAGE_CART,
   LOCAL_STORAGE_GUEST_ID,
 } from "#constants/localStorage"
+import { ROUTES_LOGIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { totalCost } from "#utils/cart"
 import { getDataAndSetErrorMessage } from "#utils/dataManipulation"

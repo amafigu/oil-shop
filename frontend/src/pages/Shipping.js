@@ -1,6 +1,6 @@
 import FormInput from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import { ROUTES_CURRENT_ADMIN } from "#constants/constants"
+import { ROUTES_CURRENT_ADMIN } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"

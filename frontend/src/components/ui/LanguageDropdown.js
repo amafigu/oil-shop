@@ -1,4 +1,4 @@
-import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#constants/constants"
+import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#constants/routes"
 import { useTranslation } from "#hooks/useTranslation"
 import React from "react"
 import { useLocation } from "react-router-dom"

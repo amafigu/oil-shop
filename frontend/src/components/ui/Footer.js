@@ -1,14 +1,14 @@
 import {
-  ROUTES_FAQ,
-  ROUTES_LOGIN,
-  ROUTES_SHOP,
-  ROUTES_SIGN_UP,
-} from "#constants/constants"
-import {
   SOCIAL_MEDIA_URL_FACEBOOK,
   SOCIAL_MEDIA_URL_INSTAGRAM,
   SOCIAL_MEDIA_URL_YOUTUBE,
 } from "#constants/media"
+import {
+  ROUTES_FAQ,
+  ROUTES_LOGIN,
+  ROUTES_SHOP,
+  ROUTES_SIGN_UP,
+} from "#constants/routes"
 import { useTranslation } from "#hooks/useTranslation"
 import {
   faDhl,

@@ -1,4 +1,4 @@
-import { ROUTES_CURRENT_ADMIN } from "#constants/constants"
+import { ROUTES_CURRENT_ADMIN } from "#constants/routes"
 import { LONG_REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"

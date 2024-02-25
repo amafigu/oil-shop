@@ -1,5 +1,5 @@
-import { ROUTES_SHOP_QUERY_CATEGORY_PREFIX } from "#constants/constants"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
+import { ROUTES_SHOP_QUERY_CATEGORY_PREFIX } from "#constants/routes"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import { Link } from "react-router-dom"
