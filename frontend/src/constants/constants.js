@@ -1,7 +1,5 @@
 // VARIABLES
 export const SHIPPING_COST = 10
-export const LOCAL_STORAGE_GUEST_ID = "yolo-guest-id"
-export const LOCAL_STORAGE_CART = "yolo-cart"
 
 // API
 export const API_PRODUCTS = "/products"

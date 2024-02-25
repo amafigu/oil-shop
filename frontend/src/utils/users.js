@@ -16,11 +16,13 @@ import {
   API_USERS_USER,
   API_USER_ROLE,
   API_VERIFY_TOKEN,
-  LOCAL_STORAGE_CART,
-  LOCAL_STORAGE_GUEST_ID,
   ROUTES_LOGIN,
   SHIPPING_COST,
 } from "#constants/constants"
+import {
+  LOCAL_STORAGE_CART,
+  LOCAL_STORAGE_GUEST_ID,
+} from "#constants/localStorage"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { totalCost } from "#utils/cart"
 import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
