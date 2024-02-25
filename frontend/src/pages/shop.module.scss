@@ -5,35 +5,29 @@
 .shopPageWrapper {
   @include flex-justify-center;
   @include margin-page-wrapper;
+}
 
-  min-height: 100vh;
+.shopPage {
+  width: 80%;
 
-  .shopPage {
-    @include flex-column-all-center;
+  @include flex-column-all-center;
 
-    width: 80%;
-
-    @include media.widescreen-down {
-      width: 90%;
-    }
-
-    .sidebarWrapper {
-      display: flex;
-      margin-bottom: 40px;
-
-      @include media.tablet-down {
-        display: none;
-      }
-    }
+  @include media.widescreen-down {
+    width: 90%;
   }
+}
 
-  .sortedProducts {
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    gap: theme.$spacing-semi-regular;
-    justify-content: center;
-    width: 100%;
+.sidebarWrapper {
+  display: flex;
+  margin-bottom: 40px;
+
+  @include media.tablet-down {
+    display: none;
   }
+}
+
+.sortedProductsSection {
+  margin: theme.$spacing-component-divider-vertical 0;
+
+  @include flex-all-center;
 }
