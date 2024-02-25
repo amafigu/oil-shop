@@ -1,0 +1,11 @@
+@use "#styles/theme" as theme;
+
+.sortedProductsList {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  gap: theme.$spacing-semi-regular;
+  justify-content: center;
+  width: 100%;
+}
