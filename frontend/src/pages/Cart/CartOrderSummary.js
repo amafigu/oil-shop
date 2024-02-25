@@ -1,4 +1,4 @@
-import { SHIPPING_COST } from "#constants/constants"
+import { SHIPPING_COST } from "#constants/cart"
 import { ROUTES_CART, ROUTES_CHECKOUT_SHIPPING } from "#constants/routes"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"

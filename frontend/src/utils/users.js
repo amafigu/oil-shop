@@ -17,7 +17,7 @@ import {
   API_USER_ROLE,
   API_VERIFY_TOKEN,
 } from "#constants/api"
-import { SHIPPING_COST } from "#constants/constants"
+import { SHIPPING_COST } from "#constants/cart"
 import {
   LOCAL_STORAGE_CART,
   LOCAL_STORAGE_GUEST_ID,
