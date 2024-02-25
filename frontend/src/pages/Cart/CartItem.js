@@ -1,4 +1,4 @@
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/constants"
+import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/dataManipulation"

@@ -1,5 +1,6 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import { DEFAULT_PRODUCT_IMAGE, SHIPPING_COST } from "#constants/constants"
+import { SHIPPING_COST } from "#constants/constants"
+import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"

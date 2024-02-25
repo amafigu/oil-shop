@@ -1,4 +1,4 @@
-import { LOGO_IMAGE } from "#constants/constants"
+import { LOGO_IMAGE } from "#constants/media"
 import styles from "./notFound.module.scss"
 
 const NotFound = () => {

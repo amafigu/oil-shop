@@ -1,4 +1,4 @@
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/constants"
+import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { navigateToProductAndCloseDropdown } from "#utils/products"
 import { titleCase } from "#utils/stringManipulation"

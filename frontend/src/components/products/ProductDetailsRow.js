@@ -1,4 +1,4 @@
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/constants"
+import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import styles from "./productDetailsRow.module.scss"

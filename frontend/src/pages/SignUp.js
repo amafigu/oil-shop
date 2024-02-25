@@ -2,11 +2,11 @@ import LanguageDropdown from "#components/ui/LanguageDropdown"
 import SubNavbar from "#components/ui/Navbar/SubNavbar"
 import CreateUserForm from "#components/users/UsersCrud/CreateUserForm"
 import {
-  LOGO_IMAGE,
   ROUTES_LOGIN,
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
 } from "#constants/constants"
+import { LOGO_IMAGE } from "#constants/media"
 import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
 import {

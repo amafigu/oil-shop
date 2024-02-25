@@ -3,10 +3,12 @@ import {
   ROUTES_LOGIN,
   ROUTES_SHOP,
   ROUTES_SIGN_UP,
+} from "#constants/constants"
+import {
   SOCIAL_MEDIA_URL_FACEBOOK,
   SOCIAL_MEDIA_URL_INSTAGRAM,
   SOCIAL_MEDIA_URL_YOUTUBE,
-} from "#constants/constants"
+} from "#constants/media"
 import { useTranslation } from "#hooks/useTranslation"
 import {
   faDhl,
@@ -31,37 +33,10 @@ const Footer = () => {
       <div className={styles.footer}>
         <div className={styles.startSection}>
           <span className={styles.startSectionText}>
-            {/* text.newsletter.subscriptionText*/}
             {text.newsletter.usefulLinks}
           </span>
         </div>
-        <div className={styles.newsletterSection}>
-          {/* <div className={styles.registrationFormWrapper}>
-            <div className={styles.registrationFormContent}>
-              <form className={styles.registrationForm}>
-                <div className={styles.registrationEmailInputAndButtonWrapper}>
-                  <div className={styles.registrationEmailInputWrapper}>
-                    <input
-                      name='email'
-                      type='email'
-                      className={styles.registrationEmailInput}
-                      placeholder={text.newsletter.emailAddressPlaceholder}
-                    />
-                  </div>
-                  <span
-                    className={styles.registrationEmailButtonWrapper}
-                    title='Subscribe'
-                  >
-                    <span>{text.newsletter.subscriptionButton}</span>
-                  </span>
-                </div>
-              </form>
-              <p className={styles.registrationDataConsentText}>
-                {text.newsletter.registrationDataConsentText}
-              </p>
-            </div>
-          </div> */}
-        </div>
+        <div className={styles.newsletterSection}></div>
         <div className={styles.columnsSection}>
           <ul className={styles.columnsSectionElements}>
             <li className={styles.columnsSectionItem}>

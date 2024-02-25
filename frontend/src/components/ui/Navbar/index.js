@@ -1,13 +1,13 @@
 import LanguageDropdown from "#components/ui/LanguageDropdown"
 import LogoutButton from "#components/ui/LogoutButton"
 import {
-  LOGO_IMAGE,
   ROUTES_CART,
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_HOME,
   ROUTES_LOGIN,
 } from "#constants/constants"
+import { LOGO_IMAGE } from "#constants/media"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { searchAndNavigateToProduct, useGetProducts } from "#utils/products"

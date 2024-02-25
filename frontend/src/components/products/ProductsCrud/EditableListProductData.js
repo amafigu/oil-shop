@@ -1,11 +1,8 @@
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import {
-  API_PRODUCTS_PRODUCT,
-  DEFAULT_PRODUCT_IMAGE,
-  STYLES,
-} from "#constants/constants"
+import { API_PRODUCTS_PRODUCT, STYLES } from "#constants/constants"
+import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
 import {
