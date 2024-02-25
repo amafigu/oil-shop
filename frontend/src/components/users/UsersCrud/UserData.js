@@ -5,9 +5,9 @@ import ToggleButton from "#components/ui/ToggleButton"
 import {
   API_USERS_CURRENT_USER,
   API_USERS_USER,
-  SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#constants/constants"
+import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import {

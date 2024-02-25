@@ -1,7 +1,9 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
-import { SHORT_MESSAGE_TIMEOUT, STYLES } from "#constants/constants"
+import { STYLES } from "#constants/constants"
+import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
+
 import { getAllProductsList } from "#utils/products"
 import { useCallback, useEffect, useState } from "react"
 import EditableListProductData from "./EditableListProductData"

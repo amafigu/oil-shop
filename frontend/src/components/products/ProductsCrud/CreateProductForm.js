@@ -3,9 +3,9 @@ import NotificationCard from "#components/ui/NotificationCard"
 import {
   API_PRODUCTS_PRODUCT_CREATE,
   DEFAULT_PRODUCT_IMAGE,
-  SHORT_MESSAGE_TIMEOUT,
   STYLES,
 } from "#constants/constants"
+import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
 
 import {

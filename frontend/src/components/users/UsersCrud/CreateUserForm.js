@@ -1,15 +1,17 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import {
   DEFAULT_USER_IMAGE,
-  LONG_MESSAGE_TIMEOUT,
-  LONG_REDIRECT_TIMEOUT,
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
-  SHORT_MESSAGE_TIMEOUT,
 } from "#constants/constants"
+import {
+  LONG_MESSAGE_TIMEOUT,
+  LONG_REDIRECT_TIMEOUT,
+  SHORT_MESSAGE_TIMEOUT,
+} from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { uploadToS3 } from "#utils/dataManipulation"

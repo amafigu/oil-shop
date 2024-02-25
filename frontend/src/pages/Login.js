@@ -4,10 +4,9 @@ import NotificationCard from "#components/ui/NotificationCard"
 import {
   API_USERS_CURRENT_PREFIX,
   LOGO_IMAGE,
-  LONG_MESSAGE_TIMEOUT,
-  REDIRECT_TIMEOUT,
   ROUTES_SIGN_UP,
 } from "#constants/constants"
+import { LONG_MESSAGE_TIMEOUT, REDIRECT_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
