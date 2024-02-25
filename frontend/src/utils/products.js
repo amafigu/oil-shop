@@ -5,7 +5,6 @@ import {
   API_PRODUCT_CATEGORIES,
 } from "#constants/api"
 import axios from "axios"
-import { useEffect } from "react"
 
 export const getProductByName = async (name) => {
   try {
@@ -40,23 +39,6 @@ export const navigateToProductAndCloseDropdown = (
   setProductDropdownVisible(false)
   setMatchedProducts([])
   setSearchText("")
-}
-
-export const useGetProducts = (setProducts) => {
-  useEffect(() => {
-    const productsResponse = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/products`,
-        )
-
-        setProducts(response.data)
-      } catch (error) {
-        console.error("Error fetching product: ", error)
-      }
-    }
-    productsResponse()
-  }, [setProducts])
 }
 
 export const getAllProductsList = async () => {
@@ -104,3 +86,8 @@ export const deleteProductById = async (id) => {
     console.error(error)
   }
 }
+
+export const filteredProducts = (products, category) =>
+  products.filter(
+    (product) => product.category.name === category || category === "all",
+  )
