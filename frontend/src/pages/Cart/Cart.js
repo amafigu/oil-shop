@@ -1,40 +1,28 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import { ROUTES_CURRENT_ADMIN } from "#constants/constants"
-import useUserContext from "#context/userContext"
 import { useCart } from "#hooks/useCart"
+import { useCheckAdminAndRedirect } from "#hooks/useCheckAdminAndRedirect"
 import { useTranslation } from "#hooks/useTranslation"
 import { totalCost } from "#utils/cart"
 import { scrollToTop } from "#utils/render"
-import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React from "react"
 import { CartItem } from "./CartItem"
 import { CartOrderSummary } from "./CartOrderSummary"
 import styles from "./cart.module.scss"
+
 export const Cart = () => {
-  const [notification, setNotification] = useState(null)
   const { cart } = useCart()
+  const { notification } = useCheckAdminAndRedirect()
   const { translate } = useTranslation()
   const text = translate.pages.cart
-  const { user } = useUserContext()
-  const navigate = useNavigate()
-
   scrollToTop()
-  useEffect(() => {
-    if (user && user.role === "admin") {
-      setNotification("as admin you can not buy products")
-      setTimeout(() => setNotification(null), 3000)
-      setTimeout(() => navigate(ROUTES_CURRENT_ADMIN), 3000)
-    }
-  }, [user, navigate])
-
   return (
-    <div className={styles.cartWrapper}>
+    <main className={styles.cartWrapper} aria-label='shopping cart'>
       {notification && <NotificationCard message={notification} />}
-      <div className={styles.cart}>
-        <div className={styles.cartItemsList}>
+      <section className={styles.cart}>
+        <ul className={styles.cartItemsList}>
           {cart.length > 0 ? (
             cart.map((item) => (
-              <div
+              <li
                 className={styles.cartItemContainer}
                 key={`${item.product.name}${item.product.price}`}
               >
@@ -47,17 +35,17 @@ export const Cart = () => {
                   size={item.product.size}
                 />
                 <hr />
-              </div>
+              </li>
             ))
           ) : (
             <div className={styles.cartEmptyMessage}>
               <h3>{text.emptyCart}</h3>
             </div>
           )}
-        </div>
+        </ul>
 
         <CartOrderSummary totalCost={totalCost} />
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }

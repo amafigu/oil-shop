@@ -20,7 +20,7 @@ export const CartItem = ({
   const { removeProduct, updateProductQuantity } = useCart()
   const text = translate.pages.cart
   return (
-    <figure className={styles.cartItem}>
+    <figure className={styles.cartItem} aria-label='cart item'>
       <div className={styles.imagesAndDetails}>
         <img
           src={image}
@@ -60,6 +60,7 @@ export const CartItem = ({
         </div>
         <div className={styles.deleteButtonWrapper}>
           <button
+            aria-label={`Delete ${name} from cart`}
             className={styles.deleteButton}
             onClick={() => removeProduct(name)}
           >

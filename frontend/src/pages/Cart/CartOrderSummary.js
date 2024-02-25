@@ -39,11 +39,16 @@ export const CartOrderSummary = ({ totalCost }) => {
         <Link
           className={styles.confirmOrderButton}
           to={ROUTES_CHECKOUT_SHIPPING}
+          aria-label='confirm order'
         >
           {text.confirmPurchase}
         </Link>
       ) : (
-        <Link className={styles.confirmOrderButton} to={ROUTES_CART}>
+        <Link
+          className={styles.confirmOrderButton}
+          to={ROUTES_CART}
+          aria-label='make an order to continue to checkout'
+        >
           {text.orderToContinue}
         </Link>
       )}
