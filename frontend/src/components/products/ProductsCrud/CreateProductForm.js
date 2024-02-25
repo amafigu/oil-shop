@@ -1,10 +1,10 @@
 import FormInput from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import { API_PRODUCTS_PRODUCT_CREATE, STYLES } from "#constants/constants"
+import { API_PRODUCTS_PRODUCT_CREATE } from "#constants/constants"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
+import { STYLES } from "#constants/styles"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
-
 import {
   createDataAndSetStates,
   listenInputChangeAndSetDataObject,

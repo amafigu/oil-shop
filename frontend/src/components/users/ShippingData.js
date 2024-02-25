@@ -1,7 +1,8 @@
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
-import { API_SHIPPING_DATA, STYLES } from "#constants/constants"
+import { API_SHIPPING_DATA } from "#constants/constants"
+import { STYLES } from "#constants/styles"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import {

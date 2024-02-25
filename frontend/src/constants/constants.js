@@ -127,18 +127,6 @@ export const FORM_FIELDS_SHIPPING_DATA = [
   },
 ]
 
-export const STYLES = Object.freeze({
-  BUTTONS: {
-    USER_OPTIONS: "userOptionsButton",
-    SHOW_HIDE: "showHideButtons",
-  },
-  FORMS: {
-    FIELD: "formField",
-    FIELD_SEARCH_INPUT: "formFieldSearchInput",
-    ITEM_ROW: "itemRow",
-  },
-})
-
 // REGEX
 
 export const SPECIAL_CHARACTERS_REGEX = /[ !"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/

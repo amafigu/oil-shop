@@ -1,6 +1,6 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
-import { STYLES } from "#constants/constants"
+import { STYLES } from "#constants/styles"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
 import { getAllUsersList } from "#utils/users"
