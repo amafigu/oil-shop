@@ -3,7 +3,7 @@ import {
   API_PRODUCTS_PRODUCT,
   API_PRODUCTS_PRODUCT_GET_BY_NAME,
   API_PRODUCT_CATEGORIES,
-} from "#constants/constants"
+} from "#constants/api"
 import axios from "axios"
 import { useEffect } from "react"
 

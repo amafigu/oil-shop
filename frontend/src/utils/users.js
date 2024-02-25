@@ -16,9 +16,8 @@ import {
   API_USERS_USER,
   API_USER_ROLE,
   API_VERIFY_TOKEN,
-  ROUTES_LOGIN,
-  SHIPPING_COST,
-} from "#constants/constants"
+} from "#constants/api"
+import { ROUTES_LOGIN, SHIPPING_COST } from "#constants/constants"
 import {
   LOCAL_STORAGE_CART,
   LOCAL_STORAGE_GUEST_ID,
