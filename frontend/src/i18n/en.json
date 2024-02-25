@@ -47,7 +47,8 @@
       "orderSummary": "Summary",
       "orderSubtotal": "Subtotal:",
       "orderShipping": "Shipping:",
-      "orderTotal": "Total:"
+      "orderTotal": "Total:",
+      "canNotBuyProducts": "As an administrator you cannot purchase products"
     },
     "faq": {
       "difuserRoomSizeQuestion": "Which difuser is suitable for which room size?",
