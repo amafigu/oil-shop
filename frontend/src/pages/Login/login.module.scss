@@ -1,0 +1,101 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.loginPageWrapper {
+  @include flex-column-all-center;
+}
+
+.subNavbarContainer {
+  width: 100%;
+  margin: theme.$spacing-regular auto;
+
+  @include media.tablet-down {
+    width: 50%;
+  }
+
+  @include media.mobile {
+    width: 80%;
+  }
+}
+
+.loginPage {
+  width: 100%;
+  min-height: theme.$min-height-page-regular;
+
+  @include flex-column-all-center;
+
+  @include media.mobile {
+    min-height: theme.$min-height-page-small;
+    margin-top: theme.$spacing-large;
+  }
+}
+
+.languageOptionsAndFormContainer {
+  width: 348px;
+
+  @include flex-column;
+}
+
+.logoAndFormContainer {
+  height: auto;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+
+  .logo {
+    width: 216px;
+    border-radius: theme.$border-radius-circle;
+  }
+}
+
+.formContainer {
+  width: 100%;
+  padding: theme.$spacing-regular;
+  border-radius: theme.$border-radius-small;
+}
+
+.divider {
+  width: 100%;
+  font-size: theme.$font-size-medium;
+  font-weight: theme.$font-weight-regular;
+
+  @include flex-all-center;
+}
+
+.divider::before,
+.divider::after {
+  flex: 1 1;
+  margin: auto;
+  content: "";
+  border-bottom: 1px solid;
+}
+
+.divider::before {
+  margin-right: 10px;
+}
+
+.divider::after {
+  margin-left: 10px;
+}
+
+.linkContainer {
+  width: 100%;
+  height: auto;
+  margin: theme.$spacing-large 0;
+  border-radius: theme.$border-radius-small;
+
+  @include flex-column-all-center;
+
+  .link {
+    font-weight: theme.$font-weight-semibold;
+    color: theme.$branding-color-primary;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+  }
+}
