@@ -10,7 +10,8 @@ import {
 } from "#constants/routes"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
-import { searchAndNavigateToProduct, useGetProducts } from "#utils/products"
+import { useGetProducts } from "#hooks/useGetProducts"
+import { searchAndNavigateToProduct } from "#utils/products"
 import {
   getInputChangeAndOpenList,
   useHideListOnOuterClick,
