@@ -9,14 +9,7 @@ import {
 } from "#constants/routes"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
-import {
-  faCartShopping,
-  faChevronDown,
-  faChevronUp,
-  faGlobe,
-  faUser,
-  faX,
-} from "@fortawesome/free-solid-svg-icons"
+import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -47,7 +40,7 @@ const MenuMobile = ({
             className={`${styles.closeMenuIconContainer} ${styles.listItem}`}
             onClick={() => setMenuOpen(false)}
           >
-            <FontAwesomeIcon icon={faX} />
+            <FontAwesomeIcon icon={getIconByName("faX")} />
           </li>
 
           <li
@@ -59,12 +52,14 @@ const MenuMobile = ({
             }
           >
             <div className={styles.itemsContainer}>
-              <FontAwesomeIcon icon={faGlobe} />
+              <FontAwesomeIcon icon={getIconByName("faGlobe")} />
 
               {!isLanguageDropdownOpen && (
-                <FontAwesomeIcon icon={faChevronDown} />
+                <FontAwesomeIcon icon={getIconByName("faChevronDown")} />
               )}
-              {isLanguageDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
+              {isLanguageDropdownOpen && (
+                <FontAwesomeIcon icon={getIconByName("faChevronUp")} />
+              )}
             </div>
           </li>
           {isLanguageDropdownOpen && (
@@ -75,7 +70,7 @@ const MenuMobile = ({
             onClick={() => navigateAndCloseMenu(ROUTES_CART)}
           >
             <div className={styles.itemsContainer}>
-              <FontAwesomeIcon icon={faCartShopping} />
+              <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
 
               <span className={styles.productsQuantity}>
                 {getAllProductsQuantity}
@@ -105,14 +100,14 @@ const MenuMobile = ({
                       : ROUTES_CURRENT_CUSTOMER
                   }
                 >
-                  <FontAwesomeIcon icon={faUser} />
+                  <FontAwesomeIcon icon={getIconByName("faUser")} />
                 </Link>
               </div>
             </div>
           ) : (
             <div className={styles.listItem}>
               <Link className={styles.linkChild} to={ROUTES_LOGIN}>
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={getIconByName("faUser")} />
               </Link>
             </div>
           )}

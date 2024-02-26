@@ -15,13 +15,13 @@ import {
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { uploadToS3 } from "#utils/dataManipulation"
+import { getIconByName } from "#utils/icons"
 import {
   createNewAdmin,
   createNewUser,
   getLoggedInUser,
   loginUserWithIdAfterCreation,
 } from "#utils/users"
-import { faLock, faUnlock } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -201,9 +201,9 @@ const CreateUserForm = ({ setRefreshAllUsersCounter }) => {
 
           <button type='button' onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? (
-              <FontAwesomeIcon icon={faUnlock} />
+              <FontAwesomeIcon icon={getIconByName("faUnlock")} />
             ) : (
-              <FontAwesomeIcon icon={faLock} />
+              <FontAwesomeIcon icon={getIconByName("faLock")} />
             )}
           </button>
         </div>

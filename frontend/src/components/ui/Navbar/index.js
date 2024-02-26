@@ -11,20 +11,12 @@ import {
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useGetProducts } from "#hooks/useGetProducts"
+import { getIconByName } from "#utils/icons"
 import { searchAndNavigateToProduct } from "#utils/products"
 import {
   getInputChangeAndOpenList,
   useHideListOnOuterClick,
 } from "#utils/render"
-import {
-  faBars,
-  faCartShopping,
-  faChevronDown,
-  faChevronUp,
-  faGlobe,
-  faSearch,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
@@ -86,7 +78,7 @@ const Navbar = ({ productCategories }) => {
                 setSearchText("")
               }}
             >
-              <FontAwesomeIcon icon={faSearch} />
+              <FontAwesomeIcon icon={getIconByName("faSearch")} />
             </div>
             {matchedProducts.length > 0 && isProductDropdownVisible && (
               <div className={styles.dropdownModal}></div>
@@ -121,7 +113,7 @@ const Navbar = ({ productCategories }) => {
                           setSearchText("")
                         }}
                       >
-                        <FontAwesomeIcon icon={faSearch} />
+                        <FontAwesomeIcon icon={getIconByName("faSearch")} />
                       </div>
                     </div>
 
@@ -176,7 +168,7 @@ const Navbar = ({ productCategories }) => {
               className={styles.menuIconWrapper}
               onClick={() => setMenuOpen(true)}
             >
-              <FontAwesomeIcon icon={faBars} size={"xl"} />
+              <FontAwesomeIcon icon={getIconByName("faBars")} size={"xl"} />
             </div>
             <div className={styles.rightSideForBigScreen}>
               <div className={styles.iconsNav}>
@@ -186,7 +178,7 @@ const Navbar = ({ productCategories }) => {
                     style={isProductDropdownVisible ? { display: "none" } : {}}
                     onClick={() => setProductDropdownVisible(true)}
                   >
-                    <FontAwesomeIcon icon={faSearch} />
+                    <FontAwesomeIcon icon={getIconByName("faSearch")} />
                   </div>
                 </div>
                 <div
@@ -196,12 +188,16 @@ const Navbar = ({ productCategories }) => {
                 >
                   <div className={styles.itemsContainer}>
                     <div className={styles.languageChevronContainer}>
-                      <FontAwesomeIcon icon={faGlobe} />
+                      <FontAwesomeIcon icon={getIconByName("faGlobe")} />
 
                       {!isDropdownOpen && (
-                        <FontAwesomeIcon icon={faChevronDown} />
+                        <FontAwesomeIcon
+                          icon={getIconByName("faChevronDown")}
+                        />
                       )}
-                      {isDropdownOpen && <FontAwesomeIcon icon={faChevronUp} />}
+                      {isDropdownOpen && (
+                        <FontAwesomeIcon icon={getIconByName("faChevronUp")} />
+                      )}
                     </div>
                     <div className={styles.languageDropdownContainer}>
                       {isDropdownOpen && <LanguageDropdown />}
@@ -218,7 +214,7 @@ const Navbar = ({ productCategories }) => {
                           : ROUTES_CURRENT_CUSTOMER
                       }
                     >
-                      <FontAwesomeIcon icon={faUser} />
+                      <FontAwesomeIcon icon={getIconByName("faUser")} />
                     </Link>
                     <div className={styles.logoutIconContainer}>
                       <LogoutButton
@@ -229,13 +225,13 @@ const Navbar = ({ productCategories }) => {
                   </div>
                 ) : (
                   <Link className={styles.linkChild} to={ROUTES_LOGIN}>
-                    <FontAwesomeIcon icon={faUser} />
+                    <FontAwesomeIcon icon={getIconByName("faUser")} />
                   </Link>
                 )}
 
                 <div className={styles.cartAndQuantity}>
                   <Link className={styles.linkChild} to={ROUTES_CART}>
-                    <FontAwesomeIcon icon={faCartShopping} />
+                    <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
                   </Link>
                   <span className={styles.productsQuantity}>
                     {getAllProductsQuantity}

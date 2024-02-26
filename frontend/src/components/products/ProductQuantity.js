@@ -1,7 +1,6 @@
 import { decreaseQuantity, increaseQuantity } from "#utils/cart"
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons"
+import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
 import styles from "./productQuantity.module.scss"
 
 const ProductQuantity = ({ quantity, setQuantity }) => {
@@ -12,13 +11,13 @@ const ProductQuantity = ({ quantity, setQuantity }) => {
       </div>
       <div className={styles.quantityButtonsContainer}>
         <FontAwesomeIcon
-          icon={faChevronUp}
+          icon={getIconByName("faChevronUp")}
           onClick={() => increaseQuantity(quantity, setQuantity)}
           size='sm'
         />
 
         <FontAwesomeIcon
-          icon={faChevronDown}
+          icon={getIconByName("faChevronDown")}
           onClick={() => decreaseQuantity(quantity, setQuantity)}
           size='sm'
         />
