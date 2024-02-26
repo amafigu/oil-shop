@@ -1,6 +1,5 @@
 import ProductCard from "#components/products/ProductCard"
-import { useGetProducts } from "#utils/products"
-
+import { useGetProducts } from "#hooks/useGetProducts"
 import {
   faChevronLeft,
   faChevronRight,
@@ -10,10 +9,9 @@ import React, { useEffect, useState } from "react"
 import styles from "./productSlider.module.scss"
 
 export const ProductsSlider = () => {
-  const [products, setProducts] = useState([])
   const [currentProductIndex, setcurrentProductIndex] = useState(0)
   const [sliderQuantity, setSliderQuantity] = useState(1)
-  useGetProducts(setProducts)
+  const { products } = useGetProducts()
 
   const updateSliderQuantityByScreenSize = () => {
     let windowSize = window.innerWidth
