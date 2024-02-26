@@ -6,7 +6,7 @@ import styles from "./home.module.scss"
 
 export const Home = () => {
   return (
-    <div className={styles.homePageWrapper}>
+    <main className={styles.homePageWrapper}>
       <div className={styles.homePage}>
         <div className={styles.pageColumn}>
           <section className={styles.videoBannerContainer}>
@@ -21,6 +21,6 @@ export const Home = () => {
           </section>
         </div>
       </div>
-    </div>
+    </main>
   )
 }

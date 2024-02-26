@@ -1,9 +1,6 @@
 import ProductCard from "#components/products/ProductCard"
 import { useGetProducts } from "#hooks/useGetProducts"
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons"
+import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from "react"
 import styles from "./productSlider.module.scss"
@@ -53,7 +50,7 @@ export const ProductsSlider = () => {
   return (
     <div className={styles.productSliderWrapper}>
       <button className={styles.iconSlider} onClick={previousProduct}>
-        <FontAwesomeIcon icon={faChevronLeft} size='2xl' />
+        <FontAwesomeIcon icon={getIconByName("faChevronLeft")} size='2xl' />
       </button>
       {products
         .slice(currentProductIndex, currentProductIndex + sliderQuantity)
@@ -63,7 +60,7 @@ export const ProductsSlider = () => {
           </div>
         ))}
       <button onClick={nextProduct} className={styles.iconSlider}>
-        <FontAwesomeIcon icon={faChevronRight} size='2xl' />
+        <FontAwesomeIcon icon={getIconByName("faChevronRight")} size='2xl' />
       </button>
     </div>
   )

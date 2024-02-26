@@ -10,15 +10,7 @@ import {
   ROUTES_SIGN_UP,
 } from "#constants/routes"
 import { useTranslation } from "#hooks/useTranslation"
-import {
-  faDhl,
-  faGooglePay,
-  faPaypal,
-  faSquareFacebook,
-  faSquareInstagram,
-  faSquareYoutube,
-  faUps,
-} from "@fortawesome/free-brands-svg-icons"
+import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { Link } from "react-router-dom"
@@ -97,8 +89,14 @@ const Footer = () => {
               </div>
               <div className={styles.iconsSectionItemIcons}>
                 <div className={styles.iconsSectionItemIcons}>
-                  <FontAwesomeIcon icon={faPaypal} size='2xl' />
-                  <FontAwesomeIcon icon={faGooglePay} size='2xl' />
+                  <FontAwesomeIcon
+                    icon={getIconByName("faPaypal")}
+                    size='2xl'
+                  />
+                  <FontAwesomeIcon
+                    icon={getIconByName("faGooglePay")}
+                    size='2xl'
+                  />
                 </div>
               </div>
             </li>
@@ -107,8 +105,8 @@ const Footer = () => {
                 <h4>{text.iconsColumns.shippingPartners.title}</h4>
               </div>
               <div className={styles.iconsSectionItemIcons}>
-                <FontAwesomeIcon icon={faDhl} size='2xl' />
-                <FontAwesomeIcon icon={faUps} size='2xl' />
+                <FontAwesomeIcon icon={getIconByName("faDhl")} size='2xl' />
+                <FontAwesomeIcon icon={getIconByName("faUps")} size='2xl' />
               </div>
             </li>
 
@@ -125,7 +123,10 @@ const Footer = () => {
                   title={text.iconsColumns.socialMedia.facebook}
                   alt={text.iconsColumns.socialMedia.facebook}
                 >
-                  <FontAwesomeIcon icon={faSquareFacebook} size='2xl' />
+                  <FontAwesomeIcon
+                    icon={getIconByName("faSquareFacebook")}
+                    size='2xl'
+                  />
                 </a>
                 <a
                   href={SOCIAL_MEDIA_URL_INSTAGRAM}
@@ -134,7 +135,10 @@ const Footer = () => {
                   title={text.iconsColumns.socialMedia.instagram}
                   alt={text.iconsColumns.socialMedia.instagram}
                 >
-                  <FontAwesomeIcon icon={faSquareInstagram} size='2xl' />
+                  <FontAwesomeIcon
+                    icon={getIconByName("faSquareInstagram")}
+                    size='2xl'
+                  />
                 </a>
                 <a
                   href={SOCIAL_MEDIA_URL_YOUTUBE}
@@ -143,7 +147,10 @@ const Footer = () => {
                   title={text.iconsColumns.socialMedia.youtube}
                   alt={text.iconsColumns.socialMedia.youtube}
                 >
-                  <FontAwesomeIcon icon={faSquareYoutube} size='2xl' />
+                  <FontAwesomeIcon
+                    icon={getIconByName("faSquareYoutube")}
+                    size='2xl'
+                  />
                 </a>
               </div>
             </li>
