@@ -2,8 +2,8 @@ import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/dataManipulation"
+import { getIconByName } from "#utils/icons"
 import { titleCase } from "#utils/stringManipulation"
-import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import styles from "./cartItem.module.scss"
@@ -20,21 +20,21 @@ export const CartItem = ({
   const { removeProduct, updateProductQuantity } = useCart()
   const text = translate.pages.cart
   return (
-    <figure className={styles.cartItem} aria-label='cart item'>
+    <div className={styles.cartItem} aria-label='cart item'>
       <div className={styles.imagesAndDetails}>
         <img
           src={image}
           alt={name}
-          className={styles.cartItemImage}
+          className={styles.cartItemImage || DEFAULT_PRODUCT_IMAGE}
           onError={(e) => {
             setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
           }}
         />
-        <figcaption className={styles.cartItemDetails}>
-          <h3>{titleCase(name, "_")}</h3>
-          <p>{description}</p>
-          <p>{size} ml</p>
-        </figcaption>
+        <div className={styles.cartItemDetails}>
+          <span>{titleCase(name, "_")}</span>
+          <span>{description}</span>
+          <span>{size} ml</span>
+        </div>
       </div>
 
       <div className={styles.cartItemSelectors}>
@@ -44,7 +44,7 @@ export const CartItem = ({
             className={styles.cartItemQuantityButton}
             onClick={() => updateProductQuantity(name, quantity - 1)}
           >
-            <FontAwesomeIcon icon={faMinus} />
+            <FontAwesomeIcon icon={getIconByName("faMinus")} />
           </button>
           <span className={styles.cartItemQuantityInput}>{quantity}</span>
           <button
@@ -52,7 +52,7 @@ export const CartItem = ({
             className={styles.cartItemQuantityButton}
             onClick={() => updateProductQuantity(name, quantity + 1)}
           >
-            <FontAwesomeIcon icon={faPlus} />
+            <FontAwesomeIcon icon={getIconByName("faPlus")} />
           </button>
         </div>
         <div className={styles.cartItemTotalCost}>
@@ -65,10 +65,10 @@ export const CartItem = ({
             onClick={() => removeProduct(name)}
           >
             {text.deleteButton}
-            <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={getIconByName("faTrash")} />
           </button>
         </div>
       </div>
-    </figure>
+    </div>
   )
 }
