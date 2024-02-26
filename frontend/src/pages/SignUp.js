@@ -1,4 +1,3 @@
-import LanguageDropdown from "#components/ui/LanguageDropdown"
 import SubNavbar from "#components/ui/Navbar/SubNavbar"
 import CreateUserForm from "#components/users/UsersCrud/CreateUserForm"
 import { LOGO_IMAGE } from "#constants/media"
@@ -9,18 +8,10 @@ import {
 } from "#constants/routes"
 import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
-import {
-  faChevronDown,
-  faChevronUp,
-  faGlobe,
-} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import styles from "./signUp.module.scss"
 
 const SignUp = () => {
-  const [isDropdownOpen, setDropdownOpen] = useState(false)
   const { translate } = useTranslation()
   const text = translate.pages.signUp
   const location = useLocation()
@@ -36,31 +27,6 @@ const SignUp = () => {
       <div className={styles.signUpPage}>
         <div className={styles.languageOptionsAndFormContainer}>
           <div className={styles.logoAndFormContainer}>
-            <div className={styles.languageOptionsContainer}>
-              <div
-                onClick={() =>
-                  setDropdownOpen((isDropdownOpen) => !isDropdownOpen)
-                }
-              >
-                <div className={styles.languageChevronContainer}>
-                  <FontAwesomeIcon
-                    icon={faGlobe}
-                    className={styles.languageIcon}
-                  />
-                  {!isDropdownOpen && (
-                    <FontAwesomeIcon icon={faChevronDown} size='2xs' />
-                  )}
-                  {isDropdownOpen && (
-                    <FontAwesomeIcon icon={faChevronUp} size='2xs' />
-                  )}
-                </div>
-              </div>
-              {isDropdownOpen && (
-                <div className={styles.languageDropdownContainer}>
-                  <LanguageDropdown />
-                </div>
-              )}
-            </div>
             <div className={styles.logoContainer}>
               <img
                 className={styles.logo}

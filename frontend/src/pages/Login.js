@@ -1,4 +1,3 @@
-import LanguageDropdown from "#components/ui/LanguageDropdown"
 import SubNavbar from "#components/ui/Navbar/SubNavbar"
 import NotificationCard from "#components/ui/NotificationCard"
 import { API_USERS_CURRENT_PREFIX } from "#constants/api"
@@ -7,15 +6,9 @@ import { ROUTES_SIGN_UP } from "#constants/routes"
 import { LONG_MESSAGE_TIMEOUT, REDIRECT_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
+import { getIconByName } from "#utils/icons"
 import { scrollToTop } from "#utils/render"
 import { loginUser } from "#utils/users"
-import {
-  faChevronDown,
-  faChevronUp,
-  faGlobe,
-  faLock,
-  faUnlock,
-} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -23,7 +16,6 @@ import styles from "./login.module.scss"
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("")
   const [email, setEmail] = useState("")
-  const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const { translate } = useTranslation()
@@ -67,31 +59,6 @@ const Login = () => {
       <div className={styles.loginPage}>
         <div className={styles.languageOptionsAndFormContainer}>
           <div className={styles.logoAndFormContainer}>
-            <div className={styles.languageOptionsContainer}>
-              <div
-                onClick={() =>
-                  setDropdownOpen((isDropdownOpen) => !isDropdownOpen)
-                }
-              >
-                <div className={styles.languageChevronContainer}>
-                  <FontAwesomeIcon
-                    icon={faGlobe}
-                    className={styles.languageIcon}
-                  />
-                  {!isDropdownOpen && (
-                    <FontAwesomeIcon icon={faChevronDown} size='2xs' />
-                  )}
-                  {isDropdownOpen && (
-                    <FontAwesomeIcon icon={faChevronUp} size='2xs' />
-                  )}
-                </div>
-              </div>
-              {isDropdownOpen && (
-                <div className={styles.languageDropdownContainer}>
-                  <LanguageDropdown />
-                </div>
-              )}
-            </div>
             <div className={styles.logoContainer}>
               <img
                 className={styles.logo}
@@ -129,9 +96,9 @@ const Login = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <FontAwesomeIcon icon={faUnlock} />
+                      <FontAwesomeIcon icon={getIconByName("faUnlock")} />
                     ) : (
-                      <FontAwesomeIcon icon={faLock} />
+                      <FontAwesomeIcon icon={getIconByName("faLock")} />
                     )}
                   </button>
                 </div>
