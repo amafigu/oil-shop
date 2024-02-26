@@ -5,16 +5,18 @@
 .shopPageWrapper {
   @include flex-justify-center;
   @include margin-page-wrapper;
+
+  min-height: theme.$min-height-page-small;
 }
 
 .shopPage {
   width: 80%;
 
-  @include flex-column-all-center;
-
   @include media.widescreen-down {
     width: 90%;
   }
+
+  @include flex-column-all-center;
 }
 
 .sidebarWrapper {
