@@ -1,0 +1,45 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.signUpPage {
+  @include flex-column-all-center;
+}
+
+.subNavbarContainer {
+  width: 100%;
+  margin: theme.$spacing-regular auto;
+
+  @include media.tablet-down {
+    width: 50%;
+  }
+
+  @include media.mobile {
+    width: 80%;
+  }
+}
+
+.logoAndSignUpForm {
+  width: 100%;
+  min-height: theme.$min-height-page-regular;
+
+  @include flex-column-all-center;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 216px;
+  border-radius: theme.$border-radius-circle;
+}
+
+.form {
+  width: 100%;
+  padding: theme.$spacing-regular;
+  border-radius: theme.$border-radius-small;
+
+  @include flex-justify-center;
+}
