@@ -1,0 +1,45 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.form {
+  width: 100%;
+}
+
+.formField {
+  width: 100%;
+  height: 32px;
+  margin-bottom: theme.$spacing-small;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-medium;
+}
+
+.formButton {
+  @include action-button;
+
+  width: 100%;
+  height: 36px;
+  margin-top: 8px;
+  margin-bottom: theme.$spacing-regular;
+  font-size: theme.$font-size-small;
+  text-transform: none;
+
+  @include media.mobile {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+.passwordInputAndToggleButtonContainer {
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transform: translateY(-80%);
+  }
+}

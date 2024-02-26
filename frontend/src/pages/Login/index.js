@@ -1,0 +1,52 @@
+import SubNavbar from "#components/ui/Navbar/SubNavbar"
+import NotificationCard from "#components/ui/NotificationCard"
+import { LOGO_IMAGE } from "#constants/media"
+import { ROUTES_SIGN_UP } from "#constants/routes"
+import { useLoginAndRedirect } from "#hooks/useLoginAndRedirect"
+import { useTranslation } from "#hooks/useTranslation"
+import { scrollToTop } from "#utils/render"
+import { Link } from "react-router-dom"
+import { LoginForm } from "./LoginForm"
+import styles from "./login.module.scss"
+
+export const Login = () => {
+  const { errorMessage } = useLoginAndRedirect()
+  const { translate } = useTranslation()
+  const text = translate.pages.login
+
+  scrollToTop()
+
+  return (
+    <main className={styles.loginPageWrapper}>
+      {errorMessage && <NotificationCard message={errorMessage} />}
+      <div className={styles.subNavbarContainer}>
+        <SubNavbar />
+      </div>
+      <div className={styles.loginPage}>
+        <section className={styles.languageOptionsAndFormContainer}>
+          <div className={styles.logoAndFormContainer}>
+            <div className={styles.logoContainer}>
+              <img
+                className={styles.logo}
+                src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
+                alt='logo'
+              />
+            </div>
+            <div className={styles.formContainer}>
+              <LoginForm />
+            </div>
+          </div>
+          <div className={styles.divider}>{text.or}</div>
+          <div className={styles.linkContainer}>
+            <span>
+              {text.haveAccount}{" "}
+              <Link to={ROUTES_SIGN_UP} className={styles.link}>
+                {text.signUp}
+              </Link>
+            </span>
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}
