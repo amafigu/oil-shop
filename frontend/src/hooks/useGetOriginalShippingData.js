@@ -29,7 +29,6 @@ export const useGetOriginalShippingData = () => {
           return
         }
         if (shippingData.status === 200) {
-          console.log(shippingData.data)
           setNonUpdatedShippingData(shippingData.data)
         }
       }
