@@ -17,7 +17,7 @@ import {
   ROUTES_SIGN_UP_ADMIN,
   ROUTES_WITHOUT_NAVBAR,
 } from "#constants/routes"
-import About from "#pages/About"
+import { About } from "#pages/About"
 import Admin from "#pages/Admin"
 import { Cart } from "#pages/Cart/Cart"
 import Faq from "#pages/Faq"
