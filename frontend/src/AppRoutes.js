@@ -20,7 +20,7 @@ import {
 import { About } from "#pages/About"
 import Admin from "#pages/Admin"
 import { Cart } from "#pages/Cart/Cart"
-import Faq from "#pages/Faq"
+import { Faq } from "#pages/Faq"
 import { Home } from "#pages/Home"
 import { Login } from "#pages/Login"
 import NotFound from "#pages/NotFound"
