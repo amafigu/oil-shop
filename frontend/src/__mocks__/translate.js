@@ -14,6 +14,9 @@ module.exports = {
       orderShipping: "Shipping",
       orderTotal: "Total",
     },
+    about: {
+      title: "Hi! Thanks for visiting Oylo, Portfolio web-shop",
+    },
   },
   components: {
     addOneToCartButton: {
