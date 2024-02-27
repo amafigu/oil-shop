@@ -17,6 +17,9 @@ module.exports = {
     about: {
       title: "Hi! Thanks for visiting Oylo, Portfolio web-shop",
     },
+    faq: {
+      difuserRoomSizeQuestion: "Which difuser is suitable for which room size?",
+    },
   },
   components: {
     addOneToCartButton: {
