@@ -2,19 +2,21 @@ import shippingData from "#__mocks__/shippingData"
 import translate from "#__mocks__/translate"
 import user from "#__mocks__/user"
 import Header from "#components/ui/Header"
-import ShippingData from "#components/users/ShippingData"
 import GetOrders from "#components/users/UsersCrud/GetOrders"
 import useUserContext from "#context/userContext"
+import { useGetOriginalShippingData } from "#hooks/useGetOriginalShippingData"
 import { useTranslation } from "#hooks/useTranslation"
 import { useUserData } from "#hooks/useUserData"
 import "@testing-library/jest-dom"
 import "@testing-library/react"
 import { render } from "@testing-library/react"
 import axios from "axios"
+import { ShippingData } from "./ShippingData"
 import { UserData } from "./UserData"
 
 jest.mock("#hooks/useTranslation")
 jest.mock("#hooks/useUserData")
+jest.mock("#hooks/useGetOriginalShippingData")
 jest.mock("#context/userContext")
 jest.mock("axios")
 
@@ -28,7 +30,9 @@ describe("User page should", () => {
       setNonUpdatedUserData: jest.fn(),
     })
     useUserContext.mockReturnValue({ userId: 243 })
-    //jest.mock({ setNonUpdatedShippingData: jest.fn() })
+    useGetOriginalShippingData.mockReturnValue({
+      setNonUpdatedShippingData: jest.fn(),
+    })
   })
 
   test("render Header correctly", () => {
