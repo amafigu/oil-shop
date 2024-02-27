@@ -1,0 +1,9 @@
+@import "#styles/helpers/mixins";
+
+.title {
+  @include component-title;
+}
+
+.inputContainer {
+  @include input-container-spacing;
+}
