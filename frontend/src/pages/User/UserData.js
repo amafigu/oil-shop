@@ -2,21 +2,20 @@ import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
-import { API_USERS_CURRENT_USER, API_USERS_USER } from "#constants/api"
+import { API_USERS_USER } from "#constants/api"
 import { STYLES } from "#constants/styles"
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
+import { useUserData } from "#hooks/useUserData"
+
 import {
-  getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styles from "./userData.module.scss"
 
-const UserData = () => {
+export const UserData = () => {
   const [showForm, setShowForm] = useState(false)
   const initialUserData = {
     firstName: "",
@@ -26,52 +25,20 @@ const UserData = () => {
   }
   const [file, setFile] = useState(null)
 
-  const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
-    ...initialUserData,
-  })
-
   const [updatedUserData, setUpdatedUserData] = useState({
     ...initialUserData,
   })
-  const [notification, setNotification] = useState(null)
   const { translate } = useTranslation()
-  const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
-  const { setUser, userId, isLoading } = useUserContext()
 
-  useEffect(() => {
-    async function getOriginalUserData() {
-      if (!isLoading) {
-        try {
-          const userData = await getDataAndSetErrorMessage(
-            userId,
-            API_USERS_CURRENT_USER,
-            setNotification,
-          )
-          if (!userData) {
-            const errorMessage =
-              errorText.user && errorText.user.getUserData
-                ? `${errorText.user.getUserData}`
-                : "Error getting user data"
-            setNotification(errorMessage)
-            setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-            return
-          }
-          if (userData.status === 200) {
-            setUser(userData.data)
-            setNonUpdatedUserData(userData.data)
-          }
-        } catch (error) {
-          setNotification("Error by getting user data")
-          setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-          console.error(error)
-        }
-      }
-    }
-
-    getOriginalUserData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, isLoading])
+  const {
+    notification,
+    nonUpdatedUserData,
+    setNonUpdatedUserData,
+    setNotification,
+    setUser,
+    userId,
+  } = useUserData()
 
   const updateUserDataAndSetStates = async (e, propertyName) => {
     let image = ""
@@ -97,6 +64,7 @@ const UserData = () => {
     }
     setUser(updatedData.data.user)
   }
+
   const setFileToUpload = (e) => {
     setFile(e.target.files[0])
   }
@@ -158,5 +126,3 @@ const UserData = () => {
     </>
   )
 }
-
-export default UserData

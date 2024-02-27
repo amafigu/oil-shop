@@ -2,65 +2,67 @@ import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
 import ShippingData from "#components/users/ShippingData"
 import GetOrders from "#components/users/UsersCrud/GetOrders"
-import UserData from "#components/users/UsersCrud/UserData"
 import { ROUTES_CURRENT_ADMIN, ROUTES_LOGIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { UserData } from "./UserData"
 import styles from "./user.module.scss"
 
-const User = () => {
+export const User = () => {
   const [notification, setNotification] = useState(null)
-  const [headerData, setHeaderData] = useState({})
   const { user, isLoading } = useUserContext()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isLoading) {
-      if (user && Object.keys(user).length !== 0) {
-        setHeaderData({
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          image: user.image,
-        })
-        if (user.role === "admin") {
-          navigate(ROUTES_CURRENT_ADMIN)
-        }
+    let notificationTimeoutId
+    let navigateTimeoutId
+    if (!isLoading && user) {
+      if (user.role === "admin") {
+        navigate(ROUTES_CURRENT_ADMIN)
       } else if (!user) {
         setNotification("User not logged in")
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-        setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
+        notificationTimeoutId = setTimeout(
+          () => setNotification(null),
+          SHORT_MESSAGE_TIMEOUT,
+        )
+        navigateTimeoutId = setTimeout(
+          () => navigate(ROUTES_LOGIN),
+          REDIRECT_TIMEOUT,
+        )
       }
+    }
+    return () => {
+      clearTimeout(notificationTimeoutId)
+      clearTimeout(navigateTimeoutId)
     }
   }, [isLoading, user, navigate])
 
   return (
-    <div className={styles.userWrapper}>
-      {notification && <NotificationCard message={notification} />}
-
+    <main
+      className={styles.userPageWrapper}
+      aria-label='Customer Management Page'
+    >
       <div className={styles.userPage}>
+        {notification && <NotificationCard message={notification} />}
         {isLoading ? (
           <div>Loading...</div>
         ) : (
           <>
-            <Header data={headerData} />
-            <div className={styles.componentContainer}>
+            <Header />
+            <section className={styles.componentContainer}>
               <UserData />
-            </div>
-            <div className={styles.componentContainer}>
+            </section>
+            <section className={styles.componentContainer}>
               <ShippingData />
-            </div>
-
-            <div className={styles.componentContainer}>
+            </section>
+            <section className={styles.componentContainer}>
               <GetOrders />
-            </div>
+            </section>
           </>
         )}
       </div>
-    </div>
+    </main>
   )
 }
-
-export default User

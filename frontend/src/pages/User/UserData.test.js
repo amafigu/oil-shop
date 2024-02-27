@@ -3,7 +3,7 @@ import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { render } from "@testing-library/react"
 import React from "react"
-import UserData from "./UserData"
+import { UserData } from "./UserData"
 
 jest.mock("#context/userContext")
 jest.mock("#hooks/useTranslation")
