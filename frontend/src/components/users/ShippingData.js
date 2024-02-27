@@ -3,10 +3,9 @@ import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
 import { API_SHIPPING_DATA } from "#constants/api"
 import { STYLES } from "#constants/styles"
-import useUserContext from "#context/userContext"
+import { useGetOriginalShippingData } from "#hooks/useGetOriginalShippingData"
 import { useTranslation } from "#hooks/useTranslation"
 import {
-  getDataAndSetErrorMessage,
   listenInputChangeAndSetDataObject,
   updateDataAndSetStates,
 } from "#utils/dataManipulation"
@@ -16,6 +15,7 @@ import styles from "./shippingData.module.scss"
 
 const ShippingData = () => {
   const [showForm, setShowForm] = useState(false)
+  const [notification, setNotification] = useState(null)
   const initialShippingData = {
     street: "",
     number: "",
@@ -25,52 +25,32 @@ const ShippingData = () => {
     state: "",
     country: "",
   }
-  const [nonUpdatedShippingData, setNonUpdatedShippingData] = useState({
-    ...initialShippingData,
-  })
 
   const [updatedShippingData, setUpdatedShippingData] = useState({
     ...initialShippingData,
   })
-  const [notification, setNotification] = useState(null)
   const { translate } = useTranslation()
-  const { userId, isLoading } = useUserContext()
-
-  const errorText = translate.errors.requests
   const buttonsText = translate.components.buttons
   const usersWarningText = translate.warningMessages.users
+  const { nonUpdatedShippingData, setNonUpdatedShippingData, userId } =
+    useGetOriginalShippingData()
 
   useEffect(() => {
-    async function getOriginalShippingData() {
-      if (!isLoading) {
-        const shippingData = await getDataAndSetErrorMessage(
-          userId,
-          API_SHIPPING_DATA,
-        )
-        if (!shippingData) {
-          return
-        }
-        if (shippingData.status === 200) {
-          setNonUpdatedShippingData(shippingData.data)
-        }
-      }
-    }
-    getOriginalShippingData()
-  }, [userId, errorText.user.getShippingData, isLoading])
-
-  useEffect(() => {
+    let timeoutId
     if (
       Object.keys(ignorePropertiesWithEmptyValue(nonUpdatedShippingData))
         .length === 0 &&
       showForm
     ) {
       setNotification(usersWarningText.shippingDataIsEmpty)
-      setTimeout(() => setNotification(null), 3000)
+      timeoutId = setTimeout(() => setNotification(null), 3000)
     }
+
+    return () => clearTimeout(timeoutId)
   }, [nonUpdatedShippingData, showForm, usersWarningText.shippingDataIsEmpty])
 
   const updateUserShippingDataAndSetStates = async (e, propertyName) => {
-    const updatedData = updateDataAndSetStates(
+    const updatedData = await updateDataAndSetStates(
       e,
       propertyName,
       userId,
