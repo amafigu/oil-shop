@@ -25,6 +25,10 @@ module.exports = {
           hide: "Hide user data",
           show: "Show user data",
         },
+        shipping: {
+          show: "Show shipping data",
+          hide: "Hide shipping data",
+        },
       },
     },
     crud: {
@@ -46,6 +50,12 @@ module.exports = {
         size: "size",
         price: "price",
       },
+    },
+  },
+  warningMessages: {
+    users: {
+      shippingDataIsEmpty:
+        "enter your shipping data by editing and saving fields",
     },
   },
 }
