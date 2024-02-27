@@ -85,6 +85,7 @@
       "passwordLost": "Did you forget your password?",
       "errorMessage": "Unfortunately your password or email address was incorrect."
     },
+    "notFound": "Unfortunately this page does not exist.",
     "orderSummary": {
       "thankClient": "Thank you for shopping at Oylo!",
       "orderResume": "Order Summary",
