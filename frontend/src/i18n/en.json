@@ -127,7 +127,8 @@
     "signUpAdmin": {},
     "payment": {
       "paymentButton": "Proceed",
-      "title": "Payment with:",
+      "title": "Proceed with Payment",
+      "legend": "Select Payment Method",
       "backButton": "Go Back",
       "insertPaymentMethod": "Please choose a payment method.",
       "emptyShippingData": "please add data for shipping"

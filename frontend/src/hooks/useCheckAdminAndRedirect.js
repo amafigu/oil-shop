@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 export const useCheckAdminAndRedirect = () => {
   const [notification, setNotification] = useState(null)
-  const { user } = useUserContext()
+  const { user, isLoggedIn, userId } = useUserContext()
   const { translate } = useTranslation()
   const text = translate.pages.cart
   const navigate = useNavigate()
@@ -22,5 +22,5 @@ export const useCheckAdminAndRedirect = () => {
     return () => clearTimeout(redirectTimeoutId)
   }, [user, navigate, text.canNotBuyProducts])
 
-  return { notification }
+  return { notification, setNotification, isLoggedIn, userId, user }
 }

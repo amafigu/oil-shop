@@ -42,9 +42,7 @@
   width: 172px;
   overflow: hidden;
 
-  @include media.desktop-down {
-    flex-grow: 1;
-  }
+  @include flex-column;
 }
 
 .cartItemSelectors {
