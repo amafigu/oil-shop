@@ -146,7 +146,8 @@
     "payment": {
       "backButton": "Zurück",
       "paymentButton": "Bezahlen",
-      "title": "Bezahlen mit:",
+      "title": "Fahren Sie mit der Zahlung fort",
+      "legend": "Wählen Sie eine Zahlungsmethode aus",
       "insertPaymentMethod": "Bitte, wählen Sie eine Zahlungsart.",
       "emptyShippingData": "Bitte, füllen Sie die Versanddaten aus."
     },
