@@ -1,0 +1,39 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.item {
+  width: 300px;
+  height: 120px;
+  margin: theme.$spacing-smaller;
+  margin: 0 theme.$spacing-smaller;
+  background-color: theme.$background-color-primary;
+  border-bottom: theme.$border-regular-component;
+
+  @include flex-align-center;
+}
+
+.imageContainer {
+  width: 80px;
+
+  @include flex-align-center;
+
+  @include media.mobile {
+    width: 5rem;
+    margin-right: 52px;
+  }
+}
+
+.image {
+  display: block;
+  height: 80px;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+
+.itemDetails {
+  margin: theme.$spacing-small;
+  overflow: hidden;
+
+  @include flex-column;
+}
