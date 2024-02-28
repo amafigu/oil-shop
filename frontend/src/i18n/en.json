@@ -304,6 +304,9 @@
         "error": "Can not see all products"
       }
     },
+    "orderSummaryItem": {
+      "quantity": "Quantity"
+    },
     "products": {
       "oil": {
         "size": "size",

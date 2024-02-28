@@ -314,6 +314,9 @@
         "error": "Kann nicht alle Produkte finden"
       }
     },
+    "orderSummaryItem": {
+      "quantity": "Menge"
+    },
     "products": {
       "oil": {
         "size": "Größe",

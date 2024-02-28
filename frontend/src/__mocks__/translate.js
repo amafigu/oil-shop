@@ -21,6 +21,9 @@ module.exports = {
       difuserRoomSizeQuestion: "Which difuser is suitable for which room size?",
     },
     notFound: "Unfortunately this page does not exist.",
+    orderSummary: {
+      orderResume: "Order Summary",
+    },
   },
   components: {
     addOneToCartButton: {
