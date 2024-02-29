@@ -1,7 +1,7 @@
+import { getProductByName } from "#api/products/getProductByName"
 import { ROUTES_SHOP } from "#constants/routes"
 import { LONG_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
-import { getProductByName } from "#utils/products"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 

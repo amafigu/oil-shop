@@ -1,3 +1,4 @@
+import { deleteProductById } from "#api/products/deleteProductById"
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
@@ -11,7 +12,6 @@ import {
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import { deleteProductById } from "#utils/products"
 import { useEffect, useState } from "react"
 import styles from "./editableListProductData.module.scss"
 

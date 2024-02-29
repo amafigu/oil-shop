@@ -42,8 +42,6 @@ export const getInputChangeAndOpenList =
     }
   }
 
-// END OF FUNCTIONS FOR REFACTORING IN THE TODO ABOVE
-
 export const cancelWithScape = (e, setState) => {
   if (e.key === "Escape") {
     setState(false)
