@@ -1,9 +1,9 @@
+import { getUserOrdersWithProductsList } from "#api/orders/getUserOrdersWithProductsList"
 import ProductDetailsRow from "#components/products/ProductDetailsRow"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
 import useUserContext from "#context/userContext"
 import { convertIsoToLocaleDateString } from "#utils/stringManipulation"
-import { getUserOrdersWithProductsList } from "#utils/users"
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import styles from "./getOrders.module.scss"
 

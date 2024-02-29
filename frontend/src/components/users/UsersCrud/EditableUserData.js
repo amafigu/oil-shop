@@ -1,3 +1,7 @@
+import { uploadToS3 } from "#api/aws/uploadToS3"
+import { updateDataAndSetStates } from "#api/generics/updateDataAndSetStates"
+import { deleteUserByEmail } from "#api/users/deleteUserByEmail"
+import { getUserByEmail } from "#api/users/getUserByEmail"
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
@@ -11,11 +15,8 @@ import { useTranslation } from "#hooks/useTranslation"
 import {
   listenInputChangeAndSetDataObject,
   setDefaultImageByError,
-  updateDataAndSetStates,
-  uploadToS3,
 } from "#utils/dataManipulation"
-import { deleteUserByEmail, getUserByEmail } from "#utils/users"
-import React, { useState } from "react"
+import { useState } from "react"
 import styles from "./editableUserData.module.scss"
 
 const EditableUserData = ({ setRefreshAllUsersCounter }) => {

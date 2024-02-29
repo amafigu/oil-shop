@@ -1,3 +1,6 @@
+import { uploadToS3 } from "#api/aws/uploadToS3"
+import { createDataAndSetStates } from "#api/generics/createDataAndSetStates"
+import { getProductCategories } from "#api/products/getProductCategories"
 import FormInput from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import { API_PRODUCTS_PRODUCT_CREATE } from "#constants/api"
@@ -5,12 +8,7 @@ import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { STYLES } from "#constants/styles"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
-import {
-  createDataAndSetStates,
-  listenInputChangeAndSetDataObject,
-  uploadToS3,
-} from "#utils/dataManipulation"
-import { getProductCategories } from "#utils/products"
+import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import { useEffect, useState } from "react"
 import styles from "./createProductForm.module.scss"

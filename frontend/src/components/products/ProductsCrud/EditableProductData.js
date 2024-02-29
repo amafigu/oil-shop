@@ -1,3 +1,7 @@
+import { uploadToS3 } from "#api/aws/uploadToS3"
+import { updateDataAndSetStates } from "#api/generics/updateDataAndSetStates"
+import { deleteProductById } from "#api/products/deleteProductById"
+import { getProductByName } from "#api/products/getProductByName"
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
@@ -7,12 +11,7 @@ import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { STYLES } from "#constants/styles"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
-import {
-  listenInputChangeAndSetDataObject,
-  updateDataAndSetStates,
-  uploadToS3,
-} from "#utils/dataManipulation"
-import { deleteProductById, getProductByName } from "#utils/products"
+import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
 import { useState } from "react"
 import styles from "./editableProductData.module.scss"
 

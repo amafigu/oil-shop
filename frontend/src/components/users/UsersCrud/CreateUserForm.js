@@ -1,3 +1,8 @@
+import { loginUserWithIdAfterCreation } from "#api/auth/loginUserWithIdAfterCreation"
+import { uploadToS3 } from "#api/aws/uploadToS3"
+import { createNewAdmin } from "#api/users/createNewAdmin"
+import { createNewUser } from "#api/users/createNewUser"
+import { getLoggedInUser } from "#api/users/getLoggedInUser"
 import NotificationCard from "#components/ui/NotificationCard"
 import { DEFAULT_USER_IMAGE } from "#constants/media"
 import {
@@ -14,14 +19,7 @@ import {
 } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
-import { uploadToS3 } from "#utils/dataManipulation"
 import { getIconByName } from "#utils/icons"
-import {
-  createNewAdmin,
-  createNewUser,
-  getLoggedInUser,
-  loginUserWithIdAfterCreation,
-} from "#utils/users"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"

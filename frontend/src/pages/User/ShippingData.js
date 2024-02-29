@@ -1,3 +1,4 @@
+import { updateDataAndSetStates } from "#api/generics/updateDataAndSetStates"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import ToggleButton from "#components/ui/ToggleButton"
@@ -6,10 +7,7 @@ import { initialShippingData } from "#constants/shippingData"
 import { STYLES } from "#constants/styles"
 import { useGetOriginalShippingData } from "#hooks/useGetOriginalShippingData"
 import { useTranslation } from "#hooks/useTranslation"
-import {
-  listenInputChangeAndSetDataObject,
-  updateDataAndSetStates,
-} from "#utils/dataManipulation"
+import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
 import { useState } from "react"
 import styles from "./shippingData.module.scss"
 

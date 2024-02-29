@@ -7,6 +7,7 @@ import {
 import useCartContext from "#context/cartContext"
 import { useCheckAdminAndRedirect } from "#hooks/useCheckAdminAndRedirect"
 import { useTranslation } from "#hooks/useTranslation"
+import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ShippingForm } from "./ShippingForm"
 import styles from "./shipping.module.scss"
@@ -19,11 +20,14 @@ export const Shipping = () => {
   const { notification, setNotification, isLoggedIn } =
     useCheckAdminAndRedirect()
 
-  if (cart.length <= 0) {
-    navigate(ROUTES_CART)
-  } else if (isLoggedIn) {
-    navigate(ROUTES_CHECKOUT_PAYMENT)
-  }
+  useEffect(() => {
+    if (cart.length <= 0) {
+      navigate(ROUTES_CART)
+    } else if (isLoggedIn) {
+      navigate(ROUTES_CHECKOUT_PAYMENT)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <main

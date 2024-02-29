@@ -1,3 +1,4 @@
+import { getProductCategories } from "#api/products/getProductCategories"
 import Footer from "#components/ui/Footer"
 import Navbar from "#components/ui/Navbar"
 import {
@@ -31,7 +32,6 @@ import { Shipping } from "#pages/Shipping"
 import { Shop } from "#pages/Shop"
 import { SignUp } from "#pages/SignUp"
 import { User } from "#pages/User"
-import { getProductCategories } from "#utils/products"
 import { useEffect, useState } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import styles from "./appRoutes.module.scss"
