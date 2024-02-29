@@ -3,8 +3,7 @@ import translate from "#__mocks__/translate"
 import useCartContext, { CartContext } from "#context/cartContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { fireEvent, render, screen } from "@testing-library/react"
-import React from "react"
-import AddProductToCartButton from "./AddProductToCartButton"
+import { AddProductToCartButton } from "./"
 
 jest.mock("#hooks/useTranslation")
 jest.mock("#context/cartContext")

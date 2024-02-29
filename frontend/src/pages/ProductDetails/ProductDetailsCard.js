@@ -1,16 +1,16 @@
+import { AddProductToCartButton } from "#components/products/AddProductToCartButton"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { ROUTES_SHOP_QUERY_CATEGORY_PREFIX } from "#constants/routes"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
 import { Link } from "react-router-dom"
-import AddProductToCartButton from "./AddProductToCartButton"
-import ProductQuantity from "./ProductQuantity"
+import { ProductQuantity } from "./ProductQuantity"
 import styles from "./productDetailsCard.module.scss"
 
 export const ProductDetailsCard = ({ product, quantity, setQuantity }) => {
   return (
-    <div className={styles.detailsAndButtonContainerWrapper}>
-      <div className={styles.detailsAndButtonContainer}>
+    <article className={styles.card} aria-label='Product details'>
+      <section className={styles.cardBody}>
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
@@ -19,29 +19,34 @@ export const ProductDetailsCard = ({ product, quantity, setQuantity }) => {
             onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
           />
         </div>
-        <div className={styles.productInfo}>
-          <div className={styles.rightContainerDetails}>
-            <div className={styles.productInfoCategory}>
+        <div className={styles.details}>
+          <dl className={styles.right}>
+            <dt className={styles.hideForSemantic}>Details</dt>
+            <dd
+              className={styles.category}
+              aria-label='link to products of this category'
+            >
               <Link
-                className={styles.productInfoCategoryLink}
+                className={styles.categoryLink}
                 to={`${ROUTES_SHOP_QUERY_CATEGORY_PREFIX}${product.category.name}`}
               >
                 {titleCase(product.category.name, "_")}
               </Link>
-            </div>
-            <div className={styles.productName}>
+            </dd>
+            <dd className={styles.name}>
               {titleCase(product.name, "_")} {product.size}ml
+            </dd>
+            <dd className={styles.item}>{product.description}</dd>
+            <dd className={styles.item}>{product.details}</dd>
+            <div className={styles.sizeAndPrice}>
+              <dd className={styles.size}>{product.size} ml</dd>
+              <dd className={styles.price}>${product.price}</dd>
             </div>
-            <ul className={styles.descriptionPoints}>
-              <li className={styles.descriptionPoint}>{product.description}</li>
-              <li className={styles.descriptionPoint}>{product.details}</li>
-            </ul>
-          </div>
-          <div className={styles.rightContainerPriceDetails}>
-            <div className={styles.productSize}>{product.size} ml</div>
-            <div className={styles.productPrice}>${product.price}</div>
-          </div>
-          <div className={styles.selectorAndButtonContainerDesktop}>
+          </dl>
+          <div
+            className={styles.container}
+            aria-label='quantity selector and add to cart button'
+          >
             <ProductQuantity quantity={quantity} setQuantity={setQuantity} />
             <AddProductToCartButton
               product={product}
@@ -50,7 +55,7 @@ export const ProductDetailsCard = ({ product, quantity, setQuantity }) => {
             />
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </article>
   )
 }

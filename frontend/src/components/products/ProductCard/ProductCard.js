@@ -1,13 +1,12 @@
+import { AddProductToCartButton } from "#components/products/AddProductToCartButton"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
-import React from "react"
 import { Link } from "react-router-dom"
-import AddProductToCartButton from "./AddProductToCartButton"
 import styles from "./productCard.module.scss"
 
-const ProductCard = ({ product }) => {
+export const ProductCard = ({ product }) => {
   const { translate } = useTranslation()
 
   return (
@@ -52,5 +51,3 @@ const ProductCard = ({ product }) => {
     </div>
   )
 }
-
-export default ProductCard

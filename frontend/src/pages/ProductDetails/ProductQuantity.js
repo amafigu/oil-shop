@@ -3,7 +3,7 @@ import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "./productQuantity.module.scss"
 
-const ProductQuantity = ({ quantity, setQuantity }) => {
+export const ProductQuantity = ({ quantity, setQuantity }) => {
   return (
     <div className={styles.quantitySelector}>
       <div className={styles.quantityContainer}>
@@ -25,5 +25,3 @@ const ProductQuantity = ({ quantity, setQuantity }) => {
     </div>
   )
 }
-
-export default ProductQuantity

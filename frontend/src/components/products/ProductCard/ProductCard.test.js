@@ -6,7 +6,7 @@ import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 import { MemoryRouter } from "react-router-dom"
-import ProductCard from "./ProductCard"
+import { ProductCard } from "./ProductCard"
 
 jest.mock("#hooks/useTranslation")
 jest.mock("#context/cartContext")

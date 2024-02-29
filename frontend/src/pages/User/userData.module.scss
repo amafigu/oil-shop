@@ -29,6 +29,8 @@
 }
 
 .title {
+  margin-bottom: theme.$spacing-semi-regular;
+
   @include component-title;
 }
 

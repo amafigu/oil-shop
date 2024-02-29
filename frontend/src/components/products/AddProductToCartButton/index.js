@@ -1,7 +1,7 @@
 import useCartContext from "#context/cartContext"
 import { useTranslation } from "#hooks/useTranslation"
-import React from "react"
-const AddProductToCartButton = ({ product, classname, quantity }) => {
+
+export const AddProductToCartButton = ({ product, classname, quantity }) => {
   const { addProduct } = useCartContext()
   const { translate } = useTranslation()
 
@@ -17,5 +17,3 @@ const AddProductToCartButton = ({ product, classname, quantity }) => {
     </button>
   )
 }
-
-export default AddProductToCartButton
