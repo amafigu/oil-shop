@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom"
 
 export const useProductDetails = () => {
   const [product, setProduct] = useState(null)
+  const [quantity, setQuantity] = useState(1)
   const [notification, setNotification] = useState(null)
   const { productName } = useParams()
   const { translate } = useTranslation()
@@ -29,5 +30,5 @@ export const useProductDetails = () => {
     getProductDetails()
   }, [productName, text.errorByGettingProduct, navigate])
 
-  return { product, notification }
+  return { product, notification, quantity, setQuantity }
 }
