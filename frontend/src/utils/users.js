@@ -488,3 +488,24 @@ export const updateUserDataAndSetStates = async (
   }
   setUpdatedUserData(updatedData.data.user)
 }
+
+export const submitGuestUserWithOrders = async (
+  e,
+  cart,
+  isLoggedIn,
+  navigate,
+  formData,
+) => {
+  if (cart.length > 0) {
+    e.preventDefault()
+    if (cart.length > 0) {
+      if (!isLoggedIn) {
+        navigate("/checkout/payment", {
+          state: { formData },
+        })
+      }
+    } else {
+      navigate("/cart")
+    }
+  }
+}
