@@ -1,4 +1,4 @@
-import ProductCard from "#components/products/ProductCard"
+import { ProductCard } from "#components/products/ProductCard/ProductCard"
 import { useGetProducts } from "#hooks/useGetProducts"
 import { filteredProducts } from "#utils/products"
 import styles from "./sortedProductsList.module.scss"
