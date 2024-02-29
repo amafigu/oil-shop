@@ -3,9 +3,9 @@ import { useSubmitOrder } from "#hooks/useSubmitOrder"
 import { useTranslation } from "#hooks/useTranslation"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import styles from "./submitPayment.module.scss"
+import styles from "./paymentForm.module.scss"
 
-export const SubmitPayment = ({ isLoggedIn, userId, setNotification }) => {
+export const PaymentForm = ({ isLoggedIn, userId, setNotification }) => {
   const { submitOrder } = useSubmitOrder()
   const { translate } = useTranslation()
   const text = translate.pages.payment

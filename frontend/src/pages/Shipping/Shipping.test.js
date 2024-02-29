@@ -1,3 +1,4 @@
+import translate from "#__mocks__/translate"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
@@ -5,34 +6,32 @@ import "@testing-library/jest-dom"
 import { render } from "@testing-library/react"
 import React from "react"
 import { MemoryRouter } from "react-router-dom"
-import Shipping from "./Shipping"
+import { Shipping } from "."
 
 jest.mock("#context/cartContext")
 jest.mock("#hooks/useTranslation")
 jest.mock("#context/userContext")
 
-beforeAll(() => {
-  window.scrollTo = jest.fn()
-})
-
 describe("Shipping page should", () => {
-  test("renders correctly", () => {
+  beforeAll(() => {
+    window.scrollTo = jest.fn()
+    useTranslation.mockReturnValue({ translate })
     useCartContext.mockReturnValue({
       cart: [],
     })
-
+    useUserContext.mockReturnValue({
+      user: null,
+      isLoggedIn: false,
+      isLoading: false,
+    })
+  })
+  test("renders correctly", () => {
     useTranslation.mockReturnValue({
       translate: {
         pages: {
           shipping: {},
         },
       },
-    })
-
-    useUserContext.mockReturnValue({
-      user: null,
-      isLoggedIn: false,
-      isLoading: false,
     })
 
     const { container } = render(

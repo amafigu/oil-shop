@@ -1,7 +1,7 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import { useCheckAdminAndRedirect } from "#hooks/useCheckAdminAndRedirect"
 import { scrollToTop } from "#utils/render"
-import { SubmitPayment } from "./SubmitPayment"
+import { PaymentForm } from "./PaymentForm"
 import styles from "./payment.module.scss"
 
 export const Payment = () => {
@@ -14,7 +14,7 @@ export const Payment = () => {
     <main className={styles.paymentPageWrapper} aria-label='Payment page'>
       {notification && <NotificationCard message={notification} />}
       <section className={styles.paymentPage}>
-        <SubmitPayment
+        <PaymentForm
           isLoggedIn={isLoggedIn}
           userId={userId}
           setNotification={setNotification}
