@@ -1,5 +1,7 @@
-import { getLoggedInUser, verifyToken } from "#utils/users"
+import { verifyToken } from "#api/auth/verifyToken"
+import { getLoggedInUser } from "#api/users/getLoggedInUser"
 import { createContext, useContext, useEffect, useState } from "react"
+
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {

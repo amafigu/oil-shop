@@ -1,10 +1,10 @@
+import { getSummaryData } from "#api/orders/getSummaryData"
 import {
   initialOrderData,
   initialShippingData,
   initialUserData,
 } from "#constants/orderSummaryData"
 import useUserContext from "#context/userContext"
-import { getSummaryData } from "#utils/users"
 import { useEffect, useState } from "react"
 
 export const useGetOrderSummary = () => {

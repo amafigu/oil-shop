@@ -1,8 +1,8 @@
+import { loginUser } from "#api/auth/loginUser"
 import { API_USERS_CURRENT_PREFIX } from "#constants/api"
 import { LONG_MESSAGE_TIMEOUT, REDIRECT_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
-import { loginUser } from "#utils/users"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 

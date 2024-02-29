@@ -1,8 +1,8 @@
+import { submitOrderAndGuestUser } from "#api/orders/submitOrderAndGuestUser"
 import { ROUTES_CHECKOUT_ORDER_SUMMARY } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useCartContext from "#context/cartContext"
 import { useTranslation } from "#hooks/useTranslation"
-import { submitOrderAndGuestUser } from "#utils/users"
 import { useNavigate } from "react-router-dom"
 
 export const useSubmitOrder = () => {

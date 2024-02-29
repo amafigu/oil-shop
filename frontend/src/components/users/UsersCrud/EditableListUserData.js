@@ -1,3 +1,4 @@
+import { deleteUserByEmail } from "#api/users/deleteUserByEmail"
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
@@ -13,7 +14,6 @@ import {
   updateDataAndSetStates,
   uploadToS3,
 } from "#utils/dataManipulation"
-import { deleteUserByEmail } from "#utils/users"
 import React, { useState } from "react"
 import styles from "./editableListUserData.module.scss"
 
