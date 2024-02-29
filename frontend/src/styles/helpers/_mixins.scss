@@ -194,11 +194,6 @@
   }
 }
 
-@mixin error-message {
-  font-weight: theme.$font-weight-semibold;
-  color: red;
-}
-
 @mixin form-action-button {
   @include action-button;
 
@@ -211,6 +206,16 @@
   @include media.mobile {
     width: 120px;
   }
+}
+
+@mixin footer-column {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
 }
 
 @mixin form-field {
