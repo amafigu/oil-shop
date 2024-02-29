@@ -6,6 +6,8 @@
   @include flex-column;
 
   .title {
+    margin-bottom: theme.$spacing-semi-regular;
+
     @include component-title;
   }
 

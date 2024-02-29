@@ -21,6 +21,7 @@
   .link {
     @include component-title;
 
+    margin-bottom: theme.$spacing-semi-regular;
     text-align: center;
   }
 }

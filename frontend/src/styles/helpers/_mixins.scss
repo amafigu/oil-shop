@@ -232,23 +232,38 @@
 }
 
 @mixin component-title {
-  margin-bottom: theme.$spacing-semi-regular;
-  font-family: theme.$font-family-primary;
   font-size: theme.$font-size-subtitle;
   font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
 }
 
 @mixin subtitle-text {
-  font-family: theme.$font-family-primary;
   font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-regular;
   line-height: theme.$line-height-primary;
 }
 
 @mixin title-text {
-  font-family: theme.$font-family-primary;
   font-size: theme.$font-size-semi-title;
   font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-primary-regular {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-regular;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-primary-semi-bold {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-secondary-regular {
+  font-size: theme.$font-size-medium;
+  font-weight: theme.$font-weight-regular;
   line-height: theme.$line-height-primary;
 }
 
@@ -266,4 +281,17 @@
 
 @mixin input-container-spacing-small {
   margin: theme.$spacing-small 0;
+}
+
+@mixin hide {
+  opacity: 0;
+}
+
+@mixin responsive-image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  background-repeat: no-repeat;
+  object-fit: contain;
 }
