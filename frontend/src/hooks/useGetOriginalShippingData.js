@@ -1,6 +1,6 @@
+import { getDataAndSetErrorMessage } from "#api/generics/getDataAndSetErrorMessage"
 import { API_SHIPPING_DATA } from "#constants/api"
 import useUserContext from "#context/userContext"
-import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import { useEffect, useState } from "react"
 
 export const useGetOriginalShippingData = () => {

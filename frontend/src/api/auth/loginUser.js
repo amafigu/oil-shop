@@ -1,10 +1,10 @@
+import { getDataAndSetErrorMessage } from "#api/generics/getDataAndSetErrorMessage"
 import {
   API_LOGIN,
   API_USERS_CURRENT_USER,
   API_USER_ROLE,
   API_VERIFY_TOKEN,
 } from "#constants/api"
-import { getDataAndSetErrorMessage } from "#utils/dataManipulation"
 import axios from "axios"
 
 export const loginUser = async (email, password) => {
