@@ -436,5 +436,27 @@
     "users": {
       "shippingDataIsEmpty": "Sie haben keine Versanddaten. Bitte füllen Sie die Versanddaten aus."
     }
+  },
+  "commonProperties": {
+    "category": "Kategorie",
+    "city": "Stadt",
+    "country": "Land",
+    "createdAt": "Erstellt am",
+    "description": "Beschreibung",
+    "details": "Details",
+    "email": "E-Mail",
+    "firstName": "Vorname",
+    "imageUrl": "Bild URL",
+    "lastName": "Nachname",
+    "measure": "Maß",
+    "name": "Name",
+    "number": "Nummer",
+    "password": "Passwort",
+    "postalCode": "PLZ",
+    "price": "Preis",
+    "role": "Rolle",
+    "state": "Bundesland",
+    "size": "Größe",
+    "street": "Straße"
   }
 }
