@@ -9,6 +9,11 @@
   align-items: center;
 }
 
+@mixin flex-align-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
 @mixin flex-all-center {
   display: flex;
   align-items: center;
@@ -48,22 +53,10 @@
   justify-content: space-around;
 }
 
-@mixin flex-center-column {
-  @include flex-all-center;
-
-  flex-direction: column;
-}
-
 @mixin flex-align-start-justify-around {
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
-}
-
-@mixin flex-column-align-start-justify-around {
-  @include flex-align-start-justify-around;
-
-  flex-direction: column;
 }
 
 @mixin product-card-name {
@@ -76,15 +69,10 @@
 }
 
 @mixin action-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: 124px;
   height: 60px;
   overflow: hidden;
   font-family: theme.$font-family-primary;
-  font-size: theme.$font-size-small;
-  font-weight: theme.$font-weight-semibold;
   color: theme.$font-color-primary;
   text-align: center;
   text-overflow: ellipsis;
@@ -94,16 +82,13 @@
   border: none;
   border-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
+
+  @include property-font-tertiary-semi-bold;
+  @include flex-all-center;
 }
 
 @mixin notification-card-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  font-family: theme.$font-family-primary;
-  font-size: theme.$font-size-small;
-  font-weight: theme.$font-weight-semibold;
   color: theme.$font-color-primary;
   text-align: center;
   text-overflow: ellipsis;
@@ -112,6 +97,9 @@
   border: none;
   border-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
+
+  @include flex-all-center;
+  @include property-font-secondary-semi-bold;
 }
 
 @mixin input-styles-reset {
@@ -134,36 +122,8 @@
   }
 }
 
-@mixin shipping-info-cell {
-  width: 50%;
-  margin-bottom: theme.$spacing-semi-regular-large;
-
-  @include flex-column;
-}
-
 @mixin z-index($key) {
   z-index: functions.get-z-index($key);
-}
-
-@mixin newsleter-input-and-button-wrapper {
-  width: 30%;
-  padding: 10px;
-  font-size: theme.$font-size-medium;
-  color: theme.$font-color-contrast;
-  text-align: center;
-  cursor: pointer;
-  background-color: theme.$background-color-secondary-button;
-  border: none;
-  border-radius: theme.$border-radius-small;
-}
-
-@mixin menu-list-cell {
-  width: 100%;
-  padding: theme.$spacing-semi-regular-large;
-  font-size: theme.$font-size-medium;
-  line-height: theme.$line-height-primary;
-  text-transform: uppercase;
-  border-bottom: theme.$border-regular-component;
 }
 
 @mixin menu-list-item {
@@ -266,9 +226,27 @@
   line-height: theme.$line-height-primary;
 }
 
+@mixin property-font-primary-medium {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-medium;
+  line-height: theme.$line-height-primary;
+}
+
 @mixin property-font-secondary-regular {
   font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-regular;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-secondary-semi-bold {
+  font-size: theme.$font-size-medium;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-tertiary-semi-bold {
+  font-size: theme.$font-size-small;
+  font-weight: theme.$font-weight-semibold;
   line-height: theme.$line-height-primary;
 }
 
