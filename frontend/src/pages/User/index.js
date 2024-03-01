@@ -1,6 +1,6 @@
+import { OrdersList } from "#components/orders/OrdersList"
 import NotificationCard from "#components/ui/NotificationCard"
 import { UserHeader } from "#components/ui/UserHeader"
-import GetOrders from "#components/users/UsersCrud/GetOrders"
 import { ROUTES_CURRENT_ADMIN, ROUTES_LOGIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
@@ -58,7 +58,7 @@ export const User = () => {
               <ShippingData />
             </section>
             <section className={styles.componentContainer}>
-              <GetOrders />
+              <OrdersList />
             </section>
           </>
         )}
