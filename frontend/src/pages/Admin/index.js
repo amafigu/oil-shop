@@ -1,6 +1,6 @@
 import ProductsCrud from "#components/products/ProductsCrud"
-import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
+import { UserHeader } from "#components/ui/UserHeader"
 import UsersCrud from "#components/users/UsersCrud"
 import { ROUTES_CURRENT_CUSTOMER, ROUTES_LOGIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
@@ -41,7 +41,7 @@ const Admin = () => {
     <div className={styles.adminPageWrapper}>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.adminPage}>
-        <Header data={headerData} />
+        <UserHeader data={headerData} />
         <div className={styles.componentContainer}>
           <ProductsCrud
             refreshAllProductsCounter={refreshAllProductsCounter}

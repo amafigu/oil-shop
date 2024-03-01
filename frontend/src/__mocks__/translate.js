@@ -1,4 +1,4 @@
-module.exports = {
+export const translate = {
   errors: {
     requests: {
       user: {
@@ -68,4 +68,27 @@ module.exports = {
         "enter your shipping data by editing and saving fields",
     },
   },
+}
+
+export const commonProperties = {
+  category: "Category",
+  city: "City",
+  country: "Country",
+  createdAt: "Created at",
+  description: "Description",
+  details: "Details",
+  email: "Email",
+  firstName: "First name",
+  imageUrl: "Image Url",
+  lastName: "Last name",
+  password: "Password",
+  measure: "Measure",
+  name: "Name",
+  number: "Number",
+  postalCode: "Postal code",
+  price: "Price",
+  role: "Rolle",
+  size: "Size",
+  street: "Street",
+  state: "State",
 }

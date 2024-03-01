@@ -3,7 +3,7 @@
 @import "#styles/helpers/mixins";
 
 .orderSummary {
-  @include flex-center-column;
+  @include flex-column-all-center;
 }
 
 .columnTitle {

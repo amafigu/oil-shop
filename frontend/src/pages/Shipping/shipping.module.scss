@@ -3,10 +3,11 @@
 @import "#styles/helpers/mixins";
 
 .shippingPageWrapper {
-  @include flex-center-column;
+  @include flex-column-all-center;
 }
 
 .shippingPage {
+  flex-direction: column;
   width: theme.$section-width-primary;
   margin-bottom: theme.$spacing-semi-large;
   background: theme.$background-color-form-primary;

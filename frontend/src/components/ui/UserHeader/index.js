@@ -1,20 +1,20 @@
-import TableRow from "#components/ui/TableRow"
 import { DEFAULT_USER_IMAGE } from "#constants/media"
 import useUserContext from "#context/userContext"
 import { setDefaultImageByError } from "#utils/dataManipulation"
-import styles from "./header.module.scss"
-
-const Header = () => {
+import { UserHeaderData } from "./UserHeaderData"
+import styles from "./userHeader.module.scss"
+export const UserHeader = () => {
   const { user } = useUserContext()
-  const tableData = {
+
+  const userData = {
     firstName: user?.firstName,
     lastName: user?.lastName,
     email: user?.email,
   }
 
   return (
-    <div className={styles.headerContainer}>
-      <div className={styles.header}>
+    <header className={styles.headerContainer} aria-label='User Description'>
+      <section className={styles.header}>
         {user ? (
           <div className={styles.dataContainer}>
             <div className={styles.avatarContainer}>
@@ -25,14 +25,12 @@ const Header = () => {
                 onError={(e) => setDefaultImageByError(e, DEFAULT_USER_IMAGE)}
               />
             </div>
-            <TableRow data={tableData} />
+            <UserHeaderData data={userData} />
           </div>
         ) : (
           `loading Data`
         )}
-      </div>
-    </div>
+      </section>
+    </header>
   )
 }
-
-export default Header

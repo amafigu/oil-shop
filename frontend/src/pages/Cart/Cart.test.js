@@ -1,4 +1,4 @@
-import translate from "#__mocks__/translate"
+import { translate } from "#__mocks__/translate"
 import useUserContext from "#context/userContext"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"

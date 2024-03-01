@@ -1,5 +1,5 @@
-import Header from "#components/ui/Header"
 import NotificationCard from "#components/ui/NotificationCard"
+import { UserHeader } from "#components/ui/UserHeader"
 import GetOrders from "#components/users/UsersCrud/GetOrders"
 import { ROUTES_CURRENT_ADMIN, ROUTES_LOGIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
@@ -50,7 +50,7 @@ export const User = () => {
           <div>Loading...</div>
         ) : (
           <>
-            <Header />
+            <UserHeader />
             <section className={styles.componentContainer}>
               <UserData />
             </section>

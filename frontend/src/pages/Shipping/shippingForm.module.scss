@@ -6,7 +6,7 @@
   width: theme.$page-width-primary;
   margin: theme.$spacing-regular-large;
 
-  @include flex-center-column;
+  @include flex-column-all-center;
 
   @include media.tablet-down {
     margin: theme.$spacing-semi-regular-semi-large;

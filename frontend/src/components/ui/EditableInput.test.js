@@ -1,4 +1,4 @@
-import translate from "#__mocks__/translate"
+import { translate } from "#__mocks__/translate"
 import { useTranslation } from "#hooks/useTranslation"
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
