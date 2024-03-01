@@ -92,3 +92,24 @@ export const commonProperties = {
   street: "Street",
   state: "State",
 }
+
+export const components = {
+  ordersList: {
+    title: "Your Orders",
+    hideToggleButton: "Hide orders",
+    showToggleButton: "Show orders",
+  },
+  ordersItem: {
+    orderDate: "Order date",
+    payedWith: "Payed with",
+    total: "Total",
+    productsHaveBeenDeleted:
+      "The products of this order have been deleted from our system",
+  },
+  orderCard: {
+    orderedProduct: "Ordered product",
+    hiddenSemantics: "Items description",
+    pricePerUnit: "per unit",
+    productNotFound: "Product not found",
+  },
+}

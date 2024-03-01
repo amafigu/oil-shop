@@ -318,6 +318,23 @@
     "orderSummaryItem": {
       "quantity": "Menge"
     },
+    "ordersList": {
+      "title": "Deine Bestellungen",
+      "hideToggleButton": "Bestellungen ausblenden",
+      "showToggleButton": "Bestellungen anzeigen"
+    },
+    "ordersItem": {
+      "orderedAt": "Bestellungsdatum",
+      "payedWith": "Bezahlt mit",
+      "total": "Gesamtsumme",
+      "productsHaveBeenDeleted": "Die Produkte dieser Bestellung wurden aus unserem System gelöscht"
+    },
+    "orderCard": {
+      "orderedProduct": "Bestelltes Produkt",
+      "hiddenSemantics": "Artikelbeschreibung",
+      "pricePerUnit": "pro Einheit",
+      "productNotFound": "Produkt nicht gefunden"
+    },
     "products": {
       "oil": {
         "size": "Größe",
