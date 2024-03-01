@@ -1,4 +1,4 @@
-import translate from "#__mocks__/translate"
+import { translate } from "#__mocks__/translate"
 import { useTranslation } from "#hooks/useTranslation"
 import { Faq } from "#pages/Faq"
 import { scrollToTop } from "#utils/render"

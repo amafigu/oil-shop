@@ -1,5 +1,5 @@
 import product from "#__mocks__/product"
-import translate from "#__mocks__/translate"
+import { translate } from "#__mocks__/translate"
 import useCartContext, { CartContext } from "#context/cartContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { fireEvent, render, screen } from "@testing-library/react"

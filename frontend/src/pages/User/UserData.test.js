@@ -1,4 +1,4 @@
-import translate from "#__mocks__/translate"
+import { translate } from "#__mocks__/translate"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { render } from "@testing-library/react"

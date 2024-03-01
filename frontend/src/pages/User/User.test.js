@@ -1,7 +1,7 @@
-import shippingData from "#__mocks__/shippingData"
-import translate from "#__mocks__/translate"
+import { shippingData } from "#__mocks__/shippingData"
+import { translate } from "#__mocks__/translate"
 import user from "#__mocks__/user"
-import Header from "#components/ui/Header"
+import { UserHeader } from "#components/ui/UserHeader"
 import GetOrders from "#components/users/UsersCrud/GetOrders"
 import useUserContext from "#context/userContext"
 import { useGetOriginalShippingData } from "#hooks/useGetOriginalShippingData"
@@ -36,7 +36,7 @@ describe("User page should", () => {
   })
 
   test("render Header correctly", () => {
-    render(<Header data={user} />)
+    render(<UserHeader data={user} />)
   })
   test("render UserData correctly", () => {
     render(<UserData />)
