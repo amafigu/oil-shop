@@ -1,0 +1,18 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.adminProductsList {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+}
+
+.atributesContainer {
+  display: flex;
+}
+
+.editableInputsContainer {
+  flex-grow: 1;
+
+  @include flex-column;
+}

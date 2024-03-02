@@ -1,23 +1,7 @@
-import { ROUTES_PRODUCTS } from "#constants/routes"
-import axios from "axios"
-import { useEffect, useState } from "react"
+import useProductContext from "#context/productContext"
 
 export const useGetProducts = () => {
-  const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    const getProductsList = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}${ROUTES_PRODUCTS}`,
-        )
-        setProducts(response.data)
-      } catch (error) {
-        console.error("Error fetching product: ", error)
-      }
-    }
-    getProductsList()
-  }, [setProducts])
+  const { products, setProducts } = useProductContext()
 
   return { products, setProducts }
 }

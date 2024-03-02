@@ -1,5 +1,5 @@
-import ProductsCrud from "#components/products/ProductsCrud"
 import NotificationCard from "#components/ui/NotificationCard"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { UserHeader } from "#components/ui/UserHeader"
 import UsersCrud from "#components/users/UsersCrud"
 import { ROUTES_CURRENT_CUSTOMER, ROUTES_LOGIN } from "#constants/routes"
@@ -7,9 +7,12 @@ import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { AdminProductsList } from "./AdminProductsList"
+import { CreateProduct } from "./CreateProduct"
 import styles from "./admin.module.scss"
-const Admin = () => {
-  const [refreshAllProductsCounter, setRefreshAllProductsCounter] = useState(0)
+
+export const Admin = () => {
+  const [showProductsSection, setShowProductsSection] = useState(false)
   const [notification, setNotification] = useState(null)
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
@@ -38,17 +41,34 @@ const Admin = () => {
   }, [isLoading, user, navigate])
 
   return (
-    <div className={styles.adminPageWrapper}>
+    <main className={styles.adminPageWrapper}>
       {notification && <NotificationCard message={notification} />}
-      <div className={styles.adminPage}>
+      <section className={styles.adminPage}>
         <UserHeader data={headerData} />
         <div className={styles.componentContainer}>
-          <ProductsCrud
-            refreshAllProductsCounter={refreshAllProductsCounter}
-            setRefreshAllProductsCounter={setRefreshAllProductsCounter}
-          />
-        </div>
+          <div className={styles.productsCrudWrapper}>
+            <ToggleButton
+              isVisible={showProductsSection}
+              onToggle={setShowProductsSection}
+              hideBtnText={"HIDE PRODUCTS ACTIONS"}
+              showBtnText={"SHOW PRODUCTS ACTIONS"}
+              classCss='showHideButtons'
+            />
+            {showProductsSection && (
+              <div className={styles.formsContainerWrapper}>
+                <div className={styles.formsContainer}>
+                  <div className={styles.crudContainer}>
+                    <AdminProductsList />
+                  </div>
 
+                  <div className={styles.crudContainer}>
+                    <CreateProduct />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
         <div className={styles.componentContainer}>
           <UsersCrud
             setEmailInUserError={setEmailInUserError}
@@ -57,9 +77,7 @@ const Admin = () => {
             fieldErrors={fieldErrors}
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
-
-export default Admin
