@@ -1,28 +1,33 @@
-import React from "react"
 import styles from "./toggleButton.module.scss"
 
-const ToggleButton = ({ show, setToggle, textHide, textShow, classCss }) => {
+export const ToggleButton = ({
+  isVisible,
+  onToggle,
+  hideBtnText,
+  showBtnText,
+  classCss,
+}) => {
   return (
     <>
-      {show ? (
+      {isVisible ? (
         <button
-          onClick={() => setToggle(false)}
+          aria-label={`${hideBtnText} button`}
+          onClick={() => onToggle(false)}
           className={styles[classCss]}
           type='button'
         >
-          {textHide}
+          {hideBtnText}
         </button>
       ) : (
         <button
-          onClick={() => setToggle(true)}
+          aria-label={`${showBtnText} button`}
+          onClick={() => onToggle(true)}
           className={styles[classCss]}
           type='button'
         >
-          {textShow}
+          {showBtnText}
         </button>
       )}
     </>
   )
 }
-
-export default ToggleButton
