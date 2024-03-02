@@ -1,6 +1,6 @@
 import { getAllUsersList } from "#api/users/getAllUsersList"
 import NotificationCard from "#components/ui/NotificationCard"
-import ToggleButton from "#components/ui/ToggleButton"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { STYLES } from "#constants/styles"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
@@ -41,10 +41,10 @@ const GetAllUsers = ({ refreshAllUsersCounter, setRefreshAllUsersCounter }) => {
 
       <div className={styles.showHideButtonsContainer}>
         <ToggleButton
-          show={showUsers}
-          setToggle={showUserListAndGetData}
-          textHide={text.hideButton.toUpperCase()}
-          textShow={text.showButton.toUpperCase()}
+          isVisible={showUsers}
+          onToggle={showUserListAndGetData}
+          hideBtnText={text.hideButton.toUpperCase()}
+          showBtnText={text.showButton.toUpperCase()}
           classCss={STYLES.BUTTONS.SHOW_HIDE}
         />
       </div>

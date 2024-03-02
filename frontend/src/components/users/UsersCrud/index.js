@@ -1,4 +1,4 @@
-import ToggleButton from "#components/ui/ToggleButton"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import ZodValidationErrorsCard from "#components/ui/ZodValidationErrorsCard"
 import { useTranslation } from "#hooks/useTranslation"
 import { useState } from "react"
@@ -24,10 +24,10 @@ const UsersCrud = ({
   return (
     <div className={styles.usersCrudWrapper}>
       <ToggleButton
-        show={showUsersSection}
-        setToggle={setShowUsersSection}
-        textHide={toggleButtonText.hide.toUpperCase()}
-        textShow={toggleButtonText.show.toUpperCase()}
+        isVisible={showUsersSection}
+        onToggle={setShowUsersSection}
+        hideBtnText={toggleButtonText.hide.toUpperCase()}
+        showBtnText={toggleButtonText.show.toUpperCase()}
         classCss='showHideButtons'
       />
       {showUsersSection && (
@@ -47,10 +47,10 @@ const UsersCrud = ({
 
           <div className={styles.crudContainer}>
             <ToggleButton
-              show={showCreateUserForm}
-              setToggle={setShowCreateUserForm}
-              textHide={"HIDE USER FORM"}
-              textShow={"CREATE USER"}
+              isVisible={showCreateUserForm}
+              onToggle={setShowCreateUserForm}
+              hideBtnText={"HIDE USER FORM"}
+              showBtnText={"CREATE USER"}
               classCss='showHideButtons'
             />
             {showCreateUserForm && (

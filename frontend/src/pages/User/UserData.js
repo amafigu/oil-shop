@@ -3,7 +3,7 @@ import { updateDataAndSetStates } from "#api/generics/updateDataAndSetStates"
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import ToggleButton from "#components/ui/ToggleButton"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { API_USERS_USER } from "#constants/api"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
@@ -73,10 +73,10 @@ export const UserData = () => {
         <h1 className={styles.title}>User Data</h1>
 
         <ToggleButton
-          show={showForm}
-          setToggle={setShowForm}
-          textHide={`${buttonsText?.actions.user.hide}`}
-          textShow={`${buttonsText?.actions.user.show}`}
+          isVisible={showForm}
+          onToggle={setShowForm}
+          hideBtnText={`${buttonsText?.actions.user.hide}`}
+          showBtnText={`${buttonsText?.actions.user.show}`}
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (

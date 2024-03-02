@@ -1,5 +1,5 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import ToggleButton from "#components/ui/ToggleButton"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { STYLES } from "#constants/styles"
 import { useGetOrdersWithProducts } from "#hooks/useGetOrdersWithProducts"
 import { useTranslation } from "#hooks/useTranslation"
@@ -31,10 +31,10 @@ export const OrdersList = () => {
       {notification && <NotificationCard message={notification} />}
       <h2 className={styles.title}>{text.title}</h2>
       <ToggleButton
-        show={showOrders}
-        setToggle={showOrderListAndGetData}
-        textHide={text.hideToggleButton.toUpperCase()}
-        textShow={text.showToggleButton.toUpperCase()}
+        isVisible={showOrders}
+        onToggle={showOrderListAndGetData}
+        hideBtnText={text.hideToggleButton.toUpperCase()}
+        showBtnText={text.showToggleButton.toUpperCase()}
         classCss={STYLES.BUTTONS.SHOW_HIDE}
       />
       <ul className={styles.ordersList}>

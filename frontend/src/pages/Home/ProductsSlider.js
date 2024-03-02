@@ -1,4 +1,4 @@
-import { ProductCard } from "#components/products/ProductCard/ProductCard"
+import { ProductCard } from "#components/products/ProductCard"
 import { useGetProducts } from "#hooks/useGetProducts"
 import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

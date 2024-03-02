@@ -5,7 +5,7 @@ import { getUserByEmail } from "#api/users/getUserByEmail"
 import EditableImageInput from "#components/ui/EditableImageInput"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import ToggleButton from "#components/ui/ToggleButton"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { API_USERS_USER } from "#constants/api"
 import { DEFAULT_USER_IMAGE } from "#constants/media"
 import { STYLES } from "#constants/styles"
@@ -117,10 +117,10 @@ const EditableUserData = ({ setRefreshAllUsersCounter }) => {
       <div className={styles.editableUserDataWrapper}>
         {notification && <NotificationCard message={notification} />}
         <ToggleButton
-          show={showForm}
-          setToggle={setShowForm}
-          textHide={`${buttonsText?.buttons.actions.userByEmail.hide}`}
-          textShow={`${buttonsText?.buttons.actions.userByEmail.show}`}
+          isVisible={showForm}
+          onToggle={setShowForm}
+          hideBtnText={`${buttonsText?.buttons.actions.userByEmail.hide}`}
+          showBtnText={`${buttonsText?.buttons.actions.userByEmail.show}`}
           classCss={STYLES.BUTTONS.USER_OPTIONS}
         />
         {showForm && (

@@ -1,7 +1,7 @@
 import { updateDataAndSetStates } from "#api/generics/updateDataAndSetStates"
 import EditableInput from "#components/ui/EditableInput"
 import NotificationCard from "#components/ui/NotificationCard"
-import ToggleButton from "#components/ui/ToggleButton"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { API_SHIPPING_DATA } from "#constants/api"
 import { initialShippingData } from "#constants/shippingData"
 import { STYLES } from "#constants/styles"
@@ -43,10 +43,10 @@ export const ShippingData = () => {
       {notification && <NotificationCard message={notification} />}
       <h3 className={styles.title}>Shipping Data</h3>
       <ToggleButton
-        show={showForm}
-        setToggle={setShowForm}
-        textHide={`${buttonsText.actions.shipping.hide.toUpperCase()}`}
-        textShow={`${buttonsText.actions.shipping.show.toUpperCase()}`}
+        isVisible={showForm}
+        onToggle={setShowForm}
+        hideBtnText={`${buttonsText.actions.shipping.hide.toUpperCase()}`}
+        showBtnText={`${buttonsText.actions.shipping.show.toUpperCase()}`}
         classCss={STYLES.BUTTONS.USER_OPTIONS}
       />
       {showForm && nonUpdatedShippingData !== initialShippingData && (
