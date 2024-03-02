@@ -1,6 +1,5 @@
 export const STYLES = Object.freeze({
   BUTTONS: {
-    USER_OPTIONS: "userOptionsButton",
     SHOW_HIDE: "showHideButtons",
   },
   FORMS: {

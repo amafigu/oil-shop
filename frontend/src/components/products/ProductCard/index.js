@@ -25,7 +25,6 @@ export const ProductCard = ({ product }) => {
                   }
                 />
               </div>
-
               <div className={styles.productCardName}>
                 {titleCase(product.name, "_")}
               </div>

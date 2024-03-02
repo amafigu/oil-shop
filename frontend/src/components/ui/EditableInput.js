@@ -12,14 +12,13 @@ const EditableInput = ({
   classCss,
   originalPropertyData,
   updatedPropertyData,
-  refreshAllProductsCounter,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
   const { translate } = useTranslation()
   const textButtons = translate.components.crud.buttons
   const textProperties = translate.components.crud.forms.commonProperties
 
-  useEffect(() => {}, [refreshAllProductsCounter])
+  useEffect(() => {}, [])
 
   return (
     <div className={styles.itemRow}>

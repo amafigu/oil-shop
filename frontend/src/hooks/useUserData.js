@@ -1,4 +1,4 @@
-import { getDataAndSetErrorMessage } from "#api//generics/getDataAndSetErrorMessage"
+import { getDataAndSetErrorMessage } from "#api/generics/getDataAndSetErrorMessage"
 import { API_USERS_CURRENT_USER } from "#constants/api"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"

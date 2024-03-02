@@ -19,7 +19,7 @@ import {
   ROUTES_WITHOUT_NAVBAR,
 } from "#constants/routes"
 import { About } from "#pages/About"
-import Admin from "#pages/Admin"
+import { Admin } from "#pages/Admin"
 import { Cart } from "#pages/Cart/Cart"
 import { Faq } from "#pages/Faq"
 import { Home } from "#pages/Home"
@@ -34,9 +34,8 @@ import { SignUp } from "#pages/SignUp"
 import { User } from "#pages/User"
 import { useEffect, useState } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
-import styles from "./appRoutes.module.scss"
 
-const AppRoutes = () => {
+export const AppRoutes = () => {
   const [productCategories, setProductCategories] = useState([])
 
   useEffect(() => {
@@ -57,7 +56,7 @@ const AppRoutes = () => {
   const currentPath = location.pathname
 
   return (
-    <div className={styles.wrapper}>
+    <>
       {!ROUTES_WITHOUT_NAVBAR.includes(currentPath) && (
         <Navbar productCategories={productCategories} />
       )}
@@ -88,7 +87,7 @@ const AppRoutes = () => {
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
-    </div>
+    </>
   )
 }
 

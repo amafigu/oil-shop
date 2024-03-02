@@ -1,10 +1,11 @@
+import { useCountProducts } from "#hooks/useCountProducts"
 import { useTranslation } from "#hooks/useTranslation"
-import { saveDataAndToggleInput } from "#utils/dataManipulation"
+import { saveProductDataAndToggleInput } from "#utils/products"
 import { cancelWithScape } from "#utils/render"
-import React, { useState } from "react"
-import styles from "./editableAndDeletableInput.module.scss"
+import { useEffect, useState } from "react"
+import styles from "./editableProductInput.module.scss"
 
-const EditableAndDeletableInput = ({
+export const EditableProductInput = ({
   label,
   name,
   onChange,
@@ -17,6 +18,8 @@ const EditableAndDeletableInput = ({
   const { translate } = useTranslation()
   const textButtons = translate.components.crud.buttons
   const textProperties = translate.components.crud.forms.commonProperties
+  const { counter } = useCountProducts()
+  useEffect(() => {}, [counter])
 
   return (
     <div className={styles.itemRow}>
@@ -47,7 +50,9 @@ const EditableAndDeletableInput = ({
         <div
           aria-label={textButtons.save}
           className={styles.formButton}
-          onClick={(e) => saveDataAndToggleInput(e, onSave, setIsEditing)}
+          onClick={(e) =>
+            saveProductDataAndToggleInput(e, onSave, setIsEditing)
+          }
         >
           {textButtons ? textButtons.save : "Save"}
         </div>
@@ -63,4 +68,3 @@ const EditableAndDeletableInput = ({
     </div>
   )
 }
-export default EditableAndDeletableInput

@@ -1,22 +1,23 @@
 import "#styles/main.scss"
 import { BrowserRouter } from "react-router-dom"
-import AppRoutes from "./AppRoutes"
+import { AppRoutes } from "./AppRoutes"
 import { CartProvider } from "./context/cartContext"
 import { LocaleContextProvider } from "./context/localeContext"
+import { ProductProvider } from "./context/productContext"
 import { UserProvider } from "./context/userContext"
 
-const App = () => {
+export const App = () => {
   return (
     <BrowserRouter>
       <LocaleContextProvider>
         <UserProvider>
-          <CartProvider>
-            <AppRoutes />
-          </CartProvider>
+          <ProductProvider>
+            <CartProvider>
+              <AppRoutes />
+            </CartProvider>
+          </ProductProvider>
         </UserProvider>
       </LocaleContextProvider>
     </BrowserRouter>
   )
 }
-
-export default App

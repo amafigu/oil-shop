@@ -1,0 +1,47 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.formField {
+  width: 100%;
+  height: 32px;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-medium;
+}
+
+.itemRow {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.nonUpdatedData {
+  width: 100%;
+  height: 32px;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-medium;
+  border-bottom: theme.$border-regular-component;
+}
+
+.property {
+  @include property-font;
+}
+
+.value {
+  @include value-font;
+}
+
+.formButton {
+  @include action-button;
+
+  width: 160px;
+  height: 36px;
+  margin-left: theme.$spacing-regular;
+  font-size: theme.$font-size-small;
+  text-transform: none;
+
+  @include media.mobile {
+    width: 120px;
+    overflow: hidden;
+  }
+}

@@ -1,8 +1,6 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.userOptionsButton,
-.showHideButtons,
-.toggleButtons {
+.showHideButtons {
   @include form-action-button;
 }

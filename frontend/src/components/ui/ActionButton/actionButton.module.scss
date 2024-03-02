@@ -2,6 +2,6 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.productsCrudWrapper {
-  @include component-container-large;
+.actionButton {
+  @include action-button;
 }
