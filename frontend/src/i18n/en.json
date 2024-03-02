@@ -305,6 +305,12 @@
         "error": "Can not see all products"
       }
     },
+    "editableListProductData": {
+      "deleteButton": {
+        "sucess": "Product successfully deleted",
+        "fail": "We can not delete this product"
+      }
+    },
     "orderSummaryItem": {
       "quantity": "Quantity"
     },

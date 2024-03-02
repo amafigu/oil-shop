@@ -315,6 +315,12 @@
         "error": "Kann nicht alle Produkte finden"
       }
     },
+    "editableListProductData": {
+      "deleteButton": {
+        "sucess": "Produkt erfolgreich gelöscht",
+        "fail": "Wir können dieses Produkt nicht löschen"
+      }
+    },
     "orderSummaryItem": {
       "quantity": "Menge"
     },
