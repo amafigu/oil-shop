@@ -1,6 +1,5 @@
 import { ToggleButton } from "#components/ui/ToggleButton"
 import { STYLES } from "#constants/styles"
-import { useCountProducts } from "#hooks/useCountProducts"
 import { useGetProducts } from "#hooks/useGetProducts"
 import { useTranslation } from "#hooks/useTranslation"
 import { useEffect, useState } from "react"
@@ -11,8 +10,9 @@ export const AdminProductsList = () => {
   const { translate } = useTranslation()
   const text = translate.components.crud.getAllProducts
   const { products } = useGetProducts()
-  const { counter } = useCountProducts()
-  useEffect(() => {}, [counter])
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <section
       className={styles.adminProductsList}

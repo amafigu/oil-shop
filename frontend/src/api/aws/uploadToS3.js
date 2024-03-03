@@ -9,6 +9,7 @@ export const uploadToS3 = async (file) => {
       { withCredentials: true },
     )
     newUrl = `https://oylo-images.s3.us-east-2.amazonaws.com/${response.data.fileName}`
+    console.log(newUrl, "NEW URL")
 
     await axios.put(
       response.data.uploadURL,

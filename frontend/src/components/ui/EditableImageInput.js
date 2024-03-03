@@ -1,15 +1,9 @@
 import { useTranslation } from "#hooks/useTranslation"
 import React, { useState } from "react"
+import { ActionButton } from "./ActionButton"
 import styles from "./editableImageInput.module.scss"
 
-const EditableImageInput = ({
-  label,
-  name,
-  onChange,
-  classCss,
-  file,
-  onSave,
-}) => {
+const EditableImageInput = ({ onChange, classCss, file, onSave }) => {
   const [isEditing, setIsEditing] = useState(false)
   const { translate } = useTranslation()
   const textButtons = translate.components.crud.buttons
@@ -23,40 +17,37 @@ const EditableImageInput = ({
     <div className={styles[classCss]}>
       {isEditing ? (
         <div className={styles.nonUpdatedData}>
-          <span className={styles.label}></span>
-
+          <label htmlFor='image' className={styles.label}>
+            image
+          </label>
           <input
             className={styles.fileInput}
             type='file'
-            name={name}
+            name='image'
             id='fileInput'
             onChange={onChange}
           />
         </div>
       ) : (
         <div className={styles.nonUpdatedData}>
-          <span className={styles.property}>{label}: </span>
+          <span className={styles.property}>image: </span>
           <span className={styles.value}>
             {file ? file.name : "No file selected"}
           </span>
         </div>
       )}
       {isEditing ? (
-        <div
-          aria-label={textButtons.save}
+        <ActionButton
+          text={textButtons.save}
+          action={(e) => saveAndSetIsEditing(e)}
           className={styles.formButton}
-          onClick={(e) => saveAndSetIsEditing(e)}
-        >
-          {textButtons.save}
-        </div>
+        />
       ) : (
-        <div
-          aria-label={textButtons.edit}
+        <ActionButton
+          text={textButtons.edit}
+          action={() => setIsEditing(true)}
           className={styles.formButton}
-          onClick={() => setIsEditing(true)}
-        >
-          {textButtons.edit}
-        </div>
+        />
       )}
     </div>
   )

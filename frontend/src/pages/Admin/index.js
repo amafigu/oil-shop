@@ -2,11 +2,7 @@ import NotificationCard from "#components/ui/NotificationCard"
 import { ToggleButton } from "#components/ui/ToggleButton"
 import { UserHeader } from "#components/ui/UserHeader"
 import UsersCrud from "#components/users/UsersCrud"
-import { ROUTES_CURRENT_CUSTOMER, ROUTES_LOGIN } from "#constants/routes"
-import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import useUserContext from "#context/userContext"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 import { AdminProductsList } from "./AdminProductsList"
 import { CreateProduct } from "./CreateProduct"
 import styles from "./admin.module.scss"
@@ -17,10 +13,8 @@ export const Admin = () => {
   const [emailInUserError, setEmailInUserError] = useState("")
   const [fieldErrors, setFieldErrors] = useState({})
   const [headerData, setHeaderData] = useState({})
-  const { user, isLoading } = useUserContext()
-  const navigate = useNavigate()
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!isLoading) {
       if (user && Object.keys(user).length !== 0) {
         setHeaderData({
@@ -38,7 +32,7 @@ export const Admin = () => {
         setTimeout(() => navigate(ROUTES_LOGIN), REDIRECT_TIMEOUT)
       }
     }
-  }, [isLoading, user, navigate])
+  }, [isLoading, user, navigate]) */
 
   return (
     <main className={styles.adminPageWrapper}>

@@ -31,33 +31,17 @@ export const filteredProducts = (products, category) =>
     (product) => product.category.name === category || category === "all",
   )
 
-export const deleteProductAndUpdateState = async (
-  id,
-  setNotification,
-  setCounter,
-  text,
-) => {
+export const deleteProductAndUpdateState = async (id, setNotification) => {
   try {
     const deleteProductResponse = await deleteProductById(id)
 
     if (deleteProductResponse) {
-      setNotification(text.sucess)
+      setNotification("product deleted")
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-
-      setCounter((prevState) => prevState + 1)
     }
   } catch (error) {
-    setNotification(text.fail)
+    setNotification("can not delete product")
     setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     console.error("Can not delete product", error)
   }
-}
-
-export const saveProductDataAndToggleInput = async (
-  e,
-  asyncOnSaveFunction,
-  setToggle,
-) => {
-  await asyncOnSaveFunction(e)
-  setToggle(false)
 }
