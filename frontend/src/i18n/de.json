@@ -481,5 +481,11 @@
     "state": "Bundesland",
     "size": "Größe",
     "street": "Straße"
+  },
+  "commonButtons": {
+    "create": "Erstellen",
+    "delete": "Löschen",
+    "edit": "Editieren",
+    "save": "Speichern"
   }
 }

@@ -10,7 +10,7 @@
         "secondPart": "you are loggin as a",
         "thirdPart": "."
       },
-      "crud": {
+      "commonProperties": {
         "users": {
           "create": "",
           "delete": "",
@@ -471,5 +471,11 @@
     "size": "Size",
     "street": "Street",
     "state": "State"
+  },
+  "commonButtons": {
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save"
   }
 }
