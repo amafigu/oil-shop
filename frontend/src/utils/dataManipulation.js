@@ -21,3 +21,7 @@ export const listenInputChangeAndSetDataObject = (
     [e.target.name]: e.target.value,
   })
 }
+
+export const setFileToUpload = (event, setFile) => {
+  setFile(event.target.files[0])
+}
