@@ -11,6 +11,11 @@ export const validateUserAndProductFieldsInDataObject = (
       setTimeout(() => setErrorNotification(null), 2000)
       return
     }
+
+    if (property === "image") {
+      propertyValue = propertyValue.toString().trim()
+      dataObject[property] = propertyValue
+    }
     // product validation
     if (property === "price") {
       propertyValue = propertyValue.trim()
