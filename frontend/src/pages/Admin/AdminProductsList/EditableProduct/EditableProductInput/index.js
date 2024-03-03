@@ -1,29 +1,51 @@
-import { useCountProducts } from "#hooks/useCountProducts"
+import { ActionButton } from "#components/ui/ActionButton"
+import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
-import { saveProductDataAndToggleInput } from "#utils/products"
 import { cancelWithScape } from "#utils/render"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import styles from "./editableProductInput.module.scss"
 
 export const EditableProductInput = ({
   label,
   name,
+  updatedPropertyData,
   onChange,
   onSave,
   classCss,
-  originalPropertyData,
-  updatedPropertyData,
+  file,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const { translate } = useTranslation()
-  const textButtons = translate.components.crud.buttons
-  const textProperties = translate.components.crud.forms.commonProperties
-  const { counter } = useCountProducts()
-  useEffect(() => {}, [counter])
+  const { commonProperties, commonButtons } = useTranslation()
 
+  const saveEdition = (e) => {
+    onSave(e)
+    setIsEditing(false)
+  }
   return (
-    <div className={styles.itemRow}>
-      {isEditing ? (
+    <div className={styles.item}>
+      {name === "image" ? (
+        isEditing ? (
+          <div className={styles.nonUpdatedData}>
+            <label htmlFor='image' className={styles.label}>
+              image
+            </label>
+            <input
+              className={styles.fileInput}
+              type='file'
+              name='image'
+              id='fileInput'
+              onChange={onChange}
+            />
+          </div>
+        ) : (
+          <div className={styles.nonUpdatedData}>
+            <span className={styles.property}>image: </span>
+            <span className={styles.value}>
+              {file ? file.name : "No file selected"}
+            </span>
+          </div>
+        )
+      ) : isEditing ? (
         <input
           aria-label={`${label} input`}
           className={styles[classCss]}
@@ -31,39 +53,27 @@ export const EditableProductInput = ({
           name={name}
           onChange={onChange}
           onKeyDown={(e) => cancelWithScape(e, setIsEditing)}
-          placeholder={textProperties[name]}
-          value={
-            updatedPropertyData[name] || updatedPropertyData[name] === ""
-              ? updatedPropertyData[name]
-              : originalPropertyData[name]
-          }
+          placeholder={commonProperties[name]}
+          value={updatedPropertyData[name]}
         />
       ) : (
-        <div className={styles.nonUpdatedData}>
-          <span className={styles.property}>{textProperties[name]}: </span>
-          <span
-            className={styles.value}
-          >{`${originalPropertyData[name]}`}</span>
+        <div className={styles.data}>
+          <span className={styles.property}>{commonProperties[name]}: </span>
+          <span className={styles.value}>{`${updatedPropertyData[name]}`}</span>
         </div>
       )}
       {isEditing ? (
-        <div
-          aria-label={textButtons.save}
-          className={styles.formButton}
-          onClick={(e) =>
-            saveProductDataAndToggleInput(e, onSave, setIsEditing)
-          }
-        >
-          {textButtons ? textButtons.save : "Save"}
-        </div>
+        <ActionButton
+          action={(e) => saveEdition(e)}
+          text={commonButtons.save}
+          className={STYLES.BUTTONS.ACTION}
+        />
       ) : (
-        <div
-          aria-label={textButtons.edit}
-          className={styles.formButton}
-          onClick={() => setIsEditing(true)}
-        >
-          {textButtons.edit}
-        </div>
+        <ActionButton
+          action={() => setIsEditing(true)}
+          text={commonButtons.edit}
+          className={STYLES.BUTTONS.ACTION}
+        />
       )}
     </div>
   )
