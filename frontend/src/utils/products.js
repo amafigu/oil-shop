@@ -1,8 +1,9 @@
 import { uploadToS3 } from "#api/aws/uploadToS3"
+import { createProductRequest } from "#api/products/createProductRequest"
 import { deleteProductById } from "#api/products/deleteProductById"
 import { updateProductDataRequest } from "#api/products/updateProductDataRequest"
 import { ROUTES_PRODUCTS } from "#constants/routes"
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+import { PROCESS_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { validateProductProperty } from "#utils/validation"
 
 export const searchAndNavigateToProduct = (products, searchText, navigate) => {
@@ -113,6 +114,57 @@ export const onProductUpdate = async (
         setNotification("Error by updating data")
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
+    }
+  }
+}
+
+export const onCreateProduct = async (
+  e,
+  product,
+  setMessage,
+  file,
+  setCounter,
+) => {
+  e.preventDefault()
+
+  debugger
+  console.log("product no image", product)
+  try {
+    let image
+    product = { ...product, measure: "ml" }
+
+    if (file) {
+      image = await uploadToS3(file)
+      product = { ...product, image: image }
+    }
+
+    const validProduct = validateProductProperty(product, setMessage)
+    const request = await createProductRequest(validProduct)
+    if (request && request.status === 201) {
+      setMessage(`Product created sucessfully!`)
+      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+      setTimeout(
+        () => setCounter((prevCount) => prevCount + 1),
+        PROCESS_TIMEOUT,
+      )
+      return request
+    }
+    if (request && request.status === 422) {
+      setMessage(
+        `Error by updating data: Can not add product, this product is already existent. Please try with another name, size or category.`,
+      )
+      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+    }
+  } catch (error) {
+    console.error(error)
+    if (error.response && error.response.data.message) {
+      console.error(error.response.data.message)
+      setMessage(`Error by updating data: ${error.response.data.message}`)
+      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+    } else {
+      console.error("error by updating data", error)
+      setMessage("Error by updating data")
+      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
     }
   }
 }
