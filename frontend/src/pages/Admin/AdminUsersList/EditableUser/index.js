@@ -1,34 +1,34 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import NotificationCard from "#components/ui/NotificationCard"
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { initialProductData } from "#constants/products"
+import { DEFAULT_USER_IMAGE } from "#constants/media"
 import { STYLES } from "#constants/styles"
-import useProductContext from "#context/productContext"
+import { initialUserData } from "#constants/users"
+import { useCountUsers } from "#hooks/useCountUsers"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/dataManipulation"
-import { onProductDelete, onProductUpdate } from "#utils/products"
-import { useEffect, useState } from "react"
-import { EditableProductInput } from "./EditableProductInput"
-import styles from "./editableProduct.module.scss"
+import { onDeleteUser, onUpdateUser } from "#utils/users"
 
-export const EditableProduct = ({ product }) => {
-  const productProperties = {
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    image: product.image,
-    size: product.size,
+import { useEffect, useState } from "react"
+import { EditableUserInput } from "./EditableUserInput"
+import styles from "./editableUser.module.scss"
+
+export const EditableUser = ({ user }) => {
+  const userProperties = {
+    firstName: user.name,
+    lastName: user.description,
+    email: user.price,
+    image: user.image,
   }
-  const [updatedProductData, setUpdatedProductData] = useState({
-    ...productProperties,
+  const [updatedUserData, setUpdatedUserData] = useState({
+    ...userProperties,
   })
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const { setCounter } = useProductContext()
+  const { setCounter } = useCountUsers()
   const { translate } = useTranslation()
   const deleteButtonText = translate.components.crud.deleteProduct.button
 
-  useEffect(() => {}, [updatedProductData])
+  useEffect(() => {}, [updatedUserData])
 
   return (
     <article className={styles.editableItem}>
@@ -38,32 +38,30 @@ export const EditableProduct = ({ product }) => {
           <img
             className={styles.image}
             src={
-              updatedProductData.image.image
-                ? DEFAULT_PRODUCT_IMAGE
-                : updatedProductData.image
+              updatedUserData.image.image
+                ? DEFAULT_USER_IMAGE
+                : updatedUserData.image
             }
             alt='product'
           />
         </div>
         <ActionButton
-          action={(e) =>
-            onProductDelete(e, product.id, setNotification, setCounter)
-          }
+          action={(e) => onDeleteUser(e, user.id, setNotification, setCounter)}
           text={deleteButtonText}
           className={STYLES.BUTTONS.ACTION}
         />
       </div>
       <form className={styles.form}>
-        {Object.keys(initialProductData).map((key) => (
-          <EditableProductInput
+        {Object.keys(initialUserData).map((key) => (
+          <EditableUserInput
             label={key}
             name={key}
-            updatedPropertyData={updatedProductData}
+            updatedPropertyData={updatedUserData}
             onChange={
               key !== "image"
                 ? (e) =>
-                    setUpdatedProductData({
-                      ...updatedProductData,
+                    setUpdatedUserData({
+                      ...updatedUserData,
                       [e.target.name]: e.target.value,
                     })
                 : (e) => setFileToUpload(e, setFile)
@@ -71,22 +69,22 @@ export const EditableProduct = ({ product }) => {
             onSave={
               key === "image"
                 ? (e) =>
-                    onProductUpdate(
+                    onUpdateUser(
                       e,
                       key,
-                      product.id,
-                      updatedProductData,
-                      setUpdatedProductData,
+                      user.id,
+                      updatedUserData,
+                      setUpdatedUserData,
                       setNotification,
                       file,
                     )
                 : (e) =>
-                    onProductUpdate(
+                    onUpdateUser(
                       e,
                       key,
-                      product.id,
-                      updatedProductData,
-                      setUpdatedProductData,
+                      user.id,
+                      updatedUserData,
+                      setUpdatedUserData,
                       setNotification,
                     )
             }

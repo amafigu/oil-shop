@@ -1,16 +1,13 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import { UserHeader } from "#components/ui/UserHeader"
-import UsersCrud from "#components/users/UsersCrud"
 import { useCheckIsAdmin } from "#hooks/useCheckIsAdmin"
-import { useState } from "react"
 import { AdminProductsList } from "./AdminProductsList"
+import { AdminUsersList } from "./AdminUsersList"
 import { CreateProduct } from "./CreateProduct"
+import { CreateUser } from "./CreateUser"
 import styles from "./admin.module.scss"
 
 export const Admin = () => {
-  const [emailInUserError, setEmailInUserError] = useState("")
-  const [fieldErrors, setFieldErrors] = useState({})
-
   const { notification } = useCheckIsAdmin()
 
   return (
@@ -20,12 +17,8 @@ export const Admin = () => {
         <UserHeader />
         <AdminProductsList />
         <CreateProduct />
-        <UsersCrud
-          setEmailInUserError={setEmailInUserError}
-          setFieldErrors={setFieldErrors}
-          emailInUserError={emailInUserError}
-          fieldErrors={fieldErrors}
-        />
+        <AdminUsersList />
+        <CreateUser />
       </section>
     </main>
   )

@@ -3,8 +3,6 @@ import ZodValidationErrorsCard from "#components/ui/ZodValidationErrorsCard"
 import { useTranslation } from "#hooks/useTranslation"
 import { useState } from "react"
 import CreateUserForm from "./CreateUserForm"
-import EditableUserData from "./EditableUserData"
-import GetAllUsers from "./GetAllUsers"
 import styles from "./usersCrud.module.scss"
 const UsersCrud = ({
   setEmailInUserError,
@@ -32,18 +30,9 @@ const UsersCrud = ({
       />
       {showUsersSection && (
         <div className={styles.formsContainer}>
-          <div className={styles.crudContainer}>
-            <GetAllUsers
-              refreshAllUsersCounter={refreshAllUsersCounter}
-              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
-            />
-          </div>
+          <div className={styles.crudContainer}></div>
 
-          <div className={styles.crudContainer}>
-            <EditableUserData
-              setRefreshAllUsersCounter={setRefreshAllUsersCounter}
-            />
-          </div>
+          <div className={styles.crudContainer}></div>
 
           <div className={styles.crudContainer}>
             <ToggleButton

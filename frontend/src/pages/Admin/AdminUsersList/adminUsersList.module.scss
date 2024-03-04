@@ -7,11 +7,11 @@
   margin: theme.$spacing-regular 0;
 }
 
-.itemsList {
+.productsList {
   @include flex-column;
 }
 
-.item {
+.product {
   display: flex;
 }
 

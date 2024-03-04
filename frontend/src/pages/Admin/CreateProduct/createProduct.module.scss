@@ -9,10 +9,6 @@
   border-radius: theme.$border-radius-small;
 }
 
-.createProductFormWrapper {
-  @include component-container-large;
-}
-
 .form {
   width: 100%;
 }
