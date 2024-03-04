@@ -132,6 +132,20 @@ router.get('/user/role/:roleId', async (req, res) => {
   }
 });
 
+router.delete('/:id', decodeJWT, async (req, res) => {
+  try {
+    const result = await db.users.destroy({
+      where: { id: req.params.id },
+    });
+    if (!result) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.json({ message: 'User deleted successfully' });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
 router.delete('/user/:email', decodeJWT, async (req, res) => {
   try {
     const result = await db.users.destroy({
