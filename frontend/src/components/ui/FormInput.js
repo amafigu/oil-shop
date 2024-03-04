@@ -2,7 +2,7 @@ import { camelCaseToTitleCase } from "#utils/stringManipulation"
 import React from "react"
 import styles from "./formInput.module.scss"
 
-const FormInput = ({
+export const FormInput = ({
   classCss,
   name,
   value,
@@ -12,7 +12,7 @@ const FormInput = ({
   type,
 }) => {
   return (
-    <div className={styles.inputContainer}>
+    <div className={styles.inputContainer} aria-label={`${name} input`}>
       <label className={styles.label} htmlFor={name}>
         {label}
       </label>
@@ -23,11 +23,9 @@ const FormInput = ({
         onChange={onChangeListener}
         value={value}
         placeholder={camelCaseToTitleCase(placeholder)}
-        id={name}
         required
+        autoComplete='true'
       />
     </div>
   )
 }
-
-export default FormInput

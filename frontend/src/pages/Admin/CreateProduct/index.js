@@ -1,4 +1,4 @@
-import FormInput from "#components/ui/FormInput"
+import { FormInput } from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import { ToggleButton } from "#components/ui/ToggleButton"
 import { emptyCreateProductObj } from "#constants/products"
