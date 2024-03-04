@@ -130,19 +130,6 @@ export const validateProductProperty = (dataObject, setErrorNotification) => {
   return dataObject
 }
 
-export const ignorePropertiesWithEmptyValue = (dataObject) => {
-  return Object.keys(dataObject)
-    .filter(
-      (key) =>
-        dataObject[key] !== "" &&
-        dataObject[key] !== null &&
-        dataObject[key] !== undefined,
-    )
-    .reduce((object, key) => {
-      object[key] = dataObject[key]
-      return object
-    }, {})
-}
 export const ignoreUnsavedProperties = (dataObject, propertyName) => {
   return { [propertyName]: dataObject[propertyName] }
 }
