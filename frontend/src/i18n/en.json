@@ -185,9 +185,13 @@
     "addOneToCartButton": {
       "text": "add to cart"
     },
-
     "adminProductsList": {
       "title": "Products management",
+      "showButton": "Show list",
+      "hideButton": "Hide list"
+    },
+    "adminUsersList": {
+      "title": "Users management",
       "showButton": "Show list",
       "hideButton": "Hide list"
     },
