@@ -17,35 +17,30 @@ export const Login = () => {
   scrollToTop()
 
   return (
-    <main className={styles.loginPageWrapper}>
+    <main className={styles.loginPageWrapper} aria-label='Login page'>
       {errorMessage && <NotificationCard message={errorMessage} />}
       <div className={styles.subNavbarContainer}>
         <SubNavbar />
       </div>
       <div className={styles.loginPage}>
-        <section className={styles.languageOptionsAndFormContainer}>
-          <div className={styles.logoAndFormContainer}>
-            <div className={styles.logoContainer}>
-              <img
-                className={styles.logo}
-                src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
-                alt='logo'
-              />
-            </div>
-            <div className={styles.formContainer}>
-              <LoginForm />
-            </div>
+        <div className={styles.logoAndFormContainer}>
+          <div className={styles.logoContainer}>
+            <img
+              className={styles.logo}
+              src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
+              alt='logo'
+            />
           </div>
-          <div className={styles.divider}>{text.or}</div>
-          <div className={styles.linkContainer}>
-            <span>
-              {text.haveAccount}{" "}
-              <Link to={ROUTES_SIGN_UP} className={styles.link}>
-                {text.signUp}
-              </Link>
-            </span>
-          </div>
-        </section>
+          <LoginForm />
+        </div>
+        <div className={styles.linkContainer}>
+          <span aria-label='Create account'>
+            {text.haveAccount}{" "}
+            <Link to={ROUTES_SIGN_UP} className={styles.link}>
+              {text.signUp}
+            </Link>
+          </span>
+        </div>
       </div>
     </main>
   )
