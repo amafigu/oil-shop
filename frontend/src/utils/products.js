@@ -127,8 +127,6 @@ export const onCreateProduct = async (
 ) => {
   e.preventDefault()
 
-  debugger
-  console.log("product no image", product)
   try {
     let image
     product = { ...product, measure: "ml" }
