@@ -208,6 +208,11 @@
       "showButton": "Liste anzeigen",
       "hideButton": "Liste ausblenden"
     },
+    "adminUsersList": {
+      "title": "Benutzerverwaltung",
+      "showButton": "Benutzern anzeigen",
+      "hideButton": "Liste ausblenden"
+    },
     "buttons": {
       "actions": {
         "commons": {
