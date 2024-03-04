@@ -1,11 +1,11 @@
-import { API_PRODUCTS_PRODUCT } from "#constants/api"
+import { API_PRODUCTS_PRODUCT_CREATE } from "#constants/api"
 import axios from "axios"
 
-export const updateProductDataRequest = async (productId, propertyObj) => {
+export const createProductRequest = async (dataObject) => {
   try {
-    const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT}/${productId}`,
-      propertyObj,
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_CREATE}`,
+      dataObject,
       { withCredentials: true },
     )
     return response

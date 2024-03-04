@@ -5,3 +5,13 @@ export const initialProductData = {
   image: "",
   size: "",
 }
+
+export const emptyCreateProductObj = {
+  name: "",
+  productCategoryId: "",
+  description: "",
+  price: "",
+  details: "",
+  size: "",
+  image: "",
+}

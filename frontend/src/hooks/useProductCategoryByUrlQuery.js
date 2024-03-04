@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 
-export const useProductCategory = () => {
+export const useProductCategoryByUrlQuery = () => {
   const [category, setCategory] = useState("")
   const location = useLocation()
   const params = new URLSearchParams(location.search)

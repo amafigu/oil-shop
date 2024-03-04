@@ -231,6 +231,10 @@
         }
       }
     },
+    "createProductForm": {
+      "showButton": "Produkt erstellen",
+      "hideButton": "Formular ausblenden"
+    },
     "navbar": {
       "home": "Home",
       "shop": "Shop",
