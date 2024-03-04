@@ -20,3 +20,15 @@ export const submitGuestUserWithOrders = async (
     }
   }
 }
+
+export const onCreateUser = () => {
+  console.log("onCreateUser")
+}
+
+export const onDeleteUser = () => {
+  console.log("onDeleteUser")
+}
+
+export const onUpdateUser = () => {
+  console.log("onDeleteUser")
+}
