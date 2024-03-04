@@ -1,12 +1,12 @@
 import Sidebar from "#components/ui/Sidebar"
-import { useProductCategory } from "#hooks/useProductCategory"
+import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
 import { scrollToTop } from "#utils/render"
 import React from "react"
 import { SortedProductsList } from "./SortedProductsList"
 import styles from "./shop.module.scss"
 
 export const Shop = ({ productCategories }) => {
-  const { category, setCategory } = useProductCategory()
+  const { category, setCategory } = useProductCategoryByUrlQuery()
   scrollToTop()
 
   return (

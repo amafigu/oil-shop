@@ -10,6 +10,7 @@ export const updateProductDataRequest = async (productId, propertyObj) => {
     )
     return response
   } catch (error) {
+    // handle Zod backend validator messages
     if (error.response && error.response.dataconsole.error) {
       if (error.response.data.message) {
         console.error(`${error.response.data.message}`)
