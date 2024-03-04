@@ -7,17 +7,16 @@ import { EditableProduct } from "./EditableProduct"
 import styles from "./adminProductsList.module.scss"
 export const AdminProductsList = () => {
   const [showProducts, setShowProducts] = useState(false)
-  const { translate } = useTranslation()
-  const text = translate.components.crud.getAllProducts
+  const { components } = useTranslation()
+  const text = components.adminProductsList
   const { products } = useGetProducts()
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  useEffect(() => {}, [products])
   return (
     <section
-      className={styles.adminProductsList}
-      aria-label='Products list section for Admin'
+      className={styles.section}
+      aria-label='Products list section for admins'
     >
+      <h2>{components.adminProductsList.title}</h2>
       <ToggleButton
         isVisible={showProducts}
         onToggle={setShowProducts}
@@ -26,15 +25,11 @@ export const AdminProductsList = () => {
         classCss={STYLES.BUTTONS.SHOW_HIDE}
       />
       {showProducts && (
-        <ul className={styles.show}>
+        <ul className={styles.productsList}>
           {products &&
             products.map((product) => (
-              <li className={styles.itemRow} key={product.id}>
-                <div className={styles.editableInputsContainer}>
-                  <div className={styles.atributesContainer}>
-                    <EditableProduct product={product} />
-                  </div>
-                </div>
+              <li className={styles.product} key={product.id}>
+                <EditableProduct product={product} />
               </li>
             ))}
         </ul>
