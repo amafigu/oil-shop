@@ -1,3 +1,5 @@
+import { emailPattern, startWithCapitalLetter } from "#constants/regex"
+
 export const validateUserAndProductFieldsInDataObject = (
   dataObject,
   setErrorNotification,
@@ -16,27 +18,9 @@ export const validateUserAndProductFieldsInDataObject = (
       propertyValue = propertyValue.toString().trim()
       dataObject[property] = propertyValue
     }
-    // product validation
-    if (property === "price") {
-      propertyValue = propertyValue.trim()
-      propertyValue = Number(propertyValue).toFixed(2)
-      propertyValue = Number(propertyValue)
-      dataObject[property] = propertyValue
-    }
 
-    if (property === "size" || property === "productCategoryId") {
-      propertyValue = propertyValue.toString().trim()
-      propertyValue = Number(propertyValue)
-      dataObject[property] = propertyValue
-    }
-
-    if (property === "name") {
-      propertyValue = propertyValue.toString().trim()
-      dataObject[property] = propertyValue
-    }
-    // user validation
     if (property === "firstName" || property === "lastName") {
-      if (!/^[A-Z]/.test(propertyValue)) {
+      if (!startWithCapitalLetter.test(propertyValue)) {
         setErrorNotification("Name should start with a capital letter")
         setTimeout(() => setErrorNotification(null), 3000)
       }
@@ -55,8 +39,7 @@ export const validateUserAndProductFieldsInDataObject = (
     }
 
     if (property === "email") {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(propertyValue)) {
+      if (!emailPattern.test(propertyValue)) {
         console.error("Invalid email format.")
         setErrorNotification("Invalid email format.")
         setTimeout(() => setErrorNotification(null), 3000)
@@ -91,6 +74,56 @@ export const validateUserAndProductFieldsInDataObject = (
         setTimeout(() => setErrorNotification(null), 3000)
         return
       }
+    }
+  }
+
+  return dataObject
+}
+
+export const validateProductProperty = (dataObject, setErrorNotification) => {
+  for (let property in dataObject) {
+    const propertyValueLength = dataObject[property].length
+    let propertyValue = dataObject[property]
+
+    if (propertyValueLength > 256) {
+      setErrorNotification("Property value is too long, 256 is the max")
+      setTimeout(() => setErrorNotification(null), 2000)
+      return
+    }
+    if (propertyValue === "" || propertyValue === undefined) {
+      setErrorNotification("No changes made.")
+      setTimeout(() => setErrorNotification(null), 2000)
+      return
+    }
+
+    if (property === "image") {
+      propertyValue = propertyValue.toString().trim()
+      dataObject[property] = propertyValue
+    }
+
+    if (property === "price") {
+      propertyValue = propertyValue.trim()
+      propertyValue = Number(propertyValue).toFixed(2)
+      propertyValue = Number(propertyValue)
+      dataObject[property] = propertyValue
+    }
+
+    if (property === "size") {
+      propertyValue = Math.trunc(propertyValue.toString().trim())
+      console.log(typeof propertyValue)
+      propertyValue = Number(propertyValue)
+      dataObject[property] = propertyValue
+    }
+
+    if (property === "productCategoryId") {
+      propertyValue = propertyValue.toString().trim()
+      propertyValue = Number(propertyValue)
+      dataObject[property] = propertyValue
+    }
+
+    if (property === "name") {
+      propertyValue = propertyValue.toString().trim()
+      dataObject[property] = propertyValue
     }
   }
 
