@@ -1,4 +1,4 @@
-import FormInput from "#components/ui/FormInput"
+import { FormInput } from "#components/ui/FormInput"
 import { ROUTES_CART } from "#constants/routes"
 import { initialShippingFormData } from "#constants/shippingData"
 import { STYLES } from "#constants/styles"
