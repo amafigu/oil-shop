@@ -8,7 +8,8 @@
     "test": "jest --testTimeout=10000",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-last-migrate": "npx sequelize db:migrate:undo",
-    "clear-jest": "jest --clearCache"
+    "clear-jest": "jest --clearCache",
+    "seed:products": "node seeders/productsSeed.js"
   },
   "jest": {
     "transform": {

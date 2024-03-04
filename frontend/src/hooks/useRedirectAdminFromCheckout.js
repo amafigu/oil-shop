@@ -4,7 +4,7 @@ import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export const useCheckAdminAndRedirect = () => {
+export const useRedirectAdminFromCheckout = () => {
   const [notification, setNotification] = useState(null)
   const { user, isLoggedIn, userId } = useUserContext()
 

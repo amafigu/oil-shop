@@ -5,7 +5,7 @@ import {
   ROUTES_SIGN_UP,
 } from "#constants/routes"
 import useCartContext from "#context/cartContext"
-import { useCheckAdminAndRedirect } from "#hooks/useCheckAdminAndRedirect"
+import { useRedirectAdminFromCheckout } from "#hooks/useRedirectAdminFromCheckout"
 import { useTranslation } from "#hooks/useTranslation"
 import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -18,7 +18,7 @@ export const Shipping = () => {
   const { cart } = useCartContext()
   const text = translate.pages.shipping
   const { notification, setNotification, isLoggedIn } =
-    useCheckAdminAndRedirect()
+    useRedirectAdminFromCheckout()
 
   useEffect(() => {
     if (cart.length <= 0) {

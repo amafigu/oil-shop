@@ -1,12 +1,12 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import { useCheckAdminAndRedirect } from "#hooks/useCheckAdminAndRedirect"
+import { useRedirectAdminFromCheckout } from "#hooks/useRedirectAdminFromCheckout"
 import { scrollToTop } from "#utils/render"
 import { PaymentForm } from "./PaymentForm"
 import styles from "./payment.module.scss"
 
 export const Payment = () => {
   const { notification, setNotification, isLoggedIn, userId } =
-    useCheckAdminAndRedirect()
+    useRedirectAdminFromCheckout()
 
   scrollToTop()
 

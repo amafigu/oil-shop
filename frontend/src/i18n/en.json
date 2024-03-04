@@ -10,7 +10,7 @@
         "secondPart": "you are loggin as a",
         "thirdPart": "."
       },
-      "crud": {
+      "commonProperties": {
         "users": {
           "create": "",
           "delete": "",
@@ -184,6 +184,12 @@
   "components": {
     "addOneToCartButton": {
       "text": "add to cart"
+    },
+
+    "adminProductsList": {
+      "title": "Products management",
+      "showButton": "Show list",
+      "hideButton": "Hide list"
     },
     "buttons": {
       "actions": {
@@ -460,6 +466,7 @@
     "email": "Email",
     "firstName": "First name",
     "imageUrl": "Image Url",
+    "image": "Image",
     "lastName": "Last name",
     "password": "Password",
     "measure": "Measure",
@@ -471,5 +478,11 @@
     "size": "Size",
     "street": "Street",
     "state": "State"
+  },
+  "commonButtons": {
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save"
   }
 }

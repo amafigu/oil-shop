@@ -3,5 +3,11 @@
 @import "#styles/helpers/mixins";
 
 .actionButton {
+  height: 36px !important;
+
   @include action-button;
+
+  @include media.mobile {
+    overflow: hidden;
+  }
 }

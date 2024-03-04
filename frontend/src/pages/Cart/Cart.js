@@ -1,6 +1,6 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import { useCart } from "#hooks/useCart"
-import { useCheckAdminAndRedirect } from "#hooks/useCheckAdminAndRedirect"
+import { useRedirectAdminFromCheckout } from "#hooks/useRedirectAdminFromCheckout"
 import { useTranslation } from "#hooks/useTranslation"
 import { totalCost } from "#utils/cart"
 import { scrollToTop } from "#utils/render"
@@ -11,7 +11,7 @@ import styles from "./cart.module.scss"
 
 export const Cart = () => {
   const { cart } = useCart()
-  const { notification } = useCheckAdminAndRedirect()
+  const { notification } = useRedirectAdminFromCheckout()
   const { translate } = useTranslation()
   const text = translate.pages.cart
   scrollToTop()

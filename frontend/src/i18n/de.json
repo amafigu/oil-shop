@@ -203,6 +203,11 @@
     "addOneToCartButton": {
       "text": "in den Warenkorb"
     },
+    "adminProductsList": {
+      "title": "Produktverwaltung",
+      "showButton": "Liste anzeigen",
+      "hideButton": "Liste ausblenden"
+    },
     "buttons": {
       "actions": {
         "commons": {
@@ -470,6 +475,7 @@
     "email": "E-Mail",
     "firstName": "Vorname",
     "imageUrl": "Bild URL",
+    "image": "Bild",
     "lastName": "Nachname",
     "measure": "Maß",
     "name": "Name",
@@ -481,5 +487,11 @@
     "state": "Bundesland",
     "size": "Größe",
     "street": "Straße"
+  },
+  "commonButtons": {
+    "create": "Erstellen",
+    "delete": "Löschen",
+    "edit": "Editieren",
+    "save": "Speichern"
   }
 }

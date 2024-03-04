@@ -19,7 +19,7 @@ export const ProductProvider = ({ children }) => {
       }
     }
     getProducts()
-  }, [])
+  }, [counter])
 
   return (
     <ProductContext.Provider
