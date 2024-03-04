@@ -1,6 +1,9 @@
+import { uploadToS3 } from "#api/aws/uploadToS3"
 import { deleteProductById } from "#api/products/deleteProductById"
+import { updateProductDataRequest } from "#api/products/updateProductDataRequest"
 import { ROUTES_PRODUCTS } from "#constants/routes"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+import { validateProductProperty } from "#utils/validation"
 
 export const searchAndNavigateToProduct = (products, searchText, navigate) => {
   const match = products.find(
@@ -31,17 +34,85 @@ export const filteredProducts = (products, category) =>
     (product) => product.category.name === category || category === "all",
   )
 
-export const deleteProductAndUpdateState = async (id, setNotification) => {
+export const onProductDelete = async (
+  e,
+  productId,
+  setNotification,
+  setCounter,
+) => {
+  e.preventDefault()
   try {
-    const deleteProductResponse = await deleteProductById(id)
-
-    if (deleteProductResponse) {
-      setNotification("product deleted")
-      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+    const response = await deleteProductById(productId)
+    if (response && response.status === 200) {
+      if (setNotification) {
+        setNotification("product deleted")
+        setTimeout(() => {
+          setNotification(null)
+        }, SHORT_MESSAGE_TIMEOUT)
+      }
+      if (setCounter) {
+        setTimeout(() => {
+          setCounter((prevCount) => Number(prevCount) + 1)
+        }, 500)
+      }
     }
   } catch (error) {
-    setNotification("can not delete product")
-    setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-    console.error("Can not delete product", error)
+    console.error(error)
+  }
+}
+
+export const onProductUpdate = async (
+  e,
+  key,
+  productId,
+  updatedProductData,
+  setUpdatedProductData,
+  setNotification,
+  file,
+) => {
+  e.preventDefault()
+  console.log(key)
+
+  try {
+    let validProperty
+    let image
+
+    if (key === "image" && file) {
+      image = await uploadToS3(file)
+      validProperty = { [key]: image }
+    } else {
+      const toBevalidProperty = { [key]: updatedProductData[key] }
+      validProperty = validateProductProperty(
+        toBevalidProperty,
+        setNotification,
+      )
+    }
+    if (!validProperty) {
+      return
+    }
+
+    const dataRequest = await updateProductDataRequest(productId, validProperty)
+    if (dataRequest && dataRequest.status === 200) {
+      const updatedProduct = dataRequest.data.product
+      setUpdatedProductData(updatedProduct)
+      return updatedProduct
+    }
+  } catch (error) {
+    console.error(error)
+    if (error.response && error.response.data.message) {
+      console.error(error.response.data.message)
+      if (setNotification) {
+        setNotification(
+          `Error by updating data: ${error.response.data.message}`,
+        )
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
+    } else {
+      console.error(error)
+      if (setNotification) {
+        setNotification("Error by updating data")
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
+    }
   }
 }
