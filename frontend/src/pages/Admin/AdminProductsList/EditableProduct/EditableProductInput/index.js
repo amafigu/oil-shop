@@ -21,44 +21,59 @@ export const EditableProductInput = ({
     onSave(e)
     setIsEditing(false)
   }
+
   return (
     <div className={styles.item}>
       {name === "image" ? (
         isEditing ? (
-          <div className={styles.nonUpdatedData}>
-            <label htmlFor='image' className={styles.label}>
-              image
+          <>
+            <label htmlFor={name} className={styles.hideForSemantic}>
+              {commonProperties[name]}
             </label>
             <input
-              className={styles.fileInput}
+              className={styles[classCss]}
               type='file'
               name='image'
               id='fileInput'
               onChange={onChange}
             />
-          </div>
+          </>
         ) : (
-          <div className={styles.nonUpdatedData}>
-            <span className={styles.property}>image: </span>
+          <div className={styles.data}>
+            <span className={styles.property}>
+              {`${commonProperties[name]}:`}{" "}
+            </span>
             <span className={styles.value}>
               {file ? file.name : "No file selected"}
             </span>
           </div>
         )
       ) : isEditing ? (
-        <input
-          aria-label={`${label} input`}
-          className={styles[classCss]}
-          label={label}
-          name={name}
-          onChange={onChange}
-          onKeyDown={(e) => cancelWithScape(e, setIsEditing)}
-          placeholder={commonProperties[name]}
-          value={updatedPropertyData[name]}
-        />
+        <>
+          <label htmlFor={name} className={styles.hideForSemantic}>
+            {commonProperties[name]}
+          </label>
+          <input
+            aria-label={`${label} input`}
+            className={styles[classCss]}
+            label={label}
+            name={name}
+            onChange={onChange}
+            onKeyDown={(e) => cancelWithScape(e, setIsEditing)}
+            placeholder={commonProperties[name]}
+            value={
+              name === "size" || name === "price"
+                ? Number(updatedPropertyData[name])
+                : updatedPropertyData[name]
+            }
+            type={name === "size" || name === "price" ? "number" : "text"}
+          />
+        </>
       ) : (
         <div className={styles.data}>
-          <span className={styles.property}>{commonProperties[name]}: </span>
+          <span
+            className={styles.property}
+          >{`${commonProperties[name]}:`}</span>
           <span className={styles.value}>{`${updatedPropertyData[name]}`}</span>
         </div>
       )}
