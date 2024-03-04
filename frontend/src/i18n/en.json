@@ -214,6 +214,10 @@
         }
       }
     },
+    "createProductForm": {
+      "showButton": "Create product",
+      "hideButton": "Hide form"
+    },
     "navbar": {
       "home": "Home",
       "shop": "Shop",
