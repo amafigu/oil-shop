@@ -185,6 +185,12 @@
     "addOneToCartButton": {
       "text": "add to cart"
     },
+
+    "adminProductsList": {
+      "title": "Products management",
+      "showButton": "Show list",
+      "hideButton": "Hide list"
+    },
     "buttons": {
       "actions": {
         "commons": {
@@ -460,6 +466,7 @@
     "email": "Email",
     "firstName": "First name",
     "imageUrl": "Image Url",
+    "image": "Image",
     "lastName": "Last name",
     "password": "Password",
     "measure": "Measure",
