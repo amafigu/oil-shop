@@ -27,10 +27,10 @@ export const AdminUsersList = () => {
         classCss={STYLES.BUTTONS.SHOW_HIDE}
       />
       {showUsers && (
-        <ul className={styles.productsList}>
+        <ul className={styles.itemsList}>
           {users &&
             users.map((user) => (
-              <li className={styles.user} key={user.id}>
+              <li className={styles.item} key={user.id}>
                 <EditableUser user={user} />
               </li>
             ))}
