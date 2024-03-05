@@ -1,7 +1,10 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import { UserHeader } from "#components/ui/UserHeader"
 import { useCheckIsAdmin } from "#hooks/useCheckIsAdmin"
+import { useCountUsers } from "#hooks/useCountUsers"
 import { useGetUsers } from "#hooks/useGetUsers"
+import { useTranslation } from "#hooks/useTranslation"
+import { onDeleteUser, onUpdateUser } from "#utils/users"
 import { AdminProductsList } from "./AdminProductsList"
 import { AdminUsersList } from "./AdminUsersList"
 import { CreateProduct } from "./CreateProduct"
@@ -13,7 +16,8 @@ import styles from "./admin.module.scss"
 export const Admin = () => {
   const { notification } = useCheckIsAdmin()
   const { users } = useGetUsers()
-
+  const { setCounter } = useCountUsers()
+  const { components } = useTranslation()
   return (
     <main className={styles.adminPage}>
       {notification && <NotificationCard message={notification} />}
@@ -26,7 +30,13 @@ export const Admin = () => {
         <EditableItemsList
           itemsList={users}
           ItemComponent={EditableItem}
-          title={"USER LIST"}
+          title={components.adminUsersList.title}
+          itemProps={{
+            setCounter: setCounter,
+            onSave: onUpdateUser,
+            onDelete: onDeleteUser,
+            renderItemProps: ["firstName", "lastName", "email", "image"],
+          }}
         />
       </section>
     </main>

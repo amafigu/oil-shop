@@ -7,6 +7,7 @@ export const EditableItemsList = ({
   title,
   itemProps = {},
 }) => {
+  console.log(itemProps)
   useEffect(() => {}, [itemsList])
   return (
     <section className={styles.section} aria-label={title}>
@@ -16,11 +17,7 @@ export const EditableItemsList = ({
           {itemsList &&
             itemsList.map((item, index) => (
               <li className={styles.item} key={item.id || index}>
-                <ItemComponent
-                  item={item}
-                  renderItemProps={["firstName", "lastName", "email", "image"]}
-                  {...itemProps}
-                />
+                <ItemComponent item={item} {...itemProps} />
               </li>
             ))}
         </ul>

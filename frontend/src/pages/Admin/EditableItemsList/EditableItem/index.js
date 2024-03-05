@@ -11,14 +11,15 @@ import styles from "./editableItem.module.scss"
 export const EditableItem = ({
   item,
   renderItemProps,
-  itemProps,
   setCounter,
+  onSave,
+  onDelete,
 }) => {
   const objectAttribute = renderItemProps.reduce((acc, val) => {
     acc[val] = item[val]
     return acc
   }, {})
-  console.log(objectAttribute)
+
   const [updatedItemData, setUpdatedItemData] = useState({
     ...objectAttribute,
   })
@@ -27,11 +28,9 @@ export const EditableItem = ({
   })
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-
   const { translate } = useTranslation()
   const deleteButtonText = translate.components.crud.deleteUser.button
 
-  console.log(updatedItemData)
   return (
     <article className={styles.editableItem}>
       {notification && <NotificationCard message={notification} />}
@@ -44,16 +43,14 @@ export const EditableItem = ({
           />
         </div>
         <ActionButton
-          action={(e) =>
-            itemProps.onDelete(e, item.id, setNotification, setCounter)
-          }
+          action={(e) => onDelete(e, item.id, setNotification, setCounter)}
           text={deleteButtonText}
           className={STYLES.BUTTONS.ACTION}
         />
       </div>
       {
         <form className={""}>
-          {Object.keys(renderItemProps).map((key) => (
+          {Object.keys(objectAttribute).map((key) => (
             <EditableItemInput
               label={key}
               name={key}
@@ -70,7 +67,7 @@ export const EditableItem = ({
               onSave={
                 key === "image"
                   ? (e) =>
-                      itemProps.onUpdate(
+                      onSave(
                         e,
                         key,
                         item.id,
@@ -82,7 +79,7 @@ export const EditableItem = ({
                         file,
                       )
                   : (e) =>
-                      itemProps.onUpdate(
+                      onSave(
                         e,
                         key,
                         item.id,
