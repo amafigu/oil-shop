@@ -7,7 +7,7 @@ import { useCountUsers } from "#hooks/useCountUsers"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/dataManipulation"
 import { onDeleteUser, onUpdateUser } from "#utils/users"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { EditableUserInput } from "./EditableUserInput"
 import styles from "./editableUser.module.scss"
 
@@ -26,12 +26,10 @@ export const EditableUser = ({ user }) => {
   })
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const [propsChangeCounter, setPropsChangeCounter] = useState(0)
+
   const { setCounter } = useCountUsers()
   const { translate } = useTranslation()
   const deleteButtonText = translate.components.crud.deleteUser.button
-
-  useEffect(() => {}, [propsChangeCounter])
 
   return (
     <article className={styles.editableItem}>
@@ -40,10 +38,8 @@ export const EditableUser = ({ user }) => {
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
-            src={
-              updatedUserData.image ? DEFAULT_USER_IMAGE : updatedUserData.image
-            }
-            alt='product'
+            src={updatedUserData.image || DEFAULT_USER_IMAGE}
+            alt='user'
           />
         </div>
         <ActionButton
@@ -60,7 +56,7 @@ export const EditableUser = ({ user }) => {
             updatedPropertyData={updatedUserData}
             onChange={
               key === "image"
-                ? (e) => setFileToUpload(e, setFile, setPropsChangeCounter)
+                ? (e) => setFileToUpload(e, setFile)
                 : (e) =>
                     setUpdatedUserData({
                       ...updatedUserData,
@@ -75,6 +71,7 @@ export const EditableUser = ({ user }) => {
                       key,
                       user.id,
                       updatedUserData,
+                      nonUpdatedUserData,
                       setUpdatedUserData,
                       setNonUpdatedUserData,
                       setNotification,
@@ -88,6 +85,7 @@ export const EditableUser = ({ user }) => {
                       updatedUserData,
                       nonUpdatedUserData,
                       setUpdatedUserData,
+                      setNonUpdatedUserData,
                       setNotification,
                     )
             }

@@ -12,7 +12,7 @@ export const AdminUsersList = () => {
   const text = components.adminUsersList
   const { users } = useGetUsers()
   useEffect(() => {}, [users])
-  console.log(users)
+
   return (
     <section
       className={styles.section}
