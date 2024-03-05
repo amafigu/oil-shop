@@ -329,6 +329,11 @@
         "error": "Kann nicht alle Produkte finden"
       }
     },
+    "createUserForm": {
+      "submitButton": "Benuzter erstellen",
+      "showButton": "Formular anzeigen",
+      "hideButton": "Formular ausblenden"
+    },
     "editableListProductData": {
       "deleteButton": {
         "sucess": "Produkt erfolgreich gelöscht",

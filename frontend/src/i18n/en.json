@@ -319,6 +319,11 @@
         "error": "Can not see all products"
       }
     },
+    "createUserForm": {
+      "submitButton": "Create User",
+      "showButton": "Show Form",
+      "hideButton": "Hide Form"
+    },
     "editableListProductData": {
       "deleteButton": {
         "sucess": "Product successfully deleted",
