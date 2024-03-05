@@ -10,6 +10,5 @@ export const initialUserData = {
   firstName: "",
   lastName: "",
   email: "",
-  password: "",
   image: "",
 }
