@@ -7,28 +7,31 @@ import { useCountUsers } from "#hooks/useCountUsers"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/dataManipulation"
 import { onDeleteUser, onUpdateUser } from "#utils/users"
-
 import { useEffect, useState } from "react"
 import { EditableUserInput } from "./EditableUserInput"
 import styles from "./editableUser.module.scss"
 
 export const EditableUser = ({ user }) => {
   const userProperties = {
-    firstName: user.name,
-    lastName: user.description,
-    email: user.price,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
     image: user.image,
   }
   const [updatedUserData, setUpdatedUserData] = useState({
     ...userProperties,
   })
+  const [nonUpdatedUserData, setNonUpdatedUserData] = useState({
+    ...userProperties,
+  })
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
+  const [propsChangeCounter, setPropsChangeCounter] = useState(0)
   const { setCounter } = useCountUsers()
   const { translate } = useTranslation()
-  const deleteButtonText = translate.components.crud.deleteProduct.button
+  const deleteButtonText = translate.components.crud.deleteUser.button
 
-  useEffect(() => {}, [updatedUserData])
+  useEffect(() => {}, [propsChangeCounter])
 
   return (
     <article className={styles.editableItem}>
@@ -38,9 +41,7 @@ export const EditableUser = ({ user }) => {
           <img
             className={styles.image}
             src={
-              updatedUserData.image.image
-                ? DEFAULT_USER_IMAGE
-                : updatedUserData.image
+              updatedUserData.image ? DEFAULT_USER_IMAGE : updatedUserData.image
             }
             alt='product'
           />
@@ -58,13 +59,13 @@ export const EditableUser = ({ user }) => {
             name={key}
             updatedPropertyData={updatedUserData}
             onChange={
-              key !== "image"
-                ? (e) =>
+              key === "image"
+                ? (e) => setFileToUpload(e, setFile, setPropsChangeCounter)
+                : (e) =>
                     setUpdatedUserData({
                       ...updatedUserData,
                       [e.target.name]: e.target.value,
                     })
-                : (e) => setFileToUpload(e, setFile)
             }
             onSave={
               key === "image"
@@ -75,6 +76,7 @@ export const EditableUser = ({ user }) => {
                       user.id,
                       updatedUserData,
                       setUpdatedUserData,
+                      setNonUpdatedUserData,
                       setNotification,
                       file,
                     )
@@ -84,6 +86,7 @@ export const EditableUser = ({ user }) => {
                       key,
                       user.id,
                       updatedUserData,
+                      nonUpdatedUserData,
                       setUpdatedUserData,
                       setNotification,
                     )

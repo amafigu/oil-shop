@@ -61,11 +61,7 @@ export const EditableUserInput = ({
             onChange={onChange}
             onKeyDown={(e) => cancelWithScape(e, setIsEditing)}
             placeholder={commonProperties[name]}
-            value={
-              name === "size" || name === "price"
-                ? Number(updatedPropertyData[name])
-                : updatedPropertyData[name]
-            }
+            value={updatedPropertyData[name]}
             type={name === "size" || name === "price" ? "number" : "text"}
           />
         </>
