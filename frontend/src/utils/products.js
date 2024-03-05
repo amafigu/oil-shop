@@ -35,7 +35,7 @@ export const filteredProducts = (products, category) =>
     (product) => product.category.name === category || category === "all",
   )
 
-export const onProductDelete = async (
+export const onDeleteProduct = async (
   e,
   productId,
   setNotification,
@@ -62,7 +62,7 @@ export const onProductDelete = async (
   }
 }
 
-export const onProductUpdate = async (
+export const onUpdateProduct = async (
   e,
   key,
   productId,
