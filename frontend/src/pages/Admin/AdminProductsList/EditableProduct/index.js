@@ -22,6 +22,10 @@ export const EditableProduct = ({ product }) => {
   const [updatedProductData, setUpdatedProductData] = useState({
     ...productProperties,
   })
+  const [nonUpdatedProductData, setNonUpdatedProductData] = useState({
+    ...productProperties,
+  })
+
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
   const { setCounter } = useProductContext()
@@ -37,11 +41,7 @@ export const EditableProduct = ({ product }) => {
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
-            src={
-              updatedProductData.image.image
-                ? DEFAULT_PRODUCT_IMAGE
-                : updatedProductData.image
-            }
+            src={updatedProductData.image || DEFAULT_PRODUCT_IMAGE}
             alt='product'
           />
         </div>
@@ -76,7 +76,9 @@ export const EditableProduct = ({ product }) => {
                       key,
                       product.id,
                       updatedProductData,
+                      nonUpdatedProductData,
                       setUpdatedProductData,
+                      setNonUpdatedProductData,
                       setNotification,
                       file,
                     )
@@ -86,7 +88,9 @@ export const EditableProduct = ({ product }) => {
                       key,
                       product.id,
                       updatedProductData,
+                      nonUpdatedProductData,
                       setUpdatedProductData,
+                      setNonUpdatedProductData,
                       setNotification,
                     )
             }
