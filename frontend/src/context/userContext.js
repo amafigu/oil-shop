@@ -1,4 +1,5 @@
 import { verifyToken } from "#api/auth/verifyToken"
+import { getAllUsers } from "#api/users/getAllUsers"
 import { getLoggedInUser } from "#api/users/getLoggedInUser"
 import { createContext, useContext, useEffect, useState } from "react"
 
@@ -10,6 +11,8 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [userEmail, setUserEmail] = useState("")
   const [userId, setUserId] = useState(null)
+  const [users, setUsers] = useState([])
+  const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -48,6 +51,21 @@ export const UserProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn])
 
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const response = await getAllUsers()
+        if (response && response.status === 200) {
+          console.log(response.data)
+          setUsers(response.data)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getUsers()
+  }, [counter])
+
   return (
     <UserContext.Provider
       value={{
@@ -60,6 +78,9 @@ export const UserProvider = ({ children }) => {
         user,
         userEmail,
         userId,
+        users,
+        counter,
+        setCounter,
       }}
     >
       {children}

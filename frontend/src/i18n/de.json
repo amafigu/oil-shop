@@ -208,6 +208,11 @@
       "showButton": "Liste anzeigen",
       "hideButton": "Liste ausblenden"
     },
+    "adminUsersList": {
+      "title": "Benutzerverwaltung",
+      "showButton": "Benutzern anzeigen",
+      "hideButton": "Liste ausblenden"
+    },
     "buttons": {
       "actions": {
         "commons": {
@@ -323,6 +328,11 @@
         "hideButton": "Alle Produkte ausblenden",
         "error": "Kann nicht alle Produkte finden"
       }
+    },
+    "createUserForm": {
+      "submitButton": "Benuzter erstellen",
+      "showButton": "Formular anzeigen",
+      "hideButton": "Formular ausblenden"
     },
     "editableListProductData": {
       "deleteButton": {

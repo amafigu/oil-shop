@@ -185,9 +185,13 @@
     "addOneToCartButton": {
       "text": "add to cart"
     },
-
     "adminProductsList": {
       "title": "Products management",
+      "showButton": "Show list",
+      "hideButton": "Hide list"
+    },
+    "adminUsersList": {
+      "title": "Users management",
       "showButton": "Show list",
       "hideButton": "Hide list"
     },
@@ -314,6 +318,11 @@
         "hideButton": "Hide all products",
         "error": "Can not see all products"
       }
+    },
+    "createUserForm": {
+      "submitButton": "Create User",
+      "showButton": "Show Form",
+      "hideButton": "Hide Form"
     },
     "editableListProductData": {
       "deleteButton": {

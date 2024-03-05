@@ -25,10 +25,10 @@ export const AdminProductsList = () => {
         classCss={STYLES.BUTTONS.SHOW_HIDE}
       />
       {showProducts && (
-        <ul className={styles.productsList}>
+        <ul className={styles.itemsList}>
           {products &&
             products.map((product) => (
-              <li className={styles.product} key={product.id}>
+              <li className={styles.item} key={product.id}>
                 <EditableProduct product={product} />
               </li>
             ))}

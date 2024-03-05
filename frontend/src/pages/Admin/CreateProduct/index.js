@@ -13,7 +13,7 @@ import {
 import { onCreateProduct } from "#utils/products"
 import { titleCase } from "#utils/stringManipulation"
 import { useState } from "react"
-import styles from "./createProductForm.module.scss"
+import styles from "./createProduct.module.scss"
 
 export const CreateProduct = () => {
   const [isVisible, setIsVisible] = useState(false)

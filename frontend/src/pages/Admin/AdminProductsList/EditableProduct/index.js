@@ -6,7 +6,7 @@ import { STYLES } from "#constants/styles"
 import useProductContext from "#context/productContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/dataManipulation"
-import { onProductDelete, onProductUpdate } from "#utils/products"
+import { onDeleteProduct, onUpdateProduct } from "#utils/products"
 import { useEffect, useState } from "react"
 import { EditableProductInput } from "./EditableProductInput"
 import styles from "./editableProduct.module.scss"
@@ -22,6 +22,10 @@ export const EditableProduct = ({ product }) => {
   const [updatedProductData, setUpdatedProductData] = useState({
     ...productProperties,
   })
+  const [nonUpdatedProductData, setNonUpdatedProductData] = useState({
+    ...productProperties,
+  })
+
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
   const { setCounter } = useProductContext()
@@ -31,23 +35,19 @@ export const EditableProduct = ({ product }) => {
   useEffect(() => {}, [updatedProductData])
 
   return (
-    <article className={styles.editableProduct}>
+    <article className={styles.editableItem}>
       {notification && <NotificationCard message={notification} />}
-      <div className={styles.imageAndButton}>
+      <div className={styles.container}>
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
-            src={
-              updatedProductData.image.image
-                ? DEFAULT_PRODUCT_IMAGE
-                : updatedProductData.image
-            }
+            src={updatedProductData.image || DEFAULT_PRODUCT_IMAGE}
             alt='product'
           />
         </div>
         <ActionButton
           action={(e) =>
-            onProductDelete(e, product.id, setNotification, setCounter)
+            onDeleteProduct(e, product.id, setNotification, setCounter)
           }
           text={deleteButtonText}
           className={STYLES.BUTTONS.ACTION}
@@ -71,22 +71,26 @@ export const EditableProduct = ({ product }) => {
             onSave={
               key === "image"
                 ? (e) =>
-                    onProductUpdate(
+                    onUpdateProduct(
                       e,
                       key,
                       product.id,
                       updatedProductData,
+                      nonUpdatedProductData,
                       setUpdatedProductData,
+                      setNonUpdatedProductData,
                       setNotification,
                       file,
                     )
                 : (e) =>
-                    onProductUpdate(
+                    onUpdateProduct(
                       e,
                       key,
                       product.id,
                       updatedProductData,
+                      nonUpdatedProductData,
                       setUpdatedProductData,
+                      setNonUpdatedProductData,
                       setNotification,
                     )
             }

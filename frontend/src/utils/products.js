@@ -35,7 +35,7 @@ export const filteredProducts = (products, category) =>
     (product) => product.category.name === category || category === "all",
   )
 
-export const onProductDelete = async (
+export const onDeleteProduct = async (
   e,
   productId,
   setNotification,
@@ -58,21 +58,35 @@ export const onProductDelete = async (
       }
     }
   } catch (error) {
-    console.error(error)
+    if (error.response && error.response.data.message) {
+      console.error(error.response.data.message)
+      if (setNotification) {
+        setNotification(
+          `Error by deleting data: ${error.response.data.message}`,
+        )
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
+    } else {
+      if (setNotification) {
+        setNotification("Error by deleting data")
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
+    }
   }
 }
 
-export const onProductUpdate = async (
+export const onUpdateProduct = async (
   e,
   key,
   productId,
   updatedProductData,
+  nonUpdatedProductData,
   setUpdatedProductData,
+  setNonUpdatedProductData,
   setNotification,
   file,
 ) => {
   e.preventDefault()
-  console.log(key)
 
   try {
     let validProperty
@@ -96,10 +110,11 @@ export const onProductUpdate = async (
     if (dataRequest && dataRequest.status === 200) {
       const updatedProduct = dataRequest.data.product
       setUpdatedProductData(updatedProduct)
+      setNonUpdatedProductData(updatedProduct)
       return updatedProduct
     }
   } catch (error) {
-    console.error(error)
+    setUpdatedProductData(nonUpdatedProductData)
     if (error.response && error.response.data.message) {
       console.error(error.response.data.message)
       if (setNotification) {
@@ -109,7 +124,6 @@ export const onProductUpdate = async (
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
     } else {
-      console.error(error)
       if (setNotification) {
         setNotification("Error by updating data")
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
@@ -127,8 +141,6 @@ export const onCreateProduct = async (
 ) => {
   e.preventDefault()
 
-  debugger
-  console.log("product no image", product)
   try {
     let image
     product = { ...product, measure: "ml" }
