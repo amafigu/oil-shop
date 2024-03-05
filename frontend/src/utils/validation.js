@@ -162,11 +162,6 @@ export const validateProductProperty = (dataObject, setErrorNotification) => {
     const propertyValueLength = dataObject[property].length
     let propertyValue = dataObject[property]
 
-    if (propertyValueLength > 256) {
-      setErrorNotification("Property value is too long, 256 is the max")
-      setTimeout(() => setErrorNotification(null), 2000)
-      return
-    }
     if (propertyValue === "" || propertyValue === undefined) {
       setErrorNotification("No changes made.")
       setTimeout(() => setErrorNotification(null), 2000)
@@ -180,15 +175,24 @@ export const validateProductProperty = (dataObject, setErrorNotification) => {
 
     if (property === "price") {
       propertyValue = propertyValue.trim()
+      if (propertyValueLength > 8) {
+        setErrorNotification("Max 10 digits.")
+        setTimeout(() => setErrorNotification(null), 2000)
+        propertyValue = propertyValue.slice(0, 8)
+        dataObject[property] = propertyValue
+      }
       propertyValue = Number(propertyValue).toFixed(2)
       propertyValue = Number(propertyValue)
       dataObject[property] = propertyValue
     }
 
     if (property === "size") {
-      propertyValue = Math.trunc(propertyValue.toString().trim())
-      console.log(typeof propertyValue)
-      propertyValue = Number(propertyValue)
+      propertyValue = parseInt(propertyValue)
+      if (propertyValueLength > 10) {
+        setErrorNotification("Max 10 digits.")
+        setTimeout(() => setErrorNotification(null), 2000)
+        propertyValue = propertyValue.slice(0, 10)
+      }
       dataObject[property] = propertyValue
     }
 
@@ -200,6 +204,21 @@ export const validateProductProperty = (dataObject, setErrorNotification) => {
 
     if (property === "name") {
       propertyValue = propertyValue.toString().trim()
+      if (propertyValueLength > 40) {
+        setErrorNotification("Max 40 charachters.")
+        setTimeout(() => setErrorNotification(null), 2000)
+        propertyValue = propertyValue.slice(0, 40)
+      }
+      dataObject[property] = propertyValue
+    }
+
+    if (property === "description") {
+      propertyValue = propertyValue.toString().trim()
+      if (propertyValueLength > 60) {
+        setErrorNotification("Max 60 charachters.")
+        setTimeout(() => setErrorNotification(null), 2000)
+        propertyValue = propertyValue.slice(0, 60)
+      }
       dataObject[property] = propertyValue
     }
   }
