@@ -463,12 +463,11 @@ router.get('/user/shipping-data/:id', async (req, res) => {
       };
 
       shippingData = await db.usersShippingData.create(initialData);
-
-      if (shippingData) {
-        return res.status(200).json(shippingData);
-      } else if (!userExists) {
-        return res.status(404).json({ message: 'User not found' });
-      }
+    }
+    if (shippingData) {
+      return res.status(200).json(shippingData);
+    } else if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
