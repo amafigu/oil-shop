@@ -15,3 +15,11 @@ export const emptyCreateProductObj = {
   size: "",
   image: "",
 }
+
+export const editableProductProperties = [
+  "name",
+  "description",
+  "price",
+  "image",
+  "size",
+]

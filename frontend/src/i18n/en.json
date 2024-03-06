@@ -195,6 +195,18 @@
       "showButton": "Show list",
       "hideButton": "Hide list"
     },
+    "createItem": {
+      "showButton": "Show form",
+      "hideButton": "Hide Form",
+      "submitButton": "Create"
+    },
+    "editableItemsList": {
+      "showButton": "Show list",
+      "hideButton": "Hide list"
+    },
+    "editableItem": {
+      "deleteButton": "Delete"
+    },
     "buttons": {
       "actions": {
         "commons": {

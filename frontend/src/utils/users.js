@@ -33,7 +33,6 @@ export const submitGuestUserWithOrders = async (
 
 export const onCreateUser = async (e, user, setMessage, file, setCounter) => {
   e.preventDefault()
-  debugger
   try {
     let image
     if (file) {
