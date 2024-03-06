@@ -213,6 +213,18 @@
       "showButton": "Benutzern anzeigen",
       "hideButton": "Liste ausblenden"
     },
+    "createItem": {
+      "showButton": "Formular anzeigen",
+      "hideButton": "Formular ausblenden",
+      "submitButton": "Create"
+    },
+    "editableItemsList": {
+      "showButton": "List anzeigen",
+      "hideButton": "Liste ausblenden"
+    },
+    "editableItem": {
+      "deleteButton": "Löschen"
+    },
     "buttons": {
       "actions": {
         "commons": {
