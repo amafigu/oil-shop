@@ -12,3 +12,17 @@ export const initialUserData = {
   email: "",
   image: "",
 }
+
+export const editableUserProperties = [
+  "firstName",
+  "lastName",
+  "email",
+  "image",
+]
+export const createUserProperties = [
+  "firstName",
+  "lastName",
+  "email",
+  "password",
+  "image",
+]
