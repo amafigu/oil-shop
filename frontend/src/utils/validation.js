@@ -1,4 +1,5 @@
 import { emailPattern, startWithCapitalLetter } from "#constants/regex"
+import { isNumber } from "../constants/regex"
 
 export const validateUserAndProductFieldsInDataObject = (
   dataObject,
@@ -172,9 +173,15 @@ export const validateProductProperty = (dataObject, setErrorNotification) => {
       propertyValue = propertyValue.toString().trim()
       dataObject[property] = propertyValue
     }
-
+    debugger
     if (property === "price") {
+      if (!isNumber.test(propertyValue)) {
+        setErrorNotification("User only numbers.")
+        setTimeout(() => setErrorNotification(null), 3000)
+      }
       propertyValue = propertyValue.trim()
+      propertyValue = parseInt(propertyValue)
+
       if (propertyValueLength > 8) {
         setErrorNotification("Max 10 digits.")
         setTimeout(() => setErrorNotification(null), 2000)
@@ -187,6 +194,11 @@ export const validateProductProperty = (dataObject, setErrorNotification) => {
     }
 
     if (property === "size") {
+      propertyValue = propertyValue.trim()
+      if (!isNumber.test(propertyValue)) {
+        setErrorNotification("User only numbers.")
+        setTimeout(() => setErrorNotification(null), 3000)
+      }
       propertyValue = parseInt(propertyValue)
       if (propertyValueLength > 10) {
         setErrorNotification("Max 10 digits.")
