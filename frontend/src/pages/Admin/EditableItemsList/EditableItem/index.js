@@ -1,6 +1,5 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import NotificationCard from "#components/ui/NotificationCard"
-import { DEFAULT_USER_IMAGE } from "#constants/media"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/dataManipulation"
@@ -28,28 +27,27 @@ export const EditableItem = ({
   })
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
-  const { translate } = useTranslation()
-  const deleteButtonText = translate.components.crud.deleteUser.button
+  const { components } = useTranslation()
 
   return (
-    <article className={styles.editableItem}>
+    <article className={styles.editableItem} aria-label='editable item'>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
-            src={updatedItemData.image || DEFAULT_USER_IMAGE}
-            alt='user'
+            src={updatedItemData.image || ""}
+            alt='element'
           />
         </div>
         <ActionButton
           action={(e) => onDelete(e, item.id, setNotification, setCounter)}
-          text={deleteButtonText}
+          text={components.editableItem.deleteButton}
           className={STYLES.BUTTONS.ACTION}
         />
       </div>
       {
-        <form className={""}>
+        <form className={styles.form}>
           {Object.keys(objectAttribute).map((key) => (
             <EditableItemInput
               label={key}
