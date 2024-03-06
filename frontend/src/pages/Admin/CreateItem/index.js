@@ -4,8 +4,13 @@ import NotificationCard from "#components/ui/NotificationCard"
 import { ToggleButton } from "#components/ui/ToggleButton"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
-import { setFileToUpload } from "#utils/dataManipulation"
+import {
+  listenInputChangeAndSetDataObject,
+  setFileToUpload,
+} from "#utils/dataManipulation"
 import { useState } from "react"
+import { OptionsFormInput } from "./OptionsFormInput"
+
 import styles from "./createItem.module.scss"
 
 export const CreateItem = ({
@@ -13,8 +18,9 @@ export const CreateItem = ({
   onChange,
   setCounter,
   renderItemProps,
+  itemCategories,
 }) => {
-  const itemInitialAttributes = renderItemProps.reduce((acc, val) => {
+  const initialItemData = renderItemProps.reduce((acc, val) => {
     acc[val] = ""
     return acc
   }, {})
@@ -24,12 +30,12 @@ export const CreateItem = ({
   const [file, setFile] = useState(null)
 
   const [itemData, setItemData] = useState({
-    ...itemInitialAttributes,
+    ...initialItemData,
   })
   const { components } = useTranslation()
-
+  console.log(itemData)
   return (
-    <section aria-label='create product form'>
+    <section aria-label='create item form'>
       {notification && <NotificationCard message={notification} />}
       <ToggleButton
         isVisible={isVisible}
@@ -40,25 +46,37 @@ export const CreateItem = ({
       />
       {isVisible && (
         <form className={styles.form}>
-          {Object.keys(itemData).map((field) => (
-            <FormInput
-              classCss={STYLES.FORMS.FIELD}
-              key={field}
-              name={field}
-              onChangeListener={
-                field === "image"
-                  ? (e) => setFileToUpload(e, setFile)
-                  : (e) => onChange(e, itemData, setItemData, setNotification)
-              }
-              placeholder={field}
-              label={field}
-              type={field === "image" && "file"}
-              value={itemData[field]}
-            />
-          ))}
+          {Object.keys(itemData).map((field) =>
+            field !== "productCategoryId" ? (
+              <FormInput
+                classCss={STYLES.FORMS.FIELD}
+                key={field}
+                name={field}
+                onChangeListener={
+                  field === "image"
+                    ? (e) => setFileToUpload(e, setFile)
+                    : (e) => onChange(e, itemData, setItemData, setNotification)
+                }
+                placeholder={field}
+                label={field}
+                type={field === "image" && "file"}
+                value={itemData[field]}
+              />
+            ) : (
+              <OptionsFormInput
+                itemData={itemData}
+                setItemData={setItemData}
+                onChange={listenInputChangeAndSetDataObject}
+                setNotification={setNotification}
+                itemCategories={itemCategories}
+                property={"productCategoryId"}
+              />
+            ),
+          )}
           <ActionButton
-            action={(e) => {
-              onCreate(e, itemData, setNotification, file, setCounter)
+            action={async (e) => {
+              await onCreate(e, itemData, setNotification, file, setCounter)
+              setItemData({ ...initialItemData })
             }}
             text={components.createItem.submitButton}
             className={STYLES.BUTTONS.ACTION}
