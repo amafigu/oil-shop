@@ -14,16 +14,16 @@ export const EditableItem = ({
   onSave,
   onDelete,
 }) => {
-  const objectAttribute = renderItemProps.reduce((acc, val) => {
+  const itemInitialAttributes = renderItemProps.reduce((acc, val) => {
     acc[val] = item[val]
     return acc
   }, {})
 
   const [updatedItemData, setUpdatedItemData] = useState({
-    ...objectAttribute,
+    ...itemInitialAttributes,
   })
   const [nonUpdatedItemData, setNonUpdatedItemData] = useState({
-    ...objectAttribute,
+    ...itemInitialAttributes,
   })
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
@@ -48,7 +48,7 @@ export const EditableItem = ({
       </div>
       {
         <form className={styles.form}>
-          {Object.keys(objectAttribute).map((key) => (
+          {Object.keys(itemInitialAttributes).map((key) => (
             <EditableItemInput
               label={key}
               name={key}
