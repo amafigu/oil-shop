@@ -33,7 +33,7 @@ export const FormInput = ({
       ) : (
         <>
           <label className={styles.label} htmlFor={name}>
-            {label}
+            {camelCaseToTitleCase(label)}
           </label>
           <input
             className={styles[classCss]}
