@@ -2,13 +2,17 @@ import { uploadToS3 } from "#api/aws/uploadToS3"
 import { createUserRequest } from "#api/users/createUserRequest"
 import { deleteUserById } from "#api/users/deleteUserById"
 import { updateUserDataRequest } from "#api/users/updateUserDataRequest"
+import { updateUserShippingDataRequest } from "#api/users/updateUserShippingDataRequest"
 import { ROUTES_CART, ROUTES_CHECKOUT_PAYMENT } from "#constants/routes"
 import {
   NORMAL_MESSAGE_TIMEOUT,
   PROCESS_TIMEOUT,
   SHORT_MESSAGE_TIMEOUT,
 } from "#constants/time"
-import { validateUserProperties } from "#utils/validation"
+import {
+  validateUserProperties,
+  validateUserShippingDataProperties,
+} from "#utils/validation"
 
 export const submitGuestUserWithOrders = async (
   e,
@@ -120,6 +124,59 @@ export const onUpdateUser = async (
     }
 
     const dataRequest = await updateUserDataRequest(userId, validProperty)
+    if (dataRequest && dataRequest.status === 200) {
+      const updatedUser = dataRequest.data.user
+      setUpdatedUserData(updatedUser)
+      setNonUpdatedUserData(updatedUser)
+      return updatedUser
+    }
+  } catch (error) {
+    setUpdatedUserData(nonUpdatedUserData)
+    if (error.response && error.response.data.errors) {
+      if (setNotification) {
+        setNotification(
+          `Error by updating data: ${error.response.data.errors[0].message}`,
+        )
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
+    } else {
+      if (setNotification) {
+        setNotification("Error by updating data")
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
+    }
+  }
+}
+
+export const onUpdateUserShippingData = async (
+  e,
+  key,
+  userId,
+  updatedUserData,
+  nonUpdatedUserData,
+  setUpdatedUserData,
+  setNonUpdatedUserData,
+  setNotification,
+  file,
+) => {
+  e.preventDefault()
+  try {
+    let validProperty
+
+    const toBevalidProperty = { [key]: updatedUserData[key] }
+    validProperty = validateUserShippingDataProperties(
+      toBevalidProperty,
+      setNotification,
+    )
+
+    if (!validProperty) {
+      return
+    }
+
+    const dataRequest = await updateUserShippingDataRequest(
+      userId,
+      validProperty,
+    )
     if (dataRequest && dataRequest.status === 200) {
       const updatedUser = dataRequest.data.user
       setUpdatedUserData(updatedUser)

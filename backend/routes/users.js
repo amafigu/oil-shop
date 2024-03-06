@@ -441,15 +441,35 @@ router.post('/register-product-manager', async (req, res) => {
 
 router.get('/user/shipping-data/:id', async (req, res) => {
   try {
-    const shippingData = await db.usersShippingData.findOne({
+    let shippingData = await db.usersShippingData.findOne({
       where: { userId: req.params.id },
     });
-    if (!shippingData) {
-      return res
-        .status(404)
-        .json({ message: 'user has no shipping data saved' });
+    const user = await db.users.findOne({
+      where: { id: req.params.id },
+    });
+    if (!shippingData && user) {
+      const initialData = {
+        userId: req.params.id,
+        firstName: 'Please add data',
+        lastName: 'Please add data',
+        email: 'Please add data',
+        street: 'Please add data',
+        number: 'Please add data',
+        details: 'Please add data',
+        city: 'Please add data',
+        state: 'Please add data',
+        country: 'Please add data',
+        postalCode: 'Please add data',
+      };
+
+      shippingData = await db.usersShippingData.create(initialData);
+
+      if (shippingData) {
+        return res.status(200).json(shippingData);
+      } else if (!userExists) {
+        return res.status(404).json({ message: 'User not found' });
+      }
     }
-    return res.json(shippingData);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -470,6 +490,8 @@ router.post('/user/shipping-data/:id', async (req, res) => {
         message: 'Shipping data created successfully',
         data: newShippingData,
       });
+    } else {
+      return res.status(400).json({ message: 'User has already shippingData' });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });

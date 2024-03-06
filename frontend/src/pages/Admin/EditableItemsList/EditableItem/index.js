@@ -34,17 +34,21 @@ export const EditableItem = ({
       {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <div className={styles.imageContainer}>
-          <img
-            className={styles.image}
-            src={updatedItemData.image || ""}
-            alt='element'
-          />
+          {item && item.hasOwnProperty("image") && (
+            <img
+              className={styles.image}
+              src={updatedItemData.image || ""}
+              alt='element'
+            />
+          )}
         </div>
-        <ActionButton
-          action={(e) => onDelete(e, item.id, setNotification, setCounter)}
-          text={components.editableItem.deleteButton}
-          className={STYLES.BUTTONS.ACTION}
-        />
+        {onDelete && (
+          <ActionButton
+            action={(e) => onDelete(e, item.id, setNotification, setCounter)}
+            text={components.editableItem.deleteButton}
+            className={STYLES.BUTTONS.ACTION}
+          />
+        )}
       </div>
       {
         <form className={styles.form}>
