@@ -23,3 +23,13 @@ export const editableProductProperties = [
   "image",
   "size",
 ]
+
+export const createProductProperties = [
+  "name",
+  "productCategoryId",
+  "description",
+  "price",
+  "details",
+  "image",
+  "size",
+]
