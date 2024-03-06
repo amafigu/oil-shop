@@ -115,17 +115,24 @@ export const onUpdateProduct = async (
     }
   } catch (error) {
     setUpdatedProductData(nonUpdatedProductData)
+    if (error.response && error.response.data.errors) {
+      console.error(error.response.data.message)
+      setNotification(
+        `Error by creating user: ${error.response.data.errors[0].path} ${error.response.data.errors[0].message}`,
+      )
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+    }
     if (error.response && error.response.data.message) {
       console.error(error.response.data.message)
       if (setNotification) {
         setNotification(
-          `Error by updating data: ${error.response.data.message}`,
+          `Error by creating user: ${error.response.data.message}`,
         )
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
     } else {
       if (setNotification) {
-        setNotification("Error by updating data")
+        setNotification("Error by creating user")
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
     }
@@ -140,8 +147,8 @@ export const onCreateProduct = async (
   setCounter,
 ) => {
   e.preventDefault()
-
   try {
+    // TODO: either make a separate table for measures or delete that from database
     let image
     product = { ...product, measure: "ml" }
 
@@ -169,9 +176,11 @@ export const onCreateProduct = async (
     }
   } catch (error) {
     console.error(error)
-    if (error.response && error.response.data.message) {
+    if (error.response && error.response.data.errors) {
       console.error(error.response.data.message)
-      setMessage(`Error by updating data: ${error.response.data.message}`)
+      setMessage(
+        `Error by updating data: ${error.response.data.errors[0].path} ${error.response.data.errors[0].message}`,
+      )
       setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
     } else {
       console.error("error by updating data", error)
