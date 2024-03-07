@@ -18,7 +18,7 @@ export const EditableItem = ({
     acc[val] = item[val]
     return acc
   }, {})
-  console.log(item)
+
   const [updatedItemData, setUpdatedItemData] = useState({
     ...itemInitialAttributes,
   })
@@ -52,51 +52,52 @@ export const EditableItem = ({
       </div>
       {
         <form className={styles.form}>
-          {Object.keys(itemInitialAttributes).map((key) => (
-            <EditableItemInput
-              label={key}
-              name={key}
-              updatedPropertyData={updatedItemData}
-              onChange={
-                key === "image"
-                  ? (e) => setFileToUpload(e, setFile)
-                  : (e) =>
-                      setUpdatedItemData({
-                        ...updatedItemData,
-                        [e.target.name]: e.target.value,
-                      })
-              }
-              onSave={
-                key === "image"
-                  ? (e) =>
-                      onSave(
-                        e,
-                        key,
-                        item.id,
-                        updatedItemData,
-                        nonUpdatedItemData,
-                        setUpdatedItemData,
-                        setNonUpdatedItemData,
-                        setNotification,
-                        file,
-                      )
-                  : (e) =>
-                      onSave(
-                        e,
-                        key,
-                        item.id,
-                        updatedItemData,
-                        nonUpdatedItemData,
-                        setUpdatedItemData,
-                        setNonUpdatedItemData,
-                        setNotification,
-                      )
-              }
-              classCss={STYLES.FORMS.FIELD}
-              key={key}
-              file={file}
-            />
-          ))}
+          {item &&
+            Object.keys(itemInitialAttributes).map((key) => (
+              <EditableItemInput
+                label={key}
+                name={key}
+                updatedPropertyData={updatedItemData}
+                onChange={
+                  key === "image"
+                    ? (e) => setFileToUpload(e, setFile)
+                    : (e) =>
+                        setUpdatedItemData({
+                          ...updatedItemData,
+                          [e.target.name]: e.target.value,
+                        })
+                }
+                onSave={
+                  key === "image"
+                    ? (e) =>
+                        onSave(
+                          e,
+                          key,
+                          item.id,
+                          updatedItemData,
+                          nonUpdatedItemData,
+                          setUpdatedItemData,
+                          setNonUpdatedItemData,
+                          setNotification,
+                          file,
+                        )
+                    : (e) =>
+                        onSave(
+                          e,
+                          key,
+                          item.id,
+                          updatedItemData,
+                          nonUpdatedItemData,
+                          setUpdatedItemData,
+                          setNonUpdatedItemData,
+                          setNotification,
+                        )
+                }
+                classCss={STYLES.FORMS.FIELD}
+                key={key}
+                file={file}
+              />
+            ))}
         </form>
       }
     </article>
