@@ -15,9 +15,10 @@ export const EditableItemInput = ({
   classCss,
   file,
 }) => {
+  debugger
   const [isEditing, setIsEditing] = useState(false)
   const { commonProperties, commonButtons } = useTranslation()
-
+  console.log(updatedPropertyData)
   const saveEdition = (e) => {
     onSave(e)
     setIsEditing(false)
@@ -52,7 +53,7 @@ export const EditableItemInput = ({
       ) : isEditing ? (
         <>
           <label htmlFor={name} className={styles.hideForSemantic}>
-            {commonProperties[name]}
+            {/* commonProperties[name] || "" */}
           </label>
           <input
             aria-label={`${label} input`}
