@@ -36,8 +36,8 @@ export const editableUserShippingDataProperties = [
   "street",
   "number",
   "details",
+  "postalCode",
   "city",
   "state",
   "country",
-  "postalCode",
 ]

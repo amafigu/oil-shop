@@ -56,7 +56,6 @@ export const UserProvider = ({ children }) => {
       try {
         const response = await getAllUsers()
         if (response && response.status === 200) {
-          console.log(response.data)
           setUsers(response.data)
         }
       } catch (error) {

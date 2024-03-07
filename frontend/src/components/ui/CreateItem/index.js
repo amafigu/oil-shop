@@ -33,7 +33,7 @@ export const CreateItem = ({
     ...initialItemData,
   })
   const { components } = useTranslation()
-  console.log(itemData)
+
   return (
     <section aria-label='create item form'>
       {notification && <NotificationCard message={notification} />}
