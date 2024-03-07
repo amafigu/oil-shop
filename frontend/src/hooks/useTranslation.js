@@ -5,6 +5,7 @@ export const useTranslation = () => {
   const commonProperties = translate.commonProperties
   const commonButtons = translate.commonButtons
   const components = translate.components
+  const pages = translate.pages
   return {
     translate,
     language,
@@ -12,5 +13,6 @@ export const useTranslation = () => {
     commonProperties,
     commonButtons,
     components,
+    pages,
   }
 }
