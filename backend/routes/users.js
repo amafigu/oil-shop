@@ -525,7 +525,7 @@ router.put(
         await shippingData.save();
       }
 
-      return res.json({ message: 'Shipping data updated successfully' });
+      return res.json(shippingData);
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }
