@@ -2,14 +2,14 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.userPageWrapper {
+.userPage {
   @include flex-justify-center;
   @include margin-page-wrapper;
 
   min-height: 100vh;
 }
 
-.userPage {
+.container {
   width: 80%;
 
   @include flex-column;
