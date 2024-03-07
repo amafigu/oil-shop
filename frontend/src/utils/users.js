@@ -152,18 +152,17 @@ export const onUpdateUserShippingData = async (
   e,
   key,
   userId,
-  updatedUserData,
-  nonUpdatedUserData,
-  setUpdatedUserData,
+  updatedUserShippingData,
+  nonUpdatedUserShippingData,
+  setUpdatedUserShippingData,
   setNonUpdatedUserData,
   setNotification,
-  file,
 ) => {
   e.preventDefault()
   try {
     let validProperty
 
-    const toBevalidProperty = { [key]: updatedUserData[key] }
+    const toBevalidProperty = { [key]: updatedUserShippingData[key] }
     validProperty = validateUserShippingDataProperties(
       toBevalidProperty,
       setNotification,
@@ -178,13 +177,13 @@ export const onUpdateUserShippingData = async (
       validProperty,
     )
     if (dataRequest && dataRequest.status === 200) {
-      const updatedUser = dataRequest.data.user
-      setUpdatedUserData(updatedUser)
-      setNonUpdatedUserData(updatedUser)
-      return updatedUser
+      const updatedShippingData = dataRequest.data
+      setUpdatedUserShippingData(updatedShippingData)
+      setNonUpdatedUserData(updatedShippingData)
+      return updatedShippingData
     }
   } catch (error) {
-    setUpdatedUserData(nonUpdatedUserData)
+    setUpdatedUserShippingData(nonUpdatedUserShippingData)
     if (error.response && error.response.data.errors) {
       if (setNotification) {
         setNotification(
