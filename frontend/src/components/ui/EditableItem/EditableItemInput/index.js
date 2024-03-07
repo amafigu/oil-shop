@@ -71,7 +71,9 @@ export const EditableItemInput = ({
           <span
             className={styles.property}
           >{`${commonProperties[name]}:`}</span>
-          <span className={styles.value}>{`${updatedPropertyData[name]}`}</span>
+          <span className={styles.value}>
+            {updatedPropertyData ? `${updatedPropertyData[name]}` : ""}
+          </span>
         </div>
       )}
       {isEditing ? (

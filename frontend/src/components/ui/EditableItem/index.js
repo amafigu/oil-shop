@@ -18,7 +18,7 @@ export const EditableItem = ({
     acc[val] = item[val]
     return acc
   }, {})
-
+  console.log(item)
   const [updatedItemData, setUpdatedItemData] = useState({
     ...itemInitialAttributes,
   })

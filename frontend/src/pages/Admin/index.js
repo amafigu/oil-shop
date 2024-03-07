@@ -1,3 +1,6 @@
+import { CreateItem } from "#components/ui/CreateItem"
+import { EditableItem } from "#components/ui/EditableItem"
+import { EditableItemsList } from "#components/ui/EditableItemsList"
 import NotificationCard from "#components/ui/NotificationCard"
 import { UserHeader } from "#components/ui/UserHeader"
 import {
@@ -12,7 +15,6 @@ import { useGetProductCategories } from "#hooks/useGetProductCategories"
 import { useGetProducts } from "#hooks/useGetProducts"
 import { useGetUsers } from "#hooks/useGetUsers"
 import { useTranslation } from "#hooks/useTranslation"
-
 import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
 import {
   onCreateProduct,
@@ -20,9 +22,6 @@ import {
   onUpdateProduct,
 } from "#utils/products"
 import { onCreateUser, onDeleteUser, onUpdateUser } from "#utils/users"
-import { CreateItem } from "./CreateItem"
-import { EditableItemsList } from "./EditableItemsList"
-import { EditableItem } from "./EditableItemsList/EditableItem"
 import styles from "./admin.module.scss"
 
 export const Admin = () => {
