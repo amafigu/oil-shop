@@ -22,3 +22,14 @@
     overflow: hidden;
   }
 }
+
+.addProductButton {
+  width: 100%;
+  height: 52px !important;
+
+  @include action-button;
+
+  @include media.mobile {
+    overflow: hidden;
+  }
+}

@@ -8,9 +8,13 @@ export const SortedProductsList = ({ category }) => {
   const sortedProducts = filteredProducts(products, category)
 
   return (
-    <ul aria-label='products list' className={styles.sortedProductsList}>
+    <ul className={styles.sortedProductsList} aria-label='products list'>
       {sortedProducts.map((product) => (
-        <li key={product.id} className={styles.sortedProduct}>
+        <li
+          key={product.id}
+          className={styles.sortedProduct}
+          aria-label='products list item'
+        >
           <ProductCard product={product} />
         </li>
       ))}

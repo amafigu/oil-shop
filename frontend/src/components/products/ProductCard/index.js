@@ -1,20 +1,31 @@
-import { AddProductToCartButton } from "#components/products/AddProductToCartButton"
+import { ActionButton } from "#components/ui/ActionButton"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
+import { ROUTES_PRODUCTS } from "#constants/routes"
+import { STYLES } from "#constants/styles"
+import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { titleCase } from "#utils/stringManipulation"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import styles from "./productCard.module.scss"
 
 export const ProductCard = ({ product }) => {
-  const { translate } = useTranslation()
-
+  const { components } = useTranslation()
+  const { addProduct } = useCart()
+  const navigate = useNavigate()
   return (
-    <div className={styles.productCardWrapper}>
+    <article
+      className={styles.productCard}
+      aria-label={`product: ${product.name}`}
+    >
       {product ? (
-        <div className={styles.productCardBodyWrapper}>
-          <Link to={`/products/${product.name}`}>
-            <div className={styles.productCardBody}>
+        <>
+          <div className={styles.container}>
+            <div
+              role='button'
+              className={styles.body}
+              onClick={() => navigate(`${ROUTES_PRODUCTS}/${product.name}`)}
+            >
               <div className={styles.imageContainer}>
                 <img
                   className={styles.image}
@@ -25,28 +36,30 @@ export const ProductCard = ({ product }) => {
                   }
                 />
               </div>
-              <div className={styles.productCardName}>
-                {titleCase(product.name, "_")}
-              </div>
-              <div className={styles.productCardSize}>
-                {translate.components.products.oil.size}: {product.size} ml
-              </div>
-              <div className={styles.productCardPrice}>
-                {translate.components.products.oil.price} €{product.price}
+              <div className={styles.data}>
+                <h3 className={styles.name}>{titleCase(product.name, "_")}</h3>
+                <ul>
+                  <li className={styles.size}>
+                    {components.products.oil.size}: {product.size} ml
+                  </li>
+                  <li className={styles.price}>
+                    {components.products.oil.price} €{product.price}
+                  </li>
+                </ul>
               </div>
             </div>
-          </Link>
-          <div className={styles.addButtonContainer}>
-            <AddProductToCartButton
-              product={product}
-              classname={styles.addButton}
-              quantity={1}
-            />
+            <div className={styles.addButtonContainer}>
+              <ActionButton
+                action={() => addProduct(product, 1)}
+                text={components.addOneToCartButton.text}
+                className={STYLES.BUTTONS.ADD_PRODUCT}
+              />
+            </div>
           </div>
-        </div>
+        </>
       ) : (
-        <div>Loading Product</div>
+        <span className={styles.loading}>Loading Product</span>
       )}
-    </div>
+    </article>
   )
 }
