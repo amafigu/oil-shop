@@ -4,6 +4,7 @@ export const STYLES = Object.freeze({
     ACTION: "actionButton",
     FORM: "formButton",
     WIDE: "wideButton",
+    ADD_PRODUCT: "addProductButton",
   },
   FORMS: {
     FIELD: "formField",
