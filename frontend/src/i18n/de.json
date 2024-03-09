@@ -252,11 +252,6 @@
       "showButton": "Produkt erstellen",
       "hideButton": "Formular ausblenden"
     },
-    "navbar": {
-      "home": "Home",
-      "shop": "Shop",
-      "about": "Über uns"
-    },
     "crud": {
       "forms": {
         "commonProperties": {
@@ -351,6 +346,11 @@
         "sucess": "Produkt erfolgreich gelöscht",
         "fail": "Wir können dieses Produkt nicht löschen"
       }
+    },
+    "navigationMenu": {
+      "home": "Home",
+      "shop": "Shop",
+      "about": "Über uns"
     },
     "orderSummaryItem": {
       "quantity": "Menge"

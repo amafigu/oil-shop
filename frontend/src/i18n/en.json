@@ -234,11 +234,7 @@
       "showButton": "Create product",
       "hideButton": "Hide form"
     },
-    "navbar": {
-      "home": "Home",
-      "shop": "Shop",
-      "about": "About us"
-    },
+
     "crud": {
       "forms": {
         "shippingData": {},
@@ -341,6 +337,11 @@
         "sucess": "Product successfully deleted",
         "fail": "We can not delete this product"
       }
+    },
+    "navigationMenu": {
+      "home": "Home",
+      "shop": "Shop",
+      "about": "About us"
     },
     "orderSummaryItem": {
       "quantity": "Quantity"
