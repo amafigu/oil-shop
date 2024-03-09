@@ -8,10 +8,10 @@ const NotificationCard = ({
   textValidationErrorsObject,
 }) => {
   return (
-    <div>
+    <article className={styles.notificationCard}>
       {message && message !== "" && (
         <div className={styles.modal}>
-          <div className={styles.notificationCard}>{message}</div>
+          <div className={styles.card}>{message}</div>
         </div>
       )}
 
@@ -19,7 +19,7 @@ const NotificationCard = ({
         errorsMessageArray &&
         errorsMessageArray.length > 0 && (
           <div className={styles.modal}>
-            <div className={styles.notificationCard}>
+            <div className={styles.card}>
               <ZodValidationErrorsCard
                 errorsArray={errorsMessageArray}
                 translationObj={textValidationErrorsObject}
@@ -27,7 +27,7 @@ const NotificationCard = ({
             </div>
           </div>
         )}
-    </div>
+    </article>
   )
 }
 

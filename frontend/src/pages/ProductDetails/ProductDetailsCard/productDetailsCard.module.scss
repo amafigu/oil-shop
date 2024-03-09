@@ -12,7 +12,7 @@
   }
 }
 
-.cardBody {
+.body {
   display: flex;
   justify-content: space-evenly;
   width: theme.$page-width-primary;
@@ -36,15 +36,14 @@
 }
 
 .imageContainer {
-  width: 6rem;
-  height: auto;
-  margin-right: theme.$spacing-extra-large;
+  width: 300px;
+  height: 300px;
 
   @include flex-all-center;
 
   @include media.mobile {
-    width: 3rem;
-    margin-right: 0;
+    width: 200px;
+    height: 200px;
   }
 }
 
@@ -52,7 +51,7 @@
   @include responsive-image;
 }
 
-.details {
+.container {
   width: 50%;
   height: auto;
   overflow: hidden;
@@ -66,7 +65,7 @@
   }
 }
 
-.right {
+.data {
   width: 100%;
 
   @include media.mobile {
@@ -74,21 +73,17 @@
   }
 }
 
-.hideForSemantic {
-  @include hide;
-}
-
 .category {
   color: theme.$font-color-primary;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
 
   @include property-font-primary-regular;
 }
 
-.categoryLink {
+.link {
+  display: inline-block;
   color: theme.$font-color-primary;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
 }
 
 .name {
@@ -98,13 +93,14 @@
   @include property-font-primary-semi-bold;
 }
 
-.item {
+.description,
+.details {
   margin-bottom: theme.$spacing-semi-regular-large;
-  font-size: theme.$font-size-medium;
-  list-style-type: none;
+
+  @include property-font-primary-semi-large-light;
 }
 
-.sizeAndPrice {
+.row {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -124,8 +120,9 @@
   @include property-font-secondary-regular;
 }
 
-.container {
+.selection {
   display: flex;
+  gap: theme.$spacing-regular;
   width: 100%;
 }
 

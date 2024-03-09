@@ -67,7 +67,7 @@
   overflow: hidden;
   font-family: theme.$font-family-primary;
   font-size: theme.$font-size-semi-medium;
-  font-weight: theme.$font-weight-regular;
+  font-weight: theme.$font-weight-normal;
   text-align: center;
 
   @include media.fullscreen-down {

@@ -5,7 +5,7 @@ export const cartTotalSum = (cart, shippingCost) =>
   Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
 
 export const increaseQuantity = (quantity, setQuantity) => {
-  if (quantity < 20) {
+  if (quantity < 40) {
     setQuantity((prevQuantity) => prevQuantity + 1)
   }
 }

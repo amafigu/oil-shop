@@ -8,13 +8,11 @@
   margin: theme.$spacing-semi-large;
   overflow: hidden;
   cursor: pointer;
+  border: solid 1px theme.$background-color-primary;
+  border-radius: theme.$border-radius-regular;
 
   @include media.mobile {
     margin: theme.$spacing-semi-large 0;
-  }
-
-  &:hover {
-    scale: theme.$scale-item-small;
   }
 }
 
@@ -40,8 +38,6 @@
 }
 
 .image {
-  border-radius: theme.$border-radius-small;
-
   @include responsive-image;
 }
 
