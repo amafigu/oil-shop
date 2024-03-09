@@ -2,6 +2,10 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
+.notificationCard {
+  user-select: none;
+}
+
 .modal {
   position: fixed;
   inset: 0;
@@ -14,7 +18,7 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.notificationCard {
+.card {
   width: fit-content;
   height: fit-content;
   padding: theme.$spacing-semi-regular-large;
