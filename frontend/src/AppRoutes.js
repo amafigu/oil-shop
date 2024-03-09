@@ -1,4 +1,3 @@
-import { getProductCategories } from "#api/products/getProductCategories"
 import { Footer } from "#components/ui/Footer"
 import Navbar from "#components/ui/Navbar"
 import {
@@ -16,7 +15,6 @@ import {
   ROUTES_SHOP,
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
-  ROUTES_WITHOUT_NAVBAR,
 } from "#constants/routes"
 import { About } from "#pages/About"
 import { Admin } from "#pages/Admin"
@@ -32,40 +30,15 @@ import { Shipping } from "#pages/Shipping"
 import { Shop } from "#pages/Shop"
 import { SignUp } from "#pages/SignUp"
 import { User } from "#pages/User"
-import { useEffect, useState } from "react"
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 
 export const AppRoutes = () => {
-  const [productCategories, setProductCategories] = useState([])
-
-  useEffect(() => {
-    const getCategories = async () => {
-      try {
-        const getCategoriesResponse = await getProductCategories()
-        if (getCategoriesResponse.status === 200) {
-          setProductCategories(getCategoriesResponse.data)
-        }
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getCategories()
-  }, [])
-
-  const location = useLocation()
-  const currentPath = location.pathname
-
   return (
     <>
-      {!ROUTES_WITHOUT_NAVBAR.includes(currentPath) && (
-        <Navbar productCategories={productCategories} />
-      )}
+      <Navbar />
       <Routes>
         <Route path={`${ROUTES_ABOUT}`} element={<About />} />
-        <Route
-          path={`${ROUTES_SHOP}`}
-          element={<Shop productCategories={productCategories} />}
-        />
+        <Route path={`${ROUTES_SHOP}`} element={<Shop />} />
         <Route path={`${ROUTES_HOME}`} element={<Home />} />
         <Route path={`${ROUTES_CART}`} element={<Cart />} />
         <Route path={`${ROUTES_FAQ}`} element={<Faq />} />
