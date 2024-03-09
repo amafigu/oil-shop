@@ -198,7 +198,7 @@
 
 @mixin subtitle-text {
   font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-regular;
+  font-weight: theme.$font-weight-normal;
   line-height: theme.$line-height-primary;
 }
 
@@ -210,7 +210,13 @@
 
 @mixin property-font-primary-regular {
   font-size: theme.$font-size-semi-large;
-  font-weight: theme.$font-weight-regular;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-primary-semi-large-light {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-extra-light;
   line-height: theme.$line-height-primary;
 }
 
@@ -228,7 +234,7 @@
 
 @mixin property-font-secondary-regular {
   font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-regular;
+  font-weight: theme.$font-weight-normal;
   line-height: theme.$line-height-primary;
 }
 
@@ -240,7 +246,7 @@
 
 @mixin property-font-secondary-semi-medium-regular {
   font-size: theme.$font-size-semi-medium;
-  font-weight: theme.$font-weight-regular;
+  font-weight: theme.$font-weight-normal;
   line-height: theme.$line-height-primary;
 }
 

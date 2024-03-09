@@ -64,7 +64,7 @@
 .divider {
   width: 100%;
   font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-regular;
+  font-weight: theme.$font-weight-normal;
 
   @include flex-all-center;
 }

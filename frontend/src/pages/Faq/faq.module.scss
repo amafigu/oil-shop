@@ -19,13 +19,13 @@
 .question {
   margin-bottom: theme.$spacing-semi-regular-semi-large;
   font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-regular;
+  font-weight: theme.$font-weight-normal;
   text-align: center;
 }
 
 .answer {
   margin-bottom: theme.$spacing-large;
   font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-light;
+  font-weight: theme.$font-weight-extra-light;
   text-align: center;
 }
