@@ -13,6 +13,7 @@ export const ProductCard = ({ product }) => {
   const { components } = useTranslation()
   const { addProduct } = useCart()
   const navigate = useNavigate()
+
   return (
     <article
       className={styles.productCard}
