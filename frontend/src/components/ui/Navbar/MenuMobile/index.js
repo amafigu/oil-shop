@@ -1,30 +1,27 @@
 import LanguageDropdown from "#components/ui/LanguageDropdown"
 import LogoutButton from "#components/ui/LogoutButton"
-import Sidebar from "#components/ui/Sidebar"
+import { NavigationMenu } from "#components/ui/NavigationMenu"
 import {
   ROUTES_CART,
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
+  ROUTES_SHOP,
 } from "#constants/routes"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
+import { useGetProductCategories } from "#hooks/useGetProductCategories"
 import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./menuMobile.module.scss"
 
-const MenuMobile = ({
-  setMenuOpen,
-  category,
-  setCategory,
-  productCategories,
-}) => {
+const MenuMobile = ({ setMenuOpen }) => {
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const navigate = useNavigate()
   const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
-
+  const { productCategories } = useGetProductCategories()
   const navigateAndCloseMenu = (route) => {
     setMenuOpen(false)
     navigate(route)
@@ -111,19 +108,16 @@ const MenuMobile = ({
               </Link>
             </div>
           )}
-
-          <li
-            className={styles.listItem}
-            onClick={() => navigateAndCloseMenu("/about")}
-          >
-            <span className={styles.linkContent}>About</span>
-          </li>
-
-          <Sidebar
-            productCategories={productCategories}
+          <NavigationMenu
+            items={
+              productCategories &&
+              productCategories.map((category) => ({
+                type: "category",
+                path: `${ROUTES_SHOP}?category=${category.name}`,
+              }))
+            }
+            navigationProperty={"link"}
             setMenuOpen={setMenuOpen}
-            category={category}
-            setCategory={setCategory}
           />
         </ul>
       </div>
