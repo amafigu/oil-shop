@@ -1,5 +1,7 @@
 import { Footer } from "#components/ui/Footer"
-import Navbar from "#components/ui/Navbar"
+import { Navbar } from "#components/ui/Navbar"
+import { NavigationMenu } from "#components/ui/NavigationMenu"
+import { pageNavigationItems } from "#constants/navigation"
 import {
   ROUTES_ABOUT,
   ROUTES_CART,
@@ -16,6 +18,7 @@ import {
   ROUTES_SIGN_UP,
   ROUTES_SIGN_UP_ADMIN,
 } from "#constants/routes"
+import { STYLES } from "#constants/styles"
 import { About } from "#pages/About"
 import { Admin } from "#pages/Admin"
 import { Cart } from "#pages/Cart/Cart"
@@ -36,6 +39,10 @@ export const AppRoutes = () => {
   return (
     <>
       <Navbar />
+      <NavigationMenu
+        items={pageNavigationItems}
+        className={STYLES.COMPONENTS.NAVIGATION_MENU.PAGES}
+      />
       <Routes>
         <Route path={`${ROUTES_ABOUT}`} element={<About />} />
         <Route path={`${ROUTES_SHOP}`} element={<Shop />} />
