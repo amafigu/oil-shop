@@ -2,16 +2,16 @@ export const pageNavigationItems = [
   {
     type: "link",
     path: "/",
-    label: "navigationMenu.home",
+    label: "home",
   },
   {
     type: "link",
     path: "/shop",
-    label: "navigationMenu.shop",
+    label: "shop",
   },
   {
     type: "link",
     path: "/about",
-    label: "navigationMenu.about",
+    label: "about",
   },
 ]
