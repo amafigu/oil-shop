@@ -11,19 +11,21 @@ import {
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useGetProductCategories } from "#hooks/useGetProductCategories"
+import { useMenuMobile } from "#hooks/useMenuMobile"
 import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./menuMobile.module.scss"
 
-const MenuMobile = ({ setMenuOpen }) => {
+const MenuMobile = () => {
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const navigate = useNavigate()
   const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
   const { productCategories } = useGetProductCategories()
+  const { setShowMobileMenu } = useMenuMobile()
   const navigateAndCloseMenu = (route) => {
-    setMenuOpen(false)
+    setShowMobileMenu(false)
     navigate(route)
   }
 
@@ -35,7 +37,7 @@ const MenuMobile = ({ setMenuOpen }) => {
         <ul className={styles.menu}>
           <li
             className={`${styles.closeMenuIconContainer} ${styles.listItem}`}
-            onClick={() => setMenuOpen(false)}
+            onClick={() => setShowMobileMenu(false)}
           >
             <FontAwesomeIcon icon={getIconByName("faX")} />
           </li>
@@ -59,9 +61,7 @@ const MenuMobile = ({ setMenuOpen }) => {
               )}
             </div>
           </li>
-          {isLanguageDropdownOpen && (
-            <LanguageDropdown setMenuOpen={setMenuOpen} />
-          )}
+          {isLanguageDropdownOpen && <LanguageDropdown />}
           <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu(ROUTES_CART)}
@@ -78,7 +78,7 @@ const MenuMobile = ({ setMenuOpen }) => {
             <div className={styles.userAndLogoutIconContainer}>
               <div
                 className={styles.listItem}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => setShowMobileMenu(false)}
               >
                 <LogoutButton
                   navigate={navigate}
@@ -87,7 +87,7 @@ const MenuMobile = ({ setMenuOpen }) => {
               </div>
               <div
                 className={styles.listItem}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => setShowMobileMenu(false)}
               >
                 <Link
                   className={styles.linkChild}
@@ -114,10 +114,10 @@ const MenuMobile = ({ setMenuOpen }) => {
               productCategories.map((category) => ({
                 type: "category",
                 path: `${ROUTES_SHOP}?category=${category.name}`,
+                label: category.name,
               }))
             }
             navigationProperty={"link"}
-            setMenuOpen={setMenuOpen}
           />
         </ul>
       </div>

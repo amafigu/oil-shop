@@ -1,6 +1,7 @@
-import SubNavbar from "#components/ui/Navbar/SubNavbar"
+import { NavigationMenu } from "#components/ui/NavigationMenu"
 import NotificationCard from "#components/ui/NotificationCard"
 import { LOGO_IMAGE } from "#constants/media"
+import { pageNavigationItems } from "#constants/navigation"
 import { ROUTES_SIGN_UP } from "#constants/routes"
 import { useLoginAndRedirect } from "#hooks/useLoginAndRedirect"
 import { useTranslation } from "#hooks/useTranslation"
@@ -20,7 +21,10 @@ export const Login = () => {
     <main className={styles.loginPageWrapper} aria-label='Login page'>
       {errorMessage && <NotificationCard message={errorMessage} />}
       <div className={styles.subNavbarContainer}>
-        <SubNavbar />
+        <NavigationMenu
+          items={pageNavigationItems}
+          navigationProperty={"link"}
+        />
       </div>
       <div className={styles.loginPage}>
         <div className={styles.logoAndFormContainer}>
