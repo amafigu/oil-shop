@@ -1,0 +1,42 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.navigationMenu {
+  @include flex-justify-center;
+}
+
+.active {
+  color: theme.$branding-color-primary;
+}
+
+.itemsList {
+  display: flex;
+
+  @include media.tablet-down {
+    flex-direction: column;
+  }
+}
+
+.item {
+  font-size: theme.$font-size-medium;
+
+  @include menu-list-item;
+
+  @include media.tablet {
+    border-bottom: 0;
+  }
+
+  @include media.tablet {
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0 theme.$spacing-regular;
+  }
+
+  &:last-child {
+    @include media.tablet-down {
+      border-bottom: white 1px solid !important;
+    }
+  }
+}

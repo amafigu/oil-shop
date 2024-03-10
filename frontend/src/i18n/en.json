@@ -341,7 +341,13 @@
     "navigationMenu": {
       "home": "Home",
       "shop": "Shop",
-      "about": "About us"
+      "about": "About us",
+      "all": "All Products",
+      "essentialOil": "Essential Oils",
+      "difuser": "Difusers",
+      "bodyCare": "Body Care",
+      "roll": "Roll On",
+      "massageOil": "Massage Oils"
     },
     "orderSummaryItem": {
       "quantity": "Quantity"
@@ -368,15 +374,6 @@
         "size": "size",
         "price": "price"
       }
-    },
-    "sidebar": {
-      "allProducts": "All Products",
-      "essentialOils": "Essential Oils",
-      "difusers": "Difusers",
-      "bodyCare": "Body Care",
-      "hairCare": "Hair Care",
-      "rollOn": "Roll On",
-      "massageOils": "Massage Oils"
     },
     "footer": {
       "linksColumns": {
@@ -425,11 +422,11 @@
     },
     "sidebarMenu": {
       "allProducts": "All Products",
-      "essentialOils": "Essential Oils",
+      "essentialOil": "Essential Oils",
       "difusers": "Difusers",
       "bodyCare": "Body Care",
       "hairCare": "Hair Care",
-      "rollOn": "Roll On",
+      "roll": "Roll On",
       "massageOils": "Massage Oils",
       "onlineShop": "Online Shop",
       "contact": "Contact us",
