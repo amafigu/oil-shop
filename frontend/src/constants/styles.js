@@ -6,9 +6,19 @@ export const STYLES = Object.freeze({
     WIDE: "wideButton",
     ADD_PRODUCT: "addProductButton",
   },
+  LINKS: {
+    NAVIGATION_MENU_LINK: "navigationMenuLink",
+    NAVIGATION_MENU_ACTIVE_LINK: "navigationMenuActiveLink",
+  },
   FORMS: {
     FIELD: "formField",
     FIELD_SEARCH_INPUT: "formFieldSearchInput",
     ITEM_ROW: "itemRow",
+  },
+  COMPONENTS: {
+    NAVIGATION_MENU: {
+      PRODUCT_CATEGORIES: "navigationMenuProductCategories",
+      PAGES: "navigationMenuPages",
+    },
   },
 })

@@ -3,6 +3,7 @@ import NotificationCard from "#components/ui/NotificationCard"
 import { LOGO_IMAGE } from "#constants/media"
 import { pageNavigationItems } from "#constants/navigation"
 import { ROUTES_SIGN_UP } from "#constants/routes"
+import { STYLES } from "#constants/styles"
 import { useLoginAndRedirect } from "#hooks/useLoginAndRedirect"
 import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
@@ -23,7 +24,7 @@ export const Login = () => {
       <div className={styles.subNavbarContainer}>
         <NavigationMenu
           items={pageNavigationItems}
-          navigationProperty={"link"}
+          className={STYLES.COMPONENTS.NAVIGATION_MENU.PAGES}
         />
       </div>
       <div className={styles.loginPage}>

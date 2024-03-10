@@ -8,6 +8,7 @@ import {
   ROUTES_LOGIN,
   ROUTES_SHOP,
 } from "#constants/routes"
+import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useGetProductCategories } from "#hooks/useGetProductCategories"
@@ -117,7 +118,7 @@ const MenuMobile = () => {
                 label: category.name,
               }))
             }
-            navigationProperty={"link"}
+            className={STYLES.COMPONENTS.NAVIGATION_MENU.PRODUCT_CATEGORIES}
           />
         </ul>
       </div>

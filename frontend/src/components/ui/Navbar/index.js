@@ -11,6 +11,7 @@ import {
   ROUTES_LOGIN,
   ROUTES_WITHOUT_NAVBAR,
 } from "#constants/routes"
+import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useGetProducts } from "#hooks/useGetProducts"
@@ -240,7 +241,7 @@ const Navbar = () => {
           <div className={styles.subNavbarContainer}>
             <NavigationMenu
               items={pageNavigationItems}
-              navigationProperty={"link"}
+              className={STYLES.COMPONENTS.NAVIGATION_MENU.PAGES}
             />
           </div>
         </div>

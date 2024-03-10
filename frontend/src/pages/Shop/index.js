@@ -1,5 +1,6 @@
 import { NavigationMenu } from "#components/ui/NavigationMenu"
 import { ROUTES_SHOP } from "#constants/routes"
+import { STYLES } from "#constants/styles"
 import { useGetProductCategories } from "#hooks/useGetProductCategories"
 import { scrollToTop } from "#utils/render"
 import { SortedProductsList } from "./SortedProductsList"
@@ -22,7 +23,7 @@ export const Shop = () => {
                 label: category.name,
               }))
             }
-            navigationProperty={"name"}
+            className={STYLES.COMPONENTS.NAVIGATION_MENU.PRODUCT_CATEGORIES}
           />
         </nav>
         <section className={styles.sortedProductsSection}>
