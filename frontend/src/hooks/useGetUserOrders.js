@@ -13,9 +13,8 @@ export const useGetUserOrders = () => {
     const getData = async () => {
       if (!user) return
       try {
-        console.log(user.id)
         const response = await getUserOrdersRequest(user.id)
-        console.log(response)
+
         if (response && response.status === 200) {
           setOrders(response.data)
         }
