@@ -5,6 +5,17 @@ export const titleCase = (str, separator) => {
     .join(" ")
 }
 
+export const toCamelCase = (str, separator) => {
+  return str
+    .split(separator)
+    .map((word, index) =>
+      index === 0
+        ? word.toLowerCase()
+        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+    )
+    .join("")
+}
+
 export const camelCaseToTitleCase = (str) => {
   if (!str) return str
   const spaced = str.replace(/([A-Z])/g, " $1").trim()

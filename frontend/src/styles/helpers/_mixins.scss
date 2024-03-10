@@ -109,11 +109,6 @@
   cursor: pointer;
   background: none;
   border: none;
-  outline: none;
-
-  &:focus {
-    outline: none;
-  }
 }
 
 @mixin z-index($key) {
@@ -121,19 +116,9 @@
 }
 
 @mixin menu-list-item {
-  display: flex;
-  align-items: center;
-  width: 90%;
-  height: 60px;
-  padding: theme.$spacing-semi-regular-large;
-  margin: auto;
-  font-size: theme.$font-size-medium;
-  line-height: theme.$line-height-primary;
-  text-transform: uppercase;
-  letter-spacing: 0.0094em;
-  list-style-type: none;
   cursor: pointer;
-  border-bottom: 1px solid gray;
+
+  @include property-font-primary-medium;
 }
 
 @mixin margin-page-wrapper {

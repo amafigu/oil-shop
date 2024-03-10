@@ -13,7 +13,6 @@ export const useGetUserShippingData = () => {
     const getData = async () => {
       if (!user) return
       try {
-        console.log(user.id)
         const response = await getUserShippingDataRequest(user.id)
 
         if (response && response.status === 200) {

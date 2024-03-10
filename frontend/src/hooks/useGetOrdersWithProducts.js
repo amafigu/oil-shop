@@ -13,7 +13,6 @@ export const useGetOrdersWithProducts = () => {
 
   useEffect(() => {
     const getOrdersWithProducts = async () => {
-      console.log(user)
       if (!user) return
 
       try {
@@ -26,8 +25,6 @@ export const useGetOrdersWithProducts = () => {
               return { ...order, cartItems: cartItemsResponse.data }
             }),
           )
-
-          console.log(ordersWithDetails)
 
           setOrders(ordersWithDetails)
         }

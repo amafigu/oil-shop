@@ -252,11 +252,6 @@
       "showButton": "Produkt erstellen",
       "hideButton": "Formular ausblenden"
     },
-    "navbar": {
-      "home": "Home",
-      "shop": "Shop",
-      "about": "Über uns"
-    },
     "crud": {
       "forms": {
         "commonProperties": {
@@ -352,6 +347,17 @@
         "fail": "Wir können dieses Produkt nicht löschen"
       }
     },
+    "navigationMenu": {
+      "home": "Home",
+      "shop": "Shop",
+      "about": "Über uns",
+      "all": "Alle Produkte",
+      "essentialOil": "Essentielle Öle",
+      "difuser": "Diffusoren",
+      "bodyCare": "Körperpflege",
+      "roll": "Roll On",
+      "massageOil": "Massageöle"
+    },
     "orderSummaryItem": {
       "quantity": "Menge"
     },
@@ -377,15 +383,6 @@
         "size": "Größe",
         "price": "Preis"
       }
-    },
-    "sidebar": {
-      "allProducts": "Alle Produkte",
-      "essentialOils": "Essentielle Öle",
-      "difusers": "Diffusoren",
-      "bodyCare": "Körperpflege",
-      "hairCare": "Haarpflege",
-      "rollOn": "Roll On",
-      "massageOils": "Massageöle"
     },
     "footer": {
       "linksColumns": {

@@ -45,6 +45,7 @@
   width: 100%;
   max-width: 100%;
   margin-bottom: theme.$spacing-regular-large;
+  text-align: center;
 
   @include single-line-overflow-hidden;
   @include flex-column-align-center;

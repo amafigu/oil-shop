@@ -1,32 +1,32 @@
 import LanguageDropdown from "#components/ui/LanguageDropdown"
 import LogoutButton from "#components/ui/LogoutButton"
-import Sidebar from "#components/ui/Sidebar"
+import { NavigationMenu } from "#components/ui/NavigationMenu"
 import {
   ROUTES_CART,
   ROUTES_CURRENT_ADMIN,
   ROUTES_CURRENT_CUSTOMER,
   ROUTES_LOGIN,
+  ROUTES_SHOP,
 } from "#constants/routes"
+import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
+import { useGetProductCategories } from "#hooks/useGetProductCategories"
+import { useMenuMobile } from "#hooks/useMenuMobile"
 import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./menuMobile.module.scss"
 
-const MenuMobile = ({
-  setMenuOpen,
-  category,
-  setCategory,
-  productCategories,
-}) => {
+const MenuMobile = () => {
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false)
   const navigate = useNavigate()
   const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
-
+  const { productCategories } = useGetProductCategories()
+  const { setShowMobileMenu } = useMenuMobile()
   const navigateAndCloseMenu = (route) => {
-    setMenuOpen(false)
+    setShowMobileMenu(false)
     navigate(route)
   }
 
@@ -38,7 +38,7 @@ const MenuMobile = ({
         <ul className={styles.menu}>
           <li
             className={`${styles.closeMenuIconContainer} ${styles.listItem}`}
-            onClick={() => setMenuOpen(false)}
+            onClick={() => setShowMobileMenu(false)}
           >
             <FontAwesomeIcon icon={getIconByName("faX")} />
           </li>
@@ -62,9 +62,7 @@ const MenuMobile = ({
               )}
             </div>
           </li>
-          {isLanguageDropdownOpen && (
-            <LanguageDropdown setMenuOpen={setMenuOpen} />
-          )}
+          {isLanguageDropdownOpen && <LanguageDropdown />}
           <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu(ROUTES_CART)}
@@ -81,7 +79,7 @@ const MenuMobile = ({
             <div className={styles.userAndLogoutIconContainer}>
               <div
                 className={styles.listItem}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => setShowMobileMenu(false)}
               >
                 <LogoutButton
                   navigate={navigate}
@@ -90,7 +88,7 @@ const MenuMobile = ({
               </div>
               <div
                 className={styles.listItem}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => setShowMobileMenu(false)}
               >
                 <Link
                   className={styles.linkChild}
@@ -111,19 +109,16 @@ const MenuMobile = ({
               </Link>
             </div>
           )}
-
-          <li
-            className={styles.listItem}
-            onClick={() => navigateAndCloseMenu("/about")}
-          >
-            <span className={styles.linkContent}>About</span>
-          </li>
-
-          <Sidebar
-            productCategories={productCategories}
-            setMenuOpen={setMenuOpen}
-            category={category}
-            setCategory={setCategory}
+          <NavigationMenu
+            items={
+              productCategories &&
+              productCategories.map((category) => ({
+                type: "category",
+                path: `${ROUTES_SHOP}?category=${category.name}`,
+                label: category.name,
+              }))
+            }
+            className={STYLES.COMPONENTS.NAVIGATION_MENU.PRODUCT_CATEGORIES}
           />
         </ul>
       </div>

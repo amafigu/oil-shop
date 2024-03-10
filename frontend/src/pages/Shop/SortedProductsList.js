@@ -1,10 +1,12 @@
 import { ProductCard } from "#components/products/ProductCard"
 import { useGetProducts } from "#hooks/useGetProducts"
+import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
 import { filteredProducts } from "#utils/products"
 import styles from "./sortedProductsList.module.scss"
 
-export const SortedProductsList = ({ category }) => {
+export const SortedProductsList = () => {
   const { products } = useGetProducts()
+  const { category } = useProductCategoryByUrlQuery()
   const sortedProducts = filteredProducts(products, category)
 
   return (
