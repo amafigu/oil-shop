@@ -33,3 +33,13 @@
     overflow: hidden;
   }
 }
+
+.navigationMenuLink {
+  @include reset-button;
+}
+
+.navigationMenuActiveLink {
+  @include reset-button;
+
+  color: theme.$branding-color-primary !important;
+}
