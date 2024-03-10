@@ -4,9 +4,17 @@ export const MenuContext = createContext()
 
 export const MenuProvider = ({ children }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [activePageLink, setActivePageLink] = useState("")
 
   return (
-    <MenuContext.Provider value={{ showMobileMenu, setShowMobileMenu }}>
+    <MenuContext.Provider
+      value={{
+        showMobileMenu,
+        setShowMobileMenu,
+        activePageLink,
+        setActivePageLink,
+      }}
+    >
       {children}
     </MenuContext.Provider>
   )

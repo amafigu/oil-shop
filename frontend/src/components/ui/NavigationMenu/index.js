@@ -1,4 +1,7 @@
+import { ActionButton } from "#components/ui/ActionButton"
+import { STYLES } from "#constants/styles"
 import { useActiveCategory } from "#hooks/useActiveCategory"
+import { useActivePageLink } from "#hooks/useActivePageLink"
 import { useMenuMobile } from "#hooks/useMenuMobile"
 import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
 import { useTranslation } from "#hooks/useTranslation"
@@ -8,10 +11,11 @@ import { accessTranslationWithPathString } from "#utils/translation"
 import { useNavigate } from "react-router-dom"
 import styles from "./navigationMenu.module.scss"
 
-export const NavigationMenu = ({ items, navigationProperty }) => {
+export const NavigationMenu = ({ items, className }) => {
   const { setCategory } = useProductCategoryByUrlQuery()
   const { components } = useTranslation()
   const activeCategory = useActiveCategory()
+  const { activePageLink, setActivePageLink } = useActivePageLink()
   const { setShowMobileMenu } = useMenuMobile()
   const navigate = useNavigate()
 
@@ -20,34 +24,38 @@ export const NavigationMenu = ({ items, navigationProperty }) => {
     if (item.type === "category") {
       setCategory(item.path)
     }
+    if (item.type === "link") {
+      setActivePageLink(item.label)
+    }
     setShowMobileMenu(false)
     navigate(item.path)
     scrollToTop()
   }
-  console.log(activeCategory)
-  console.log(navigationProperty)
-  console.log(items)
-  const setClassName = (item) => {
-    return `${styles.item} ${
-      activeCategory === item[navigationProperty] ? styles.active : ""
-    }`
-  }
 
   return (
-    <nav className={styles.navigationMenu} aria-label='navigation menu'>
+    <nav className={styles[className]} aria-label='navigation menu'>
       <ul className={styles.itemsList}>
         {items &&
           items.length > 0 &&
           items.map((item, index) => (
-            <li
-              role='button'
-              key={index}
-              onClick={(e) => onSelect(e, item)}
-              className={setClassName(item)}
-            >
-              {item.type === "link"
-                ? accessTranslationWithPathString(components, item.label)
-                : components.navigationMenu[toCamelCase(item.label, "_")]}
+            <li className={styles.item} key={index}>
+              <ActionButton
+                action={(e) => onSelect(e, item)}
+                text={
+                  item.type === "link"
+                    ? accessTranslationWithPathString(
+                        components.navigationMenu,
+                        item.label,
+                      )
+                    : components.navigationMenu[toCamelCase(item.label, "_")]
+                }
+                className={
+                  item.label === activePageLink || item.label === activeCategory
+                    ? `${STYLES.LINKS.NAVIGATION_MENU_ACTIVE_LINK}`
+                    : `${STYLES.LINKS.NAVIGATION_MENU_LINK}`
+                }
+                aria-label='navigation item'
+              />
             </li>
           ))}
       </ul>
