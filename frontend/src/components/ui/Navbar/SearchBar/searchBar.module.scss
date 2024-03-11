@@ -1,0 +1,54 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.searchBar {
+  width: 33.333%;
+
+  @include flex-align-center;
+}
+
+.inputContainer {
+  width: 100%;
+  height: 40px;
+  padding-left: theme.$spacing-regular;
+
+  @include flex-align-center;
+
+  @include media.mobile {
+    display: none;
+  }
+}
+
+.searchProductContainer {
+  width: 100%;
+}
+
+.searchTextInput {
+  width: 100%;
+  height: 100%;
+  padding-left: theme.$spacing-small;
+  font-family: theme.$font-family-primary;
+  color: theme.$font-color-primary;
+  background-color: theme.$background-color-primary !important;
+  border-radius: theme.$border-radius-small;
+
+  @include property-font-primary-semi-large-light;
+  @include input-styles-reset;
+}
+
+.listContainer {
+  width: 100%;
+  padding: theme.$padding-divider-small;
+  color: theme.$font-color-primary;
+  background-color: theme.$background-color-form-primary;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include flex-column;
+
+  @include media.short {
+    height: 70vh;
+    overflow-y: auto;
+  }
+}

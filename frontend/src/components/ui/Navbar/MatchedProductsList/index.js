@@ -4,29 +4,33 @@ import { navigateToProductAndCloseDropdown } from "#utils/products"
 import { titleCase } from "#utils/stringManipulation"
 import { React } from "react"
 import { useNavigate } from "react-router-dom"
-import styles from "./productsDropdown.module.scss"
+import styles from "./matchedProductsList.module.scss"
 
-const ProductsDropdown = ({
-  setProductDropdownVisible,
-  setSearchText,
-  setMatchedProducts,
+export const MatchedProductsList = ({
   matchedProducts,
+  setMatchedProducts,
+  setShowMatchedProductsList,
+  setSearchProductText,
 }) => {
   const navigate = useNavigate()
 
   return (
-    <div className={styles.productsDropdownWrapper}>
+    <ul
+      className={styles.matchedProductsList}
+      aria-label={"Searched products list"}
+    >
       {matchedProducts.map((product) => (
-        <div
-          className={styles.dropdownListItem}
+        <li
+          className={styles.item}
+          aria-label={`Searched item: ${product.name}`}
           key={product.name}
           onClick={() =>
             navigateToProductAndCloseDropdown(
               product.name,
               navigate,
-              setProductDropdownVisible,
               setMatchedProducts,
-              setSearchText,
+              setShowMatchedProductsList,
+              setSearchProductText,
             )
           }
         >
@@ -38,16 +42,14 @@ const ProductsDropdown = ({
               onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
             />
           </div>
-          <div className={styles.dataContainer}>
-            <div className={styles.data}>{titleCase(product.name, "_")}</div>
-            <div className={styles.dropdownListItemName}>
-              {`${product.size} ml`}
-            </div>
+          <div className={styles.data}>
+            <span className={styles.dataItem}>
+              {product.name ? titleCase(product.name, "_") : ""}
+            </span>
+            <span className={styles.dataItem}>{`${product.size} ml`}</span>
           </div>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }
-
-export default ProductsDropdown

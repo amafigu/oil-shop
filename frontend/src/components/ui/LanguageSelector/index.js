@@ -3,14 +3,16 @@ import { useMenuMobile } from "#hooks/useMenuMobile"
 import { useTranslation } from "#hooks/useTranslation"
 import React from "react"
 import { useLocation } from "react-router-dom"
-import styles from "./LanguageDropdown.module.scss"
+import styles from "./languageSelector.module.scss"
 
-const LanguageDropdown = () => {
+export const LanguageSelector = ({ setShowLanguagesOptions }) => {
   const { setLanguage, language } = useTranslation()
   const { setShowMobileMenu } = useMenuMobile()
+
   const changeLanguage = (lang) => {
     setLanguage(lang)
     setShowMobileMenu(false)
+    setShowLanguagesOptions(false)
   }
 
   const location = useLocation()
@@ -45,5 +47,3 @@ const LanguageDropdown = () => {
     </ul>
   )
 }
-
-export default LanguageDropdown

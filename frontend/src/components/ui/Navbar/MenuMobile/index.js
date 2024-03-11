@@ -1,5 +1,7 @@
-import LanguageDropdown from "#components/ui/LanguageDropdown"
+import { ActionButton } from "#components/ui/ActionButton"
+import { LanguageSelector } from "#components/ui/LanguageSelector"
 import LogoutButton from "#components/ui/LogoutButton"
+
 import { NavigationMenu } from "#components/ui/NavigationMenu"
 import {
   ROUTES_CART,
@@ -42,7 +44,15 @@ const MenuMobile = () => {
           >
             <FontAwesomeIcon icon={getIconByName("faX")} />
           </li>
-
+          <div className={styles.onlyMobile}>
+            <ActionButton
+              action={() => console.log("menu")}
+              text={
+                <FontAwesomeIcon icon={getIconByName("faSearch")} size={"xl"} />
+              }
+              className={STYLES.LINKS.NAVIGATION_MENU_LINK}
+            />
+          </div>
           <li
             className={`${styles.listDropdownItem} ${styles.listItem}`}
             onClick={() =>
@@ -62,7 +72,7 @@ const MenuMobile = () => {
               )}
             </div>
           </li>
-          {isLanguageDropdownOpen && <LanguageDropdown />}
+          {isLanguageDropdownOpen && <LanguageSelector />}
           <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu(ROUTES_CART)}
