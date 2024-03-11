@@ -7,7 +7,7 @@ import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuer
 import { useTranslation } from "#hooks/useTranslation"
 import { accessTranslationWithPathString } from "#utils/accessTranslationWithPathString"
 import { scrollToTop } from "#utils/scrollToTop"
-import { toCamelCase } from "#utils/stringManipulation"
+import { toCamelCase } from "#utils/toCamelCase"
 import { useNavigate } from "react-router-dom"
 import styles from "./navigationMenu.module.scss"
 

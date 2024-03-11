@@ -1,7 +1,7 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/setDefaultImageByError"
-import { titleCase } from "#utils/stringManipulation"
+import { titleCase } from "#utils/titleCase"
 import styles from "./orderSummaryItem.module.scss"
 
 export const OrderSummaryItem = ({ image, name, size, quantity }) => {

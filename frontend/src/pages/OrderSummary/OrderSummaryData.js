@@ -1,5 +1,5 @@
 import { SHIPPING_COST } from "#constants/cart"
-import { camelCaseToTitleCase } from "#utils/stringManipulation"
+import { camelCaseToTitleCase } from "#utils/camelCaseToTitleCase"
 import styles from "./orderSummaryData.module.scss"
 
 export const OrderSummaryData = ({ userData, shippingData, orderData }) => {

@@ -5,7 +5,7 @@ import { STYLES } from "#constants/styles"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/setDefaultImageByError"
-import { titleCase } from "#utils/stringManipulation"
+import { titleCase } from "#utils/titleCase"
 import { useNavigate } from "react-router-dom"
 import styles from "./productCard.module.scss"
 

@@ -1,3 +1,5 @@
+// TODO: translate zod backend errors
+
 export const translateZodValidationErrors = (error, text) => {
   const translatedMessage = text.validationErrors[error.path]
 

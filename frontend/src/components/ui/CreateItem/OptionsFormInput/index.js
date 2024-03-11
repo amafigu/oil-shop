@@ -1,4 +1,5 @@
-import { camelCaseToTitleCase, titleCase } from "#utils/stringManipulation"
+import { camelCaseToTitleCase } from "#utils/camelCaseToTitleCase"
+import { titleCase } from "#utils/titleCase"
 import styles from "./optionsFormInput.module.scss"
 
 export const OptionsFormInput = ({

@@ -1,4 +1,4 @@
-import { camelCaseToTitleCase } from "#utils/stringManipulation"
+import { camelCaseToTitleCase } from "#utils/camelCaseToTitleCase"
 import React from "react"
 import styles from "./formInput.module.scss"
 
