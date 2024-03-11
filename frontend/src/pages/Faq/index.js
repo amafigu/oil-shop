@@ -1,6 +1,6 @@
 import { questionsAndAnswers } from "#constants/faq"
 import { useTranslation } from "#hooks/useTranslation"
-import { scrollToTop } from "#utils/render"
+import { scrollToTop } from "#utils/scrollToTop"
 import styles from "./faq.module.scss"
 
 export const Faq = () => {

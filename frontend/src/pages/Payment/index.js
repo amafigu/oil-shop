@@ -1,6 +1,6 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import { useRedirectAdminFromCheckout } from "#hooks/useRedirectAdminFromCheckout"
-import { scrollToTop } from "#utils/render"
+import { scrollToTop } from "#utils/scrollToTop"
 import { PaymentForm } from "./PaymentForm"
 import styles from "./payment.module.scss"
 

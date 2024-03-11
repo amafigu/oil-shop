@@ -4,7 +4,7 @@ import NotificationCard from "#components/ui/NotificationCard"
 import { STYLES } from "#constants/styles"
 import { useLoginAndRedirect } from "#hooks/useLoginAndRedirect"
 import { useTranslation } from "#hooks/useTranslation"
-import { getIconByName } from "#utils/icons"
+import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "./loginForm.module.scss"
 

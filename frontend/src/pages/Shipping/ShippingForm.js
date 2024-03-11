@@ -4,8 +4,8 @@ import { initialShippingFormData } from "#constants/shippingData"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import { useTranslation } from "#hooks/useTranslation"
-import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
-import { submitGuestUserWithOrders } from "#utils/users"
+import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { onSubmitGuestUserWithOrders } from "#utils/onSubmitGuestUserWithOrders"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./shippingForm.module.scss"
@@ -22,7 +22,7 @@ export const ShippingForm = ({ isLoggedIn, setNotification }) => {
       aria-label='Shipping data form'
       className={styles.form}
       onSubmit={(e) =>
-        submitGuestUserWithOrders(e, cart, isLoggedIn, navigate, formData)
+        onSubmitGuestUserWithOrders(e, cart, isLoggedIn, navigate, formData)
       }
     >
       <div className={styles.customerInfo}>

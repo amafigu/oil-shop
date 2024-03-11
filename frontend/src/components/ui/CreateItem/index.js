@@ -4,10 +4,8 @@ import NotificationCard from "#components/ui/NotificationCard"
 import { ToggleButton } from "#components/ui/ToggleButton"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
-import {
-  listenInputChangeAndSetDataObject,
-  setFileToUpload,
-} from "#utils/dataManipulation"
+import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { setFileToUpload } from "#utils/setFileToUpload"
 import { useState } from "react"
 import { OptionsFormInput } from "./OptionsFormInput"
 

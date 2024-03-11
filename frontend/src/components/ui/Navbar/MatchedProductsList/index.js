@@ -1,9 +1,8 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useMenuOptions } from "#hooks/useMenuOptions"
-import { setDefaultImageByError } from "#utils/dataManipulation"
-import { navigateToProductAndCloseDropdown } from "#utils/products"
-import { titleCase } from "#utils/stringManipulation"
-import { React } from "react"
+import { navigateToProductAndCloseDropdown } from "#utils/navigateToProductAndCloseDropdown"
+import { setDefaultImageByError } from "#utils/setDefaultImageByError"
+import { titleCase } from "#utils/titleCase"
 import { useNavigate } from "react-router-dom"
 import styles from "./matchedProductsList.module.scss"
 

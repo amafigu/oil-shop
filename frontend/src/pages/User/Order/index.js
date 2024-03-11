@@ -1,5 +1,5 @@
 import { useTranslation } from "#hooks/useTranslation"
-import { convertIsoToLocaleDateString } from "#utils/stringManipulation"
+import { convertIsoToLocaleDateString } from "#utils/convertIsoToLocaleDateString"
 import { OrderCard } from "../OrderCard"
 import styles from "./order.module.scss"
 

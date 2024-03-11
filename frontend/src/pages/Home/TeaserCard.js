@@ -1,6 +1,6 @@
 import { useTranslation } from "#hooks/useTranslation"
-import { getIconByName } from "#utils/icons"
-import { accessTranslationWithPathString } from "#utils/translation"
+import { accessTranslationWithPathString } from "#utils/accessTranslationWithPathString"
+import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "./teaserCard.module.scss"
 

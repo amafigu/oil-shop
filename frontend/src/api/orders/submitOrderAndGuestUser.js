@@ -12,7 +12,7 @@ import {
   LOCAL_STORAGE_CART,
   LOCAL_STORAGE_GUEST_ID,
 } from "#constants/localStorage"
-import { totalCost } from "#utils/cart"
+import { totalCost } from "#utils/totalCost"
 import axios from "axios"
 export const submitOrderAndGuestUser = async (
   isLoggedIn,

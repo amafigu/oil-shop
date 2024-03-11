@@ -2,7 +2,7 @@ import { NavigationMenu } from "#components/ui/NavigationMenu"
 import { ROUTES_SHOP } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import { useGetProductCategories } from "#hooks/useGetProductCategories"
-import { scrollToTop } from "#utils/render"
+import { scrollToTop } from "#utils/scrollToTop"
 import { SortedProductsList } from "./SortedProductsList"
 import styles from "./shop.module.scss"
 

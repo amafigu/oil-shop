@@ -1,9 +1,19 @@
 import { ActionButton } from "#components/ui/ActionButton"
-import { decreaseQuantity, increaseQuantity } from "#utils/cart"
-import { getIconByName } from "#utils/icons"
+import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "./counter.module.scss"
 
+const increaseQuantity = (quantity, setQuantity) => {
+  if (quantity < 40) {
+    setQuantity((prevQuantity) => prevQuantity + 1)
+  }
+}
+
+const decreaseQuantity = (quantity, setQuantity) => {
+  if (quantity > 1) {
+    setQuantity((prevQuantity) => prevQuantity - 1)
+  }
+}
 export const Counter = ({ counter, setCounter }) => {
   return (
     <div className={styles.counter}>

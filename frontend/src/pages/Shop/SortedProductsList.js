@@ -1,8 +1,12 @@
 import { ProductCard } from "#components/products/ProductCard"
 import { useGetProducts } from "#hooks/useGetProducts"
 import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
-import { filteredProducts } from "#utils/products"
 import styles from "./sortedProductsList.module.scss"
+
+const filteredProducts = (products, category) =>
+  products.filter(
+    (product) => product.category.name === category || category === "all",
+  )
 
 export const SortedProductsList = () => {
   const { products } = useGetProducts()

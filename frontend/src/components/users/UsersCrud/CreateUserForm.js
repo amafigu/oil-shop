@@ -19,7 +19,7 @@ import {
 } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
-import { getIconByName } from "#utils/icons"
+import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"

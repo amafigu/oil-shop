@@ -1,6 +1,6 @@
 import NotificationCard from "#components/ui/NotificationCard"
 import { LOCAL_STORAGE_CART } from "#constants/localStorage"
-import { titleCase } from "#utils/stringManipulation"
+import { titleCase } from "#utils/titleCase"
 import { createContext, useContext, useEffect, useState } from "react"
 
 export const CartContext = createContext()
