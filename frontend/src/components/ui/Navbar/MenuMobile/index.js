@@ -1,4 +1,4 @@
-import LanguageDropdown from "#components/ui/LanguageDropdown"
+import { LanguageSelector } from "#components/ui/LanguageSelector"
 import LogoutButton from "#components/ui/LogoutButton"
 import { NavigationMenu } from "#components/ui/NavigationMenu"
 import {
@@ -62,7 +62,7 @@ const MenuMobile = () => {
               )}
             </div>
           </li>
-          {isLanguageDropdownOpen && <LanguageDropdown />}
+          {isLanguageDropdownOpen && <LanguageSelector />}
           <li
             className={styles.listItem}
             onClick={() => navigateAndCloseMenu(ROUTES_CART)}

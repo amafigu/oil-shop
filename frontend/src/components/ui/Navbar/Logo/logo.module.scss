@@ -3,6 +3,8 @@
 @import "#styles/helpers/mixins";
 
 .logoContainer {
+  width: 33.333%;
+
   @include flex-justify-center;
 }
 

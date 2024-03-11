@@ -20,14 +20,14 @@ export const searchAndNavigateToProduct = (products, searchText, navigate) => {
 export const navigateToProductAndCloseDropdown = (
   name,
   navigate,
-  setProductDropdownVisible,
-  setMatchedProducts,
-  setSearchText,
+  setItemsList,
+  setShowList,
+  setSearchProductText,
 ) => {
   navigate(`${ROUTES_PRODUCTS}/${name}`)
-  setProductDropdownVisible(false)
-  setMatchedProducts([])
-  setSearchText("")
+  setItemsList([])
+  setShowList(false)
+  setSearchProductText("")
 }
 
 export const filteredProducts = (products, category) =>

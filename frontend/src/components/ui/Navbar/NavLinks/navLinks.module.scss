@@ -6,6 +6,16 @@
   display: flex;
   gap: theme.$spacing-regular;
   align-items: center;
+  justify-content: flex-end;
+  width: 33.333%;
+}
+
+.onlyMobile {
+  display: none;
+
+  @include media.tablet-down {
+    display: block;
+  }
 }
 
 .linkChild {
