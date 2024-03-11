@@ -1,4 +1,5 @@
 import { useGetProducts } from "#hooks/useGetProducts"
+import { useMenuOptions } from "#hooks/useMenuOptions"
 import { searchProducts } from "#utils/products/searchProducts"
 import styles from "./searchBar.module.scss"
 
@@ -9,10 +10,17 @@ export const SearchBar = ({
   setShowMatchedProductsList,
 }) => {
   const { products } = useGetProducts()
+  const { showProductsSearchBar } = useMenuOptions()
 
   return (
     <section className={styles.searchBar}>
-      <div className={styles.inputContainer}>
+      <div
+        className={
+          showProductsSearchBar
+            ? `${styles.inputContainer} ${styles.showBar}`
+            : `${styles.hideBar}`
+        }
+      >
         <input
           className={styles.searchTextInput}
           onChange={(e) =>
@@ -27,7 +35,6 @@ export const SearchBar = ({
           placeholder='Search Product'
           value={searchProductText}
         />
-        {/* <FontAwesomeIcon icon={getIconByName("faSearch")} /> */}
       </div>
     </section>
   )

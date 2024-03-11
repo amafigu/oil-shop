@@ -8,16 +8,20 @@
   @include flex-align-center;
 }
 
+.showBar {
+  display: flex;
+}
+
+.hideBar {
+  display: none;
+}
+
 .inputContainer {
   width: 100%;
   height: 40px;
   padding-left: theme.$spacing-regular;
 
   @include flex-align-center;
-
-  @include media.mobile {
-    display: none;
-  }
 }
 
 .searchProductContainer {

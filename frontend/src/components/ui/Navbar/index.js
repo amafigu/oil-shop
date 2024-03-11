@@ -1,22 +1,22 @@
 import { ROUTES_WITHOUT_NAVBAR } from "#constants/routes"
+import { useMenuOptions } from "#hooks/useMenuOptions"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
 import { Logo } from "./Logo"
 import { MatchedProductsList } from "./MatchedProductsList"
-import MenuMobile from "./MenuMobile"
+import { MobileMenu } from "./MobileMenu"
 import { NavLinks } from "./NavLinks"
 import { SearchBar } from "./SearchBar"
 import styles from "./navbar.module.scss"
 
 export const Navbar = () => {
-  const [showProductsSearchbar, setShowProductsSearchbar] = useState(false)
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [matchedProducts, setMatchedProducts] = useState([])
   const [showLanguagesOptions, setShowLanguagesOptions] = useState(false)
   const [showMatchedProductsList, setShowMatchedProductsList] = useState(false)
   const [searchProductText, setSearchProductText] = useState("")
   const location = useLocation()
   const currentPath = location.pathname
+  const { showMobileMenu } = useMenuOptions()
 
   return (
     <>
@@ -31,13 +31,9 @@ export const Navbar = () => {
             />
             <Logo />
             <NavLinks
-              setShowMobileMenu={setShowMobileMenu}
               showLanguagesOptions={showLanguagesOptions}
               setShowLanguagesOptions={setShowLanguagesOptions}
             />
-            {showMobileMenu && (
-              <MenuMobile setShowMobileMenu={setShowMobileMenu} />
-            )}
           </nav>
           {matchedProducts.length > 0 && showMatchedProductsList && (
             <MatchedProductsList
@@ -45,6 +41,12 @@ export const Navbar = () => {
               setMatchedProducts={setMatchedProducts}
               setShowMatchedProductsList={setShowMatchedProductsList}
               setSearchProductText={setSearchProductText}
+            />
+          )}
+          {showMobileMenu && (
+            <MobileMenu
+              showLanguagesOptions={showLanguagesOptions}
+              setShowLanguagesOptions={setShowLanguagesOptions}
             />
           )}
         </>

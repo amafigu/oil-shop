@@ -20,5 +20,8 @@ export const STYLES = Object.freeze({
       PRODUCT_CATEGORIES: "navigationMenuProductCategories",
       PAGES: "navigationMenuPages",
     },
+    MOBILE_MENU: {
+      ITEMS: "mobileMenuItems",
+    },
   },
 })

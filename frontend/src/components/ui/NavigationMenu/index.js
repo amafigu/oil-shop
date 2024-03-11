@@ -2,7 +2,7 @@ import { ActionButton } from "#components/ui/ActionButton"
 import { STYLES } from "#constants/styles"
 import { useActiveCategory } from "#hooks/useActiveCategory"
 import { useActivePageLink } from "#hooks/useActivePageLink"
-import { useMenuMobile } from "#hooks/useMenuMobile"
+import { useMenuOptions } from "#hooks/useMenuOptions"
 import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
 import { useTranslation } from "#hooks/useTranslation"
 import { scrollToTop } from "#utils/render"
@@ -16,7 +16,7 @@ export const NavigationMenu = ({ items, className }) => {
   const { components } = useTranslation()
   const activeCategory = useActiveCategory()
   const { activePageLink, setActivePageLink } = useActivePageLink()
-  const { setShowMobileMenu } = useMenuMobile()
+  const { setShowMobileMenu } = useMenuOptions()
   const navigate = useNavigate()
 
   const onSelect = (e, item) => {
@@ -27,6 +27,7 @@ export const NavigationMenu = ({ items, className }) => {
     if (item.type === "link") {
       setActivePageLink(item.label)
     }
+
     setShowMobileMenu(false)
     navigate(item.path)
     scrollToTop()

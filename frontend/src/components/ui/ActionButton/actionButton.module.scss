@@ -45,3 +45,9 @@
 
   color: theme.$branding-color-primary !important;
 }
+
+.mobileMenuItems {
+  @include reset-button;
+
+  color: inherit;
+}

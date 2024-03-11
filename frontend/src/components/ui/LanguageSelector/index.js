@@ -1,5 +1,5 @@
 import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#constants/routes"
-import { useMenuMobile } from "#hooks/useMenuMobile"
+import { useMenuOptions } from "#hooks/useMenuOptions"
 import { useTranslation } from "#hooks/useTranslation"
 import React from "react"
 import { useLocation } from "react-router-dom"
@@ -7,7 +7,7 @@ import styles from "./languageSelector.module.scss"
 
 export const LanguageSelector = ({ setShowLanguagesOptions }) => {
   const { setLanguage, language } = useTranslation()
-  const { setShowMobileMenu } = useMenuMobile()
+  const { setShowMobileMenu } = useMenuOptions()
 
   const changeLanguage = (lang) => {
     setLanguage(lang)
