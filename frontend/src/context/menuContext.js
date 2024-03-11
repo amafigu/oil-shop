@@ -5,7 +5,7 @@ export const MenuContext = createContext()
 export const MenuProvider = ({ children }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [activePageLink, setActivePageLink] = useState("")
-
+  const [showProductsSearchBar, setShowProductsSearchBar] = useState(false)
   return (
     <MenuContext.Provider
       value={{
@@ -13,6 +13,8 @@ export const MenuProvider = ({ children }) => {
         setShowMobileMenu,
         activePageLink,
         setActivePageLink,
+        showProductsSearchBar,
+        setShowProductsSearchBar,
       }}
     >
       {children}
