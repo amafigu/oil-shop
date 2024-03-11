@@ -4,7 +4,7 @@ import {
   SOCIAL_MEDIA_URL_YOUTUBE,
 } from "#constants/media"
 import { useTranslation } from "#hooks/useTranslation"
-import { getIconByName } from "#utils/icons"
+import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styles from "./footerIcons.module.scss"
 

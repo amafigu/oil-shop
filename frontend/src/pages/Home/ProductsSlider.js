@@ -1,6 +1,6 @@
 import { ProductCard } from "#components/products/ProductCard"
 import { useGetProducts } from "#hooks/useGetProducts"
-import { getIconByName } from "#utils/icons"
+import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import styles from "./productSlider.module.scss"

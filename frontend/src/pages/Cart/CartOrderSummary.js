@@ -2,11 +2,13 @@ import { SHIPPING_COST } from "#constants/cart"
 import { ROUTES_CART, ROUTES_CHECKOUT_SHIPPING } from "#constants/routes"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
-import { cartTotalSum } from "#utils/cart"
+import { totalCost } from "#utils/totalCost"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./cartOrderSummary.module.scss"
 
+export const cartTotalSum = (cart, shippingCost) =>
+  Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
 export const CartOrderSummary = ({ totalCost }) => {
   const { cart } = useCart()
   const { translate } = useTranslation()
