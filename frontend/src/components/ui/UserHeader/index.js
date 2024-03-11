@@ -1,6 +1,6 @@
 import { DEFAULT_USER_IMAGE } from "#constants/media"
 import useUserContext from "#context/userContext"
-import { setDefaultImageByError } from "#utils/dataManipulation"
+import { setDefaultImageByError } from "#utils/setDefaultImageByError"
 import { UserHeaderData } from "./UserHeaderData"
 import styles from "./userHeader.module.scss"
 export const UserHeader = () => {

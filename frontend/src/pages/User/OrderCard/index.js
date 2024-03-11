@@ -1,6 +1,6 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useTranslation } from "#hooks/useTranslation"
-import { setDefaultImageByError } from "#utils/dataManipulation"
+import { setDefaultImageByError } from "#utils/setDefaultImageByError"
 import { titleCase } from "#utils/stringManipulation"
 import styles from "./orderCard.module.scss"
 
