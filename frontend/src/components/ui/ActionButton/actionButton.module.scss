@@ -36,6 +36,8 @@
 
 .navigationMenuLink {
   @include reset-button;
+
+  color: inherit;
 }
 
 .navigationMenuActiveLink {
