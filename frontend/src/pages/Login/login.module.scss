@@ -6,19 +6,6 @@
   @include flex-column-all-center;
 }
 
-.subNavbarContainer {
-  width: 100%;
-  margin: theme.$spacing-regular auto;
-
-  @include media.tablet-down {
-    width: 50%;
-  }
-
-  @include media.mobile {
-    width: 80%;
-  }
-}
-
 .loginPage {
   width: 100%;
   min-height: theme.$min-height-page-regular;
