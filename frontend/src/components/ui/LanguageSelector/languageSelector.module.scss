@@ -3,34 +3,39 @@
 @import "#styles/helpers/mixins";
 
 .dropdownMenu {
+  position: absolute;
+  display: flex;
+  gap: theme.$spacing-semi-regular;
+  padding: 0 4px;
+  margin-top: 8px;
   color: theme.$font-color-primary;
+  background-color: #fff;
   border: theme.$border-regular-component;
+  border-radius: theme.$border-radius-small;
 
   @include media.mobile {
-    border: none;
-  }
-
-  .activeCategory {
-    color: theme.$branding-color-primary;
-  }
-
-  .listItem {
-    @include media.tablet-down {
-      @include menu-list-item;
-    }
-  }
-
-  .linkContent {
-    cursor: pointer;
-  }
-
-  @include media.tablet {
-    position: absolute;
+    position: relative;
     display: flex;
     gap: theme.$spacing-semi-regular;
+    height: theme.$height-mobile-menu-item;
     padding: 0 4px;
     margin-top: 8px;
     background-color: #fff;
+    border: none;
     border-radius: theme.$border-radius-small;
   }
+}
+
+.activeCategory {
+  color: theme.$branding-color-primary;
+}
+
+.listItem {
+  @include media.tablet-down {
+    @include menu-list-item;
+  }
+}
+
+.linkContent {
+  cursor: pointer;
 }
