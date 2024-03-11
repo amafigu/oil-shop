@@ -1,7 +1,6 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
-import { cancelWithScape } from "#utils/render"
 import { useState } from "react"
 
 import styles from "./editableItemInput.module.scss"
@@ -60,7 +59,11 @@ export const EditableItemInput = ({
             label={label}
             name={name}
             onChange={onChange}
-            onKeyDown={(e) => cancelWithScape(e, setIsEditing)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setIsEditing(false)
+              }
+            }}
             placeholder={commonProperties[name]}
             value={updatedPropertyData[name]}
             type={name === "size" || name === "price" ? "number" : "text"}

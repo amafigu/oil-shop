@@ -1,7 +1,7 @@
 import { translate } from "#__mocks__/translate"
 import { useTranslation } from "#hooks/useTranslation"
 import { Faq } from "#pages/Faq"
-import { scrollToTop } from "#utils/render"
+import { scrollToTop } from "#utils/scrollToTop"
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 

@@ -1,6 +1,6 @@
 import { LOGO_IMAGE } from "#constants/media"
 import { useTranslation } from "#hooks/useTranslation"
-import { scrollToTop } from "#utils/render"
+import { scrollToTop } from "#utils/scrollToTop"
 import styles from "./notFound.module.scss"
 
 export const NotFound = () => {

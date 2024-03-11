@@ -1,6 +1,6 @@
 import { useGetProducts } from "#hooks/useGetProducts"
 import { useMenuOptions } from "#hooks/useMenuOptions"
-import { searchProducts } from "#utils/products/searchProducts"
+import { searchProducts } from "#utils/searchProducts"
 import styles from "./searchBar.module.scss"
 
 export const SearchBar = ({

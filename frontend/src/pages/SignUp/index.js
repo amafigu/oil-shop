@@ -1,6 +1,6 @@
 import CreateUserForm from "#components/users/UsersCrud/CreateUserForm"
 import { LOGO_IMAGE } from "#constants/media"
-import { scrollToTop } from "#utils/render"
+import { scrollToTop } from "#utils/scrollToTop"
 import { LinkContainer } from "./LinkContainer"
 import styles from "./signUp.module.scss"
 

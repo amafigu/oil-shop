@@ -1,4 +1,4 @@
-import { scrollToTop } from "#utils/render"
+import { scrollToTop } from "#utils/scrollToTop"
 import { ProductDetailsCard } from "./ProductDetailsCard"
 import styles from "./productDetails.module.scss"
 

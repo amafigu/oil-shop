@@ -16,12 +16,14 @@ import { useGetProducts } from "#hooks/useGetProducts"
 import { useGetUsers } from "#hooks/useGetUsers"
 import { useTranslation } from "#hooks/useTranslation"
 import { listenInputChangeAndSetDataObject } from "#utils/dataManipulation"
+import { onCreateUser } from "#utils/onCreateUser"
+import { onDeleteUser } from "#utils/onDeleteUser"
+import { onUpdateUser } from "#utils/onUpdateUser"
 import {
   onCreateProduct,
   onDeleteProduct,
   onUpdateProduct,
 } from "#utils/products"
-import { onCreateUser, onDeleteUser, onUpdateUser } from "#utils/users"
 import styles from "./admin.module.scss"
 
 export const Admin = () => {

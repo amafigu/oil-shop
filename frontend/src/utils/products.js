@@ -4,7 +4,7 @@ import { deleteProductById } from "#api/products/deleteProductById"
 import { updateProductDataRequest } from "#api/products/updateProductDataRequest"
 import { ROUTES_PRODUCTS } from "#constants/routes"
 import { PROCESS_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import { validateProductProperty } from "#utils/validation"
+import { validateProductProperty } from "#utils/validateProductProperty"
 
 export const searchAndNavigateToProduct = (products, searchText, navigate) => {
   const match = products.find(
