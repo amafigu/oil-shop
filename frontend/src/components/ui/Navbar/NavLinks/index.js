@@ -10,30 +10,41 @@ import {
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
+import { useMenuOptions } from "#hooks/useMenuOptions"
 import { getIconByName } from "#utils/icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./navLinks.module.scss"
 
-export const NavLinks = ({
-  setShowMobileMenu,
-  showLanguagesOptions,
-  setShowLanguagesOptions,
-}) => {
+export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
   const { getAllProductsQuantity } = useCartContext()
   const { setIsLoggedIn, isLoggedIn, user } = useUserContext()
   const navigate = useNavigate()
+  const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
 
+  const onMobileMenu = () => {
+    setShowProductsSearchBar(false)
+    setShowMobileMenu(true)
+  }
   return (
     <section className={styles.navLinks}>
       <div className={styles.onlyMobile}>
         <ActionButton
-          action={() => setShowMobileMenu(true)}
+          action={onMobileMenu}
           text={<FontAwesomeIcon icon={getIconByName("faBars")} size={"xl"} />}
           className={STYLES.LINKS.NAVIGATION_MENU_LINK}
         />
       </div>
       <div className={styles.hideOnMobile}>
+        <div className={styles.listItem}>
+          <ActionButton
+            action={() => setShowProductsSearchBar((prevState) => !prevState)}
+            text={
+              <FontAwesomeIcon icon={getIconByName("faSearch")} size={"xl"} />
+            }
+            className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
+          />
+        </div>
         <div className={styles.languageSelector}>
           <ActionButton
             action={() => setShowLanguagesOptions((prevState) => !prevState)}
