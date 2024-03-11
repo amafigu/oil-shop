@@ -241,6 +241,12 @@
   line-height: theme.$line-height-primary;
 }
 
+@mixin property-font-tertiary-regular {
+  font-size: theme.$font-size-small;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
+}
+
 @mixin property-font {
   font-size: theme.$font-size-medium;
 }

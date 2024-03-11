@@ -30,6 +30,8 @@
 }
 
 .listItem {
+  height: theme.$height-mobile-menu-item;
+
   @include menu-list-item;
 }
 
