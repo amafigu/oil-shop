@@ -2,17 +2,31 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.productsDropdownWrapper {
-  .hidden {
-    display: none;
+.matchedProductsList {
+  position: absolute;
+  left: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  padding: 4px 0;
+  background-color: theme.$background-color-form-primary;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include z-index("product-search-dropdow");
+
+  @include media.mobile {
+    width: 86%;
   }
 
-  .dropdownListItem {
+  .item {
     display: flex;
     align-items: center;
+    width: 96%;
     height: 100px;
     padding: theme.$spacing-smaller;
-    margin: theme.$spacing-smaller 0;
+    margin: theme.$spacing-smallest 0;
     font-size: theme.$font-size-small;
     line-height: theme.$line-height-primary;
     list-style-type: none;
@@ -20,19 +34,24 @@
     background-color: theme.$background-color-primary;
     border-radius: theme.$border-radius-small;
     box-shadow: theme.$box-shadow-light;
-    transition: background-color 0.3s ease;
 
-    .data {
+    &:hover {
+      scale: 1.01;
+    }
+
+    .dataItem {
+      display: block;
       font-weight: theme.$font-weight-normal;
       color: theme.$font-color-primary;
     }
 
     .imageContainer {
+      width: 33px;
+      height: 84px;
+      margin-right: theme.$spacing-regular;
+
       .image {
-        max-width: 33px;
-        max-height: 84px;
-        object-fit: contain;
-        margin-right: theme.$spacing-regular;
+        @include responsive-image;
       }
     }
   }

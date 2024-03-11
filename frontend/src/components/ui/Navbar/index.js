@@ -32,7 +32,6 @@ export const Navbar = () => {
             <Logo />
             <NavLinks
               setShowMobileMenu={setShowMobileMenu}
-              setShowProductsSearchbar={setShowProductsSearchbar}
               showLanguagesOptions={showLanguagesOptions}
               setShowLanguagesOptions={setShowLanguagesOptions}
             />
@@ -41,14 +40,12 @@ export const Navbar = () => {
             )}
           </nav>
           {matchedProducts.length > 0 && showMatchedProductsList && (
-            <div className={styles.listContainer}>
-              <MatchedProductsList
-                matchedProducts={matchedProducts}
-                setMatchedProducts={setMatchedProducts}
-                setShowMatchedProductsList={setShowMatchedProductsList}
-                setSearchProductText={setSearchProductText}
-              />
-            </div>
+            <MatchedProductsList
+              matchedProducts={matchedProducts}
+              setMatchedProducts={setMatchedProducts}
+              setShowMatchedProductsList={setShowMatchedProductsList}
+              setSearchProductText={setSearchProductText}
+            />
           )}
         </>
       )}

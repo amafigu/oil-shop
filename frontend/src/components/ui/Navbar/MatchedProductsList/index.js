@@ -15,10 +15,14 @@ export const MatchedProductsList = ({
   const navigate = useNavigate()
 
   return (
-    <div className={styles.productsDropdownWrapper}>
+    <ul
+      className={styles.matchedProductsList}
+      aria-label={"Searched products list"}
+    >
       {matchedProducts.map((product) => (
-        <div
-          className={styles.dropdownListItem}
+        <li
+          className={styles.item}
+          aria-label={`Searched item: ${product.name}`}
           key={product.name}
           onClick={() =>
             navigateToProductAndCloseDropdown(
@@ -38,16 +42,14 @@ export const MatchedProductsList = ({
               onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
             />
           </div>
-          <div className={styles.dataContainer}>
-            <div className={styles.data}>
+          <div className={styles.data}>
+            <span className={styles.dataItem}>
               {product.name ? titleCase(product.name, "_") : ""}
-            </div>
-            <div className={styles.dropdownListItemName}>
-              {`${product.size} ml`}
-            </div>
+            </span>
+            <span className={styles.dataItem}>{`${product.size} ml`}</span>
           </div>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }

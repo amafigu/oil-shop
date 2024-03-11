@@ -14,6 +14,10 @@
   padding-left: theme.$spacing-regular;
 
   @include flex-align-center;
+
+  @include media.mobile {
+    display: none;
+  }
 }
 
 .searchProductContainer {
@@ -42,7 +46,6 @@
   box-shadow: theme.$box-shadow-primary;
 
   @include flex-column;
-  @include z-index("product-search-dropdow");
 
   @include media.short {
     height: 70vh;

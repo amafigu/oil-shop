@@ -3,18 +3,34 @@
 @import "#styles/helpers/mixins";
 
 .navLinks {
-  display: flex;
-  gap: theme.$spacing-regular;
-  align-items: center;
   justify-content: flex-end;
   width: 33.333%;
+
+  @include flex-align-center;
 }
 
 .onlyMobile {
   display: none;
 
-  @include media.tablet-down {
+  @include media.mobile {
     display: block;
+    margin-right: theme.$spacing-regular;
+  }
+}
+
+.hideOnMobile {
+  @include flex-align-center;
+
+  gap: theme.$spacing-regular;
+
+  @include media.mobile {
+    display: none;
+  }
+}
+
+.languageSelector {
+  button {
+    margin-right: theme.$spacing-smallest;
   }
 }
 
@@ -36,100 +52,4 @@
 
 .userAndLogoutIconContainer {
   display: flex;
-}
-
-.logoutIconContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  margin-left: theme.$spacing-regular;
-  cursor: pointer;
-}
-
-.dropdownModal {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: rgb(0 0 0 / 50%);
-  transition: opacity 0.3s ease-in-out;
-}
-
-.searchProduct {
-  flex-grow: 1;
-  width: 100%;
-  background-color: #fff;
-  border-radius: theme.$border-radius-small;
-  box-shadow: theme.$box-shadow-primary;
-
-  @include flex-column-all-center;
-
-  .searchTextInputAndIcon {
-    width: 100%;
-
-    @include flex-align-center;
-  }
-
-  .laguageDropdownContainer {
-    min-width: 50px;
-    min-height: theme.$spacing-semi-regular-large;
-  }
-}
-
-.menuWrapper {
-  display: none;
-
-  @include media.desktop-down {
-    display: flex;
-  }
-}
-
-.menuIconWrapper {
-  display: none;
-
-  @include media.tablet-down {
-    display: grid;
-    flex-basis: 0;
-    flex-grow: 1;
-    margin-right: theme.$spacing-semi-regular-large;
-    cursor: pointer;
-
-    svg {
-      justify-self: flex-end;
-    }
-  }
-}
-
-.searchIconWrapper {
-  display: none;
-
-  @include media.tablet-down {
-    display: flex;
-    flex-basis: 0;
-    flex-grow: 1;
-    justify-content: flex-start;
-    margin-right: theme.$spacing-semi-regular-large;
-    cursor: pointer;
-  }
-}
-
-.navbarColumnLeft {
-  flex-basis: 0;
-  flex-grow: 1;
-
-  .searchIconIWrapperOut {
-    margin-right: 8px;
-  }
-
-  .searchIconIWrapper {
-    display: none;
-
-    @include media.tablet-down {
-      display: block;
-      margin-left: theme.$spacing-semi-regular-large;
-    }
-  }
 }
