@@ -8,6 +8,7 @@ import {
   faUps,
 } from "@fortawesome/free-brands-svg-icons"
 import {
+  faArrowRightFromBracket,
   faBars,
   faCartShopping,
   faChevronDown,
@@ -56,6 +57,7 @@ const icons = {
   faTrash,
   faTree,
   faUnlock,
+  faArrowRightFromBracket,
 }
 
 export const getIconByName = (iconName) => {
