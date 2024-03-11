@@ -1,4 +1,5 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
+import { useMenuOptions } from "#hooks/useMenuOptions"
 import { setDefaultImageByError } from "#utils/dataManipulation"
 import { navigateToProductAndCloseDropdown } from "#utils/products"
 import { titleCase } from "#utils/stringManipulation"
@@ -13,6 +14,7 @@ export const MatchedProductsList = ({
   setSearchProductText,
 }) => {
   const navigate = useNavigate()
+  const { setShowProductsSearchBar } = useMenuOptions()
 
   return (
     <ul
@@ -31,6 +33,7 @@ export const MatchedProductsList = ({
               setMatchedProducts,
               setShowMatchedProductsList,
               setSearchProductText,
+              setShowProductsSearchBar(false),
             )
           }
         >
