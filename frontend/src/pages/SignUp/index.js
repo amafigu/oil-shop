@@ -1,8 +1,5 @@
-import { NavigationMenu } from "#components/ui/NavigationMenu"
 import CreateUserForm from "#components/users/UsersCrud/CreateUserForm"
 import { LOGO_IMAGE } from "#constants/media"
-import { pageNavigationItems } from "#constants/navigation"
-import { STYLES } from "#constants/styles"
 import { scrollToTop } from "#utils/render"
 import { LinkContainer } from "./LinkContainer"
 import styles from "./signUp.module.scss"
@@ -12,12 +9,6 @@ export const SignUp = () => {
 
   return (
     <main className={styles.signUpPage}>
-      <div className={styles.subNavbarContainer}>
-        <NavigationMenu
-          items={pageNavigationItems}
-          className={STYLES.COMPONENTS.NAVIGATION_MENU.PAGES}
-        />
-      </div>
       <section className={styles.logoAndSignUpForm}>
         <div className={styles.logoContainer}>
           <img
