@@ -1,7 +1,7 @@
 import { ProductCard } from "#components/products/ProductCard"
 import { useGetProducts } from "#hooks/useGetProducts"
 import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
-import { filteredProducts } from "#utils/products"
+import { filteredProducts } from "#utils/filteredProducts"
 import styles from "./sortedProductsList.module.scss"
 
 export const SortedProductsList = () => {
