@@ -5,6 +5,7 @@ export const STYLES = Object.freeze({
     FORM: "formButton",
     WIDE: "wideButton",
     ADD_PRODUCT: "addProductButton",
+    SLIDER: "sliderButton",
   },
   LINKS: {
     NAVIGATION_MENU_LINK: "navigationMenuLink",

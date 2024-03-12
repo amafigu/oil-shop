@@ -1,10 +1,12 @@
-import { ProductsSlider } from "./ProductsSlider"
+import { useGetProducts } from "#hooks/useGetProducts"
+import { Slider } from "./Slider"
 import { TeaserCards } from "./TeaserCards"
 import { TeaserText } from "./TeaserText"
 import { VideoBanner } from "./VideoBanner"
 import styles from "./home.module.scss"
 
 export const Home = () => {
+  const { products } = useGetProducts()
   return (
     <main className={styles.homePageWrapper}>
       <div className={styles.homePage}>
@@ -14,7 +16,7 @@ export const Home = () => {
           </section>
           <TeaserText />
           <section className={styles.productSliderContainer}>
-            <ProductsSlider />
+            <Slider items={products} />
           </section>
           <section className={styles.columnsContainer}>
             <TeaserCards />

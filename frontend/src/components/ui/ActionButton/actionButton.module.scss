@@ -34,7 +34,8 @@
   }
 }
 
-.navigationMenuLink {
+.navigationMenuLink,
+.sliderButton {
   @include reset-button;
 
   color: inherit;
