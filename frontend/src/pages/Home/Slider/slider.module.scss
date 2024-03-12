@@ -4,9 +4,14 @@
 .slider {
   gap: theme.$spacing-semi-regular;
   width: 100%;
+  min-height: 500px;
   margin: theme.$spacing-semi-regular-large 0;
 
   @include flex-all-center;
+
+  .list {
+    display: flex;
+  }
 
   .iconSlider {
     color: theme.$font-color-primary;
