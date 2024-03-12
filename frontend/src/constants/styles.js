@@ -6,6 +6,9 @@ export const STYLES = Object.freeze({
     WIDE: "wideButton",
     ADD_PRODUCT: "addProductButton",
     SLIDER: "sliderButton",
+    COUNTER: "counterButton",
+    CART_ITEM_QUANTITY: "cartItemQuantityButton",
+    CART_ITEM_DELETE: "cartItemDeleteButton",
   },
   LINKS: {
     NAVIGATION_MENU_LINK: "navigationMenuLink",
