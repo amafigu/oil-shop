@@ -7,7 +7,7 @@ import styles from "./teaserCards.module.scss"
 export const TeaserCards = () => {
   const { translate } = useTranslation()
   return (
-    <div className={styles.teaserCardsWrapper}>
+    <section className={styles.teaserCardsWrapper} aria-label='teaser items'>
       <div className={styles.columsTitleContainer}>
         <p className={styles.columnsTitle}>
           {translate.pages.welcome.subTeaser.title}
@@ -23,6 +23,6 @@ export const TeaserCards = () => {
           />
         ))}
       </div>
-    </div>
+    </section>
   )
 }

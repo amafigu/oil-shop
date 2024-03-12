@@ -78,6 +78,7 @@ export const CreateItem = ({
             }}
             text={components.createItem.submitButton}
             className={STYLES.BUTTONS.ACTION}
+            ariaLabel={"create item"}
           />
         </form>
       )}

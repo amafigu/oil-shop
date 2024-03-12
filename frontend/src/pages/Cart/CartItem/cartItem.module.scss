@@ -65,16 +65,6 @@
   margin-left: theme.$spacing-regular;
 }
 
-.cartItemQuantityButton {
-  width: 32px;
-  height: 32px;
-  color: grey;
-  cursor: pointer;
-  background: none;
-  border: none;
-  outline: none;
-}
-
 .cartItemQuantityInput {
   @include flex-all-center;
 
@@ -95,8 +85,4 @@
   flex-grow: 1;
 
   @include flex-justify-end;
-}
-
-.deleteButton {
-  @include reset-button;
 }

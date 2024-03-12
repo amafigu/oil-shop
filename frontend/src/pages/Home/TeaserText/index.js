@@ -5,7 +5,7 @@ import styles from "./teaserText.module.scss"
 export const TeaserText = () => {
   const { translate } = useTranslation()
   return (
-    <div className={styles.teaserTextWrapper}>
+    <section className={styles.teaserTextWrapper} aria-label='teaser section'>
       <div className={styles.teaserText}>
         <h2 className={styles.title}>{translate.pages.welcome.title}</h2>
         <h3 className={styles.subtitleText}>
@@ -24,6 +24,6 @@ export const TeaserText = () => {
           {translate.pages.welcome.teaserSubSentenceFour}
         </h3>
       </div>
-    </div>
+    </section>
   )
 }

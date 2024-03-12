@@ -1,10 +1,10 @@
 import { VIDEO_BANNER_PATH } from "#constants/media"
 import React from "react"
-import styles from "./videoBanner.module.scss"
+import styles from "./banner.module.scss"
 
-export const VideoBanner = () => {
+export const Banner = () => {
   return (
-    <div className={styles.videoBannerWrapper}>
+    <div className={styles.videoBannerWrapper} aria-label='page banner'>
       <div className={styles.outerContainer}>
         <div className={styles.videoWrapper}>
           <video

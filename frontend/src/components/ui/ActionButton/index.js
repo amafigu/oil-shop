@@ -1,6 +1,6 @@
 import styles from "./actionButton.module.scss"
 
-export const ActionButton = ({ action, text, className }) => {
+export const ActionButton = ({ action, text, className, ariaLabel }) => {
   return (
     <button
       style={{ userSelect: "none" }}
@@ -9,6 +9,7 @@ export const ActionButton = ({ action, text, className }) => {
         e.preventDefault()
         action(e)
       }}
+      aria-label={ariaLabel}
     >
       {text}
     </button>

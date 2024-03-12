@@ -19,7 +19,7 @@ export const ShippingForm = ({ isLoggedIn, setNotification }) => {
 
   return (
     <form
-      aria-label='Shipping data form'
+      aria-label='insert your shipping data'
       className={styles.form}
       onSubmit={(e) =>
         onSubmitGuestUserWithOrders(e, cart, isLoggedIn, navigate, formData)

@@ -2,35 +2,35 @@ import { SHIPPING_COST } from "#constants/cart"
 import { ROUTES_CART, ROUTES_CHECKOUT_SHIPPING } from "#constants/routes"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
-import { totalCost } from "#utils/totalCost"
 import React from "react"
 import { Link } from "react-router-dom"
 import styles from "./cartOrderSummary.module.scss"
 
-export const cartTotalSum = (cart, shippingCost) =>
-  Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
 export const CartOrderSummary = ({ totalCost }) => {
   const { cart } = useCart()
   const { translate } = useTranslation()
   const text = translate.pages.cart
 
+  const cartTotalSum = (cart, shippingCost) =>
+    Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
+
   return (
-    <section className={styles.cartOrderSummary} aria-label='cart details'>
-      <h2 className={styles.orderSummaryText}>{text.orderSummary}</h2>
+    <section className={styles.cartOrderSummary} aria-label='order summary'>
+      <h2 className={styles.orderSummaryTitle}>{text.orderSummary}</h2>
       <dl className={styles.cartOrderSummaryDetails}>
-        <div>
-          <dt>{text.orderSubtotal} </dt>
+        <div className={styles.summaryItem}>
+          <dt className={styles.summaryItemProperty}>{text.orderSubtotal}</dt>
           <dd>{totalCost(cart).toFixed(2)} €</dd>
         </div>
-        <div>
-          <dt>{text.orderShipping} </dt>
+        <div className={styles.summaryItem}>
+          <dt className={styles.summaryItemProperty}>{text.orderShipping} </dt>
           <dd>{SHIPPING_COST.toFixed(2)} €</dd>
         </div>
         <div className={styles.totalCostDivider}>
           <hr />
         </div>
-        <div>
-          <dt className={styles.orderTotalText}>{text.orderTotal} </dt>
+        <div className={styles.summaryItem}>
+          <dt className={styles.summaryItemProperty}>{text.orderTotal}</dt>
           <dd>{cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €</dd>
         </div>
       </dl>

@@ -8,7 +8,7 @@ export const TeaserCard = ({ title, text, iconName }) => {
   const { translate } = useTranslation()
 
   return (
-    <div className={styles.teaserSingleCard}>
+    <article className={styles.teaserSingleCard} aria-label='teaser'>
       <p className={styles.teaserCardTitle}>
         {accessTranslationWithPathString(translate, title)}
       </p>
@@ -18,6 +18,6 @@ export const TeaserCard = ({ title, text, iconName }) => {
       <span className={styles.iconColumns}>
         <FontAwesomeIcon icon={getIconByName(iconName)} size='xs' />
       </span>
-    </div>
+    </article>
   )
 }

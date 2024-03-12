@@ -6,11 +6,11 @@ import { useLocation, useNavigate } from "react-router-dom"
 import styles from "./paymentForm.module.scss"
 
 export const PaymentForm = ({ isLoggedIn, userId, setNotification }) => {
+  const [paymentMethod, setPaymentMethod] = useState("")
   const { submitOrder } = useSubmitOrder()
   const { translate } = useTranslation()
   const text = translate.pages.payment
   const location = useLocation()
-  const [paymentMethod, setPaymentMethod] = useState("")
   const navigate = useNavigate()
   const selectPaymentMethod = (e) => {
     setPaymentMethod(e.target.value)

@@ -41,6 +41,7 @@ export const MobileMenu = ({
             action={() => setShowMobileMenu(false)}
             text={<FontAwesomeIcon icon={getIconByName("faX")} />}
             className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
+            ariaLabel={"show mobile menu"}
           />
         </li>
         <li className={styles.listItem}>
@@ -50,6 +51,7 @@ export const MobileMenu = ({
               <FontAwesomeIcon icon={getIconByName("faSearch")} size={"xl"} />
             }
             className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
+            ariaLabel={"show search bar"}
           />
         </li>
         <li className={`${styles.listItem} ${styles.itemsContainer}`}>
@@ -59,6 +61,7 @@ export const MobileMenu = ({
               <FontAwesomeIcon icon={getIconByName("faGlobe")} size={"xl"} />
             }
             className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
+            ariaLabel={"show language selector"}
           />
 
           {!showLanguagesOptions && (
@@ -76,7 +79,10 @@ export const MobileMenu = ({
             />
           )}
         </li>
-        <li className={`${styles.listItem} ${styles.itemsContainer}`}>
+        <li
+          className={`${styles.listItem} ${styles.itemsContainer}`}
+          aria-label={"navigate to cart"}
+        >
           <Link onClick={() => setShowMobileMenu(false)} to={ROUTES_CART}>
             <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
             <span className={styles.productsQuantity}>
@@ -85,8 +91,8 @@ export const MobileMenu = ({
           </Link>
         </li>
         {isLoggedIn ? (
-          <div className={styles.userAndLogoutIconContainer}>
-            <div
+          <ul className={styles.userAndLogoutIconContainer}>
+            <li
               className={styles.listItem}
               onClick={() => setShowMobileMenu(false)}
             >
@@ -99,11 +105,13 @@ export const MobileMenu = ({
                   />
                 }
                 className={STYLES.LINKS.NAVIGATION_MENU_LINK}
+                ariaLabel={"logout"}
               />
-            </div>
-            <div
+            </li>
+            <li
               className={styles.listItem}
               onClick={() => setShowMobileMenu(false)}
+              aria-label='navigate to user profile'
             >
               <Link
                 className={styles.linkChild}
@@ -115,8 +123,8 @@ export const MobileMenu = ({
               >
                 <FontAwesomeIcon icon={getIconByName("faUser")} />
               </Link>
-            </div>
-          </div>
+            </li>
+          </ul>
         ) : (
           <div className={styles.listItem}>
             <Link className={styles.linkChild} to={ROUTES_LOGIN}>
@@ -126,6 +134,7 @@ export const MobileMenu = ({
               action={() => logout(navigate, setIsLoggedIn)}
               text={<FontAwesomeIcon icon={getIconByName("faUser")} />}
               className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
+              ariaLabel='logout'
             />
           </div>
         )}

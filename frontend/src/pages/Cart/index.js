@@ -19,7 +19,7 @@ export const Cart = () => {
     <main className={styles.cartWrapper} aria-label='shopping cart'>
       {notification && <NotificationCard message={notification} />}
       <section className={styles.cart}>
-        <ul className={styles.cartItemsList}>
+        <ul className={styles.cartItemsList} aria-label='cart items'>
           {cart.length > 0 ? (
             cart.map((item) => (
               <li
@@ -43,7 +43,6 @@ export const Cart = () => {
             </div>
           )}
         </ul>
-
         <CartOrderSummary totalCost={totalCost} />
       </section>
     </main>

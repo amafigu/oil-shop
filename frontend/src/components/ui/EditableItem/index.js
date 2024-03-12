@@ -47,6 +47,7 @@ export const EditableItem = ({
             action={(e) => onDelete(e, item.id, setNotification, setCounter)}
             text={components.editableItem.deleteButton}
             className={STYLES.BUTTONS.ACTION}
+            ariaLabel={"delete item"}
           />
         )}
       </div>

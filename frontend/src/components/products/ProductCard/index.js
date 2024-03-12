@@ -59,6 +59,7 @@ export const ProductCard = ({ product }) => {
                 action={() => addProduct(product, 1)}
                 text={components.addOneToCartButton.text}
                 className={STYLES.BUTTONS.ADD_PRODUCT}
+                ariaLabel={"add product"}
               />
             </div>
           </div>

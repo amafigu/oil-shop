@@ -2,7 +2,7 @@ import { commonProperties } from "#__mocks__/translate"
 import { useTranslation } from "#hooks/useTranslation"
 import "@testing-library/jest-dom"
 import { render } from "@testing-library/react"
-import { UserHeaderData } from "./UserHeaderData"
+import { UserHeaderData } from "."
 
 jest.mock("#hooks/useTranslation")
 

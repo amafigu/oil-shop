@@ -1,6 +1,7 @@
+import { ActionButton } from "#components/ui/ActionButton"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
+import { STYLES } from "#constants/styles"
 import { useCart } from "#hooks/useCart"
-import { useTranslation } from "#hooks/useTranslation"
 import { getIconByName } from "#utils/getIconByName"
 import { setDefaultImageByError } from "#utils/setDefaultImageByError"
 import { titleCase } from "#utils/titleCase"
@@ -16,11 +17,9 @@ export const CartItem = ({
   quantity,
   size,
 }) => {
-  const { translate } = useTranslation()
   const { removeProduct, updateProductQuantity } = useCart()
-  const text = translate.pages.cart
   return (
-    <div className={styles.cartItem} aria-label='cart item'>
+    <article className={styles.cartItem} aria-label='cart item'>
       <div className={styles.imagesAndDetails}>
         <img
           src={image}
@@ -36,39 +35,34 @@ export const CartItem = ({
           <span>{size} ml</span>
         </div>
       </div>
-
       <div className={styles.cartItemSelectors}>
         <div className={styles.quantityButtonsContainer}>
-          <button
-            aria-label={`Substract one ${name} from cart`}
-            className={styles.cartItemQuantityButton}
-            onClick={() => updateProductQuantity(name, quantity - 1)}
-          >
-            <FontAwesomeIcon icon={getIconByName("faMinus")} />
-          </button>
+          <ActionButton
+            action={() => updateProductQuantity(name, quantity - 1)}
+            text={<FontAwesomeIcon icon={getIconByName("faMinus")} />}
+            className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
+            ariaLabel={`Substract one ${name} from cart`}
+          />
           <span className={styles.cartItemQuantityInput}>{quantity}</span>
-          <button
-            aria-label={`Add one ${name} to cart`}
-            className={styles.cartItemQuantityButton}
-            onClick={() => updateProductQuantity(name, quantity + 1)}
-          >
-            <FontAwesomeIcon icon={getIconByName("faPlus")} />
-          </button>
+          <ActionButton
+            action={() => updateProductQuantity(name, quantity + 1)}
+            text={<FontAwesomeIcon icon={getIconByName("faPlus")} />}
+            className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
+            ariaLabel={`Add one ${name} to cart`}
+          />
         </div>
         <div className={styles.cartItemTotalCost}>
           {(quantity * Number(price)).toFixed(2)} €
         </div>
         <div className={styles.deleteButtonWrapper}>
-          <button
-            aria-label={`Delete ${name} from cart`}
-            className={styles.deleteButton}
-            onClick={() => removeProduct(name)}
-          >
-            {text.deleteButton}
-            <FontAwesomeIcon icon={getIconByName("faTrash")} />
-          </button>
+          <ActionButton
+            action={() => removeProduct(name)}
+            text={<FontAwesomeIcon icon={getIconByName("faTrash")} />}
+            className={STYLES.BUTTONS.CART_ITEM_DELETE}
+            ariaLabel={`Delete ${name} from cart`}
+          />
         </div>
       </div>
-    </div>
+    </article>
   )
 }

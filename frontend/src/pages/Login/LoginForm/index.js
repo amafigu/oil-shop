@@ -61,6 +61,7 @@ export const LoginForm = () => {
           action={loginUserAndSetState}
           text={text.loginButton}
           className={STYLES.BUTTONS.WIDE}
+          ariaLabel={"confirm login"}
         />
       </form>
     </>

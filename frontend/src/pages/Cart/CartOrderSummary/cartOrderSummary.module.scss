@@ -23,11 +23,11 @@
   }
 }
 
-.orderSummaryText {
+.orderSummaryTitle {
   margin-bottom: theme.$spacing-semi-regular-large;
-  font-size: theme.$font-size-semi-medium;
-  font-weight: theme.$font-weight-extra-bold;
   text-transform: uppercase;
+
+  @include property-font-primary-semi-bold;
 
   @include media.desktop-down {
     padding: theme.$spacing-semi-regular-large 0 0
@@ -43,12 +43,18 @@
   }
 }
 
-.totalCostDivider {
-  margin: theme.$spacing-large 0;
+.summaryItem {
+  display: flex;
+
+  .summaryItemProperty {
+    margin-right: theme.$spacing-smallest;
+
+    @include property-font-secondary-semi-bold;
+  }
 }
 
-.orderTotalText {
-  font-weight: theme.$font-weight-semibold;
+.totalCostDivider {
+  margin: theme.$spacing-large 0;
 }
 
 .confirmOrderButton {

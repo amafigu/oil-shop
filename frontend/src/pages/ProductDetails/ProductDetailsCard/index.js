@@ -58,16 +58,12 @@ export const ProductDetailsCard = () => {
                 </li>
               </ul>
               <div className={styles.selection}>
-                <Counter
-                  counter={quantity}
-                  setCounter={setQuantity}
-                  aria-label='product quantity selector'
-                />
+                <Counter counter={quantity} setCounter={setQuantity} />
                 <ActionButton
                   action={() => addProduct(product, quantity)}
                   className={STYLES.BUTTONS.ADD_PRODUCT}
                   text={components.addOneToCartButton.text}
-                  aria-label='add product to cart button'
+                  ariaLabel='add product to cart'
                 />
               </div>
             </div>

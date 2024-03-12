@@ -1,18 +1,18 @@
 import { useGetProducts } from "#hooks/useGetProducts"
+import { Banner } from "./Banner"
 import { Slider } from "./Slider"
 import { TeaserCards } from "./TeaserCards"
 import { TeaserText } from "./TeaserText"
-import { VideoBanner } from "./VideoBanner"
 import styles from "./home.module.scss"
 
 export const Home = () => {
   const { products } = useGetProducts()
   return (
-    <main className={styles.homePageWrapper}>
+    <main className={styles.homePageWrapper} aria-label='home page'>
       <div className={styles.homePage}>
         <div className={styles.pageColumn}>
           <section className={styles.videoBannerContainer}>
-            <VideoBanner />
+            <Banner />
           </section>
           <TeaserText />
           <section className={styles.productSliderContainer}>

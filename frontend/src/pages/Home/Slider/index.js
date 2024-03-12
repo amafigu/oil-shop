@@ -46,25 +46,31 @@ export const Slider = ({ items }) => {
   }
 
   return (
-    <section className={styles.slider}>
+    <section className={styles.slider} aria-label='slider'>
       <ActionButton
         action={previousItem}
         text={
           <FontAwesomeIcon icon={getIconByName("faChevronLeft")} size='2xl' />
         }
         className={STYLES.BUTTONS.SLIDER}
+        ariaLabel='previous item'
       />
-      {items
-        .slice(currentItemIndex, currentItemIndex + sliderQuantity)
-        .map((product, index) => (
-          <ProductCard product={product} key={index} />
-        ))}
+      <ul className={styles.list} aria-label='slider items list'>
+        {items
+          .slice(currentItemIndex, currentItemIndex + sliderQuantity)
+          .map((product, index) => (
+            <li aria-label='slider item' key={index}>
+              <ProductCard product={product} />
+            </li>
+          ))}
+      </ul>
       <ActionButton
         action={nextItem}
         text={
           <FontAwesomeIcon icon={getIconByName("faChevronRight")} size='2xl' />
         }
         className={STYLES.BUTTONS.SLIDER}
+        ariaLabel='next item'
       />
     </section>
   )
