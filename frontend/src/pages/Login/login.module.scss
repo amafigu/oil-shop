@@ -19,13 +19,13 @@
 }
 
 .logoAndFormContainer {
-  width: 348px;
+  width: theme.$width-login-register-form;
   height: auto;
 
   @include flex-column-align-center;
 
   @include media.mobile {
-    width: 288px;
+    width: theme.$width-login-register-form-mobile;
   }
 }
 
