@@ -4,7 +4,7 @@ import styles from "./banner.module.scss"
 
 export const Banner = () => {
   return (
-    <div className={styles.videoBannerWrapper}>
+    <div className={styles.videoBannerWrapper} aria-label='page banner'>
       <div className={styles.outerContainer}>
         <div className={styles.videoWrapper}>
           <video
