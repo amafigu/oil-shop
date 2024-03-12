@@ -1,0 +1,20 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.form {
+  width: 100%;
+}
+
+.passwordInputAndToggleButtonContainer {
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+}
