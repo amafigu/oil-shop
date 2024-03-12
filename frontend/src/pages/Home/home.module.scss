@@ -25,22 +25,14 @@
   .videoBannerContainer {
     position: relative;
     z-index: -1;
-    display: flex;
-    justify-content: center;
     width: 100%;
     margin-bottom: 38px;
+
+    @include flex-justify-center;
   }
 
   .productSliderContainer {
-    display: flex;
-    justify-content: center;
     width: 100%;
     margin-bottom: theme.$spacing-semi-regular;
-
-    .columnsContainer {
-      display: flex;
-      justify-content: center;
-      width: 95%;
-    }
   }
 }
