@@ -84,12 +84,14 @@ export const EditableItemInput = ({
           action={(e) => saveEdition(e)}
           text={commonButtons.save}
           className={STYLES.BUTTONS.ACTION}
+          ariaLabel={"save edition"}
         />
       ) : (
         <ActionButton
           action={() => setIsEditing(true)}
           text={commonButtons.edit}
           className={STYLES.BUTTONS.ACTION}
+          ariaLabel={"edit item"}
         />
       )}
     </div>

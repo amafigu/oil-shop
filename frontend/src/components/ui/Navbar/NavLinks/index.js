@@ -27,25 +27,27 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
     setShowMobileMenu(true)
   }
   return (
-    <section className={styles.navLinks}>
+    <section className={styles.navLinks} aria-label={"navigation section"}>
       <div className={styles.onlyMobile}>
         <ActionButton
           action={onMobileMenu}
           text={<FontAwesomeIcon icon={getIconByName("faBars")} size={"xl"} />}
           className={STYLES.LINKS.NAVIGATION_MENU_LINK}
+          ariaLabel={"show mobile menu"}
         />
       </div>
-      <div className={styles.hideOnMobile}>
-        <div className={styles.listItem}>
+      <ul className={styles.hideOnMobile} aria-label={"navigation items"}>
+        <li className={styles.listItem}>
           <ActionButton
             action={() => setShowProductsSearchBar((prevState) => !prevState)}
             text={
               <FontAwesomeIcon icon={getIconByName("faSearch")} size={"xl"} />
             }
             className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
+            ariaLabel={"show search bar"}
           />
-        </div>
-        <div className={styles.languageSelector}>
+        </li>
+        <li className={styles.languageSelector}>
           <ActionButton
             action={() => setShowLanguagesOptions((prevState) => !prevState)}
             text={
@@ -65,9 +67,9 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
               setShowLanguagesOptions={setShowLanguagesOptions}
             />
           )}
-        </div>
+        </li>
         {isLoggedIn ? (
-          <div className={styles.userAndLogoutIconContainer}>
+          <li className={styles.userAndLogoutIconContainer}>
             <Link
               className={styles.linkChild}
               to={
@@ -79,21 +81,24 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
               <FontAwesomeIcon icon={getIconByName("faUser")} />
             </Link>
             <LogoutButton navigate={navigate} setIsLoggedIn={setIsLoggedIn} />
-          </div>
+          </li>
         ) : (
           <Link className={styles.linkChild} to={ROUTES_LOGIN}>
             <FontAwesomeIcon icon={getIconByName("faUser")} />
           </Link>
         )}
-        <div className={styles.cartAndQuantity}>
+        <li
+          className={styles.cartAndQuantity}
+          aria-label={"cart items quantity"}
+        >
           <Link className={styles.linkChild} to={ROUTES_CART}>
             <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
           </Link>
           <span className={styles.productsQuantity}>
             {getAllProductsQuantity}
           </span>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
   )
 }
