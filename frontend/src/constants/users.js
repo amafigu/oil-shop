@@ -26,3 +26,10 @@ export const createUserProperties = [
   "password",
   "image",
 ]
+
+export const registerUserProperties = [
+  "firstName",
+  "lastName",
+  "email",
+  "password",
+]

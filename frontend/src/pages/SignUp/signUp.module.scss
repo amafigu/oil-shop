@@ -16,6 +16,8 @@
 .logoContainer {
   display: flex;
   justify-content: center;
+
+  @include flex-justify-center;
 }
 
 .logo {
@@ -29,4 +31,17 @@
   border-radius: theme.$border-radius-small;
 
   @include flex-justify-center;
+
+  section {
+    width: theme.$width-login-register-form;
+
+    @include media.mobile {
+      width: theme.$width-login-register-form-mobile;
+    }
+
+    button {
+      width: 100%;
+      margin-top: theme.$spacing-small;
+    }
+  }
 }

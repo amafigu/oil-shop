@@ -2,11 +2,13 @@ import { CreateItem } from "#components/ui/CreateItem"
 import { EditableItem } from "#components/ui/EditableItem"
 import { EditableItemsList } from "#components/ui/EditableItemsList"
 import NotificationCard from "#components/ui/NotificationCard"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { UserHeader } from "#components/ui/UserHeader"
 import {
   createProductProperties,
   editableProductProperties,
 } from "#constants/products"
+import { STYLES } from "#constants/styles"
 import { createUserProperties, editableUserProperties } from "#constants/users"
 import { useCheckIsAdmin } from "#hooks/useCheckIsAdmin"
 import { useCountProducts } from "#hooks/useCountProducts"
@@ -22,6 +24,7 @@ import { onDeleteProduct } from "#utils/onDeleteProduct"
 import { onDeleteUser } from "#utils/onDeleteUser"
 import { onUpdateProduct } from "#utils/onUpdateProduct"
 import { onUpdateUser } from "#utils/onUpdateUser"
+import { useState } from "react"
 import styles from "./admin.module.scss"
 
 export const Admin = () => {
@@ -32,6 +35,8 @@ export const Admin = () => {
   const { setCounter: setProductsCounter } = useCountProducts()
   const { productCategories: itemCategories } = useGetProductCategories()
   const { components } = useTranslation()
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false)
+
   return (
     <main className={styles.adminPage}>
       {notification && <NotificationCard message={notification} />}
@@ -48,12 +53,22 @@ export const Admin = () => {
             renderItemProps: editableUserProperties,
           }}
         />
-        <CreateItem
-          onCreate={onCreateUser}
-          onChange={listenInputChangeAndSetDataObject}
-          setCounter={setUsersCounter}
-          renderItemProps={createUserProperties}
+        <ToggleButton
+          isVisible={showCreateUserForm}
+          onToggle={setShowCreateUserForm}
+          hideBtnText={components.createItem.hideButton.toUpperCase()}
+          showBtnText={components.createItem.showButton.toUpperCase()}
+          classCss={STYLES.BUTTONS.SHOW_HIDE}
         />
+        {showCreateUserForm && (
+          <CreateItem
+            onCreate={onCreateUser}
+            onChange={listenInputChangeAndSetDataObject}
+            setCounter={setUsersCounter}
+            renderItemProps={createUserProperties}
+          />
+        )}
+
         <EditableItemsList
           itemsList={products}
           ItemComponent={EditableItem}
