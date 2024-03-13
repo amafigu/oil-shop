@@ -3,4 +3,4 @@ export const NORMAL_MESSAGE_TIMEOUT = 4500
 export const LONG_MESSAGE_TIMEOUT = 6000
 export const REDIRECT_TIMEOUT = 1000
 export const LONG_REDIRECT_TIMEOUT = 2000
-export const PROCESS_TIMEOUT = 3000
+export const PROCESS_TIMEOUT = 1500
