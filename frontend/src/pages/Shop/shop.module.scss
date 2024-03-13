@@ -3,14 +3,13 @@
 @import "#styles/helpers/mixins";
 
 .shopPageWrapper {
-  @include flex-justify-center;
+  @include flex-column-align-center;
   @include margin-page-wrapper;
-
-  min-height: theme.$min-height-page-small;
 }
 
 .shopPage {
   width: 80%;
+  min-height: theme.$min-height-page-small;
 
   @include media.widescreen-down {
     width: 90%;
@@ -19,9 +18,8 @@
   @include flex-column-all-center;
 }
 
-.sidebarWrapper {
+.navigationMenuContainer {
   display: flex;
-  margin-bottom: 40px;
 
   @include media.tablet-down {
     display: none;

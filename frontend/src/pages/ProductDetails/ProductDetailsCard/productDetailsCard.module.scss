@@ -48,6 +48,8 @@
 }
 
 .image {
+  user-select: none;
+
   @include responsive-image;
 }
 

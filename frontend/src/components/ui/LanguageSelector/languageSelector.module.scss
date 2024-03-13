@@ -5,7 +5,7 @@
 .dropdownMenu {
   position: absolute;
   display: flex;
-  gap: theme.$spacing-semi-regular;
+  gap: theme.$spacing-smallest;
   padding: 0 4px;
   margin-top: 8px;
   color: theme.$font-color-primary;
@@ -27,7 +27,9 @@
 }
 
 .activeCategory {
-  color: theme.$branding-color-primary;
+  button {
+    color: theme.$branding-color-primary;
+  }
 }
 
 .listItem {

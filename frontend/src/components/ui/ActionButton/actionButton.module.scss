@@ -68,3 +68,10 @@
   color: theme.$font-color-light;
   cursor: pointer;
 }
+
+.languagesSelector {
+  cursor: pointer;
+
+  @include reset-button;
+  @include property-font-tertiary-regular;
+}

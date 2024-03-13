@@ -12,20 +12,20 @@ export const Shop = () => {
 
   return (
     <main className={styles.shopPageWrapper}>
+      <div className={styles.navigationMenuContainer}>
+        <NavigationMenu
+          items={
+            productCategories &&
+            productCategories.map((category) => ({
+              type: "category",
+              path: `${ROUTES_SHOP}?category=${category.name}`,
+              label: category.name,
+            }))
+          }
+          className={STYLES.COMPONENTS.NAVIGATION_MENU.PRODUCT_CATEGORIES}
+        />
+      </div>
       <div className={styles.shopPage}>
-        <nav className={styles.sidebarWrapper}>
-          <NavigationMenu
-            items={
-              productCategories &&
-              productCategories.map((category) => ({
-                type: "category",
-                path: `${ROUTES_SHOP}?category=${category.name}`,
-                label: category.name,
-              }))
-            }
-            className={STYLES.COMPONENTS.NAVIGATION_MENU.PRODUCT_CATEGORIES}
-          />
-        </nav>
         <section className={styles.sortedProductsSection}>
           <SortedProductsList />
         </section>
