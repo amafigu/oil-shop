@@ -12,6 +12,7 @@ export const EditableItemInput = ({
   onChange,
   onSave,
   classCss,
+  type,
   file,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
@@ -63,10 +64,13 @@ export const EditableItemInput = ({
               if (e.key === "Escape") {
                 setIsEditing(false)
               }
+              if (e.key === "Enter") {
+                saveEdition(e)
+              }
             }}
             placeholder={commonProperties[name]}
             value={updatedPropertyData[name]}
-            type={name === "size" || name === "price" ? "number" : "text"}
+            type={"text"}
           />
         </>
       ) : (

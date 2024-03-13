@@ -52,6 +52,7 @@ export const CreateItem = ({
             />
           ) : (
             <OptionsFormInput
+              key={field}
               itemData={itemData}
               setItemData={setItemData}
               onChange={listenInputChangeAndSetDataObject}
