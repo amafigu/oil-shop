@@ -1,52 +1,62 @@
 import { loginUser } from "#api/auth/loginUser"
+import { createAdminRequest } from "#api/users/createAdminRequest"
 import { createUserRequest } from "#api/users/createUserRequest"
 import { API_USERS_CURRENT_PREFIX } from "#constants/api"
-import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import { validateUserProperties } from "#utils/validateUserProperties"
-import { useNavigate } from "react-router-dom"
+import { ROUTES_SIGN_UP_ADMIN } from "#constants/routes"
+import { REDIRECT_TIMEOUT } from "#constants/time"
+import { onValidationError } from "#utils/onValidationError"
+import { createUserSchema } from "#utils/usersValidation"
+import { useLocation, useNavigate } from "react-router-dom"
+import { onRequestHandlerError } from "../utils/onRequestHandlerError"
+import { onRequestHandlerNotification } from "../utils/onRequestHandlerNotification"
 import { useCurrentUser } from "./useCurrentUser"
 
 export const useRegisterUserAndRedirect = () => {
+  const location = useLocation()
+  const currentPath = location.pathname
+  const isAdmin = currentPath.includes(ROUTES_SIGN_UP_ADMIN)
+
   const navigate = useNavigate()
-  const { setUser } = useCurrentUser()
-  const registerUserAndRedirect = async (e, user, setMessage) => {
+  const { setIsLoggedIn, setUserEmail, setUser } = useCurrentUser()
+  const registerUserAndRedirect = async (e, user, setNotification) => {
     e.preventDefault()
+
     try {
-      const validUser = validateUserProperties(user, setMessage)
-      const request = await createUserRequest(validUser)
+      let validUser
+      let request
+      try {
+        validUser = createUserSchema.parse(user)
+      } catch (error) {
+        onValidationError(error, setNotification)
+        return
+      }
+      if (isAdmin) {
+        request = await createAdminRequest(validUser)
+      } else {
+        request = await createUserRequest(validUser)
+      }
       if (request && request.status === 201) {
         const newUser = request.data.user
-        const loginUserResponse = await loginUser(
-          newUser.email,
-          validUser.password,
-        )
-        if (loginUserResponse) {
-          setUser(newUser)
+        const response = await loginUser(newUser.email, validUser.password)
+        if (response) {
+          setUserEmail(response.userEmail)
+          setIsLoggedIn(response.isLoggedIn)
+          setUser(response.user)
           setTimeout(
-            () =>
-              navigate(
-                `${API_USERS_CURRENT_PREFIX}${loginUserResponse.userRole}`,
-              ),
+            () => navigate(`${API_USERS_CURRENT_PREFIX}${response.userRole}`),
             REDIRECT_TIMEOUT,
           )
         }
       }
+
       if (request && request.status === 422) {
-        setMessage(
-          `Error by creating data: Can not add user, this is already existent. Please try with another email.`,
-        )
-        setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+        const message =
+          "Can not add user, this is already existent. Please try with another email."
+        onRequestHandlerNotification(setNotification, message)
       }
     } catch (error) {
-      console.error(error)
-      if (error.response && error.response.data.message) {
-        console.error(error.response.data.message)
-        setMessage(`Error by creating user: ${error.response.data.message}`)
-        setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-      } else {
-        setMessage("Error by creating user")
-        setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-      }
+      const message = "Error by creating user."
+      onRequestHandlerError(error, setNotification, message)
     }
   }
 

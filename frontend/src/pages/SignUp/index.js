@@ -9,9 +9,9 @@ import { LinkContainer } from "./LinkContainer"
 import styles from "./signUp.module.scss"
 
 export const SignUp = () => {
-  scrollToTop()
   const { setCounter } = useCountUsers()
   const { registerUserAndRedirect } = useRegisterUserAndRedirect()
+  scrollToTop()
 
   return (
     <main className={styles.signUpPage}>

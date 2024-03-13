@@ -301,7 +301,7 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
     });
 
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already in use' });
+      return res.status(422).json({ message: 'Email already in use' });
     }
 
     const hashedPassword = await hashPassword(req.body.password);
