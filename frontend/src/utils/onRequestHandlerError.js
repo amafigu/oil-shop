@@ -13,6 +13,12 @@ export const onRequestHandlerError = (
       )
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     }
+  }
+  if (error && error.response && error.response.data.message) {
+    if (setNotification) {
+      setNotification(`Error: ${error.response.data.message}`)
+      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+    }
   } else {
     if (setNotification) {
       setNotification(message)
