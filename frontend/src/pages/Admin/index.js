@@ -36,6 +36,7 @@ export const Admin = () => {
   const { productCategories: itemCategories } = useGetProductCategories()
   const { components } = useTranslation()
   const [showCreateUserForm, setShowCreateUserForm] = useState(false)
+  const [showCreateProductForm, setShowCreateProductForm] = useState(false)
 
   return (
     <main className={styles.adminPage}>
@@ -80,13 +81,22 @@ export const Admin = () => {
             renderItemProps: editableProductProperties,
           }}
         />
-        <CreateItem
-          onCreate={onCreateProduct}
-          onChange={listenInputChangeAndSetDataObject}
-          setCounter={setProductsCounter}
-          renderItemProps={createProductProperties}
-          itemCategories={itemCategories}
+        <ToggleButton
+          isVisible={showCreateProductForm}
+          onToggle={setShowCreateProductForm}
+          hideBtnText={components.createItem.hideButton.toUpperCase()}
+          showBtnText={components.createItem.showButton.toUpperCase()}
+          classCss={STYLES.BUTTONS.SHOW_HIDE}
         />
+        {showCreateProductForm && (
+          <CreateItem
+            onCreate={onCreateProduct}
+            onChange={listenInputChangeAndSetDataObject}
+            setCounter={setProductsCounter}
+            renderItemProps={createProductProperties}
+            itemCategories={itemCategories}
+          />
+        )}
       </section>
     </main>
   )
