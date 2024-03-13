@@ -63,15 +63,9 @@ export const EditableItem = ({
                   if (key === "image") {
                     setFileToUpload(e, setFile)
                   } else {
-                    let val
-                    if (key === "price") {
-                      val = Number(e.target.value).toFixed(2)
-                    } else {
-                      val = e.target.value
-                    }
                     setUpdatedItemData((prevState) => ({
                       ...prevState,
-                      [e.target.name]: val,
+                      [e.target.name]: e.target.value,
                     }))
                   }
                 }}
@@ -87,6 +81,7 @@ export const EditableItem = ({
                           setUpdatedItemData,
                           setNonUpdatedItemData,
                           setNotification,
+                          setCounter,
                           file,
                         )
                     : (e) =>
@@ -99,6 +94,7 @@ export const EditableItem = ({
                           setUpdatedItemData,
                           setNonUpdatedItemData,
                           setNotification,
+                          setCounter,
                         )
                 }
                 classCss={STYLES.FORMS.FIELD}
