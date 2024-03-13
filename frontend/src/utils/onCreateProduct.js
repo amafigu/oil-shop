@@ -20,7 +20,7 @@ export const onCreateProduct = async (
       image = await uploadToS3(file)
       product = { ...product, image: image }
     }
-    debugger
+
     let validProduct
     product = {
       ...product,

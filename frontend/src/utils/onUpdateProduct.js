@@ -19,7 +19,7 @@ export const onUpdateProduct = async (
   try {
     let validProperty
     let image
-    debugger
+
     if (key === "image" && file) {
       image = await uploadToS3(file)
       validProperty = { [key]: image }
@@ -52,12 +52,11 @@ export const onUpdateProduct = async (
   } catch (error) {
     setUpdatedProductData(nonUpdatedProductData)
     if (error.response && error.response.data.errors) {
-      console.error(error.response.data.errors[0].path[0])
-      console.error(error.response.data.errors[0].message)
       setNotification(
         `Error by updating product: ${error.response.data.errors[0].path[0]} ${error.response.data.errors[0].message}`,
       )
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      console.error(error)
     } else {
       if (setNotification) {
         setNotification("Error by updating products")
