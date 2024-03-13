@@ -143,6 +143,7 @@ router.get('/', async (req, res) => {
           as: 'category',
         },
       ],
+      order: [['id', 'ASC']],
     });
     return res.json(products);
   } catch (err) {

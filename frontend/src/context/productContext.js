@@ -1,4 +1,4 @@
-import { getAllProductsList } from "#api/products/getAllProductsList"
+import { getProducts } from "#api/products/getProducts"
 import { createContext, useContext, useEffect, useState } from "react"
 
 export const ProductContext = createContext()
@@ -8,17 +8,17 @@ export const ProductProvider = ({ children }) => {
   const [counter, setCounter] = useState(0)
 
   useEffect(() => {
-    const getProducts = async () => {
+    const getAllProducts = async () => {
       try {
-        const response = await getAllProductsList()
-        if (response) {
-          setProducts(response)
+        const response = await getProducts()
+        if (response && response.status === 200) {
+          setProducts(response.data)
         }
       } catch (error) {
         console.error(error)
       }
     }
-    getProducts()
+    getAllProducts()
   }, [counter])
 
   return (

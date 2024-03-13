@@ -1,7 +1,9 @@
 import { uploadToS3 } from "#api/aws/uploadToS3"
 import { updateProductDataRequest } from "#api/products/updateProductDataRequest"
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { updateProductSchema } from "#utils/productsValidation"
+import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onValidationError } from "./onValidationError"
+import { updateEditableItemData } from "./updateEditableItemData"
 
 export const onUpdateProduct = async (
   e,
@@ -12,6 +14,7 @@ export const onUpdateProduct = async (
   setUpdatedProductData,
   setNonUpdatedProductData,
   setNotification,
+  setCounter,
   file,
 ) => {
   e.preventDefault()
@@ -26,42 +29,30 @@ export const onUpdateProduct = async (
     } else {
       try {
         let toBevalidProperty = { [key]: updatedProductData[key] }
-        if (key === "price") {
+        if (key === "price" || key === "size") {
           toBevalidProperty = { [key]: Number(updatedProductData[key]) }
         }
         validProperty = updateProductSchema.parse(toBevalidProperty)
       } catch (error) {
-        console.error(error)
-        setNotification(
-          `Error by updating product: ${error.issues[0].message} `,
-        )
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+        onValidationError(error, setNotification)
+        return
       }
-    }
-    if (!validProperty) {
-      return
     }
 
     const dataRequest = await updateProductDataRequest(productId, validProperty)
     if (dataRequest && dataRequest.status === 200) {
       const updatedProduct = dataRequest.data.product
-      setUpdatedProductData(updatedProduct)
-      setNonUpdatedProductData(updatedProduct)
+      updateEditableItemData(
+        setUpdatedProductData,
+        setNonUpdatedProductData,
+        updatedProduct,
+        setCounter,
+      )
       return updatedProduct
     }
   } catch (error) {
     setUpdatedProductData(nonUpdatedProductData)
-    if (error.response && error.response.data.errors) {
-      setNotification(
-        `Error by updating product: ${error.response.data.errors[0].path[0]} ${error.response.data.errors[0].message}`,
-      )
-      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      console.error(error)
-    } else {
-      if (setNotification) {
-        setNotification("Error by updating products")
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      }
-    }
+    const message = "Error by updating product"
+    onRequestHandlerError(error, setNotification, message)
   }
 }

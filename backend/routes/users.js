@@ -33,7 +33,9 @@ router.get('/verify-token', (req, res) => {
 
 router.get('/', decodeJWT, async (req, res) => {
   try {
-    const users = await db.users.findAll();
+    const users = await db.users.findAll({
+      order: [['id', 'ASC']],
+    });
     return res.json(users);
   } catch (err) {
     return res.status(500).json({ message: err.message });
@@ -195,9 +197,6 @@ router.put(
   }
 );
 
-// End Admin routes
-// TODO: only use the used id
-
 router.post('/logout', (req, res) => {
   const isSecure = process.env.IS_SECURE;
 
@@ -235,7 +234,7 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
         id: user.id,
       },
       process.env.JWT_KEY,
-      { expiresIn: '7200000' } // 2 hours
+      { expiresIn: '14400000' } // 4 hours
     );
 
     const isSecure = process.env.IS_SECURE;

@@ -1,7 +1,9 @@
 import { uploadToS3 } from "#api/aws/uploadToS3"
 import { updateUserDataRequest } from "#api/users/updateUserDataRequest"
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import { validateUserProperties } from "#utils/validateUserProperties"
+import { updateUserSchema } from "#utils/usersValidation"
+import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onValidationError } from "./onValidationError"
+import { updateEditableItemData } from "./updateEditableItemData"
 
 export const onUpdateUser = async (
   e,
@@ -12,6 +14,7 @@ export const onUpdateUser = async (
   setUpdatedUserData,
   setNonUpdatedUserData,
   setNotification,
+  setCounter,
   file,
 ) => {
   e.preventDefault()
@@ -23,34 +26,29 @@ export const onUpdateUser = async (
       image = await uploadToS3(file)
       validProperty = { [key]: image }
     } else {
-      const toBevalidProperty = { [key]: updatedUserData[key] }
-      validProperty = validateUserProperties(toBevalidProperty, setNotification)
-    }
-    if (!validProperty) {
-      return
+      try {
+        let toBevalidProperty = { [key]: updatedUserData[key] }
+        validProperty = updateUserSchema.parse(toBevalidProperty)
+      } catch (error) {
+        onValidationError(error, setNotification)
+        return
+      }
     }
 
     const dataRequest = await updateUserDataRequest(userId, validProperty)
     if (dataRequest && dataRequest.status === 200) {
       const updatedUser = dataRequest.data.user
-      setUpdatedUserData(updatedUser)
-      setNonUpdatedUserData(updatedUser)
+      updateEditableItemData(
+        setUpdatedUserData,
+        setNonUpdatedUserData,
+        updatedUser,
+        setCounter,
+      )
       return updatedUser
     }
   } catch (error) {
     setUpdatedUserData(nonUpdatedUserData)
-    if (error.response && error.response.data.errors) {
-      if (setNotification) {
-        setNotification(
-          `Error by updating data: ${error.response.data.errors[0].message}`,
-        )
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      }
-    } else {
-      if (setNotification) {
-        setNotification("Error by updating data")
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      }
-    }
+    const message = "Error by updating user"
+    onRequestHandlerError(error, setNotification, message)
   }
 }

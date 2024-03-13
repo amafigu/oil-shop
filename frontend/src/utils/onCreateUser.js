@@ -1,42 +1,45 @@
 import { uploadToS3 } from "#api/aws/uploadToS3"
 import { createUserRequest } from "#api/users/createUserRequest"
-import { PROCESS_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import { validateUserProperties } from "#utils/validateUserProperties"
+import { createUserSchema } from "#utils/usersValidation"
+import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestHandlerNotification } from "./onRequestHandlerNotification"
+import { onValidationError } from "./onValidationError"
 
-export const onCreateUser = async (e, user, setMessage, file, setCounter) => {
+export const onCreateUser = async (
+  e,
+  user,
+  setNotification,
+  file,
+  setCounter,
+) => {
   e.preventDefault()
   try {
     let image
+    let validUser
     if (file) {
       image = await uploadToS3(file)
       user = { ...user, image: image }
     }
-    const validUser = validateUserProperties(user, setMessage)
+    try {
+      validUser = createUserSchema.parse(user)
+    } catch (error) {
+      onValidationError(error, setNotification)
+      return
+    }
+
     const request = await createUserRequest(validUser)
     if (request && request.status === 201) {
-      setMessage(`User created sucessfully!`)
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-      setTimeout(
-        () => setCounter((prevCount) => prevCount + 1),
-        PROCESS_TIMEOUT,
-      )
+      const message = "User created sucessfully!"
+      onRequestHandlerNotification(setNotification, message, setCounter)
       return request
     }
     if (request && request.status === 422) {
-      setMessage(
-        `Error by creating data: Can not add user, this is already existent. Please try with another email.`,
-      )
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+      const message =
+        "Can not add user, this is already existent. Please try with another email."
+      onRequestHandlerNotification(setNotification, message)
     }
   } catch (error) {
-    console.error(error)
-    if (error.response && error.response.data.message) {
-      console.error(error.response.data.message)
-      setMessage(`Error by creating user: ${error.response.data.message}`)
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-    } else {
-      setMessage("Error by creating user")
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-    }
+    const message = "Error by creating user."
+    onRequestHandlerError(error, setNotification, message)
   }
 }
