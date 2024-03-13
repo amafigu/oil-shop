@@ -2,6 +2,7 @@ import { uploadToS3 } from "#api/aws/uploadToS3"
 import { updateUserDataRequest } from "#api/users/updateUserDataRequest"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { validateUserProperties } from "#utils/validateUserProperties"
+import { updateEditableItemData } from "./updateEditableItemData"
 
 export const onUpdateUser = async (
   e,
@@ -12,6 +13,7 @@ export const onUpdateUser = async (
   setUpdatedUserData,
   setNonUpdatedUserData,
   setNotification,
+  setCounter,
   file,
 ) => {
   e.preventDefault()
@@ -33,8 +35,12 @@ export const onUpdateUser = async (
     const dataRequest = await updateUserDataRequest(userId, validProperty)
     if (dataRequest && dataRequest.status === 200) {
       const updatedUser = dataRequest.data.user
-      setUpdatedUserData(updatedUser)
-      setNonUpdatedUserData(updatedUser)
+      updateEditableItemData(
+        setUpdatedUserData,
+        setNonUpdatedUserData,
+        updatedUser,
+        setCounter,
+      )
       return updatedUser
     }
   } catch (error) {
