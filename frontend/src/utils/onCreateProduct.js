@@ -1,12 +1,14 @@
 import { uploadToS3 } from "#api/aws/uploadToS3"
 import { createProductRequest } from "#api/products/createProductRequest"
-import { PROCESS_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import { createProductSchema } from "#utils/productsValidation"
+import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestHandlerNotification } from "./onRequestHandlerNotification"
+import { onValidationError } from "./onValidationError"
+import { createProductSchema } from "./productsValidation"
 
 export const onCreateProduct = async (
   e,
   product,
-  setMessage,
+  setNotification,
   file,
   setCounter,
 ) => {
@@ -31,38 +33,24 @@ export const onCreateProduct = async (
     try {
       validProduct = createProductSchema.parse(product)
     } catch (error) {
-      console.error(error)
-      setMessage(`Error by updating product: ${error.issues[0].message} `)
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+      onValidationError(error, setNotification)
+      return
     }
+
     const request = await createProductRequest(validProduct)
     if (request && request.status === 201) {
-      setMessage(`Product created sucessfully!`)
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-      setTimeout(
-        () => setCounter((prevCount) => prevCount + 1),
-        PROCESS_TIMEOUT,
-      )
+      const message = "Product created sucessfully!"
+      onRequestHandlerNotification(message, setNotification, setCounter)
       return request
     }
     if (request && request.status === 422) {
-      setMessage(
-        `Error by updating data: Can not add product, this product is already existent. Please try with another name, size or category.`,
-      )
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+      const message =
+        "This product is already existent. Please try with another name, size or category."
+      onRequestHandlerNotification(message, setNotification)
+      return request
     }
   } catch (error) {
-    console.error(error)
-    if (error.response && error.response.data.errors) {
-      console.error(error.response.data.message)
-      setMessage(
-        `Error by updating data: ${error.response.data.errors[0].path} ${error.response.data.errors[0].message}`,
-      )
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-    } else {
-      console.error("error by updating data", error)
-      setMessage("Error by updating data")
-      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
-    }
+    console.log(error)
+    onRequestHandlerError(error, setNotification)
   }
 }
