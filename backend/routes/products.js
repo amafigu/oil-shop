@@ -4,13 +4,9 @@ import { decodeJWT } from '../middleware/decodeToken.js';
 import db from '../models/index.js';
 dotenv.config();
 
-import {
-  validateBody,
-  validateParams,
-} from '../middleware/validationMiddleware.js';
+import { validateBody } from '../middleware/validationMiddleware.js';
 import {
   CreateProductSchema,
-  ProductIdParamSchema,
   UpdateProductSchema,
 } from '../middleware/validationSchemas/productSchema.js';
 const router = express.Router();
@@ -91,28 +87,23 @@ router.get('/product/:id', async (req, res) => {
   }
 });
 
-router.delete(
-  '/product/:id',
-  validateParams(ProductIdParamSchema),
-  async (req, res) => {
-    try {
-      const product = await db.products.findOne({
-        where: { id: req.params.id },
-      });
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-      await product.destroy();
-      res.status(200).json({ message: 'Product successfully deleted' });
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+router.delete('/product/:id', async (req, res) => {
+  try {
+    const product = await db.products.findOne({
+      where: { id: req.params.id },
+    });
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
+    await product.destroy();
+    res.status(200).json({ message: 'Product successfully deleted' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-);
+});
 
 router.put(
   '/product/:id',
-  validateParams(ProductIdParamSchema),
   validateBody(UpdateProductSchema),
   async (req, res) => {
     try {

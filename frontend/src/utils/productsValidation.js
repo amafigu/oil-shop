@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from "zod"
 
-const CreateProductSchema = z.object({
+const createProductSchema = z.object({
   name: z.string().refine((value) => value.length <= 30, {
     message: "Product name can't be longer than 30 characters.",
   }),
@@ -24,9 +24,15 @@ const CreateProductSchema = z.object({
   }),
   createdAt: z.string().or(z.date()).optional(),
   updatedAt: z.string().or(z.date()).optional(),
-});
+})
 
-const UpdateProductSchema = z.object({
+const updateProductSchema = z.object({
+  price: z
+    .number()
+    .refine((value) => value <= 100000, {
+      message: "Product price can't be more than 100000.",
+    })
+    .optional(),
   name: z
     .string()
     .refine((value) => value.length <= 30, {
@@ -36,8 +42,8 @@ const UpdateProductSchema = z.object({
   image: z.string().optional(),
   description: z
     .string()
-    .refine((value) => value.length <= 200, {
-      message: "Product description can't be longer than 200 characters.",
+    .refine((value) => value.length <= 20, {
+      message: "Product description can't be longer than 20 characters.",
     })
     .optional(),
   measure: z.string().optional(),
@@ -54,18 +60,12 @@ const UpdateProductSchema = z.object({
       message: "Product details can't be longer than 200 characters.",
     })
     .optional(),
-  price: z
-    .number()
-    .refine((value) => value <= 100000, {
-      message: "Product price can't be more than 100000.",
-    })
-    .optional(),
-});
+})
 
 const ProductCategorySchema = z.object({
   name: z.string().refine((value) => value.length <= 30, {
     message: "Product category can't be longer than 30 characters.",
   }),
-});
+})
 
-export { CreateProductSchema, ProductCategorySchema, UpdateProductSchema };
+export { ProductCategorySchema, createProductSchema, updateProductSchema }
