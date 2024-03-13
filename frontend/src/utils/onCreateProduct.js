@@ -16,6 +16,7 @@ export const onCreateProduct = async (
   try {
     // TODO: either make a separate table for measures or delete that from database
     let image
+    let validProduct
     product = { ...product, measure: "ml" }
 
     if (file) {
@@ -23,7 +24,6 @@ export const onCreateProduct = async (
       product = { ...product, image: image }
     }
 
-    let validProduct
     product = {
       ...product,
       productCategoryId: Number(product.productCategoryId),
