@@ -1,8 +1,8 @@
 import { PROCESS_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 
 export const onRequestHandlerNotification = (
-  message,
   setNotification,
+  message = "Request successful",
   setCounter,
 ) => {
   if (setNotification) {

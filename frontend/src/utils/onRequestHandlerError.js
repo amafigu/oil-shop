@@ -1,6 +1,10 @@
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 
-export const onRequestHandlerError = (error, setNotification) => {
+export const onRequestHandlerError = (
+  error,
+  setNotification,
+  message = "Error by handling request",
+) => {
   console.error(error)
   if (error && error.response && error.response.data.errors) {
     if (setNotification) {
@@ -11,7 +15,7 @@ export const onRequestHandlerError = (error, setNotification) => {
     }
   } else {
     if (setNotification) {
-      setNotification("Error by handling request")
+      setNotification(message)
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     }
   }

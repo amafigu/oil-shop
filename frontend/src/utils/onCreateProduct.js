@@ -40,17 +40,17 @@ export const onCreateProduct = async (
     const request = await createProductRequest(validProduct)
     if (request && request.status === 201) {
       const message = "Product created sucessfully!"
-      onRequestHandlerNotification(message, setNotification, setCounter)
+      onRequestHandlerNotification(setNotification, message, setCounter)
       return request
     }
     if (request && request.status === 422) {
       const message =
         "This product is already existent. Please try with another name, size or category."
-      onRequestHandlerNotification(message, setNotification)
+      onRequestHandlerNotification(setNotification, message)
       return request
     }
   } catch (error) {
-    console.log(error)
-    onRequestHandlerError(error, setNotification)
+    const message = "Error by creating product."
+    onRequestHandlerError(error, setNotification, message)
   }
 }
