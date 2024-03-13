@@ -3,14 +3,13 @@ import axios from "axios"
 
 export const deleteProductById = async (id) => {
   try {
-    const deleteProductResponse = await axios.delete(
+    const response = await axios.delete(
       `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT}/${id}`,
       {
         withCredentials: true,
       },
     )
-
-    return deleteProductResponse
+    return response
   } catch (error) {
     throw error
   }

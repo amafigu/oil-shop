@@ -3,11 +3,11 @@ import axios from "axios"
 
 export const getProductByName = async (name) => {
   try {
-    const getProductResponse = await axios.get(
+    const reponse = await axios.get(
       `${process.env.REACT_APP_API_URL}${API_PRODUCTS_PRODUCT_GET_BY_NAME}/${name}`,
     )
-    return getProductResponse
+    return reponse
   } catch (error) {
-    console.error("Error geting product by name", error)
+    throw error
   }
 }
