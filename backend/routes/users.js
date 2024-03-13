@@ -197,9 +197,6 @@ router.put(
   }
 );
 
-// End Admin routes
-// TODO: only use the used id
-
 router.post('/logout', (req, res) => {
   const isSecure = process.env.IS_SECURE;
 
@@ -237,7 +234,7 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
         id: user.id,
       },
       process.env.JWT_KEY,
-      { expiresIn: '7200000' } // 2 hours
+      { expiresIn: '14400000' } // 4 hours
     );
 
     const isSecure = process.env.IS_SECURE;
