@@ -9,10 +9,9 @@ export const deleteProductById = async (id) => {
         withCredentials: true,
       },
     )
-    if (deleteProductResponse) {
-      return deleteProductResponse
-    }
+
+    return deleteProductResponse
   } catch (error) {
-    console.error(error)
+    throw error
   }
 }

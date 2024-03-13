@@ -1,7 +1,7 @@
 import { uploadToS3 } from "#api/aws/uploadToS3"
 import { createProductRequest } from "#api/products/createProductRequest"
 import { PROCESS_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import { validateProductProperty } from "#utils/validateProductProperty"
+import { createProductSchema } from "#utils/productsValidation"
 
 export const onCreateProduct = async (
   e,
@@ -21,7 +21,20 @@ export const onCreateProduct = async (
       product = { ...product, image: image }
     }
 
-    const validProduct = validateProductProperty(product, setMessage)
+    let validProduct
+    product = {
+      ...product,
+      productCategoryId: Number(product.productCategoryId),
+      size: Number(product.size),
+      price: Number(product.price),
+    }
+    try {
+      validProduct = createProductSchema.parse(product)
+    } catch (error) {
+      console.error(error)
+      setMessage(`Error by updating product: ${error.issues[0].message} `)
+      setTimeout(() => setMessage(null), SHORT_MESSAGE_TIMEOUT)
+    }
     const request = await createProductRequest(validProduct)
     if (request && request.status === 201) {
       setMessage(`Product created sucessfully!`)

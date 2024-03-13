@@ -59,15 +59,22 @@ export const EditableItem = ({
                 label={key}
                 name={key}
                 updatedPropertyData={updatedItemData}
-                onChange={
-                  key === "image"
-                    ? (e) => setFileToUpload(e, setFile)
-                    : (e) =>
-                        setUpdatedItemData({
-                          ...updatedItemData,
-                          [e.target.name]: e.target.value,
-                        })
-                }
+                onChange={(e) => {
+                  if (key === "image") {
+                    setFileToUpload(e, setFile)
+                  } else {
+                    let val
+                    if (key === "price") {
+                      val = Number(e.target.value).toFixed(2)
+                    } else {
+                      val = e.target.value
+                    }
+                    setUpdatedItemData((prevState) => ({
+                      ...prevState,
+                      [e.target.name]: val,
+                    }))
+                  }
+                }}
                 onSave={
                   key === "image"
                     ? (e) =>
@@ -95,8 +102,9 @@ export const EditableItem = ({
                         )
                 }
                 classCss={STYLES.FORMS.FIELD}
-                key={key}
+                type={"text"}
                 file={file}
+                key={key}
               />
             ))}
         </form>

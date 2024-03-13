@@ -24,11 +24,11 @@ export const onDeleteProduct = async (
       }
     }
   } catch (error) {
-    if (error.response && error.response.data.message) {
-      console.error(error.response.data.message)
+    if (error.response && error.response.data.errors) {
+      console.error(error)
       if (setNotification) {
         setNotification(
-          `Error by deleting data: ${error.response.data.message}`,
+          `Error by updating product: ${error.response.data.errors[0].path[0]} ${error.response.data.errors[0].message}`,
         )
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }

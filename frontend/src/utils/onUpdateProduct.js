@@ -1,7 +1,7 @@
 import { uploadToS3 } from "#api/aws/uploadToS3"
 import { updateProductDataRequest } from "#api/products/updateProductDataRequest"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import { validateProductProperty } from "#utils/validateProductProperty"
+import { updateProductSchema } from "#utils/productsValidation"
 
 export const onUpdateProduct = async (
   e,
@@ -24,11 +24,19 @@ export const onUpdateProduct = async (
       image = await uploadToS3(file)
       validProperty = { [key]: image }
     } else {
-      const toBevalidProperty = { [key]: updatedProductData[key] }
-      validProperty = validateProductProperty(
-        toBevalidProperty,
-        setNotification,
-      )
+      try {
+        let toBevalidProperty = { [key]: updatedProductData[key] }
+        if (key === "price") {
+          toBevalidProperty = { [key]: Number(updatedProductData[key]) }
+        }
+        validProperty = updateProductSchema.parse(toBevalidProperty)
+      } catch (error) {
+        console.error(error)
+        setNotification(
+          `Error by updating product: ${error.issues[0].message} `,
+        )
+        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+      }
     }
     if (!validProperty) {
       return
@@ -44,23 +52,14 @@ export const onUpdateProduct = async (
   } catch (error) {
     setUpdatedProductData(nonUpdatedProductData)
     if (error.response && error.response.data.errors) {
-      console.error(error.response.data.message)
       setNotification(
-        `Error by creating user: ${error.response.data.errors[0].path} ${error.response.data.errors[0].message}`,
+        `Error by updating product: ${error.response.data.errors[0].path[0]} ${error.response.data.errors[0].message}`,
       )
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-    }
-    if (error.response && error.response.data.message) {
-      console.error(error.response.data.message)
-      if (setNotification) {
-        setNotification(
-          `Error by creating user: ${error.response.data.message}`,
-        )
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      }
+      console.error(error)
     } else {
       if (setNotification) {
-        setNotification("Error by creating user")
+        setNotification("Error by updating products")
         setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
       }
     }
