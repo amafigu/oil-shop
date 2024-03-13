@@ -1,5 +1,6 @@
 import { deleteUserById } from "#api/users/deleteUserById"
-import { NORMAL_MESSAGE_TIMEOUT } from "#constants/time"
+import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestHandlerNotification } from "./onRequestHandlerNotification"
 
 export const onDeleteUser = async (e, userId, setNotification, setCounter) => {
   e.preventDefault()
@@ -7,19 +8,11 @@ export const onDeleteUser = async (e, userId, setNotification, setCounter) => {
     const response = await deleteUserById(userId)
 
     if (response && response.status === 200) {
-      if (setNotification) {
-        setNotification("user deleted")
-        setTimeout(() => {
-          setNotification(null)
-        }, NORMAL_MESSAGE_TIMEOUT)
-      }
-      if (setCounter) {
-        setTimeout(() => {
-          setCounter((prevCount) => Number(prevCount) + 1)
-        }, 500)
-      }
+      const message = "User deleted"
+      onRequestHandlerNotification(setNotification, message, setCounter)
     }
   } catch (error) {
-    console.error(error)
+    const message = "Error by deleting user."
+    onRequestHandlerError(error, setNotification, message)
   }
 }
