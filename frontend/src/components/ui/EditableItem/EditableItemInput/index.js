@@ -2,7 +2,6 @@ import { ActionButton } from "#components/ui/ActionButton"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
 import { useState } from "react"
-
 import styles from "./editableItemInput.module.scss"
 
 export const EditableItemInput = ({
@@ -70,7 +69,7 @@ export const EditableItemInput = ({
             }}
             placeholder={commonProperties[name]}
             value={updatedPropertyData[name]}
-            type={"text"}
+            type={type}
           />
         </>
       ) : (
@@ -79,7 +78,9 @@ export const EditableItemInput = ({
             className={styles.property}
           >{`${commonProperties[name]}:`}</span>
           <span className={styles.value}>
-            {updatedPropertyData ? `${updatedPropertyData[name]}` : ""}
+            {name === "price"
+              ? Number(updatedPropertyData[name]).toFixed(2)
+              : updatedPropertyData[name]}
           </span>
         </div>
       )}
