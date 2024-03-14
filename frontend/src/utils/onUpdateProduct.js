@@ -3,18 +3,15 @@ import { updateProductDataRequest } from "#api/products/updateProductDataRequest
 import { updateProductSchema } from "#utils/productsValidation"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 import { onValidationError } from "./onValidationError"
-import { updateEditableItemData } from "./updateEditableItemData"
 
 export const onUpdateProduct = async (
   e,
   key,
   productId,
   updatedProductData,
-  nonUpdatedProductData,
   setUpdatedProductData,
-  setNonUpdatedProductData,
+  lastUpdatedData,
   setNotification,
-  setCounter,
   file,
 ) => {
   e.preventDefault()
@@ -34,6 +31,7 @@ export const onUpdateProduct = async (
         }
         validProperty = updateProductSchema.parse(toBevalidProperty)
       } catch (error) {
+        setUpdatedProductData(lastUpdatedData)
         onValidationError(error, setNotification)
         return
       }
@@ -42,16 +40,10 @@ export const onUpdateProduct = async (
     const dataRequest = await updateProductDataRequest(productId, validProperty)
     if (dataRequest && dataRequest.status === 200) {
       const updatedProduct = dataRequest.data.product
-      updateEditableItemData(
-        setUpdatedProductData,
-        setNonUpdatedProductData,
-        updatedProduct,
-        setCounter,
-      )
-      return updatedProduct
+      setUpdatedProductData(updatedProduct)
     }
   } catch (error) {
-    setUpdatedProductData(nonUpdatedProductData)
+    setUpdatedProductData(lastUpdatedData)
     const message = "Error by updating product"
     onRequestHandlerError(error, setNotification, message)
   }
