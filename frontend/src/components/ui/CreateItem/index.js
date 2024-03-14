@@ -62,15 +62,17 @@ export const CreateItem = ({
             />
           ),
         )}
-        <ActionButton
-          action={async (e) => {
-            await onCreate(e, itemData, setNotification, file, setCounter)
-            setItemData({ ...initialItemData })
-          }}
-          text={components.createItem.submitButton}
-          className={STYLES.BUTTONS.ACTION}
-          ariaLabel={"create item"}
-        />
+        <div className={styles.buttonContainer}>
+          <ActionButton
+            action={async (e) => {
+              await onCreate(e, itemData, setNotification, file, setCounter)
+              setItemData({ ...initialItemData })
+            }}
+            text={components.createItem.submitButton}
+            className={STYLES.BUTTONS.ACTION}
+            ariaLabel={components.createItem.submitButton}
+          />
+        </div>
       </form>
     </section>
   )
