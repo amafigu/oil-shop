@@ -9,6 +9,6 @@ export const getLoggedInUser = async (userId) => {
     )
     return response
   } catch (error) {
-    console.error("Error geting admin data", error)
+    throw error
   }
 }

@@ -3,18 +3,16 @@ import { updateUserDataRequest } from "#api/users/updateUserDataRequest"
 import { updateUserSchema } from "#utils/usersValidation"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 import { onValidationError } from "./onValidationError"
-import { updateEditableItemData } from "./updateEditableItemData"
 
 export const onUpdateUser = async (
   e,
   key,
   userId,
   updatedUserData,
-  nonUpdatedUserData,
   setUpdatedUserData,
-  setNonUpdatedUserData,
+  lastUpdatedData,
+  setLastUpdatedData,
   setNotification,
-  setCounter,
   file,
 ) => {
   e.preventDefault()
@@ -30,6 +28,7 @@ export const onUpdateUser = async (
         let toBevalidProperty = { [key]: updatedUserData[key] }
         validProperty = updateUserSchema.parse(toBevalidProperty)
       } catch (error) {
+        setUpdatedUserData(lastUpdatedData)
         onValidationError(error, setNotification)
         return
       }
@@ -38,16 +37,11 @@ export const onUpdateUser = async (
     const dataRequest = await updateUserDataRequest(userId, validProperty)
     if (dataRequest && dataRequest.status === 200) {
       const updatedUser = dataRequest.data.user
-      updateEditableItemData(
-        setUpdatedUserData,
-        setNonUpdatedUserData,
-        updatedUser,
-        setCounter,
-      )
-      return updatedUser
+      setUpdatedUserData(updatedUser)
+      setLastUpdatedData(updatedUser)
     }
   } catch (error) {
-    setUpdatedUserData(nonUpdatedUserData)
+    setUpdatedUserData(lastUpdatedData)
     const message = "Error by updating user"
     onRequestHandlerError(error, setNotification, message)
   }

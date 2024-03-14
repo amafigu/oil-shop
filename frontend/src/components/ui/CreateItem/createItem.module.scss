@@ -21,6 +21,10 @@
   font-size: theme.$font-size-medium;
 }
 
+.buttonContainer {
+  margin-top: theme.$spacing-small;
+}
+
 .formButton {
   @include action-button;
 

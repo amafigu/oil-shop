@@ -3,7 +3,7 @@ import NotificationCard from "#components/ui/NotificationCard"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/setFileToUpload"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { EditableItemInput } from "./EditableItemInput"
 import styles from "./editableItem.module.scss"
 
@@ -14,21 +14,21 @@ export const EditableItem = ({
   onSave,
   onDelete,
 }) => {
+  const [lastUpdatedData, setLastUpdatedData] = useState({})
+  const [updatedItemData, setUpdatedItemData] = useState({})
+  const [file, setFile] = useState(null)
+  const [notification, setNotification] = useState(null)
+  const { components } = useTranslation()
   const itemInitialAttributes = renderItemProps.reduce((acc, val) => {
     acc[val] = item[val]
     return acc
   }, {})
 
-  const [updatedItemData, setUpdatedItemData] = useState({
-    ...itemInitialAttributes,
-  })
-  const [nonUpdatedItemData, setNonUpdatedItemData] = useState({
-    ...itemInitialAttributes,
-  })
-  const [file, setFile] = useState(null)
-  const [notification, setNotification] = useState(null)
-  const { components } = useTranslation()
-
+  useEffect(() => {
+    setLastUpdatedData(itemInitialAttributes)
+    setUpdatedItemData(itemInitialAttributes)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item])
   return (
     <article className={styles.editableItem} aria-label='editable item'>
       {notification && <NotificationCard message={notification} />}
@@ -54,6 +54,7 @@ export const EditableItem = ({
       {
         <form className={styles.form}>
           {item &&
+            itemInitialAttributes &&
             Object.keys(itemInitialAttributes).map((key) => (
               <EditableItemInput
                 label={key}
@@ -76,12 +77,12 @@ export const EditableItem = ({
                           e,
                           key,
                           item.id,
+
                           updatedItemData,
-                          nonUpdatedItemData,
                           setUpdatedItemData,
-                          setNonUpdatedItemData,
+                          lastUpdatedData,
+                          setLastUpdatedData,
                           setNotification,
-                          setCounter,
                           file,
                         )
                     : (e) =>
@@ -90,11 +91,10 @@ export const EditableItem = ({
                           key,
                           item.id,
                           updatedItemData,
-                          nonUpdatedItemData,
                           setUpdatedItemData,
-                          setNonUpdatedItemData,
+                          lastUpdatedData,
+                          setLastUpdatedData,
                           setNotification,
-                          setCounter,
                         )
                 }
                 classCss={STYLES.FORMS.FIELD}

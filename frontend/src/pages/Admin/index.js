@@ -24,43 +24,67 @@ import { onDeleteProduct } from "#utils/onDeleteProduct"
 import { onDeleteUser } from "#utils/onDeleteUser"
 import { onUpdateProduct } from "#utils/onUpdateProduct"
 import { onUpdateUser } from "#utils/onUpdateUser"
+import { toggleAndRefresh } from "#utils/toggleAndRefresh"
 import { useState } from "react"
 import styles from "./admin.module.scss"
 
 export const Admin = () => {
+  const [showCreateUserForm, setShowCreateUserForm] = useState(false)
+  const [showCreateProductForm, setShowCreateProductForm] = useState(false)
+  const [showUsersList, setShowUsersList] = useState(false)
+  const [showProductsList, setShowProductsList] = useState(false)
   const { notification } = useCheckIsAdmin()
   const { users } = useGetUsers()
   const { products } = useGetProducts()
   const { setCounter: setUsersCounter } = useCountUsers()
   const { setCounter: setProductsCounter } = useCountProducts()
-  const { productCategories: itemCategories } = useGetProductCategories()
-  const { components } = useTranslation()
-  const [showCreateUserForm, setShowCreateUserForm] = useState(false)
-  const [showCreateProductForm, setShowCreateProductForm] = useState(false)
+  const { productCategories } = useGetProductCategories()
+  const { pages } = useTranslation()
+  const usersText = pages.admin.usersManagement
+  const productsText = pages.admin.productManagement
 
   return (
     <main className={styles.adminPage}>
       {notification && <NotificationCard message={notification} />}
-      <section className={styles.container}>
+      <div className={styles.container}>
         <UserHeader />
-        <EditableItemsList
-          itemsList={users}
-          ItemComponent={EditableItem}
-          title={components.adminUsersList.title}
-          itemProps={{
-            setCounter: setUsersCounter,
-            onSave: onUpdateUser,
-            onDelete: onDeleteUser,
-            renderItemProps: editableUserProperties,
-          }}
-        />
-        <ToggleButton
-          isVisible={showCreateUserForm}
-          onToggle={setShowCreateUserForm}
-          hideBtnText={components.createItem.hideButton.toUpperCase()}
-          showBtnText={components.createItem.showButton.toUpperCase()}
-          classCss={STYLES.BUTTONS.SHOW_HIDE}
-        />
+      </div>
+      <section className={styles.container}>
+        <h2>{usersText.title}</h2>
+        <div className={styles.toggleButton}>
+          <ToggleButton
+            isVisible={showUsersList}
+            onToggle={() =>
+              toggleAndRefresh(setShowUsersList, showUsersList, setUsersCounter)
+            }
+            hideBtnText={usersText.toggleListButton.hide.toUpperCase()}
+            showBtnText={usersText.toggleListButton.show.toUpperCase()}
+            classCss={STYLES.BUTTONS.SHOW_HIDE}
+          />
+        </div>
+        {showUsersList && (
+          <EditableItemsList
+            itemsList={users}
+            ItemComponent={EditableItem}
+            title={usersText.editableItemsList.title}
+            itemProps={{
+              setCounter: setUsersCounter,
+              onSave: onUpdateUser,
+              onDelete: onDeleteUser,
+              renderItemProps: editableUserProperties,
+            }}
+          />
+        )}
+        <div className={styles.toggleButton}>
+          <ToggleButton
+            isVisible={showCreateUserForm}
+            onToggle={setShowCreateUserForm}
+            hideBtnText={usersText.toggleCreateItemButton.hide.toUpperCase()}
+            showBtnText={usersText.toggleCreateItemButton.show.toUpperCase()}
+            classCss={STYLES.BUTTONS.SHOW_HIDE}
+          />
+        </div>
+
         {showCreateUserForm && (
           <CreateItem
             onCreate={onCreateUser}
@@ -69,32 +93,53 @@ export const Admin = () => {
             renderItemProps={createUserProperties}
           />
         )}
-
-        <EditableItemsList
-          itemsList={products}
-          ItemComponent={EditableItem}
-          title={components.adminProductsList.title}
-          itemProps={{
-            setCounter: setProductsCounter,
-            onSave: onUpdateProduct,
-            onDelete: onDeleteProduct,
-            renderItemProps: editableProductProperties,
-          }}
-        />
-        <ToggleButton
-          isVisible={showCreateProductForm}
-          onToggle={setShowCreateProductForm}
-          hideBtnText={components.createItem.hideButton.toUpperCase()}
-          showBtnText={components.createItem.showButton.toUpperCase()}
-          classCss={STYLES.BUTTONS.SHOW_HIDE}
-        />
+      </section>
+      <section className={styles.container}>
+        <h2>{productsText.title}</h2>
+        <div className={styles.toggleButton}>
+          <ToggleButton
+            isVisible={showProductsList}
+            onToggle={() =>
+              toggleAndRefresh(
+                setShowProductsList,
+                showProductsList,
+                setProductsCounter,
+              )
+            }
+            hideBtnText={productsText.toggleListButton.hide.toUpperCase()}
+            showBtnText={productsText.toggleListButton.show.toUpperCase()}
+            classCss={STYLES.BUTTONS.SHOW_HIDE}
+          />
+        </div>
+        {showProductsList && (
+          <EditableItemsList
+            itemsList={products}
+            ItemComponent={EditableItem}
+            title={productsText.editableItemsList.title}
+            itemProps={{
+              setCounter: setProductsCounter,
+              onSave: onUpdateProduct,
+              onDelete: onDeleteProduct,
+              renderItemProps: editableProductProperties,
+            }}
+          />
+        )}
+        <div className={styles.toggleButton}>
+          <ToggleButton
+            isVisible={showCreateProductForm}
+            onToggle={setShowCreateProductForm}
+            hideBtnText={productsText.toggleCreateItemButton.hide.toUpperCase()}
+            showBtnText={productsText.toggleCreateItemButton.show.toUpperCase()}
+            classCss={STYLES.BUTTONS.SHOW_HIDE}
+          />
+        </div>
         {showCreateProductForm && (
           <CreateItem
             onCreate={onCreateProduct}
             onChange={listenInputChangeAndSetDataObject}
             setCounter={setProductsCounter}
             renderItemProps={createProductProperties}
-            itemCategories={itemCategories}
+            itemCategories={productCategories}
           />
         )}
       </section>
