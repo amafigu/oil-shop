@@ -20,10 +20,8 @@ export const CreateItem = ({
     acc[val] = ""
     return acc
   }, {})
-
   const [notification, setNotification] = useState(null)
   const [file, setFile] = useState(null)
-
   const [itemData, setItemData] = useState({
     ...initialItemData,
   })
@@ -32,7 +30,6 @@ export const CreateItem = ({
   return (
     <section aria-label='create item form'>
       {notification && <NotificationCard message={notification} />}
-
       <form className={styles.form}>
         {Object.keys(itemData).map((field) =>
           field !== "productCategoryId" ? (
