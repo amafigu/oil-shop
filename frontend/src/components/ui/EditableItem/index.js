@@ -14,20 +14,18 @@ export const EditableItem = ({
   onSave,
   onDelete,
 }) => {
-  const itemInitialAttributes = renderItemProps.reduce((acc, val) => {
-    acc[val] = item[val]
-    return acc
-  }, {})
-  const [originalItemData, setOriginalItemData] = useState({})
-  const [lastUpdatedData, setLastUpdatedData] = useState(itemInitialAttributes)
-
+  const [lastUpdatedData, setLastUpdatedData] = useState({})
   const [updatedItemData, setUpdatedItemData] = useState({})
   const [file, setFile] = useState(null)
   const [notification, setNotification] = useState(null)
   const { components } = useTranslation()
+  const itemInitialAttributes = renderItemProps.reduce((acc, val) => {
+    acc[val] = item[val]
+    return acc
+  }, {})
 
   useEffect(() => {
-    setOriginalItemData(itemInitialAttributes)
+    setLastUpdatedData(itemInitialAttributes)
     setUpdatedItemData(itemInitialAttributes)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item])
@@ -56,6 +54,7 @@ export const EditableItem = ({
       {
         <form className={styles.form}>
           {item &&
+            itemInitialAttributes &&
             Object.keys(itemInitialAttributes).map((key) => (
               <EditableItemInput
                 label={key}
