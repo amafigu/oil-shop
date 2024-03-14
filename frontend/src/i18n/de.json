@@ -4,39 +4,33 @@
       "title": "Hallo! Vielen Dank für Ihren Besuch im Oylo, Portfolio-Webshop"
     },
     "admin": {
-      "loadingData": "Admin-Daten werden geladen...",
-      "welcomeText": {
-        "firstPart": "Hallo,",
-        "secondPart": "Sie sind als",
-        "thirdPart": " angemeldet."
-      },
-      "crud": {
-        "users": {
-          "create": "Benutzer erstellen",
-          "delete": "Benutzer löschen",
-          "deletedByEmail": "wurde erfolgreich aus dem System gelöscht",
-          "deleteError": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
-          "getUserButton": "Benutzer Daten sehen",
-          "getByEmail": "Benutzer per E-Mail Daten sehen"
+      "usersManagement": {
+        "title": "Benutzerverwaltung",
+        "editableItemsList": {
+          "title": "Benutzerliste"
         },
-        "products": {
-          "create": "Produkt erstellen",
-          "delete": "Produkt löschen",
-          "edit": "Produkt editieren",
-          "getByName": {
-            "show": "Produkt per Name finden",
-            "hide": "Ausblenden"
-          },
-
-          "getByNameAndQuantity": ""
+        "toggleListButton": {
+          "show": "Benutzern anzeigen",
+          "hide": "Liste ausblenden"
+        },
+        "toggleCreateItemButton": {
+          "show": "Benutzer erstellen",
+          "hide": "Form ausblenden"
         }
       },
-      "logout": "Ausloggen",
-      "userInfo": {
-        "email": "E-Mail",
-        "firstName": "Vorname",
-        "lastName": "Nachname",
-        "role": "Rolle"
+      "productManagement": {
+        "title": "Produktverwaltung",
+        "editableItemsList": {
+          "title": "Produktliste"
+        },
+        "toggleListButton": {
+          "show": "Produkte anzeigen",
+          "hide": "Produkte ausblenden"
+        },
+        "toggleCreateItemButton": {
+          "show": "Produkt erstellen",
+          "hide": "Form ausblenden"
+        }
       }
     },
     "cart": {
@@ -203,20 +197,8 @@
     "addOneToCartButton": {
       "text": "in den Warenkorb"
     },
-    "adminProductsList": {
-      "title": "Produktverwaltung",
-      "showButton": "Liste anzeigen",
-      "hideButton": "Liste ausblenden"
-    },
-    "adminUsersList": {
-      "title": "Benutzerverwaltung",
-      "showButton": "Benutzern anzeigen",
-      "hideButton": "Liste ausblenden"
-    },
     "createItem": {
-      "showButton": "Formular anzeigen",
-      "hideButton": "Formular ausblenden",
-      "submitButton": "Create"
+      "submitButton": "Senden"
     },
     "editableItemsList": {
       "showButton": "List anzeigen",

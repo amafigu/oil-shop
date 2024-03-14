@@ -4,40 +4,33 @@
       "title": "Hi! Thanks for visiting Oylo, Portfolio web-shop"
     },
     "admin": {
-      "loadingData": "Admin-Daten werden geladen...",
-      "welcomeText": {
-        "firstPart": "Hello,",
-        "secondPart": "you are loggin as a",
-        "thirdPart": "."
-      },
-      "commonProperties": {
-        "users": {
-          "create": "",
-          "delete": "",
-          "deletedByEmail": "was successfully deleted from system",
-          "deleteError": "Can not delete user with this email: ",
-          "edit": "",
-          "getByEmail": "Get user by email",
-          "getUserButton": "Get user data"
+      "usersManagement": {
+        "title": "Users management",
+        "editableItemsList": {
+          "title": "Users list"
         },
-        "products": {
-          "create": "Create product",
-          "delete": "Delete product",
-          "edit": "Edit product",
-          "getByName": {
-            "show": "Get Product By Name",
-            "hide": "Hide Form"
-          },
-
-          "getByNameAndQuantity": ""
+        "toggleListButton": {
+          "show": "Show users",
+          "hide": "Hide users"
+        },
+        "toggleCreateItemButton": {
+          "show": "Create user",
+          "hide": "Hide form"
         }
       },
-      "logout": "Logout",
-      "userInfo": {
-        "email": "Email",
-        "firstName": "First name",
-        "lastName": "Last name",
-        "role": "Rolle"
+      "productManagement": {
+        "title": "Products management",
+        "editableItemsList": {
+          "title": "Products list"
+        },
+        "toggleListButton": {
+          "show": "Show products",
+          "hide": "Hide products"
+        },
+        "toggleCreateItemButton": {
+          "show": "Create product",
+          "hide": "Hide form"
+        }
       }
     },
     "cart": {
@@ -185,49 +178,18 @@
     "addOneToCartButton": {
       "text": "add to cart"
     },
-    "adminProductsList": {
-      "title": "Products management",
-      "showButton": "Show list",
-      "hideButton": "Hide list"
-    },
-    "adminUsersList": {
-      "title": "Users management",
-      "showButton": "Show list",
-      "hideButton": "Hide list"
-    },
     "createItem": {
-      "showButton": "Show form",
-      "hideButton": "Hide Form",
-      "submitButton": "Create"
-    },
-    "editableItemsList": {
-      "showButton": "Show list",
-      "hideButton": "Hide list"
+      "submitButton": "Submit"
     },
     "editableItem": {
       "deleteButton": "Delete"
     },
     "buttons": {
       "actions": {
-        "commons": {
-          "delete": "Delete",
-          "edit": "Edit",
-          "save": "Save",
-          "create": "Create"
-        },
-        "shipping": {
-          "show": "Show shipping data",
-          "hide": "Hide shipping data"
-        },
-        "user": {
-          "show": "SHOW CURRENT USER DATA",
-          "hide": "HIDE  CURRENT USER DATA"
-        },
-
-        "userByEmail": {
-          "show": "GET USER BY EMAIL",
-          "hide": "HIDE FORM"
-        }
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save",
+        "create": "Create"
       }
     },
     "createProductForm": {
@@ -331,6 +293,10 @@
       "submitButton": "Create User",
       "showButton": "Show Form",
       "hideButton": "Hide Form"
+    },
+    "editableItemsList": {
+      "showButton": "Show list",
+      "hideButton": "Hide list"
     },
     "editableListProductData": {
       "deleteButton": {

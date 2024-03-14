@@ -3,10 +3,10 @@
 @import "#styles/helpers/mixins";
 
 .adminPage {
-  @include flex-justify-center;
+  @include flex-column-all-center;
   @include margin-page-wrapper;
 
-  min-height: 100vh;
+  min-height: theme.$min-height-page-regular;
 
   .container {
     width: 80%;
@@ -16,5 +16,9 @@
     @include media.widescreen-down {
       width: 90%;
     }
+  }
+
+  .toggleButton {
+    margin: theme.$spacing-regular 0;
   }
 }
