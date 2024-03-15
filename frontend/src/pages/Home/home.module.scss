@@ -9,9 +9,9 @@
   margin-bottom: theme.$spacing-semi-regular-large;
 
   .homePage {
-    @include flex-justify-center;
-
     width: 80%;
+
+    @include flex-justify-center;
 
     @include media.widescreen-down {
       width: 90%;

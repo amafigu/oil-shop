@@ -35,6 +35,19 @@ export const MatchedProductsList = ({
               setShowProductsSearchBar(false),
             )
           }
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              navigateToProductAndCloseDropdown(
+                product.name,
+                navigate,
+                setMatchedProducts,
+                setShowMatchedProductsList,
+                setSearchProductText,
+                setShowProductsSearchBar(false),
+              )
+            }
+          }}
+          tabIndex={0}
         >
           <div className={styles.imageContainer}>
             <img

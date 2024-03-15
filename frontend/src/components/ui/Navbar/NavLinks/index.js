@@ -1,6 +1,5 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import { LanguageSelector } from "#components/ui/LanguageSelector"
-import LogoutButton from "#components/ui/LogoutButton"
 import {
   ROUTES_CART,
   ROUTES_CURRENT_ADMIN,
@@ -12,6 +11,7 @@ import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
 import { useMenuOptions } from "#hooks/useMenuOptions"
 import { getIconByName } from "#utils/getIconByName"
+import { onLogout } from "#utils/onLogout"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./navLinks.module.scss"
@@ -19,8 +19,8 @@ import styles from "./navLinks.module.scss"
 export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
   const { getAllProductsQuantity } = useCartContext()
   const { setIsLoggedIn, isLoggedIn, user } = useUserContext()
-  const navigate = useNavigate()
   const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
+  const navigate = useNavigate()
 
   const onMobileMenu = () => {
     setShowProductsSearchBar(false)
@@ -31,7 +31,7 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
       <div className={styles.onlyMobile}>
         <ActionButton
           action={onMobileMenu}
-          text={<FontAwesomeIcon icon={getIconByName("faBars")} size={"xl"} />}
+          text={<FontAwesomeIcon icon={getIconByName("faBars")} size={"2xl"} />}
           className={STYLES.LINKS.NAVIGATION_MENU_LINK}
           ariaLabel={"show mobile menu"}
         />
@@ -80,7 +80,17 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
             >
               <FontAwesomeIcon icon={getIconByName("faUser")} />
             </Link>
-            <LogoutButton navigate={navigate} setIsLoggedIn={setIsLoggedIn} />
+            <ActionButton
+              action={() => onLogout(navigate, setIsLoggedIn)}
+              text={
+                <FontAwesomeIcon
+                  icon={getIconByName("faArrowRightFromBracket")}
+                  size={"xl"}
+                />
+              }
+              className={STYLES.LINKS.NAVIGATION_MENU_LINK}
+              ariaLabel={"logout"}
+            />
           </li>
         ) : (
           <Link className={styles.linkChild} to={ROUTES_LOGIN}>

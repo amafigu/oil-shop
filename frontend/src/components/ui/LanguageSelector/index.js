@@ -21,7 +21,7 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
 
   return (
     <ul
-      className={styles.dropdownMenu}
+      className={styles.languageSelector}
       style={
         currentPath.includes(ROUTES_SIGN_UP) ||
         currentPath.includes(ROUTES_LOGIN)
