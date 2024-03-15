@@ -19,12 +19,12 @@ export const LoginForm = () => {
     showPassword,
     password,
     email,
-    errorMessage,
+    notification,
   } = useLoginAndRedirect()
 
   return (
     <>
-      {errorMessage && <NotificationCard message={errorMessage} />}
+      {notification && <NotificationCard message={notification} />}
       <form className={styles.form}>
         <FormInput
           classCss={STYLES.FORMS.FIELD}
@@ -45,17 +45,18 @@ export const LoginForm = () => {
             label={"password"}
             type={showPassword ? "text" : "password"}
           />
-          <button
-            aria-label='show password'
-            type='button'
-            onClick={() => setShowPassword((prevState) => !prevState)}
-          >
-            {showPassword ? (
-              <FontAwesomeIcon icon={getIconByName("faUnlock")} />
-            ) : (
-              <FontAwesomeIcon icon={getIconByName("faLock")} />
-            )}
-          </button>
+          <ActionButton
+            action={() => setShowPassword((prevState) => !prevState)}
+            text={
+              showPassword ? (
+                <FontAwesomeIcon icon={getIconByName("faUnlock")} />
+              ) : (
+                <FontAwesomeIcon icon={getIconByName("faLock")} />
+              )
+            }
+            classCss={""}
+            ariaLabel={"show password"}
+          />
         </div>
         <ActionButton
           action={loginUserAndSetState}
