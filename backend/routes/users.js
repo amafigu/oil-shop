@@ -4,7 +4,6 @@ import { decodeJWT } from '../middleware/decodeToken.js';
 import { hashPassword } from '../middleware/passwordEncrypt.js';
 import { validateBody } from '../middleware/validationMiddleware.js';
 import {
-  createGuestUserValidation,
   createUserValidation,
   updateUserValidation,
 } from '../middleware/validationSchemas/userSchema.js';
@@ -218,7 +217,7 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
 
 router.post(
   '/create-guest',
-  validateBody(createGuestUserValidation),
+  // validateBody(createGuestUserValidation),
   async (req, res) => {
     try {
       const existingUser = await db.users.findOne({
@@ -237,10 +236,7 @@ router.post(
         password: hashedPassword,
       });
 
-      return res.status(201).json({
-        message: 'Guest user created successfully',
-        guestUser: newUser,
-      });
+      return res.status(201).json(newUser);
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }

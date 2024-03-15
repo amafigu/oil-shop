@@ -57,7 +57,7 @@ router.post('/user/shipping-data/:id', async (req, res) => {
         data: newShippingData,
       });
     } else {
-      return res.status(400).json({ message: 'User has already shippingData' });
+      return res.status(422).json({ message: 'User has already shippingData' });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
