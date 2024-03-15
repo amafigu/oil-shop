@@ -1,6 +1,6 @@
+import { getAuthenticatedUser } from "#api/auth/getAuthenticatedUser"
 import { createOrder } from "#api/orders/createOrder"
 import { createOrderItem } from "#api/orders/createOrderItem"
-import { getLoggedInUser } from "#api/users/getLoggedInUser"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 import { totalCost } from "./totalCost"
 
@@ -11,7 +11,7 @@ export const onSubmitRegisteredUserOrder = async (
   setNotification,
 ) => {
   try {
-    const loggedInUserResponse = await getLoggedInUser(userId)
+    const loggedInUserResponse = await getAuthenticatedUser(userId)
     if (loggedInUserResponse && loggedInUserResponse.status === 200) {
       const newOrder = {
         userId: userId,
