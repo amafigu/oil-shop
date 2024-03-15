@@ -28,7 +28,6 @@ export const onCreateGuestUserWithShippingData = async (
   }
 
   try {
-    debugger
     const guestResponse = await onCreateGuestUser(userFormData)
     if (guestResponse && guestResponse.status === 201) {
       const userId = guestResponse.data.id

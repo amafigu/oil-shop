@@ -16,9 +16,9 @@ export const CartOrderSummary = ({ totalCost }) => {
   const { isLoggedIn } = useCurrentUser()
   const { translate } = useTranslation()
   const text = translate.pages.cart
-  console.log(isLoggedIn)
   const cartTotalSum = (cart, shippingCost) =>
     Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
+
   const renderLink = () => {
     if (cart.length > 0) {
       const route = isLoggedIn

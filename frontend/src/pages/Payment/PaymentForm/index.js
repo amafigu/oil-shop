@@ -3,7 +3,7 @@ import { ROUTES_CHECKOUT_SHIPPING } from "#constants/routes"
 import { useSubmitOrder } from "#hooks/useSubmitOrder"
 import { useTranslation } from "#hooks/useTranslation"
 import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import styles from "./paymentForm.module.scss"
 
 export const PaymentForm = () => {
@@ -12,15 +12,10 @@ export const PaymentForm = () => {
   const { translate } = useTranslation()
   const [notification, setNotification] = useState(null)
   const text = translate.pages.payment
-  const location = useLocation()
   const navigate = useNavigate()
 
   const selectPaymentMethod = (e) => {
     setPaymentMethod(e.target.value)
-  }
-  let formData = {}
-  if (location.state) {
-    formData = location.state.formData
   }
 
   return (
@@ -29,9 +24,7 @@ export const PaymentForm = () => {
       <form
         aria-label='Submit Payment Form'
         className={styles.paymentForm}
-        onSubmit={(e) =>
-          submitOrder(e, paymentMethod, formData, setNotification)
-        }
+        onSubmit={(e) => submitOrder(e, paymentMethod, setNotification)}
       >
         <header className={styles.titleContainer}>
           <h2 className={styles.title}>{text.title}</h2>
