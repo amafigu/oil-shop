@@ -9,7 +9,7 @@ import { LoginForm } from "./LoginForm"
 import styles from "./login.module.scss"
 
 export const Login = () => {
-  const { errorMessage } = useLoginAndRedirect()
+  const { notification } = useLoginAndRedirect()
   const { translate } = useTranslation()
   const text = translate.pages.login
 
@@ -17,7 +17,7 @@ export const Login = () => {
 
   return (
     <main className={styles.loginPageWrapper} aria-label='Login page'>
-      {errorMessage && <NotificationCard message={errorMessage} />}
+      {notification && <NotificationCard message={notification} />}
       <div className={styles.loginPage}>
         <div className={styles.logoAndFormContainer}>
           <div className={styles.logoContainer}>
