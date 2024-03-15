@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { decodeJWT } from '../middleware/decodeToken.js';
 import { hashPassword } from '../middleware/passwordEncrypt.js';
 import { validateBody } from '../middleware/validationMiddleware.js';
@@ -8,6 +9,7 @@ import {
   updateUserValidation,
 } from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
+
 dotenv.config();
 const router = express.Router();
 
@@ -26,6 +28,22 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { email: req.params.email },
+      attributes: { exclude: ['password'] },
+      include: [{ model: db.userRoles, as: 'role' }],
+    });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/:id', decodeJWT, async (req, res) => {
+  try {
+    const user = await db.users.findOne({
+      where: { id: req.params.id },
       attributes: { exclude: ['password'] },
       include: [{ model: db.userRoles, as: 'role' }],
     });
@@ -70,10 +88,9 @@ router.get('/guest/id/:id', async (req, res) => {
   }
 });
 
-router.get('/current-user/:id', decodeJWT, async (req, res) => {
+router.get('/authenticated-user/:id', decodeJWT, async (req, res) => {
   try {
-    const token = req.cookies.token;
-
+    const token = req.cookies.token || req.cookies.guestUserToken;
     if (!token) return res.status(401).json({ message: 'Not authenticated' });
 
     const currentUser = await db.users.findOne({
@@ -91,12 +108,11 @@ router.get('/current-user/:id', decodeJWT, async (req, res) => {
     if (!currentUser) {
       return res.status(404).json({ message: 'User not found' });
     }
-
     const user = {
       ...currentUser.dataValues,
       role: currentUser.role.name,
     };
-    return res.json(user);
+    return res.status(200).json(user);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -107,7 +123,7 @@ router.get('/user/role/:roleId', async (req, res) => {
     const userRole = await db.userRoles.findOne({
       where: { id: req.params.roleId },
     });
-    return res.json(userRole);
+    return res.status(200).json(userRole);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -117,20 +133,6 @@ router.delete('/:id', decodeJWT, async (req, res) => {
   try {
     const result = await db.users.destroy({
       where: { id: req.params.id },
-    });
-    if (!result) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    return res.json({ message: 'User deleted successfully' });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
-router.delete('/user/:email', decodeJWT, async (req, res) => {
-  try {
-    const result = await db.users.destroy({
-      where: { email: req.params.email },
     });
     if (!result) {
       return res.status(404).json({ message: 'User not found' });
@@ -228,7 +230,7 @@ router.post(
         return res.status(400).json({ message: 'Email already in use' });
       }
 
-      const hashedPassword = await hashPassword('dummyPass');
+      const hashedPassword = await hashPassword('dummyPass!');
 
       const newUser = await db.users.create({
         ...req.body,
@@ -236,6 +238,22 @@ router.post(
         password: hashedPassword,
       });
 
+      const guestUserToken = jwt.sign(
+        {
+          id: newUser.id,
+        },
+        process.env.JWT_KEY,
+        { expiresIn: '6000000' } // 10 min
+      );
+      console.log('GUEST TOKEN', guestUserToken);
+      const isSecure = true;
+
+      res.cookie('guestUserToken', guestUserToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: isSecure,
+      });
       return res.status(201).json(newUser);
     } catch (err) {
       return res.status(500).json({ message: err.message });
