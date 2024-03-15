@@ -8,6 +8,6 @@ export const getUserWithoutCredentialsByEmail = async (email) => {
     )
     return response
   } catch (error) {
-    console.error("Error geting user by email", error)
+    throw error
   }
 }
