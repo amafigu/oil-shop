@@ -26,28 +26,12 @@
   "imports": {
     "#*": "./src/*"
   },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
-    },
-    "moduleNameMapper": {
-      "^#(.*)$": "<rootDir>/src/$1",
-      "\\.(css|less|scss|sss|styl)$": "<rootDir>/styleMock.js"
-    }
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --watch",
-    "eject": "react-scripts eject",
+    "coverage": "jest --coverage",
     "format": "stylelint src/**/*.scss"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -82,6 +66,7 @@
     "@babel/preset-react": "^7.23.3",
     "@testing-library/jest-dom": "^5.16.5",
     "babel-jest": "^29.7.0",
+    "eslint-plugin-jest": "^27.9.0",
     "prettier": "^2.8.8",
     "stylelint": "^15.10.2",
     "stylelint-config-css-modules": "^4.3.0",
