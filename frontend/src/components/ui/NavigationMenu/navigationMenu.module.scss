@@ -43,11 +43,7 @@
     @include property-font-primary-semi-large-light;
   }
 
-  @include media.tablet {
-    border-bottom: 0;
-  }
-
-  @include media.tablet {
+  @include media.tablet-down {
     width: auto;
     height: auto;
     padding: 0;
@@ -63,6 +59,8 @@
 
 .navigationMenuPages {
   @include flex-justify-center;
+
+  width: 100%;
 
   button {
     font-family: theme.$font-family-primary;

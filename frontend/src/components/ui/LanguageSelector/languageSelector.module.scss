@@ -2,14 +2,14 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.dropdownMenu {
+.languageSelector {
   position: absolute;
   display: flex;
   gap: theme.$spacing-smallest;
-  padding: 0 4px;
-  margin-top: 8px;
+  padding: 0 theme.$spacing-smallest;
+  margin-top: theme.$spacing-smaller;
   color: theme.$font-color-primary;
-  background-color: #fff;
+  background-color: theme.$background-color-primary;
   border: theme.$border-regular-component;
   border-radius: theme.$border-radius-small;
 
@@ -18,9 +18,8 @@
     display: flex;
     gap: theme.$spacing-semi-regular;
     height: theme.$height-mobile-menu-item;
-    padding: 0 4px;
-    margin-top: 8px;
-    background-color: #fff;
+    margin-top: 0;
+    background-color: theme.$background-color-primary;
     border: none;
     border-radius: theme.$border-radius-small;
   }

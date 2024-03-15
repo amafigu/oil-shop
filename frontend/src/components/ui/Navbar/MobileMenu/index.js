@@ -34,12 +34,15 @@ export const MobileMenu = ({
     setShowMobileMenu(false)
   }
   return (
-    <div className={styles.mobileMenu}>
+    <div
+      className={styles.mobileMenu}
+      aria-label='navigation menu for mobile devices'
+    >
       <ul className={styles.itemsList}>
         <li className={`${styles.closeMenuIconContainer} ${styles.listItem}`}>
           <ActionButton
             action={() => setShowMobileMenu(false)}
-            text={<FontAwesomeIcon icon={getIconByName("faX")} />}
+            text={<FontAwesomeIcon icon={getIconByName("faX")} size={"xl"} />}
             className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
             ariaLabel={"show mobile menu"}
           />

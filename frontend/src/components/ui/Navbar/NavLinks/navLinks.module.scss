@@ -12,18 +12,18 @@
 .onlyMobile {
   display: none;
 
-  @include media.mobile {
+  @include media.tablet-down {
     display: block;
     margin-right: theme.$spacing-regular;
   }
 }
 
 .hideOnMobile {
-  @include flex-align-center;
-
   gap: theme.$spacing-regular;
 
-  @include media.mobile {
+  @include flex-align-center;
+
+  @include media.tablet-down {
     display: none;
   }
 }
@@ -35,8 +35,7 @@
 }
 
 .linkChild {
-  display: flex;
-  align-items: center;
+  @include flex-align-center;
 }
 
 .productsQuantity {
@@ -44,12 +43,16 @@
 }
 
 .cartAndQuantity {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-right: theme.$spacing-semi-regular;
+  gap: theme.$spacing-smaller;
+
+  @include flex-align-center;
+
+  @include media.tablet {
+    margin-right: 0;
+  }
 }
 
 .userAndLogoutIconContainer {
   display: flex;
+  gap: theme.$spacing-semi-regular;
 }

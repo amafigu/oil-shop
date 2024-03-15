@@ -19,7 +19,7 @@ $fullscreen: 1440px;
 }
 
 @mixin mobile-up {
-  @media screen and (min-width: $mobile) {
+  @media screen and (min-width: ($mobile + 1)) {
     @content;
   }
 }
@@ -31,7 +31,7 @@ $fullscreen: 1440px;
 }
 
 @mixin tablet {
-  @media screen and (min-width: $tablet) {
+  @media screen and (min-width: ($tablet + 1px)) {
     @content;
   }
 }
@@ -43,7 +43,7 @@ $fullscreen: 1440px;
 }
 
 @mixin desktop {
-  @media screen and (min-width: $desktop) {
+  @media screen and (min-width: ($desktop + 1px)) {
     @content;
   }
 }
@@ -55,7 +55,7 @@ $fullscreen: 1440px;
 }
 
 @mixin widescreen {
-  @media screen and (min-width: $widescreen) {
+  @media screen and (min-width: ($widescreen + 1)) {
     @content;
   }
 }
