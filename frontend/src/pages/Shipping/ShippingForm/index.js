@@ -2,18 +2,16 @@ import { FormInput } from "#components/ui/FormInput"
 import { ROUTES_CART } from "#constants/routes"
 import { initialShippingFormData } from "#constants/shippingData"
 import { STYLES } from "#constants/styles"
-import useCartContext from "#context/cartContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
-import { onSubmitGuestUserWithOrders } from "#utils/onSubmitGuestUserWithOrders"
+import { onCreateGuestUserWithShippingData } from "#utils/onCreateGuestUserWithShippingData"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "./shippingForm.module.scss"
 
-export const ShippingForm = ({ isLoggedIn, setNotification }) => {
+export const ShippingForm = ({ setNotification }) => {
   const { translate } = useTranslation()
   const text = translate.pages.shipping
-  const { cart } = useCartContext()
   const [formData, setFormData] = useState(initialShippingFormData)
   const navigate = useNavigate()
 
@@ -22,7 +20,12 @@ export const ShippingForm = ({ isLoggedIn, setNotification }) => {
       aria-label='insert your shipping data'
       className={styles.form}
       onSubmit={(e) =>
-        onSubmitGuestUserWithOrders(e, cart, isLoggedIn, navigate, formData)
+        onCreateGuestUserWithShippingData(
+          e,
+          setNotification,
+          formData,
+          navigate,
+        )
       }
     >
       <div className={styles.customerInfo}>
