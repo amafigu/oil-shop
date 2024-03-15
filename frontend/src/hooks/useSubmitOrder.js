@@ -1,61 +1,36 @@
-import { submitOrderAndGuestUser } from "#api/orders/submitOrderAndGuestUser"
+import { LOCAL_STORAGE_CART } from "#constants/localStorage"
 import { ROUTES_CHECKOUT_ORDER_SUMMARY } from "#constants/routes"
-import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import useCartContext from "#context/cartContext"
-import { useTranslation } from "#hooks/useTranslation"
+import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+import { useCart } from "#hooks/useCart"
+import { useCurrentUser } from "#hooks/useCurrentUser"
+import { onSubmitGuestUserOrder } from "#utils/onSubmitGuestUserOrder"
+import { onSubmitRegisteredUserOrder } from "#utils/onSubmitRegisteredUserOrder"
 import { useNavigate } from "react-router-dom"
 
 export const useSubmitOrder = () => {
+  const { isLoggedIn, userId } = useCurrentUser()
+  const { cart, setCart } = useCart()
   const navigate = useNavigate()
-  const { setCart } = useCartContext()
-  const { translate } = useTranslation()
-  const text = translate.pages.payment
 
-  const submitOrder = async (
-    e,
-    isLoggedIn,
-    userId,
-    paymentMethod,
-    setNotification,
-    formData,
-  ) => {
+  const submitOrder = async (e, paymentMethod, formData, setNotification) => {
     e.preventDefault()
-
-    const stateShippingDataObject = {
-      street: formData.street,
-      number: formData.number,
-      details: formData.details,
-      postalCode: formData.postalCode,
-      city: formData.city,
-      state: formData.state,
-      country: formData.country,
-    }
-
-    const registeredUserEmptyShippingDataObject = {
-      street: text.emptyShippingData,
-      number: text.emptyShippingData,
-      details: text.emptyShippingData,
-      postalCode: text.emptyShippingData,
-      city: text.emptyShippingData,
-      state: text.emptyShippingData,
-      country: text.emptyShippingData,
-    }
+    let response
     try {
-      const orderResponse = await submitOrderAndGuestUser(
-        isLoggedIn,
-        formData,
-        userId,
-        stateShippingDataObject,
-        registeredUserEmptyShippingDataObject,
-        paymentMethod,
-      )
-
-      if (orderResponse) {
-        setCart([])
-        setTimeout(
-          () => navigate(ROUTES_CHECKOUT_ORDER_SUMMARY),
-          REDIRECT_TIMEOUT,
+      if (isLoggedIn) {
+        response = await onSubmitRegisteredUserOrder(
+          userId,
+          paymentMethod,
+          cart,
+          setNotification,
         )
+      }
+      if (!isLoggedIn) {
+        response = await onSubmitGuestUserOrder(formData, cart)
+      }
+      if (response) {
+        navigate(ROUTES_CHECKOUT_ORDER_SUMMARY)
+        localStorage.removeItem(LOCAL_STORAGE_CART)
+        setCart([])
       }
     } catch (error) {
       setNotification(error.message)
