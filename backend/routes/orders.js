@@ -11,7 +11,7 @@ router.get('/all/:userId', async (req, res) => {
     });
     return res.json(orders);
   } catch (err) {
-    return res.status(500).json({ message: 'No order for this id' });
+    return res.status(500).json({ message: 'This user has no orders' });
   }
 });
 
@@ -74,21 +74,16 @@ router.get('/cart-items/:orderId', async (req, res) => {
   }
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create/:userId', async (req, res) => {
   try {
-    if (!req.body.userId) {
-      return res.status(400).json({
-        message: 'No userId provided',
-      });
-    }
     const user = await db.users.findOne({
       where: {
-        id: req.body.userId,
+        id: req.params.userId,
       },
     });
     if (!user) {
       return res.status(422).json({
-        message: 'Can not create order',
+        message: 'Can not find user for saving order, please try again',
       });
     } else {
       const order = await db.userOrders.create(req.body);

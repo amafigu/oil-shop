@@ -1,4 +1,4 @@
-import { getUserShippingDataRequest } from "#api/users/getUserShippingDataRequest"
+import { getUserShippingData } from "#api/users/getUserShippingData"
 import { LONG_MESSAGE_TIMEOUT } from "#constants/time"
 import { useCheckIsUser } from "#hooks/useCheckIsUser"
 import { useEffect, useState } from "react"
@@ -13,7 +13,7 @@ export const useGetUserShippingData = () => {
     const getData = async () => {
       if (!user) return
       try {
-        const response = await getUserShippingDataRequest(user.id)
+        const response = await getUserShippingData(user.id)
 
         if (response && response.status === 200) {
           const data = response.data

@@ -1,6 +1,6 @@
-import { verifyToken } from "#api/auth/verifyToken"
+import { getAuthenticatedUser } from "#api/auth/getAuthenticatedUser"
+import { getRegisteredUserToken } from "#api/auth/getRegisteredUserToken"
 import { getAllUsers } from "#api/users/getAllUsers"
-import { getLoggedInUser } from "#api/users/getLoggedInUser"
 import { createContext, useContext, useEffect, useState } from "react"
 
 export const UserContext = createContext()
@@ -15,12 +15,15 @@ export const UserProvider = ({ children }) => {
   const [counter, setCounter] = useState(0)
 
   useEffect(() => {
-    const verifyCookie = async () => {
+    const checkAuthenticationAndSetState = async () => {
       setIsLoading(true)
       try {
-        const authToken = await verifyToken()
-        if (authToken) {
-          const loggedInUserResponse = await getLoggedInUser(authToken)
+        const authToken = await getRegisteredUserToken()
+        if (authToken && authToken.status === 200) {
+          const authorizatedUserId = authToken.data.id
+          const loggedInUserResponse = await getAuthenticatedUser(
+            authorizatedUserId,
+          )
           if (loggedInUserResponse && loggedInUserResponse.status === 200) {
             const userData = loggedInUserResponse.data
             setUser(userData)
@@ -47,7 +50,7 @@ export const UserProvider = ({ children }) => {
       }
       setIsLoading(false)
     }
-    verifyCookie()
+    checkAuthenticationAndSetState()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn])
 

@@ -1,61 +1,40 @@
-import { submitOrderAndGuestUser } from "#api/orders/submitOrderAndGuestUser"
+import { getGuestUserToken } from "#api/auth/getGuestUserToken"
+import { LOCAL_STORAGE_CART } from "#constants/localStorage"
 import { ROUTES_CHECKOUT_ORDER_SUMMARY } from "#constants/routes"
-import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import useCartContext from "#context/cartContext"
-import { useTranslation } from "#hooks/useTranslation"
+import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+import { useCart } from "#hooks/useCart"
+import { useCurrentUser } from "#hooks/useCurrentUser"
+import { onSubmitRegisteredUserOrder } from "#utils/onSubmitRegisteredUserOrder"
 import { useNavigate } from "react-router-dom"
 
 export const useSubmitOrder = () => {
+  const { isLoggedIn, userId } = useCurrentUser()
+  const { cart, setCart } = useCart()
   const navigate = useNavigate()
-  const { setCart } = useCartContext()
-  const { translate } = useTranslation()
-  const text = translate.pages.payment
 
-  const submitOrder = async (
-    e,
-    isLoggedIn,
-    userId,
-    paymentMethod,
-    setNotification,
-    formData,
-  ) => {
+  const submitOrder = async (e, paymentMethod, setNotification) => {
     e.preventDefault()
-
-    const stateShippingDataObject = {
-      street: formData.street,
-      number: formData.number,
-      details: formData.details,
-      postalCode: formData.postalCode,
-      city: formData.city,
-      state: formData.state,
-      country: formData.country,
-    }
-
-    const registeredUserEmptyShippingDataObject = {
-      street: text.emptyShippingData,
-      number: text.emptyShippingData,
-      details: text.emptyShippingData,
-      postalCode: text.emptyShippingData,
-      city: text.emptyShippingData,
-      state: text.emptyShippingData,
-      country: text.emptyShippingData,
-    }
+    let response
+    let validUserId
     try {
-      const orderResponse = await submitOrderAndGuestUser(
-        isLoggedIn,
-        formData,
-        userId,
-        stateShippingDataObject,
-        registeredUserEmptyShippingDataObject,
+      if (isLoggedIn) {
+        validUserId = userId
+      } else {
+        const guestUserId = await getGuestUserToken()
+        if (guestUserId && guestUserId.status === 200) {
+          validUserId = guestUserId.data.id
+        }
+      }
+      response = await onSubmitRegisteredUserOrder(
+        validUserId,
         paymentMethod,
+        cart,
+        setNotification,
       )
-
-      if (orderResponse) {
+      if (response) {
+        navigate(ROUTES_CHECKOUT_ORDER_SUMMARY)
+        localStorage.removeItem(LOCAL_STORAGE_CART)
         setCart([])
-        setTimeout(
-          () => navigate(ROUTES_CHECKOUT_ORDER_SUMMARY),
-          REDIRECT_TIMEOUT,
-        )
       }
     } catch (error) {
       setNotification(error.message)

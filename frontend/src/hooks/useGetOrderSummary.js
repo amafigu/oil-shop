@@ -1,4 +1,4 @@
-import { getSummaryData } from "#api/orders/getSummaryData"
+import { getGuestUserToken } from "#api/auth/getGuestUserToken"
 import {
   initialOrderData,
   initialShippingData,
@@ -6,6 +6,7 @@ import {
 } from "#constants/orderSummaryData"
 import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
+import { onGetOrderSummary } from "../utils/onGetOrderSummary"
 
 export const useGetOrderSummary = () => {
   const [notification, setNotification] = useState(null)
@@ -13,13 +14,22 @@ export const useGetOrderSummary = () => {
   const [shippingData, setShippingData] = useState(initialShippingData)
   const [userData, setUserData] = useState(initialUserData)
   const [orderData, setOrderData] = useState(initialOrderData)
-  const { isLoggedIn, userId, isLoading } = useUserContext()
+  const { isLoggedIn, userId } = useUserContext()
+
   useEffect(() => {
+    let currentUserId
+
     const getOrderSummary = async () => {
-      const userSummaryResponse = await getSummaryData(
-        userId,
-        isLoggedIn,
-        isLoading,
+      if (isLoggedIn) {
+        currentUserId = userId
+      } else {
+        const decodedToken = await getGuestUserToken()
+        if (decodedToken && decodedToken.status === 200) {
+          currentUserId = decodedToken.data.id
+        }
+      }
+      const userSummaryResponse = await onGetOrderSummary(
+        currentUserId,
         setNotification,
       )
       if (userSummaryResponse) {

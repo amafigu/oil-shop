@@ -1,11 +1,11 @@
 import { API_SHIPPING_DATA } from "#constants/api"
 import axios from "axios"
 
-export const getUserShippingData = async (userId) => {
+export const createShippingData = async (userId, data) => {
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.REACT_APP_API_URL}${API_SHIPPING_DATA}/${userId}`,
-      { withCredentials: true },
+      data,
     )
     return response
   } catch (error) {

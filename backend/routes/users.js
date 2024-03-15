@@ -2,34 +2,16 @@ import dotenv from 'dotenv';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { decodeJWT } from '../middleware/decodeToken.js';
-import {
-  comparePassword,
-  hashPassword,
-} from '../middleware/passwordEncrypt.js';
+import { hashPassword } from '../middleware/passwordEncrypt.js';
 import { validateBody } from '../middleware/validationMiddleware.js';
 import {
-  createGuestUserValidation,
   createUserValidation,
-  loginValidation,
-  shippingDataValidation,
   updateUserValidation,
 } from '../middleware/validationSchemas/userSchema.js';
 import db from '../models/index.js';
+
 dotenv.config();
 const router = express.Router();
-
-router.get('/verify-token', (req, res) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) return res.status(401).json({ message: 'Not authenticated' });
-    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
-    return res.json(decodedToken);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-});
-
-// GET ALL USERS
 
 router.get('/', decodeJWT, async (req, res) => {
   try {
@@ -42,11 +24,26 @@ router.get('/', decodeJWT, async (req, res) => {
   }
 });
 
-// GET USER BY EMAIL
 router.get('/user/:email', decodeJWT, async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { email: req.params.email },
+      attributes: { exclude: ['password'] },
+      include: [{ model: db.userRoles, as: 'role' }],
+    });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.json(user);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/:id', decodeJWT, async (req, res) => {
+  try {
+    const user = await db.users.findOne({
+      where: { id: req.params.id },
       attributes: { exclude: ['password'] },
       include: [{ model: db.userRoles, as: 'role' }],
     });
@@ -91,10 +88,9 @@ router.get('/guest/id/:id', async (req, res) => {
   }
 });
 
-router.get('/current-user/:id', decodeJWT, async (req, res) => {
+router.get('/authenticated-user/:id', decodeJWT, async (req, res) => {
   try {
-    const token = req.cookies.token;
-
+    const token = req.cookies.token || req.cookies.guestUserToken;
     if (!token) return res.status(401).json({ message: 'Not authenticated' });
 
     const currentUser = await db.users.findOne({
@@ -112,12 +108,11 @@ router.get('/current-user/:id', decodeJWT, async (req, res) => {
     if (!currentUser) {
       return res.status(404).json({ message: 'User not found' });
     }
-
     const user = {
       ...currentUser.dataValues,
       role: currentUser.role.name,
     };
-    return res.json(user);
+    return res.status(200).json(user);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -128,7 +123,7 @@ router.get('/user/role/:roleId', async (req, res) => {
     const userRole = await db.userRoles.findOne({
       where: { id: req.params.roleId },
     });
-    return res.json(userRole);
+    return res.status(200).json(userRole);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -138,20 +133,6 @@ router.delete('/:id', decodeJWT, async (req, res) => {
   try {
     const result = await db.users.destroy({
       where: { id: req.params.id },
-    });
-    if (!result) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    return res.json({ message: 'User deleted successfully' });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
-router.delete('/user/:email', decodeJWT, async (req, res) => {
-  try {
-    const result = await db.users.destroy({
-      where: { email: req.params.email },
     });
     if (!result) {
       return res.status(404).json({ message: 'User not found' });
@@ -197,103 +178,6 @@ router.put(
   }
 );
 
-router.post('/logout', (req, res) => {
-  const isSecure = process.env.IS_SECURE;
-
-  res.clearCookie('token', {
-    httpOnly: true,
-    sameSite: 'none',
-    path: '/',
-    secure: isSecure,
-  });
-
-  res.json({ message: 'Logged out successfully' });
-});
-
-router.post('/login', validateBody(loginValidation), async (req, res) => {
-  try {
-    const user = await db.users.findOne({
-      where: { email: req.body.email },
-      include: [{ model: db.userRoles, as: 'role' }],
-    });
-    if (!user) {
-      return res.status(404).json({ message: 'Invalid email' });
-    }
-
-    const isPasswordValid = await comparePassword(
-      req.body.password,
-      user.password
-    );
-
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid password' });
-    }
-
-    const token = jwt.sign(
-      {
-        id: user.id,
-      },
-      process.env.JWT_KEY,
-      { expiresIn: '14400000' } // 4 hours
-    );
-
-    const isSecure = process.env.IS_SECURE;
-
-    res.cookie('token', token, {
-      httpOnly: true,
-      sameSite: 'none',
-      path: '/',
-      secure: isSecure,
-    });
-
-    return res.json({ message: 'Logged in successfully' });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
-router.post('/login', validateBody(loginValidation), async (req, res) => {
-  try {
-    const user = await db.users.findOne({
-      where: { email: req.body.email },
-      include: [{ model: db.userRoles, as: 'role' }],
-    });
-    if (!user) {
-      return res.status(404).json({ message: 'Invalid email' });
-    }
-
-    const isPasswordValid = await comparePassword(
-      req.body.password,
-      user.password
-    );
-
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid password' });
-    }
-
-    const token = jwt.sign(
-      {
-        id: user.id,
-      },
-      process.env.JWT_KEY,
-      { expiresIn: '7200000' } // 2 hours
-    );
-
-    const isSecure = process.env.IS_SECURE;
-
-    res.cookie('token', token, {
-      httpOnly: true,
-      sameSite: 'none',
-      path: '/',
-      secure: isSecure,
-    });
-
-    return res.json({ message: 'Logged in successfully' });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
 router.post('/create', validateBody(createUserValidation), async (req, res) => {
   try {
     const existingUser = await db.users.findOne({
@@ -333,10 +217,9 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
   }
 });
 
-// TODO: make a password and check crud in db
 router.post(
   '/create-guest',
-  validateBody(createGuestUserValidation),
+  // validateBody(createGuestUserValidation),
   async (req, res) => {
     try {
       const existingUser = await db.users.findOne({
@@ -347,7 +230,7 @@ router.post(
         return res.status(400).json({ message: 'Email already in use' });
       }
 
-      const hashedPassword = await hashPassword('dummyPass');
+      const hashedPassword = await hashPassword('dummyPass!');
 
       const newUser = await db.users.create({
         ...req.body,
@@ -355,10 +238,23 @@ router.post(
         password: hashedPassword,
       });
 
-      return res.status(201).json({
-        message: 'Guest user created successfully',
-        guestUser: newUser,
+      const guestUserToken = jwt.sign(
+        {
+          id: newUser.id,
+        },
+        process.env.JWT_KEY,
+        { expiresIn: '6000000' } // 10 min
+      );
+      console.log('GUEST TOKEN', guestUserToken);
+      const isSecure = true;
+
+      res.cookie('guestUserToken', guestUserToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        path: '/',
+        secure: isSecure,
       });
+      return res.status(201).json(newUser);
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }
@@ -402,129 +298,6 @@ router.post(
         message: 'Customer user created successfully',
         user: contextUser,
       });
-    } catch (err) {
-      return res.status(500).json({ message: err.message });
-    }
-  }
-);
-
-router.post('/register-product-manager', async (req, res) => {
-  try {
-    const existingUser = await db.users.findOne({
-      where: { email: req.body.email },
-    });
-
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email already in use' });
-    }
-    const userRole = await db.userRoles.findOne({
-      where: { name: 'product_manager' },
-    });
-
-    const hashedPassword = await hashPassword(req.body.password);
-
-    const newAdmin = await db.users.create({
-      ...req.body,
-      password: hashedPassword,
-      roleId: userRole.id,
-    });
-
-    return res.status(201).json({
-      message: 'Product Manager user created successfully',
-      user: newAdmin,
-    });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
-router.get('/user/shipping-data/:id', async (req, res) => {
-  try {
-    let shippingData = await db.usersShippingData.findOne({
-      where: { userId: req.params.id },
-    });
-    const user = await db.users.findOne({
-      where: { id: req.params.id },
-    });
-    if (!shippingData && user) {
-      const initialData = {
-        userId: req.params.id,
-        firstName: 'Please add data',
-        lastName: 'Please add data',
-        email: 'Please add data',
-        street: 'Please add data',
-        number: 'Please add data',
-        details: 'Please add data',
-        city: 'Please add data',
-        state: 'Please add data',
-        country: 'Please add data',
-        postalCode: 'Please add data',
-      };
-
-      shippingData = await db.usersShippingData.create(initialData);
-    }
-    if (shippingData) {
-      return res.status(200).json(shippingData);
-    } else if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
-router.post('/user/shipping-data/:id', async (req, res) => {
-  try {
-    const shippingData = await db.usersShippingData.findOne({
-      where: { userId: req.params.id },
-    });
-    if (!shippingData) {
-      const newShippingData = await db.usersShippingData.create({
-        ...req.body,
-        userId: req.params.id,
-      });
-
-      return res.status(201).json({
-        message: 'Shipping data created successfully',
-        data: newShippingData,
-      });
-    } else {
-      return res.status(400).json({ message: 'User has already shippingData' });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
-router.put(
-  '/user/shipping-data/:id',
-  validateBody(shippingDataValidation),
-
-  async (req, res) => {
-    try {
-      const shippingData = await db.usersShippingData.findOne({
-        where: { userId: req.params.id },
-      });
-
-      if (!shippingData) {
-        await db.usersShippingData.create({
-          ...req.body,
-          userId: req.params.id,
-        });
-      } else {
-        shippingData.street = req.body.street || shippingData.street;
-        shippingData.number = req.body.number || shippingData.number;
-        shippingData.details = req.body.details || shippingData.details;
-        shippingData.postalCode =
-          req.body.postalCode || shippingData.postalCode;
-        shippingData.city = req.body.city || shippingData.city;
-        shippingData.state = req.body.state || shippingData.state;
-        shippingData.country = req.body.country || shippingData.country;
-
-        await shippingData.save();
-      }
-
-      return res.json(shippingData);
     } catch (err) {
       return res.status(500).json({ message: err.message });
     }

@@ -1,7 +1,7 @@
 import { getDataAndSetErrorMessage } from "#api/generics/getDataAndSetErrorMessage"
 import {
+  API_AUTH_AUTHENTICATED_USER,
   API_LOGIN,
-  API_USERS_CURRENT_USER,
   API_USER_ROLE,
   API_VERIFY_TOKEN,
 } from "#constants/api"
@@ -23,7 +23,7 @@ export const loginUser = async (email, password) => {
       const userId = currentUserIdResponse.data.id
       const userResponse = await getDataAndSetErrorMessage(
         userId,
-        API_USERS_CURRENT_USER,
+        API_AUTH_AUTHENTICATED_USER,
       )
       const loggedUser = userResponse.data
       if (userResponse.status === 200) {
