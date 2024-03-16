@@ -1,55 +1,78 @@
-import { shippingData } from "#__mocks__/shippingData"
-import { components, translate } from "#__mocks__/translate"
+import orders from "#__mocks__/orders"
+import shippingData from "#__mocks__/shippingData"
+import {
+  commonButtons,
+  commonProperties,
+  components,
+  translate,
+} from "#__mocks__/translate"
 import user from "#__mocks__/user"
-import { OrdersList } from "#components/orders/OrdersList"
+import { EditableItem } from "#components/ui/EditableItem"
+import { EditableItemsList } from "#components/ui/EditableItemsList"
 import { UserHeader } from "#components/ui/UserHeader"
+import { editableUserShippingDataProperties } from "#constants/shippingData"
+import { editableUserProperties } from "#constants/users"
 import useUserContext from "#context/userContext"
-// import { useGetOrdersWithProducts } from "#hooks/useGetOrdersWithProducts"
-import { useGetOriginalShippingData } from "#hooks/useGetOriginalShippingData"
+import { useGetOrdersWithProducts } from "#hooks/useGetOrdersWithProducts"
+import { useGetUserShippingData } from "#hooks/useGetUserShippingData"
 import { useTranslation } from "#hooks/useTranslation"
-import { useUserData } from "#hooks/useUserData"
+import { Order } from "#pages/User/Order"
+import { onUpdateUser } from "#utils/onUpdateUser"
+import { onUpdateUserShippingData } from "#utils/onUpdateUserShippingData"
 import "@testing-library/jest-dom"
 import "@testing-library/react"
 import { render } from "@testing-library/react"
-import axios from "axios"
-import { ShippingData } from "./ShippingData"
-import { UserData } from "./UserData"
 
-//jest.mock("#hooks/useGetOrdersWithProducts")
 jest.mock("#hooks/useTranslation")
-jest.mock("#hooks/useUserData")
-jest.mock("#hooks/useGetOriginalShippingData")
+jest.mock("#hooks/useGetUserShippingData")
+jest.mock("#hooks/useGetOrdersWithProducts")
 jest.mock("#context/userContext")
 jest.mock("axios")
 
 describe("User page should", () => {
   beforeAll(() => {
-    axios.put.mockResolvedValue({ data: { shippingData }, status: 200 })
-    axios.get.mockResolvedValue({ data: { user }, status: 200 })
-
-    useTranslation.mockReturnValue({ translate, components })
-    useUserData.mockReturnValue({
-      setUser: jest.fn(),
-      setNonUpdatedUserData: jest.fn(),
+    useTranslation.mockReturnValue({
+      translate,
+      components,
+      commonProperties,
+      commonButtons,
     })
-    useUserContext.mockReturnValue({ userId: 243 })
-    useGetOriginalShippingData.mockReturnValue({
-      setNonUpdatedShippingData: jest.fn(),
-    })
-
-    // useGetOrdersWithProducts.mockReturnValue({ data: [] })
+    useUserContext.mockReturnValue({ user })
+    useGetUserShippingData.mockReturnValue({ shippingData })
+    useGetOrdersWithProducts.mockReturnValue({ orders })
   })
 
   test("render UserHeader correctly", () => {
     render(<UserHeader data={user} />)
   })
-  test("render UserData correctly", () => {
-    render(<UserData />)
+
+  test("render User data correctly", () => {
+    render(
+      <EditableItem
+        item={user}
+        renderItemProps={editableUserProperties}
+        onSave={onUpdateUser}
+      />,
+    )
   })
-  test("render ShippingData correctly", () => {
-    render(<ShippingData />)
+
+  test("render Shipping Data correctly", () => {
+    render(
+      <EditableItem
+        item={shippingData}
+        renderItemProps={editableUserShippingDataProperties}
+        onSave={onUpdateUserShippingData}
+      />,
+    )
   })
-  test("render OrdersList correctly", () => {
-    render(<OrdersList />)
+
+  test("render Orders Data correctly", () => {
+    render(
+      <EditableItemsList
+        itemsList={orders}
+        ItemComponent={Order}
+        title={components.ordersList.title}
+      />,
+    )
   })
 })
