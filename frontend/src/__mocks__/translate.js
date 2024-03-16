@@ -113,3 +113,10 @@ export const components = {
     productNotFound: "Product not found",
   },
 }
+
+export const commonButtons = {
+  create: "Create",
+  delete: "Delete",
+  edit: "Edit",
+  save: "Save",
+}
