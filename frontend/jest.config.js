@@ -1,8 +1,8 @@
-module.export = {
+module.exports = {
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.{js,jsx}"],
   coverageDirectory: "coverage",
-  testEnviroment: "jsdom",
+  testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   transform: {
     "^.+\\.[t|j]sx?$": "babel-jest",
