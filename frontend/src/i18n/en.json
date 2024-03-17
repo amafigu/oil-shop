@@ -335,11 +335,10 @@
       "pricePerUnit": "per unit",
       "productNotFound": "Product not found"
     },
-    "products": {
-      "oil": {
-        "size": "size",
-        "price": "price"
-      }
+    "productCard": {
+      "loading": "Loading product",
+      "addProductButton": "add to cart",
+      "addProductButtonLabel": "Add product to your shop cart"
     },
     "footer": {
       "linksColumns": {

@@ -112,6 +112,11 @@ export const components = {
     pricePerUnit: "per unit",
     productNotFound: "Product not found",
   },
+  productCard: {
+    loading: "Loading product",
+    addProductButton: "add to cart",
+    addProductButtonLabel: "Add product to your shop cart",
+  },
 }
 
 export const commonButtons = {

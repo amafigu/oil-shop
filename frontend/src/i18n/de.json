@@ -360,11 +360,10 @@
       "pricePerUnit": "pro Einheit",
       "productNotFound": "Produkt nicht gefunden"
     },
-    "products": {
-      "oil": {
-        "size": "Größe",
-        "price": "Preis"
-      }
+    "productCard": {
+      "loading": "Produkt wird geladen",
+      "addProductButton": "in den Warenkorb",
+      "addProductButtonLabel": "Fügen Sie das Produkt Ihrem Warenkorb hinzu"
     },
     "footer": {
       "linksColumns": {
