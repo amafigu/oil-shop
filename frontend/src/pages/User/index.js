@@ -4,6 +4,7 @@ import NotificationCard from "#components/ui/NotificationCard"
 import { UserHeader } from "#components/ui/UserHeader"
 import { editableUserShippingDataProperties } from "#constants/shippingData"
 import { editableUserProperties } from "#constants/users"
+import useUserContext from "#context/userContext"
 import { useCheckIsUser } from "#hooks/useCheckIsUser"
 import { useGetOrdersWithProducts } from "#hooks/useGetOrdersWithProducts"
 import { useGetUserShippingData } from "#hooks/useGetUserShippingData"
@@ -14,7 +15,8 @@ import { Order } from "./Order"
 import styles from "./user.module.scss"
 
 export const User = () => {
-  const { notification, user } = useCheckIsUser()
+  const { notification } = useCheckIsUser()
+  const { user } = useUserContext()
   const { shippingData } = useGetUserShippingData()
   const { components } = useTranslation()
   const { orders, notification: ordersNotification } =

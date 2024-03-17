@@ -3,6 +3,7 @@ import useUserContext from "#context/userContext"
 import { setDefaultImageByError } from "#utils/setDefaultImageByError"
 import { UserHeaderData } from "./UserHeaderData"
 import styles from "./userHeader.module.scss"
+
 export const UserHeader = () => {
   const { user } = useUserContext()
 
