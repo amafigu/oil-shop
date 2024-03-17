@@ -34,7 +34,7 @@ export const EditableItem = ({
       {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <div className={styles.imageContainer}>
-          {item && item.hasOwnProperty("image") && (
+          {item && Object.prototype.hasOwnProperty.call(item, "image") && (
             <img
               className={styles.image}
               src={updatedItemData.image || ""}
@@ -77,7 +77,6 @@ export const EditableItem = ({
                           e,
                           key,
                           item.id,
-
                           updatedItemData,
                           setUpdatedItemData,
                           lastUpdatedData,
