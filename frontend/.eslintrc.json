@@ -4,7 +4,12 @@
     "es2021": true,
     "jest/globals": true
   },
-  "extends": ["react-app"],
+  "extends": [
+    "react-app",
+    "plugin:jest/recommended",
+    "prettier",
+    "eslint:recommended"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -12,15 +17,15 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "plugin:jest/recommended"],
+  "plugins": ["react", "jest"],
   "rules": {
     "no-underscore-dangle": 0,
     "import/extensions": [
       "error",
-      "ignorePackages",
+
       {
-        "js": "always",
-        "jsx": "always"
+        "js": "never",
+        "jsx": "never"
       }
     ]
   }
