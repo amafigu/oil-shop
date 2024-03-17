@@ -45,27 +45,23 @@ export const ProductCard = ({ product }) => {
               <div className={styles.data}>
                 <h3 className={styles.name}>{titleCase(product.name, "_")}</h3>
                 <ul>
-                  <li className={styles.size}>
-                    {components.products.oil.size}: {product.size} ml
-                  </li>
-                  <li className={styles.price}>
-                    {components.products.oil.price} €{product.price}
-                  </li>
+                  <li className={styles.size}>{product.size} ml</li>
+                  <li className={styles.price}>{product.price} €</li>
                 </ul>
               </div>
             </div>
             <div className={styles.addButtonContainer}>
               <ActionButton
                 action={() => addProduct(product, 1)}
-                text={components.addOneToCartButton.text}
+                text={components.productCard.addProductButton}
                 className={STYLES.BUTTONS.ADD_PRODUCT}
-                ariaLabel={"add product"}
+                ariaLabel={components.productCard.addProductButtonLabel}
               />
             </div>
           </div>
         </>
       ) : (
-        <span className={styles.loading}>Loading Product</span>
+        <span className={styles.loading}>{components.productCard.loading}</span>
       )}
     </article>
   )
