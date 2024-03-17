@@ -27,6 +27,7 @@
         "js": "never",
         "jsx": "never"
       }
-    ]
+    ],
+    "no-useless-catch": "off"
   }
 }
