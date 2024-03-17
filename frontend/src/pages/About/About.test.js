@@ -1,15 +1,13 @@
 import { translate } from "#__mocks__/translate"
 import { useTranslation } from "#hooks/useTranslation"
 import { About } from "#pages/About"
-import { scrollToTop } from "#utils/scrollToTop"
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 jest.mock("#hooks/useTranslation")
-jest.mock("#utils/render")
+jest.mock("#utils/scrollToTop")
 
 describe("About page should", () => {
   beforeAll(() => {
-    scrollToTop.mockReturnValue(jest.fn())
     useTranslation.mockReturnValue({ translate })
   })
 

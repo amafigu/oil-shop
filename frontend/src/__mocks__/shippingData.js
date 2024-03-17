@@ -1,4 +1,5 @@
 module.exports = {
+  street: "Street",
   city: "Berlin",
   country: "Germany",
   createdAt: "2024-02-27T08:57:50.616Z",
@@ -7,7 +8,6 @@ module.exports = {
   number: "1",
   postalCode: "123456",
   state: "Berlin",
-  street: "Street",
   updatedAt: "2024-02-27T08:58:32.170Z",
   userId: 213,
 }

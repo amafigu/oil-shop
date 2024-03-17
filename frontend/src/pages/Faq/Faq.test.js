@@ -6,7 +6,7 @@ import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 
 jest.mock("#hooks/useTranslation")
-jest.mock("#utils/render")
+jest.mock("#utils/scrollToTop")
 describe("Faq page should", () => {
   beforeAll(() => {
     scrollToTop.mockReturnValue(jest.fn())
