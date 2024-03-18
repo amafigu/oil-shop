@@ -31,7 +31,8 @@
     "build": "react-scripts build",
     "test": "jest",
     "coverage": "jest --coverage",
-    "format": "stylelint src/**/*.scss"
+    "formatStyle": "stylelint src/**/*.scss",
+    "eslint": "npx eslint ."
   },
   "browserslist": {
     "production": [
