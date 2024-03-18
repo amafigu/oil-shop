@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import products from '../__mocks__/products.js';
+import products from '../mockData/products.js';
 import db from '../models/index.js';
 import app from '../server.js';
 
@@ -12,7 +12,7 @@ jest.mock('../models/index.js', () => ({
 }));
 
 describe('products request should', () => {
-  it('should return all products', async () => {
+  test('should return all products', async () => {
     db.products.findAll.mockResolvedValue(products);
     const response = await request.get('/api/products').send(products);
     expect(response.status).toBe(200);

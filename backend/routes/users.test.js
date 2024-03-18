@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import newUser from '../__mocks__/newUser.js';
+import newUser from '../mockData/newUser.js';
 import db from '../models/index.js';
 import app from '../server.js';
 
