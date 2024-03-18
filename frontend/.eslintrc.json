@@ -25,7 +25,9 @@
 
       {
         "js": "never",
-        "jsx": "never"
+        "jsx": "never",
+        "json": "always",
+        "scss": "always"
       }
     ],
     "no-useless-catch": "off"
