@@ -1,7 +1,7 @@
 import { commonProperties } from "#__mocks__/translate"
 import { useTranslation } from "#hooks/useTranslation"
 import "@testing-library/jest-dom"
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { UserHeaderData } from "."
 
 jest.mock("#hooks/useTranslation")
@@ -17,5 +17,6 @@ describe("UserHeaderData should", () => {
   })
   test("render user data", () => {
     render(<UserHeaderData data={data} />)
+    expect(screen.getByText("User")).toBeInTheDocument()
   })
 })

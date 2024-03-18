@@ -21,7 +21,7 @@ import { onUpdateUser } from "#utils/onUpdateUser"
 import { onUpdateUserShippingData } from "#utils/onUpdateUserShippingData"
 import "@testing-library/jest-dom"
 import "@testing-library/react"
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 
 jest.mock("#hooks/useTranslation")
 jest.mock("#hooks/useGetUserShippingData")
@@ -44,6 +44,7 @@ describe("User page should", () => {
 
   test("render UserHeader correctly", () => {
     render(<UserHeader data={user} />)
+    expect(screen.getByLabelText("User Description")).toBeInTheDocument()
   })
 
   test("render User data correctly", () => {
@@ -54,6 +55,7 @@ describe("User page should", () => {
         onSave={onUpdateUser}
       />,
     )
+    expect(screen.getByText("Test firstName")).toBeInTheDocument()
   })
 
   test("render Shipping Data correctly", () => {
@@ -64,6 +66,7 @@ describe("User page should", () => {
         onSave={onUpdateUserShippingData}
       />,
     )
+    expect(screen.getByText("123456")).toBeInTheDocument()
   })
 
   test("render Orders Data correctly", () => {
@@ -74,5 +77,6 @@ describe("User page should", () => {
         title={components.ordersList.title}
       />,
     )
+    expect(screen.getByText("16.3.2024, 14:37")).toBeInTheDocument()
   })
 })
