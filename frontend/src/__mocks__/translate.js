@@ -117,6 +117,9 @@ export const components = {
     addProductButton: "add to cart",
     addProductButtonLabel: "Add product to your shop cart",
   },
+  editableItem: {
+    deleteButton: "Delete",
+  },
 }
 
 export const commonButtons = {

@@ -7,7 +7,9 @@ export const getProducts = async () => {
       `${process.env.REACT_APP_API_URL}${API_PRODUCTS}`,
       { withCredentials: false },
     )
-    return response
+    if (response && response.status === 200) {
+      return response
+    }
   } catch (error) {
     throw error
   }

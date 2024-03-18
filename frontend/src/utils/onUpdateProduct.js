@@ -11,6 +11,7 @@ export const onUpdateProduct = async (
   updatedProductData,
   setUpdatedProductData,
   lastUpdatedData,
+  setLastUpdatedData,
   setNotification,
   file,
 ) => {
@@ -41,6 +42,7 @@ export const onUpdateProduct = async (
     if (dataRequest && dataRequest.status === 200) {
       const updatedProduct = dataRequest.data.product
       setUpdatedProductData(updatedProduct)
+      setLastUpdatedData(updatedProduct)
     }
   } catch (error) {
     setUpdatedProductData(lastUpdatedData)
