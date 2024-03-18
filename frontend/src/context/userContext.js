@@ -1,6 +1,6 @@
 import { getAuthenticatedUser } from "#api/auth/getAuthenticatedUser"
 import { getRegisteredUserToken } from "#api/auth/getRegisteredUserToken"
-import { getAllUsers } from "#api/users/getAllUsers"
+import { getUsers } from "#api/users/getUsers"
 import { createContext, useContext, useEffect, useState } from "react"
 
 export const UserContext = createContext()
@@ -55,9 +55,9 @@ export const UserProvider = ({ children }) => {
   }, [isLoggedIn])
 
   useEffect(() => {
-    const getUsers = async () => {
+    const getAllUsers = async () => {
       try {
-        const response = await getAllUsers()
+        const response = await getUsers()
         if (response && response.status === 200) {
           setUsers(response.data)
         }
@@ -65,7 +65,7 @@ export const UserProvider = ({ children }) => {
         console.error(error)
       }
     }
-    getUsers()
+    getAllUsers()
   }, [counter])
 
   return (
