@@ -4,7 +4,7 @@ import useUserContext from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { OrderSummary } from "#pages/OrderSummary"
 import "@testing-library/jest-dom"
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { MemoryRouter } from "react-router-dom"
 
 jest.mock("#hooks/useTranslation")
@@ -24,5 +24,6 @@ describe("Order Summary page should", () => {
         <OrderSummary />
       </MemoryRouter>,
     )
+    expect(screen.getByLabelText("Order details")).toBeInTheDocument()
   })
 })
