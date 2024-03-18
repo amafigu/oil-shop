@@ -5,7 +5,7 @@
   "main": "start.js",
   "scripts": {
     "dev": "nodemon start.js",
-    "test": "jest --watch --testTimeout=20000",
+    "test": "jest --testTimeout=20000",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-last-migrate": "npx sequelize db:migrate:undo",
     "clear-jest": "jest --clearCache",
