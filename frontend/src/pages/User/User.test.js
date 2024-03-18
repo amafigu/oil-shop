@@ -77,6 +77,6 @@ describe("User page should", () => {
         title={components.ordersList.title}
       />,
     )
-    expect(screen.getByText("16.3.2024, 14:37")).toBeInTheDocument()
+    expect(screen.getByText("333.00 € per unit")).toBeInTheDocument()
   })
 })

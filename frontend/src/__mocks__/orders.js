@@ -16,9 +16,9 @@ module.exports = [
         updatedAt: "2024-03-16T13:37:23.959Z",
         product: {
           id: 345,
-          name: "renacer",
+          name: "Product one",
           image:
-            "https://oylo-images.s3.us-east-2.amazonaws.com/1710416729104-Screenshot (113).png",
+            "https://oylo-images.s3.us-east-2.amazonaws.com/1710416729104-Screenshot.png",
           description: "description",
           measure: "ml",
           size: 331,
@@ -44,10 +44,10 @@ module.exports = [
         updatedAt: "2024-03-16T13:37:23.960Z",
         product: {
           id: 343,
-          name: "111111",
+          name: "Product two",
           image:
-            "https://oylo-images.s3.us-east-2.amazonaws.com/1710326045548-Screenshot (114).png",
-          description: "wwwww222",
+            "https://oylo-images.s3.us-east-2.amazonaws.com/1710326045548-Screenshot.png",
+          description: "description",
           measure: "ml",
           size: 10,
           productCategoryId: 9,
