@@ -1,4 +1,4 @@
-Portfolio application, simulates an online-shop
+Portfolio application
 
 Technologies stack -
 
