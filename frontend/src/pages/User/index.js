@@ -35,13 +35,14 @@ export const User = () => {
             onSave={onUpdateUser}
           />
         )}
-        {shippingData && shippingData.hasOwnProperty("id") && (
-          <EditableItem
-            item={shippingData}
-            renderItemProps={editableUserShippingDataProperties}
-            onSave={onUpdateUserShippingData}
-          />
-        )}
+        {shippingData &&
+          Object.prototype.hasOwnProperty.call(shippingData, "id") && (
+            <EditableItem
+              item={shippingData}
+              renderItemProps={editableUserShippingDataProperties}
+              onSave={onUpdateUserShippingData}
+            />
+          )}
         {orders && (
           <EditableItemsList
             itemsList={orders}
