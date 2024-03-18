@@ -1,7 +1,7 @@
 module.exports = {
   id: 213,
-  firstName: "test firstName",
-  lastName: "test lastname",
+  firstName: "Test firstName",
+  lastName: "Test lastname",
   email: "test@mail.com",
   image:
     "https://oylo-images.s3.us-east-2.amazonaws.com/1702305642065-test.png",
