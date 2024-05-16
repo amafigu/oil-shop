@@ -1,0 +1,38 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.homePageWrapper {
+  @include flex-justify-center;
+
+  margin-top: 0 !important;
+  margin-bottom: theme.$spacing-semi-regular-large;
+
+  .homePage {
+    width: 80%;
+
+    @include flex-justify-center;
+
+    @include media.widescreen-down {
+      width: 90%;
+    }
+  }
+
+  .pageColumn {
+    width: 100%;
+  }
+
+  .videoBannerContainer {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    margin-bottom: 38px;
+
+    @include flex-justify-center;
+  }
+
+  .productSliderContainer {
+    width: 100%;
+    margin-bottom: theme.$spacing-semi-regular;
+  }
+}

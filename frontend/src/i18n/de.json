@@ -1,0 +1,509 @@
+{
+  "pages": {
+    "about": {
+      "title": "Hallo! Vielen Dank für Ihren Besuch im Oylo, Portfolio-Webshop"
+    },
+    "admin": {
+      "usersManagement": {
+        "title": "Benutzerverwaltung",
+        "editableItemsList": {
+          "title": "Benutzerliste",
+          "firstName": "Nach Vorname sortieren",
+          "lastName": "Nach Nachname sortieren",
+          "name": "Nach Name sortieren",
+          "email": "Nach Email sortieren",
+          "price": "Nach Preis sortieren",
+          "size": "Nach Größe sortieren",
+          "productCategoryId": "Nach Kategorie sortieren",
+          "reverse": "Umkehren"
+        },
+        "toggleListButton": {
+          "show": "Benutzern anzeigen",
+          "hide": "Liste ausblenden"
+        },
+        "toggleCreateItemButton": {
+          "show": "Benutzer erstellen",
+          "hide": "Form ausblenden"
+        }
+      },
+      "productManagement": {
+        "title": "Produktverwaltung",
+        "editableItemsList": {
+          "title": "Produktliste"
+        },
+        "toggleListButton": {
+          "show": "Produkte anzeigen",
+          "hide": "Produkte ausblenden"
+        },
+        "toggleCreateItemButton": {
+          "show": "Produkt erstellen",
+          "hide": "Form ausblenden"
+        }
+      }
+    },
+    "cart": {
+      "emptyCart": "Es befinden sich keine Produkte in Ihrem Warenkorb",
+      "confirmPurchase": "Bestätigen",
+      "orderToContinue": "Bitte bestellen",
+      "orderSummary": "Zusammenfassung",
+      "orderSubtotal": "Zwischensumme:",
+      "orderShipping": "Versand:",
+      "orderTotal": "Gesamt:",
+      "canNotBuyProducts": "Als Administrator können Sie keine Produkte kaufen"
+    },
+    "faq": {
+      "difuserRoomSizeQuestion": "Welcher Diffusor eignet sich für welche Raumgröße?",
+      "difuserRoomSizeAnswer": "Der Diffusor sollte immer an den Raum angepasst werden, den Sie beduften möchten. Kleine Ultraschall-Diffuser eignen sich für kleinere Räume bis ca. 15qmgeeignet. Für größere Räume bis etwa 30 Quadratmeter ist ein größerer Diffusor geeignet. Ansonsten können Sie die Dosierung auch ein wenig verändern, indem Sie beispielsweise noch ein paar Tropfen Öl in den Diffusor geben.",
+      "howDifuserWorksQuestion": "Wie funktioniert ein Ultraschalldiffusor?",
+      "howDifuserWorksAnswer": "Sie füllen einen Ultraschallzerstäuber mit etwas Wasser und geben dann einfach ein paar Tropfen ätherisches Öl ins Wasser. Der Ultraschall bewirkt, dass das Wasser kalt verdunstet und der Duft mit dem Wasserdampf sehr sanft in die Luft gelangt, anders als bei Duftlampen, die Wärme verwenden. Abhängig von der Größe des Verneblers und der Dosierung des Öls können Sie damit ganze Räume auf natürliche Weise beduften.",
+      "thirdQuestion": "Sind Ihre Produkte wirklich frei von chemischen Zusatzstoffen?",
+      "thirdAnswer": "Unsere Öle sind natürlich, rein natürlich und biologisch ohne jegliche Zusatzstoffe. Wir verwenden keinerlei synthetische oder naturidentische Stoffe. Nach welchen hohen Qualitätskriterien und Anforderungen wir unsere Produkte herstellen, erfahren Sie auf unserer Qualitätsseite.",
+      "fourthQuestion": "Kann ich Ihre Öle auch innerlich einnehmen?",
+      "fourthAnswer": "Wir dürfen nur unsere zum Verzehr empfohlenen ätherischen Öle verwenden, die wir unterhalb der Marke als Bio-Aroma einstufen. Diese sind als Lebensmittel gekennzeichnet und können zum Würzen von Speisen und Getränken verwendet werden. Grundsätzlich unterliegen jedoch alle unsere Öle den gleichen strengen Qualitätskontrollen und sind naturbelassen. Allerdings darf nicht jeder von uns Öle zum Verzehr empfehlen, da sie als Naturkosmetik gelten. Auch bei der internen Anwendung sind bestimmte Hinweise zu beachten.",
+      "addBodyOilAndUsedAsCosmeticQuestion": "Können die ätherischen Öle auch einem Körperöl zugesetzt und als Kosmetikprodukt verwendet werden?",
+      "addBodyOilAndUsedAsCosmeticAnswer": "Ätherische Öle eignen sich hierfür hervorragend. Die reinen ätherischen Öle und Zusammensetzungen mehrerer ätherischer Öle sind als Kosmetik zertifiziert und können mit Basisöl gemischt und als Kosmetik verwendet werden. Die Bio-Aromen von Baldini eignen sich besonders gut als Lebensmittel, können aber auch auf die Haut aufgetragen und als Kosmetika verwendet werden. Manche Öle haben einen Alkoholanteil, da sie extra für Ultraschallvernebler entwickelt wurden und so besser in die Luft gelangen, diese können aber auch auf der Haut angewendet werden. Auf den Ölen finden Sie immer einen Hinweis darauf, wie viel Öl auf wie viel Grundöl verwendet werden soll. Bitte beachten Sie, dass einige Öle besonders hautpflegend sind, während Öle in höheren Dosen die Haut reizen können. Lesen Sie die Beschreibung des Öls und testen Sie vorher, zum Beispiel in Ihrer Armbeuge, ob Sie die Mischung vertragen",
+      "sixthQuestion": "Kann ich ätherische Öle auch für ein Aromabad in der Badewanne verwenden?",
+      "sixthAnswer": "Ja! Mit ätherischen Ölen lassen sich tolle aromatische Badezusätze herstellen. Bitte beachten Sie lediglich einige Hinweise, z. B. dass die Öle zuvor mit einer Base vermischt werden können und erst in die bereits gefüllte Wanne gegeben werden können. Auf unserer Kosmetikseite finden Sie Hinweise zur Dosierung und Anwendung in den Rezepten.",
+      "seventhQuestion": "Wie dosiere ich die Öle richtig?",
+      "seventhAnswer": "Welche Dosierung die richtige ist, hängt von den individuellen Vorlieben und der Art der Anwendung ab.",
+      "eighthQuestion": "Kann ich ätherische Öle auch bei Babys und Kindern anwenden?",
+      "eighthAnswer": "Bei Babys und Kindern sind einige Anwendungs- und Dosierungshinweise zu beachten. Welche Öle Sie in welcher Dosierung verwenden können, entnehmen Sie bitte der Fachliteratur.",
+      "ninthQuestion": "Kann ich ätherische Öle auch während der Schwangerschaft verwenden?",
+      "ninthAnswer": "In der Schwangerschaft sind einige Anwendungs- und Dosierungshinweise zu beachten. Bitte informieren Sie sich in der Fachliteratur darüber, welche Öle Sie in welcher Dosierung verwenden können.",
+      "tenthQuestion": "Kann ich ätherische Öle auch bei meinen Haustieren anwenden?",
+      "tenthAnswer": "Tiere reagieren anders als Menschen auf ätherische Öle. Bitte informieren Sie sich in Fachliteratur darüber, welche Öle Sie in welcher Dosierung verwenden können. Hierzu können wir keine eigenen Handlungsempfehlungen geben."
+    },
+    "login": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "loginButton": "Einlogen",
+      "emailPlaceholder": "E-Mail eingeben",
+      "passwordPlaceholder": "Passwort eingeben",
+      "signUp": "Zur Registrierung",
+      "loginAsAdmin": "Als Testadministrator einlogen",
+      "haveAccount": "Sie haben noch kein Konto?",
+      "or": "oder",
+      "passwordLost": "Haben Sie Ihr Passwort vergessen?",
+      "errorMessage": "Leider war Ihre E-Mail-Adresse oder Ihr Passwort falsch."
+    },
+    "notFound": "Leider existiert diese Seite nicht.",
+    "orderSummary": {
+      "thankClient": "Vielen Dank für Ihren Einkauf bei Oylo!",
+      "orderResume": "Bestellübersicht",
+      "deliveryInformation": "Lieferinformationen",
+      "inputLabels": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "phone": "Telefonnummer",
+        "address": "Adresse",
+        "state": "Bundesland",
+        "postalCode": "PLZ",
+        "city": "Stadt",
+        "country": "Land",
+        "paidWith": "Zahlungsart",
+        "totalAmount": "Gesamt"
+      }
+    },
+    "signUp": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "loginButton": "Einlogen",
+      "login": "Anmelden",
+      "createAdminText": "Erstellen Sie ein",
+      "createAdminLink": "Testadministratorkonto",
+      "haveAccount": "Haben Sie ein Konto?",
+      "createCustomer": "Kundenkonto erstellen",
+      "doNotHaveAccount": "Haben Sie kein Konto?",
+
+      "or": "oder",
+      "passwordLost": "Haben Sie Ihr Passwort vergessen?",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "submitButton": "Konto erstellen",
+      "emailInUseErrorMessage": "E-Mail bereits registriert",
+      "validationErrors": {
+        "firstName": {
+          "too_small": "Der Vorname sollte mindestens zwei Zeichen haben.",
+          "custom": "Der Vorname sollte mit einem Großbuchstaben beginnen und darf nur Buchstaben enthalten."
+        },
+        "lastName": {
+          "too_small": "Der Nachname sollte mindestens zwei Zeichen haben.",
+          "custom": "Der Nachname sollte mit einem Großbuchstaben beginnen und darf nur Buchstaben enthalten."
+        },
+        "password": {
+          "too_small": "Das Passwort sollte mindestens 8 Zeichen lang sein.",
+          "custom": "Das Passwort sollte mindestens 8 Zeichen und 1 Symbol haben."
+        },
+        "email": {
+          "too_big": "E-Mails dürfen nicht länger als 40 Zeichen sein.",
+          "invalid_string": "Ungültiges E-Mail-Format.",
+          "too_small": "Das Passwort sollte mindestens 8 Zeichen lang sein.",
+          "custom": "Das Passwort sollte mindestens 8 Zeichen und 1 Symbol haben."
+        }
+      }
+    },
+    "signUpAdmin": {},
+
+    "payment": {
+      "backButton": "Zurück",
+      "paymentButton": "Bezahlen",
+      "title": "Fahren Sie mit der Zahlung fort",
+      "legend": "Wählen Sie eine Zahlungsmethode aus",
+      "insertPaymentMethod": "Bitte, wählen Sie eine Zahlungsart.",
+      "emptyShippingData": "Bitte, füllen Sie die Versanddaten aus."
+    },
+    "productsDetails": {
+      "loading": "Wird geladen",
+      "addToCartButton": "In den Warenkorb",
+      "errorByGettingProduct": "Wir konnen das Produkt nicht finden, versuchen Sie später."
+    },
+    "shipping": {
+      "yourInfo": "Ihren Daten",
+      "yourEmail": "Ihren E-Mail",
+      "title": "Wenn Sie bereits registriert sind, gehen sie zur",
+      "titleLink": "Login",
+      "titleSubSentence": "Seite. Andernfalls können Sie durch die Übermittlung Ihrer Daten als Gast zur Kasse gehen",
+      "inputLabels": {
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "E-Mail",
+        "phone": "Telefonnummer",
+        "address": "Adresse",
+        "state": "Bundesland",
+        "postalCode": "PLZ",
+        "city": "Stadt",
+        "country": "Land"
+      },
+      "submitButton": "Zur Zahlungsart",
+      "backToCart": "Zurück zur Kasse"
+    },
+    "shop": {
+      "title": "Alle Produkte"
+    },
+    "welcome": {
+      "subTeaser": {
+        "title": "Bei Oylo ist unsere Wertschätzung für die wertvollen Geschenke der Natur grenzenlos",
+        "teaserFirstSubtitle": "VERWENDUNG ÄTHERISCHER ÖLE",
+        "teaserFirstSentence": "Von Diffusoren bis hin zu Massageölen, von belebenden Bädern bis hin zu aromatischen kulinarischen Aufgüssen.",
+        "teaserSecondSubtitle": "DIE KRAFT ÄTHERISCHER ÖLE",
+        "teaserSecondSentence": "Ätherische Öle wecken Emotionen und führen zu einer positiven Veränderung. Heben Sie Ihre Stimmung mit Zitrusfrüchten auf oder schärfen Sie Ihren Fokus mit Rosmarin.",
+        "teaserThirthSubtitle": "DIE OYLO-KOLLEKTION",
+        "teaserThirthSentence": "Unser Online-Shop bietet eine Auswahl an Aromaölen, einzigartigen Ayurveda-Mischungen, Wellnessprodukten, Naturkosmetik und bezaubernden Geschenksets.",
+        "teaserFourthSubtitle": "OYLO'S QUALITÄTSVERSPRECHEN",
+        "teaserFourthSentence": "Oylo sorgt für völlig natürliche Produkte, frei von synthetischen Zusatzstoffen, Parabenen oder gentechnisch veränderten Substanzen."
+      },
+      "title": "Willkommen in unserer Welt des natürlichen Wohlbefindens",
+      "teaserSentence": "Wir glauben an die Kraft der Pflanzen und unser Shop für ätherische Öle ist ein Ort für alle, die ihre Gesundheit steigern, ihre Stimmung verbessern oder einfach ein Zuhause schaffen möchten, das wunderbar und frisch duftet.",
+      "teaserSubSentenceOne": "Each drop of essential oils is derived from nature's most precious gifts, sustainably sourced and meticulously distilled to preserve the inherent life force of each plant. ",
+      "teaserSubSentenceTwo": "Jeder Tropfen ätherischer Öle wird aus den wertvollsten Geschenken der Natur gewonnen, nachhaltig beschafft und sorgfältig destilliert, um die inhärente Lebenskraft jeder Pflanze zu bewahren.",
+      "teaserSubSentenceThree": "Wir laden Sie ein, unsere vielfältige Kollektion zu erkunden. Wir bieten auch eine Auswahl an mit Öl angereicherten Produkten wie Diffusoren, Haarpflege und Hautpflege an.",
+      "teaserSubSentenceFour": "Egal, ob Sie ein Liebhaber ätherischer Öle sind oder gerade erst Ihre Reise in die Welt der Aromen beginnen, wir sind hier, um Sie zu begleiten."
+    }
+  },
+  "components": {
+    "addOneToCartButton": {
+      "text": "in den Warenkorb"
+    },
+    "createItem": {
+      "submitButton": "Senden"
+    },
+    "editableItemsList": {
+      "showButton": "List anzeigen",
+      "hideButton": "Liste ausblenden"
+    },
+    "editableItem": {
+      "deleteButton": "Löschen"
+    },
+    "buttons": {
+      "actions": {
+        "commons": {
+          "delete": "Löschen",
+          "edit": "Editieren",
+          "save": "Speichern",
+          "create": "Erstellen",
+          "noChanges": "Keine Änderungen"
+        },
+        "shipping": {
+          "show": "Versanddaten anzeigen",
+          "hide": "Versanddaten ausblenden"
+        },
+        "user": {
+          "show": "Benutzer Daten anzeigen",
+          "hide": "Benutzer Daten ausblenden"
+        },
+        "userByEmail": {
+          "show": "BENUTZER PER E-MAIL ANZEIGEN",
+          "hide": "AUSBLENDEN"
+        }
+      }
+    },
+    "createProductForm": {
+      "showButton": "Produkt erstellen",
+      "hideButton": "Formular ausblenden"
+    },
+    "crud": {
+      "forms": {
+        "commonProperties": {
+          "category": "Kategorie",
+          "city": "Stadt",
+          "country": "Land",
+          "createdAt": "Erstellt am",
+          "description": "Beschreibung",
+          "details": "Details",
+          "email": "E-Mail",
+          "firstName": "Vorname",
+          "imageUrl": "Bild URL",
+          "lastName": "Nachname",
+          "measure": "Maß",
+          "name": "Name",
+          "number": "Nummer",
+          "password": "Passwort",
+          "postalCode": "PLZ",
+          "price": "Preis",
+          "role": "Rolle",
+          "state": "Bundesland",
+          "size": "Größe",
+          "street": "Straße"
+        },
+        "createProductForm": {
+          "submitButton": "Produkt erstellen"
+        },
+        "toggleUsersCrudOptions": {
+          "show": "Benutzern CRUD anzeigen",
+          "hide": "Benutzern CRUD ausblenden"
+        }
+      },
+      "buttons": {
+        "create": "Erstellen",
+        "delete": "Löschen",
+        "edit": "Editieren",
+        "save": "Speichern"
+      },
+      "updateUser": {
+        "success": "Benutzer wurde erfolgreich aktualisiert.",
+        "error": "Benutzer kann nicht aktualisiert werden."
+      },
+      "deleteUser": {
+        "button": "Benutzer löschen",
+        "error": "Benutzer mit dieser E-Mail kann nicht gelöscht werden: ",
+        "deletedByEmail": "wurde erfolgreich aus dem System gelöscht",
+        "cannotDeleteYourself": "Du kannst dich nicht selbst löschen",
+        "nonAuthorized": "Sie sind nicht berechtigt, diesen Benutzer zu löschen"
+      },
+      "getUser": {
+        "button": "Benutzer Daten sehen",
+        "error": "Kann nicht Benutzer finden: ",
+        "getByEmail": "Benutzer per E-Mail  sehen"
+      },
+      "getAllUsers": {
+        "showButton": "Alle Benutzer anzeigen",
+        "hideButton": "Alle Benutzer ausblenden",
+        "error": "Kann nicht alle Benutzer finden"
+      },
+      "createUser": {
+        "success": "Benutzer wurde erfolgreich erstellt",
+        "submitCustomerButton": "Benutzer Konto erstellen",
+        "submitAdminButton": "Admin Konto erstellen",
+        "emailInUseErrorMessage": "E-Mail bereits registriert",
+        "hideForm": "Benutzer Formular ausblenden",
+        "showForm": "Benutzer Formular anzeigen",
+        "error": "Benutzer kann nicht erstellt werden"
+      },
+      "deleteProduct": {
+        "button": "Produkt löschen",
+        "error": "Das Produkt kann nicht gelöscht werden",
+        "success": "Das Produkt wurde erfolgreich gelöscht"
+      },
+      "getProduct": {
+        "button": "Produkt Daten anzeigen",
+        "error": "Das folgende Produkt kann nicht gefunden werden: ",
+        "getByName": "Produkt per Name Daten anzeigen"
+      },
+      "getAllProducts": {
+        "showButton": "Alle Produkte anzeigen",
+        "hideButton": "Alle Produkte ausblenden",
+        "error": "Kann nicht alle Produkte finden"
+      }
+    },
+    "createUserForm": {
+      "submitButton": "Benuzter erstellen",
+      "showButton": "Formular anzeigen",
+      "hideButton": "Formular ausblenden"
+    },
+    "editableListProductData": {
+      "deleteButton": {
+        "sucess": "Produkt erfolgreich gelöscht",
+        "fail": "Wir können dieses Produkt nicht löschen"
+      }
+    },
+    "navigationMenu": {
+      "home": "Home",
+      "shop": "Shop",
+      "about": "Über uns",
+      "all": "Alle Produkte",
+      "essentialOil": "Essentielle Öle",
+      "difuser": "Diffusoren",
+      "bodyCare": "Körperpflege",
+      "roll": "Roll On",
+      "massageOil": "Massageöle"
+    },
+    "orderSummaryItem": {
+      "quantity": "Menge"
+    },
+    "ordersList": {
+      "title": "Deine Bestellungen",
+      "hideToggleButton": "Bestellungen ausblenden",
+      "showToggleButton": "Bestellungen anzeigen"
+    },
+    "ordersItem": {
+      "orderedAt": "Bestellungsdatum",
+      "payedWith": "Bezahlt mit",
+      "total": "Gesamtsumme",
+      "productsHaveBeenDeleted": "Die Produkte dieser Bestellung wurden aus unserem System gelöscht"
+    },
+    "orderCard": {
+      "orderedProduct": "Bestelltes Produkt",
+      "hiddenSemantics": "Artikelbeschreibung",
+      "pricePerUnit": "pro Einheit",
+      "productNotFound": "Produkt nicht gefunden"
+    },
+    "productCard": {
+      "loading": "Produkt wird geladen",
+      "addProductButton": "in den Warenkorb",
+      "addProductButtonLabel": "Fügen Sie das Produkt Ihrem Warenkorb hinzu"
+    },
+    "footer": {
+      "linksColumns": {
+        "wayToUs": {
+          "title": "Ihr Weg zu uns",
+          "address": "Oil Paradise 1",
+          "postalCode": "12437",
+          "city": "Berlin",
+          "phoneTitle": "Telefon",
+          "contactPhone": "+49-6622-88334"
+        },
+        "forClient": {
+          "title": "Für dich",
+          "returnToShop": "Zurück zum Shop",
+          "returnToShopTitle": "Zurück zum shopping",
+          "faq": "Häufig gestellte Fragen / FAQ",
+          "faqTitle": "Häufig gestellte Fragen"
+        },
+        "users": {
+          "title": "Kunden",
+          "accountAndLogin": "Account & Login",
+          "registration": "Seien Sie Shop-Kunde"
+        }
+      },
+      "newsletter": {
+        "subscriptionText": "Ihr regelmäßiges Oylo-Update",
+        "subscriptionButton": "Abonnieren",
+        "emailAddressPlaceholder": "E-Mail Adresse",
+        "registrationDataConsentText": "Die von Ihnen hier eingegebenen Daten werden ausschließlich zum Versand des Newsletters genutzt und nicht an Dritte weitergegeben. Sie können den Newsletter jederzeit per E-Mail abbestellen und Ihre Einwilligung widerrufen. Ihre Daten werden nach Abschluss des Newsletter-Empfangs innerhalb von 3 Monaten gelöscht, sofern der Löschung keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Mit dem Absenden der eingegebenen Daten erklären Sie sich mit der Datenverarbeitung einverstanden und bestätigen unsere Datenschutzerklärung."
+      },
+      "iconsColumns": {
+        "creditCards": {
+          "title": "Sicher einkaufen"
+        },
+        "shippingPartners": {
+          "title": "Schnelle Lieferung"
+        },
+        "socialMedia": {
+          "title": "Folgen Sie uns",
+          "facebook": "Folge uns auf Facebook",
+          "instagram": "Folge uns auf Instagram",
+          "youtube": "Folge uns auf Youtube"
+        }
+      },
+      "copy": "OYLO OILS - Alle Rechte vorbehalten"
+    },
+    "sidebarMenu": {
+      "allProducts": "Alle Produkte",
+      "essentialOils": "Essentielle Öle",
+      "difusers": "Diffusoren",
+      "bodyCare": "Körperpflege",
+      "hairCare": "Haarpflege",
+      "rollOn": "Roll On",
+      "massageOils": "Massageöle",
+      "onlineShop": "Online Shop",
+      "contact": "Kontaktiere uns",
+      "accountAndLogin": "Account & Login",
+      "registration": "Seien Sie Shop-Kunde",
+      "shipmentAndPayment": "Shipment & Payment",
+      "cancellationPolicy": "Cancellation",
+      "cancellationPolicyTitle": "Cancellation policy",
+      "returnProducts": "Return buyed products",
+      "returnProductsTitle": "Return buyed products policy",
+      "faq": "Frequently Asked Questions / FAQ",
+      "faqTitle": "Frequently Asked Questions"
+    }
+  },
+  "errors": {
+    "requests": {
+      "user": {
+        "getUserData": "Fehler beim Abrufen der Benutzerdaten",
+        "getShippingData": "Fehler beim Abrufen der Versanddaten",
+        "login": "Fehler beim Einloggen"
+      }
+    },
+    "validationErrors": {
+      "firstName": {
+        "tooLong": "First name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "First name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "First name should start with a capital letter.",
+        "shouldContainOnlyLetters": "First name can only contain letters."
+      },
+      "lastName": {
+        "tooLong": "Last name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "Last name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "Last name should start with a capital letter.",
+        "shouldContainOnlyLetters": "Last name can only contain letters."
+      },
+      "password": {
+        "tooShort": "Password should have at least 8 characters.",
+        "shouldHaveAtLeastOneUppercase": "Password should have at least one uppercase character.",
+        "shouldHaveAtLeastOneSymbol": "Password should have at least one symbol."
+      },
+      "email": {
+        "tooLong": "Email can't be longer than 40 characters.",
+        "invalidFormat": "Invalid email format.",
+        "tooShort": "Email should have at least 4 characters."
+      }
+    }
+  },
+  "warningMessages": {
+    "users": {
+      "shippingDataIsEmpty": "Sie haben keine Versanddaten. Bitte füllen Sie die Versanddaten aus."
+    }
+  },
+  "commonProperties": {
+    "category": "Kategorie",
+    "city": "Stadt",
+    "country": "Land",
+    "createdAt": "Erstellt am",
+    "description": "Beschreibung",
+    "details": "Details",
+    "email": "E-Mail",
+    "firstName": "Vorname",
+    "imageUrl": "Bild URL",
+    "image": "Bild",
+    "lastName": "Nachname",
+    "measure": "Maß",
+    "name": "Name",
+    "number": "Nummer",
+    "password": "Passwort",
+    "postalCode": "PLZ",
+    "price": "Preis",
+    "role": "Rolle",
+    "state": "Bundesland",
+    "size": "Größe",
+    "street": "Straße"
+  },
+  "commonButtons": {
+    "create": "Erstellen",
+    "delete": "Löschen",
+    "edit": "Editieren",
+    "save": "Speichern"
+  }
+}

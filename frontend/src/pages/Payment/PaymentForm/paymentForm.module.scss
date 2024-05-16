@@ -1,0 +1,120 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.paymentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: theme.$spacing-regular-large;
+
+  @include media.tablet-down {
+    margin: theme.$spacing-semi-regular-semi-large;
+  }
+}
+
+.titleContainer {
+  @include flex-align-center;
+
+  width: 100%;
+  margin-bottom: theme.$spacing-regular;
+}
+
+.title {
+  margin-right: 8px;
+  font-size: theme.$font-size-subtitle;
+}
+
+.methods {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding-left: theme.$spacing-semi-regular;
+  margin-bottom: theme.$spacing-semi-regular-large;
+  font-size: theme.$font-size-medium;
+  background-color: white;
+  border: solid 1px grey;
+  border-radius: 8px;
+}
+
+/* create custom radio */
+
+.row input[type="radio"] {
+  width: 1px;
+  opacity: 0;
+}
+
+.row label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    content: "";
+    border: 1px solid grey;
+    border-radius: theme.$border-radius-circle;
+  }
+
+  &::after {
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    content: "";
+    background-color: theme.$branding-color-primary;
+    border-radius: theme.$border-radius-circle;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: scale(0);
+  }
+}
+
+.row input[type="radio"]:checked + label::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* end create custom radio */
+
+.navigateButtons {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.formButton {
+  @include action-button;
+
+  width: 160px;
+  height: 36px;
+  font-size: theme.$font-size-small;
+  text-transform: none;
+
+  @include media.mobile {
+    width: 120px;
+    overflow: hidden;
+  }
+}
+
+input {
+  margin-right: -9px;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 0.01em 0 0;
+  margin: 0;
+  border: 0;
+}

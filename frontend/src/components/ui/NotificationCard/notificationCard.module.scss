@@ -1,0 +1,29 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.notificationCard {
+  user-select: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: rgb(0 0 0 / 50%);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card {
+  width: fit-content;
+  height: fit-content;
+  padding: theme.$spacing-semi-regular-large;
+  margin: theme.$spacing-notification-card-vertical auto;
+  border: theme.$border-regular-component;
+
+  @include notification-card-content;
+}

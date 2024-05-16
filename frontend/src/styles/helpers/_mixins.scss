@@ -1,0 +1,283 @@
+@use "../theme" as theme;
+@use "../media" as media;
+@use "./functions" as functions;
+
+@mixin flex-justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-justify-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+@mixin flex-justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin flex-justify-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+@mixin flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-align-baseline {
+  display: flex;
+  align-items: baseline;
+}
+
+@mixin flex-all-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-align-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-column-justify-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin flex-column-all-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin action-button {
+  min-width: 124px;
+  min-height: 36px;
+  overflow: hidden;
+  font-family: theme.$font-family-primary;
+  color: theme.$font-color-primary;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: theme.$branding-color-primary;
+  border: none;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include property-font-tertiary-semi-bold;
+  @include flex-all-center;
+}
+
+@mixin notification-card-content {
+  overflow: hidden;
+  color: theme.$font-color-primary;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  background-color: theme.$branding-color-primary;
+  border: none;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include flex-all-center;
+  @include property-font-secondary-semi-bold;
+}
+
+@mixin input-styles-reset {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+@mixin reset-button {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+@mixin z-index($key) {
+  z-index: functions.get-z-index($key);
+}
+
+@mixin menu-list-item {
+  cursor: pointer;
+
+  @include property-font-primary-medium;
+}
+
+@mixin margin-page-wrapper {
+  margin-bottom: 80px;
+
+  @include media.desktop-down {
+    margin-bottom: 40px;
+  }
+
+  @include media.mobile {
+    margin-bottom: theme.$spacing-regular-large;
+  }
+}
+
+@mixin form-action-button {
+  @include action-button;
+
+  width: 160px;
+  height: 36px;
+  overflow: hidden;
+  font-size: theme.$font-size-small;
+  text-transform: none;
+
+  @include media.mobile {
+    width: 120px;
+  }
+}
+
+@mixin footer-column {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  width: 100%;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin form-field {
+  height: theme.$height-form-field;
+  margin-bottom: theme.$margin-bottom-form-field;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-form-field;
+}
+
+@mixin label-form-field {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: theme.$margin-bottom-label-form-field;
+}
+
+@mixin component-container-large {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+}
+
+@mixin component-title {
+  font-size: theme.$font-size-subtitle;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin subtitle-text {
+  font-size: theme.$font-size-medium;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin title-text {
+  font-size: theme.$font-size-semi-title;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-primary-regular {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-primary-semi-large-light {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-extra-light;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-primary-semi-bold {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-primary-medium {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-medium;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-secondary-regular {
+  font-size: theme.$font-size-medium;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-secondary-semi-bold {
+  font-size: theme.$font-size-medium;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-secondary-semi-medium-regular {
+  font-size: theme.$font-size-semi-medium;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-tertiary-semi-bold {
+  font-size: theme.$font-size-small;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font-tertiary-regular {
+  font-size: theme.$font-size-small;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin property-font {
+  font-size: theme.$font-size-medium;
+}
+
+@mixin value-font {
+  font-size: theme.$font-size-small;
+}
+
+@mixin input-container-spacing {
+  margin: theme.$spacing-regular 0;
+}
+
+@mixin input-container-spacing-small {
+  margin: theme.$spacing-small 0;
+}
+
+@mixin hide {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+@mixin responsive-image {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+
+@mixin single-line-overflow-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

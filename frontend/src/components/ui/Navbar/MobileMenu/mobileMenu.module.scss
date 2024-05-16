@@ -1,0 +1,53 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 200px;
+  padding-left: theme.$spacing-small;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: theme.$background-color-primary;
+  border-bottom-left-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include media.tablet {
+    display: none;
+  }
+}
+
+.itemsList {
+  width: 100%;
+
+  @include media.short {
+    overflow-y: auto;
+  }
+}
+
+.itemsContainer {
+  display: flex;
+  gap: theme.$spacing-small;
+  align-items: center;
+}
+
+.listItem {
+  height: theme.$height-mobile-menu-item;
+
+  @include menu-list-item;
+}
+
+.closeMenuIconContainer {
+  justify-content: flex-end;
+  color: theme.$branding-color-primary;
+}
+
+.userAndLogoutIconContainer {
+  text-align: left;
+}
+
+.menuAndMailButtonContainer {
+  width: 100%;
+}

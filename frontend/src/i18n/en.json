@@ -1,0 +1,485 @@
+{
+  "pages": {
+    "about": {
+      "title": "Hi! Thanks for visiting Oylo, Portfolio web-shop"
+    },
+    "admin": {
+      "usersManagement": {
+        "title": "Users management",
+        "editableItemsList": {
+          "title": "Users list",
+          "firstName": "Sort by First Name",
+          "reverseFilterByFirstName": "Reverse order",
+          "lastName": "Sort by Last Name",
+          "name": "Sort by Name",
+          "email": "Sort by Email",
+          "price": "Sort by Price",
+          "size": "Sort by Size",
+          "productCategoryId": "Sort by category",
+          "reverse": "Reverse order"
+        },
+        "toggleListButton": {
+          "show": "Show users",
+          "hide": "Hide users"
+        },
+        "toggleCreateItemButton": {
+          "show": "Create user",
+          "hide": "Hide form"
+        }
+      },
+      "productManagement": {
+        "title": "Products management",
+        "editableItemsList": {
+          "title": "Products list"
+        },
+        "toggleListButton": {
+          "show": "Show products",
+          "hide": "Hide products"
+        },
+        "toggleCreateItemButton": {
+          "show": "Create product",
+          "hide": "Hide form"
+        }
+      }
+    },
+    "cart": {
+      "emptyCart": "There are no products in the cart",
+      "confirmPurchase": "Confirm Purchase",
+      "orderToContinue": "Order to Continue",
+      "orderSummary": "Summary",
+      "orderSubtotal": "Subtotal:",
+      "orderShipping": "Shipping:",
+      "orderTotal": "Total:",
+      "canNotBuyProducts": "As an administrator you cannot purchase products"
+    },
+    "faq": {
+      "difuserRoomSizeQuestion": "Which difuser is suitable for which room size?",
+      "difuserRoomSizeAnswer": "The difuser should always be adapted to the room you want to scent. Small ultrasonic difusers are for smaller rooms up to approx. 15sqm suitable. For larger rooms up to about 30 square meters is a larger one difuser suitable. Otherwise you can also change the dosage a little bit change it, for example by adding a few more drops of oil to the difuser.",
+      "howDifuserWorksQuestion": "How does an ultrasonic difuser work?",
+      "howDifuserWorksAnswer": "You fill one up Ultrasonic difuser with some water and then just gives a few drops of essential oil into the water. The ultrasound will do that water evaporates cold and the fragrance arrives very gently with the water vapor into the air, unlike fragrance lamps that use heat work. Depending on the size of the nebulizer and the dosage of the oil you can use it to scent entire rooms naturally.",
+      "thirdQuestion": "Are your products really free of chemical additives?",
+      "thirdAnswer": "Our oils are natural, all-natural and organic without any additives. We never use synthetic or nature-identical substances. After what high Quality criteria and requirements we manufacture our products, can be found on our quality page.",
+      "fourthQuestion": "Can I also take your oils internally? ",
+      "fourthAnswer": " We are only allowed ours essential oils recommended for consumption, which we classify as organic flavoring below of the brand. These are marked as food and can be used to flavor food and drinks. In principle, however, all our oils are subject to the same strict standards quality controls and are natural. However, not all of us are allowed to recommend oils for consumption, as they are distinguished as natural cosmetics. For internal use, certain instructions must also be observed.",
+      "addBodyOilAndUsedAsCosmeticQuestion": "Can the ethereal Oils can also be added to a body oil and used as a cosmetic product be used?",
+      "addBodyOilAndUsedAsCosmeticAnswer": " Essential oils are perfect for this. The pure essential oils and compositions of several essential oils certified as cosmetics and can be mixed with base oil and used as cosmetics are applied. The organic aromas from Baldini are extra excellent as food, but they can also be on the skin and used as cosmetics. Some oils have an alcohol content because they are extra for Ultrasonic nebulizers were developed and so better in the air reach, but these can also be used on the skin. On the Oils you will always find an indication of how much oil on how much base oil should be used. Please note that some oils are particularly skin-nourishing, while oils may irritate skin in higher doses. Read the description of the oil and test beforehand, for example in the crook of your arm, whether you have the mixture tolerate",
+      "sixthQuestion": "Can I also use essential oils for an aromatherapy bath in the bathtub?",
+      "sixthAnswer": "Yes! With essential oils you can create great aromatic bath additives produce. Please note only a few notes, for example that the Oils can be previously mixed with a base and only added to the already filled tub can be added. On our cosmetic page You will find information on dosage and application in the recipes.",
+      "seventhQuestion": "How do I dose the oils correctly?",
+      "seventhAnswer": " Which dosage is the right one is depending on individual preferences and the type of application differing.",
+      "eighthQuestion": "Can I also use essential oils on babies and children?",
+      "eighthAnswer": "With babies and children, some application and dosage instructions must be observed. Please see specialist literature about which oils you in what dosage you can use.",
+      "ninthQuestion": "Can I also use essential oils during pregnancy?",
+      "ninthAnswer": " In the Pregnancy are some application and dosage instructions too observe. Please visit specialist literature about which ones Oils you can use in what dosage.",
+      "tenthQuestion": " Can I also use essential oils on my pets?",
+      "tenthAnswer": "Animals react differently than humans to essential oils. Please inform yourself in specialized literature on the subject of which oils you use in what dosage you can use. For this we can not own give recommendations for action."
+    },
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "loginButton": "Login",
+      "emailPlaceholder": "enter email",
+      "passwordPlaceholder": "enter password",
+      "signUp": "Create an Account",
+      "haveAccount": "Don't have an account?",
+      "loginAsAdmin": "Login as test Admin",
+      "or": "or",
+      "passwordLost": "Did you forget your password?",
+      "errorMessage": "Unfortunately your password or email address was incorrect."
+    },
+    "notFound": "Unfortunately this page does not exist.",
+    "orderSummary": {
+      "thankClient": "Thank you for shopping at Oylo!",
+      "orderResume": "Order Summary",
+      "deliveryInformation": "Delivery information",
+      "inputLabels": {
+        "email": "Email address",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "Phone number",
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "address": "Address",
+        "postalCode": "Postal code",
+        "paidWith": "Payment method",
+        "totalAmount": "Amount"
+      }
+    },
+    "signUp": {
+      "newCustomer": "New Customer?",
+      "email": "Email",
+      "password": "Password",
+      "loginButton": "Login",
+      "emailPlaceholder": "enter email",
+      "passwordPlaceholder": "enter password",
+      "login": "Login",
+      "createAdminText": "Create a",
+      "createAdminLink": "test admin account",
+      "createCustomer": "Create a customer account",
+      "doNotHaveAccount": "Don't you have?",
+      "haveAccount": "Do you have an account?",
+      "or": "or",
+      "passwordLost": "Did you forget your password?",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "submitButton": "Create an Account",
+      "emailInUseErrorMessage": "Email already registered"
+    },
+    "signUpAdmin": {},
+    "payment": {
+      "paymentButton": "Proceed",
+      "title": "Proceed with Payment",
+      "legend": "Select Payment Method",
+      "backButton": "Go Back",
+      "insertPaymentMethod": "Please choose a payment method.",
+      "emptyShippingData": "please add data for shipping"
+    },
+    "productsDetails": {
+      "loading": "Loading",
+      "addToCartButton": "Add To Cart",
+      "errorByGettingProduct": "We can not get that product, please try again later"
+    },
+    "shipping": {
+      "yourInfo": "Your Info",
+      "yourEmail": "Your email",
+      "title": "If you are already registered please",
+      "titleLink": "login",
+      "titleSubSentence": ". Otherwise, by submitting your data you may checkout as a guest",
+      "inputLabels": {
+        "email": "Email address",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "Phone number",
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "address": "Address",
+        "postalCode": "Postal code"
+      },
+      "submitButton": "Payment form",
+      "backToCart": "Back to cart"
+    },
+    "shop": {
+      "title": "All products"
+    },
+    "welcome": {
+      "subTeaser": {
+        "title": "At Oylo, our appreciation for nature's treasured gifts is boundless",
+        "teaserFirstSubtitle": "UTILIZING ESSENTIAL OILS",
+        "teaserFirstSentence": "From diffusers to massage oils, from invigorating baths to aromatic culinary infusions, essential oils serve various purposes.",
+        "teaserSecondSubtitle": "THE POWER OF ESSENTIAL",
+        "teaserSecondSentence": "Essential oils stir emotions, leading to a positive shift. Enhance your mood with citrus or sharpen your focus with rosemary.",
+        "teaserThirthSubtitle": "THE OYLO COLLECTION",
+        "teaserThirthSentence": "Our online store offers a range of aromatherapy oils, unique Ayurveda blends, wellness products, natural cosmetics, and enchanting gift sets.",
+        "teaserFourthSubtitle": "OYLO'S QUALITY PROMISE",
+        "teaserFourthSentence": "Oylo ensures completely natural products, free of synthetic additives, parabens, or genetically modified substances."
+      },
+      "title": "Welcome to our world of natural wellness ",
+      "teaserSentence": "where we believe in the power of plants and our Essential Oil Shop is a place for those seeking to boost their health, improve their mood, or simply create a home that smells wonderful and fresh.",
+      "teaserSubSentenceOne": "Each drop of essential oils is derived from nature's most precious gifts, sustainably sourced and meticulously distilled to preserve the inherent life force of each plant. ",
+      "teaserSubSentenceTwo": "We carry a range of oils that can energize, calm, uplift, or purify, all depending on your unique needs.",
+      "teaserSubSentenceThree": "We invite you to explore our diverse collection, we also offer a selection of oil-infused products such as diffusers, haircare, and skincare.",
+      "teaserSubSentenceFour": "Whether you're an essential oil aficionado or just beginning your journey into the aromatic world, we're here to guide."
+    }
+  },
+  "components": {
+    "addOneToCartButton": {
+      "text": "add to cart"
+    },
+    "createItem": {
+      "submitButton": "Submit"
+    },
+    "editableItem": {
+      "deleteButton": "Delete"
+    },
+    "buttons": {
+      "actions": {
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save",
+        "create": "Create"
+      }
+    },
+    "createProductForm": {
+      "showButton": "Create product",
+      "hideButton": "Hide form"
+    },
+
+    "crud": {
+      "forms": {
+        "shippingData": {},
+        "user": {
+          "firstName": "First name",
+          "lastName": "Last name",
+          "email": "Email",
+          "password": "Password",
+          "role": "Rolle"
+        },
+        "commonProperties": {
+          "category": "Category",
+          "city": "City",
+          "country": "Country",
+          "createdAt": "Created at",
+          "description": "Description",
+          "details": "Details",
+          "email": "Email",
+          "firstName": "First name",
+          "imageUrl": "Image Url",
+          "lastName": "Last name",
+          "password": "Password",
+          "measure": "Measure",
+          "name": "Name",
+          "number": "Number",
+          "postalCode": "Postal code",
+          "price": "Price",
+          "role": "Rolle",
+          "size": "Size",
+          "street": "Street",
+          "state": "State"
+        },
+        "createProductForm": {
+          "submitButton": "Create product"
+        },
+        "toggleUsersCrudOptions": {
+          "show": "show users actions",
+          "hide": "hide users actions"
+        }
+      },
+      "buttons": {
+        "create": "Create",
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save"
+      },
+      "updateUser": {
+        "success": "User updated successfully",
+        "error": "Can not update user"
+      },
+      "deleteUser": {
+        "button": "Delete User",
+        "error": "Can not delete user with this email: ",
+        "deletedByEmail": "was successfully deleted from system",
+        "nonAuthorized": "you can not delete this user",
+        "cannotDeleteYourself": "Can not delete yourself"
+      },
+      "getUser": {
+        "button": "Get user data",
+        "error": "Can not find user: ",
+        "getByEmail": "Get user by email"
+      },
+      "getAllUsers": {
+        "showButton": "Show all users",
+        "hideButton": "Hide all users",
+        "error": "Can not see all users"
+      },
+      "createUser": {
+        "success": "User created successfully",
+        "submitAdminButton": "Create an admin account",
+        "submitCustomerButton": "Create a customer account",
+        "emailInUseErrorMessage": "Email already registered",
+        "hideForm": "Hide create user form",
+        "showForm": "Show create user form",
+        "error": "Can not create user"
+      },
+      "deleteProduct": {
+        "button": "Delete Product",
+        "error": "Can not delete product",
+        "success": "The product was successfully deleted from system"
+      },
+      "getProduct": {
+        "button": "Get product data",
+        "error": "Can not find product: ",
+        "getByName": "Get product by name"
+      },
+      "getAllProducts": {
+        "showButton": "Show all products",
+        "hideButton": "Hide all products",
+        "error": "Can not see all products"
+      }
+    },
+    "createUserForm": {
+      "submitButton": "Create User",
+      "showButton": "Show Form",
+      "hideButton": "Hide Form"
+    },
+    "editableItemsList": {
+      "showButton": "Show list",
+      "hideButton": "Hide list"
+    },
+    "editableListProductData": {
+      "deleteButton": {
+        "sucess": "Product successfully deleted",
+        "fail": "We can not delete this product"
+      }
+    },
+    "navigationMenu": {
+      "home": "Home",
+      "shop": "Shop",
+      "about": "About us",
+      "all": "All Products",
+      "essentialOil": "Essential Oils",
+      "difuser": "Difusers",
+      "bodyCare": "Body Care",
+      "roll": "Roll On",
+      "massageOil": "Massage Oils"
+    },
+    "orderSummaryItem": {
+      "quantity": "Quantity"
+    },
+    "ordersList": {
+      "title": "Your Orders",
+      "hideToggleButton": "Hide orders",
+      "showToggleButton": "Show orders"
+    },
+    "ordersItem": {
+      "orderDate": "Order date",
+      "payedWith": "Payed with",
+      "total": "Total",
+      "productsHaveBeenDeleted": "The products of this order have been deleted from our system"
+    },
+    "orderCard": {
+      "orderedProduct": "Ordered product",
+      "hiddenSemantics": "Items description",
+      "pricePerUnit": "per unit",
+      "productNotFound": "Product not found"
+    },
+    "productCard": {
+      "loading": "Loading product",
+      "addProductButton": "add to cart",
+      "addProductButtonLabel": "Add product to your shop cart"
+    },
+    "footer": {
+      "linksColumns": {
+        "wayToUs": {
+          "title": "Your way to us",
+          "address": "Oil Paradise 1",
+          "postalCode": "12437",
+          "city": "Berlin",
+          "phoneTitle": "phone",
+          "contactPhone": "+49-6622-88334"
+        },
+        "forClient": {
+          "title": "For you",
+          "returnToShop": "Back to shop",
+          "returnToShopTitle": "Back to shopping",
+          "faq": "Frequently Asked Questions / FAQ",
+          "faqTitle": "Frequently Asked Questions"
+        },
+        "users": {
+          "title": "Customers",
+          "accountAndLogin": "Account & Login",
+          "registration": "Be a Shop Customer"
+        }
+      },
+      "newsletter": {
+        "subscriptionText": "Your regular Oylo update",
+        "subscriptionButton": "Subscribe",
+        "emailAddressPlaceholder": "Enter email",
+        "registrationDataConsentText": "The data you enter here will only be used to send the Newsletters used and not passed on to third parties. You can unsubscribe from the newsletter at any time withdraw your consent by sending us an email. Your data after completion of the newsletter receipt within 3 Months deleted, provided that the deletion is not legal conflict with retention requirements. By sending the entered data you agree to the data processing and confirm our privacy policy."
+      },
+      "iconsColumns": {
+        "creditCards": {
+          "title": "Shop Safely"
+        },
+        "shippingPartners": {
+          "title": "Fast Shipping"
+        },
+        "socialMedia": {
+          "title": "Follow us",
+          "facebook": "Follow us on Facebook",
+          "instagram": "Follow us on Instagram",
+          "youtube": "Follow us on Youtube"
+        }
+      },
+      "copy": "OYLO OILS - All rights reserved"
+    },
+    "sidebarMenu": {
+      "allProducts": "All Products",
+      "essentialOil": "Essential Oils",
+      "difusers": "Difusers",
+      "bodyCare": "Body Care",
+      "hairCare": "Hair Care",
+      "roll": "Roll On",
+      "massageOils": "Massage Oils",
+      "onlineShop": "Online Shop",
+      "contact": "Contact us",
+      "accountAndLogin": "Account & Login",
+      "registration": "Be a Shop Customer",
+      "shipmentAndPayment": "Shipment & Payment",
+      "cancellationPolicy": "Cancellation",
+      "cancellationPolicyTitle": "Cancellation policy",
+      "returnProducts": "Return buyed products",
+      "returnProductsTitle": "Return buyed products policy",
+      "faq": "Frequently Asked Questions / FAQ",
+      "faqTitle": "Frequently Asked Questions"
+    }
+  },
+  "errors": {
+    "requests": {
+      "user": {
+        "getUserData": "Error while getting user data",
+        "getShippingData": "Error while getting shipping data",
+        "login": "Error while login"
+      }
+    },
+    "validationErrors": {
+      "firstName": {
+        "tooLong": "First name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "First name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "First name should start with a capital letter.",
+        "shouldContainOnlyLetters": "First name can only contain letters."
+      },
+      "lastName": {
+        "tooLong": "Last name can't be longer than 30 characters.",
+        "shouldHaveAtLeastTwoCharacters": "Last name should have at least two characters.",
+        "shouldStartWithACapitalLetter": "Last name should start with a capital letter.",
+        "shouldContainOnlyLetters": "Last name can only contain letters."
+      },
+      "password": {
+        "tooShort": "Password should have at least 8 characters.",
+        "shouldHaveAtLeastOneUppercase": "Password should have at least one uppercase character.",
+        "shouldHaveAtLeastOneSymbol": "Password should have at least one symbol."
+      },
+      "email": {
+        "tooLong": "Email can't be longer than 40 characters.",
+        "invalidFormat": "Invalid email format.",
+        "tooShort": "Email should have at least 4 characters."
+      }
+    }
+  },
+  "warningMessages": {
+    "users": {
+      "shippingDataIsEmpty": "enter your shipping data by editing and saving fields"
+    }
+  },
+  "commonProperties": {
+    "category": "Category",
+    "city": "City",
+    "country": "Country",
+    "createdAt": "Created at",
+    "description": "Description",
+    "details": "Details",
+    "email": "Email",
+    "firstName": "First name",
+    "imageUrl": "Image Url",
+    "image": "Image",
+    "lastName": "Last name",
+    "password": "Password",
+    "measure": "Measure",
+    "name": "Name",
+    "number": "Number",
+    "postalCode": "Postal code",
+    "price": "Price",
+    "role": "Rolle",
+    "size": "Size",
+    "street": "Street",
+    "state": "State"
+  },
+  "commonButtons": {
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save"
+  }
+}

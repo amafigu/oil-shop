@@ -1,0 +1,82 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.productCard {
+  width: 256px;
+  height: 454px;
+  margin: theme.$spacing-semi-large;
+  overflow: hidden;
+  cursor: pointer;
+  border: solid 1px theme.$background-color-primary;
+  border-radius: theme.$border-radius-regular;
+
+  @include media.mobile {
+    margin: theme.$spacing-semi-large 0;
+  }
+}
+
+.container {
+  width: calc(100% - theme.$spacing-smaller * 2);
+  margin: theme.$spacing-regular theme.$spacing-smaller;
+
+  @include flex-column-align-center;
+}
+
+.body {
+  width: 80%;
+
+  @include flex-column-align-center;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 226px;
+  margin-bottom: theme.$spacing-regular-large;
+
+  @include flex-all-center;
+}
+
+.image {
+  @include responsive-image;
+}
+
+.data {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: theme.$spacing-regular-large;
+  text-align: center;
+
+  @include single-line-overflow-hidden;
+  @include flex-column-align-center;
+}
+
+.name {
+  max-width: 100%;
+  color: theme.$font-color-light;
+
+  @include single-line-overflow-hidden;
+  @include property-font-secondary-semi-bold;
+}
+
+.size,
+.price {
+  max-width: 100%;
+  font-family: theme.$font-family-primary;
+  color: theme.$font-color-light;
+
+  @include property-font-secondary-semi-medium-regular;
+  @include single-line-overflow-hidden;
+}
+
+.addButtonContainer {
+  width: 80%;
+  pointer-events: auto;
+  opacity: 1;
+
+  @include flex-align-center;
+}
+
+.loading {
+  @include property-font-secondary-semi-bold;
+}

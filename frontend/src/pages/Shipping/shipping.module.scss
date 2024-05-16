@@ -1,0 +1,35 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.shippingPageWrapper {
+  @include flex-column-all-center;
+}
+
+.shippingPage {
+  flex-direction: column;
+  width: theme.$section-width-primary;
+  margin-bottom: theme.$spacing-semi-large;
+  background: theme.$background-color-form-primary;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include flex-column-align-center;
+
+  @include media.widescreen-down {
+    width: theme.$page-width-primary;
+  }
+
+  @include media.tablet-down {
+    width: 90%;
+    margin-bottom: theme.$spacing-semi-large;
+  }
+}
+
+.emailRegistrationText {
+  margin: theme.$spacing-regular 0 0 theme.$spacing-regular;
+}
+
+.linkLogin {
+  font-size: theme.$font-size-medium;
+  color: theme.$branding-color-primary;
+}

@@ -1,0 +1,35 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.orderSummaryData {
+  width: auto;
+}
+
+.dataItemsList {
+  width: 100%;
+  padding: 40px;
+
+  @include media.mobile {
+    padding: 0;
+  }
+}
+
+.formField {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  font-family: theme.$font-family-primary;
+  font-size: theme.$font-size-medium;
+  background-color: theme.$background-color-primary;
+  border-bottom: 1px solid theme.$font-color-light;
+
+  @include flex-align-center;
+
+  dt {
+    margin-right: theme.$spacing-smallest;
+    font-size: theme.$font-size-semi-large;
+    font-weight: theme.$font-weight-medium;
+  }
+}

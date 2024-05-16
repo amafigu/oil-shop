@@ -1,0 +1,77 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.actionButton {
+  height: 36px !important;
+
+  @include action-button;
+
+  @include media.mobile {
+    overflow: hidden;
+  }
+}
+
+.wideButton {
+  width: 100%;
+  height: 36px !important;
+
+  @include action-button;
+
+  @include media.mobile {
+    overflow: hidden;
+  }
+}
+
+.addProductButton {
+  width: 100%;
+  height: 52px !important;
+
+  @include action-button;
+
+  @include media.mobile {
+    overflow: hidden;
+  }
+}
+
+.navigationMenuLink,
+.sliderButton {
+  @include reset-button;
+
+  color: inherit;
+}
+
+.navigationMenuActiveLink {
+  @include reset-button;
+
+  color: theme.$branding-color-primary !important;
+}
+
+.mobileMenuItems {
+  @include reset-button;
+
+  color: inherit;
+}
+
+.counterButton {
+  @include reset-button;
+
+  cursor: pointer;
+}
+
+.cartItemQuantityButton,
+.cartItemDeleteButton {
+  @include reset-button;
+
+  width: theme.$width-height-cart-buttons;
+  height: theme.$width-height-cart-buttons;
+  color: theme.$font-color-light;
+  cursor: pointer;
+}
+
+.languagesSelector {
+  cursor: pointer;
+
+  @include reset-button;
+  @include property-font-tertiary-regular;
+}

@@ -1,0 +1,72 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.searchBar {
+  width: 33.333%;
+
+  @include flex-align-center;
+}
+
+.showBar {
+  display: flex;
+}
+
+.hideBar {
+  display: none;
+}
+
+.inputContainer {
+  width: 100%;
+  height: 40px;
+  padding-left: theme.$spacing-regular;
+
+  @include flex-align-center;
+
+  @include media.mobile {
+    width: 100%;
+    padding-left: theme.$spacing-semi-regular;
+
+    @include property-font-tertiary-regular;
+  }
+}
+
+.searchProductContainer {
+  width: 100%;
+}
+
+.searchTextInput {
+  width: 100%;
+  height: 100%;
+  padding-left: theme.$spacing-small;
+  font-family: theme.$font-family-primary;
+  color: theme.$font-color-primary;
+  background-color: theme.$background-color-primary !important;
+  border-radius: theme.$border-radius-small;
+
+  @include property-font-primary-semi-large-light;
+  @include input-styles-reset;
+
+  @include media.mobile {
+    width: 90%;
+    padding-left: theme.$spacing-smallest;
+
+    @include property-font-tertiary-regular;
+  }
+}
+
+.listContainer {
+  width: 100%;
+  padding: theme.$padding-divider-small;
+  color: theme.$font-color-primary;
+  background-color: theme.$background-color-form-primary;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include flex-column;
+
+  @include media.short {
+    height: 70vh;
+    overflow-y: auto;
+  }
+}

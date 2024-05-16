@@ -1,0 +1,28 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.notFoundPage {
+  width: 100%;
+
+  @include flex-all-center;
+
+  min-height: theme.$min-height-page-small;
+  margin-bottom: theme.$spacing-extra-large;
+}
+
+.container {
+  @include flex-column-align-center;
+}
+
+.logo {
+  width: 300px;
+  height: 200px;
+}
+
+.message {
+  font-size: theme.$font-size-title;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+  text-align: center;
+}

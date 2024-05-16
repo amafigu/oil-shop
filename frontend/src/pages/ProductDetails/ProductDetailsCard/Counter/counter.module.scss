@@ -1,0 +1,37 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.counter {
+  width: 80px;
+  user-select: none;
+  background-color: theme.$background-color-form-primary;
+  border-radius: theme.$border-radius-small;
+
+  @include flex-align-center;
+}
+
+.container {
+  width: 60%;
+  margin: 0;
+  text-align: center;
+
+  @include flex-all-center;
+}
+
+.buttons {
+  flex-grow: 1;
+  justify-content: space-evenly;
+  height: 100%;
+  margin-right: theme.$spacing-smallest;
+
+  @include flex-column;
+
+  svg {
+    cursor: pointer;
+  }
+
+  button {
+    @include reset-button;
+  }
+}

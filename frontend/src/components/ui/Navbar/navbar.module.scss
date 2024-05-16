@@ -1,0 +1,12 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: theme.$navbar-height-desktop;
+  user-select: none;
+  background-color: theme.$branding-color-primary;
+}

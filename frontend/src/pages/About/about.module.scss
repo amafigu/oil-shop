@@ -1,0 +1,27 @@
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
+
+.aboutPageWrapper {
+  min-height: theme.$min-height-page-small;
+
+  @include flex-justify-center;
+
+  .aboutPage {
+    width: theme.$page-width-primary;
+
+    @include flex-column-all-center;
+  }
+
+  .title {
+    @include title-text;
+
+    text-align: center;
+  }
+
+  .link {
+    @include component-title;
+
+    margin-bottom: theme.$spacing-semi-regular;
+    text-align: center;
+  }
+}
