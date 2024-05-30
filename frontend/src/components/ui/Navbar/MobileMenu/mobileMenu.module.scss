@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.mobileMenu {
+.wrapper {
   position: fixed;
   top: 0;
   right: 0;
@@ -19,7 +19,7 @@
   }
 }
 
-.itemsList {
+.list {
   width: 100%;
 
   @include media.short {
@@ -27,27 +27,23 @@
   }
 }
 
-.itemsContainer {
+.container {
   display: flex;
   gap: theme.$spacing-small;
   align-items: center;
 }
 
-.listItem {
+.item {
   height: theme.$height-mobile-menu-item;
 
   @include menu-list-item;
 }
 
-.closeMenuIconContainer {
+.closeIcon {
   justify-content: flex-end;
   color: theme.$branding-color-primary;
 }
 
-.userAndLogoutIconContainer {
+.userIcons {
   text-align: left;
-}
-
-.menuAndMailButtonContainer {
-  width: 100%;
 }

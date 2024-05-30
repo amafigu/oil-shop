@@ -2,11 +2,11 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.shippingPageWrapper {
+.wrapper {
   @include flex-column-all-center;
 }
 
-.shippingPage {
+.container {
   flex-direction: column;
   width: theme.$section-width-primary;
   margin-bottom: theme.$spacing-semi-large;
@@ -25,11 +25,11 @@
   }
 }
 
-.emailRegistrationText {
+.content {
   margin: theme.$spacing-regular 0 0 theme.$spacing-regular;
 }
 
-.linkLogin {
+.link {
   font-size: theme.$font-size-medium;
   color: theme.$branding-color-primary;
 }

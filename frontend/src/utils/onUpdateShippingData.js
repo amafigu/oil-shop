@@ -1,9 +1,9 @@
-import { updateUserShippingDataRequest } from "#api/users/updateUserShippingDataRequest"
+import { updateShippingData } from "#api/users/updateShippingData"
 import { shippingDataSchema } from "#utils/usersValidation"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 import { onValidationError } from "./onValidationError"
 
-export const onUpdateUserShippingData = async (
+export const onUpdateShippingData = async (
   e,
   key,
   userId,
@@ -24,7 +24,7 @@ export const onUpdateUserShippingData = async (
       return
     }
 
-    const response = await updateUserShippingDataRequest(userId, validProperty)
+    const response = await updateShippingData(userId, validProperty)
     if (response && response.status === 200) {
       const updatedShippingData = response.data
       setUpdatedUserShippingData(updatedShippingData)

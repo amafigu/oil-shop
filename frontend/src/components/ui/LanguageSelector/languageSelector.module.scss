@@ -2,7 +2,7 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.languageSelector {
+.list {
   position: absolute;
   display: flex;
   gap: theme.$spacing-smallest;
@@ -25,18 +25,14 @@
   }
 }
 
-.activeCategory {
+.active {
   button {
     color: theme.$branding-color-primary;
   }
 }
 
-.listItem {
+.item {
   @include media.tablet-down {
     @include menu-list-item;
   }
-}
-
-.linkContent {
-  cursor: pointer;
 }

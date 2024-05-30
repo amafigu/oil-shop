@@ -2,14 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.formContainer {
-  width: 100%;
-  padding: theme.$spacing-regular;
-  border: theme.$border-regular-component;
-  border-radius: theme.$border-radius-small;
-}
-
-.form {
+.container {
   width: 100%;
 }
 
@@ -21,22 +14,6 @@
   font-size: theme.$font-size-medium;
 }
 
-.buttonContainer {
+.button {
   margin-top: theme.$spacing-small;
-}
-
-.formButton {
-  @include action-button;
-
-  width: 100%;
-  height: 36px;
-  margin-top: 8px;
-  margin-bottom: theme.$spacing-regular;
-  font-size: theme.$font-size-small;
-  text-transform: none;
-
-  @include media.mobile {
-    width: 100%;
-    overflow: hidden;
-  }
 }

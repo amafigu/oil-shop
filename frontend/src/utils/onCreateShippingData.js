@@ -1,4 +1,4 @@
-import { createShippingData } from "#api/shipping/createShippingData"
+import { createShippingData } from "#api/users/createShippingData"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 
 export const onCreateShippingData = async (

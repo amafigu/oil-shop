@@ -2,7 +2,7 @@ import { CreateItem } from "#components/ui/CreateItem"
 import { LOGO_IMAGE } from "#constants/media"
 import { registerUserProperties } from "#constants/users"
 import { useRegisterUserAndRedirect } from "#hooks/useRegisterUserAndRedirect"
-import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { listenInput } from "#utils/listenInput"
 import { scrollToTop } from "#utils/scrollToTop"
 import { LinkContainer } from "./LinkContainer"
 import styles from "./signUp.module.scss"
@@ -12,8 +12,8 @@ export const SignUp = () => {
   scrollToTop()
 
   return (
-    <main className={styles.signUpPage}>
-      <section className={styles.logoAndSignUpForm}>
+    <main className={styles.wrapper} aria-label='Sign up page'>
+      <section className={styles.container}>
         <div className={styles.logoContainer}>
           <img
             className={styles.logo}
@@ -21,10 +21,10 @@ export const SignUp = () => {
             alt='logo'
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.form} aria-label='Create new user form'>
           <CreateItem
             onCreate={registerUserAndRedirect}
-            onChange={listenInputChangeAndSetDataObject}
+            onChange={listenInput}
             renderItemProps={registerUserProperties}
           />
         </div>

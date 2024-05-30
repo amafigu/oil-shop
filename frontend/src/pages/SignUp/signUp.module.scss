@@ -2,11 +2,11 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.signUpPage {
+.wrapper {
   @include flex-column-all-center;
 }
 
-.logoAndSignUpForm {
+.container {
   width: 100%;
   min-height: theme.$min-height-page-regular;
 

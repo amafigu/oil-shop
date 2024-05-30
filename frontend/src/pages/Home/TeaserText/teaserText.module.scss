@@ -2,12 +2,12 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.teaserTextWrapper {
+.wrapper {
   display: flex;
   justify-content: center;
 }
 
-.teaserText {
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@
   @include title-text;
 }
 
-.subtitleText {
+.subtitle {
   width: 84%;
   text-align: center;
 

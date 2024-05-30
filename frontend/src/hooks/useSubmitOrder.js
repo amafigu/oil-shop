@@ -1,6 +1,6 @@
 import { getGuestUserToken } from "#api/auth/getGuestUserToken"
 import { LOCAL_STORAGE_CART } from "#constants/localStorage"
-import { ROUTES_CHECKOUT_ORDER_SUMMARY } from "#constants/routes"
+import { ORDER_SUMMARY } from "#constants/routes"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import { useCart } from "#hooks/useCart"
 import { useCurrentUser } from "#hooks/useCurrentUser"
@@ -32,7 +32,7 @@ export const useSubmitOrder = () => {
         setNotification,
       )
       if (response) {
-        navigate(ROUTES_CHECKOUT_ORDER_SUMMARY)
+        navigate(ORDER_SUMMARY)
         localStorage.removeItem(LOCAL_STORAGE_CART)
         setCart([])
       }

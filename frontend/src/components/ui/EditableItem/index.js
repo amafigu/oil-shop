@@ -24,7 +24,7 @@ export const EditableItem = ({ item, renderItemProps, onSave, onDelete }) => {
   }, [item])
 
   return (
-    <article className={styles.editableItem} aria-label='editable item'>
+    <article className={styles.wrapper} aria-label='editable item'>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <div className={styles.imageContainer}>
@@ -46,7 +46,7 @@ export const EditableItem = ({ item, renderItemProps, onSave, onDelete }) => {
         )}
       </div>
       {
-        <form className={styles.form}>
+        <form className={styles.item}>
           {item &&
             itemInitialAttributes &&
             Object.keys(itemInitialAttributes).map((key) => (

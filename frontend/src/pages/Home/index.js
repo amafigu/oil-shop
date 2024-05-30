@@ -8,19 +8,17 @@ import styles from "./home.module.scss"
 export const Home = () => {
   const { products } = useProducts()
   return (
-    <main className={styles.homePageWrapper} aria-label='home page'>
-      <div className={styles.homePage}>
-        <div className={styles.pageColumn}>
-          <section className={styles.videoBannerContainer}>
+    <main className={styles.wrapper} aria-label='home page'>
+      <div className={styles.container}>
+        <div className={styles.column}>
+          <section className={styles.banner}>
             <Banner />
           </section>
           <TeaserText />
-          <section className={styles.productSliderContainer}>
+          <section className={styles.slider}>
             <Slider items={products} />
           </section>
-          <section className={styles.columnsContainer}>
-            <TeaserCards />
-          </section>
+          <TeaserCards />
         </div>
       </div>
     </main>

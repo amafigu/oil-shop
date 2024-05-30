@@ -1,4 +1,4 @@
-import { ROUTES_CURRENT_ADMIN } from "#constants/routes"
+import { CURRENT_ADMIN } from "#constants/routes"
 import { LONG_REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
@@ -17,7 +17,7 @@ export const useRedirectAdminFromCheckout = () => {
         "As an Admin you can not visit this page, make an customer account for that",
       )
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      setTimeout(() => navigate(ROUTES_CURRENT_ADMIN), LONG_REDIRECT_TIMEOUT)
+      setTimeout(() => navigate(CURRENT_ADMIN), LONG_REDIRECT_TIMEOUT)
     }
     return () => clearTimeout(redirectTimeoutId)
   }, [user, navigate])

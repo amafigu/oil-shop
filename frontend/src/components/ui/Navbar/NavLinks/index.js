@@ -1,11 +1,6 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import { LanguageSelector } from "#components/ui/LanguageSelector"
-import {
-  ROUTES_CART,
-  ROUTES_CURRENT_ADMIN,
-  ROUTES_CURRENT_CUSTOMER,
-  ROUTES_LOGIN,
-} from "#constants/routes"
+import { CART, CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
@@ -27,8 +22,8 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
     setShowMobileMenu(true)
   }
   return (
-    <section className={styles.navLinks} aria-label={"navigation section"}>
-      <div className={styles.onlyMobile}>
+    <section className={styles.container} aria-label={"navigation section"}>
+      <div className={styles.mobile}>
         <ActionButton
           action={onMobileMenu}
           text={<FontAwesomeIcon icon={getIconByName("faBars")} size={"2xl"} />}
@@ -36,8 +31,8 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
           ariaLabel={"show mobile menu"}
         />
       </div>
-      <ul className={styles.hideOnMobile} aria-label={"navigation items"}>
-        <li className={styles.listItem}>
+      <ul className={styles.list} aria-label={"navigation items"}>
+        <li>
           <ActionButton
             action={() => setShowProductsSearchBar((prevState) => !prevState)}
             text={
@@ -47,7 +42,7 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
             ariaLabel={"show search bar"}
           />
         </li>
-        <li className={styles.languageSelector}>
+        <li className={styles.selector}>
           <ActionButton
             action={() => setShowLanguagesOptions((prevState) => !prevState)}
             text={
@@ -69,13 +64,11 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
           )}
         </li>
         {isLoggedIn ? (
-          <li className={styles.userAndLogoutIconContainer}>
+          <li className={styles.logout}>
             <Link
-              className={styles.linkChild}
+              className={styles.link}
               to={
-                user && user.role === "admin"
-                  ? ROUTES_CURRENT_ADMIN
-                  : ROUTES_CURRENT_CUSTOMER
+                user && user.role === "admin" ? CURRENT_ADMIN : CURRENT_CUSTOMER
               }
             >
               <FontAwesomeIcon icon={getIconByName("faUser")} />
@@ -93,20 +86,15 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
             />
           </li>
         ) : (
-          <Link className={styles.linkChild} to={ROUTES_LOGIN}>
+          <Link className={styles.link} to={LOGIN}>
             <FontAwesomeIcon icon={getIconByName("faUser")} />
           </Link>
         )}
-        <li
-          className={styles.cartAndQuantity}
-          aria-label={"cart items quantity"}
-        >
-          <Link className={styles.linkChild} to={ROUTES_CART}>
+        <li className={styles.cart} aria-label={"cart items quantity"}>
+          <Link className={styles.link} to={CART}>
             <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
           </Link>
-          <span className={styles.productsQuantity}>
-            {getAllProductsQuantity}
-          </span>
+          <span className={styles.quantity}>{getAllProductsQuantity}</span>
         </li>
       </ul>
     </section>

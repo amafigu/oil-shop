@@ -1,5 +1,5 @@
 import { getProductByName } from "#api/products/getProductByName"
-import { ROUTES_SHOP } from "#constants/routes"
+import { SHOP } from "#constants/routes"
 import { LONG_MESSAGE_TIMEOUT } from "#constants/time"
 import { useTranslation } from "#hooks/useTranslation"
 import { useEffect, useState } from "react"
@@ -23,7 +23,7 @@ export const useProductDetails = () => {
         }
       } catch (error) {
         setNotification(text.errorByGettingProduct)
-        setTimeout(() => navigate(ROUTES_SHOP), LONG_MESSAGE_TIMEOUT)
+        setTimeout(() => navigate(SHOP), LONG_MESSAGE_TIMEOUT)
         setTimeout(() => setNotification(null), LONG_MESSAGE_TIMEOUT)
       }
     }

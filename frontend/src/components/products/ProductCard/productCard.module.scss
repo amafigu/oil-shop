@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.productCard {
+.wrapper {
   width: 256px;
   height: 454px;
   margin: theme.$spacing-semi-large;

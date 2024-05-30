@@ -3,8 +3,8 @@ import styles from "./orderSummaryItemsList.module.scss"
 
 export const OrderSummaryItemsList = ({ orderAndCartItems }) => {
   return (
-    <section className={styles.orderSummaryItems} aria-label='Ordered items'>
-      <ul className={styles.itemsList}>
+    <section className={styles.container} aria-label='Ordered items'>
+      <ul className={styles.list}>
         {orderAndCartItems &&
           orderAndCartItems.cartItems &&
           orderAndCartItems.cartItems.map((item, index) => (

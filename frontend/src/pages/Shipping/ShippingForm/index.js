@@ -1,9 +1,9 @@
 import { FormInput } from "#components/ui/FormInput"
-import { ROUTES_CART } from "#constants/routes"
+import { CART } from "#constants/routes"
 import { initialShippingFormData } from "#constants/shippingData"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
-import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { listenInput } from "#utils/listenInput"
 import { onCreateGuestUserWithShippingData } from "#utils/onCreateGuestUserWithShippingData"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -28,9 +28,9 @@ export const ShippingForm = ({ setNotification }) => {
         )
       }
     >
-      <div className={styles.customerInfo}>
-        <fieldset className={styles.infoColumn}>
-          <legend className={styles.containerTitle}>{text.yourInfo}</legend>
+      <div className={styles.container}>
+        <fieldset className={styles.column}>
+          <legend className={styles.title}>{text.yourInfo}</legend>
           {Object.keys(formData).map((field) => (
             <div key={field}>
               <FormInput
@@ -38,12 +38,7 @@ export const ShippingForm = ({ setNotification }) => {
                 key={field}
                 name={field}
                 onChangeListener={(e) =>
-                  listenInputChangeAndSetDataObject(
-                    e,
-                    formData,
-                    setFormData,
-                    setNotification,
-                  )
+                  listenInput(e, formData, setFormData, setNotification)
                 }
                 placeholder={field}
                 value={formData[field]}
@@ -52,19 +47,11 @@ export const ShippingForm = ({ setNotification }) => {
           ))}
         </fieldset>
       </div>
-      <div className={styles.actionButtons} aria-label='Navigation buttons'>
-        <Link
-          className={styles.formButton}
-          to={ROUTES_CART}
-          aria-label='Back to cart'
-        >
+      <div className={styles.options} aria-label='Navigation buttons'>
+        <Link className={styles.option} to={CART} aria-label='Back to cart'>
           {text.backToCart}
         </Link>
-        <button
-          className={styles.formButton}
-          type='submit'
-          aria-label='Submit data button'
-        >
+        <button className={styles.option} type='submit' aria-label='Submit'>
           {text.submitButton}
         </button>
       </div>

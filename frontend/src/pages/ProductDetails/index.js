@@ -6,11 +6,8 @@ export const ProductDetails = () => {
   scrollToTop()
 
   return (
-    <main
-      className={styles.productDetailsPageWrapper}
-      aria-label='Product details page'
-    >
-      <section className={styles.productDetailsPage}>
+    <main className={styles.wrapper} aria-label='Product details page'>
+      <section className={styles.container}>
         <ProductDetailsCard />
       </section>
     </main>

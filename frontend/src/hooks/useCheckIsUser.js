@@ -1,4 +1,4 @@
-import { ROUTES_LOGIN } from "#constants/routes"
+import { LOGIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { useEffect, useState } from "react"
@@ -19,10 +19,7 @@ export const useCheckIsUser = () => {
           () => setNotification(null),
           SHORT_MESSAGE_TIMEOUT,
         )
-        navigateTimeoutId = setTimeout(
-          () => navigate(ROUTES_LOGIN),
-          REDIRECT_TIMEOUT,
-        )
+        navigateTimeoutId = setTimeout(() => navigate(LOGIN), REDIRECT_TIMEOUT)
       }
     }
     return () => {

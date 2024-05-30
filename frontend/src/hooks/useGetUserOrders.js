@@ -1,4 +1,4 @@
-import { getUserOrdersRequest } from "#api/orders/getUserOrdersRequest"
+import { getOrders } from "#api/orders/getOrders"
 import { LONG_MESSAGE_TIMEOUT } from "#constants/time"
 import { useCheckIsUser } from "#hooks/useCheckIsUser"
 import { useEffect, useState } from "react"
@@ -13,7 +13,7 @@ export const useGetUserOrders = () => {
     const getData = async () => {
       if (!user) return
       try {
-        const response = await getUserOrdersRequest(user.id)
+        const response = await getOrders(user.id)
 
         if (response && response.status === 200) {
           setOrders(response.data)

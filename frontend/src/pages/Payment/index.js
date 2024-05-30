@@ -9,9 +9,9 @@ export const Payment = () => {
   scrollToTop()
 
   return (
-    <main className={styles.paymentPageWrapper} aria-label='Payment page'>
+    <main className={styles.wrapper} aria-label='Payment page'>
       {notification && <NotificationCard message={notification} />}
-      <section className={styles.paymentPage}>
+      <section className={styles.container}>
         <PaymentForm />
       </section>
     </main>

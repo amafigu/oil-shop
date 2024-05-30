@@ -1,4 +1,4 @@
-import { uploadToS3 } from "#api/aws/uploadToS3"
+import { uploadFile } from "#api/aws/uploadFile"
 import { createUser } from "#api/users/createUser"
 import { createUserSchema } from "#utils/usersValidation"
 import { onRequestHandlerError } from "./onRequestHandlerError"
@@ -11,7 +11,7 @@ export const onCreateUser = async (e, user, setNotification, file) => {
     let image
     let validUser
     if (file) {
-      image = await uploadToS3(file)
+      image = await uploadFile(file)
       user = { ...user, image: image }
     }
     try {

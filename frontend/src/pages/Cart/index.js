@@ -16,14 +16,14 @@ export const Cart = () => {
   const text = translate.pages.cart
   scrollToTop()
   return (
-    <main className={styles.cartWrapper} aria-label='shopping cart'>
+    <main className={styles.wrapper} aria-label='shopping cart'>
       {notification && <NotificationCard message={notification} />}
-      <section className={styles.cart}>
-        <ul className={styles.cartItemsList} aria-label='cart items'>
+      <section className={styles.container}>
+        <ul className={styles.list} aria-label='items list'>
           {cart.length > 0 ? (
             cart.map((item) => (
               <li
-                className={styles.cartItemContainer}
+                className={styles.item}
                 key={`${item.product.name}${item.product.price}`}
               >
                 <CartItem
@@ -38,7 +38,7 @@ export const Cart = () => {
               </li>
             ))
           ) : (
-            <div className={styles.cartEmptyMessage}>
+            <div className={styles.message}>
               <h3>{text.emptyCart}</h3>
             </div>
           )}

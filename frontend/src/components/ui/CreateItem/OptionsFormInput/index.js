@@ -1,4 +1,4 @@
-import { camelCaseToTitleCase } from "#utils/camelCaseToTitleCase"
+import { camelToTitleCase } from "#utils/camelToTitleCase"
 import { titleCase } from "#utils/titleCase"
 import styles from "./optionsFormInput.module.scss"
 
@@ -11,11 +11,11 @@ export const OptionsFormInput = ({
   property,
 }) => {
   return (
-    <div className={styles.labelAndInputContainer}>
+    <>
       <label className={styles.label} htmlFor='name'>
         {property === "productCategoryId"
-          ? camelCaseToTitleCase("productCategory")
-          : camelCaseToTitleCase(property)}
+          ? camelToTitleCase("productCategory")
+          : camelToTitleCase(property)}
       </label>
       <select
         onChange={(e) => onChange(e, itemData, setItemData, setNotification)}
@@ -41,6 +41,6 @@ export const OptionsFormInput = ({
               ))
           : ""}
       </select>
-    </div>
+    </>
   )
 }

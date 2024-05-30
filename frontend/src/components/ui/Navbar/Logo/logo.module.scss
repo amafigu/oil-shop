@@ -2,13 +2,13 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.logoContainer {
+.container {
   width: 33.333%;
 
   @include flex-justify-center;
 }
 
-.linkChild {
+.link {
   @include flex-align-center;
 }
 

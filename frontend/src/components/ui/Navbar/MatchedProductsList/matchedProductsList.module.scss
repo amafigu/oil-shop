@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.matchedProductsList {
+.list {
   position: absolute;
   left: 24px;
   display: flex;
@@ -39,7 +39,7 @@
       scale: 1.01;
     }
 
-    .dataItem {
+    .content {
       display: block;
       font-weight: theme.$font-weight-normal;
       color: theme.$font-color-primary;

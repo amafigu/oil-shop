@@ -1,6 +1,6 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useMenuOptions } from "#hooks/useMenuOptions"
-import { navigateToProductAndCloseDropdown } from "#utils/navigateToProductAndCloseDropdown"
+import { navigateAndClose } from "#utils/navigateAndClose"
 import { setDefaultImageByError } from "#utils/setDefaultImageByError"
 import { titleCase } from "#utils/titleCase"
 import { useNavigate } from "react-router-dom"
@@ -16,17 +16,14 @@ export const MatchedProductsList = ({
   const { setShowProductsSearchBar } = useMenuOptions()
 
   return (
-    <ul
-      className={styles.matchedProductsList}
-      aria-label={"Searched products list"}
-    >
+    <ul className={styles.list} aria-label={"Searched products list"}>
       {matchedProducts.map((product) => (
         <li
           className={styles.item}
           aria-label={`Searched item: ${product.name}`}
           key={product.name}
           onClick={() =>
-            navigateToProductAndCloseDropdown(
+            navigateAndClose(
               product.name,
               navigate,
               setMatchedProducts,
@@ -37,7 +34,7 @@ export const MatchedProductsList = ({
           }
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              navigateToProductAndCloseDropdown(
+              navigateAndClose(
                 product.name,
                 navigate,
                 setMatchedProducts,
@@ -57,11 +54,11 @@ export const MatchedProductsList = ({
               onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
             />
           </div>
-          <div className={styles.data}>
-            <span className={styles.dataItem}>
+          <div>
+            <span className={styles.content}>
               {product.name ? titleCase(product.name, "_") : ""}
             </span>
-            <span className={styles.dataItem}>{`${product.size} ml`}</span>
+            <span className={styles.content}>{`${product.size} ml`}</span>
           </div>
         </li>
       ))}

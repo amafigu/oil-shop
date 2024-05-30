@@ -1,6 +1,6 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { ROUTES_PRODUCTS } from "#constants/routes"
+import { PRODUCTS } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
@@ -15,10 +15,7 @@ export const ProductCard = ({ product }) => {
   const navigate = useNavigate()
 
   return (
-    <article
-      className={styles.productCard}
-      aria-label={`product: ${product.name}`}
-    >
+    <article className={styles.wrapper} aria-label={`product: ${product.name}`}>
       {product ? (
         <>
           <div className={styles.container}>
@@ -26,10 +23,9 @@ export const ProductCard = ({ product }) => {
               tabIndex={0}
               role='button'
               className={styles.body}
-              onClick={() => navigate(`${ROUTES_PRODUCTS}/${product.name}`)}
+              onClick={() => navigate(`${PRODUCTS}/${product.name}`)}
               onKeyDown={(e) => {
-                if (e.key === "Enter")
-                  navigate(`${ROUTES_PRODUCTS}/${product.name}`)
+                if (e.key === "Enter") navigate(`${PRODUCTS}/${product.name}`)
               }}
             >
               <div className={styles.imageContainer}>

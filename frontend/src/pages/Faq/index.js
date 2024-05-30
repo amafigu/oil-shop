@@ -9,19 +9,16 @@ export const Faq = () => {
   scrollToTop()
 
   return (
-    <main
-      className={styles.faqPageWrapper}
-      aria-label='Frequent asked questions page'
-    >
-      <div className={styles.faqPage}>
+    <main className={styles.wrapper} aria-label='Frequent asked questions page'>
+      <div className={styles.container}>
         <section className={styles.questionsAndAnswers}>
           <ul>
             {questionsAndAnswers.map((item) => (
               <li key={item.question}>
-                <p className={styles.question} aria-label='question'>
+                <p className={styles.title} aria-label='question'>
                   {text[item.question]}
                 </p>
-                <p className={styles.answer} aria-label='answer'>
+                <p className={styles.subtitle} aria-label='answer'>
                   {text[item.answer]}
                 </p>
               </li>

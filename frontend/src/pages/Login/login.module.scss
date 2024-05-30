@@ -2,11 +2,11 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.loginPageWrapper {
+.wrapper {
   @include flex-column-all-center;
 }
 
-.loginPage {
+.container {
   width: 100%;
   min-height: theme.$min-height-page-regular;
 
@@ -18,7 +18,7 @@
   }
 }
 
-.logoAndFormContainer {
+.formContainer {
   width: theme.$width-login-register-form;
   height: auto;
 

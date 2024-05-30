@@ -1,13 +1,13 @@
-import { ROUTES_PRODUCTS } from "#constants/routes"
+import { PRODUCTS } from "#constants/routes"
 
-export const navigateToProductAndCloseDropdown = (
+export const navigateAndClose = (
   name,
   navigate,
   setItemsList,
   setShowList,
   setSearchProductText,
 ) => {
-  navigate(`${ROUTES_PRODUCTS}/${name}`)
+  navigate(`${PRODUCTS}/${name}`)
   setItemsList([])
   setShowList(false)
   setSearchProductText("")

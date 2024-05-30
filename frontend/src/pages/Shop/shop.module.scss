@@ -2,23 +2,23 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.shopPageWrapper {
+.wrapper {
   @include flex-column-align-center;
   @include margin-page-wrapper;
 }
 
-.shopPage {
+.products {
   width: 80%;
   min-height: theme.$min-height-page-small;
+
+  @include flex-column-all-center;
 
   @include media.widescreen-down {
     width: 90%;
   }
-
-  @include flex-column-all-center;
 }
 
-.navigationMenuContainer {
+.container {
   display: flex;
 
   @include media.tablet-down {
@@ -26,7 +26,7 @@
   }
 }
 
-.sortedProductsSection {
+.list {
   margin: theme.$spacing-component-divider-vertical 0;
 
   @include flex-all-center;

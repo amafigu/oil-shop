@@ -13,13 +13,13 @@ export const FooterIcons = () => {
   const text = translate.components.footer
 
   return (
-    <section className={styles.iconsSection}>
-      <ul className={styles.iconsColumns}>
+    <section className={styles.wrapper}>
+      <ul className={styles.list}>
         <li className={styles.item}>
-          <div className={styles.itemTitle}>
+          <div className={styles.title}>
             <h4>{text.iconsColumns.creditCards.title}</h4>
           </div>
-          <ul className={styles.iconsList}>
+          <ul className={styles.icons}>
             <li>
               <FontAwesomeIcon icon={getIconByName("faPaypal")} size='2xl' />
             </li>
@@ -29,10 +29,10 @@ export const FooterIcons = () => {
           </ul>
         </li>
         <li className={styles.item}>
-          <div className={styles.itemTitle}>
+          <div className={styles.title}>
             <h4>{text.iconsColumns.shippingPartners.title}</h4>
           </div>
-          <ul className={styles.iconsList}>
+          <ul className={styles.icons}>
             <li>
               <FontAwesomeIcon icon={getIconByName("faDhl")} size='2xl' />
             </li>
@@ -42,10 +42,10 @@ export const FooterIcons = () => {
           </ul>
         </li>
         <li className={styles.item}>
-          <div className={styles.itemTitle}>
+          <div className={styles.title}>
             <h4>{text.iconsColumns.socialMedia.title}</h4>
           </div>
-          <ul className={styles.iconsList}>
+          <ul className={styles.icons}>
             <li>
               <a
                 href={SOCIAL_MEDIA_URL_FACEBOOK}

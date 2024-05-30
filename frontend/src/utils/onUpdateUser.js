@@ -1,5 +1,5 @@
-import { uploadToS3 } from "#api/aws/uploadToS3"
-import { updateUserDataRequest } from "#api/users/updateUserDataRequest"
+import { uploadFile } from "#api/aws/uploadFile"
+import { updateUser } from "#api/users/updateUser"
 import { updateUserSchema } from "#utils/usersValidation"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 import { onValidationError } from "./onValidationError"
@@ -20,7 +20,7 @@ export const onUpdateUser = async (
     let image
 
     if (key === "image" && file) {
-      image = await uploadToS3(file)
+      image = await uploadFile(file)
       validProperty = { [key]: image }
     } else {
       try {
@@ -33,7 +33,7 @@ export const onUpdateUser = async (
       }
     }
 
-    const response = await updateUserDataRequest(userId, validProperty)
+    const response = await updateUser(userId, validProperty)
     if (response && response.status === 200) {
       const updatedUser = response.data.user
       setUpdatedUserData(updatedUser)

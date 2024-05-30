@@ -12,14 +12,14 @@ export const OrderSummary = () => {
     useGetOrderSummary()
 
   return (
-    <main className={styles.orderSummary} aria-label='Order Summary Page'>
+    <main className={styles.wrapper} aria-label='Order Summary Page'>
       {notification && <NotificationCard message={notification} />}
-      <header className={styles.columnTitle}>
-        <h1 className={styles.pageTitle}>{text.thankClient}</h1>
-        <h2 className={styles.summaryTitle}>{text.orderResume}:</h2>
+      <header className={styles.header}>
+        <h1 className={styles.title}>{text.thankClient}</h1>
+        <h2 className={styles.subtitle}>{text.orderResume}:</h2>
       </header>
-      <section className={styles.columnsSection} aria-label='Order details'>
-        <div className={styles.dataColumn}>
+      <section className={styles.columns} aria-label='Order details'>
+        <div className={styles.customer}>
           {shippingData && (
             <OrderSummaryData
               userData={userData}
@@ -28,7 +28,7 @@ export const OrderSummary = () => {
             />
           )}
         </div>
-        <div className={styles.itemsColumn}>
+        <div className={styles.items}>
           {orderAndCartItems && (
             <OrderSummaryItemsList orderAndCartItems={orderAndCartItems} />
           )}

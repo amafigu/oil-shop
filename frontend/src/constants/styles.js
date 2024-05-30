@@ -1,32 +1,31 @@
 export const STYLES = Object.freeze({
   BUTTONS: {
     SHOW_HIDE: "showHideButtons",
-    ACTION: "actionButton",
-    FORM: "formButton",
-    WIDE: "wideButton",
-    ADD_PRODUCT: "addProductButton",
-    SLIDER: "sliderButton",
-    COUNTER: "counterButton",
-    CART_ITEM_QUANTITY: "cartItemQuantityButton",
-    CART_ITEM_DELETE: "cartItemDeleteButton",
-    LANGUAGES_SELECTOR: "languagesSelector",
+    ACTION: "action",
+    WIDE: "wide",
+    ADD_PRODUCT: "addProduct",
+    SLIDER: "slider",
+    COUNTER: "counter",
+    CART_ITEM_QUANTITY: "cartQuantity",
+    CART_ITEM_DELETE: "cartDelete",
+    LANGUAGES_SELECTOR: "languages",
   },
   LINKS: {
-    NAVIGATION_MENU_LINK: "navigationMenuLink",
-    NAVIGATION_MENU_ACTIVE_LINK: "navigationMenuActiveLink",
+    NAVIGATION_MENU_LINK: "navigation",
+    NAVIGATION_MENU_ACTIVE_LINK: "navigationActive",
   },
   FORMS: {
-    FIELD: "formField",
+    FIELD: "field",
     FIELD_SEARCH_INPUT: "formFieldSearchInput",
     ITEM_ROW: "itemRow",
   },
   COMPONENTS: {
     NAVIGATION_MENU: {
-      PRODUCT_CATEGORIES: "navigationMenuProductCategories",
-      PAGES: "navigationMenuPages",
+      PRODUCT_CATEGORIES: "categories",
+      PAGES: "pages",
     },
     MOBILE_MENU: {
-      ITEMS: "mobileMenuItems",
+      ITEMS: "mobile",
     },
   },
 })

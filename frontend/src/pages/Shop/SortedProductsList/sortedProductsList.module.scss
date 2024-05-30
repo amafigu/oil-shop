@@ -1,7 +1,7 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.sortedProductsList {
+.container {
   flex-grow: 1;
   flex-shrink: 1;
   flex-wrap: wrap;

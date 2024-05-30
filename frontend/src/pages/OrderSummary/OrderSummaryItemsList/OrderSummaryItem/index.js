@@ -18,7 +18,7 @@ export const OrderSummaryItem = ({ image, name, size, quantity }) => {
           onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
         />
       </div>
-      <div className={styles.itemDetails} aria-label='product details'>
+      <div className={styles.details} aria-label='product details'>
         <span>{titleCase(name, "_")}</span>
         <span>{size} ml</span>
         <span>

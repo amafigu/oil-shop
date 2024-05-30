@@ -9,12 +9,12 @@ export const OrderCard = ({ product, quantity }) => {
   const text = components.orderCard
   return (
     <article
-      className={styles.card}
+      className={styles.wrapper}
       aria-label={`${text.orderedProduct}: ${product.name}`}
     >
       {product ? (
         <dl>
-          <div className={styles.bodyWrapper}>
+          <div className={styles.container}>
             <div className={styles.body}>
               <div className={styles.imageContainer}>
                 <img
@@ -26,11 +26,8 @@ export const OrderCard = ({ product, quantity }) => {
                   }
                 />
               </div>
-
               <div className={styles.description}>
-                <dt className={styles.hideForSemantics}>
-                  {text.hiddenSemantics}
-                </dt>
+                <dt className={styles.hide}>{text.hiddenSemantics}</dt>
                 <dd>{`${quantity} ${titleCase(product.name, "_")} ${
                   product.size
                 } ml`}</dd>

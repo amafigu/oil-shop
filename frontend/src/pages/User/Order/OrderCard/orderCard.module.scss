@@ -2,14 +2,14 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.card {
+.wrapper {
   display: flex;
   padding: theme.$spacing-small 0;
   overflow: hidden;
   border-bottom: solid 1px theme.$font-color-light;
 }
 
-.bodyWrapper {
+.container {
   height: 120px;
 
   @include flex-align-center;

@@ -1,4 +1,4 @@
-import { ROUTES_CHECKOUT_PAYMENT } from "#constants/routes"
+import { PAYMENT } from "#constants/routes"
 import { onCreateGuestUser } from "./onCreateGuestUser"
 import { onCreateShippingData } from "./onCreateShippingData"
 import { onRequestHandlerError } from "./onRequestHandlerError"
@@ -36,7 +36,7 @@ export const onCreateGuestUserWithShippingData = async (
         shippingFormData,
       )
       if (shippingDataResponse) {
-        navigate(ROUTES_CHECKOUT_PAYMENT)
+        navigate(PAYMENT)
       }
     }
   } catch (error) {

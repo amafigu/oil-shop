@@ -19,7 +19,7 @@ import "jest-environment-jsdom"
 import { EditableItem } from "./index"
 
 jest.mock("#utils/onUpdateProduct")
-jest.mock("#api/products/updateProductDataRequest")
+jest.mock("#api/products/updateProduct")
 jest.mock("#context/userContext")
 jest.mock("#context/productContext")
 jest.mock("#utils/onUpdateUser")

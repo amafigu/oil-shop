@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.adminPage {
+.wrapper {
   justify-content: flex-start;
   min-height: theme.$min-height-page-regular;
 
@@ -19,7 +19,7 @@
     }
   }
 
-  .toggleButton {
+  .button {
     margin: theme.$spacing-regular 0;
   }
 }

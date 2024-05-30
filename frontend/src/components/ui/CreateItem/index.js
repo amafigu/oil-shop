@@ -3,7 +3,7 @@ import { FormInput } from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
-import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { listenInput } from "#utils/listenInput"
 import { setFileToUpload } from "#utils/setFileToUpload"
 import { useState } from "react"
 import { OptionsFormInput } from "./OptionsFormInput"
@@ -29,7 +29,7 @@ export const CreateItem = ({
   return (
     <section aria-label='create item form'>
       {notification && <NotificationCard message={notification} />}
-      <form className={styles.form}>
+      <form className={styles.container}>
         {Object.keys(itemData).map((field) =>
           field !== "productCategoryId" ? (
             <FormInput
@@ -51,14 +51,14 @@ export const CreateItem = ({
               key={field}
               itemData={itemData}
               setItemData={setItemData}
-              onChange={listenInputChangeAndSetDataObject}
+              onChange={listenInput}
               setNotification={setNotification}
               itemCategories={itemCategories}
               property={"productCategoryId"}
             />
           ),
         )}
-        <div className={styles.buttonContainer}>
+        <div className={styles.button}>
           <ActionButton
             action={async (e) => {
               await onCreate(e, itemData, setNotification, file)

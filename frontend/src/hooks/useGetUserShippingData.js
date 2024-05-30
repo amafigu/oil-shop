@@ -1,7 +1,7 @@
 import { getUserShippingData } from "#api/users/getUserShippingData"
 import useUserContext from "#context/userContext"
 import { onRequestHandlerError } from "#utils/onRequestHandlerError"
-import { onUpdateUserShippingData } from "#utils/onUpdateUserShippingData"
+import { onUpdateShippingData } from "#utils/onUpdateShippingData"
 import { useEffect, useState } from "react"
 
 export const useGetUserShippingData = () => {
@@ -52,7 +52,7 @@ export const useGetUserShippingData = () => {
     setNotification,
   ) => {
     try {
-      const response = await onUpdateUserShippingData(
+      const response = await onUpdateShippingData(
         e,
         key,
         userId,

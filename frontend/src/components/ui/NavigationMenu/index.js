@@ -5,9 +5,9 @@ import { useActivePageLink } from "#hooks/useActivePageLink"
 import { useMenuOptions } from "#hooks/useMenuOptions"
 import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
 import { useTranslation } from "#hooks/useTranslation"
-import { accessTranslationWithPathString } from "#utils/accessTranslationWithPathString"
+import { camelCase } from "#utils/camelCase"
 import { scrollToTop } from "#utils/scrollToTop"
-import { toCamelCase } from "#utils/toCamelCase"
+import { translateByPath } from "#utils/translateByPath"
 import { useNavigate } from "react-router-dom"
 import styles from "./navigationMenu.module.scss"
 
@@ -35,7 +35,7 @@ export const NavigationMenu = ({ items, className }) => {
 
   return (
     <nav className={styles[className]} aria-label='navigation menu'>
-      <ul className={styles.itemsList}>
+      <ul className={styles.list}>
         {items &&
           items.length > 0 &&
           items.map((item, index) => (
@@ -44,11 +44,8 @@ export const NavigationMenu = ({ items, className }) => {
                 action={(e) => onSelect(e, item)}
                 text={
                   item.type === "link"
-                    ? accessTranslationWithPathString(
-                        components.navigationMenu,
-                        item.label,
-                      )
-                    : components.navigationMenu[toCamelCase(item.label, "_")]
+                    ? translateByPath(components.navigationMenu, item.label)
+                    : components.navigationMenu[camelCase(item.label, "_")]
                 }
                 className={
                   item.label === activePageLink || item.label === activeCategory

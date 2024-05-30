@@ -3,11 +3,11 @@ import { ActionButton } from "#components/ui/ActionButton"
 import { LanguageSelector } from "#components/ui/LanguageSelector"
 import { NavigationMenu } from "#components/ui/NavigationMenu"
 import {
-  ROUTES_CART,
-  ROUTES_CURRENT_ADMIN,
-  ROUTES_CURRENT_CUSTOMER,
-  ROUTES_LOGIN,
-  ROUTES_SHOP,
+  CART,
+  CURRENT_ADMIN,
+  CURRENT_CUSTOMER,
+  LOGIN,
+  SHOP,
 } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
@@ -34,12 +34,12 @@ export const MobileMenu = ({
     setShowMobileMenu(false)
   }
   return (
-    <div
-      className={styles.mobileMenu}
+    <nav
+      className={styles.wrapper}
       aria-label='navigation menu for mobile devices'
     >
-      <ul className={styles.itemsList}>
-        <li className={`${styles.closeMenuIconContainer} ${styles.listItem}`}>
+      <ul className={styles.list}>
+        <li className={`${styles.closeIcon} ${styles.item}`}>
           <ActionButton
             action={() => setShowMobileMenu(false)}
             text={<FontAwesomeIcon icon={getIconByName("faX")} size={"xl"} />}
@@ -47,7 +47,7 @@ export const MobileMenu = ({
             ariaLabel={"show mobile menu"}
           />
         </li>
-        <li className={styles.listItem}>
+        <li className={styles.item}>
           <ActionButton
             action={onSearchBarToggle}
             text={
@@ -57,7 +57,7 @@ export const MobileMenu = ({
             ariaLabel={"show search bar"}
           />
         </li>
-        <li className={`${styles.listItem} ${styles.itemsContainer}`}>
+        <li className={`${styles.item} ${styles.container}`}>
           <ActionButton
             action={() => setShowLanguagesOptions((prevState) => !prevState)}
             text={
@@ -83,20 +83,18 @@ export const MobileMenu = ({
           )}
         </li>
         <li
-          className={`${styles.listItem} ${styles.itemsContainer}`}
+          className={`${styles.item} ${styles.container}`}
           aria-label={"navigate to cart"}
         >
-          <Link onClick={() => setShowMobileMenu(false)} to={ROUTES_CART}>
+          <Link onClick={() => setShowMobileMenu(false)} to={CART}>
             <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
-            <span className={styles.productsQuantity}>
-              {getAllProductsQuantity}
-            </span>
+            <span>{getAllProductsQuantity}</span>
           </Link>
         </li>
         {isLoggedIn ? (
-          <ul className={styles.userAndLogoutIconContainer}>
+          <ul className={styles.userIcons}>
             <li
-              className={styles.listItem}
+              className={styles.item}
               onClick={() => setShowMobileMenu(false)}
             >
               <ActionButton
@@ -112,16 +110,15 @@ export const MobileMenu = ({
               />
             </li>
             <li
-              className={styles.listItem}
+              className={styles.item}
               onClick={() => setShowMobileMenu(false)}
               aria-label='navigate to user profile'
             >
               <Link
-                className={styles.linkChild}
                 to={
                   user && user.role === "admin"
-                    ? ROUTES_CURRENT_ADMIN
-                    : ROUTES_CURRENT_CUSTOMER
+                    ? CURRENT_ADMIN
+                    : CURRENT_CUSTOMER
                 }
               >
                 <FontAwesomeIcon icon={getIconByName("faUser")} />
@@ -129,8 +126,8 @@ export const MobileMenu = ({
             </li>
           </ul>
         ) : (
-          <div className={styles.listItem}>
-            <Link className={styles.linkChild} to={ROUTES_LOGIN}>
+          <div className={styles.item}>
+            <Link to={LOGIN}>
               <FontAwesomeIcon icon={getIconByName("faUser")} />
             </Link>
             <ActionButton
@@ -147,12 +144,12 @@ export const MobileMenu = ({
           productCategories &&
           productCategories.map((category) => ({
             type: "category",
-            path: `${ROUTES_SHOP}?category=${category.name}`,
+            path: `${SHOP}?category=${category.name}`,
             label: category.name,
           }))
         }
         className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
       />
-    </div>
+    </nav>
   )
 }

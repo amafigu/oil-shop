@@ -1,5 +1,5 @@
 import { ActionButton } from "#components/ui/ActionButton"
-import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#constants/routes"
+import { LOGIN, SIGN_UP } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import { useMenuOptions } from "#hooks/useMenuOptions"
 import { useTranslation } from "#hooks/useTranslation"
@@ -21,18 +21,15 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
 
   return (
     <ul
-      className={styles.languageSelector}
+      className={styles.list}
       style={
-        currentPath.includes(ROUTES_SIGN_UP) ||
-        currentPath.includes(ROUTES_LOGIN)
+        currentPath.includes(SIGN_UP) || currentPath.includes(LOGIN)
           ? { margin: "0" }
           : {}
       }
     >
       <li
-        className={`${styles.listItem} ${
-          language === "en" ? styles.activeCategory : ""
-        }`}
+        className={`${styles.item} ${language === "en" ? styles.active : ""}`}
       >
         <ActionButton
           action={() => changeLanguage("en")}
@@ -42,9 +39,7 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
         />
       </li>
       <li
-        className={`${styles.listItem} ${
-          language === "de" ? styles.activeCategory : ""
-        }`}
+        className={`${styles.item} ${language === "de" ? styles.active : ""}`}
       >
         <ActionButton
           action={() => changeLanguage("de")}

@@ -1,5 +1,5 @@
-import { uploadToS3 } from "#api/aws/uploadToS3"
-import { updateProductDataRequest } from "#api/products/updateProductDataRequest"
+import { uploadFile } from "#api/aws/uploadFile"
+import { updateProduct } from "#api/products/updateProduct"
 import { updateProductSchema } from "#utils/productsValidation"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 import { onValidationError } from "./onValidationError"
@@ -21,7 +21,7 @@ export const onUpdateProduct = async (
     let image
 
     if (key === "image" && file) {
-      image = await uploadToS3(file)
+      image = await uploadFile(file)
       validProperty = { [key]: image }
     } else {
       try {
@@ -37,7 +37,7 @@ export const onUpdateProduct = async (
       }
     }
 
-    const dataRequest = await updateProductDataRequest(productId, validProperty)
+    const dataRequest = await updateProduct(productId, validProperty)
     if (dataRequest && dataRequest.status === 200) {
       const updatedProduct = dataRequest.data.product
       setUpdatedProductData(updatedProduct)

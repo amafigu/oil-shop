@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.ordersItem {
+.item {
   display: flex;
   margin: theme.$margin-order-list 0;
 
@@ -11,7 +11,7 @@
   }
 }
 
-.details {
+.content {
   margin-right: theme.$spacing-semi-huge;
 
   @include media.mobile {
@@ -20,7 +20,7 @@
   }
 }
 
-.detailsItem {
+.details {
   display: flex;
 }
 
@@ -34,21 +34,21 @@
   @include property-font-secondary-regular;
 }
 
-.cardsList {
+.list {
   justify-content: space-evenly;
   width: 600px;
+
+  @include flex-column;
 
   @include media.desktop-down {
     width: 480px;
   }
-
-  @include flex-column;
 
   @include media.mobile {
     width: 100%;
   }
 }
 
-.noItems {
+.info {
   @include property-font-secondary-semi-bold;
 }

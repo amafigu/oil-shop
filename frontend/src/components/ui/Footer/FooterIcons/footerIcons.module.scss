@@ -2,12 +2,12 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.iconsSection {
+.wrapper {
   display: flex;
   height: fit-content;
 }
 
-.iconsColumns {
+.list {
   @include footer-column;
 
   @include media.desktop-down {
@@ -28,14 +28,14 @@
   @include flex-column-align-center;
 }
 
-.itemTitle {
+.title {
   height: 40px;
 
   @include property-font-primary-semi-bold;
   @include flex-all-center;
 }
 
-.iconsList {
+.icons {
   justify-content: space-evenly;
   width: 100%;
 

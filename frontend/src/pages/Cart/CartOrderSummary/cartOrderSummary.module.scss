@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.cartOrderSummary {
+.wrapper {
   width: 35%;
   max-width: 460px;
   height: fit-content;
@@ -23,7 +23,7 @@
   }
 }
 
-.orderSummaryTitle {
+.title {
   margin-bottom: theme.$spacing-semi-regular-large;
   text-transform: uppercase;
 
@@ -35,7 +35,7 @@
   }
 }
 
-.cartOrderSummaryDetails {
+.details {
   margin-bottom: theme.$spacing-large;
 
   @include media.desktop-down {
@@ -43,21 +43,21 @@
   }
 }
 
-.summaryItem {
+.item {
   display: flex;
 
-  .summaryItemProperty {
+  .field {
     margin-right: theme.$spacing-smallest;
 
     @include property-font-secondary-semi-bold;
   }
 }
 
-.totalCostDivider {
+.divider {
   margin: theme.$spacing-large 0;
 }
 
-.confirmOrderButton {
+.link {
   flex-grow: 1;
 
   @include action-button;

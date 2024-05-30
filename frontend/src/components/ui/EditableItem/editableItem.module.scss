@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.editableItem {
+.wrapper {
   display: flex;
   width: 100%;
 
@@ -47,7 +47,7 @@
   @include responsive-image;
 }
 
-.form {
+.item {
   width: 540px;
   margin: theme.$spacing-regular 0;
 
