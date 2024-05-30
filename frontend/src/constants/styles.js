@@ -22,11 +22,11 @@ export const STYLES = Object.freeze({
   },
   COMPONENTS: {
     NAVIGATION_MENU: {
-      PRODUCT_CATEGORIES: "navigationMenuProductCategories",
-      PAGES: "navigationMenuPages",
+      PRODUCT_CATEGORIES: "categories",
+      PAGES: "pages",
     },
     MOBILE_MENU: {
-      ITEMS: "mobileMenuItems",
+      ITEMS: "mobile",
     },
   },
 })

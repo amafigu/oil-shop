@@ -22,7 +22,7 @@ export const Navbar = () => {
     <>
       {!ROUTES_WITHOUT_NAVBAR.includes(currentPath) && (
         <>
-          <nav className={styles.navbar}>
+          <nav className={styles.container}>
             <SearchBar
               searchProductText={searchProductText}
               setSearchProductText={setSearchProductText}

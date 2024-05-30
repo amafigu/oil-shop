@@ -35,7 +35,7 @@ export const NavigationMenu = ({ items, className }) => {
 
   return (
     <nav className={styles[className]} aria-label='navigation menu'>
-      <ul className={styles.itemsList}>
+      <ul className={styles.list}>
         {items &&
           items.length > 0 &&
           items.map((item, index) => (

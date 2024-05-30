@@ -8,7 +8,7 @@ const NotificationCard = ({
   textValidationErrorsObject,
 }) => {
   return (
-    <article className={styles.notificationCard}>
+    <article className={styles.container}>
       {message && message !== "" && (
         <div className={styles.modal}>
           <div className={styles.card}>{message}</div>

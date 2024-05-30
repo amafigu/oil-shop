@@ -13,16 +13,16 @@ export const SearchBar = ({
   const { showProductsSearchBar } = useMenuOptions()
 
   return (
-    <section className={styles.searchBar}>
+    <section className={styles.wrapper}>
       <div
         className={
           showProductsSearchBar
-            ? `${styles.inputContainer} ${styles.showBar}`
-            : `${styles.hideBar}`
+            ? `${styles.container} ${styles.show}`
+            : `${styles.hide}`
         }
       >
         <input
-          className={styles.searchTextInput}
+          className={styles.input}
           onChange={(e) =>
             searchProducts(
               e,
