@@ -11,10 +11,8 @@ describe("About page should", () => {
     useTranslation.mockReturnValue({ translate })
   })
 
-  test("render github link correctly", () => {
+  test("renders correctly", () => {
     render(<About />)
-    expect(
-      screen.getByText("https://github.com/amafigu/oil-shop"),
-    ).toBeInTheDocument()
+    expect(screen.getByText("To Source Code")).toBeInTheDocument()
   })
 })

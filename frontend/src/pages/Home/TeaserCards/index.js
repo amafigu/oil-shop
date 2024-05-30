@@ -7,13 +7,13 @@ import styles from "./teaserCards.module.scss"
 export const TeaserCards = () => {
   const { translate } = useTranslation()
   return (
-    <section className={styles.teaserCardsWrapper} aria-label='teaser items'>
-      <div className={styles.columsTitleContainer}>
-        <p className={styles.columnsTitle}>
+    <section className={styles.wrapper} aria-label='teaser items'>
+      <div className={styles.container}>
+        <p className={styles.title}>
           {translate.pages.welcome.subTeaser.title}
         </p>
       </div>
-      <div className={styles.teaserCards}>
+      <div className={styles.cards}>
         {teaserCards.map((card, index) => (
           <TeaserCard
             title={card.title}

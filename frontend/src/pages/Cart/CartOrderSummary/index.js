@@ -28,18 +28,14 @@ export const CartOrderSummary = ({ totalCost }) => {
       const text = "Confirm Purchase"
 
       return (
-        <Link
-          className={styles.confirmOrderButton}
-          to={route}
-          aria-label={label}
-        >
+        <Link className={styles.link} to={route} aria-label={label}>
           {text}
         </Link>
       )
     } else {
       return (
         <Link
-          className={styles.confirmOrderButton}
+          className={styles.link}
           to={ROUTES_CART}
           aria-label='make an order to continue to checkout'
         >
@@ -48,23 +44,24 @@ export const CartOrderSummary = ({ totalCost }) => {
       )
     }
   }
+
   return (
-    <section className={styles.cartOrderSummary} aria-label='order summary'>
-      <h2 className={styles.orderSummaryTitle}>{text.orderSummary}</h2>
-      <dl className={styles.cartOrderSummaryDetails}>
-        <div className={styles.summaryItem}>
-          <dt className={styles.summaryItemProperty}>{text.orderSubtotal}</dt>
+    <section className={styles.wrapper} aria-label='order summary'>
+      <h2 className={styles.title}>{text.orderSummary}</h2>
+      <dl className={styles.details}>
+        <div className={styles.item}>
+          <dt className={styles.field}>{text.orderSubtotal}</dt>
           <dd>{totalCost(cart).toFixed(2)} €</dd>
         </div>
-        <div className={styles.summaryItem}>
-          <dt className={styles.summaryItemProperty}>{text.orderShipping} </dt>
+        <div className={styles.item}>
+          <dt className={styles.field}>{text.orderShipping} </dt>
           <dd>{SHIPPING_COST.toFixed(2)} €</dd>
         </div>
-        <div className={styles.totalCostDivider}>
+        <div className={styles.divider}>
           <hr />
         </div>
-        <div className={styles.summaryItem}>
-          <dt className={styles.summaryItemProperty}>{text.orderTotal}</dt>
+        <div className={styles.item}>
+          <dt className={styles.field}>{text.orderTotal}</dt>
           <dd>{cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €</dd>
         </div>
       </dl>

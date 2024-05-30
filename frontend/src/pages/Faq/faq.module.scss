@@ -1,11 +1,11 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.faqPageWrapper {
+.wrapper {
   @include flex-justify-center;
 }
 
-.faqPage {
+.container {
   @include flex-column-align-center;
 
   width: theme.$page-width-primary;
@@ -16,14 +16,14 @@
   max-width: theme.$section-width-primary;
 }
 
-.question {
+.title {
   margin-bottom: theme.$spacing-semi-regular-semi-large;
   font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-normal;
   text-align: center;
 }
 
-.answer {
+.subtitle {
   margin-bottom: theme.$spacing-large;
   font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-extra-light;

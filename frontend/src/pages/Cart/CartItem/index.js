@@ -19,31 +19,31 @@ export const CartItem = ({
 }) => {
   const { removeProduct, updateProductQuantity } = useCart()
   return (
-    <article className={styles.cartItem} aria-label='cart item'>
-      <div className={styles.imagesAndDetails}>
+    <article className={styles.wrapper} aria-label='cart item'>
+      <div className={styles.container}>
         <img
           src={image}
           alt={name}
-          className={styles.cartItemImage || DEFAULT_PRODUCT_IMAGE}
+          className={styles.image || DEFAULT_PRODUCT_IMAGE}
           onError={(e) => {
             setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
           }}
         />
-        <div className={styles.cartItemDetails}>
+        <div className={styles.details}>
           <span>{titleCase(name, "_")}</span>
           <span>{description}</span>
           <span>{size} ml</span>
         </div>
       </div>
-      <div className={styles.cartItemSelectors}>
-        <div className={styles.quantityButtonsContainer}>
+      <div className={styles.selectors}>
+        <div className={styles.buttons}>
           <ActionButton
             action={() => updateProductQuantity(name, quantity - 1)}
             text={<FontAwesomeIcon icon={getIconByName("faMinus")} />}
             className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
             ariaLabel={`Substract one ${name} from cart`}
           />
-          <span className={styles.cartItemQuantityInput}>{quantity}</span>
+          <span className={styles.quantity}>{quantity}</span>
           <ActionButton
             action={() => updateProductQuantity(name, quantity + 1)}
             text={<FontAwesomeIcon icon={getIconByName("faPlus")} />}
@@ -51,7 +51,7 @@ export const CartItem = ({
             ariaLabel={`Add one ${name} to cart`}
           />
         </div>
-        <div className={styles.cartItemTotalCost}>
+        <div className={styles.cost}>
           {(quantity * Number(price)).toFixed(2)} €
         </div>
         <div className={styles.deleteButtonWrapper}>

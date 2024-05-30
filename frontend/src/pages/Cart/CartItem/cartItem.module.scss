@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.cartItem {
+.wrapper {
   @include flex-align-center;
 
   @include media.desktop-down {
@@ -10,7 +10,7 @@
   }
 }
 
-.imagesAndDetails {
+.container {
   @include flex-align-center;
 
   flex-grow: 1;
@@ -22,7 +22,7 @@
   }
 }
 
-.cartItemImage {
+.image {
   width: 3.5rem;
   min-height: 90px;
   max-height: 90px;
@@ -36,7 +36,7 @@
   }
 }
 
-.cartItemDetails {
+.details {
   flex-grow: 1;
   flex-shrink: 1;
   width: 172px;
@@ -45,7 +45,7 @@
   @include flex-column;
 }
 
-.cartItemSelectors {
+.selectors {
   @include flex-align-center;
 
   flex-grow: 1;
@@ -58,14 +58,14 @@
   }
 }
 
-.quantityButtonsContainer {
+.buttons {
   display: flex;
   flex-basis: 0;
   flex-grow: 1;
   margin-left: theme.$spacing-regular;
 }
 
-.cartItemQuantityInput {
+.quantity {
   @include flex-all-center;
 
   width: 2rem;
@@ -74,7 +74,7 @@
   outline: none;
 }
 
-.cartItemTotalCost {
+.cost {
   min-width: 120px;
 
   @include flex-all-center;

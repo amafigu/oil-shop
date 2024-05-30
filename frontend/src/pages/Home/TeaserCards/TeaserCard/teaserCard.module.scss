@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.teaserSingleCard {
+.container {
   width: 20%;
   padding: theme.$spacing-semi-regular-large;
 
@@ -17,7 +17,7 @@
   }
 }
 
-.teaserCardTitle {
+.title {
   display: flex;
   align-items: flex-start;
   min-height: 48px;
@@ -27,7 +27,7 @@
   text-align: center;
 }
 
-.teaserCardText {
+.text {
   height: fit-content;
   min-height: 120px;
   margin-bottom: theme.$spacing-small;
@@ -59,6 +59,6 @@
   }
 }
 
-.iconColumns {
+.icon {
   font-size: theme.$font-size-teaser;
 }

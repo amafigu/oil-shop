@@ -4,9 +4,9 @@ import styles from "./banner.module.scss"
 
 export const Banner = () => {
   return (
-    <div className={styles.videoBannerWrapper} aria-label='page banner'>
-      <div className={styles.outerContainer}>
-        <div className={styles.videoWrapper}>
+    <div className={styles.wrapper} aria-label='page banner'>
+      <div className={styles.container}>
+        <div className={styles.content}>
           <video
             aria-label='background video'
             autoPlay

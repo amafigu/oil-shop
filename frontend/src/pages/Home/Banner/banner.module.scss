@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.videoBannerWrapper {
+.wrapper {
   @include flex-all-center;
 
   width: 100%;
@@ -12,7 +12,7 @@
     height: 100%;
   }
 
-  .outerContainer {
+  .container {
     max-width: 1000px;
     max-height: 500px;
     margin: auto;
@@ -25,7 +25,7 @@
     }
   }
 
-  .videoWrapper {
+  .content {
     --calculated-height: calc(100vw / 2);
     --max-height: 500px;
 

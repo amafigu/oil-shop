@@ -46,7 +46,7 @@ export const Slider = ({ items }) => {
   }
 
   return (
-    <section className={styles.slider} aria-label='slider'>
+    <section className={styles.container} aria-label='product slider'>
       <ActionButton
         action={previousItem}
         text={

@@ -2,13 +2,13 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.cartWrapper {
+.wrapper {
   @include flex-justify-center;
 
   margin: theme.$spacing-component-divider-vertical 0;
 }
 
-.cart {
+.container {
   display: flex;
   width: 86%;
 
@@ -22,7 +22,7 @@
   }
 }
 
-.cartItemsList {
+.list {
   @include flex-column;
 
   flex-grow: 1;
@@ -36,7 +36,7 @@
   }
 }
 
-.cartItemContainer {
+.item {
   margin-top: theme.$spacing-regular;
 
   hr {
@@ -59,7 +59,7 @@
   }
 }
 
-.cartEmptyMessage {
+.message {
   @include flex-all-center;
 
   height: 9rem;

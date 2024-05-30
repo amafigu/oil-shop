@@ -35,14 +35,14 @@ export const Admin = () => {
   const productsText = pages.admin.productManagement
 
   return (
-    <main className={styles.adminPage}>
+    <main className={styles.wrapper}>
       {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <UserHeader />
       </div>
       <section className={styles.container}>
         <h2>{usersText.title}</h2>
-        <div className={styles.toggleButton}>
+        <div className={styles.button}>
           <ToggleButton
             isVisible={showUsersList}
             onToggle={() => setShowUsersList((prevState) => !prevState)}
@@ -64,7 +64,7 @@ export const Admin = () => {
             filterProps={filterUserProps}
           />
         )}
-        <div className={styles.toggleButton}>
+        <div className={styles.button}>
           <ToggleButton
             isVisible={showCreateUserForm}
             onToggle={setShowCreateUserForm}
@@ -84,7 +84,7 @@ export const Admin = () => {
       </section>
       <section className={styles.container}>
         <h2>{productsText.title}</h2>
-        <div className={styles.toggleButton}>
+        <div className={styles.button}>
           <ToggleButton
             isVisible={showProductsList}
             onToggle={() => setShowProductsList((prevState) => !prevState)}
@@ -106,7 +106,7 @@ export const Admin = () => {
             filterProps={filterProductsProps}
           />
         )}
-        <div className={styles.toggleButton}>
+        <div className={styles.button}>
           <ToggleButton
             isVisible={showCreateProductForm}
             onToggle={setShowCreateProductForm}
