@@ -12,7 +12,7 @@
   }
 }
 
-.formField {
+.field {
   width: 100%;
 
   @include form-field;
@@ -20,8 +20,4 @@
 
 .label {
   @include label-form-field;
-}
-
-.formButton {
-  @include form-action-button;
 }

@@ -5,8 +5,8 @@ import styles from "./logo.module.scss"
 
 export const Logo = () => {
   return (
-    <div className={styles.logoContainer}>
-      <Link className={styles.linkChild} to={ROUTES_HOME}>
+    <div className={styles.container}>
+      <Link className={styles.link} to={ROUTES_HOME}>
         <img
           className={styles.logo}
           src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}

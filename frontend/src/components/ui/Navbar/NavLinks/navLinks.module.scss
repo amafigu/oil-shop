@@ -2,14 +2,14 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.navLinks {
+.container {
   justify-content: flex-end;
   width: 33.333%;
 
   @include flex-align-center;
 }
 
-.onlyMobile {
+.mobile {
   display: none;
 
   @include media.tablet-down {
@@ -18,7 +18,7 @@
   }
 }
 
-.hideOnMobile {
+.list {
   gap: theme.$spacing-regular;
 
   @include flex-align-center;
@@ -28,21 +28,21 @@
   }
 }
 
-.languageSelector {
+.selector {
   button {
     margin-right: theme.$spacing-smallest;
   }
 }
 
-.linkChild {
+.link {
   @include flex-align-center;
 }
 
-.productsQuantity {
+.quantity {
   width: 36px;
 }
 
-.cartAndQuantity {
+.cart {
   gap: theme.$spacing-smaller;
 
   @include flex-align-center;
@@ -52,7 +52,7 @@
   }
 }
 
-.userAndLogoutIconContainer {
+.logout {
   display: flex;
   gap: theme.$spacing-semi-regular;
 }

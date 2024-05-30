@@ -2,16 +2,6 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.form {
-  @include flex-column;
-
-  margin: theme.$margin-form-container;
-
-  @include media.tablet-down {
-    margin: theme.$margin-form-container-mobile;
-  }
-}
-
 .formField {
   width: 100%;
 
@@ -20,8 +10,4 @@
 
 .label {
   @include label-form-field;
-}
-
-.formButton {
-  @include form-action-button;
 }

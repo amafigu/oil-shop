@@ -13,13 +13,13 @@ export const FormInput = ({
   file,
 }) => {
   return (
-    <div className={styles.inputContainer} aria-label={`${name} input`}>
+    <div aria-label={`${name} input`}>
       {name === "image" ? (
         <>
           <span className={styles.label}>
             {file ? "Selected file: " : "Select a file"}
           </span>
-          <label className={styles.labelForFile} htmlFor='fileInput'>
+          <label chtmlFor='fileInput'>
             {file ? file.name : "Search on device"}
           </label>
           <input

@@ -11,7 +11,7 @@ export const OptionsFormInput = ({
   property,
 }) => {
   return (
-    <div className={styles.labelAndInputContainer}>
+    <>
       <label className={styles.label} htmlFor='name'>
         {property === "productCategoryId"
           ? camelCaseToTitleCase("productCategory")
@@ -41,6 +41,6 @@ export const OptionsFormInput = ({
               ))
           : ""}
       </select>
-    </div>
+    </>
   )
 }

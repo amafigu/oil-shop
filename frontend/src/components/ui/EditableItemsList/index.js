@@ -29,9 +29,9 @@ export const EditableItemsList = ({
   }
 
   return (
-    <section className={styles.section} aria-label={title}>
+    <section className={styles.wrapper} aria-label={title}>
       <h2>{title}</h2>
-      <div className={styles.filterButtons}>
+      <div className={styles.container}>
         {filteredItemsList &&
           filterProps &&
           filterProps.length > 0 &&
@@ -53,7 +53,7 @@ export const EditableItemsList = ({
       </div>
 
       {
-        <ul className={styles.itemsList}>
+        <ul className={styles.list}>
           {filteredItemsList &&
             filteredItemsList.map((item, index) => (
               <li className={styles.item} key={item.id || index}>

@@ -34,12 +34,12 @@ export const MobileMenu = ({
     setShowMobileMenu(false)
   }
   return (
-    <div
-      className={styles.mobileMenu}
+    <nav
+      className={styles.wrapper}
       aria-label='navigation menu for mobile devices'
     >
-      <ul className={styles.itemsList}>
-        <li className={`${styles.closeMenuIconContainer} ${styles.listItem}`}>
+      <ul className={styles.list}>
+        <li className={`${styles.closeIcon} ${styles.item}`}>
           <ActionButton
             action={() => setShowMobileMenu(false)}
             text={<FontAwesomeIcon icon={getIconByName("faX")} size={"xl"} />}
@@ -47,7 +47,7 @@ export const MobileMenu = ({
             ariaLabel={"show mobile menu"}
           />
         </li>
-        <li className={styles.listItem}>
+        <li className={styles.item}>
           <ActionButton
             action={onSearchBarToggle}
             text={
@@ -57,7 +57,7 @@ export const MobileMenu = ({
             ariaLabel={"show search bar"}
           />
         </li>
-        <li className={`${styles.listItem} ${styles.itemsContainer}`}>
+        <li className={`${styles.item} ${styles.container}`}>
           <ActionButton
             action={() => setShowLanguagesOptions((prevState) => !prevState)}
             text={
@@ -83,20 +83,18 @@ export const MobileMenu = ({
           )}
         </li>
         <li
-          className={`${styles.listItem} ${styles.itemsContainer}`}
+          className={`${styles.item} ${styles.container}`}
           aria-label={"navigate to cart"}
         >
           <Link onClick={() => setShowMobileMenu(false)} to={ROUTES_CART}>
             <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
-            <span className={styles.productsQuantity}>
-              {getAllProductsQuantity}
-            </span>
+            <span>{getAllProductsQuantity}</span>
           </Link>
         </li>
         {isLoggedIn ? (
-          <ul className={styles.userAndLogoutIconContainer}>
+          <ul className={styles.userIcons}>
             <li
-              className={styles.listItem}
+              className={styles.item}
               onClick={() => setShowMobileMenu(false)}
             >
               <ActionButton
@@ -112,12 +110,11 @@ export const MobileMenu = ({
               />
             </li>
             <li
-              className={styles.listItem}
+              className={styles.item}
               onClick={() => setShowMobileMenu(false)}
               aria-label='navigate to user profile'
             >
               <Link
-                className={styles.linkChild}
                 to={
                   user && user.role === "admin"
                     ? ROUTES_CURRENT_ADMIN
@@ -129,8 +126,8 @@ export const MobileMenu = ({
             </li>
           </ul>
         ) : (
-          <div className={styles.listItem}>
-            <Link className={styles.linkChild} to={ROUTES_LOGIN}>
+          <div className={styles.item}>
+            <Link to={ROUTES_LOGIN}>
               <FontAwesomeIcon icon={getIconByName("faUser")} />
             </Link>
             <ActionButton
@@ -153,6 +150,6 @@ export const MobileMenu = ({
         }
         className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
       />
-    </div>
+    </nav>
   )
 }

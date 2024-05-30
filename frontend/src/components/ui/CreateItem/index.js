@@ -29,7 +29,7 @@ export const CreateItem = ({
   return (
     <section aria-label='create item form'>
       {notification && <NotificationCard message={notification} />}
-      <form className={styles.form}>
+      <form className={styles.container}>
         {Object.keys(itemData).map((field) =>
           field !== "productCategoryId" ? (
             <FormInput
@@ -58,7 +58,7 @@ export const CreateItem = ({
             />
           ),
         )}
-        <div className={styles.buttonContainer}>
+        <div className={styles.button}>
           <ActionButton
             action={async (e) => {
               await onCreate(e, itemData, setNotification, file)

@@ -2,12 +2,12 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.section {
+.wrapper {
   width: 100%;
   margin: theme.$spacing-regular 0;
 }
 
-.filterButtons {
+.container {
   @include media.mobile {
     justify-content: flex-start;
   }
@@ -17,7 +17,7 @@
   gap: theme.$spacing-regular;
 }
 
-.itemsList {
+.list {
   @include flex-column;
 }
 

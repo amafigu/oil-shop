@@ -15,10 +15,7 @@ export const ProductCard = ({ product }) => {
   const navigate = useNavigate()
 
   return (
-    <article
-      className={styles.productCard}
-      aria-label={`product: ${product.name}`}
-    >
+    <article className={styles.wrapper} aria-label={`product: ${product.name}`}>
       {product ? (
         <>
           <div className={styles.container}>

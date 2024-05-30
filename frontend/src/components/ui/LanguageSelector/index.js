@@ -21,7 +21,7 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
 
   return (
     <ul
-      className={styles.languageSelector}
+      className={styles.list}
       style={
         currentPath.includes(ROUTES_SIGN_UP) ||
         currentPath.includes(ROUTES_LOGIN)
@@ -30,9 +30,7 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
       }
     >
       <li
-        className={`${styles.listItem} ${
-          language === "en" ? styles.activeCategory : ""
-        }`}
+        className={`${styles.item} ${language === "en" ? styles.active : ""}`}
       >
         <ActionButton
           action={() => changeLanguage("en")}
@@ -42,9 +40,7 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
         />
       </li>
       <li
-        className={`${styles.listItem} ${
-          language === "de" ? styles.activeCategory : ""
-        }`}
+        className={`${styles.item} ${language === "de" ? styles.active : ""}`}
       >
         <ActionButton
           action={() => changeLanguage("de")}
