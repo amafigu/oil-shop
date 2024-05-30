@@ -1,7 +1,7 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import NotificationCard from "#components/ui/NotificationCard"
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { ROUTES_SHOP_QUERY_CATEGORY_PREFIX } from "#constants/routes"
+import { SHOP_QUERY_CATEGORY_PREFIX } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import { useCart } from "#hooks/useCart"
 import { useProductDetails } from "#hooks/useProductDetails"
@@ -44,7 +44,7 @@ export const ProductDetailsCard = () => {
                 >
                   <Link
                     className={styles.link}
-                    to={`${ROUTES_SHOP_QUERY_CATEGORY_PREFIX}${product.category.name}`}
+                    to={`${SHOP_QUERY_CATEGORY_PREFIX}${product.category.name}`}
                   >
                     {titleCase(product.category.name, "_")}
                   </Link>

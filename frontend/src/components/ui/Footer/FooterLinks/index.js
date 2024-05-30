@@ -1,9 +1,4 @@
-import {
-  ROUTES_FAQ,
-  ROUTES_LOGIN,
-  ROUTES_SHOP,
-  ROUTES_SIGN_UP,
-} from "#constants/routes"
+import { FAQ, LOGIN, SHOP, SIGN_UP } from "#constants/routes"
 import { useTranslation } from "#hooks/useTranslation"
 import { Link } from "react-router-dom"
 import styles from "./footerLinks.module.scss"
@@ -38,14 +33,14 @@ export const FooterLinks = () => {
             <ul className={styles.itemsLinksList}>
               <li>
                 <Link
-                  to={ROUTES_SHOP}
+                  to={SHOP}
                   title={text.linksColumns.forClient.returnToShopTitle}
                 >
                   {text.linksColumns.forClient.returnToShop}
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES_FAQ} title='FAQ'>
+                <Link to={FAQ} title='FAQ'>
                   {text.linksColumns.forClient.faq}
                 </Link>
               </li>
@@ -58,12 +53,12 @@ export const FooterLinks = () => {
             </div>
             <ul className={styles.itemsLinksList}>
               <li>
-                <Link to={ROUTES_LOGIN} title='account & login'>
+                <Link to={LOGIN} title='account & login'>
                   {text.linksColumns.users.accountAndLogin}
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES_SIGN_UP} title='registration'>
+                <Link to={SIGN_UP} title='registration'>
                   {text.linksColumns.users.registration}
                 </Link>
               </li>

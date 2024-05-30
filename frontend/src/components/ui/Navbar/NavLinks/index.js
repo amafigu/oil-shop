@@ -1,11 +1,6 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import { LanguageSelector } from "#components/ui/LanguageSelector"
-import {
-  ROUTES_CART,
-  ROUTES_CURRENT_ADMIN,
-  ROUTES_CURRENT_CUSTOMER,
-  ROUTES_LOGIN,
-} from "#constants/routes"
+import { CART, CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
@@ -73,9 +68,7 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
             <Link
               className={styles.link}
               to={
-                user && user.role === "admin"
-                  ? ROUTES_CURRENT_ADMIN
-                  : ROUTES_CURRENT_CUSTOMER
+                user && user.role === "admin" ? CURRENT_ADMIN : CURRENT_CUSTOMER
               }
             >
               <FontAwesomeIcon icon={getIconByName("faUser")} />
@@ -93,12 +86,12 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
             />
           </li>
         ) : (
-          <Link className={styles.link} to={ROUTES_LOGIN}>
+          <Link className={styles.link} to={LOGIN}>
             <FontAwesomeIcon icon={getIconByName("faUser")} />
           </Link>
         )}
         <li className={styles.cart} aria-label={"cart items quantity"}>
-          <Link className={styles.link} to={ROUTES_CART}>
+          <Link className={styles.link} to={CART}>
             <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
           </Link>
           <span className={styles.quantity}>{getAllProductsQuantity}</span>

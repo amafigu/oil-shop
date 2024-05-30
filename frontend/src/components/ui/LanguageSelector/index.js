@@ -1,5 +1,5 @@
 import { ActionButton } from "#components/ui/ActionButton"
-import { ROUTES_LOGIN, ROUTES_SIGN_UP } from "#constants/routes"
+import { LOGIN, SIGN_UP } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import { useMenuOptions } from "#hooks/useMenuOptions"
 import { useTranslation } from "#hooks/useTranslation"
@@ -23,8 +23,7 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
     <ul
       className={styles.list}
       style={
-        currentPath.includes(ROUTES_SIGN_UP) ||
-        currentPath.includes(ROUTES_LOGIN)
+        currentPath.includes(SIGN_UP) || currentPath.includes(LOGIN)
           ? { margin: "0" }
           : {}
       }

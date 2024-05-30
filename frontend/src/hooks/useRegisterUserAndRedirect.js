@@ -1,7 +1,7 @@
-import { createAdminRequest } from "#api/users/createAdminRequest"
+import { createAdmin } from "#api/users/createAdmin"
 import { createUser } from "#api/users/createUser"
 import { API_USERS_CURRENT_PREFIX } from "#constants/api"
-import { ROUTES_SIGN_UP_ADMIN } from "#constants/routes"
+import { SIGN_UP_ADMIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT } from "#constants/time"
 import { onLogin } from "#utils/onLogin"
 import { onRequestHandlerError } from "#utils/onRequestHandlerError"
@@ -16,7 +16,7 @@ export const useRegisterUserAndRedirect = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const currentPath = location.pathname
-  const isAdmin = currentPath.includes(ROUTES_SIGN_UP_ADMIN)
+  const isAdmin = currentPath.includes(SIGN_UP_ADMIN)
 
   const registerUserAndRedirect = async (e, user, setNotification) => {
     e.preventDefault()
@@ -30,7 +30,7 @@ export const useRegisterUserAndRedirect = () => {
         return
       }
       if (isAdmin) {
-        request = await createAdminRequest(validUser)
+        request = await createAdmin(validUser)
       } else {
         request = await createUser(validUser)
       }

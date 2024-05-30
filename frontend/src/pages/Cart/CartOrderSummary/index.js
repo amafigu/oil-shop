@@ -1,9 +1,5 @@
 import { SHIPPING_COST } from "#constants/cart"
-import {
-  ROUTES_CART,
-  ROUTES_CHECKOUT_PAYMENT,
-  ROUTES_CHECKOUT_SHIPPING,
-} from "#constants/routes"
+import { CART, PAYMENT, SHIPPING } from "#constants/routes"
 import { useCart } from "#hooks/useCart"
 import { useCurrentUser } from "#hooks/useCurrentUser"
 import { useTranslation } from "#hooks/useTranslation"
@@ -21,9 +17,7 @@ export const CartOrderSummary = ({ totalCost }) => {
 
   const renderLink = () => {
     if (cart.length > 0) {
-      const route = isLoggedIn
-        ? ROUTES_CHECKOUT_PAYMENT
-        : ROUTES_CHECKOUT_SHIPPING
+      const route = isLoggedIn ? PAYMENT : SHIPPING
       const label = "confirm order"
       const text = "Confirm Purchase"
 
@@ -36,7 +30,7 @@ export const CartOrderSummary = ({ totalCost }) => {
       return (
         <Link
           className={styles.link}
-          to={ROUTES_CART}
+          to={CART}
           aria-label='make an order to continue to checkout'
         >
           {text.orderToContinue}

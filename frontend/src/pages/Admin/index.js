@@ -17,7 +17,7 @@ import { useTranslation } from "#hooks/useTranslation"
 import { useUsers } from "#hooks/useUsers"
 import { filterProductsProps } from "#utils/filterProductsProps"
 import { filterUserProps } from "#utils/filterUserProps"
-import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { listenInput } from "#utils/listenInput"
 import { useState } from "react"
 import styles from "./admin.module.scss"
 
@@ -77,7 +77,7 @@ export const Admin = () => {
         {showCreateUserForm && (
           <CreateItem
             onCreate={addUser}
-            onChange={listenInputChangeAndSetDataObject}
+            onChange={listenInput}
             renderItemProps={createUserProperties}
           />
         )}
@@ -118,7 +118,7 @@ export const Admin = () => {
         {showCreateProductForm && (
           <CreateItem
             onCreate={addProduct}
-            onChange={listenInputChangeAndSetDataObject}
+            onChange={listenInput}
             renderItemProps={createProductProperties}
             itemCategories={productCategories}
           />

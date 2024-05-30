@@ -1,5 +1,5 @@
 import { useTranslation } from "#hooks/useTranslation"
-import { convertIsoToLocaleDateString } from "#utils/convertIsoToLocaleDateString"
+import { isoToLocaleDate } from "#utils/isoToLocaleDate"
 import { OrderCard } from "./OrderCard"
 import styles from "./order.module.scss"
 
@@ -12,9 +12,7 @@ export const Order = ({ item }) => {
       <dl className={styles.content}>
         <div className={styles.details}>
           <dt className={styles.property}>{`${text.orderDate}:`}</dt>
-          <dd className={styles.value}>
-            {convertIsoToLocaleDateString(item.createdAt)}
-          </dd>
+          <dd className={styles.value}>{isoToLocaleDate(item.createdAt)}</dd>
         </div>
         <div className={styles.details}>
           <dt className={styles.property}>{`${text.payedWith}:`} </dt>

@@ -1,5 +1,5 @@
 import { NavigationMenu } from "#components/ui/NavigationMenu"
-import { ROUTES_SHOP } from "#constants/routes"
+import { SHOP } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import { useGetProductCategories } from "#hooks/useGetProductCategories"
 import { scrollToTop } from "#utils/scrollToTop"
@@ -18,7 +18,7 @@ export const Shop = () => {
             productCategories &&
             productCategories.map((category) => ({
               type: "category",
-              path: `${ROUTES_SHOP}?category=${category.name}`,
+              path: `${SHOP}?category=${category.name}`,
               label: category.name,
             }))
           }

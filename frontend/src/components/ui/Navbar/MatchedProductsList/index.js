@@ -1,6 +1,6 @@
 import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
 import { useMenuOptions } from "#hooks/useMenuOptions"
-import { navigateToProductAndCloseDropdown } from "#utils/navigateToProductAndCloseDropdown"
+import { navigateAndClose } from "#utils/navigateAndClose"
 import { setDefaultImageByError } from "#utils/setDefaultImageByError"
 import { titleCase } from "#utils/titleCase"
 import { useNavigate } from "react-router-dom"
@@ -23,7 +23,7 @@ export const MatchedProductsList = ({
           aria-label={`Searched item: ${product.name}`}
           key={product.name}
           onClick={() =>
-            navigateToProductAndCloseDropdown(
+            navigateAndClose(
               product.name,
               navigate,
               setMatchedProducts,
@@ -34,7 +34,7 @@ export const MatchedProductsList = ({
           }
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              navigateToProductAndCloseDropdown(
+              navigateAndClose(
                 product.name,
                 navigate,
                 setMatchedProducts,

@@ -1,5 +1,5 @@
-import { getUserOrderItemsRequest } from "#api/orders/getUserOrderItemsRequest"
-import { getUserOrdersRequest } from "#api/orders/getUserOrdersRequest"
+import { getOrderItems } from "#api/orders/getOrderItems"
+import { getOrders } from "#api/orders/getOrders"
 import { useCheckIsUser } from "#hooks/useCheckIsUser"
 import { useEffect, useRef, useState } from "react"
 
@@ -16,12 +16,12 @@ export const useGetOrdersWithProducts = () => {
       if (!user) return
 
       try {
-        const response = await getUserOrdersRequest(user.id)
+        const response = await getOrders(user.id)
 
         if (response && response.status === 200) {
           const ordersWithDetails = await Promise.all(
             response.data.map(async (order) => {
-              const cartItemsResponse = await getUserOrderItemsRequest(order.id)
+              const cartItemsResponse = await getOrderItems(order.id)
               return { ...order, cartItems: cartItemsResponse.data }
             }),
           )

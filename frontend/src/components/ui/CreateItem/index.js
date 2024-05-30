@@ -3,7 +3,7 @@ import { FormInput } from "#components/ui/FormInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
-import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { listenInput } from "#utils/listenInput"
 import { setFileToUpload } from "#utils/setFileToUpload"
 import { useState } from "react"
 import { OptionsFormInput } from "./OptionsFormInput"
@@ -51,7 +51,7 @@ export const CreateItem = ({
               key={field}
               itemData={itemData}
               setItemData={setItemData}
-              onChange={listenInputChangeAndSetDataObject}
+              onChange={listenInput}
               setNotification={setNotification}
               itemCategories={itemCategories}
               property={"productCategoryId"}

@@ -1,4 +1,4 @@
-import { camelCaseToTitleCase } from "#utils/camelCaseToTitleCase"
+import { camelToTitleCase } from "#utils/camelToTitleCase"
 import React from "react"
 import styles from "./formInput.module.scss"
 
@@ -33,7 +33,7 @@ export const FormInput = ({
       ) : (
         <>
           <label className={styles.label} htmlFor={name}>
-            {camelCaseToTitleCase(label)}
+            {camelToTitleCase(label)}
           </label>
           <input
             className={styles[classCss]}
@@ -41,7 +41,7 @@ export const FormInput = ({
             name={name}
             onChange={onChangeListener}
             value={value}
-            placeholder={camelCaseToTitleCase(placeholder)}
+            placeholder={camelToTitleCase(placeholder)}
             required
             autoComplete='true'
           />

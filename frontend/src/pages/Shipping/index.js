@@ -1,9 +1,5 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import {
-  ROUTES_CART,
-  ROUTES_CHECKOUT_PAYMENT,
-  ROUTES_SIGN_UP,
-} from "#constants/routes"
+import { CART, PAYMENT, SIGN_UP } from "#constants/routes"
 import useCartContext from "#context/cartContext"
 import { useRedirectAdminFromCheckout } from "#hooks/useRedirectAdminFromCheckout"
 import { useTranslation } from "#hooks/useTranslation"
@@ -22,9 +18,9 @@ export const Shipping = () => {
 
   useEffect(() => {
     if (cart.length <= 0) {
-      navigate(ROUTES_CART)
+      navigate(CART)
     } else if (isLoggedIn) {
-      navigate(ROUTES_CHECKOUT_PAYMENT)
+      navigate(PAYMENT)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -36,7 +32,7 @@ export const Shipping = () => {
         <div className={styles.content}>
           {`Please `}
           <span className={styles.link}>
-            <Link to={ROUTES_SIGN_UP}>sign up</Link>
+            <Link to={SIGN_UP}>sign up</Link>
           </span>
           {` ${text.titleSubSentence}`}
         </div>

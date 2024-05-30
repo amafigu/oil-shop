@@ -1,5 +1,5 @@
-import { uploadToS3 } from "#api/aws/uploadToS3"
-import { createProductRequest } from "#api/products/createProductRequest"
+import { uploadFile } from "#api/aws/uploadFile"
+import { createProduct } from "#api/products/createProduct"
 import { onRequestHandlerError } from "./onRequestHandlerError"
 import { onRequestHandlerNotification } from "./onRequestHandlerNotification"
 import { onValidationError } from "./onValidationError"
@@ -14,7 +14,7 @@ export const onCreateProduct = async (e, product, setNotification, file) => {
     product = { ...product, measure: "ml" }
 
     if (file) {
-      image = await uploadToS3(file)
+      image = await uploadFile(file)
       product = { ...product, image: image }
     }
 
@@ -31,7 +31,7 @@ export const onCreateProduct = async (e, product, setNotification, file) => {
       return
     }
 
-    const request = await createProductRequest(validProduct)
+    const request = await createProduct(validProduct)
     if (request && request.status === 201) {
       const message = "Product created sucessfully!"
       onRequestHandlerNotification(setNotification, message)

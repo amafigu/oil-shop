@@ -2,7 +2,7 @@ import { CreateItem } from "#components/ui/CreateItem"
 import { LOGO_IMAGE } from "#constants/media"
 import { registerUserProperties } from "#constants/users"
 import { useRegisterUserAndRedirect } from "#hooks/useRegisterUserAndRedirect"
-import { listenInputChangeAndSetDataObject } from "#utils/listenInputChangeAndSetDataObject"
+import { listenInput } from "#utils/listenInput"
 import { scrollToTop } from "#utils/scrollToTop"
 import { LinkContainer } from "./LinkContainer"
 import styles from "./signUp.module.scss"
@@ -24,7 +24,7 @@ export const SignUp = () => {
         <div className={styles.form} aria-label='Create new user form'>
           <CreateItem
             onCreate={registerUserAndRedirect}
-            onChange={listenInputChangeAndSetDataObject}
+            onChange={listenInput}
             renderItemProps={registerUserProperties}
           />
         </div>

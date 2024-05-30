@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const uploadToS3 = async (file) => {
+export const uploadFile = async (file) => {
   if (!file) return ""
   let newUrl = ""
   try {

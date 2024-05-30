@@ -1,8 +1,4 @@
-import {
-  ROUTES_LOGIN,
-  ROUTES_SIGN_UP,
-  ROUTES_SIGN_UP_ADMIN,
-} from "#constants/routes"
+import { LOGIN, SIGN_UP, SIGN_UP_ADMIN } from "#constants/routes"
 import { useTranslation } from "#hooks/useTranslation"
 import { Link, useLocation } from "react-router-dom"
 import styles from "./linkContainer.module.scss"
@@ -18,30 +14,30 @@ export const LinkContainer = () => {
       <ul className={styles.list}>
         <li aria-label='Navigate to login page'>
           {text.haveAccount}{" "}
-          <Link className={styles.link} to={ROUTES_LOGIN}>
+          <Link className={styles.link} to={LOGIN}>
             {text.login}
           </Link>
         </li>
         <li
           aria-label={
-            currentPath.includes(ROUTES_SIGN_UP_ADMIN)
+            currentPath.includes(SIGN_UP_ADMIN)
               ? text.createCustomer
               : text.createAdminLink
           }
         >
-          {currentPath.includes(ROUTES_SIGN_UP) &&
-            !currentPath.includes(ROUTES_SIGN_UP_ADMIN) && (
+          {currentPath.includes(SIGN_UP) &&
+            !currentPath.includes(SIGN_UP_ADMIN) && (
               <>
                 {text.createAdminText}{" "}
-                <Link className={styles.link} to={ROUTES_SIGN_UP_ADMIN}>
+                <Link className={styles.link} to={SIGN_UP_ADMIN}>
                   {text.createAdminLink}
                 </Link>
               </>
             )}
-          {currentPath.includes(ROUTES_SIGN_UP_ADMIN) && (
+          {currentPath.includes(SIGN_UP_ADMIN) && (
             <>
               {text.doNotHaveAccount}{" "}
-              <Link className={styles.link} to={ROUTES_SIGN_UP}>
+              <Link className={styles.link} to={SIGN_UP}>
                 {text.createCustomer}
               </Link>
             </>

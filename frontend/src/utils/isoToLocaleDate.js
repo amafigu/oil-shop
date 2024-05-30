@@ -1,4 +1,4 @@
-export const convertIsoToLocaleDateString = (isoDate) => {
+export const isoToLocaleDate = (isoDate) => {
   const date = new Date(isoDate)
   return date.toLocaleDateString("de-De", {
     hour: "2-digit",

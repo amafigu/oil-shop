@@ -18,8 +18,8 @@ import { useGetOrdersWithProducts } from "#hooks/useGetOrdersWithProducts"
 import { useGetUserShippingData } from "#hooks/useGetUserShippingData"
 import { useTranslation } from "#hooks/useTranslation"
 import { Order } from "#pages/User/Order"
+import { onUpdateShippingData } from "#utils/onUpdateShippingData"
 import { onUpdateUser } from "#utils/onUpdateUser"
-import { onUpdateUserShippingData } from "#utils/onUpdateUserShippingData"
 import "@testing-library/jest-dom"
 import "@testing-library/react"
 import { render, screen } from "@testing-library/react"
@@ -65,7 +65,7 @@ describe("User page should", () => {
       <EditableItem
         item={shippingData}
         renderItemProps={editableUserShippingDataProperties}
-        onSave={onUpdateUserShippingData}
+        onSave={onUpdateShippingData}
       />,
     )
     expect(screen.getByText("123456")).toBeInTheDocument()

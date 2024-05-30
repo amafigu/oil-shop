@@ -1,4 +1,4 @@
-import { ROUTES_WITHOUT_NAVBAR } from "#constants/routes"
+import { WITHOUT_NAVBAR } from "#constants/routes"
 import { useMenuOptions } from "#hooks/useMenuOptions"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
@@ -20,7 +20,7 @@ export const Navbar = () => {
 
   return (
     <>
-      {!ROUTES_WITHOUT_NAVBAR.includes(currentPath) && (
+      {!WITHOUT_NAVBAR.includes(currentPath) && (
         <>
           <nav className={styles.container}>
             <SearchBar

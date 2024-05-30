@@ -3,11 +3,11 @@ import { ActionButton } from "#components/ui/ActionButton"
 import { LanguageSelector } from "#components/ui/LanguageSelector"
 import { NavigationMenu } from "#components/ui/NavigationMenu"
 import {
-  ROUTES_CART,
-  ROUTES_CURRENT_ADMIN,
-  ROUTES_CURRENT_CUSTOMER,
-  ROUTES_LOGIN,
-  ROUTES_SHOP,
+  CART,
+  CURRENT_ADMIN,
+  CURRENT_CUSTOMER,
+  LOGIN,
+  SHOP,
 } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
@@ -86,7 +86,7 @@ export const MobileMenu = ({
           className={`${styles.item} ${styles.container}`}
           aria-label={"navigate to cart"}
         >
-          <Link onClick={() => setShowMobileMenu(false)} to={ROUTES_CART}>
+          <Link onClick={() => setShowMobileMenu(false)} to={CART}>
             <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
             <span>{getAllProductsQuantity}</span>
           </Link>
@@ -117,8 +117,8 @@ export const MobileMenu = ({
               <Link
                 to={
                   user && user.role === "admin"
-                    ? ROUTES_CURRENT_ADMIN
-                    : ROUTES_CURRENT_CUSTOMER
+                    ? CURRENT_ADMIN
+                    : CURRENT_CUSTOMER
                 }
               >
                 <FontAwesomeIcon icon={getIconByName("faUser")} />
@@ -127,7 +127,7 @@ export const MobileMenu = ({
           </ul>
         ) : (
           <div className={styles.item}>
-            <Link to={ROUTES_LOGIN}>
+            <Link to={LOGIN}>
               <FontAwesomeIcon icon={getIconByName("faUser")} />
             </Link>
             <ActionButton
@@ -144,7 +144,7 @@ export const MobileMenu = ({
           productCategories &&
           productCategories.map((category) => ({
             type: "category",
-            path: `${ROUTES_SHOP}?category=${category.name}`,
+            path: `${SHOP}?category=${category.name}`,
             label: category.name,
           }))
         }

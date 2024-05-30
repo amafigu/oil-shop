@@ -1,5 +1,5 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import { ROUTES_CHECKOUT_SHIPPING } from "#constants/routes"
+import { SHIPPING } from "#constants/routes"
 import { useSubmitOrder } from "#hooks/useSubmitOrder"
 import { useTranslation } from "#hooks/useTranslation"
 import { useState } from "react"
@@ -62,7 +62,7 @@ export const PaymentForm = () => {
           <button
             aria-label='come back to shipping data form'
             className={styles.button}
-            onClick={() => navigate(ROUTES_CHECKOUT_SHIPPING)}
+            onClick={() => navigate(SHIPPING)}
           >
             {text.backButton}
           </button>
