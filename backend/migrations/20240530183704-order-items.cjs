@@ -1,48 +1,51 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('cart_items', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('order_items', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      userOrderId: {
+      orderId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'user_orders',
+          model: 'orders',
           key: 'id',
         },
-        allowNull: false,
+        onDelete: 'CASCADE',
       },
       productId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'products',
           key: 'id',
         },
-        allowNull: false,
+        onDelete: 'CASCADE',
       },
       quantity: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.NOW,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.NOW,
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('cart_items');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('order_items');
   },
 };

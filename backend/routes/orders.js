@@ -3,9 +3,9 @@ import db from '../models/index.js';
 
 const router = express.Router();
 
-router.get('/all/:userId', async (req, res) => {
+router.get('/user/:userId', async (req, res) => {
   try {
-    const orders = await db.userOrders.findAll({
+    const orders = await db.orders.findAll({
       where: { userId: req.params.userId },
       order: [['createdAt', 'DESC']],
     });
@@ -15,17 +15,17 @@ router.get('/all/:userId', async (req, res) => {
   }
 });
 
-router.get('/last-order-items/:userId', async (req, res) => {
+router.get('/last-order/:userId', async (req, res) => {
   try {
-    const lastOrder = await db.userOrders.findAll({
+    const lastOrder = await db.orders.findAll({
       where: { userId: req.params.userId },
       order: [['createdAt', 'DESC']],
       limit: 1,
     });
 
     const orderId = lastOrder.map((order) => order.id);
-    const cartItems = await db.cartItems.findAll({
-      where: { userOrderId: orderId },
+    const orderItems = await db.orderItems.findAll({
+      where: { orderId: orderId },
       include: [
         {
           model: db.products,
@@ -39,7 +39,7 @@ router.get('/last-order-items/:userId', async (req, res) => {
         },
       ],
     });
-    return res.json({ cartItems, lastOrder });
+    return res.json({ orderItems, lastOrder });
   } catch (err) {
     console.error(err);
     return res
@@ -48,10 +48,10 @@ router.get('/last-order-items/:userId', async (req, res) => {
   }
 });
 
-router.get('/cart-items/:orderId', async (req, res) => {
+router.get('/items/:orderId', async (req, res) => {
   try {
-    const cartItems = await db.cartItems.findAll({
-      where: { userOrderId: req.params.orderId },
+    const orderItems = await db.orderItems.findAll({
+      where: { orderId: req.params.orderId },
       include: [
         {
           model: db.products,
@@ -65,7 +65,7 @@ router.get('/cart-items/:orderId', async (req, res) => {
         },
       ],
     });
-    return res.json(cartItems);
+    return res.json(orderItems);
   } catch (err) {
     console.error(err);
     return res
@@ -74,7 +74,7 @@ router.get('/cart-items/:orderId', async (req, res) => {
   }
 });
 
-router.post('/create/:userId', async (req, res) => {
+router.post('/user/:userId', async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: {
@@ -86,7 +86,7 @@ router.post('/create/:userId', async (req, res) => {
         message: 'Can not find user for saving order, please try again',
       });
     } else {
-      const order = await db.userOrders.create(req.body);
+      const order = await db.orders.create(req.body);
       res.status(201).json(order);
     }
   } catch (err) {
@@ -94,9 +94,9 @@ router.post('/create/:userId', async (req, res) => {
   }
 });
 
-router.post('/cart-items', async (req, res) => {
+router.post('/items', async (req, res) => {
   try {
-    const cartItem = await db.cartItems.create(req.body);
+    const cartItem = await db.orderItems.create(req.body);
     res.status(201).json(cartItem);
   } catch (err) {
     res.status(500).json({ message: err.message });

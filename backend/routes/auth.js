@@ -8,7 +8,7 @@ import db from '../models/index.js';
 dotenv.config();
 const router = express.Router();
 
-router.get('/registered-user-token', (req, res) => {
+router.get('/user-token', (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token)
@@ -20,7 +20,7 @@ router.get('/registered-user-token', (req, res) => {
   }
 });
 
-router.get('/guest-user-token', (req, res) => {
+router.get('/guest-token', (req, res) => {
   try {
     const guestToken = req.cookies.guestUserToken;
     if (!guestToken) {
@@ -65,7 +65,7 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { email: req.body.email },
-      include: [{ model: db.userRoles, as: 'role' }],
+      include: [{ model: db.roles, as: 'role' }],
     });
     if (!user) {
       return res.status(404).json({ message: 'Invalid email' });

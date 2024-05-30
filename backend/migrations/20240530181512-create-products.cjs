@@ -1,19 +1,17 @@
+/* eslint-disable no-unused-vars */
 'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('products', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       image: {
         type: Sequelize.STRING,
@@ -27,6 +25,15 @@ module.exports = {
       size: {
         type: Sequelize.INTEGER,
       },
+      productCategoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'product_categories',
+          key: 'id',
+        },
+        allowNull: false,
+        onDelete: 'SET NULL',
+      },
       details: {
         type: Sequelize.STRING,
       },
@@ -34,17 +41,18 @@ module.exports = {
         type: Sequelize.DECIMAL(10, 2),
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+        allowNull: false,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+        allowNull: false,
       },
     });
   },
+
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('products');
   },

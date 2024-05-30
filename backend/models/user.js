@@ -26,7 +26,7 @@ const userModel = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'user_roles',
+        model: 'roles',
         key: 'id',
       },
     },

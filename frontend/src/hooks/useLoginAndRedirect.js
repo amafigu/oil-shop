@@ -1,4 +1,4 @@
-import { API_USERS_CURRENT_PREFIX } from "#constants/api"
+import { CURRENT_USER } from "#constants/api"
 import { REDIRECT_TIMEOUT } from "#constants/time"
 import useUserContext from "#context/userContext"
 import { onLogin } from "#utils/onLogin"
@@ -23,10 +23,7 @@ export const useLoginAndRedirect = () => {
         setIsLoggedIn(loginUserResponse.isLoggedIn)
         setUser(loginUserResponse.user)
         setTimeout(
-          () =>
-            navigate(
-              `${API_USERS_CURRENT_PREFIX}${loginUserResponse.userRole}`,
-            ),
+          () => navigate(`${CURRENT_USER}${loginUserResponse.userRole}`),
           REDIRECT_TIMEOUT,
         )
       }

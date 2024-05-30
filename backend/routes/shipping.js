@@ -6,9 +6,9 @@ import db from '../models/index.js';
 dotenv.config();
 const router = express.Router();
 
-router.get('/user/shipping-data/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    let shippingData = await db.usersShippingData.findOne({
+    let shippingData = await db.shippingData.findOne({
       where: { userId: req.params.id },
     });
     const user = await db.users.findOne({
@@ -29,7 +29,7 @@ router.get('/user/shipping-data/:id', async (req, res) => {
         postalCode: 'Please add data',
       };
 
-      shippingData = await db.usersShippingData.create(initialData);
+      shippingData = await db.shippingData.create(initialData);
     }
     if (shippingData) {
       return res.status(200).json(shippingData);
@@ -41,13 +41,13 @@ router.get('/user/shipping-data/:id', async (req, res) => {
   }
 });
 
-router.post('/user/shipping-data/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
   try {
-    const shippingData = await db.usersShippingData.findOne({
+    const shippingData = await db.shippingData.findOne({
       where: { userId: req.params.id },
     });
     if (!shippingData) {
-      const newShippingData = await db.usersShippingData.create({
+      const newShippingData = await db.shippingData.create({
         ...req.body,
         userId: req.params.id,
       });
@@ -65,17 +65,17 @@ router.post('/user/shipping-data/:id', async (req, res) => {
 });
 
 router.put(
-  '/user/shipping-data/:id',
+  '/:id',
   validateBody(shippingDataValidation),
 
   async (req, res) => {
     try {
-      const shippingData = await db.usersShippingData.findOne({
+      const shippingData = await db.shippingData.findOne({
         where: { userId: req.params.id },
       });
 
       if (!shippingData) {
-        await db.usersShippingData.create({
+        await db.shippingData.create({
           ...req.body,
           userId: req.params.id,
         });

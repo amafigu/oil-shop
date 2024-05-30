@@ -17,7 +17,7 @@ jest.mock('../models/index.js', () => ({
       },
     }),
   },
-  userRoles: {
+  roles: {
     findOne: jest.fn(),
   },
 }));
@@ -31,7 +31,7 @@ describe('User Creation', () => {
   });
   it('should successfully create a new user', async () => {
     db.users.findOne.mockResolvedValue(null);
-    db.userRoles.findOne.mockResolvedValue(2);
+    db.roles.findOne.mockResolvedValue(2);
     const response = await request.post('/api/users/create').send(newUser);
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('Customer user created successfully');

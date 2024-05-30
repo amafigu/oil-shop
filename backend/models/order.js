@@ -1,25 +1,21 @@
-const cartItemsModel = (sequelize, DataTypes) => {
-  const CartItems = sequelize.define('cart_items', {
-    userOrderId: {
+const orderModel = (sequelize, DataTypes) => {
+  const Order = sequelize.define('orders', {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'user_orders',
+        model: 'users',
         key: 'id',
       },
       onDelete: 'CASCADE',
     },
-    productId: {
-      type: DataTypes.INTEGER,
+
+    totalAmount: {
+      type: DataTypes.DECIMAL,
       allowNull: false,
-      references: {
-        model: 'products',
-        key: 'id',
-      },
-      onDelete: 'CASCADE',
     },
-    quantity: {
-      type: DataTypes.INTEGER,
+    paymentMethod: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     createdAt: {
@@ -33,7 +29,8 @@ const cartItemsModel = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     },
   });
-  return CartItems;
+
+  return Order;
 };
 
-export default cartItemsModel;
+export default orderModel;

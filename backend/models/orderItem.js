@@ -1,21 +1,25 @@
-const userOrdersModel = (sequelize, DataTypes) => {
-  const UserOrders = sequelize.define('user_orders', {
-    userId: {
+const orderItemModel = (sequelize, DataTypes) => {
+  const OrderItem = sequelize.define('order_items', {
+    orderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'users',
+        model: 'orders',
         key: 'id',
       },
       onDelete: 'CASCADE',
     },
-
-    totalAmount: {
-      type: DataTypes.DECIMAL,
+    productId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'products',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
     },
-    paymentMethod: {
-      type: DataTypes.STRING,
+    quantity: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     createdAt: {
@@ -29,8 +33,7 @@ const userOrdersModel = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     },
   });
-
-  return UserOrders;
+  return OrderItem;
 };
 
-export default userOrdersModel;
+export default orderItemModel;

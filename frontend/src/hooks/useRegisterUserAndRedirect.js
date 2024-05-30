@@ -1,6 +1,6 @@
 import { createAdmin } from "#api/users/createAdmin"
 import { createUser } from "#api/users/createUser"
-import { API_USERS_CURRENT_PREFIX } from "#constants/api"
+import { CURRENT_USER } from "#constants/api"
 import { SIGN_UP_ADMIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT } from "#constants/time"
 import { onLogin } from "#utils/onLogin"
@@ -41,7 +41,7 @@ export const useRegisterUserAndRedirect = () => {
           setIsLoggedIn(response.isLoggedIn)
           setUser(response.user)
           setTimeout(
-            () => navigate(`${API_USERS_CURRENT_PREFIX}${response.userRole}`),
+            () => navigate(`${CURRENT_USER}${response.userRole}`),
             REDIRECT_TIMEOUT,
           )
         }

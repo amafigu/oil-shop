@@ -1,5 +1,5 @@
-const userRolesModel = (sequelize, DataTypes) => {
-  const UserRoles = sequelize.define('user_roles', {
+const roleModel = (sequelize, DataTypes) => {
+  const Role = sequelize.define('roles', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,7 +17,7 @@ const userRolesModel = (sequelize, DataTypes) => {
     },
   });
 
-  return UserRoles;
+  return Role;
 };
 
-export default userRolesModel;
+export default roleModel;

@@ -1,60 +1,66 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users_shipping_data', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('shipping_data', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'users',
           key: 'id',
         },
-        allowNull: false,
+        onDelete: 'CASCADE',
       },
       street: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
-
       number: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       details: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
-      postal_code: {
+      postalCode: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       city: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       state: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       country: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
-
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+        allowNull: false,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+        allowNull: false,
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users_shipping_data');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('shipping_data');
   },
 };

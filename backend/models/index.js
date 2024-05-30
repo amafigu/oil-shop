@@ -1,12 +1,12 @@
 import dotenv from 'dotenv';
 import Sequelize from 'sequelize';
-import cartItemsModel from './cartItems.js';
+import orderModel from './order.js';
+import orderItemModel from './orderItem.js';
 import productModel from './product.js';
 import productCategoryModel from './productCategory.js';
+import roleModel from './role.js';
+import shippingDataModel from './shippingData.js';
 import userModel from './user.js';
-import userOrdersModel from './userOrders.js';
-import userShippingDataModel from './userShippingData.js';
-import userRolesModel from './usersRole.js';
 
 dotenv.config();
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
@@ -19,61 +19,59 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.users = userModel(sequelize, Sequelize);
-
 db.products = productModel(sequelize, Sequelize);
 db.productCategories = productCategoryModel(sequelize, Sequelize);
-db.usersShippingData = userShippingDataModel(sequelize, Sequelize);
-db.userRoles = userRolesModel(sequelize, Sequelize);
-db.userOrders = userOrdersModel(sequelize, Sequelize);
-db.cartItems = cartItemsModel(sequelize, Sequelize);
+db.shippingData = shippingDataModel(sequelize, Sequelize);
+db.roles = roleModel(sequelize, Sequelize);
+db.orders = orderModel(sequelize, Sequelize);
+db.orderItems = orderItemModel(sequelize, Sequelize);
 
 db.products.belongsTo(db.productCategories, {
   foreignKey: 'productCategoryId',
   as: 'category',
 });
 db.productCategories.hasMany(db.products, { foreignKey: 'productCategoryId' });
-
-db.users.hasOne(db.usersShippingData, {
+db.users.hasOne(db.shippingData, {
   foreignKey: 'userId',
   as: 'shippingData',
   onDelete: 'CASCADE',
 });
 
-db.users.hasMany(db.userOrders, {
+db.users.hasMany(db.orders, {
   foreignKey: 'userId',
   onDelete: 'CASCADE',
 });
 
-db.userOrders.belongsTo(db.users, {
+db.orders.belongsTo(db.users, {
   foreignKey: 'userId',
   onDelete: 'CASCADE',
 });
 
-db.usersShippingData.belongsTo(db.users, {
+db.shippingData.belongsTo(db.users, {
   foreignKey: 'userId',
   onDelete: 'CASCADE',
 });
 
-db.users.belongsTo(db.userRoles, {
+db.users.belongsTo(db.roles, {
   foreignKey: 'roleId',
   as: 'role',
 });
 
-db.userRoles.hasMany(db.users, {
+db.roles.hasMany(db.users, {
   foreignKey: 'roleId',
 });
 
-db.products.hasMany(db.cartItems, {
+db.products.hasMany(db.orderItems, {
   foreignKey: 'productId',
 });
 
-db.cartItems.belongsTo(db.products, {
+db.orderItems.belongsTo(db.products, {
   foreignKey: 'productId',
   onDelete: 'CASCADE',
 });
 
-db.userOrders.hasMany(db.cartItems, {
-  foreignKey: 'userOrderId',
+db.orders.hasMany(db.orderItems, {
+  foreignKey: 'orderId',
   onDelete: 'CASCADE',
 });
 

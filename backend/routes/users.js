@@ -29,7 +29,7 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
     const user = await db.users.findOne({
       where: { email: req.params.email },
       attributes: { exclude: ['password'] },
-      include: [{ model: db.userRoles, as: 'role' }],
+      include: [{ model: db.roles, as: 'role' }],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -45,7 +45,7 @@ router.get('/:id', decodeJWT, async (req, res) => {
     const user = await db.users.findOne({
       where: { id: req.params.id },
       attributes: { exclude: ['password'] },
-      include: [{ model: db.userRoles, as: 'role' }],
+      include: [{ model: db.roles, as: 'role' }],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -61,7 +61,7 @@ router.get('/guest/email/:email', async (req, res) => {
     const user = await db.users.findOne({
       where: { email: req.params.email },
       attributes: { exclude: ['password'] },
-      include: [{ model: db.userRoles, as: 'role' }],
+      include: [{ model: db.roles, as: 'role' }],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -72,12 +72,12 @@ router.get('/guest/email/:email', async (req, res) => {
   }
 });
 
-router.get('/guest/id/:id', async (req, res) => {
+router.get('/guests/:id', async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { id: req.params.id },
       attributes: { exclude: ['password'] },
-      include: [{ model: db.userRoles, as: 'role' }],
+      include: [{ model: db.roles, as: 'role' }],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -88,7 +88,7 @@ router.get('/guest/id/:id', async (req, res) => {
   }
 });
 
-router.get('/authenticated-user/:id', decodeJWT, async (req, res) => {
+router.get('/authenticated/:id', decodeJWT, async (req, res) => {
   try {
     const token = req.cookies.token || req.cookies.guestUserToken;
     if (!token) return res.status(401).json({ message: 'Not authenticated' });
@@ -98,7 +98,7 @@ router.get('/authenticated-user/:id', decodeJWT, async (req, res) => {
       attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
       include: [
         {
-          model: db.userRoles,
+          model: db.roles,
           as: 'role',
           attributes: ['name'],
         },
@@ -118,9 +118,9 @@ router.get('/authenticated-user/:id', decodeJWT, async (req, res) => {
   }
 });
 
-router.get('/user/role/:roleId', async (req, res) => {
+router.get('/role/:roleId', async (req, res) => {
   try {
-    const userRole = await db.userRoles.findOne({
+    const userRole = await db.roles.findOne({
       where: { id: req.params.roleId },
     });
     return res.status(200).json(userRole);
@@ -144,7 +144,7 @@ router.delete('/:id', decodeJWT, async (req, res) => {
 });
 
 router.put(
-  '/user/:id',
+  '/:id',
   decodeJWT,
   validateBody(updateUserValidation),
   async (req, res) => {
@@ -178,7 +178,7 @@ router.put(
   }
 );
 
-router.post('/create', validateBody(createUserValidation), async (req, res) => {
+router.post('/', validateBody(createUserValidation), async (req, res) => {
   try {
     const existingUser = await db.users.findOne({
       where: { email: req.body.email },
@@ -190,7 +190,7 @@ router.post('/create', validateBody(createUserValidation), async (req, res) => {
 
     const hashedPassword = await hashPassword(req.body.password);
 
-    const customerRole = await db.userRoles.findOne({
+    const customerRole = await db.roles.findOne({
       where: { name: 'customer' },
     });
 
@@ -276,7 +276,7 @@ router.post(
 
       const hashedPassword = await hashPassword(req.body.password);
 
-      const customerRole = await db.userRoles.findOne({
+      const customerRole = await db.roles.findOne({
         where: { name: 'admin' },
       });
 

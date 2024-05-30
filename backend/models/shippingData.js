@@ -1,5 +1,14 @@
-const userShippingDataModel = (sequelize, DataTypes) => {
-  const UserShippingData = sequelize.define('users_shipping_data', {
+const shippingDataModel = (sequelize, DataTypes) => {
+  const shippingDataModel = sequelize.define('shipping_data', {
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
     street: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -28,15 +37,6 @@ const userShippingDataModel = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id',
-      },
-      onDelete: 'CASCADE',
-    },
     createdAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
@@ -49,7 +49,7 @@ const userShippingDataModel = (sequelize, DataTypes) => {
     },
   });
 
-  return UserShippingData;
+  return shippingDataModel;
 };
 
-export default userShippingDataModel;
+export default shippingDataModel;

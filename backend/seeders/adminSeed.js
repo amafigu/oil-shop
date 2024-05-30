@@ -20,7 +20,7 @@ const users = [
 
 async function seed() {
   try {
-    const adminRole = await db.userRoles.findOne({
+    const adminRole = await db.roles.findOne({
       where: { name: 'admin' },
     });
 

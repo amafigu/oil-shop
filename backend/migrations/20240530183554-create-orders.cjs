@@ -1,40 +1,46 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('user_orders', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('orders', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'users',
           key: 'id',
         },
-        allowNull: false,
+        onDelete: 'CASCADE',
       },
-
       totalAmount: {
         type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      paymentMethod: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.NOW,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.NOW,
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_orders');
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('orders');
   },
 };

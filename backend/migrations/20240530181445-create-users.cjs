@@ -1,15 +1,14 @@
+/* eslint-disable no-unused-vars */
 'use strict';
-
-/** @type {import('sequelize-cli').Migration} */
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('users', {
       id: {
-        allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       firstName: {
         type: Sequelize.STRING,
@@ -17,13 +16,12 @@ module.exports = {
       },
       lastName: {
         type: Sequelize.STRING,
-
         allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false,
+        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -35,24 +33,27 @@ module.exports = {
       },
       roleId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'user_roles',
+          model: 'roles',
           key: 'id',
         },
-        allowNull: false,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+        allowNull: false,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+        allowNull: false,
       },
     });
   },
+
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('users');
   },

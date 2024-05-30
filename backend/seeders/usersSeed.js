@@ -69,7 +69,7 @@ const users = [
 
 async function seed() {
   try {
-    const customerRole = await db.userRoles.findOne({
+    const customerRole = await db.roles.findOne({
       where: { name: 'customer' },
     });
 
