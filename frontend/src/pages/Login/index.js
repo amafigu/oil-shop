@@ -16,10 +16,10 @@ export const Login = () => {
   scrollToTop()
 
   return (
-    <main className={styles.loginPageWrapper} aria-label='Login page'>
+    <main className={styles.wrapper} aria-label='Login page'>
       {notification && <NotificationCard message={notification} />}
-      <div className={styles.loginPage}>
-        <div className={styles.logoAndFormContainer}>
+      <div className={styles.container}>
+        <div className={styles.formContainer}>
           <div className={styles.logoContainer}>
             <img
               className={styles.logo}

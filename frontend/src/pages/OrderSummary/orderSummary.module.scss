@@ -2,11 +2,11 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.orderSummary {
+.wrapper {
   @include flex-column-all-center;
 }
 
-.columnTitle {
+.header {
   padding: theme.$spacing-large 0;
   font-size: theme.$font-size-teaser;
 
@@ -18,16 +18,16 @@
   }
 }
 
-.pageTitle {
+.title {
   margin-bottom: theme.$spacing-semi-regular-large;
   font-size: theme.$font-size-subtitle;
 }
 
-.summaryTitle {
+.subtitle {
   font-size: theme.$font-size-subtitle;
 }
 
-.columnsSection {
+.columns {
   display: flex;
   justify-content: center;
   width: theme.$page-width-primary;
@@ -40,7 +40,7 @@
   }
 }
 
-.dataColumn {
+.customer {
   display: flex;
   justify-content: flex-end;
   width: 50%;
@@ -54,7 +54,7 @@
   }
 }
 
-.itemsColumn {
+.items {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;

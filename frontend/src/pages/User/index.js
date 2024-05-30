@@ -21,7 +21,7 @@ export const User = () => {
     useGetOrdersWithProducts()
 
   return (
-    <main className={styles.userPage} aria-label='Customer Management Page'>
+    <main className={styles.wrapper} aria-label='Customer Management Page'>
       {notification && <NotificationCard message={notification} />}
       {ordersNotification && <NotificationCard message={ordersNotification} />}
       <section className={styles.container}>

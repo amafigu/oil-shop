@@ -12,8 +12,8 @@ export const SignUp = () => {
   scrollToTop()
 
   return (
-    <main className={styles.signUpPage}>
-      <section className={styles.logoAndSignUpForm}>
+    <main className={styles.wrapper} aria-label='Sign up page'>
+      <section className={styles.container}>
         <div className={styles.logoContainer}>
           <img
             className={styles.logo}
@@ -21,7 +21,7 @@ export const SignUp = () => {
             alt='logo'
           />
         </div>
-        <div className={styles.form}>
+        <div className={styles.form} aria-label='Create new user form'>
           <CreateItem
             onCreate={registerUserAndRedirect}
             onChange={listenInputChangeAndSetDataObject}

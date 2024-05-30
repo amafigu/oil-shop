@@ -8,25 +8,25 @@ export const Order = ({ item }) => {
   const text = components.ordersItem
 
   return (
-    <article className={styles.ordersItem}>
-      <dl className={styles.details}>
-        <div className={styles.detailsItem}>
+    <article className={styles.item}>
+      <dl className={styles.content}>
+        <div className={styles.details}>
           <dt className={styles.property}>{`${text.orderDate}:`}</dt>
           <dd className={styles.value}>
             {convertIsoToLocaleDateString(item.createdAt)}
           </dd>
         </div>
-        <div className={styles.detailsItem}>
+        <div className={styles.details}>
           <dt className={styles.property}>{`${text.payedWith}:`} </dt>
           <dd className={styles.value}>{item.paymentMethod}</dd>
         </div>
-        <div className={styles.detailsItem}>
+        <div className={styles.details}>
           <dt className={styles.property}>{`${text.total}:`} </dt>
           <dd className={styles.value}>{item.totalAmount} €</dd>
         </div>
       </dl>
 
-      <ul className={styles.cardsList}>
+      <ul className={styles.list}>
         {item.cartItems.length > 0 ? (
           item.cartItems.map((cartItem) => (
             <li key={cartItem.id}>
@@ -37,7 +37,7 @@ export const Order = ({ item }) => {
             </li>
           ))
         ) : (
-          <li className={styles.noItems}>{text.productsHaveBeenDeleted}</li>
+          <li className={styles.info}>{text.productsHaveBeenDeleted}</li>
         )}
       </ul>
     </article>

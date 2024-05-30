@@ -2,11 +2,11 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.orderSummaryData {
+.container {
   width: auto;
 }
 
-.dataItemsList {
+.list {
   width: 100%;
   padding: 40px;
 
@@ -15,7 +15,7 @@
   }
 }
 
-.formField {
+.field {
   display: flex;
   align-items: center;
   width: 100%;

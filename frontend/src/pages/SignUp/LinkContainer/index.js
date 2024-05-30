@@ -14,8 +14,8 @@ export const LinkContainer = () => {
   const currentPath = location.pathname
 
   return (
-    <nav className={styles.linkContainer} aria-label='Navigation links'>
-      <ul className={styles.linksList}>
+    <nav className={styles.wrapper} aria-label='Navigation links'>
+      <ul className={styles.list}>
         <li aria-label='Navigate to login page'>
           {text.haveAccount}{" "}
           <Link className={styles.link} to={ROUTES_LOGIN}>

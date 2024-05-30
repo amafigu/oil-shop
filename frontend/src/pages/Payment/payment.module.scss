@@ -2,13 +2,13 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.paymentPageWrapper {
+.wrapper {
   margin: 80px 0 160px;
 
   @include flex-column-align-center;
 }
 
-.paymentPage {
+.container {
   width: 68%;
   background: theme.$background-color-form-primary;
   box-shadow: theme.$box-shadow-primary;

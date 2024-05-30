@@ -21,7 +21,10 @@ export const ProductDetailsCard = () => {
     <>
       {notification && <NotificationCard message={notification} />}
       {product && (
-        <article className={styles.card} aria-label={`${product.name} details`}>
+        <article
+          className={styles.wrapper}
+          aria-label={`${product.name} details`}
+        >
           <section className={styles.body}>
             <div className={styles.imageContainer}>
               <img

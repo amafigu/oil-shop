@@ -9,7 +9,7 @@ export const NotFound = () => {
   scrollToTop()
 
   return (
-    <main className={styles.notFoundPage} aria-label='Page not found'>
+    <main className={styles.wrapper} aria-label='Page not found'>
       <section className={styles.container}>
         <img
           className={styles.logo}

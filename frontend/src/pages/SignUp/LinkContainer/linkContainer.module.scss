@@ -1,7 +1,7 @@
 @use "#styles/theme" as theme;
 @import "#styles/helpers/mixins";
 
-.linkContainer {
+.wrapper {
   width: 100%;
   height: 68px;
   padding: theme.$spacing-regular;
@@ -21,6 +21,6 @@
   }
 }
 
-.linksList {
+.list {
   @include flex-column-all-center;
 }

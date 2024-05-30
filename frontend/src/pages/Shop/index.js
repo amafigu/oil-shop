@@ -11,8 +11,8 @@ export const Shop = () => {
   scrollToTop()
 
   return (
-    <main className={styles.shopPageWrapper}>
-      <div className={styles.navigationMenuContainer}>
+    <main className={styles.wrapper}>
+      <div className={styles.container}>
         <NavigationMenu
           items={
             productCategories &&
@@ -25,8 +25,8 @@ export const Shop = () => {
           className={STYLES.COMPONENTS.NAVIGATION_MENU.PRODUCT_CATEGORIES}
         />
       </div>
-      <div className={styles.shopPage}>
-        <section className={styles.sortedProductsSection}>
+      <div className={styles.products}>
+        <section className={styles.list}>
           <SortedProductsList />
         </section>
       </div>

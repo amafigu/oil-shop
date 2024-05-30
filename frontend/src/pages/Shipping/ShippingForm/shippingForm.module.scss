@@ -17,7 +17,7 @@
   }
 }
 
-.customerInfo {
+.container {
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
@@ -25,18 +25,18 @@
   margin-bottom: 0;
 }
 
-.infoColumn {
+.column {
   @include flex-column;
 
   width: 100%;
 }
 
-.containerTitle {
+.title {
   margin-bottom: theme.$spacing-regular;
   font-size: theme.$font-size-subtitle;
 }
 
-.actionButtons {
+.options {
   display: flex;
   justify-content: space-around;
   width: 60%;
@@ -46,7 +46,7 @@
   }
 }
 
-.formButton {
+.option {
   @include action-button;
 
   width: 160px;

@@ -2,35 +2,34 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.paymentForm {
-  display: flex;
-  flex-direction: column;
+.container {
   align-items: flex-start;
-  justify-content: center;
   margin: theme.$spacing-regular-large;
+
+  @include flex-column-justify-center;
 
   @include media.tablet-down {
     margin: theme.$spacing-semi-regular-semi-large;
   }
 }
 
-.titleContainer {
-  @include flex-align-center;
-
+.title {
   width: 100%;
   margin-bottom: theme.$spacing-regular;
+
+  @include flex-align-center;
+
+  h2 {
+    margin-right: 8px;
+    font-size: theme.$font-size-subtitle;
+  }
 }
 
-.title {
-  margin-right: 8px;
-  font-size: theme.$font-size-subtitle;
-}
-
-.methods {
+.options {
   width: 100%;
 }
 
-.row {
+.option {
   display: flex;
   align-items: center;
   height: 32px;
@@ -44,12 +43,12 @@
 
 /* create custom radio */
 
-.row input[type="radio"] {
+.option input[type="radio"] {
   width: 1px;
   opacity: 0;
 }
 
-.row label {
+.option label {
   position: relative;
   padding-left: 30px;
   cursor: pointer;
@@ -80,21 +79,21 @@
   }
 }
 
-.row input[type="radio"]:checked + label::after {
+.option input[type="radio"]:checked + label::after {
   opacity: 1;
   transform: scale(1);
 }
 
 /* end create custom radio */
 
-.navigateButtons {
+.buttons {
   display: flex;
   flex-grow: 1;
   justify-content: space-around;
   width: 100%;
 }
 
-.formButton {
+.button {
   @include action-button;
 
   width: 160px;

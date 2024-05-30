@@ -23,15 +23,15 @@ export const PaymentForm = () => {
       {notification && <NotificationCard message={notification} />}
       <form
         aria-label='Submit Payment Form'
-        className={styles.paymentForm}
+        className={styles.container}
         onSubmit={(e) => submitOrder(e, paymentMethod, setNotification)}
       >
-        <header className={styles.titleContainer}>
-          <h2 className={styles.title}>{text.title}</h2>
+        <header className={styles.title}>
+          <h2>{text.title}</h2>
         </header>
-        <fieldset className={styles.methods}>
+        <fieldset className={styles.options}>
           <legend>{text.legend}</legend>
-          <div className={styles.row}>
+          <div className={styles.option}>
             <input
               aria-label='payment with paypal'
               type='radio'
@@ -44,7 +44,7 @@ export const PaymentForm = () => {
             />
             <label htmlFor='paypal'>Paypal</label>
           </div>
-          <div className={styles.row}>
+          <div className={styles.option}>
             <input
               aria-label='payment with google pay'
               type='radio'
@@ -58,17 +58,17 @@ export const PaymentForm = () => {
             <label htmlFor='googlePay'>Google Pay</label>
           </div>
         </fieldset>
-        <div className={styles.navigateButtons}>
+        <div className={styles.buttons}>
           <button
             aria-label='come back to shipping data form'
-            className={styles.formButton}
+            className={styles.button}
             onClick={() => navigate(ROUTES_CHECKOUT_SHIPPING)}
           >
             {text.backButton}
           </button>
           <button
             aria-label='submit payment'
-            className={styles.formButton}
+            className={styles.button}
             type='submit'
           >
             {text.paymentButton}

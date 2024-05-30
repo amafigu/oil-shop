@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.orderSummaryItems {
+.container {
   width: 50%;
   padding: theme.$spacing-large;
 
@@ -14,7 +14,7 @@
   }
 }
 
-.itemsList {
+.list {
   width: 100%;
 
   @include flex-column;

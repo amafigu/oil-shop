@@ -14,13 +14,9 @@ export const SortedProductsList = () => {
   const sortedProducts = filteredProducts(products, category)
 
   return (
-    <ul className={styles.sortedProductsList} aria-label='products list'>
+    <ul className={styles.container} aria-label='products list'>
       {sortedProducts.map((product) => (
-        <li
-          key={product.id}
-          className={styles.sortedProduct}
-          aria-label='products list item'
-        >
+        <li key={product.id} aria-label='products list item'>
           <ProductCard product={product} />
         </li>
       ))}

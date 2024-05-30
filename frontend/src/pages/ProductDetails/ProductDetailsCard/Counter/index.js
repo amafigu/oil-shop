@@ -15,9 +15,10 @@ const decreaseQuantity = (quantity, setQuantity) => {
     setQuantity((prevQuantity) => prevQuantity - 1)
   }
 }
+
 export const Counter = ({ counter, setCounter }) => {
   return (
-    <div className={styles.counter} aria-label='counter'>
+    <div className={styles.wrapper} aria-label='counter'>
       <div className={styles.container}>
         <div>{counter}</div>
       </div>

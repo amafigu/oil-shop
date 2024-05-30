@@ -28,9 +28,9 @@ export const ShippingForm = ({ setNotification }) => {
         )
       }
     >
-      <div className={styles.customerInfo}>
-        <fieldset className={styles.infoColumn}>
-          <legend className={styles.containerTitle}>{text.yourInfo}</legend>
+      <div className={styles.container}>
+        <fieldset className={styles.column}>
+          <legend className={styles.title}>{text.yourInfo}</legend>
           {Object.keys(formData).map((field) => (
             <div key={field}>
               <FormInput
@@ -52,19 +52,15 @@ export const ShippingForm = ({ setNotification }) => {
           ))}
         </fieldset>
       </div>
-      <div className={styles.actionButtons} aria-label='Navigation buttons'>
+      <div className={styles.options} aria-label='Navigation buttons'>
         <Link
-          className={styles.formButton}
+          className={styles.option}
           to={ROUTES_CART}
           aria-label='Back to cart'
         >
           {text.backToCart}
         </Link>
-        <button
-          className={styles.formButton}
-          type='submit'
-          aria-label='Submit data button'
-        >
+        <button className={styles.option} type='submit' aria-label='Submit'>
           {text.submitButton}
         </button>
       </div>

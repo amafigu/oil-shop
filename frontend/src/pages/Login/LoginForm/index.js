@@ -35,7 +35,7 @@ export const LoginForm = () => {
           label={"email"}
           type={"email"}
         />
-        <div className={styles.passwordInputAndToggleButtonContainer}>
+        <div className={styles.container}>
           <FormInput
             classCss={STYLES.FORMS.FIELD}
             name={"email"}

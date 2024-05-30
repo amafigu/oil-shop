@@ -2,13 +2,13 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.homePageWrapper {
+.wrapper {
   @include flex-justify-center;
 
   margin-top: 0 !important;
   margin-bottom: theme.$spacing-semi-regular-large;
 
-  .homePage {
+  .container {
     width: 80%;
 
     @include flex-justify-center;
@@ -18,11 +18,11 @@
     }
   }
 
-  .pageColumn {
+  .column {
     width: 100%;
   }
 
-  .videoBannerContainer {
+  .banner {
     position: relative;
     z-index: -1;
     width: 100%;
@@ -31,7 +31,7 @@
     @include flex-justify-center;
   }
 
-  .productSliderContainer {
+  .slider {
     width: 100%;
     margin-bottom: theme.$spacing-semi-regular;
   }
