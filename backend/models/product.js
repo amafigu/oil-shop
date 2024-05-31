@@ -15,7 +15,7 @@ const productModel = (sequelize, DataTypes) => {
     size: {
       type: DataTypes.INTEGER,
     },
-    productCategoryId: {
+    categoryId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'product_categories',

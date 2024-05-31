@@ -1,44 +1,48 @@
 import db from '../models/index.js';
+/*
+categories:
+1 = roll, 2 = essential oil,3 = body care, 4 = difuser, 5 =  massage oil
+*/
 
 const products = [
   {
     name: 'angelica',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_angelica_5_ml.jpg',
-    description: 'description',
+    description: 'great for mornings',
     size: 5,
     price: 15.88,
-    category: 'essential_oil',
-    details: 'details',
+    categoryId: 2,
+    details: 'with a lemon touch',
   },
   {
-    name: 'eucalyptus_blue',
+    name: 'eucalyptus blue',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_eucalyptusBlue_15_ml.jpg',
-    description: 'description',
+    description: 'made of certificated trees',
     size: 15,
     price: 16.45,
-    category: 'essential_oil',
-    details: 'details',
+    categoryId: 2,
+    details: 'refreshing aroma',
   },
   {
     name: 'grapefruit',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_grapefruit_15_ml.jpg',
-    description: 'description',
+    description: 'like a fruit',
     size: 15,
     price: 17.25,
-    category: 'essential_oil',
-    details: 'details',
+    categoryId: 2,
+    details: 'smells from the nature',
   },
   {
-    name: 'jade_lemon',
+    name: 'jade lemon',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_jadeLemon_5_ml.jpg',
     description: 'description',
     size: 5,
     price: 18.33,
-    category: 'essential_oil',
+    categoryId: 2,
     details: 'details',
   },
   {
@@ -48,7 +52,7 @@ const products = [
     description: 'description',
     size: 15,
     price: 22.44,
-    category: 'essential_oil',
+    categoryId: 2,
     details: 'details',
   },
   {
@@ -58,27 +62,27 @@ const products = [
     description: 'description',
     size: 15,
     price: 12.33,
-    category: 'essential_oil',
+    categoryId: 2,
     details: 'details',
   },
   {
-    name: 'evening_peace',
+    name: 'evening peace',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_eveningPeace_236_ml.jpg',
     description: 'description',
     size: 236,
     price: 23.65,
-    category: 'body_care',
+    categoryId: 3,
     details: 'details',
   },
   {
-    name: 'morning_start',
+    name: 'morning start',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_morningStart_236_ml.jpg',
     description: 'description',
     size: 236,
     price: 23.69,
-    category: 'body_care',
+    categoryId: 3,
     details: 'details',
   },
   {
@@ -88,27 +92,27 @@ const products = [
     description: 'description',
     size: 236,
     price: 23.69,
-    category: 'body_care',
+    categoryId: 3,
     details: 'details',
   },
   {
-    name: 'dragon_time',
+    name: 'dragon time',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_dragonTime_236_ml.jpg',
     description: 'description',
     size: 236,
     price: 23.69,
-    category: 'body_care',
+    categoryId: 3,
     details: 'details',
   },
   {
-    name: 'bath_and_shower',
+    name: 'bath and shower',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_bathAndShower_236_ml.jpg',
     description: 'description',
     size: 236,
     price: 23.69,
-    category: 'body_care',
+    categoryId: 3,
     details: 'details',
   },
 
@@ -119,7 +123,7 @@ const products = [
     description: 'description',
     size: 285,
     price: 111.55,
-    category: 'difuser',
+    categoryId: 4,
     details: 'details',
   },
   {
@@ -129,17 +133,17 @@ const products = [
     description: 'description',
     size: 285,
     price: 111.55,
-    category: 'difuser',
+    categoryId: 4,
     details: 'details',
   },
   {
-    name: 'feather_the_owl',
+    name: 'feather the owl',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_featherTheOwl_eu.jpg',
     description: 'description',
     size: 285,
     price: 111.55,
-    category: 'difuser',
+    categoryId: 4,
     details: 'details',
   },
   {
@@ -149,7 +153,7 @@ const products = [
     description: 'description',
     size: 285,
     price: 111.55,
-    category: 'difuser',
+    categoryId: 4,
     details: 'details',
   },
   {
@@ -159,17 +163,17 @@ const products = [
     description: 'description',
     size: 285,
     price: 111.55,
-    category: 'difuser',
+    categoryId: 4,
     details: 'details',
   },
   {
-    name: 'sweet_aroma',
+    name: 'sweet aroma',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_sweetAroma_eu.jpg',
     description: 'description',
     size: 285,
     price: 111.55,
-    category: 'difuser',
+    categoryId: 4,
     details: 'details',
   },
 
@@ -180,7 +184,7 @@ const products = [
     description: 'Enhanced Vegetable Oil Refill',
     size: 944,
     price: 35.48,
-    category: 'massage_oil',
+    categoryId: 5,
     details: 'details',
   },
 
@@ -191,39 +195,39 @@ const products = [
     description: 'Vitality enhancer Vegetable Oil',
     size: 236,
     price: 35.48,
-    category: 'massage_oil',
+    categoryId: 5,
     details: 'details',
   },
 
   {
-    name: 'cel-lite_magic',
+    name: 'cel-lite magic',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oilMassage_cel-liteMagic_236_ml.jpg',
     description: 'Sking structure enhancer Vegetable Oil',
     size: 236,
     price: 35.48,
-    category: 'massage_oil',
+    categoryId: 5,
     details: 'details',
   },
 
   {
-    name: 'breathe_again',
+    name: 'breathe again',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_breatheAgain_10_ml.jpg',
     description: 'Includes peppermint and copaiba',
     size: 10,
     price: 44.78,
-    category: 'roll',
+    categoryId: 1,
     details: 'details',
   },
   {
-    name: 'peace_and_calming',
+    name: 'peace and calming',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_peaceAndCalming_10_ml.jpg',
     description: 'A sweet, lemony and slightly floral scent.',
     size: 10,
     price: 35.55,
-    category: 'roll',
+    categoryId: 1,
     details: 'details',
   },
   {
@@ -233,17 +237,17 @@ const products = [
     description: 'description',
     size: 10,
     price: 32.33,
-    category: 'roll',
+    categoryId: 1,
     details: 'details',
   },
   {
-    name: 'stress_away',
+    name: 'stress away',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_stressAway_10_ml.jpg',
     description: 'description',
     size: 10,
     price: 48.84,
-    category: 'roll',
+    categoryId: 1,
     details: 'details',
   },
   {
@@ -253,7 +257,7 @@ const products = [
     description: 'description',
     size: 10,
     price: 48.84,
-    category: 'roll',
+    categoryId: 1,
     details: 'details',
   },
   {
@@ -263,35 +267,25 @@ const products = [
     description: 'description',
     size: 10,
     price: 45.72,
-    category: 'roll',
+    categoryId: 1,
     details: 'details',
   },
 ];
 
 async function seed() {
   const categories = await db.productCategories.findAll();
-
-  const categoryIdMap = categories.reduce((map, category) => {
-    map[category.name] = category.id;
-    return map;
-  }, {});
-
+  const categoryIds = categories.map((category) => category.id);
   try {
     for (const product of products) {
-      const productToInsert = {
-        ...product,
-        productCategoryId: categoryIdMap[product.category],
-      };
-      if (!productToInsert.productCategoryId) {
-        console.error(`Category not found for product: ${product.name}`);
+      if (!categoryIds.includes(product.categoryId)) {
+        console.error(`categoryId not found for product: ${product.name}`);
+        continue;
       }
-      delete productToInsert.category;
-
       const existingProduct = await db.products.findOne({
-        where: { name: productToInsert.name },
+        where: { name: product.name },
       });
       if (!existingProduct) {
-        await db.products.create(productToInsert);
+        await db.products.create(product);
       }
     }
 

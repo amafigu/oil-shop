@@ -14,7 +14,7 @@
           "email": "Nach Email sortieren",
           "price": "Nach Preis sortieren",
           "size": "Nach Größe sortieren",
-          "productCategoryId": "Nach Kategorie sortieren",
+          "category": "Nach Kategorie sortieren",
           "reverse": "Umkehren"
         },
         "toggleListButton": {

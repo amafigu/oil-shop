@@ -4,20 +4,18 @@ const productCategories = [
   {
     name: 'roll',
   },
+
   {
-    name: 'all',
+    name: 'essential oil',
   },
   {
-    name: 'essential_oil',
-  },
-  {
-    name: 'body_care',
+    name: 'body care',
   },
   {
     name: 'difuser',
   },
   {
-    name: 'massage_oil',
+    name: 'massage oil',
   },
 ];
 

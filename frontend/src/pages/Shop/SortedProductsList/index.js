@@ -4,9 +4,9 @@ import { useProducts } from "#hooks/useProducts"
 import styles from "./sortedProductsList.module.scss"
 
 const filteredProducts = (products, category) =>
-  products.filter(
-    (product) => product.category.name === category || category === "all",
-  )
+  category
+    ? products.filter((product) => product.category.name === category)
+    : products
 
 export const SortedProductsList = () => {
   const { products } = useProducts()

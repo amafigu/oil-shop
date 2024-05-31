@@ -6,7 +6,7 @@ export const useActiveCategory = () => {
   const location = useLocation()
   useEffect(() => {
     const params = new URLSearchParams(location.search)
-    const category = params.get("category") || "all"
+    const category = params.get("category")
     setActiveCategory(category)
   }, [location.search])
 

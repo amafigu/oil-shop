@@ -31,7 +31,7 @@ export const CreateItem = ({
       {notification && <NotificationCard message={notification} />}
       <form className={styles.container}>
         {Object.keys(itemData).map((field) =>
-          field !== "productCategoryId" ? (
+          field !== "category" ? (
             <FormInput
               classCss={STYLES.FORMS.FIELD}
               key={field}
@@ -54,7 +54,7 @@ export const CreateItem = ({
               onChange={listenInput}
               setNotification={setNotification}
               itemCategories={itemCategories}
-              property={"productCategoryId"}
+              property={"category"}
             />
           ),
         )}

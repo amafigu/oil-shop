@@ -3,6 +3,15 @@ import db from '../models/index.js';
 
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+  try {
+    const orders = await db.orders.findAll();
+    return res.json(orders);
+  } catch (err) {
+    return res.status(500).json({ message: 'This are no orders' });
+  }
+});
+
 router.get('/user/:userId', async (req, res) => {
   try {
     const orders = await db.orders.findAll({
@@ -15,6 +24,7 @@ router.get('/user/:userId', async (req, res) => {
   }
 });
 
+// TODO: FIX
 router.get('/last-order/:userId', async (req, res) => {
   try {
     const lastOrder = await db.orders.findAll({
@@ -33,7 +43,6 @@ router.get('/last-order/:userId', async (req, res) => {
           include: [
             {
               model: db.productCategories,
-              as: 'category',
             },
           ],
         },
@@ -59,7 +68,6 @@ router.get('/items/:orderId', async (req, res) => {
           include: [
             {
               model: db.productCategories,
-              as: 'category',
             },
           ],
         },

@@ -10,6 +10,16 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
+      roleId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'roles',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       firstName: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -30,16 +40,6 @@ module.exports = {
       image: {
         type: Sequelize.STRING,
         allowNull: true,
-      },
-      roleId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'roles',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,

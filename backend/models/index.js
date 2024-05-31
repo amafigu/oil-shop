@@ -27,49 +27,38 @@ db.orders = orderModel(sequelize, Sequelize);
 db.orderItems = orderItemModel(sequelize, Sequelize);
 
 db.products.belongsTo(db.productCategories, {
-  foreignKey: 'productCategoryId',
-  as: 'category',
+  foreignKey: 'categoryId',
 });
-db.productCategories.hasMany(db.products, { foreignKey: 'productCategoryId' });
+db.productCategories.hasMany(db.products, { foreignKey: 'categoryId' });
 db.users.hasOne(db.shippingData, {
   foreignKey: 'userId',
-  as: 'shippingData',
   onDelete: 'CASCADE',
 });
-
 db.users.hasMany(db.orders, {
   foreignKey: 'userId',
   onDelete: 'CASCADE',
 });
-
 db.orders.belongsTo(db.users, {
   foreignKey: 'userId',
   onDelete: 'CASCADE',
 });
-
 db.shippingData.belongsTo(db.users, {
   foreignKey: 'userId',
   onDelete: 'CASCADE',
 });
-
 db.users.belongsTo(db.roles, {
   foreignKey: 'roleId',
-  as: 'role',
 });
-
 db.roles.hasMany(db.users, {
   foreignKey: 'roleId',
 });
-
 db.products.hasMany(db.orderItems, {
   foreignKey: 'productId',
 });
-
 db.orderItems.belongsTo(db.products, {
   foreignKey: 'productId',
   onDelete: 'CASCADE',
 });
-
 db.orders.hasMany(db.orderItems, {
   foreignKey: 'orderId',
   onDelete: 'CASCADE',

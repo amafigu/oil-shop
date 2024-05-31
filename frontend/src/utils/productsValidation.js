@@ -15,7 +15,7 @@ const createProductSchema = z.object({
     .refine((value) => value <= 100000, {
       message: "Product size can't be more than 100000.",
     }),
-  productCategoryId: z.number().int(),
+  category: z.number().int(),
   details: z.string().refine((value) => value.length <= 200, {
     message: "Product details can't be longer than 200 characters.",
   }),

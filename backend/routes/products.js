@@ -19,7 +19,7 @@ router.post(
       const existingProduct = await db.products.findOne({
         where: {
           name: req.body.name,
-          productCategoryId: req.body.productCategoryId,
+          category: req.body.category,
           size: req.body.size,
         },
       });
@@ -49,7 +49,6 @@ router.get('/name/:name', async (req, res) => {
       include: [
         {
           model: db.productCategories,
-          as: 'category',
         },
       ],
     });
@@ -71,7 +70,6 @@ router.get('/:id', async (req, res) => {
       include: [
         {
           model: db.productCategories,
-          as: 'category',
         },
       ],
     });
@@ -114,8 +112,7 @@ router.put('/:id', validateBody(UpdateProductSchema), async (req, res) => {
     product.name = req.body.name || product.name;
     product.size = req.body.size || product.size;
     product.price = req.body.price || product.price;
-    product.productCategoryId =
-      req.body.productCategoryId || product.productCategoryId;
+    product.categoryId = req.body.categoryId || product.categoryId;
     product.description = req.body.description || product.description;
     product.image = req.body.image || product.image;
 
@@ -135,7 +132,6 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: db.productCategories,
-          as: 'category',
         },
       ],
       order: [['id', 'ASC']],

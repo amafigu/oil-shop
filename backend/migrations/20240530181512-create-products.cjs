@@ -10,6 +10,15 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
+      categoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'product_categories',
+          key: 'id',
+        },
+        allowNull: false,
+        onDelete: 'SET NULL',
+      },
       name: {
         type: Sequelize.STRING,
       },
@@ -25,15 +34,7 @@ module.exports = {
       size: {
         type: Sequelize.INTEGER,
       },
-      productCategoryId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'product_categories',
-          key: 'id',
-        },
-        allowNull: false,
-        onDelete: 'SET NULL',
-      },
+
       details: {
         type: Sequelize.STRING,
       },

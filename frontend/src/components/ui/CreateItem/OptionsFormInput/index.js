@@ -13,7 +13,7 @@ export const OptionsFormInput = ({
   return (
     <>
       <label className={styles.label} htmlFor='name'>
-        {property === "productCategoryId"
+        {property === "category"
           ? camelToTitleCase("productCategory")
           : camelToTitleCase(property)}
       </label>
@@ -27,18 +27,16 @@ export const OptionsFormInput = ({
           Select a category
         </option>
         {itemCategories
-          ? itemCategories
-              .filter((itemCategory) => itemCategory.name !== "all")
-              .map((itemCategory) => (
-                <option
-                  key={itemCategory.id}
-                  className={styles.formField}
-                  value={itemCategory.id}
-                  name={itemCategory.id}
-                >
-                  {titleCase(itemCategory.name, "_")}
-                </option>
-              ))
+          ? itemCategories.map((itemCategory) => (
+              <option
+                key={itemCategory.id}
+                className={styles.formField}
+                value={itemCategory.id}
+                name={itemCategory.id}
+              >
+                {titleCase(itemCategory.name, " ")}
+              </option>
+            ))
           : ""}
       </select>
     </>

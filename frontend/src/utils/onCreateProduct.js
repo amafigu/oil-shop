@@ -20,7 +20,7 @@ export const onCreateProduct = async (e, product, setNotification, file) => {
 
     product = {
       ...product,
-      productCategoryId: Number(product.productCategoryId),
+      category: Number(product.category),
       size: Number(product.size),
       price: Number(product.price),
     }

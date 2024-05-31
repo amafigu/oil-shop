@@ -15,11 +15,11 @@ router.get('/generate-upload-url', async (req, res) => {
   });
 
   const s3 = new AWS.S3();
-
+  const urlExpirationInSeconds = 3600;
   const params = {
     Bucket: 'oylo-images',
     Key: fileName,
-    Expires: 3600, // URL validity in seconds
+    Expires: urlExpirationInSeconds,
   };
 
   try {

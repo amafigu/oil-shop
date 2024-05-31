@@ -10,8 +10,12 @@
     "undo-last-migrate": "npx sequelize db:migrate:undo",
     "clear-jest": "jest --clearCache",
     "eslint": "npx eslint .",
+    "seed:roles": "node seeders/rolesSeed.js",
+    "seed:productCategories": "node seeders/productCategoriesSeed.js",
     "seed:products": "node seeders/productsSeed.js",
-    "seed:users": "node seeders/usersSeed.js"
+    "seed:users": "node seeders/usersSeed.js",
+    "seed:admin": "node seeders/adminSeed.js",
+    "seed:orders": "node seeders/ordersSeed.js"
   },
   "keywords": [],
   "author": "",

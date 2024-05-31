@@ -10,8 +10,6 @@ export const useProductCategoryByUrlQuery = () => {
   useEffect(() => {
     if (queryCategory) {
       setCategory(queryCategory)
-    } else {
-      setCategory("all")
     }
   }, [queryCategory])
 

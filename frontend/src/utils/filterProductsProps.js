@@ -12,10 +12,10 @@ export const filterProductsProps = [
   {
     action: (list, sortIsAsc) =>
       sortIsAsc
-        ? list.sort((a, b) => a.productCategoryId - b.productCategoryId)
-        : list.sort((a, b) => b.productCategoryId - a.productCategoryId),
+        ? list.sort((a, b) => a.category - b.category)
+        : list.sort((a, b) => b.category - a.category),
 
-    targetProperty: "productCategoryId",
+    targetProperty: "category",
     className: STYLES.BUTTONS.ACTION,
     isAsc: true,
   },

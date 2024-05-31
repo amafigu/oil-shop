@@ -8,7 +8,7 @@ export const initialProductData = {
 
 export const emptyCreateProductObj = {
   name: "",
-  productCategoryId: "",
+  category: "",
   description: "",
   price: "",
   details: "",
@@ -26,7 +26,7 @@ export const editableProductProperties = [
 
 export const createProductProperties = [
   "name",
-  "productCategoryId",
+  "category",
   "description",
   "price",
   "details",

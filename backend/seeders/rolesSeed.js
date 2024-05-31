@@ -7,28 +7,16 @@ const roles = [
   {
     name: 'customer',
   },
-  {
-    name: 'essential_oil',
-  },
-  {
-    name: 'body_care',
-  },
-  {
-    name: 'difuser',
-  },
-  {
-    name: 'massage_oil',
-  },
 ];
 
 async function seed() {
   try {
-    for (const newCategory of productCategories) {
-      const existingCategory = await db.productCategories.findOne({
-        where: { name: newCategory.name },
+    for (const role of roles) {
+      const existingRole = await db.roles.findOne({
+        where: { name: role.name },
       });
-      if (!existingCategory) {
-        await db.productCategories.create(newCategory);
+      if (!existingRole) {
+        await db.roles.create(role);
       }
     }
     process.exit(0);
