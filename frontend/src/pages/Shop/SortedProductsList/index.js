@@ -1,25 +1,35 @@
 import { ProductCard } from "#components/products/ProductCard"
 import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
 import { useProducts } from "#hooks/useProducts"
+import { useEffect, useState } from "react"
 import styles from "./sortedProductsList.module.scss"
 
-const filteredProducts = (products, category) =>
-  category
-    ? products.filter((product) => product.category.name === category)
-    : products
-
 export const SortedProductsList = () => {
+  const [productsList, setProductsList] = useState([])
   const { products } = useProducts()
   const { category } = useProductCategoryByUrlQuery()
-  const sortedProducts = filteredProducts(products, category)
+
+  useEffect(() => {
+    const filteredProducts = (products, category) => {
+      if (category) {
+        return products.filter(
+          (product) => category && product.product_category.name === category,
+        )
+      } else {
+        return products
+      }
+    }
+    setProductsList(filteredProducts(products, category))
+  }, [products, category])
 
   return (
     <ul className={styles.container} aria-label='products list'>
-      {sortedProducts.map((product) => (
-        <li key={product.id} aria-label='products list item'>
-          <ProductCard product={product} />
-        </li>
-      ))}
+      {productsList &&
+        productsList.map((product) => (
+          <li key={product.id} aria-label='products list item'>
+            <ProductCard product={product} />
+          </li>
+        ))}
     </ul>
   )
 }
