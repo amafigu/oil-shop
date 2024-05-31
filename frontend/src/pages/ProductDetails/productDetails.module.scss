@@ -1,0 +1,22 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  min-height: theme.$min-height-page-small;
+
+  @include flex-justify-center;
+}
+
+.container {
+  width: 80%;
+  margin: 80px 0;
+
+  @include flex-justify-center;
+
+  @include media.mobile {
+    gap: 40px;
+    width: 100%;
+    margin: 60px 0;
+  }
+}

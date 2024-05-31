@@ -1,0 +1,53 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  display: flex;
+  height: fit-content;
+}
+
+.list {
+  @include footer-column;
+
+  @include media.desktop-down {
+    margin: 0 theme.$spacing-regular;
+  }
+
+  @include media.tablet-down {
+    gap: theme.$spacing-regular;
+    margin-bottom: theme.$spacing-semi-large;
+
+    @include flex-column-align-center;
+  }
+}
+
+.item {
+  width: 100%;
+
+  @include flex-column-align-center;
+}
+
+.title {
+  height: 40px;
+
+  @include property-font-primary-semi-bold;
+  @include flex-all-center;
+}
+
+.icons {
+  justify-content: space-evenly;
+  width: 100%;
+
+  @include flex-align-center;
+
+  svg[data-icon="dhl"] {
+    width: 60px;
+    height: 60px;
+  }
+
+  svg[data-icon="ups"] {
+    width: 40px;
+    height: 40px;
+  }
+}

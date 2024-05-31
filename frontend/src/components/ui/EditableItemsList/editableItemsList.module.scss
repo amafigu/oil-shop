@@ -1,0 +1,32 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+}
+
+.container {
+  @include media.mobile {
+    justify-content: flex-start;
+  }
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: theme.$spacing-regular;
+}
+
+.list {
+  @include flex-column;
+}
+
+.item {
+  display: flex;
+}
+
+h2 {
+  margin-bottom: theme.$spacing-regular;
+
+  @include property-font-primary-semi-bold;
+}

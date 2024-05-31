@@ -1,0 +1,41 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.formField {
+  flex-grow: 1;
+  height: theme.$height-form-field;
+  margin-right: theme.$spacing-small;
+}
+
+.item {
+  width: 100%;
+  margin-bottom: theme.$spacing-regular;
+
+  @include flex-align-center;
+}
+
+.data {
+  width: 100%;
+  height: theme.$height-form-field;
+  margin-right: theme.$spacing-small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-bottom: theme.$border-regular-component;
+
+  @include subtitle-text;
+}
+
+.property {
+  margin-right: theme.$spacing-smallest;
+
+  @include property-font;
+}
+
+.value {
+  @include value-font;
+}
+
+.hideForSemantic {
+  @include hide;
+}

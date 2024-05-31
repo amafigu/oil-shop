@@ -1,0 +1,38 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  @include flex-justify-center;
+
+  margin-top: 0 !important;
+  margin-bottom: theme.$spacing-semi-regular-large;
+
+  .container {
+    width: 80%;
+
+    @include flex-justify-center;
+
+    @include media.widescreen-down {
+      width: 90%;
+    }
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  .banner {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    margin-bottom: 38px;
+
+    @include flex-justify-center;
+  }
+
+  .slider {
+    width: 100%;
+    margin-bottom: theme.$spacing-semi-regular;
+  }
+}

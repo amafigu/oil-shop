@@ -1,0 +1,38 @@
+@use "#styles/media" as media;
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
+
+.list {
+  position: absolute;
+  display: flex;
+  gap: theme.$spacing-smallest;
+  padding: 0 theme.$spacing-smallest;
+  margin-top: theme.$spacing-smaller;
+  color: theme.$font-color-primary;
+  background-color: theme.$background-color-primary;
+  border: theme.$border-regular-component;
+  border-radius: theme.$border-radius-small;
+
+  @include media.mobile {
+    position: relative;
+    display: flex;
+    gap: theme.$spacing-semi-regular;
+    height: theme.$height-mobile-menu-item;
+    margin-top: 0;
+    background-color: theme.$background-color-primary;
+    border: none;
+    border-radius: theme.$border-radius-small;
+  }
+}
+
+.active {
+  button {
+    color: theme.$branding-color-primary;
+  }
+}
+
+.item {
+  @include media.tablet-down {
+    @include menu-list-item;
+  }
+}

@@ -1,0 +1,19 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.container {
+  width: 33.333%;
+
+  @include flex-justify-center;
+}
+
+.link {
+  @include flex-align-center;
+}
+
+.logo {
+  width: 116px;
+  height: 68px;
+  border-radius: theme.$border-radius-circle;
+}

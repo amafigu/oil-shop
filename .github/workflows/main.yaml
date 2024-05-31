@@ -1,0 +1,57 @@
+name: Main
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm install
+      - name: Run eslint on backend
+        working-directory: ./backend
+        run: npm run eslint
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm install
+      - name: Run eslint on frontend
+        working-directory: ./frontend
+        run: npm run eslint
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm install
+      - name: Backend tests
+        working-directory: ./backend
+        run: npm test
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm install
+      - name: Frontend tests
+        working-directory: ./frontend
+        run: npm test

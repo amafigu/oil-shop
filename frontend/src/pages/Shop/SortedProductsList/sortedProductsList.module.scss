@@ -1,0 +1,12 @@
+@use "#styles/theme" as theme;
+@import "#styles/helpers/mixins";
+
+.container {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  gap: theme.$spacing-semi-regular;
+  width: 100%;
+
+  @include flex-justify-center;
+}

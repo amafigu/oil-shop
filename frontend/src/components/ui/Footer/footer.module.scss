@@ -1,0 +1,19 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.container {
+  width: 100%;
+  font-family: theme.$font-family-primary;
+  color: theme.$font-color-primary;
+  text-align: center;
+  background-color: theme.$background-color-primary;
+
+  @include flex-column;
+}
+
+.divider {
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px solid;
+}

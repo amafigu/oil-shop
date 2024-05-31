@@ -1,0 +1,47 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  @include flex-column-all-center;
+}
+
+.container {
+  width: 100%;
+  min-height: theme.$min-height-page-regular;
+
+  @include flex-column-all-center;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+
+  @include flex-justify-center;
+}
+
+.logo {
+  width: 216px;
+  border-radius: theme.$border-radius-circle;
+}
+
+.form {
+  width: 100%;
+  padding: theme.$spacing-regular;
+  border-radius: theme.$border-radius-small;
+
+  @include flex-justify-center;
+
+  section {
+    width: theme.$width-login-register-form;
+
+    @include media.mobile {
+      width: theme.$width-login-register-form-mobile;
+    }
+
+    button {
+      width: 100%;
+      margin-top: theme.$spacing-small;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.container {
+  justify-content: flex-end;
+  width: 33.333%;
+
+  @include flex-align-center;
+}
+
+.mobile {
+  display: none;
+
+  @include media.tablet-down {
+    display: block;
+    margin-right: theme.$spacing-regular;
+  }
+}
+
+.list {
+  gap: theme.$spacing-regular;
+
+  @include flex-align-center;
+
+  @include media.tablet-down {
+    display: none;
+  }
+}
+
+.selector {
+  button {
+    margin-right: theme.$spacing-smallest;
+  }
+}
+
+.link {
+  @include flex-align-center;
+}
+
+.quantity {
+  width: 36px;
+}
+
+.cart {
+  gap: theme.$spacing-smaller;
+
+  @include flex-align-center;
+
+  @include media.tablet {
+    margin-right: 0;
+  }
+}
+
+.logout {
+  display: flex;
+  gap: theme.$spacing-semi-regular;
+}

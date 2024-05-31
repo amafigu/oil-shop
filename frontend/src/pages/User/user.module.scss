@@ -1,0 +1,20 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  @include flex-justify-center;
+  @include margin-page-wrapper;
+
+  min-height: 100vh;
+}
+
+.container {
+  width: 80%;
+
+  @include flex-column;
+
+  @include media.widescreen-down {
+    width: 90%;
+  }
+}

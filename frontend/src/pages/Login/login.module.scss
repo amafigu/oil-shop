@@ -1,0 +1,61 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  @include flex-column-all-center;
+}
+
+.container {
+  width: 100%;
+  min-height: theme.$min-height-page-regular;
+
+  @include flex-column-all-center;
+
+  @include media.mobile {
+    min-height: theme.$min-height-page-small;
+    margin-top: theme.$spacing-large;
+  }
+}
+
+.formContainer {
+  width: theme.$width-login-register-form;
+  height: auto;
+
+  @include flex-column-align-center;
+
+  @include media.mobile {
+    width: theme.$width-login-register-form-mobile;
+  }
+}
+
+.logoContainer {
+  width: 216px;
+
+  @include flex-justify-center;
+}
+
+.logo {
+  border-radius: theme.$border-radius-circle;
+
+  @include responsive-image;
+}
+
+.linkContainer {
+  width: 100%;
+  height: auto;
+  margin: theme.$spacing-large 0;
+  border-radius: theme.$border-radius-small;
+
+  @include flex-column-all-center;
+}
+
+.link {
+  font-weight: theme.$font-weight-semibold;
+  color: theme.$branding-color-primary;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+}

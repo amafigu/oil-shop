@@ -1,0 +1,72 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  @include flex-column-all-center;
+}
+
+.header {
+  padding: theme.$spacing-large 0;
+  font-size: theme.$font-size-teaser;
+
+  @include flex-column-all-center;
+
+  @include media.mobile {
+    width: 90%;
+    text-align: center;
+  }
+}
+
+.title {
+  margin-bottom: theme.$spacing-semi-regular-large;
+  font-size: theme.$font-size-subtitle;
+}
+
+.subtitle {
+  font-size: theme.$font-size-subtitle;
+}
+
+.columns {
+  display: flex;
+  justify-content: center;
+  width: theme.$page-width-primary;
+  margin-bottom: theme.$spacing-large;
+
+  @include flex-justify-center;
+
+  @include media.tablet-down {
+    @include flex-column-align-center;
+  }
+}
+
+.customer {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  overflow: hidden;
+
+  @include media.mobile {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: theme.$spacing-large;
+    overflow: hidden;
+  }
+}
+
+.items {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 50%;
+  overflow: hidden;
+
+  @include flex-column;
+
+  @include media.mobile {
+    align-items: center;
+    width: 100%;
+    margin-bottom: theme.$spacing-large;
+    overflow: hidden;
+  }
+}

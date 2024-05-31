@@ -1,0 +1,30 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.container {
+  width: 50%;
+  padding: theme.$spacing-large;
+
+  @include flex-justify-center;
+
+  @include media.tablet-down {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.list {
+  width: 100%;
+
+  @include flex-column;
+}
+
+.item {
+  width: 100%;
+  list-style-type: none;
+
+  @include media.tablet-down {
+    @include flex-justify-center;
+  }
+}

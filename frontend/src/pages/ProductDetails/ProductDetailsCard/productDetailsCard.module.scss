@@ -1,0 +1,142 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.wrapper {
+  width: 100%;
+
+  @include flex-column-all-center;
+
+  @include media.mobile {
+    margin: 0 theme.$spacing-semi-regular-large;
+  }
+}
+
+.body {
+  display: flex;
+  justify-content: space-evenly;
+  width: theme.$page-width-primary;
+  max-width: 920px;
+
+  @include media.desktop-down {
+    justify-content: space-between;
+    width: 76%;
+  }
+
+  @include media.tablet-down {
+    justify-content: space-between;
+    width: 86%;
+  }
+
+  @include media.mobile {
+    width: 100%;
+
+    @include flex-column-align-center;
+  }
+}
+
+.imageContainer {
+  width: 300px;
+  height: 300px;
+
+  @include flex-all-center;
+
+  @include media.mobile {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.image {
+  user-select: none;
+
+  @include responsive-image;
+}
+
+.container {
+  width: 50%;
+  height: auto;
+  overflow: hidden;
+  font-family: theme.$font-family-primary;
+
+  @include flex-column-all-center;
+
+  @include media.mobile {
+    flex-grow: 1;
+    min-width: 60%;
+  }
+}
+
+.data {
+  width: 100%;
+
+  @include media.mobile {
+    @include flex-column-align-center;
+  }
+}
+
+.category {
+  color: theme.$font-color-primary;
+
+  @include property-font-primary-regular;
+}
+
+.link {
+  display: inline-block;
+  color: theme.$font-color-primary;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.name {
+  margin-top: theme.$spacing-regular;
+  margin-bottom: theme.$spacing-large;
+
+  @include property-font-primary-semi-bold;
+}
+
+.description,
+.details {
+  margin-bottom: theme.$spacing-semi-regular-large;
+
+  @include property-font-primary-semi-large-light;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: theme.$spacing-semi-regular-large;
+  border-radius: theme.$border-radius-small;
+}
+
+.size {
+  margin-right: theme.$spacing-semi-regular-large;
+
+  @include property-font-secondary-regular;
+}
+
+.price {
+  margin-bottom: 0;
+
+  @include property-font-secondary-regular;
+}
+
+.selection {
+  display: flex;
+  gap: theme.$spacing-regular;
+  width: 100%;
+}
+
+.addProductToCartButton {
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin-left: theme.$spacing-small;
+
+  @include action-button;
+
+  @include media.mobile {
+    width: 50%;
+    min-width: 0;
+  }
+}

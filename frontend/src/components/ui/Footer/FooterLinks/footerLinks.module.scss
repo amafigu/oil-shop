@@ -1,0 +1,39 @@
+@use "#styles/theme" as theme;
+@use "#styles/media" as media;
+@import "#styles/helpers/mixins";
+
+.navigationItems {
+  display: flex;
+  height: auto;
+  margin-bottom: theme.$spacing-semi-large;
+}
+
+.itemsList {
+  @include footer-column;
+
+  @include media.tablet-down {
+    @include flex-column-align-center;
+  }
+}
+
+.item {
+  width: 100%;
+  margin: theme.$spacing-small 0;
+
+  @include flex-column-align-center;
+}
+
+.itemTitle {
+  margin-bottom: theme.$spacing-small;
+
+  @include flex-all-center;
+  @include property-font-primary-semi-bold;
+}
+
+.itemsLinksList {
+  gap: theme.$spacing-semi-regular;
+  justify-content: space-evenly;
+  width: 100%;
+
+  @include flex-column-align-center;
+}
