@@ -6,7 +6,7 @@ module.exports = [
     size: '15',
     price: '15',
     description: 'description one',
-    category: 'massageOil',
+    category: 'massage oil',
   },
   {
     id: 2,
@@ -15,6 +15,6 @@ module.exports = [
     size: '25',
     price: '25',
     description: 'description two',
-    category: 'massageOil',
+    category: 'massage oil',
   },
 ];
