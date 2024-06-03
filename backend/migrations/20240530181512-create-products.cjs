@@ -28,13 +28,9 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      measure: {
-        type: Sequelize.STRING,
-      },
       size: {
         type: Sequelize.INTEGER,
       },
-
       details: {
         type: Sequelize.STRING,
       },
