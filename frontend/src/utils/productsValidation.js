@@ -8,14 +8,14 @@ const createProductSchema = z.object({
   description: z.string().refine((value) => value.length <= 50, {
     message: "Product description can't be longer than 50 characters.",
   }),
-  measure: z.string(),
+
   size: z
     .number()
     .int()
     .refine((value) => value <= 100000, {
       message: "Product size can't be more than 100000.",
     }),
-  category: z.number().int(),
+  categoryId: z.number().int(),
   details: z.string().refine((value) => value.length <= 200, {
     message: "Product details can't be longer than 200 characters.",
   }),
@@ -46,14 +46,13 @@ const updateProductSchema = z.object({
       message: "Product description can't be longer than 20 characters.",
     })
     .optional(),
-  measure: z.string().optional(),
   size: z
     .number()
     .refine((value) => value <= 100000, {
       message: "Product size can't be more than 100000.",
     })
     .optional(),
-  category: z.string().optional(),
+  categoryId: z.number().optional(),
   details: z
     .string()
     .refine((value) => value.length <= 200, {
