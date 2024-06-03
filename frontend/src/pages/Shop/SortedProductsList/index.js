@@ -1,5 +1,5 @@
 import { ProductCard } from "#components/products/ProductCard"
-import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
+import { useProductCategory } from "#hooks/useProductCategory"
 import { useProducts } from "#hooks/useProducts"
 import { useEffect, useState } from "react"
 import styles from "./sortedProductsList.module.scss"
@@ -7,20 +7,22 @@ import styles from "./sortedProductsList.module.scss"
 export const SortedProductsList = () => {
   const [productsList, setProductsList] = useState([])
   const { products } = useProducts()
-  const { category } = useProductCategoryByUrlQuery()
+  const { sortCategory, categories } = useProductCategory()
 
   useEffect(() => {
-    const filteredProducts = (products, category) => {
-      if (category) {
+    const sortByCategory = (products, category) => {
+      const categoryNames = categories.map((category) => category.name)
+      if (categoryNames.includes(category)) {
         return products.filter(
-          (product) => category && product.product_category.name === category,
+          (product) => category && product.category.name === category,
         )
       } else {
         return products
       }
     }
-    setProductsList(filteredProducts(products, category))
-  }, [products, category])
+    setProductsList(sortByCategory(products, sortCategory))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [products, sortCategory])
 
   return (
     <ul className={styles.container} aria-label='products list'>
