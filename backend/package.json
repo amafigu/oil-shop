@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "nodemon start.js",
     "test": "jest --testTimeout=20000",
-    "migrate": "npx sequelize-cli db:migrate",
-    "undo-last-migrate": "npx sequelize db:migrate:undo",
     "clear-jest": "jest --clearCache",
     "eslint": "npx eslint .",
     "seed:roles": "node seeders/rolesSeed.js",
@@ -15,7 +13,11 @@
     "seed:products": "node seeders/productsSeed.js",
     "seed:users": "node seeders/usersSeed.js",
     "seed:admin": "node seeders/adminSeed.js",
-    "seed:orders": "node seeders/ordersSeed.js"
+    "seed:orders": "node seeders/ordersSeed.js",
+    "db:drop": "npx sequelize-cli db:drop",
+    "db:create": "npx sequelize-cli db:create",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:undo-migrate": "npx sequelize db:migrate:undo"
   },
   "keywords": [],
   "author": "",
