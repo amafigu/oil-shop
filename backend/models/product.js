@@ -9,9 +9,6 @@ const productModel = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
     },
-    measure: {
-      type: DataTypes.STRING,
-    },
     size: {
       type: DataTypes.INTEGER,
     },
