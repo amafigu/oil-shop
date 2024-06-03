@@ -12,8 +12,8 @@ export const filterProductsProps = [
   {
     action: (list, sortIsAsc) =>
       sortIsAsc
-        ? list.sort((a, b) => a.category - b.category)
-        : list.sort((a, b) => b.category - a.category),
+        ? list.sort((a, b) => a.categoryId - b.categoryId)
+        : list.sort((a, b) => b.categoryId - a.categoryId),
 
     targetProperty: "category",
     className: STYLES.BUTTONS.ACTION,
