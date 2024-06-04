@@ -40,7 +40,7 @@ export const routes = [
   { path: NOT_FOUND, element: <NotFound /> },
   { path: ORDER_SUMMARY, element: <OrderSummary /> },
   { path: PAYMENT, element: <Payment /> },
-  { path: PRODUCTS, element: <ProductDetails /> },
+  { path: `${PRODUCTS}/:id`, element: <ProductDetails /> },
   { path: SIGN_UP, element: <SignUp /> },
   { path: SIGN_UP_ADMIN, element: <SignUp /> },
   { path: SHIPPING, element: <Shipping /> },
