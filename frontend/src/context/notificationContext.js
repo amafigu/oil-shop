@@ -1,5 +1,5 @@
 import NotificationCard from "#components/ui/NotificationCard"
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+import { MESSAGE_TIMEOUT } from "#constants/time"
 import { createContext, useContext, useState } from "react"
 
 export const NotificationContext = createContext()
@@ -9,7 +9,7 @@ export const NotificationProvider = ({ children }) => {
 
   const onSetNotification = (message) => {
     setNotification(message)
-    setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+    setTimeout(() => setNotification(null), MESSAGE_TIMEOUT)
   }
 
   return (
