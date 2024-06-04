@@ -1,10 +1,10 @@
 import { ActionButton } from "#components/ui/ActionButton"
+import { EditableItemInput } from "#components/ui/EditableItemInput"
 import NotificationCard from "#components/ui/NotificationCard"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/setFileToUpload"
 import { useEffect, useState } from "react"
-import { EditableItemInput } from "./EditableItemInput"
 import styles from "./editableItem.module.scss"
 
 export const EditableItem = ({ item, renderItemProps, onSave, onDelete }) => {
