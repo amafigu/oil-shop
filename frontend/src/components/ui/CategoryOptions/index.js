@@ -2,24 +2,17 @@ import { camelToTitleCase } from "#utils/camelToTitleCase"
 import { titleCase } from "#utils/titleCase"
 import styles from "./categoryOptions.module.scss"
 
-export const CategoryOptions = ({
-  data,
-  setData,
-  onChange,
-  setNotification,
-  options,
-}) => {
-  console.log(data)
+export const CategoryOptions = ({ data, setData, onChange, options }) => {
   return (
     <>
       <label className={styles.label} htmlFor='name'>
         {camelToTitleCase("category")}
       </label>
       <select
-        onChange={(e) => onChange(e, data, setData, setNotification)}
+        onChange={(e) => onChange(e, data, setData)}
         className={styles.formField}
         name='categoryId'
-        value={data}
+        value={data.categoryId}
       >
         {options &&
           options.map((option) => (
