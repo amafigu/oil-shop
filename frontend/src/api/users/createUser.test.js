@@ -15,7 +15,6 @@ describe("createUserRequest", () => {
       email: "test@mail.com",
       password: "!A123456",
     })
-    console.log(response)
     expect(response.status).toEqual(201)
   })
 })
