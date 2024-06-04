@@ -30,6 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
+    "test:watch": "jest --watch-all --collectCoverage=false",
     "coverage": "jest --coverage",
     "formatStyle": "stylelint src/**/*.scss",
     "eslint": "npx eslint ."
