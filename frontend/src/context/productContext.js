@@ -18,7 +18,7 @@ export const ProductProvider = ({ children }) => {
   const [sortCategory, setSortCategory] = useState(undefined)
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
-  const { onSetNotification } = useNotificationContext()
+  const { onSetNotification, setNotification } = useNotificationContext()
 
   const fetchProducts = async () => {
     try {
@@ -54,8 +54,7 @@ export const ProductProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onDeleteProduct = async (e, id) => {
-    e.preventDefault()
+  const onDeleteProduct = async (id) => {
     try {
       const response = await deleteProductById(id)
       if (response && response.status === 200) {
@@ -80,7 +79,6 @@ export const ProductProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Failed to add product:", error)
-      onValidationError(error, setNotification)
     }
   }
 
@@ -114,7 +112,8 @@ export const ProductProvider = ({ children }) => {
         return
       }
     } catch (error) {
-      throw error
+      console.error("Error by validating product", error)
+      onValidationError(error, setNotification)
     }
   }
 
@@ -140,7 +139,6 @@ export const ProductProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error updating product:", error)
-      onSetNotification(error.message)
       setUpdatedData(initialData)
     }
   }
@@ -165,8 +163,8 @@ export const ProductProvider = ({ children }) => {
         return updateProductSchema.parse(property)
       }
     } catch (error) {
-      onValidationError(error)
-      console.error("Error by validating product:", error)
+      onValidationError(error, setNotification)
+      console.error("Error by validating property:", error)
     }
   }
 
