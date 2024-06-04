@@ -1,4 +1,4 @@
-import useProductContext from "#context/productContext"
+import { useProductContext } from "#context/productContext"
 import { useEffect } from "react"
 
 export const useProductCategory = () => {
