@@ -11,6 +11,7 @@ export const deleteProductById = async (id) => {
     )
     return response
   } catch (error) {
+    console.error("Error by deleting product", error)
     throw error
   }
 }
