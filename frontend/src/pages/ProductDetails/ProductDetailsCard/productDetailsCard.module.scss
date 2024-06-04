@@ -38,12 +38,14 @@
 .imageContainer {
   width: 300px;
   height: 300px;
+  margin-right: theme.$spacing-semi-regular-semi-large;
 
   @include flex-all-center;
 
   @include media.mobile {
     width: 200px;
     height: 200px;
+    margin-right: 0;
   }
 }
 
