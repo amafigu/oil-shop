@@ -4,13 +4,13 @@ import styles from "./shop.module.scss"
 
 export const Shop = () => (
   <main className={styles.wrapper} aria-label='Shop page'>
-    <div className={styles.container}>
+    <div className={styles.menuContainer}>
       <CategoryMenu />
     </div>
-    <div className={styles.products}>
-      <section className={styles.list}>
+    <section className={styles.productsSection}>
+      <div className={styles.listContainer}>
         <SortedProductsList />
-      </section>
-    </div>
+      </div>
+    </section>
   </main>
 )
