@@ -13,7 +13,7 @@ import { EditableItemInput } from "./index"
 jest.mock("#hooks/useTranslation")
 jest.mock("#context/userContext")
 
-function renderInput(onChangeMocked, onSaveMocked, textData) {
+function renderInput(onChangeMocked, onSaveMocked) {
   return render(
     <EditableItemInput
       label='firstName'
