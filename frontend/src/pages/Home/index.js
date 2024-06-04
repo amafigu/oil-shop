@@ -1,4 +1,4 @@
-import { useProducts } from "#hooks/useProducts"
+import { useProductContext } from "#context/productContext"
 import { Banner } from "./Banner"
 import { Slider } from "./Slider"
 import { TeaserCards } from "./TeaserCards"
@@ -6,7 +6,7 @@ import { TeaserText } from "./TeaserText"
 import styles from "./home.module.scss"
 
 export const Home = () => {
-  const { products } = useProducts()
+  const { products } = useProductContext()
   return (
     <main className={styles.wrapper} aria-label='home page'>
       <div className={styles.container}>
