@@ -40,55 +40,9 @@
 }
 
 .list {
-  @include flex-align-center;
-
-  height: 60px;
-
-  li {
-    margin: 0 16px;
-
-    @include media.tablet {
-      border-bottom: 0;
-    }
-
-    @include media.tablet {
-      width: auto;
-      height: auto;
-      padding: 0;
-      margin: 0 theme.$spacing-regular;
-    }
-
-    &:last-child {
-      @include media.tablet-down {
-        border-bottom: white 1px solid !important;
-      }
-    }
-  }
+  @include menu-list;
 
   @include media.mobile {
     flex-direction: column;
-    align-items: flex-start;
-    height: fit-content;
-
-    li {
-      margin: 0;
-
-      @include media.tablet {
-        border-bottom: 0;
-      }
-
-      @include media.tablet {
-        width: auto;
-        height: auto;
-        padding: 0;
-        margin: 0 theme.$spacing-regular;
-      }
-
-      &:last-child {
-        @include media.tablet-down {
-          border-bottom: white 1px solid !important;
-        }
-      }
-    }
   }
 }

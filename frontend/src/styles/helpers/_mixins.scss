@@ -299,3 +299,53 @@
     margin-top: theme.$spacing-small;
   }
 }
+
+@mixin menu-list {
+  @include flex-align-center;
+
+  height: 60px;
+
+  li {
+    margin: 0 16px;
+
+    @include media.tablet {
+      border-bottom: 0;
+    }
+
+    @include media.tablet {
+      width: auto;
+      height: auto;
+      padding: 0;
+      margin: 0 theme.$spacing-regular;
+    }
+
+    &:last-child {
+      @include media.tablet-down {
+        border-bottom: white 1px solid !important;
+      }
+    }
+  }
+
+  @include media.mobile {
+    align-items: flex-start;
+    height: fit-content;
+
+    li {
+      margin: 0;
+
+      @include media.tablet {
+        width: auto;
+        height: auto;
+        padding: 0;
+        margin: 0 theme.$spacing-regular;
+        border-bottom: 0;
+      }
+
+      &:last-child {
+        @include media.tablet-down {
+          border-bottom: white 1px solid !important;
+        }
+      }
+    }
+  }
+}
