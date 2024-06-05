@@ -20,21 +20,6 @@ router.get('/user-token', (req, res) => {
   }
 });
 
-router.get('/guest-token', (req, res) => {
-  try {
-    const guestToken = req.cookies.guestUserToken;
-    if (!guestToken) {
-      return res
-        .status(401)
-        .json({ message: 'Guest user is not authenticated' });
-    }
-    const decoded = jwt.verify(guestToken, process.env.JWT_KEY);
-    return res.status(200).json(decoded);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-});
-
 router.post('/logout', (req, res) => {
   const isSecure = process.env.IS_SECURE;
 
@@ -46,19 +31,6 @@ router.post('/logout', (req, res) => {
   });
 
   res.json({ message: 'Logged out successfully' });
-});
-
-router.post('/clear-guest-session', (req, res) => {
-  const isSecure = process.env.IS_SECURE;
-
-  res.clearCookie('guestUserToken', {
-    httpOnly: true,
-    sameSite: 'none',
-    path: '/',
-    secure: isSecure,
-  });
-
-  res.json({ message: 'Guest session cleared' });
 });
 
 router.post('/login', validateBody(loginValidation), async (req, res) => {
