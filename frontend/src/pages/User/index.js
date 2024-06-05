@@ -6,7 +6,7 @@ import { editableUserShippingDataProperties } from "#constants/shippingData"
 import { editableUserProperties } from "#constants/users"
 import useUserContext from "#context/userContext"
 import { useCheckIsUser } from "#hooks/useCheckIsUser"
-import { useGetOrdersWithProducts } from "#hooks/useGetOrdersWithProducts"
+import { useGetOrders } from "#hooks/useGetOrders"
 import { useGetUserShippingData } from "#hooks/useGetUserShippingData"
 import { useTranslation } from "#hooks/useTranslation"
 import { Order } from "./Order"
@@ -17,9 +17,7 @@ export const User = () => {
   const { user, updateUser, shippingData } = useUserContext()
   const { updateShippingData } = useGetUserShippingData()
   const { components } = useTranslation()
-  const { orders, notification: ordersNotification } =
-    useGetOrdersWithProducts()
-
+  const { orders, notification: ordersNotification } = useGetOrders()
   return (
     <main className={styles.wrapper} aria-label='Customer Management Page'>
       {notification && <NotificationCard message={notification} />}

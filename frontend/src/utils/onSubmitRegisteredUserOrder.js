@@ -23,7 +23,7 @@ export const onSubmitRegisteredUserOrder = async (
         const orderWithItemsResponse = await Promise.all(
           cart.map(async (item) => {
             const createdItem = await createOrderItem({
-              userOrderId: orderResponse.data.id,
+              orderId: orderResponse.data.id,
               quantity: item.quantity,
               productId: item.product.id,
             })

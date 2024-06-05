@@ -1,7 +1,7 @@
 import { SHIPPING_COST } from "#constants/cart"
-import { CART, PAYMENT, SHIPPING } from "#constants/routes"
+import { LOGIN, PAYMENT, SHOP } from "#constants/routes"
+import useUserContext from "#context/userContext"
 import { useCart } from "#hooks/useCart"
-import { useCurrentUser } from "#hooks/useCurrentUser"
 import { useTranslation } from "#hooks/useTranslation"
 import React from "react"
 import { Link } from "react-router-dom"
@@ -9,7 +9,7 @@ import styles from "./cartOrderSummary.module.scss"
 
 export const CartOrderSummary = ({ totalCost }) => {
   const { cart } = useCart()
-  const { isLoggedIn } = useCurrentUser()
+  const { isLoggedIn } = useUserContext()
   const { translate } = useTranslation()
   const text = translate.pages.cart
   const cartTotalSum = (cart, shippingCost) =>
@@ -17,9 +17,9 @@ export const CartOrderSummary = ({ totalCost }) => {
 
   const renderLink = () => {
     if (cart.length > 0) {
-      const route = isLoggedIn ? PAYMENT : SHIPPING
-      const label = "confirm order"
-      const text = "Confirm Purchase"
+      const route = isLoggedIn ? PAYMENT : LOGIN
+      const label = isLoggedIn ? "confirm order" : "login to purchase"
+      const text = isLoggedIn ? "Confirm Purchase" : "login to purchase"
 
       return (
         <Link className={styles.link} to={route} aria-label={label}>
@@ -30,7 +30,7 @@ export const CartOrderSummary = ({ totalCost }) => {
       return (
         <Link
           className={styles.link}
-          to={CART}
+          to={SHOP}
           aria-label='make an order to continue to checkout'
         >
           {text.orderToContinue}
@@ -40,7 +40,7 @@ export const CartOrderSummary = ({ totalCost }) => {
   }
 
   return (
-    <section className={styles.wrapper} aria-label='order summary'>
+    <section className={styles.wrapper} aria-label='Products cart summary'>
       <h2 className={styles.title}>{text.orderSummary}</h2>
       <dl className={styles.details}>
         <div className={styles.item}>

@@ -6,8 +6,8 @@ export const OrderSummaryItemsList = ({ orderAndCartItems }) => {
     <section className={styles.container} aria-label='Ordered items'>
       <ul className={styles.list}>
         {orderAndCartItems &&
-          orderAndCartItems.cartItems &&
-          orderAndCartItems.cartItems.map((item, index) => (
+          orderAndCartItems.orderItems &&
+          orderAndCartItems.orderItems.map((item, index) => (
             <li key={index} className={styles.item}>
               <OrderSummaryItem
                 image={item.product.image}

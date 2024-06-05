@@ -1,20 +1,17 @@
 import { getOrderItems } from "#api/orders/getOrderItems"
 import { getOrdersByUserId } from "#api/orders/getOrdersByUserId"
-import { useCheckIsUser } from "#hooks/useCheckIsUser"
-import { useEffect, useRef, useState } from "react"
+import { useNotificationContext } from "#context/notificationContext"
+import useUserContext from "#context/userContext"
+import { useEffect, useState } from "react"
 
-export const useGetOrdersWithProducts = () => {
+export const useGetOrders = () => {
   const [orders, setOrders] = useState([])
-  const [notification, setNotification] = useState(null)
-  const { user } = useCheckIsUser()
+  const { onSetNotification } = useNotificationContext()
+  const { user } = useUserContext()
   const [showOrders, setShowOrders] = useState(false)
-
-  const noGetOrdersTimeoutId = useRef(null)
 
   useEffect(() => {
     const getOrdersWithProducts = async () => {
-      if (!user) return
-
       try {
         const response = await getOrdersByUserId(user.id)
 
@@ -25,30 +22,22 @@ export const useGetOrdersWithProducts = () => {
               return { ...order, cartItems: cartItemsResponse.data }
             }),
           )
-
           setOrders(ordersWithDetails)
         }
       } catch (error) {
         console.error(error)
-        setNotification(
+        onSetNotification(
           "It is not possible to get the orders at the moment, please try again",
-        )
-        noGetOrdersTimeoutId.current = setTimeout(
-          () => setNotification(null),
-          3000,
         )
       }
     }
     getOrdersWithProducts()
-    return () => {
-      clearTimeout(noGetOrdersTimeoutId.current)
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   return {
     showOrders,
     setShowOrders,
     orders,
-    notification,
   }
 }

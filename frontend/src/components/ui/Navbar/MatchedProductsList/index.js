@@ -21,10 +21,10 @@ export const MatchedProductsList = ({
         <li
           className={styles.item}
           aria-label={`Searched item: ${product.name}`}
-          key={product.name}
+          key={product.id}
           onClick={() =>
             navigateAndClose(
-              product.name,
+              product.id,
               navigate,
               setMatchedProducts,
               setShowMatchedProductsList,
@@ -35,7 +35,7 @@ export const MatchedProductsList = ({
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               navigateAndClose(
-                product.name,
+                product.id,
                 navigate,
                 setMatchedProducts,
                 setShowMatchedProductsList,

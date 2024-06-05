@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const orders = await db.orders.findAll();
-    return res.json(orders);
+    return res.status(200).json(orders);
   } catch (err) {
     return res.status(500).json({ message: 'This are no orders' });
   }
@@ -18,7 +18,7 @@ router.get('/user/:userId', async (req, res) => {
       where: { userId: req.params.userId },
       order: [['createdAt', 'DESC']],
     });
-    return res.json(orders);
+    return res.status(200).json(orders);
   } catch (err) {
     return res.status(500).json({ message: 'This user has no orders' });
   }
@@ -47,7 +47,7 @@ router.get('/last-order/:userId', async (req, res) => {
         },
       ],
     });
-    return res.json({ orderItems, lastOrder });
+    return res.status(200).json({ orderItems, lastOrder });
   } catch (err) {
     console.error(err);
     return res
@@ -73,7 +73,7 @@ router.get('/items/:orderId', async (req, res) => {
         },
       ],
     });
-    return res.json(orderItems);
+    return res.status(200).json(orderItems);
   } catch (err) {
     console.error(err);
     return res
