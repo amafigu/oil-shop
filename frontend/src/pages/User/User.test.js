@@ -14,7 +14,6 @@ import { UserHeader } from "#components/ui/UserHeader"
 import { editableUserShippingDataProperties } from "#constants/shippingData"
 import { editableUserProperties } from "#constants/users"
 import useUserContext from "#context/userContext"
-import { useGetOrdersWithProducts } from "#hooks/useGetOrdersWithProducts"
 import { useGetUserShippingData } from "#hooks/useGetUserShippingData"
 import { useTranslation } from "#hooks/useTranslation"
 import { Order } from "#pages/User/Order"
@@ -26,7 +25,7 @@ import { render, screen } from "@testing-library/react"
 
 jest.mock("#hooks/useTranslation")
 jest.mock("#hooks/useGetUserShippingData")
-jest.mock("#hooks/useGetOrdersWithProducts")
+jest.mock("#hooks/useGetOrders")
 jest.mock("#context/userContext")
 jest.mock("axios")
 
@@ -41,7 +40,7 @@ describe("User page should", () => {
     })
     useUserContext.mockReturnValue({ user })
     useGetUserShippingData.mockReturnValue({ shippingData })
-    useGetOrdersWithProducts.mockReturnValue({ orders })
+    useGetOrders.mockReturnValue({ orders })
   })
 
   test("render UserHeader correctly", () => {
