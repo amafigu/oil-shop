@@ -6,7 +6,6 @@ import { useTranslation } from "#hooks/useTranslation"
 import { listenInput } from "#utils/listenInput"
 import { setFileToUpload } from "#utils/setFileToUpload"
 import { useState } from "react"
-
 import styles from "./createUserForm.module.scss"
 
 export const CreateUserForm = ({ onCreate }) => {
