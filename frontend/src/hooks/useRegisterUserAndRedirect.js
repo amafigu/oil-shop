@@ -3,16 +3,16 @@ import { createUser } from "#api/users/createUser"
 import { CURRENT_USER } from "#constants/api"
 import { SIGN_UP_ADMIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT } from "#constants/time"
+import useUserContext from "#context/userContext"
 import { onLogin } from "#utils/onLogin"
 import { onRequestHandlerError } from "#utils/onRequestHandlerError"
 import { onRequestHandlerNotification } from "#utils/onRequestHandlerNotification"
 import { onValidationError } from "#utils/onValidationError"
 import { createUserSchema } from "#utils/usersValidation"
 import { useLocation, useNavigate } from "react-router-dom"
-import { useCurrentUser } from "./useCurrentUser"
 
 export const useRegisterUserAndRedirect = () => {
-  const { setIsLoggedIn, setUser } = useCurrentUser()
+  const { setIsLoggedIn, setUser } = useUserContext()
   const location = useLocation()
   const navigate = useNavigate()
   const currentPath = location.pathname

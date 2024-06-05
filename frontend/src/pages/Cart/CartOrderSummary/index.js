@@ -1,7 +1,7 @@
 import { SHIPPING_COST } from "#constants/cart"
 import { LOGIN, PAYMENT, SHOP } from "#constants/routes"
+import useUserContext from "#context/userContext"
 import { useCart } from "#hooks/useCart"
-import { useCurrentUser } from "#hooks/useCurrentUser"
 import { useTranslation } from "#hooks/useTranslation"
 import React from "react"
 import { Link } from "react-router-dom"
@@ -9,7 +9,7 @@ import styles from "./cartOrderSummary.module.scss"
 
 export const CartOrderSummary = ({ totalCost }) => {
   const { cart } = useCart()
-  const { isLoggedIn } = useCurrentUser()
+  const { isLoggedIn } = useUserContext()
   const { translate } = useTranslation()
   const text = translate.pages.cart
   const cartTotalSum = (cart, shippingCost) =>
