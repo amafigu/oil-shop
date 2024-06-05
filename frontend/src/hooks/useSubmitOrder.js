@@ -1,26 +1,22 @@
 import { LOCAL_STORAGE_CART } from "#constants/localStorage"
 import { ORDER_SUMMARY } from "#constants/routes"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+import useUserContext from "#context/userContext"
 import { useCart } from "#hooks/useCart"
-import { useCurrentUser } from "#hooks/useCurrentUser"
 import { onSubmitRegisteredUserOrder } from "#utils/onSubmitRegisteredUserOrder"
 import { useNavigate } from "react-router-dom"
 
 export const useSubmitOrder = () => {
-  const { isLoggedIn, user } = useCurrentUser()
+  const { user } = useUserContext()
   const { cart, setCart } = useCart()
   const navigate = useNavigate()
 
   const submitOrder = async (e, paymentMethod, setNotification) => {
     e.preventDefault()
-    let response
-    let validUserId
+
     try {
-      if (isLoggedIn) {
-        validUserId = user.id
-      }
-      response = await onSubmitRegisteredUserOrder(
-        validUserId,
+      const response = await onSubmitRegisteredUserOrder(
+        user.id,
         paymentMethod,
         cart,
         setNotification,
