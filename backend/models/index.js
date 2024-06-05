@@ -32,7 +32,6 @@ db.products.belongsTo(db.productCategories, {
 });
 db.productCategories.hasMany(db.products, {
   foreignKey: 'categoryId',
-  as: 'category',
 });
 db.users.hasOne(db.shippingData, {
   foreignKey: 'userId',

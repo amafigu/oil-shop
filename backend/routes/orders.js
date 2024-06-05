@@ -24,7 +24,6 @@ router.get('/user/:userId', async (req, res) => {
   }
 });
 
-// TODO: FIX
 router.get('/last-order/:userId', async (req, res) => {
   try {
     const lastOrder = await db.orders.findAll({
@@ -39,10 +38,10 @@ router.get('/last-order/:userId', async (req, res) => {
       include: [
         {
           model: db.products,
-          as: 'product',
           include: [
             {
               model: db.productCategories,
+              as: 'category',
             },
           ],
         },
@@ -68,6 +67,7 @@ router.get('/items/:orderId', async (req, res) => {
           include: [
             {
               model: db.productCategories,
+              as: 'category',
             },
           ],
         },
