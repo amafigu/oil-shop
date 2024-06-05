@@ -7,10 +7,7 @@ export const getOrdersByUserId = async (userId) => {
       `${process.env.REACT_APP_API_URL}${ORDERS_BY_USER}/${userId}`,
       { withCredentials: true },
     )
-    if (
-      (response && response.status === 201) ||
-      (response && response.status === 422)
-    ) {
+    if (response && response.status === 200) {
       return response
     }
   } catch (error) {
