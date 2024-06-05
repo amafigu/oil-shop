@@ -140,26 +140,6 @@
       "addToCartButton": "Add To Cart",
       "errorByGettingProduct": "We can not get that product, please try again later"
     },
-    "shipping": {
-      "yourInfo": "Your Info",
-      "yourEmail": "Your email",
-      "title": "If you are already registered please",
-      "titleLink": "login",
-      "titleSubSentence": ". Otherwise, by submitting your data you may checkout as a guest",
-      "inputLabels": {
-        "email": "Email address",
-        "firstName": "First name",
-        "lastName": "Last name",
-        "phone": "Phone number",
-        "country": "Country",
-        "state": "State",
-        "city": "City",
-        "address": "Address",
-        "postalCode": "Postal code"
-      },
-      "submitButton": "Payment form",
-      "backToCart": "Back to cart"
-    },
     "shop": {
       "title": "All products"
     },

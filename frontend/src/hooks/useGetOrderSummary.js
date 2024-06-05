@@ -1,4 +1,3 @@
-import { getGuestUserToken } from "#api/auth/getGuestUserToken"
 import {
   initialOrderData,
   initialShippingData,
@@ -22,11 +21,6 @@ export const useGetOrderSummary = () => {
     const getOrderSummary = async () => {
       if (isLoggedIn) {
         currentUserId = user.id
-      } else {
-        const decodedToken = await getGuestUserToken()
-        if (decodedToken && decodedToken.status === 200) {
-          currentUserId = decodedToken.data.id
-        }
       }
       const userSummaryResponse = await onGetOrderSummary(
         currentUserId,

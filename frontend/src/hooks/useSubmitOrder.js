@@ -1,4 +1,3 @@
-import { getGuestUserToken } from "#api/auth/getGuestUserToken"
 import { LOCAL_STORAGE_CART } from "#constants/localStorage"
 import { ORDER_SUMMARY } from "#constants/routes"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
@@ -19,11 +18,6 @@ export const useSubmitOrder = () => {
     try {
       if (isLoggedIn) {
         validUserId = user.id
-      } else {
-        const guestUserId = await getGuestUserToken()
-        if (guestUserId && guestUserId.status === 200) {
-          validUserId = guestUserId.data.id
-        }
       }
       response = await onSubmitRegisteredUserOrder(
         validUserId,
@@ -41,6 +35,5 @@ export const useSubmitOrder = () => {
       setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
     }
   }
-
   return { submitOrder }
 }

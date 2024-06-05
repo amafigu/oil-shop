@@ -158,26 +158,6 @@
       "addToCartButton": "In den Warenkorb",
       "errorByGettingProduct": "Wir konnen das Produkt nicht finden, versuchen Sie später."
     },
-    "shipping": {
-      "yourInfo": "Ihren Daten",
-      "yourEmail": "Ihren E-Mail",
-      "title": "Wenn Sie bereits registriert sind, gehen sie zur",
-      "titleLink": "Login",
-      "titleSubSentence": "Seite. Andernfalls können Sie durch die Übermittlung Ihrer Daten als Gast zur Kasse gehen",
-      "inputLabels": {
-        "firstName": "Vorname",
-        "lastName": "Nachname",
-        "email": "E-Mail",
-        "phone": "Telefonnummer",
-        "address": "Adresse",
-        "state": "Bundesland",
-        "postalCode": "PLZ",
-        "city": "Stadt",
-        "country": "Land"
-      },
-      "submitButton": "Zur Zahlungsart",
-      "backToCart": "Zurück zur Kasse"
-    },
     "shop": {
       "title": "Alle Produkte"
     },
