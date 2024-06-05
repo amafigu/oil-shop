@@ -31,7 +31,7 @@ export const CategoryMenu = () => {
                       ? "navigationActive"
                       : "navigation"
                   }
-                  aria-label='navigation item'
+                  aria-label='category filter item'
                 />
               </li>
             )
