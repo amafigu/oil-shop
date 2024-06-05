@@ -1,5 +1,5 @@
 import { getOrderItems } from "#api/orders/getOrderItems"
-import { getOrders } from "#api/orders/getOrders"
+import { getOrdersByUserId } from "#api/orders/getOrdersByUserId"
 import { useCheckIsUser } from "#hooks/useCheckIsUser"
 import { useEffect, useRef, useState } from "react"
 
@@ -16,7 +16,7 @@ export const useGetOrdersWithProducts = () => {
       if (!user) return
 
       try {
-        const response = await getOrders(user.id)
+        const response = await getOrdersByUserId(user.id)
 
         if (response && response.status === 200) {
           const ordersWithDetails = await Promise.all(

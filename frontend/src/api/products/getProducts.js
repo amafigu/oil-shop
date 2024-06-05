@@ -11,6 +11,7 @@ export const getProducts = async () => {
       return response
     }
   } catch (error) {
+    console.error("Error by getting products", error)
     throw error
   }
 }

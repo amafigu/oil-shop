@@ -20,7 +20,7 @@ module.exports = [
           image:
             "https://oylo-images.s3.us-east-2.amazonaws.com/1710416729104-Screenshot.png",
           description: "description",
-          measure: "ml",
+
           size: 331,
           categoryId: 7,
           details: "Details",
@@ -48,7 +48,7 @@ module.exports = [
           image:
             "https://oylo-images.s3.us-east-2.amazonaws.com/1710326045548-Screenshot.png",
           description: "description",
-          measure: "ml",
+
           size: 10,
           categoryId: 9,
           details: "Details",

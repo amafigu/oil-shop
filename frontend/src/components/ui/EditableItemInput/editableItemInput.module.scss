@@ -2,7 +2,7 @@
 @use "#styles/media" as media;
 @import "#styles/helpers/mixins";
 
-.formField {
+.field {
   flex-grow: 1;
   height: theme.$height-form-field;
   margin-right: theme.$spacing-small;

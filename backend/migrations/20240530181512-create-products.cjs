@@ -21,25 +21,31 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       image: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       description: {
         type: Sequelize.STRING,
-      },
-      measure: {
-        type: Sequelize.STRING,
+        allowNull: true,
       },
       size: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
-
+      brand: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       details: {
         type: Sequelize.STRING,
+        allowNull: true,
       },
       price: {
         type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
       },
       createdAt: {
         type: Sequelize.DATE,

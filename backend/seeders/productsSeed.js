@@ -6,6 +6,7 @@ categories:
 
 const products = [
   {
+    brand: 'young living',
     name: 'angelica',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_angelica_5_ml.jpg',
@@ -16,6 +17,7 @@ const products = [
     details: 'with a lemon touch',
   },
   {
+    brand: 'young living',
     name: 'eucalyptus blue',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_eucalyptusBlue_15_ml.jpg',
@@ -26,6 +28,7 @@ const products = [
     details: 'refreshing aroma',
   },
   {
+    brand: 'young living',
     name: 'grapefruit',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_grapefruit_15_ml.jpg',
@@ -36,6 +39,7 @@ const products = [
     details: 'smells from the nature',
   },
   {
+    brand: 'young living',
     name: 'jade lemon',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_jadeLemon_5_ml.jpg',
@@ -46,6 +50,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'lavender',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_lavender_15_ml.jpg',
@@ -56,6 +61,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'spearmint',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oil_spearmint_15_ml.jpg',
@@ -66,6 +72,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'evening peace',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_eveningPeace_236_ml.jpg',
@@ -76,6 +83,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'morning start',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_morningStart_236_ml.jpg',
@@ -86,6 +94,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'sensation',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_sensation_236_ml.jpg',
@@ -96,6 +105,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'dragon time',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_dragonTime_236_ml.jpg',
@@ -106,6 +116,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'bath and shower',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/bodyCare_bathAndShower_236_ml.jpg',
@@ -117,6 +128,7 @@ const products = [
   },
 
   {
+    brand: 'young living',
     name: 'aroma_globe',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_aromaGlobe_eu.jpg',
@@ -127,6 +139,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'dewdrop',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_dewdrop_eu.jpg',
@@ -137,6 +150,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'feather the owl',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_featherTheOwl_eu.jpg',
@@ -147,6 +161,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'haven',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_haven_eu.jpg',
@@ -157,6 +172,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'lantern',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_lantern_eu.jpg',
@@ -167,6 +183,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'sweet aroma',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/difuser_sweetAroma_eu.jpg',
@@ -178,6 +195,7 @@ const products = [
   },
 
   {
+    brand: 'young living',
     name: 'v-6',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oilMassage_v-6_944_ml.jpg',
@@ -189,6 +207,7 @@ const products = [
   },
 
   {
+    brand: 'young living',
     name: 'relaxation',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oilMassage_relaxation_236_ml.jpg',
@@ -200,6 +219,7 @@ const products = [
   },
 
   {
+    brand: 'young living',
     name: 'cel-lite magic',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/oilMassage_cel-liteMagic_236_ml.jpg',
@@ -211,6 +231,7 @@ const products = [
   },
 
   {
+    brand: 'young living',
     name: 'breathe again',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_breatheAgain_10_ml.jpg',
@@ -221,6 +242,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'peace and calming',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_peaceAndCalming_10_ml.jpg',
@@ -231,6 +253,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'thieves',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_thieves_10_ml.jpg',
@@ -241,6 +264,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'stress away',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_stressAway_10_ml.jpg',
@@ -251,6 +275,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'tranquil',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_tranquil_10_ml.jpg',
@@ -261,6 +286,7 @@ const products = [
     details: 'details',
   },
   {
+    brand: 'young living',
     name: 'valor',
     image:
       'https://oylo-images.s3.us-east-2.amazonaws.com/roll_valor_10_ml.jpg',

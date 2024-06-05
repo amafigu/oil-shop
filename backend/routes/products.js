@@ -19,7 +19,7 @@ router.post(
       const existingProduct = await db.products.findOne({
         where: {
           name: req.body.name,
-          category: req.body.category,
+          categoryId: req.body.categoryId,
           size: req.body.size,
         },
       });
@@ -49,6 +49,7 @@ router.get('/name/:name', async (req, res) => {
       include: [
         {
           model: db.productCategories,
+          as: 'category',
         },
       ],
     });
@@ -70,6 +71,7 @@ router.get('/:id', async (req, res) => {
       include: [
         {
           model: db.productCategories,
+          as: 'category',
         },
       ],
     });
@@ -132,6 +134,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: db.productCategories,
+          as: 'category',
         },
       ],
       order: [['id', 'ASC']],

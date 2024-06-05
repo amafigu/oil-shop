@@ -1,31 +1,24 @@
 import { logout } from "#api/auth/logout"
 import { ActionButton } from "#components/ui/ActionButton"
 import { LanguageSelector } from "#components/ui/LanguageSelector"
-import { NavigationMenu } from "#components/ui/NavigationMenu"
-import {
-  CART,
-  CURRENT_ADMIN,
-  CURRENT_CUSTOMER,
-  LOGIN,
-  SHOP,
-} from "#constants/routes"
+import { CART, CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
 import useUserContext from "#context/userContext"
-import { useGetProductCategories } from "#hooks/useGetProductCategories"
 import { useMenuOptions } from "#hooks/useMenuOptions"
 import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { CategoryMenu } from "../../CategoryMenu"
 import styles from "./mobileMenu.module.scss"
+
 export const MobileMenu = ({
   showLanguagesOptions,
   setShowLanguagesOptions,
 }) => {
   const navigate = useNavigate()
   const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
-  const { productCategories } = useGetProductCategories()
   const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
   const { getAllProductsQuantity } = useCartContext()
 
@@ -139,17 +132,7 @@ export const MobileMenu = ({
           </div>
         )}
       </ul>
-      <NavigationMenu
-        items={
-          productCategories &&
-          productCategories.map((category) => ({
-            type: "category",
-            path: `${SHOP}?category=${category.name}`,
-            label: category.name,
-          }))
-        }
-        className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
-      />
+      <CategoryMenu />
     </nav>
   )
 }

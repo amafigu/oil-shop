@@ -1,4 +1,4 @@
-import { CreateItem } from "#components/ui/CreateItem"
+import { CreateUserForm } from "#components/ui/CreateUserForm"
 import { LOGO_IMAGE } from "#constants/media"
 import { registerUserProperties } from "#constants/users"
 import { useRegisterUserAndRedirect } from "#hooks/useRegisterUserAndRedirect"
@@ -21,8 +21,8 @@ export const SignUp = () => {
             alt='logo'
           />
         </div>
-        <div className={styles.form} aria-label='Create new user form'>
-          <CreateItem
+        <div className={styles.form}>
+          <CreateUserForm
             onCreate={registerUserAndRedirect}
             onChange={listenInput}
             renderItemProps={registerUserProperties}

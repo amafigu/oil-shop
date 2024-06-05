@@ -7,8 +7,9 @@ export const createOrder = async (userId, order) => {
       `${process.env.REACT_APP_API_URL}${ORDERS_BY_USER}/${userId}`,
       order,
     )
-    return response
+    if (response) return response
   } catch (error) {
+    console.error("Error by creating order", error)
     throw error
   }
 }

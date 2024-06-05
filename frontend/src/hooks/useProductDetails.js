@@ -1,34 +1,34 @@
-import { getProductByName } from "#api/products/getProductByName"
+import { getProductById } from "#api/products/getProductById"
 import { SHOP } from "#constants/routes"
-import { LONG_MESSAGE_TIMEOUT } from "#constants/time"
-import { useTranslation } from "#hooks/useTranslation"
+import { useNotificationContext } from "#context/notificationContext"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 export const useProductDetails = () => {
   const [product, setProduct] = useState(null)
   const [quantity, setQuantity] = useState(1)
-  const [notification, setNotification] = useState(null)
-  const { productName } = useParams()
-  const { translate } = useTranslation()
-  const text = translate.pages.productsDetails
+  const { onSetNotification } = useNotificationContext()
+  const { id } = useParams()
   const navigate = useNavigate()
 
   useEffect(() => {
+    console.log(id)
     const getProductDetails = async () => {
       try {
-        const response = await getProductByName(productName)
+        const response = await getProductById(id)
         if (response.status === 200) {
           setProduct(response.data)
         }
       } catch (error) {
-        setNotification(text.errorByGettingProduct)
-        setTimeout(() => navigate(SHOP), LONG_MESSAGE_TIMEOUT)
-        setTimeout(() => setNotification(null), LONG_MESSAGE_TIMEOUT)
+        navigate(SHOP)
+        onSetNotification(
+          "Can not navigate to product, please try with another item",
+        )
       }
     }
     getProductDetails()
-  }, [productName, text.errorByGettingProduct, navigate])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
 
-  return { product, notification, quantity, setQuantity }
+  return { product, quantity, setQuantity }
 }

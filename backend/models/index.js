@@ -28,8 +28,11 @@ db.orderItems = orderItemModel(sequelize, Sequelize);
 
 db.products.belongsTo(db.productCategories, {
   foreignKey: 'categoryId',
+  as: 'category',
 });
-db.productCategories.hasMany(db.products, { foreignKey: 'categoryId' });
+db.productCategories.hasMany(db.products, {
+  foreignKey: 'categoryId',
+});
 db.users.hasOne(db.shippingData, {
   foreignKey: 'userId',
   onDelete: 'CASCADE',

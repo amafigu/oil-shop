@@ -38,12 +38,14 @@
 .imageContainer {
   width: 300px;
   height: 300px;
+  margin-right: theme.$spacing-semi-regular-semi-large;
 
   @include flex-all-center;
 
   @include media.mobile {
     width: 200px;
     height: 200px;
+    margin-right: 0;
   }
 }
 
@@ -67,7 +69,7 @@
   }
 }
 
-.data {
+.list {
   width: 100%;
 
   @include media.mobile {
@@ -102,7 +104,7 @@
   @include property-font-primary-semi-large-light;
 }
 
-.row {
+.detailsRow {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -126,17 +128,4 @@
   display: flex;
   gap: theme.$spacing-regular;
   width: 100%;
-}
-
-.addProductToCartButton {
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin-left: theme.$spacing-small;
-
-  @include action-button;
-
-  @include media.mobile {
-    width: 50%;
-    min-width: 0;
-  }
 }

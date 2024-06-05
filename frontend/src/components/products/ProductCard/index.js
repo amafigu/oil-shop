@@ -23,9 +23,9 @@ export const ProductCard = ({ product }) => {
               tabIndex={0}
               role='button'
               className={styles.body}
-              onClick={() => navigate(`${PRODUCTS}/${product.name}`)}
+              onClick={() => navigate(`${PRODUCTS}/${product.id}`)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") navigate(`${PRODUCTS}/${product.name}`)
+                if (e.key === "Enter") navigate(`${PRODUCTS}/${product.id}`)
               }}
             >
               <div className={styles.imageContainer}>

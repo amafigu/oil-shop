@@ -3,12 +3,15 @@ import axios from "axios"
 
 export const createOrderItem = async (order) => {
   try {
-    const orderItem = await axios.post(
+    const response = await axios.post(
       `${process.env.REACT_APP_API_URL}${ORDER_ITEMS}`,
       order,
     )
-    return orderItem
+    if (response && response.status === 201) {
+      return response
+    }
   } catch (error) {
+    console.error("Error by creating order item", error)
     throw error
   }
 }

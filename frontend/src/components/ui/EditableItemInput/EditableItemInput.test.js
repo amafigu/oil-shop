@@ -4,11 +4,11 @@ import {
   translate,
 } from "#__mocks__/translate"
 import user from "#__mocks__/user"
-import { EditableItemInput } from "#components/ui/EditableItem/EditableItemInput"
 import { useTranslation } from "#hooks/useTranslation"
 import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 import React from "react"
+import { EditableItemInput } from "./index"
 
 jest.mock("#hooks/useTranslation")
 jest.mock("#context/userContext")

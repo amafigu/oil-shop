@@ -1,20 +1,5 @@
 const productModel = (sequelize, DataTypes) => {
   const Product = sequelize.define('products', {
-    name: {
-      type: DataTypes.STRING,
-    },
-    image: {
-      type: DataTypes.STRING,
-    },
-    description: {
-      type: DataTypes.STRING,
-    },
-    measure: {
-      type: DataTypes.STRING,
-    },
-    size: {
-      type: DataTypes.INTEGER,
-    },
     categoryId: {
       type: DataTypes.INTEGER,
       references: {
@@ -24,11 +9,33 @@ const productModel = (sequelize, DataTypes) => {
       allowNull: false,
       onDelete: 'SET NULL',
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     details: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     price: {
       type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,

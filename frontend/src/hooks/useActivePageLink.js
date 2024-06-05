@@ -1,4 +1,4 @@
-import { pageNavigationItems } from "#constants/navigation"
+import { navigationMenuItems } from "#constants/navigation"
 import useMenuContext from "#context/menuContext"
 import { useEffect } from "react"
 
@@ -6,8 +6,9 @@ export const useActivePageLink = () => {
   const { activePageLink, setActivePageLink } = useMenuContext()
   const location = window.location.pathname
   const path = window.location.pathname.slice(1)
+
   useEffect(() => {
-    const pageLinks = pageNavigationItems.map((item) => {
+    const pageLinks = navigationMenuItems.map((item) => {
       return item.label
     })
     if (pageLinks.includes(path)) {

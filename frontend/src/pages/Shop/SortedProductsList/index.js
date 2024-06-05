@@ -1,25 +1,37 @@
 import { ProductCard } from "#components/products/ProductCard"
-import { useProductCategoryByUrlQuery } from "#hooks/useProductCategoryByUrlQuery"
-import { useProducts } from "#hooks/useProducts"
+import { useProductContext } from "#context/productContext"
+import { useProductCategory } from "#hooks/useProductCategory"
+import { useEffect, useState } from "react"
 import styles from "./sortedProductsList.module.scss"
 
-const filteredProducts = (products, category) =>
-  category
-    ? products.filter((product) => product.category.name === category)
-    : products
-
 export const SortedProductsList = () => {
-  const { products } = useProducts()
-  const { category } = useProductCategoryByUrlQuery()
-  const sortedProducts = filteredProducts(products, category)
+  const [productsList, setProductsList] = useState([])
+  const { products } = useProductContext()
+  const { sortCategory, categories } = useProductCategory()
+
+  useEffect(() => {
+    const sortByCategory = (products, category) => {
+      const categoryNames = categories.map((category) => category.name)
+      if (categoryNames.includes(category)) {
+        return products.filter(
+          (product) => category && product.category.name === category,
+        )
+      } else {
+        return products
+      }
+    }
+    setProductsList(sortByCategory(products, sortCategory))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [products, sortCategory])
 
   return (
     <ul className={styles.container} aria-label='products list'>
-      {sortedProducts.map((product) => (
-        <li key={product.id} aria-label='products list item'>
-          <ProductCard product={product} />
-        </li>
-      ))}
+      {productsList &&
+        productsList.map((product) => (
+          <li key={product.id} aria-label='products list item'>
+            <ProductCard product={product} />
+          </li>
+        ))}
     </ul>
   )
 }

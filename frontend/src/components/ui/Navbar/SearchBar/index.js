@@ -1,5 +1,5 @@
+import { useProductContext } from "#context/productContext"
 import { useMenuOptions } from "#hooks/useMenuOptions"
-import { useProducts } from "#hooks/useProducts"
 import { searchProducts } from "#utils/searchProducts"
 import styles from "./searchBar.module.scss"
 
@@ -9,7 +9,7 @@ export const SearchBar = ({
   setMatchedProducts,
   setShowMatchedProductsList,
 }) => {
-  const { products } = useProducts()
+  const { products } = useProductContext()
   const { showProductsSearchBar } = useMenuOptions()
 
   return (

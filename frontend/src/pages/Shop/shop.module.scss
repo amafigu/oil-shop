@@ -7,7 +7,15 @@
   @include margin-page-wrapper;
 }
 
-.products {
+.menuContainer {
+  display: flex;
+
+  @include media.tablet-down {
+    display: none;
+  }
+}
+
+.productsSection {
   width: 80%;
   min-height: theme.$min-height-page-small;
 
@@ -18,15 +26,7 @@
   }
 }
 
-.container {
-  display: flex;
-
-  @include media.tablet-down {
-    display: none;
-  }
-}
-
-.list {
+.listContainer {
   margin: theme.$spacing-component-divider-vertical 0;
 
   @include flex-all-center;

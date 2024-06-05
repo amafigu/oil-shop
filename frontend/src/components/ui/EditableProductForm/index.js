@@ -1,44 +1,46 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import { EditableItemInput } from "#components/ui/EditableItemInput"
-import NotificationCard from "#components/ui/NotificationCard"
 import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/setFileToUpload"
 import { useEffect, useState } from "react"
-import styles from "./editableItem.module.scss"
+import styles from "./editableProductForm.module.scss"
 
-export const EditableItem = ({ item, renderItemProps, onSave, onDelete }) => {
-  const [updatedItemData, setUpdatedItemData] = useState({})
+export const EditableProductForm = ({
+  item,
+  renderItemProps,
+  onSave,
+  onDelete,
+}) => {
+  const [updatedData, setUpdatedData] = useState({})
   const [file, setFile] = useState(null)
-  const [notification, setNotification] = useState(null)
   const { components } = useTranslation()
 
-  const itemInitialAttributes = renderItemProps.reduce((acc, val) => {
+  const initialData = renderItemProps.reduce((acc, val) => {
     acc[val] = item[val]
     return acc
   }, {})
 
   useEffect(() => {
-    setUpdatedItemData(itemInitialAttributes)
+    setUpdatedData(initialData)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item])
 
   return (
     <article className={styles.wrapper} aria-label='editable item'>
-      {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <div className={styles.imageContainer}>
           {item && Object.prototype.hasOwnProperty.call(item, "image") && (
             <img
               className={styles.image}
-              src={updatedItemData.image || ""}
+              src={updatedData.image || ""}
               alt='element'
             />
           )}
         </div>
         {onDelete && (
           <ActionButton
-            action={(e) => onDelete(e, item.id, setNotification)}
+            action={() => onDelete(item.id)}
             text={components.editableItem.deleteButton}
             className={STYLES.BUTTONS.ACTION}
             ariaLabel={"delete item"}
@@ -48,17 +50,17 @@ export const EditableItem = ({ item, renderItemProps, onSave, onDelete }) => {
       {
         <form className={styles.item}>
           {item &&
-            itemInitialAttributes &&
-            Object.keys(itemInitialAttributes).map((key) => (
+            initialData &&
+            Object.keys(initialData).map((key) => (
               <EditableItemInput
                 label={key}
                 name={key}
-                updatedPropertyData={updatedItemData}
+                updatedPropertyData={updatedData}
                 onChange={(e) => {
                   if (key === "image") {
                     setFileToUpload(e, setFile)
                   } else {
-                    setUpdatedItemData((prevState) => ({
+                    setUpdatedData((prevState) => ({
                       ...prevState,
                       [e.target.name]: e.target.value,
                     }))
@@ -66,30 +68,26 @@ export const EditableItem = ({ item, renderItemProps, onSave, onDelete }) => {
                 }}
                 onSave={
                   key === "image"
-                    ? (e) =>
-                        onSave(
-                          e,
+                    ? () =>
+                        onSave({
                           key,
-                          item.id,
-                          itemInitialAttributes,
-                          updatedItemData,
-                          setUpdatedItemData,
-                          setNotification,
+                          id: item.id,
+                          initialData,
+                          updatedData,
+                          setUpdatedData,
                           file,
-                        )
-                    : (e) =>
-                        onSave(
-                          e,
+                        })
+                    : () =>
+                        onSave({
                           key,
-                          item.id,
-                          itemInitialAttributes,
-                          updatedItemData,
-                          setUpdatedItemData,
-                          setNotification,
-                        )
+                          id: item.id,
+                          initialData,
+                          updatedData,
+                          setUpdatedData,
+                        })
                 }
                 classCss={STYLES.FORMS.FIELD}
-                type={"text"}
+                type='text'
                 file={file}
                 key={key}
               />

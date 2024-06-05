@@ -19,7 +19,7 @@ export const FormInput = ({
           <span className={styles.label}>
             {file ? "Selected file: " : "Select a file"}
           </span>
-          <label chtmlFor='fileInput'>
+          <label htmlFor='fileInput'>
             {file ? file.name : "Search on device"}
           </label>
           <input
