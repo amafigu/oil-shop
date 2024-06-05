@@ -10,7 +10,6 @@ import {
   ORDER_SUMMARY,
   PAYMENT,
   PRODUCTS,
-  SHIPPING,
   SHOP,
   SIGN_UP,
   SIGN_UP_ADMIN,
@@ -25,7 +24,6 @@ import { NotFound } from "#pages/NotFound"
 import { OrderSummary } from "#pages/OrderSummary"
 import { Payment } from "#pages/Payment"
 import { ProductDetails } from "#pages/ProductDetails"
-import { Shipping } from "#pages/Shipping"
 import { Shop } from "#pages/Shop"
 import { SignUp } from "#pages/SignUp"
 import { User } from "#pages/User"
@@ -43,7 +41,6 @@ export const routes = [
   { path: `${PRODUCTS}/:id`, element: <ProductDetails /> },
   { path: SIGN_UP, element: <SignUp /> },
   { path: SIGN_UP_ADMIN, element: <SignUp /> },
-  { path: SHIPPING, element: <Shipping /> },
   { path: SHOP, element: <Shop /> },
   { path: CURRENT_CUSTOMER, element: <User /> },
 ]
