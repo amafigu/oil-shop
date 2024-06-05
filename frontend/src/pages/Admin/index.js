@@ -1,23 +1,20 @@
-import { CreateItem } from "#components/ui/CreateItem"
+import { CreateProductForm } from "#components/ui/CreateProductForm"
+import { CreateUserForm } from "#components/ui/CreateUserForm"
 import { EditableItem } from "#components/ui/EditableItem"
 import { EditableItemsList } from "#components/ui/EditableItemsList"
+import { EditableProductForm } from "#components/ui/EditableProductForm"
 import NotificationCard from "#components/ui/NotificationCard"
 import { ToggleButton } from "#components/ui/ToggleButton"
 import { UserHeader } from "#components/ui/UserHeader"
-import {
-  createProductProperties,
-  editableProductProperties,
-} from "#constants/products"
+import { editableProductProperties } from "#constants/products"
 import { STYLES } from "#constants/styles"
-import { createUserProperties, editableUserProperties } from "#constants/users"
+import { editableUserProperties } from "#constants/users"
+import { useProductContext } from "#context/productContext"
 import { useCheckIsAdmin } from "#hooks/useCheckIsAdmin"
-import { useGetProductCategories } from "#hooks/useGetProductCategories"
-import { useProducts } from "#hooks/useProducts"
 import { useTranslation } from "#hooks/useTranslation"
 import { useUsers } from "#hooks/useUsers"
 import { filterProductsProps } from "#utils/filterProductsProps"
 import { filterUserProps } from "#utils/filterUserProps"
-import { listenInput } from "#utils/listenInput"
 import { useState } from "react"
 import styles from "./admin.module.scss"
 
@@ -28,8 +25,7 @@ export const Admin = () => {
   const [showProductsList, setShowProductsList] = useState(false)
   const { notification } = useCheckIsAdmin()
   const { users, deleteUser, addUser, updateUser } = useUsers()
-  const { products, deleteProduct, addProduct, updateProduct } = useProducts()
-  const { productCategories } = useGetProductCategories()
+  const { onDeleteProduct, onUpdateProduct, products } = useProductContext()
   const { pages } = useTranslation()
   const usersText = pages.admin.usersManagement
   const productsText = pages.admin.productManagement
@@ -73,14 +69,7 @@ export const Admin = () => {
             classCss={STYLES.BUTTONS.SHOW_HIDE}
           />
         </div>
-
-        {showCreateUserForm && (
-          <CreateItem
-            onCreate={addUser}
-            onChange={listenInput}
-            renderItemProps={createUserProperties}
-          />
-        )}
+        {showCreateUserForm && <CreateUserForm onCreate={addUser} />}
       </section>
       <section className={styles.container}>
         <h2>{productsText.title}</h2>
@@ -96,11 +85,11 @@ export const Admin = () => {
         {showProductsList && (
           <EditableItemsList
             itemsList={products}
-            ItemComponent={EditableItem}
+            ItemComponent={EditableProductForm}
             title={productsText.editableItemsList.title}
             itemProps={{
-              onSave: updateProduct,
-              onDelete: deleteProduct,
+              onSave: onUpdateProduct,
+              onDelete: onDeleteProduct,
               renderItemProps: editableProductProperties,
             }}
             filterProps={filterProductsProps}
@@ -115,14 +104,7 @@ export const Admin = () => {
             classCss={STYLES.BUTTONS.SHOW_HIDE}
           />
         </div>
-        {showCreateProductForm && (
-          <CreateItem
-            onCreate={addProduct}
-            onChange={listenInput}
-            renderItemProps={createProductProperties}
-            itemCategories={productCategories}
-          />
-        )}
+        {showCreateProductForm && <CreateProductForm />}
       </section>
     </main>
   )
