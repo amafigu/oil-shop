@@ -8,19 +8,6 @@ export const initialShippingData = {
   country: "",
 }
 
-export const initialShippingFormData = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  street: "",
-  number: "",
-  details: "",
-  city: "",
-  state: "",
-  country: "",
-  postalCode: "",
-}
-
 export const createShippingDataProperties = {
   email: "Please add data",
   street: "Please add data",
