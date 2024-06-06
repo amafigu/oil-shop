@@ -1,5 +1,5 @@
 import { getUserShippingData } from "#api/users/getUserShippingData"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { onRequestHandlerError } from "#utils/onRequestHandlerError"
 import { onUpdateShippingData } from "#utils/onUpdateShippingData"
 import { useEffect, useState } from "react"

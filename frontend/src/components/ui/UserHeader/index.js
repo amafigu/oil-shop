@@ -1,5 +1,5 @@
 import { DEFAULT_USER_IMAGE } from "#constants/media"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { setDefaultImageByError } from "#utils/setDefaultImageByError"
 import styles from "./userHeader.module.scss"

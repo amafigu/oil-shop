@@ -1,6 +1,6 @@
 import { CURRENT_USER } from "#constants/api"
 import { REDIRECT_TIMEOUT } from "#constants/time"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { onLogin } from "#utils/onLogin"
 import { onRequestHandlerError } from "#utils/onRequestHandlerError"
 import { useState } from "react"

@@ -1,6 +1,6 @@
 import cartItem from "#__mocks__/cartItem"
 import { translate } from "#__mocks__/translate"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import { Cart } from "#pages/Cart"

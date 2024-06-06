@@ -1,6 +1,6 @@
 import { LOGIN } from "#constants/routes"
 import { REDIRECT_TIMEOUT, SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 

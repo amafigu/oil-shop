@@ -1,6 +1,6 @@
 import { translate } from "#__mocks__/translate"
 import useCartContext from "#context/cartContext"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { OrderSummary } from "#pages/OrderSummary"
 import "@testing-library/jest-dom"

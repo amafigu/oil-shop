@@ -1,7 +1,7 @@
 import { getOrderItems } from "#api/orders/getOrderItems"
 import { getOrdersByUserId } from "#api/orders/getOrdersByUserId"
 import { useNotificationContext } from "#context/notificationContext"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useEffect, useState } from "react"
 
 export const useGetOrders = () => {
