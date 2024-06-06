@@ -1,12 +1,15 @@
-# fly.toml app configuration file generated for oylo-backend on 2023-10-14T12:21:27+02:00
+# fly.toml app configuration file generated for oylo-backend on 2024-06-06T00:53:08+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "oylo-backend"
-primary_region = "ams"
+app = 'oylo-backend'
+primary_region = 'ams'
 
 [build]
+
+[deploy]
+  release_command = 'npm run db:migrate'
 
 [http_service]
   internal_port = 3001
@@ -14,7 +17,9 @@ primary_region = "ams"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-  processes = ["app"]
+  processes = ['app']
 
-[deploy]
-  release_command = "npm run migrate"
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
