@@ -7,8 +7,14 @@ export const createAdmin = async (admin) => {
       `${process.env.REACT_APP_API_URL}${CREATE_ADMIN}`,
       admin,
     )
-    return response
+    if (
+      (response && response.status === 201) ||
+      (response && response.status === 422)
+    ) {
+      return response
+    }
   } catch (error) {
+    console.error("Error by creating admin", error)
     throw error
   }
 }

@@ -10,7 +10,7 @@ export const createProduct = async (product) => {
     )
     return response
   } catch (error) {
-    console.error("Can not create product", error)
+    console.error("Error by creating product", error)
     throw error
   }
 }
