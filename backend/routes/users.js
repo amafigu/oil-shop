@@ -192,23 +192,18 @@ router.post(
       const existingUser = await db.users.findOne({
         where: { email: req.body.email },
       });
-
       if (existingUser) {
-        return res.status(400).json({ message: 'Email already in use' });
+        return res.status(422).json({ message: 'Email already in use' });
       }
-
       const hashedPassword = await hashPassword(req.body.password);
-
       const customerRole = await db.roles.findOne({
         where: { name: 'admin' },
       });
-
       const newUser = await db.users.create({
         ...req.body,
         password: hashedPassword,
         roleId: customerRole.id,
       });
-
       const contextUser = {
         ...newUser.dataValues,
         password: undefined,
@@ -216,7 +211,6 @@ router.post(
         updatedAt: undefined,
         role: customerRole.name,
       };
-
       return res.status(201).json({
         message: 'Customer user created successfully',
         user: contextUser,

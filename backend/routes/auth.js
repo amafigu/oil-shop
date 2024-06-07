@@ -12,7 +12,7 @@ router.get('/user-token', (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token)
-      return res.status(401).json({ message: 'User is not authenticated' });
+      return res.status(403).json({ message: 'User is not authenticated' });
     const decodedToken = jwt.verify(token, process.env.JWT_KEY);
     return res.status(200).json(decodedToken);
   } catch (error) {
