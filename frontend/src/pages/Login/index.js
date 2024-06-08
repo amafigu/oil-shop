@@ -1,23 +1,16 @@
-import NotificationCard from "#components/ui/NotificationCard"
 import { LOGO_IMAGE } from "#constants/media"
 import { SIGN_UP } from "#constants/routes"
-import { useLoginAndRedirect } from "#hooks/useLoginAndRedirect"
 import { useTranslation } from "#hooks/useTranslation"
-import { scrollToTop } from "#utils/scrollToTop"
 import { Link } from "react-router-dom"
 import { LoginForm } from "./LoginForm"
 import styles from "./login.module.scss"
 
 export const Login = () => {
-  const { notification } = useLoginAndRedirect()
   const { translate } = useTranslation()
   const text = translate.pages.login
 
-  scrollToTop()
-
   return (
     <main className={styles.wrapper} aria-label='Login page'>
-      {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <div className={styles.logoContainer}>
