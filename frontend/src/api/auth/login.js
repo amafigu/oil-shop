@@ -6,12 +6,16 @@ export const login = async (email, password) => {
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}${LOGIN}`,
       { email, password },
-      { withCredentials: true },
     )
-    if (response && response.status === 200) {
+    if (
+      (response && response.status === 200) ||
+      (response && response.status === 401) ||
+      (response && response.status === 404)
+    ) {
       return response
     }
   } catch (error) {
+    console.error("Error by login user")
     throw error
   }
 }
