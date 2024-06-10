@@ -1,45 +1,70 @@
-import { EditableItem } from "#components/ui/EditableItem"
 import { EditableItemsList } from "#components/ui/EditableItemsList"
-import NotificationCard from "#components/ui/NotificationCard"
+import { EditableShippingData } from "#components/ui/EditableShippingData"
+import { EditableUserForm } from "#components/ui/EditableUserForm"
+import { ToggleButton } from "#components/ui/ToggleButton"
 import { UserHeader } from "#components/ui/UserHeader"
 import { editableUserShippingDataProperties } from "#constants/shippingData"
+import { STYLES } from "#constants/styles"
 import { editableUserProperties } from "#constants/users"
 import { useUserContext } from "#context/userContext"
-import { useCheckIsUser } from "#hooks/useCheckIsUser"
 import { useGetOrders } from "#hooks/useGetOrders"
-import { useGetUserShippingData } from "#hooks/useGetUserShippingData"
 import { useTranslation } from "#hooks/useTranslation"
+import { useVerifyUserRole } from "#hooks/useVerifyUserRole"
+import { useEffect, useState } from "react"
 import { Order } from "./Order"
 import styles from "./user.module.scss"
 
 export const User = () => {
-  const { notification } = useCheckIsUser()
-  const { user, updateUser, shippingData } = useUserContext()
-  const { updateShippingData } = useGetUserShippingData()
-  const { components } = useTranslation()
-  const { orders, notification: ordersNotification } = useGetOrders()
+  const [showOrders, setShowOrders] = useState(false)
+  const [showShippingData, setShowShippingData] = useState(false)
+  const { user, onUpdateUser, onUpdateShippingData, shippingData, isLoggedIn } =
+    useUserContext()
+  const { components, pages } = useTranslation()
+  const { orders } = useGetOrders()
+  const { verifyUserRole } = useVerifyUserRole()
+
+  useEffect(() => {
+    verifyUserRole()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, isLoggedIn])
+
   return (
     <main className={styles.wrapper} aria-label='Customer Management Page'>
-      {notification && <NotificationCard message={notification} />}
-      {ordersNotification && <NotificationCard message={ordersNotification} />}
       <section className={styles.container}>
         <UserHeader />
         {user && (
-          <EditableItem
+          <EditableUserForm
             item={user}
             renderItemProps={editableUserProperties}
-            onSave={updateUser}
+            onSave={onUpdateUser}
           />
         )}
-        {shippingData &&
-          Object.prototype.hasOwnProperty.call(shippingData, "id") && (
-            <EditableItem
-              item={shippingData}
-              renderItemProps={editableUserShippingDataProperties}
-              onSave={updateShippingData}
-            />
-          )}
-        {orders && (
+        <div className={styles.buttonContainer}>
+          <ToggleButton
+            isVisible={showShippingData}
+            onToggle={setShowShippingData}
+            hideBtnText={pages.user.toggleShippingData.hide.toUpperCase()}
+            showBtnText={pages.user.toggleShippingData.show.toUpperCase()}
+            classCss={STYLES.BUTTONS.SHOW_HIDE}
+          />
+        </div>
+        {showShippingData && shippingData && (
+          <EditableShippingData
+            item={shippingData}
+            renderItemProps={editableUserShippingDataProperties}
+            onSave={onUpdateShippingData}
+          />
+        )}
+        <div className={styles.buttonContainer}>
+          <ToggleButton
+            isVisible={showOrders}
+            onToggle={setShowOrders}
+            hideBtnText={pages.user.toggleOrders.hide.toUpperCase()}
+            showBtnText={pages.user.toggleOrders.show.toUpperCase()}
+            classCss={STYLES.BUTTONS.SHOW_HIDE}
+          />
+        </div>
+        {showOrders && orders && (
           <EditableItemsList
             itemsList={orders}
             ItemComponent={Order}
