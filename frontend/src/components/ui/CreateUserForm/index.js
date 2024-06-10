@@ -4,14 +4,12 @@ import { STYLES } from "#constants/styles"
 import { useNotificationContext } from "#context/notificationContext"
 import { useTranslation } from "#hooks/useTranslation"
 import { listenInput } from "#utils/listenInput"
-import { setFileToUpload } from "#utils/setFileToUpload"
 import { useState } from "react"
 import styles from "./createUserForm.module.scss"
 
 export const CreateUserForm = ({ onCreate }) => {
   const { setNotification } = useNotificationContext()
   const { components } = useTranslation()
-  const [file, setFile] = useState(null)
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -27,21 +25,19 @@ export const CreateUserForm = ({ onCreate }) => {
             classCss={STYLES.FORMS.FIELD}
             key={field}
             name={field}
-            onChangeListener={
-              field === "image"
-                ? (e) => setFileToUpload(e, setFile)
-                : (e) => listenInput(e, data, setData, setNotification)
+            onChangeListener={(e) =>
+              listenInput(e, data, setData, setNotification)
             }
             placeholder={field}
             label={field}
-            type={field === "image" ? "image" : "text"}
+            type='text'
             value={data[field]}
           />
         ))}
         <div className={styles.button}>
           <ActionButton
             action={async (e) => {
-              await onCreate(e, data, setNotification, file)
+              await onCreate(e, data)
               setData({ ...data })
             }}
             text={components.createItem.submitButton}
