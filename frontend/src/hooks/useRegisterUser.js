@@ -21,7 +21,7 @@ export const useRegisterUser = () => {
       } else {
         newUser = await onCreateCustomer(e, data)
       }
-      setLoggedUser(newUser.email, newUser.password)
+      setLoggedUser(e, newUser.email, newUser.password)
     } catch (error) {
       console.error("Error by registering user", error)
       onRequestError(error, setNotification)
