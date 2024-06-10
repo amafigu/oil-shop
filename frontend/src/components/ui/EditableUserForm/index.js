@@ -15,14 +15,13 @@ export const EditableUserForm = ({
   const [updatedData, setUpdatedData] = useState({})
   const [file, setFile] = useState(null)
   const { components } = useTranslation()
-
-  const itemInitialAttributes = renderItemProps.reduce((acc, val) => {
+  const initialData = renderItemProps.reduce((acc, val) => {
     acc[val] = item[val]
     return acc
   }, {})
 
   useEffect(() => {
-    setUpdatedData(itemInitialAttributes)
+    setUpdatedData(initialData)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item])
 
@@ -47,8 +46,8 @@ export const EditableUserForm = ({
       </div>
       <form className={styles.item}>
         {item &&
-          itemInitialAttributes &&
-          Object.keys(itemInitialAttributes).map((key) => (
+          initialData &&
+          Object.keys(initialData).map((key) => (
             <EditableItemInput
               label={key}
               name={key}
@@ -65,25 +64,23 @@ export const EditableUserForm = ({
               }}
               onSave={
                 key === "image"
-                  ? (e) =>
-                      onSave(
-                        e,
+                  ? () =>
+                      onSave({
                         key,
-                        item.id,
-                        itemInitialAttributes,
+                        id: item.id,
+                        initialData,
                         updatedData,
                         setUpdatedData,
                         file,
-                      )
-                  : (e) =>
-                      onSave(
-                        e,
+                      })
+                  : () =>
+                      onSave({
                         key,
-                        item.id,
-                        itemInitialAttributes,
+                        id: item.id,
+                        initialData,
                         updatedData,
                         setUpdatedData,
-                      )
+                      })
               }
               classCss={STYLES.FORMS.FIELD}
               type={"text"}

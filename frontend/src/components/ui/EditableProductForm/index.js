@@ -15,7 +15,6 @@ export const EditableProductForm = ({
   const [updatedData, setUpdatedData] = useState({})
   const [file, setFile] = useState(null)
   const { components } = useTranslation()
-
   const initialData = renderItemProps.reduce((acc, val) => {
     acc[val] = item[val]
     return acc
