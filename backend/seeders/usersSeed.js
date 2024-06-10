@@ -94,7 +94,6 @@ async function seed() {
         await db.users.create(userWithRoleId);
       }
     }
-
     console.log('Seeding completed successfully.');
     process.exit(0);
   } catch (err) {

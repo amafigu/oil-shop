@@ -1,7 +1,7 @@
-import { getAuthenticatedUser } from "#api/auth/getAuthenticatedUser"
+import { getAuthenticatedUserById } from "#api/auth/getAuthenticatedUserById"
 import { getLastOrderItems } from "#api/orders/getLastOrderItems"
 import { getUserShippingData } from "#api/users/getUserShippingData"
-import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestError } from "./onRequestError"
 
 export const onGetOrderSummary = async (userId, setNotification) => {
   let orderAndCartItems
@@ -10,7 +10,7 @@ export const onGetOrderSummary = async (userId, setNotification) => {
   let userData
 
   try {
-    const userResponse = await getAuthenticatedUser(userId)
+    const userResponse = await getAuthenticatedUserById(userId)
     if (userResponse && userResponse.status === 200) {
       const user = userResponse.data
       userData = {
@@ -43,6 +43,6 @@ export const onGetOrderSummary = async (userId, setNotification) => {
     return { shippingData, userData, orderData, orderAndCartItems }
   } catch (error) {
     const message = "Error getting summary data"
-    onRequestHandlerError(error, setNotification, message)
+    onRequestError(error, setNotification, message)
   }
 }

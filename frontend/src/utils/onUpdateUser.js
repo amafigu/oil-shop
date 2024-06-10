@@ -1,7 +1,7 @@
 import { uploadFile } from "#api/aws/uploadFile"
 import { updateUser } from "#api/users/updateUser"
 import { updateUserSchema } from "#utils/usersValidation"
-import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestError } from "./onRequestError"
 import { onValidationError } from "./onValidationError"
 
 export const onUpdateUser = async (
@@ -42,6 +42,6 @@ export const onUpdateUser = async (
   } catch (error) {
     setUpdatedUserData(itemInitialAttributes)
     const message = "Error by updating user"
-    onRequestHandlerError(error, setNotification, message)
+    onRequestError(error, setNotification, message)
   }
 }
