@@ -143,6 +143,16 @@
     "shop": {
       "title": "All products"
     },
+    "user": {
+      "toggleOrders": {
+        "show": "Show orders",
+        "hide": "Hide orders"
+      },
+      "toggleShippingData": {
+        "show": "Show shipping data",
+        "hide": "Hide shipping data"
+      }
+    },
     "welcome": {
       "subTeaser": {
         "title": "At Oylo, our appreciation for nature's treasured gifts is boundless",
