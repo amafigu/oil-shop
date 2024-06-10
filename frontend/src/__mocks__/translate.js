@@ -55,6 +55,7 @@ export const translate = {
         },
       },
     },
+
     products: {
       oil: {
         size: "size",
@@ -94,6 +95,14 @@ export const commonProperties = {
 }
 
 export const components = {
+  categoryMenu: {
+    all: "All Products",
+    essentialOil: "Essential Oils",
+    difuser: "Difusers",
+    bodyCare: "Body Care",
+    roll: "Roll On",
+    massageOil: "Massage Oils",
+  },
   ordersList: {
     title: "Your Orders",
     hideToggleButton: "Hide orders",

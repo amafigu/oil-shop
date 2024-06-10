@@ -25,7 +25,7 @@
     }
   }
 
-  @include media.mobile {
+  @include media.tablet-down {
     display: flex;
     justify-content: flex-start;
     margin: 0;
@@ -42,7 +42,7 @@
 .list {
   @include menu-list;
 
-  @include media.mobile {
+  @include media.tablet-down {
     flex-direction: column;
   }
 }

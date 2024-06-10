@@ -27,7 +27,7 @@
 .list {
   @include menu-list;
 
-  @include media.mobile {
+  @include media.tablet-down {
     flex-direction: row;
     gap: theme.$spacing-semi-regular;
     margin: theme.$spacing-semi-regular;
