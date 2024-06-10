@@ -27,7 +27,7 @@
     width: 100%;
     padding-left: theme.$spacing-semi-regular;
 
-    @include property-font-tertiary-regular;
+    @include typography-small-normal;
   }
 }
 
@@ -40,13 +40,13 @@
   background-color: theme.$background-color-primary !important;
   border-radius: theme.$border-radius-small;
 
-  @include property-font-primary-semi-large-light;
+  @include typography-semilarge-extralight;
   @include input-styles-reset;
 
   @include media.mobile {
     width: 90%;
     padding-left: theme.$spacing-smallest;
 
-    @include property-font-tertiary-regular;
+    @include typography-small-normal;
   }
 }

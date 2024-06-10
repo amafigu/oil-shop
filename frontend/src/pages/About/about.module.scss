@@ -13,13 +13,13 @@
   }
 
   .title {
-    @include title-text;
+    @include typography-large-semibold;
 
     text-align: center;
   }
 
   .link {
-    @include component-title;
+    @include typography-semilarge-semibold;
 
     margin-bottom: theme.$spacing-semi-regular;
     text-align: center;

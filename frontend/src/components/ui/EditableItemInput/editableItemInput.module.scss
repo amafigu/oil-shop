@@ -4,7 +4,7 @@
 
 .field {
   flex-grow: 1;
-  height: theme.$height-form-field;
+  height: 32px;
   margin-right: theme.$spacing-small;
 }
 
@@ -17,23 +17,22 @@
 
 .data {
   width: 100%;
-  height: theme.$height-form-field;
+  height: 32px;
   margin-right: theme.$spacing-small;
   overflow: hidden;
   text-overflow: ellipsis;
   border-bottom: theme.$border-regular-component;
 
-  @include subtitle-text;
+  @include typography-medium-normal;
 }
 
 .property {
   margin-right: theme.$spacing-smallest;
-
-  @include property-font;
+  font-size: theme.$font-size-medium;
 }
 
 .value {
-  @include value-font;
+  font-size: theme.$font-size-small;
 }
 
 .hideForSemantic {

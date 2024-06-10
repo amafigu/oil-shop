@@ -4,7 +4,7 @@
 
 .item {
   display: flex;
-  margin: theme.$margin-order-list 0;
+  margin: theme.$spacing-semi-large 0;
 
   @include media.tablet-down {
     @include flex-column-align-center;
@@ -12,7 +12,7 @@
 }
 
 .content {
-  margin-right: theme.$spacing-semi-huge;
+  margin-right: theme.$spacing-extra-huge;
 
   @include media.mobile {
     margin-right: 0;
@@ -27,11 +27,11 @@
 .property {
   margin-right: theme.$spacing-smallest;
 
-  @include property-font-secondary-semi-bold;
+  @include typography-medium-semibold;
 }
 
 .value {
-  @include property-font-secondary-regular;
+  @include typography-medium-normal;
 }
 
 .list {
@@ -50,5 +50,5 @@
 }
 
 .info {
-  @include property-font-secondary-semi-bold;
+  @include typography-medium-semibold;
 }

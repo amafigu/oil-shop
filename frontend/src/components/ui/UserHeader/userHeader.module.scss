@@ -71,11 +71,11 @@
 }
 
 .property {
-  @include property-font-primary-medium;
+  @include typography-semilarge-medium;
 }
 
 .value {
   margin-left: theme.$spacing-smallest;
 
-  @include property-font-secondary-regular;
+  @include typography-medium-normal;
 }

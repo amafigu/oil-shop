@@ -27,7 +27,7 @@
   margin-bottom: theme.$spacing-small;
 
   @include flex-all-center;
-  @include property-font-primary-semi-bold;
+  @include typography-semilarge-semibold;
 }
 
 .itemsLinksList {

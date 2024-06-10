@@ -5,7 +5,7 @@
 .wrapper {
   @include flex-justify-center;
 
-  margin: theme.$spacing-component-divider-vertical 0;
+  margin: theme.$spacing-huge 0;
 }
 
 .container {

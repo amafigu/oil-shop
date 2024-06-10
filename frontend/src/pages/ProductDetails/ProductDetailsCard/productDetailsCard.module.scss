@@ -80,7 +80,7 @@
 .category {
   color: theme.$font-color-primary;
 
-  @include property-font-primary-regular;
+  @include typography-semilarge-normal;
 }
 
 .link {
@@ -94,14 +94,14 @@
   margin-top: theme.$spacing-regular;
   margin-bottom: theme.$spacing-large;
 
-  @include property-font-primary-semi-bold;
+  @include typography-semilarge-semibold;
 }
 
 .description,
 .details {
   margin-bottom: theme.$spacing-semi-regular-large;
 
-  @include property-font-primary-semi-large-light;
+  @include typography-semilarge-extralight;
 }
 
 .detailsRow {
@@ -115,13 +115,13 @@
 .size {
   margin-right: theme.$spacing-semi-regular-large;
 
-  @include property-font-secondary-regular;
+  @include typography-medium-normal;
 }
 
 .price {
   margin-bottom: 0;
 
-  @include property-font-secondary-regular;
+  @include typography-medium-normal;
 }
 
 .selection {

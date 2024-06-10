@@ -27,7 +27,7 @@
 }
 
 .listContainer {
-  margin: theme.$spacing-component-divider-vertical 0;
+  margin: theme.$spacing-huge 0;
 
   @include flex-all-center;
 }

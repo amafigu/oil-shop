@@ -22,7 +22,7 @@
   width: fit-content;
   height: fit-content;
   padding: theme.$spacing-semi-regular-large;
-  margin: theme.$spacing-notification-card-vertical auto;
+  margin: 40vh auto;
   border: theme.$border-regular-component;
 
   @include notification-card-content;
