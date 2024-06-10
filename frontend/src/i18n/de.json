@@ -316,6 +316,14 @@
         "error": "Kann nicht alle Produkte finden"
       }
     },
+    "categoryMenu": {
+      "all": "Alle Produkte",
+      "essentialOil": "Essentielle Öle",
+      "difuser": "Diffusoren",
+      "bodyCare": "Körperpflege",
+      "roll": "Roll On",
+      "massageOil": "Massageöle"
+    },
     "createUserForm": {
       "submitButton": "Benuzter erstellen",
       "showButton": "Formular anzeigen",
@@ -330,13 +338,7 @@
     "navigationMenu": {
       "home": "Home",
       "shop": "Shop",
-      "about": "Über uns",
-      "all": "Alle Produkte",
-      "essentialOil": "Essentielle Öle",
-      "difuser": "Diffusoren",
-      "bodyCare": "Körperpflege",
-      "roll": "Roll On",
-      "massageOil": "Massageöle"
+      "about": "Über uns"
     },
     "orderSummaryItem": {
       "quantity": "Menge"

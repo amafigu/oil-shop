@@ -288,6 +288,14 @@
         "error": "Can not see all products"
       }
     },
+    "categoryMenu": {
+      "all": "All Products",
+      "essentialOil": "Essential Oils",
+      "difuser": "Difusers",
+      "bodyCare": "Body Care",
+      "roll": "Roll On",
+      "massageOil": "Massage Oils"
+    },
     "createUserForm": {
       "submitButton": "Create User",
       "showButton": "Show Form",
@@ -306,13 +314,7 @@
     "navigationMenu": {
       "home": "Home",
       "shop": "Shop",
-      "about": "About us",
-      "all": "All Products",
-      "essentialOil": "Essential Oils",
-      "difuser": "Difusers",
-      "bodyCare": "Body Care",
-      "roll": "Roll On",
-      "massageOil": "Massage Oils"
+      "about": "About us"
     },
     "orderSummaryItem": {
       "quantity": "Quantity"
