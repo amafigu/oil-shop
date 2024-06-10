@@ -1,6 +1,6 @@
 import { getUserShippingData } from "#api/users/getUserShippingData"
 import { useUserContext } from "#context/userContext"
-import { onRequestHandlerError } from "#utils/onRequestHandlerError"
+import { onRequestError } from "#utils/onRequestError"
 import { onUpdateShippingData } from "#utils/onUpdateShippingData"
 import { useEffect, useState } from "react"
 
@@ -33,7 +33,7 @@ export const useGetUserShippingData = () => {
         }
       } catch (error) {
         const message = "Error by getting user shipping data"
-        onRequestHandlerError(error, setNotification, message)
+        onRequestError(error, setNotification, message)
       }
     }
     getShippingData()

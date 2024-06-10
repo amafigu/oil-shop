@@ -27,73 +27,69 @@ export const EditableProductForm = ({
   }, [item])
 
   return (
-    <article className={styles.wrapper} aria-label='editable item'>
+    <article className={styles.wrapper} aria-label='Edit product'>
       <div className={styles.container}>
         <div className={styles.imageContainer}>
-          {item && Object.prototype.hasOwnProperty.call(item, "image") && (
-            <img
-              className={styles.image}
-              src={updatedData.image || ""}
-              alt='element'
-            />
-          )}
+          <img
+            className={styles.image}
+            src={updatedData.image || ""}
+            alt='product'
+          />
         </div>
         {onDelete && (
           <ActionButton
-            action={() => onDelete(item.id)}
+            action={(e) => onDelete(e, item.id)}
             text={components.editableItem.deleteButton}
             className={STYLES.BUTTONS.ACTION}
-            ariaLabel={"delete item"}
+            ariaLabel={"delete product"}
           />
         )}
       </div>
-      {
-        <form className={styles.item}>
-          {item &&
-            initialData &&
-            Object.keys(initialData).map((key) => (
-              <EditableItemInput
-                label={key}
-                name={key}
-                updatedPropertyData={updatedData}
-                onChange={(e) => {
-                  if (key === "image") {
-                    setFileToUpload(e, setFile)
-                  } else {
-                    setUpdatedData((prevState) => ({
-                      ...prevState,
-                      [e.target.name]: e.target.value,
-                    }))
-                  }
-                }}
-                onSave={
-                  key === "image"
-                    ? () =>
-                        onSave({
-                          key,
-                          id: item.id,
-                          initialData,
-                          updatedData,
-                          setUpdatedData,
-                          file,
-                        })
-                    : () =>
-                        onSave({
-                          key,
-                          id: item.id,
-                          initialData,
-                          updatedData,
-                          setUpdatedData,
-                        })
+      <form className={styles.item}>
+        {item &&
+          initialData &&
+          Object.keys(initialData).map((key) => (
+            <EditableItemInput
+              label={key}
+              name={key}
+              updatedPropertyData={updatedData}
+              onChange={(e) => {
+                if (key === "image") {
+                  setFileToUpload(e, setFile)
+                } else {
+                  setUpdatedData((prevState) => ({
+                    ...prevState,
+                    [e.target.name]: e.target.value,
+                  }))
                 }
-                classCss={STYLES.FORMS.FIELD}
-                type='text'
-                file={file}
-                key={key}
-              />
-            ))}
-        </form>
-      }
+              }}
+              onSave={
+                key === "image"
+                  ? () =>
+                      onSave({
+                        key,
+                        id: item.id,
+                        initialData,
+                        updatedData,
+                        setUpdatedData,
+                        file,
+                      })
+                  : () =>
+                      onSave({
+                        key,
+                        id: item.id,
+                        initialData,
+                        updatedData,
+                        setUpdatedData,
+                      })
+              }
+              classCss={STYLES.FORMS.FIELD}
+              type='text'
+              file={file}
+              key={key}
+            />
+          ))}
+      </form>
     </article>
   )
 }

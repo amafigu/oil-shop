@@ -12,7 +12,6 @@ export const useProductDetails = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log(id)
     const getProductDetails = async () => {
       try {
         const response = await getProductById(id)
