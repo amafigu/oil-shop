@@ -41,8 +41,8 @@ export const EditableItemsList = ({
                 action={() => filterList(filterButton.action, index)}
                 text={
                   isAscendent[index] === true
-                    ? text[filterButton.targetProperty]
-                    : text["reverse"]
+                    ? `${text[filterButton.targetProperty]} asc`
+                    : `${text[filterButton.targetProperty]} des`
                 }
                 className={filterButton.className}
                 ariaLabel='Filter button'
