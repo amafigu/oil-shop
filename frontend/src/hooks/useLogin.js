@@ -1,17 +1,13 @@
 import { login } from "#api/auth/login"
-import { getUserRole } from "#api/users/getUserRole"
 import { CURRENT_ADMIN, CURRENT_CUSTOMER } from "#constants/routes"
-import { REDIRECT_TIMEOUT } from "#constants/time"
 import { useNotificationContext } from "#context/notificationContext"
 import { useUserContext } from "#context/userContext"
 import { onRequestError } from "#utils/onRequestError"
 import { useNavigate } from "react-router-dom"
-
 export const useLogin = () => {
   const { setIsLoggedIn, setUser } = useUserContext()
   const { setNotification } = useNotificationContext()
   const navigate = useNavigate()
-
   const setLoggedUser = async (e, email, password) => {
     e.preventDefault()
 
@@ -21,11 +17,10 @@ export const useLogin = () => {
         const user = loginResponse.data.user
         setUser(user)
         setIsLoggedIn(true)
-        const role = await getUserRole(user.roleId)
-        if (role === "admin") {
-          setTimeout(() => navigate(CURRENT_ADMIN), REDIRECT_TIMEOUT)
-        } else {
-          setTimeout(() => navigate(CURRENT_CUSTOMER), REDIRECT_TIMEOUT)
+        if (user.role.name === "admin") {
+          navigate(CURRENT_ADMIN)
+        } else if (user.role.name === "customer") {
+          navigate(CURRENT_CUSTOMER)
         }
       }
       if (loginResponse && loginResponse.status === 401) {
