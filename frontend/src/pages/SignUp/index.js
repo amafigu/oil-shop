@@ -1,14 +1,12 @@
 import { CreateUserForm } from "#components/ui/CreateUserForm"
 import { LOGO_IMAGE } from "#constants/media"
-import { registerUserProperties } from "#constants/users"
-import { useRegisterUserAndRedirect } from "#hooks/useRegisterUserAndRedirect"
-import { listenInput } from "#utils/listenInput"
+import { useRegisterUser } from "#hooks/useRegisterUser"
 import { scrollToTop } from "#utils/scrollToTop"
 import { LinkContainer } from "./LinkContainer"
 import styles from "./signUp.module.scss"
 
 export const SignUp = () => {
-  const { registerUserAndRedirect } = useRegisterUserAndRedirect()
+  const { registerUser } = useRegisterUser()
   scrollToTop()
 
   return (
@@ -22,11 +20,7 @@ export const SignUp = () => {
           />
         </div>
         <div className={styles.form}>
-          <CreateUserForm
-            onCreate={registerUserAndRedirect}
-            onChange={listenInput}
-            renderItemProps={registerUserProperties}
-          />
+          <CreateUserForm onCreate={registerUser} />
         </div>
         <LinkContainer />
       </section>

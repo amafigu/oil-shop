@@ -3,7 +3,7 @@ import {
   initialShippingData,
   initialUserData,
 } from "#constants/orderSummaryData"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useEffect, useState } from "react"
 import { onGetOrderSummary } from "../utils/onGetOrderSummary"
 

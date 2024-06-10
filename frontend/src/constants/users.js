@@ -19,10 +19,3 @@ export const editableUserProperties = [
   "email",
   "image",
 ]
-
-export const registerUserProperties = [
-  "firstName",
-  "lastName",
-  "email",
-  "password",
-]

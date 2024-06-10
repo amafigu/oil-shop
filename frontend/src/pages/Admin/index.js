@@ -1,21 +1,20 @@
 import { CreateProductForm } from "#components/ui/CreateProductForm"
 import { CreateUserForm } from "#components/ui/CreateUserForm"
-import { EditableItem } from "#components/ui/EditableItem"
 import { EditableItemsList } from "#components/ui/EditableItemsList"
 import { EditableProductForm } from "#components/ui/EditableProductForm"
-import NotificationCard from "#components/ui/NotificationCard"
+import { EditableUserForm } from "#components/ui/EditableUserForm"
 import { ToggleButton } from "#components/ui/ToggleButton"
 import { UserHeader } from "#components/ui/UserHeader"
 import { editableProductProperties } from "#constants/products"
 import { STYLES } from "#constants/styles"
 import { editableUserProperties } from "#constants/users"
 import { useProductContext } from "#context/productContext"
-import { useCheckIsAdmin } from "#hooks/useCheckIsAdmin"
+import { useUserContext } from "#context/userContext"
 import { useTranslation } from "#hooks/useTranslation"
-import { useUsers } from "#hooks/useUsers"
+import { useVerifyUserRole } from "#hooks/useVerifyUserRole"
 import { filterProductsProps } from "#utils/filterProductsProps"
 import { filterUserProps } from "#utils/filterUserProps"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./admin.module.scss"
 
 export const Admin = () => {
@@ -23,16 +22,27 @@ export const Admin = () => {
   const [showCreateProductForm, setShowCreateProductForm] = useState(false)
   const [showUsersList, setShowUsersList] = useState(false)
   const [showProductsList, setShowProductsList] = useState(false)
-  const { notification } = useCheckIsAdmin()
-  const { users, deleteUser, addUser, updateUser } = useUsers()
+  const {
+    users,
+    onDeleteUser,
+    onCreateCustomer,
+    onUpdateUser,
+    user,
+    isLoggedIn,
+  } = useUserContext()
   const { onDeleteProduct, onUpdateProduct, products } = useProductContext()
+  const { verifyUserRole } = useVerifyUserRole()
   const { pages } = useTranslation()
   const usersText = pages.admin.usersManagement
   const productsText = pages.admin.productManagement
 
+  useEffect(() => {
+    verifyUserRole()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, isLoggedIn])
+
   return (
     <main className={styles.wrapper}>
-      {notification && <NotificationCard message={notification} />}
       <div className={styles.container}>
         <UserHeader />
       </div>
@@ -50,11 +60,11 @@ export const Admin = () => {
         {showUsersList && (
           <EditableItemsList
             itemsList={users}
-            ItemComponent={EditableItem}
+            ItemComponent={EditableUserForm}
             title={usersText.editableItemsList.title}
             itemProps={{
-              onSave: updateUser,
-              onDelete: deleteUser,
+              onSave: onUpdateUser,
+              onDelete: onDeleteUser,
               renderItemProps: editableUserProperties,
             }}
             filterProps={filterUserProps}
@@ -69,7 +79,7 @@ export const Admin = () => {
             classCss={STYLES.BUTTONS.SHOW_HIDE}
           />
         </div>
-        {showCreateUserForm && <CreateUserForm onCreate={addUser} />}
+        {showCreateUserForm && <CreateUserForm onCreate={onCreateCustomer} />}
       </section>
       <section className={styles.container}>
         <h2>{productsText.title}</h2>

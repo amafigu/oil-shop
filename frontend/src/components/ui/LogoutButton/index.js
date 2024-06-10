@@ -1,14 +1,21 @@
-import { logout } from "#api/auth/logout"
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons"
+import { ActionButton } from "#components/ui/ActionButton"
+import { useLogout } from "#hooks/useLogout"
+import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-const LogoutButton = ({ navigate, setIsLoggedIn }) => {
+export const LogoutButton = ({ className }) => {
+  const { setLogout } = useLogout()
   return (
-    <FontAwesomeIcon
-      icon={faArrowRightFromBracket}
-      onClick={() => logout(navigate, setIsLoggedIn)}
+    <ActionButton
+      action={() => setLogout()}
+      text={
+        <FontAwesomeIcon
+          icon={getIconByName("faArrowRightFromBracket")}
+          size='2xl'
+        />
+      }
+      className={className}
+      ariaLabel={"Logout"}
     />
   )
 }
-
-export default LogoutButton

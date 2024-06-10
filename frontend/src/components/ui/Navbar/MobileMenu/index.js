@@ -1,24 +1,23 @@
-import { logout } from "#api/auth/logout"
 import { ActionButton } from "#components/ui/ActionButton"
+import { CategoryMenu } from "#components/ui/CategoryMenu"
 import { LanguageSelector } from "#components/ui/LanguageSelector"
+import { LogoutButton } from "#components/ui/LogoutButton"
 import { CART, CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "#constants/routes"
 import { STYLES } from "#constants/styles"
 import useCartContext from "#context/cartContext"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useMenuOptions } from "#hooks/useMenuOptions"
 import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { React } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { CategoryMenu } from "../../CategoryMenu"
+import { Link } from "react-router-dom"
 import styles from "./mobileMenu.module.scss"
 
 export const MobileMenu = ({
   showLanguagesOptions,
   setShowLanguagesOptions,
 }) => {
-  const navigate = useNavigate()
-  const { isLoggedIn, setIsLoggedIn, user } = useUserContext()
+  const { isLoggedIn, user } = useUserContext()
   const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
   const { getAllProductsQuantity } = useCartContext()
 
@@ -90,17 +89,7 @@ export const MobileMenu = ({
               className={styles.item}
               onClick={() => setShowMobileMenu(false)}
             >
-              <ActionButton
-                action={() => logout(navigate, setIsLoggedIn)}
-                text={
-                  <FontAwesomeIcon
-                    icon={getIconByName("faArrowRightFromBracket")}
-                    size={"xl"}
-                  />
-                }
-                className={STYLES.LINKS.NAVIGATION_MENU_LINK}
-                ariaLabel={"logout"}
-              />
+              <LogoutButton className={STYLES.LINKS.NAVIGATION_MENU_LINK} />
             </li>
             <li
               className={styles.item}
@@ -123,12 +112,7 @@ export const MobileMenu = ({
             <Link to={LOGIN}>
               <FontAwesomeIcon icon={getIconByName("faUser")} />
             </Link>
-            <ActionButton
-              action={() => logout(navigate, setIsLoggedIn)}
-              text={<FontAwesomeIcon icon={getIconByName("faUser")} />}
-              className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
-              ariaLabel='logout'
-            />
+            <LogoutButton className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS} />
           </div>
         )}
       </ul>

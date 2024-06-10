@@ -7,8 +7,14 @@ export const createUser = async (user) => {
       `${process.env.REACT_APP_API_URL}${USERS}`,
       user,
     )
-    return response
+    if (
+      (response && response.status === 201) ||
+      (response && response.status === 422)
+    ) {
+      return response
+    }
   } catch (error) {
+    console.error("Error by creating user", error)
     throw error
   }
 }

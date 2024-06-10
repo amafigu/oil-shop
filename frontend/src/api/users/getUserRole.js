@@ -10,6 +10,7 @@ export const getUserRole = async (roleId) => {
       return response
     }
   } catch (error) {
+    console.error("Error by getting user role", error)
     throw error
   }
 }

@@ -1,6 +1,6 @@
 import { updateShippingData } from "#api/users/updateShippingData"
 import { shippingDataSchema } from "#utils/usersValidation"
-import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestError } from "./onRequestError"
 import { onValidationError } from "./onValidationError"
 
 export const onUpdateShippingData = async (
@@ -33,6 +33,6 @@ export const onUpdateShippingData = async (
   } catch (error) {
     setUpdatedUserShippingData(itemInitialAttributes)
     const message = "Error by updating shipping data"
-    onRequestHandlerError(error, setNotification, message)
+    onRequestError(error, setNotification, message)
   }
 }

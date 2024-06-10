@@ -1,7 +1,7 @@
 import { PAYMENT } from "#constants/routes"
 import { onCreateGuestUser } from "./onCreateGuestUser"
 import { onCreateShippingData } from "./onCreateShippingData"
-import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestError } from "./onRequestError"
 
 export const onCreateGuestUserWithShippingData = async (
   e,
@@ -40,6 +40,6 @@ export const onCreateGuestUserWithShippingData = async (
       }
     }
   } catch (error) {
-    onRequestHandlerError(error, setNotification)
+    onRequestError(error, setNotification)
   }
 }

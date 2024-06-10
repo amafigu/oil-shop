@@ -1,11 +1,10 @@
-import { LOGIN } from "#constants/api"
+import { AUTHENTICATED_USER } from "#constants/api"
 import axios from "axios"
 
-export const login = async (email, password) => {
+export const getAuthenticatedUserById = async (id) => {
   try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}${LOGIN}`,
-      { email, password },
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}${AUTHENTICATED_USER}/${id}`,
       { withCredentials: true },
     )
     if (
@@ -16,7 +15,7 @@ export const login = async (email, password) => {
       return response
     }
   } catch (error) {
-    console.error("Error by login user")
+    console.error("Error by geting authenticated user", error)
     throw error
   }
 }

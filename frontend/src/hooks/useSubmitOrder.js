@@ -1,7 +1,7 @@
 import { LOCAL_STORAGE_CART } from "#constants/localStorage"
 import { ORDER_SUMMARY } from "#constants/routes"
 import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useCart } from "#hooks/useCart"
 import { onSubmitRegisteredUserOrder } from "#utils/onSubmitRegisteredUserOrder"
 import { useNavigate } from "react-router-dom"

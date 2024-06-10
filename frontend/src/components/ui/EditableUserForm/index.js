@@ -4,9 +4,9 @@ import { STYLES } from "#constants/styles"
 import { useTranslation } from "#hooks/useTranslation"
 import { setFileToUpload } from "#utils/setFileToUpload"
 import { useEffect, useState } from "react"
-import styles from "./editableProductForm.module.scss"
+import styles from "./editableUserForm.module.scss"
 
-export const EditableProductForm = ({
+export const EditableUserForm = ({
   item,
   renderItemProps,
   onSave,
@@ -26,13 +26,13 @@ export const EditableProductForm = ({
   }, [item])
 
   return (
-    <article className={styles.wrapper} aria-label='Edit product'>
+    <article className={styles.wrapper} aria-label='Edit user'>
       <div className={styles.container}>
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
             src={updatedData.image || ""}
-            alt='product'
+            alt='user'
           />
         </div>
         {onDelete && (
@@ -40,7 +40,7 @@ export const EditableProductForm = ({
             action={(e) => onDelete(e, item.id)}
             text={components.editableItem.deleteButton}
             className={STYLES.BUTTONS.ACTION}
-            ariaLabel={"delete product"}
+            ariaLabel={"delete user"}
           />
         )}
       </div>
@@ -83,7 +83,7 @@ export const EditableProductForm = ({
                       })
               }
               classCss={STYLES.FORMS.FIELD}
-              type='text'
+              type={"text"}
               file={file}
               key={key}
             />

@@ -1,6 +1,6 @@
 import { SHIPPING_COST } from "#constants/cart"
 import { LOGIN, PAYMENT, SHOP } from "#constants/routes"
-import useUserContext from "#context/userContext"
+import { useUserContext } from "#context/userContext"
 import { useCart } from "#hooks/useCart"
 import { useTranslation } from "#hooks/useTranslation"
 import React from "react"

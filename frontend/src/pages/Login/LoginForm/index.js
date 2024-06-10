@@ -1,30 +1,23 @@
 import { ActionButton } from "#components/ui/ActionButton"
 import { FormInput } from "#components/ui/FormInput"
-import NotificationCard from "#components/ui/NotificationCard"
 import { STYLES } from "#constants/styles"
-import { useLoginAndRedirect } from "#hooks/useLoginAndRedirect"
+import { useLogin } from "#hooks/useLogin"
 import { useTranslation } from "#hooks/useTranslation"
 import { getIconByName } from "#utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
 import styles from "./loginForm.module.scss"
 
 export const LoginForm = () => {
   const { translate } = useTranslation()
+  const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const { setLoggedUser } = useLogin()
   const text = translate.pages.login
-  const {
-    loginUserAndSetState,
-    setEmail,
-    setPassword,
-    setShowPassword,
-    showPassword,
-    password,
-    email,
-    notification,
-  } = useLoginAndRedirect()
 
   return (
     <>
-      {notification && <NotificationCard message={notification} />}
       <form className={styles.form}>
         <FormInput
           classCss={STYLES.FORMS.FIELD}
@@ -59,7 +52,7 @@ export const LoginForm = () => {
           />
         </div>
         <ActionButton
-          action={loginUserAndSetState}
+          action={(e) => setLoggedUser(e, email, password)}
           text={text.loginButton}
           className={STYLES.BUTTONS.WIDE}
           ariaLabel={"confirm login"}

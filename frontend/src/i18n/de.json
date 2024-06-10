@@ -161,6 +161,16 @@
     "shop": {
       "title": "Alle Produkte"
     },
+    "user": {
+      "toggleOrders": {
+        "show": "Bestellungen anzeigen",
+        "hide": "Bestellungen ausblenden"
+      },
+      "toggleShippingData": {
+        "show": "Versanddaten anzeigen",
+        "hide": "Versanddaten ausblenden"
+      }
+    },
     "welcome": {
       "subTeaser": {
         "title": "Bei Oylo ist unsere Wertschätzung für die wertvollen Geschenke der Natur grenzenlos",

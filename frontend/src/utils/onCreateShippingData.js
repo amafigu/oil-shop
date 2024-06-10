@@ -1,5 +1,5 @@
 import { createShippingData } from "#api/users/createShippingData"
-import { onRequestHandlerError } from "./onRequestHandlerError"
+import { onRequestError } from "./onRequestError"
 
 export const onCreateShippingData = async (
   userId,
@@ -14,6 +14,6 @@ export const onCreateShippingData = async (
   } catch (error) {
     const message =
       "Is not possible to create an user, try again with another email"
-    onRequestHandlerError(error, setNotification, message)
+    onRequestError(error, setNotification, message)
   }
 }
