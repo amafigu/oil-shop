@@ -81,6 +81,7 @@ const lastNameCreateUserValidation = z
 const updateUserSchema = z.object({
   firstName: firstNameUpdateValidation,
   lastName: lastNameUpdateValidation,
+  image: z.string().optional(),
   email: z
     .string()
     .max(50, "Email can't be longer than 50 characters.")
@@ -96,9 +97,7 @@ const updateUserSchema = z.object({
 
 const createUserSchema = z.object({
   firstName: firstNameCreateUserValidation,
-
   lastName: lastNameCreateUserValidation,
-
   email: z
     .string()
     .min(4, "Invalid email format. ")
