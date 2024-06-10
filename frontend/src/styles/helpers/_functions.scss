@@ -1,5 +1,0 @@
-@use "../theme" as theme;
-
-@function get-z-index($key) {
-  @return map-get(theme.$z-index, $key);
-}
