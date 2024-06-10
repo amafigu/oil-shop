@@ -5,11 +5,14 @@ import { getProductCategories } from "#api/products/getProductCategories"
 import { getProducts } from "#api/products/getProducts"
 import { updateProduct } from "#api/products/updateProduct"
 import { useNotificationContext } from "#context/notificationContext"
+import { onRequestError } from "#utils/onRequestError"
 import { onValidationError } from "#utils/onValidationError"
 import {
   createProductSchema,
   updateProductSchema,
 } from "#utils/productsValidation"
+import { convertDataToExpectedProductTypes, validate } from "#utils/verifyTypes"
+import { verifyUploadedImageUrl } from "#utils/verifyUploadedImageUrl"
 import { createContext, useContext, useEffect, useState } from "react"
 
 export const ProductContext = createContext()
@@ -54,66 +57,45 @@ export const ProductProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onDeleteProduct = async (id) => {
+  const onDeleteProduct = async (e, id) => {
+    e.preventDefault()
     try {
       const response = await deleteProductById(id)
       if (response && response.status === 200) {
         setProducts((prevState) => prevState.filter((item) => item.id !== id))
       }
     } catch (error) {
-      onSetNotification(error.message)
-      console.error(error.message, error)
+      onSetNotification("Error by deleting product")
+      console.error("Error by deleting product:", error)
     }
   }
 
-  const onCreateProduct = async ({ product, file, setNotification }) => {
+  const onCreateProduct = async ({ e, data, file }) => {
+    e.preventDefault()
     try {
-      const typedProduct = await typeData(product, file)
-      const validatedProduct = await validateProduct(typedProduct)
+      const typedItem = await convertDataToExpectedProductTypes({
+        data,
+        file,
+        verifyImgUrl: verifyUploadedImageUrl,
+        upload: uploadFile,
+      })
+
+      const validatedProduct = await validate({
+        item: typedItem,
+        schema: createProductSchema,
+        onError: onValidationError,
+        onNotification: setNotification,
+      })
       const response = await createProduct(validatedProduct)
 
       if (response && response.status === 201) {
         const newProduct = response.data.product
-        setProducts((prevProducts) => [...prevProducts, newProduct])
-        onSetNotification(`Product ${product.name} created successfully`)
+        setProducts((prevState) => [...prevState, newProduct])
+        onSetNotification(`Product ${newProduct.name} created successfully`)
       }
     } catch (error) {
-      console.error("Failed to add product:", error)
-    }
-  }
-
-  const typeData = async (product, file) => {
-    const image = await checkImage(file)
-    return {
-      ...product,
-      image,
-      details: String(product.details),
-      description: String(product.description),
-      categoryId: Number(product.categoryId),
-      size: Number(product.size),
-      price: Number(product.price),
-    }
-  }
-
-  const checkImage = async (file) => {
-    if (file) {
-      const imageUrl = await uploadFile(file)
-      return String(imageUrl)
-    } else {
-      return ""
-    }
-  }
-
-  const validateProduct = async (product) => {
-    try {
-      if (createProductSchema) {
-        return createProductSchema.parse(product)
-      } else {
-        return
-      }
-    } catch (error) {
-      console.error("Error by validating product", error)
-      onValidationError(error, setNotification)
+      console.error("Error by creating product:", error)
+      onRequestError(error, setNotification)
     }
   }
 
@@ -138,7 +120,7 @@ export const ProductProvider = ({ children }) => {
         )
       }
     } catch (error) {
-      console.error("Error updating product:", error)
+      console.error("Error by updating product:", error)
       setUpdatedData(initialData)
     }
   }
