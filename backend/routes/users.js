@@ -16,8 +16,16 @@ router.get('/', decodeJWT, async (req, res) => {
   try {
     const users = await db.users.findAll({
       order: [['id', 'ASC']],
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: db.roles,
+          as: 'role',
+          attributes: ['name'],
+        },
+      ],
     });
-    return res.json(users);
+    return res.status(200).json(users);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -28,12 +36,18 @@ router.get('/user/:email', decodeJWT, async (req, res) => {
     const user = await db.users.findOne({
       where: { email: req.params.email },
       attributes: { exclude: ['password'] },
-      include: [{ model: db.roles, as: 'role' }],
+      include: [
+        {
+          model: db.roles,
+          as: 'role',
+          attributes: ['name'],
+        },
+      ],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    return res.json(user);
+    return res.status(200).json(user);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -44,7 +58,13 @@ router.get('/:id', decodeJWT, async (req, res) => {
     const user = await db.users.findOne({
       where: { id: req.params.id },
       attributes: { exclude: ['password'] },
-      include: [{ model: db.roles, as: 'role' }],
+      include: [
+        {
+          model: db.roles,
+          as: 'role',
+          attributes: ['name'],
+        },
+      ],
     });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -62,7 +82,7 @@ router.get('/authenticated/:id', decodeJWT, async (req, res) => {
 
     const currentUser = await db.users.findOne({
       where: { id: req.params.id },
-      attributes: { exclude: ['password', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['password'] },
       include: [
         {
           model: db.roles,
@@ -75,11 +95,8 @@ router.get('/authenticated/:id', decodeJWT, async (req, res) => {
     if (!currentUser) {
       return res.status(404).json({ message: 'User not found' });
     }
-    const user = {
-      ...currentUser.dataValues,
-      role: currentUser.role.name,
-    };
-    return res.status(200).json(user);
+
+    return res.status(200).json(currentUser);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -91,6 +108,15 @@ router.get('/role/:roleId', async (req, res) => {
       where: { id: req.params.roleId },
     });
     return res.status(200).json(userRole);
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/roles', async (req, res) => {
+  try {
+    const roles = await db.roles.findAll();
+    return res.status(200).json(roles);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

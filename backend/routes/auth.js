@@ -30,14 +30,20 @@ router.post('/logout', (req, res) => {
     secure: isSecure,
   });
 
-  res.json({ message: 'Logged out successfully' });
+  res.status(200).json({ message: 'Logged out successfully' });
 });
 
 router.post('/login', validateBody(loginValidation), async (req, res) => {
   try {
     const user = await db.users.findOne({
       where: { email: req.body.email },
-      include: [{ model: db.roles, as: 'role' }],
+      include: [
+        {
+          model: db.roles,
+          as: 'role',
+          attributes: ['name'],
+        },
+      ],
     });
     if (!user) {
       return res.status(404).json({ message: 'Invalid email' });
@@ -51,13 +57,13 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid password' });
     }
-
+    const durationInMilliseconds = 4 * 60 * 60 * 1000;
     const token = jwt.sign(
       {
         id: user.id,
       },
       process.env.JWT_KEY,
-      { expiresIn: '14400000' } // 4 hours
+      { expiresIn: durationInMilliseconds }
     );
 
     const isSecure = process.env.IS_SECURE;
@@ -69,7 +75,7 @@ router.post('/login', validateBody(loginValidation), async (req, res) => {
       secure: isSecure,
     });
 
-    return res.json({ message: 'Logged in successfully' });
+    return res.status(200).json({ message: 'Logged in successfully', user });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
