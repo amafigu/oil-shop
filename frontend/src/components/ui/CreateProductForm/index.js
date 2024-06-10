@@ -61,11 +61,7 @@ export const CreateProductForm = () => {
         <div className={styles.button}>
           <ActionButton
             action={async (e) => {
-              await onCreateProduct({
-                product: data,
-                file,
-                setNotification,
-              })
+              await onCreateProduct({ e, item: data, file })
               setData({ ...data })
             }}
             text={components.createItem.submitButton}
