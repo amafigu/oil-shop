@@ -34,7 +34,7 @@
 }
 
 .item {
-  height: theme.$height-mobile-menu-item;
+  height: 32px;
 
   @include menu-list-item;
 }

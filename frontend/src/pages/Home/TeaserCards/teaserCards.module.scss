@@ -15,7 +15,7 @@
 .title {
   align-items: center;
   font-family: theme.$font-family-primary;
-  font-size: theme.$font-size-subtitle;
+  font-size: theme.$font-size-semi-large;
   font-weight: theme.$font-weight-semibold;
   text-align: center;
   text-transform: uppercase;
@@ -91,5 +91,5 @@
 }
 
 .iconColumns {
-  font-size: theme.$font-size-teaser;
+  font-size: theme.$font-size-huge;
 }

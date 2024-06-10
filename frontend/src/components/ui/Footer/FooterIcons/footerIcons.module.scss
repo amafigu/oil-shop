@@ -31,7 +31,7 @@
 .title {
   height: 40px;
 
-  @include property-font-primary-semi-bold;
+  @include typography-semilarge-semibold;
   @include flex-all-center;
 }
 

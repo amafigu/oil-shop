@@ -63,8 +63,8 @@
 .cartDelete {
   @include reset-button;
 
-  width: theme.$width-height-cart-buttons;
-  height: theme.$width-height-cart-buttons;
+  width: 32px;
+  height: 32px;
   color: theme.$font-color-light;
   cursor: pointer;
 }
@@ -73,5 +73,5 @@
   cursor: pointer;
 
   @include reset-button;
-  @include property-font-tertiary-regular;
+  @include typography-small-normal;
 }

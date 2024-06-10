@@ -5,10 +5,10 @@
 .form {
   @include flex-column;
 
-  margin: theme.$margin-form-container;
+  margin: theme.$spacing-regular;
 
   @include media.tablet-down {
-    margin: theme.$margin-form-container-mobile;
+    margin: theme.$spacing-semi-regular-semi-large;
   }
 }
 
@@ -19,5 +19,7 @@
 }
 
 .label {
-  @include label-form-field;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: theme.$spacing-smallest;
 }

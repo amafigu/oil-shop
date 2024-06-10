@@ -35,7 +35,7 @@
   font-family: theme.$font-family-primary;
   text-align: center;
 
-  @include property-font-secondary-regular;
+  @include typography-medium-normal;
   @include flex-align-center;
 
   @include media.fullscreen-down {
@@ -60,5 +60,5 @@
 }
 
 .icon {
-  font-size: theme.$font-size-teaser;
+  font-size: theme.$font-size-huge;
 }

@@ -5,8 +5,7 @@
 .wrapper {
   display: flex;
   width: 100%;
-
-  @include input-container-spacing;
+  margin: theme.$spacing-regular 0;
 
   @include media.mobile {
     flex-direction: column;
@@ -63,5 +62,5 @@
 }
 
 .inputContainer {
-  @include input-container-spacing;
+  margin: theme.$spacing-regular 0;
 }

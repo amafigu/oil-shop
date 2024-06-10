@@ -24,14 +24,14 @@
   text-align: center;
   text-transform: uppercase;
 
-  @include title-text;
+  @include typography-large-semibold;
 }
 
 .subtitle {
   width: 84%;
   text-align: center;
 
-  @include subtitle-text;
+  @include typography-medium-normal;
 
   @include media.tablet-down {
     width: 100%;

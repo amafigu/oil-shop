@@ -33,10 +33,10 @@
   @include flex-justify-center;
 
   section {
-    width: theme.$width-login-register-form;
+    width: 348px;
 
     @include media.mobile {
-      width: theme.$width-login-register-form-mobile;
+      width: 288px;
     }
 
     button {

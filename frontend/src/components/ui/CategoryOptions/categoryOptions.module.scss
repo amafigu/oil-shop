@@ -9,5 +9,7 @@
 }
 
 .label {
-  @include label-form-field;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: theme.$spacing-smallest;
 }

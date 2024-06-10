@@ -1,6 +1,5 @@
 @use "../theme" as theme;
 @use "../media" as media;
-@use "./functions" as functions;
 
 @mixin flex-justify-center {
   display: flex;
@@ -77,7 +76,7 @@
   border-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
 
-  @include property-font-tertiary-semi-bold;
+  @include typography-small-semibold;
   @include flex-all-center;
 }
 
@@ -93,7 +92,7 @@
   box-shadow: theme.$box-shadow-primary;
 
   @include flex-all-center;
-  @include property-font-secondary-semi-bold;
+  @include typography-medium-semibold;
 }
 
 @mixin input-styles-reset {
@@ -111,14 +110,10 @@
   border: none;
 }
 
-@mixin z-index($key) {
-  z-index: functions.get-z-index($key);
-}
-
 @mixin menu-list-item {
   cursor: pointer;
 
-  @include property-font-primary-medium;
+  @include typography-semilarge-medium;
 }
 
 @mixin margin-page-wrapper {
@@ -158,109 +153,76 @@
 }
 
 @mixin form-field {
-  height: theme.$height-form-field;
-  margin-bottom: theme.$margin-bottom-form-field;
+  height: 32px;
+  margin-bottom: theme.$spacing-small;
   font-family: theme.$font-family-primary;
-  font-size: theme.$font-size-form-field;
+  font-size: theme.$font-size-small;
 }
 
 @mixin label-form-field {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: theme.$margin-bottom-label-form-field;
+  margin-bottom: theme.$spacing-smallest;
 }
 
-@mixin component-container-large {
-  width: 100%;
-  margin: theme.$spacing-regular 0;
-}
-
-@mixin component-title {
-  font-size: theme.$font-size-subtitle;
-  font-weight: theme.$font-weight-semibold;
-  line-height: theme.$line-height-primary;
-}
-
-@mixin subtitle-text {
-  font-size: theme.$font-size-medium;
+@mixin typography-small-normal {
+  font-size: theme.$font-size-small;
   font-weight: theme.$font-weight-normal;
   line-height: theme.$line-height-primary;
 }
 
-@mixin title-text {
-  font-size: theme.$font-size-semi-title;
+@mixin typography-small-semibold {
+  font-size: theme.$font-size-small;
   font-weight: theme.$font-weight-semibold;
   line-height: theme.$line-height-primary;
 }
 
-@mixin property-font-primary-regular {
-  font-size: theme.$font-size-semi-large;
-  font-weight: theme.$font-weight-normal;
-  line-height: theme.$line-height-primary;
-}
-
-@mixin property-font-primary-semi-large-light {
-  font-size: theme.$font-size-semi-large;
-  font-weight: theme.$font-weight-extra-light;
-  line-height: theme.$line-height-primary;
-}
-
-@mixin property-font-primary-semi-bold {
-  font-size: theme.$font-size-semi-large;
-  font-weight: theme.$font-weight-semibold;
-  line-height: theme.$line-height-primary;
-}
-
-@mixin property-font-primary-medium {
-  font-size: theme.$font-size-semi-large;
-  font-weight: theme.$font-weight-medium;
-  line-height: theme.$line-height-primary;
-}
-
-@mixin property-font-secondary-regular {
-  font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-normal;
-  line-height: theme.$line-height-primary;
-}
-
-@mixin property-font-secondary-semi-bold {
-  font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-semibold;
-  line-height: theme.$line-height-primary;
-}
-
-@mixin property-font-secondary-semi-medium-regular {
+@mixin typography-semimedium-normal {
   font-size: theme.$font-size-semi-medium;
   font-weight: theme.$font-weight-normal;
   line-height: theme.$line-height-primary;
 }
 
-@mixin property-font-tertiary-semi-bold {
-  font-size: theme.$font-size-small;
+@mixin typography-medium-semibold {
+  font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-semibold;
   line-height: theme.$line-height-primary;
 }
 
-@mixin property-font-tertiary-regular {
-  font-size: theme.$font-size-small;
+@mixin typography-medium-normal {
+  font-size: theme.$font-size-medium;
   font-weight: theme.$font-weight-normal;
   line-height: theme.$line-height-primary;
 }
 
-@mixin property-font {
-  font-size: theme.$font-size-medium;
+@mixin typography-semilarge-extralight {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-extra-light;
+  line-height: theme.$line-height-primary;
 }
 
-@mixin value-font {
-  font-size: theme.$font-size-small;
+@mixin typography-semilarge-normal {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-normal;
+  line-height: theme.$line-height-primary;
 }
 
-@mixin input-container-spacing {
-  margin: theme.$spacing-regular 0;
+@mixin typography-semilarge-medium {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-medium;
+  line-height: theme.$line-height-primary;
 }
 
-@mixin input-container-spacing-small {
-  margin: theme.$spacing-small 0;
+@mixin typography-semilarge-semibold {
+  font-size: theme.$font-size-semi-large;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin typography-large-semibold {
+  font-size: theme.$font-size-large;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
 }
 
 @mixin hide {

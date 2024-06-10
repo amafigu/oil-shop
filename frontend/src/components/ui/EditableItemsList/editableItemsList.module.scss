@@ -28,5 +28,5 @@
 h2 {
   margin-bottom: theme.$spacing-regular;
 
-  @include property-font-primary-semi-bold;
+  @include typography-semilarge-semibold;
 }
