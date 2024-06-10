@@ -270,11 +270,11 @@
   li {
     margin: 0 16px;
 
-    @include media.tablet {
+    @include media.tablet-down {
       border-bottom: 0;
     }
 
-    @include media.tablet {
+    @include media.tablet-down {
       width: auto;
       height: auto;
       padding: 0;
@@ -288,20 +288,12 @@
     }
   }
 
-  @include media.mobile {
+  @include media.tablet-down {
     align-items: flex-start;
     height: fit-content;
 
     li {
       margin: 0;
-
-      @include media.tablet {
-        width: auto;
-        height: auto;
-        padding: 0;
-        margin: 0 theme.$spacing-regular;
-        border-bottom: 0;
-      }
 
       &:last-child {
         @include media.tablet-down {
