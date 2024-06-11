@@ -27,14 +27,14 @@ export const EditableItemInput = ({
       {name === "image" ? (
         isEditing ? (
           <>
-            <label htmlFor={name} className={styles.hideForSemantic}>
+            <label htmlFor={"imageInput"} className={styles.hideForSemantic}>
               {commonProperties[name]}
             </label>
             <input
               className={styles[classCss]}
               type='file'
               name='image'
-              id='fileInput'
+              id='imageInput'
               onChange={onChange}
             />
           </>

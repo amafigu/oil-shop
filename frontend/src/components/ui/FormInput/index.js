@@ -32,12 +32,13 @@ export const FormInput = ({
         </>
       ) : (
         <>
-          <label className={styles.label} htmlFor={name}>
+          <label className={styles.label} htmlFor={`${name}-input`}>
             {camelToTitleCase(label)}
           </label>
           <input
             className={styles[classCss]}
             type={type}
+            id={`${name}-input`}
             name={name}
             onChange={onChangeListener}
             value={value}

@@ -36,7 +36,6 @@ export const PaymentForm = () => {
               aria-label='payment with paypal'
               type='radio'
               id='paypal'
-              name='paymentMethod'
               value='paypal'
               checked={paymentMethod === "paypal"}
               onChange={selectPaymentMethod}
@@ -49,7 +48,6 @@ export const PaymentForm = () => {
               aria-label='payment with google pay'
               type='radio'
               id='googlePay'
-              name='paymentMethod'
               value='googlePay'
               checked={paymentMethod === "googlePay"}
               onChange={selectPaymentMethod}

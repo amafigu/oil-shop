@@ -22,6 +22,7 @@ export const SearchBar = ({
         }
       >
         <input
+          id={"searchbar-input"}
           className={styles.input}
           onChange={(e) =>
             searchProducts(

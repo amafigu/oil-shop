@@ -5,13 +5,14 @@ import styles from "./categoryOptions.module.scss"
 export const CategoryOptions = ({ data, setData, onChange, options }) => {
   return (
     <>
-      <label className={styles.label} htmlFor='name'>
+      <label className={styles.label} htmlFor='categoryId'>
         {camelToTitleCase("category")}
       </label>
       <select
         onChange={(e) => onChange(e, data, setData)}
         className={styles.formField}
         name='categoryId'
+        id='categoryId'
         value={data.categoryId}
       >
         {options &&
@@ -21,6 +22,7 @@ export const CategoryOptions = ({ data, setData, onChange, options }) => {
               className={styles.formField}
               value={option.id}
               name={option.id}
+              id={option.id}
             >
               {titleCase(option.name, " ")}
             </option>

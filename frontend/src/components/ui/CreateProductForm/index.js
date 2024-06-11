@@ -29,7 +29,7 @@ export const CreateProductForm = () => {
 
   return (
     <section aria-label='Create product form'>
-      <form className={styles.container}>
+      <form className={styles.container} id='create-product'>
         <CategoryOptions
           data={data}
           setData={setData}
