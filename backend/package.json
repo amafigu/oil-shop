@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon start.js",
     "test": "jest --testTimeout=20000",
+    "test:watch": "jest --watch-all --collectCoverage=false",
     "clear-jest": "jest --clearCache",
     "eslint": "npx eslint .",
     "seed:roles": "node seeders/rolesSeed.js",
