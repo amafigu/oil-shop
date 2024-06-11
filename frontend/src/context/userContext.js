@@ -70,19 +70,7 @@ export const UserProvider = ({ children }) => {
     try {
       if (user) {
         const response = await getUserShippingData(user.id)
-
         if (response && response.status === 200) {
-          /*    const data = response.data
-          const dataWithUserId = {
-            id: user.id,
-            street: data.street || "",
-            number: data.number || "",
-            details: data.details || "",
-            state: data.state || "",
-            country: data.country || "",
-            city: data.city || "",
-            postalCode: data.postalCode || "",
-          } */
           setShippingData(response.data)
         }
       }
@@ -243,6 +231,7 @@ export const UserProvider = ({ children }) => {
             user.id === updatedUser.id ? updatedUser : user,
           )
         })
+        setUser(updatedUser)
       }
     } catch (error) {
       console.error("Failed to update user:", error)
