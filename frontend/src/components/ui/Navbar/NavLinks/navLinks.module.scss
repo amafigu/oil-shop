@@ -28,12 +28,6 @@
   }
 }
 
-.selector {
-  button {
-    margin-right: theme.$spacing-smallest;
-  }
-}
-
 .link {
   @include flex-align-center;
 }

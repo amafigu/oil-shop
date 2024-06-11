@@ -6,14 +6,13 @@ import { useTranslation } from "#hooks/useTranslation"
 import { useLocation } from "react-router-dom"
 import styles from "./languageSelector.module.scss"
 
-export const LanguageSelector = ({ setShowLanguagesOptions }) => {
+export const LanguageSelector = () => {
   const { setLanguage, language } = useTranslation()
   const { setShowMobileMenu } = useMenuOptions()
 
   const changeLanguage = (lang) => {
     setLanguage(lang)
     setShowMobileMenu(false)
-    setShowLanguagesOptions(false)
   }
 
   const location = useLocation()
@@ -38,6 +37,7 @@ export const LanguageSelector = ({ setShowLanguagesOptions }) => {
           ariaLabel={"translate to english"}
         />
       </li>
+      <li className={styles.divider}>I</li>
       <li
         className={`${styles.item} ${language === "de" ? styles.active : ""}`}
       >

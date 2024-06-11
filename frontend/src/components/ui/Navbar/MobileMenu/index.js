@@ -13,10 +13,7 @@ import { React } from "react"
 import { Link } from "react-router-dom"
 import styles from "./mobileMenu.module.scss"
 
-export const MobileMenu = ({
-  showLanguagesOptions,
-  setShowLanguagesOptions,
-}) => {
+export const MobileMenu = () => {
   const { isLoggedIn, user } = useUserContext()
   const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
   const { getAllProductsQuantity } = useCartContext()
@@ -50,29 +47,7 @@ export const MobileMenu = ({
           />
         </li>
         <li className={`${styles.item} ${styles.container}`}>
-          <ActionButton
-            action={() => setShowLanguagesOptions((prevState) => !prevState)}
-            text={
-              <FontAwesomeIcon icon={getIconByName("faGlobe")} size={"xl"} />
-            }
-            className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
-            ariaLabel={"show language selector"}
-          />
-
-          {!showLanguagesOptions && (
-            <FontAwesomeIcon
-              icon={getIconByName("faChevronDown")}
-              size={"xs"}
-            />
-          )}
-          {showLanguagesOptions && (
-            <FontAwesomeIcon icon={getIconByName("faChevronUp")} size={"xs"} />
-          )}
-          {showLanguagesOptions && (
-            <LanguageSelector
-              setShowLanguagesOptions={setShowLanguagesOptions}
-            />
-          )}
+          <LanguageSelector />
         </li>
         <li
           className={`${styles.item} ${styles.container}`}

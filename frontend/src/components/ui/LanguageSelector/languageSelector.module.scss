@@ -3,36 +3,38 @@
 @import "#styles/helpers/mixins";
 
 .list {
-  position: absolute;
-  display: flex;
-  gap: theme.$spacing-smallest;
-  padding: 0 theme.$spacing-smallest;
-  margin-top: theme.$spacing-smaller;
-  color: theme.$font-color-primary;
-  background-color: theme.$background-color-primary;
-  border: theme.$border-regular-component;
-  border-radius: theme.$border-radius-small;
+  @include flex-align-center;
 
-  @include media.mobile {
-    position: relative;
+  @include media.tablet-down {
     display: flex;
     gap: theme.$spacing-semi-regular;
     height: 32px;
     margin-top: 0;
-    background-color: theme.$background-color-primary;
     border: none;
-    border-radius: theme.$border-radius-small;
   }
+
+  button {
+    color: theme.$font-color-light;
+
+    @include typography-semimedium-normal;
+  }
+}
+
+.divider {
+  font-size: theme.$font-size-large;
+}
+
+.item {
+  @include typography-semimedium-normal;
+  @include flex-align-center;
 }
 
 .active {
   button {
-    color: theme.$branding-color-primary;
-  }
-}
+    color: theme.$font-color-contrast;
 
-.item {
-  @include media.tablet-down {
-    @include menu-list-item;
+    @include media.tablet-down {
+      color: theme.$branding-color-primary;
+    }
   }
 }

@@ -11,7 +11,6 @@ import styles from "./navbar.module.scss"
 
 export const Navbar = () => {
   const [matchedProducts, setMatchedProducts] = useState([])
-  const [showLanguagesOptions, setShowLanguagesOptions] = useState(false)
   const [showMatchedProductsList, setShowMatchedProductsList] = useState(false)
   const [searchProductText, setSearchProductText] = useState("")
   const location = useLocation()
@@ -30,10 +29,7 @@ export const Navbar = () => {
               setShowMatchedProductsList={setShowMatchedProductsList}
             />
             <Logo />
-            <NavLinks
-              showLanguagesOptions={showLanguagesOptions}
-              setShowLanguagesOptions={setShowLanguagesOptions}
-            />
+            <NavLinks />
           </nav>
           {matchedProducts.length > 0 && showMatchedProductsList && (
             <MatchedProductsList
@@ -43,12 +39,7 @@ export const Navbar = () => {
               setSearchProductText={setSearchProductText}
             />
           )}
-          {showMobileMenu && (
-            <MobileMenu
-              showLanguagesOptions={showLanguagesOptions}
-              setShowLanguagesOptions={setShowLanguagesOptions}
-            />
-          )}
+          {showMobileMenu && <MobileMenu />}
         </>
       )}
     </>

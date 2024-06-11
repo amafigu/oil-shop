@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 import styles from "./navLinks.module.scss"
 
-export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
+export const NavLinks = () => {
   const { getAllProductsQuantity } = useCartContext()
   const { isLoggedIn, user } = useUserContext()
   const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
@@ -41,26 +41,8 @@ export const NavLinks = ({ showLanguagesOptions, setShowLanguagesOptions }) => {
             ariaLabel={"show search bar"}
           />
         </li>
-        <li className={styles.selector}>
-          <ActionButton
-            action={() => setShowLanguagesOptions((prevState) => !prevState)}
-            text={
-              <FontAwesomeIcon icon={getIconByName("faGlobe")} size={"xl"} />
-            }
-            className={STYLES.LINKS.NAVIGATION_MENU_LINK}
-          />
-
-          {!showLanguagesOptions && (
-            <FontAwesomeIcon icon={getIconByName("faChevronDown")} />
-          )}
-          {showLanguagesOptions && (
-            <FontAwesomeIcon icon={getIconByName("faChevronUp")} />
-          )}
-          {showLanguagesOptions && (
-            <LanguageSelector
-              setShowLanguagesOptions={setShowLanguagesOptions}
-            />
-          )}
+        <li className={styles.link}>
+          <LanguageSelector />
         </li>
         {isLoggedIn ? (
           <li className={styles.logout}>
