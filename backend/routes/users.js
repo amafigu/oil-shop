@@ -113,7 +113,7 @@ router.get('/role/:roleId', async (req, res) => {
   }
 });
 
-router.get('/roles', async (req, res) => {
+router.get('/roles', decodeJWT, async (req, res) => {
   try {
     const roles = await db.roles.findAll();
     return res.status(200).json(roles);

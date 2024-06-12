@@ -1,10 +1,10 @@
-import { USER_ROLE } from "#constants/api"
+import { USER_ROLES } from "#constants/api"
 import axios from "axios"
 
-export const getUserRole = async (roleId) => {
+export const getUserRoles = async () => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${USER_ROLE}/${roleId}`,
+      `${process.env.REACT_APP_API_URL}${USER_ROLES}`,
       { withCredentials: true },
     )
     if (response && response.status === 200) {
