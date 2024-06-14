@@ -1,22 +1,34 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { STYLES } from "#constants/styles"
-import { getIconByName } from "#utils/getIconByName"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { STYLES } from "@/constants/styles"
+import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Dispatch, FC, SetStateAction } from "react"
 import styles from "./counter.module.scss"
 
-const increaseQuantity = (quantity, setQuantity) => {
+const increaseQuantity = (
+  quantity: number,
+  setQuantity: Dispatch<SetStateAction<number>>,
+) => {
   if (quantity < 40) {
-    setQuantity((prevQuantity) => prevQuantity + 1)
+    setQuantity((prevQuantity: number) => prevQuantity + 1)
   }
 }
 
-const decreaseQuantity = (quantity, setQuantity) => {
+const decreaseQuantity = (
+  quantity: number,
+  setQuantity: Dispatch<SetStateAction<number>>,
+) => {
   if (quantity > 1) {
-    setQuantity((prevQuantity) => prevQuantity - 1)
+    setQuantity((prevQuantity: number) => prevQuantity - 1)
   }
 }
 
-export const Counter = ({ counter, setCounter }) => {
+interface CounterProps {
+  counter: number
+  setCounter: Dispatch<SetStateAction<number>>
+}
+
+export const Counter: FC<CounterProps> = ({ counter, setCounter }) => {
   return (
     <div className={styles.wrapper} aria-label='counter'>
       <div className={styles.container}>
