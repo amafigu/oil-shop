@@ -1,11 +1,12 @@
-import { LOGO_IMAGE } from "#constants/media"
-import { SIGN_UP } from "#constants/routes"
-import { useTranslation } from "#hooks/useTranslation"
+import { LOGO_IMAGE } from "@/constants/media"
+import { SIGN_UP } from "@/constants/routes"
+import { useTranslation } from "@/hooks/useTranslation"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 import { LoginForm } from "./LoginForm"
 import styles from "./login.module.scss"
 
-export const Login = () => {
+export const Login: FC = () => {
   const { translate } = useTranslation()
   const text = translate.pages.login
 

@@ -1,14 +1,14 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { FormInput } from "#components/ui/FormInput"
-import { STYLES } from "#constants/styles"
-import { useLogin } from "#hooks/useLogin"
-import { useTranslation } from "#hooks/useTranslation"
-import { getIconByName } from "#utils/getIconByName"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { FormInput } from "@/components/ui/FormInput"
+import { STYLES } from "@/constants/styles"
+import { useLogin } from "@/hooks/useLogin"
+import { useTranslation } from "@/hooks/useTranslation"
+import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { FC, useState } from "react"
 import styles from "./loginForm.module.scss"
 
-export const LoginForm = () => {
+export const LoginForm: FC = () => {
   const { translate } = useTranslation()
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
@@ -47,7 +47,7 @@ export const LoginForm = () => {
                 <FontAwesomeIcon icon={getIconByName("faLock")} />
               )
             }
-            classCss={""}
+            className={""}
             ariaLabel={"show password"}
           />
         </div>
