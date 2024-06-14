@@ -1,4 +1,4 @@
-export const camelCase = (str, separator) => {
+export const camelCase = (str: string, separator: string) => {
   return str
     .split(separator)
     .map((word, index) =>

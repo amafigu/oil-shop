@@ -1,4 +1,4 @@
-export const camelToTitleCase = (str) => {
+export const camelToTitleCase = (str: string) => {
   if (!str) return str
   const spaced = str.replace(/([A-Z])/g, " $1").trim()
 

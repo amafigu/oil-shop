@@ -1,36 +1,17 @@
 import { z } from "zod"
 
-const createGuestFirstNameValidation = z
-  .string()
-  .min(1, "First name should have at least two characters.")
-  .max(30, "First name can't be longer than 30 characters.")
-  .refine((value) => value[0] === value[0].toUpperCase(), {
-    message: "First name should start with a capital letter.",
-  })
-  .refine((value) => /^[A-Za-z\s]+$/.test(value), {
-    message: "First name can only contain letters.",
-  })
-
-const createGuestLastNameValidation = z
-  .string()
-  .min(1, "Last name should have at least two characters.")
-  .max(30, "Last name can't be longer than 30 characters.")
-  .refine((value) => value[0] === value[0].toUpperCase(), {
-    message: "Last name should start with a capital letter.",
-  })
-  .refine((value) => /^[A-Za-z\s]+$/.test(value), {
-    message: "Last name can only contain letters.",
-  })
-
 const firstNameUpdateValidation = z
   .string()
   .max(30, "First name can't be longer than 30 characters.")
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "First name should have at least two characters.",
   })
-  .refine((value) => value === "" || value[0] === value[0].toUpperCase(), {
-    message: "First name should start with a capital letter.",
-  })
+  .refine(
+    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
+    {
+      message: "First name should start with a capital letter.",
+    },
+  )
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "First name can only contain letters.",
   })
@@ -43,9 +24,12 @@ const lastNameUpdateValidation = z
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "Last name should have at least two characters.",
   })
-  .refine((value) => value === "" || value[0] === value[0].toUpperCase(), {
-    message: "Last name should start with a capital letter.",
-  })
+  .refine(
+    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
+    {
+      message: "Last name should start with a capital letter.",
+    },
+  )
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "Last name can only contain letters.",
   })
@@ -58,9 +42,12 @@ const firstNameCreateUserValidation = z
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "First name should have at least two characters.",
   })
-  .refine((value) => value === "" || value[0] === value[0].toUpperCase(), {
-    message: "First name should start with a capital letter.",
-  })
+  .refine(
+    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
+    {
+      message: "First name should start with a capital letter.",
+    },
+  )
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "First name can only contain letters.",
   })
@@ -71,9 +58,12 @@ const lastNameCreateUserValidation = z
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "Last name should have at least two characters.",
   })
-  .refine((value) => value === "" || value[0] === value[0].toUpperCase(), {
-    message: "Last name should start with a capital letter.",
-  })
+  .refine(
+    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
+    {
+      message: "Last name should start with a capital letter.",
+    },
+  )
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "Last name can only contain letters.",
   })
@@ -112,16 +102,6 @@ const createUserSchema = z.object({
     .refine((value) => /[!#$%&()*+,-./:;<=>?@[\\\]^_`{|}~]/.test(value), {
       message: "Password should have at least one symbol.",
     }),
-  image: z.string().optional(),
-  createdAt: z.string().or(z.date()).optional(),
-  updatedAt: z.string().or(z.date()).optional(),
-})
-
-const createGuestUserSchema = z.object({
-  firstName: createGuestFirstNameValidation,
-  lastName: createGuestLastNameValidation,
-  email: z.string(),
-  password: z.string(),
   image: z.string().optional(),
   createdAt: z.string().or(z.date()).optional(),
   updatedAt: z.string().or(z.date()).optional(),
@@ -170,7 +150,6 @@ const loginValidation = z.object({
 })
 
 export {
-  createGuestUserSchema,
   createUserSchema,
   loginValidation,
   shippingDataSchema,

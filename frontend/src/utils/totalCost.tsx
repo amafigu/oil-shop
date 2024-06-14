@@ -1,2 +1,8 @@
-export const totalCost = (cart) =>
-  cart.reduce((total, item) => total + item.quantity * item.product.price, 0)
+import { CartItem } from "@/types/Cart"
+
+export const totalCost = (cart: CartItem[]) =>
+  cart.reduce(
+    (total: number, item: CartItem) =>
+      total + item.quantity * item.product.price,
+    0,
+  )
