@@ -1,6 +1,6 @@
-import { WITHOUT_NAVBAR } from "#constants/routes"
-import { useMenuOptions } from "#hooks/useMenuOptions"
-import { useState } from "react"
+import { WITHOUT_NAVBAR } from "@/constants/routes"
+import { useMenuOptions } from "@/hooks/useMenuOptions"
+import { FC, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { Logo } from "./Logo"
 import { MatchedProductsList } from "./MatchedProductsList"
@@ -9,7 +9,7 @@ import { NavLinks } from "./NavLinks"
 import { SearchBar } from "./SearchBar"
 import styles from "./navbar.module.scss"
 
-export const Navbar = () => {
+export const Navbar: FC = () => {
   const [matchedProducts, setMatchedProducts] = useState([])
   const [showMatchedProductsList, setShowMatchedProductsList] = useState(false)
   const [searchProductText, setSearchProductText] = useState("")
