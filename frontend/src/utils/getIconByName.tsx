@@ -1,3 +1,4 @@
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core"
 import {
   faDhl,
   faGooglePay,
@@ -30,7 +31,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons"
 
-const icons = {
+const icons: { [key: string]: IconDefinition } = {
   faCartShopping,
   faChevronDown,
   faChevronUp,
@@ -60,6 +61,7 @@ const icons = {
   faArrowRightFromBracket,
 }
 
-export const getIconByName = (iconName) => {
-  return icons[iconName] || null
+export const getIconByName = (iconName: string): IconDefinition | null => {
+  const icon = icons[iconName]
+  return icon || null
 }
