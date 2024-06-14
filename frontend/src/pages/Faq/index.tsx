@@ -1,9 +1,10 @@
-import { questionsAndAnswers } from "#constants/faq"
-import { useTranslation } from "#hooks/useTranslation"
-import { scrollToTop } from "#utils/scrollToTop"
+import { questionsAndAnswers } from "@/constants/faq"
+import { useTranslation } from "@/hooks/useTranslation"
+import { scrollToTop } from "@/utils/scrollToTop"
+import { FC } from "react"
 import styles from "./faq.module.scss"
 
-export const Faq = () => {
+export const Faq: FC = () => {
   const { translate } = useTranslation()
   const text = translate.pages.faq
   scrollToTop()
