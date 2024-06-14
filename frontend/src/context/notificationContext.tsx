@@ -1,13 +1,16 @@
-import NotificationCard from "#components/ui/NotificationCard"
-import { MESSAGE_TIMEOUT } from "#constants/time"
-import { createContext, useContext, useState } from "react"
+import { NotificationCard } from "@/components/ui/NotificationCard"
+import { MESSAGE_TIMEOUT } from "@/constants/time"
+import { NotificationContextType } from "@/types/Notification"
+import { ReactNode, createContext, useContext, useState } from "react"
 
-export const NotificationContext = createContext()
+export const NotificationContext = createContext<
+  NotificationContextType | undefined
+>(undefined)
 
-export const NotificationProvider = ({ children }) => {
-  const [notification, setNotification] = useState(null)
+export const NotificationProvider = ({ children }: { children: ReactNode }) => {
+  const [notification, setNotification] = useState<string | null>(null)
 
-  const onSetNotification = (message) => {
+  const onSetNotification = (message: string) => {
     setNotification(message)
     setTimeout(() => setNotification(null), MESSAGE_TIMEOUT)
   }
@@ -15,15 +18,23 @@ export const NotificationProvider = ({ children }) => {
   return (
     <NotificationContext.Provider
       value={{
-        notification,
         setNotification,
         onSetNotification,
       }}
     >
-      {notification && <NotificationCard message={notification} />}
       {children}
+      {notification && <NotificationCard message={notification} />}
     </NotificationContext.Provider>
   )
 }
 
-export const useNotificationContext = () => useContext(NotificationContext)
+export const useNotificationContext = (): NotificationContextType => {
+  const context = useContext(NotificationContext)
+  if (!context) {
+    console.error("can not access useNotificationContext")
+    throw new Error(
+      "useNotificationContext must be used within a NotificationProvider",
+    )
+  }
+  return context
+}
