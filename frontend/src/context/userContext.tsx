@@ -1,29 +1,43 @@
-import { getAuthenticatedUserById } from "#api/auth/getAuthenticatedUserById"
-import { getDecodedAuthToken } from "#api/auth/getDecodedAuthToken"
-import { uploadFile } from "#api/aws/uploadFile"
-import { createAdmin } from "#api/users/createAdmin"
-import { createUser } from "#api/users/createUser"
-import { deleteUserById } from "#api/users/deleteUserById"
-import { getUserShippingData } from "#api/users/getUserShippingData"
-import { getUsers } from "#api/users/getUsers"
-import { updateUser } from "#api/users/updateUser"
-import { CURRENT_ADMIN, SIGN_UP } from "#constants/routes"
-import { useNotificationContext } from "#context/notificationContext"
-import { onRequestError } from "#utils/onRequestError"
-import { onValidationError } from "#utils/onValidationError"
-import { createUserSchema, updateUserSchema } from "#utils/usersValidation"
-import { convertDataToExpectedUserTypes, validate } from "#utils/verifyTypes"
-import { createContext, useContext, useEffect, useState } from "react"
+import { getAuthenticatedUserById } from "@/api/auth/getAuthenticatedUserById"
+import { getDecodedAuthToken } from "@/api/auth/getDecodedAuthToken"
+import { uploadFile } from "@/api/aws/uploadFile"
+import { createAdmin } from "@/api/users/createAdmin"
+import { createUser } from "@/api/users/createUser"
+import { deleteUserById } from "@/api/users/deleteUserById"
+import { getUserShippingData } from "@/api/users/getUserShippingData"
+import { getUsers } from "@/api/users/getUsers"
+import { updateShippingData } from "@/api/users/updateShippingData"
+import { updateUser } from "@/api/users/updateUser"
+import { CURRENT_ADMIN, SIGN_UP } from "@/constants/routes"
+import { useNotificationContext } from "@/context/notificationContext"
+import { ShippingData, User, UserContextType } from "@/types/User"
+import { onRequestError } from "@/utils/onRequestError"
+import { onValidationError } from "@/utils/onValidationError"
+import {
+  createUserSchema,
+  shippingDataSchema,
+  updateUserSchema,
+} from "@/utils/usersValidation"
+import { convertDataToExpectedUserTypes, validate } from "@/utils/verifyTypes"
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  SyntheticEvent,
+  createContext,
+  useEffect,
+  useState,
+} from "react"
 import { useLocation } from "react-router-dom"
 
-export const UserContext = createContext()
+export const UserContext = createContext<UserContextType | null>(null)
 
-export const UserProvider = ({ children }) => {
-  const [users, setUsers] = useState([])
-  const [user, setUser] = useState(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [shippingData, setShippingData] = useState({})
+export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const [users, setUsers] = useState<User[]>([])
+  const [user, setUser] = useState<User | null>(null)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [shippingData, setShippingData] = useState<Partial<ShippingData>>({})
   const { onSetNotification, setNotification } = useNotificationContext()
   const location = useLocation()
   const currentPath = location.pathname
@@ -39,7 +53,7 @@ export const UserProvider = ({ children }) => {
         const loggedInUserResponse = await getAuthenticatedUserById(
           authorizatedUserId,
         )
-        if (loggedInUserResponse && loggedInUserResponse.status === 200) {
+        if (loggedInUserResponse?.status === 200) {
           const userData = loggedInUserResponse.data
           setUser(userData)
           setIsLoggedIn(true)
@@ -58,7 +72,7 @@ export const UserProvider = ({ children }) => {
   const fetchUsers = async () => {
     try {
       const response = await getUsers()
-      if (response && response.status === 200) {
+      if (response?.status === 200) {
         setUsers(response.data)
       }
     } catch (error) {
@@ -68,9 +82,10 @@ export const UserProvider = ({ children }) => {
 
   const fetchShippingData = async () => {
     try {
-      if (user) {
-        const response = await getUserShippingData(user.id)
-        if (response && response.status === 200) {
+      if (user && !isLoading) {
+        const userId = user.id
+        const response = await getUserShippingData(userId)
+        if (response?.status === 200) {
           setShippingData(response.data)
         }
       }
@@ -98,7 +113,7 @@ export const UserProvider = ({ children }) => {
     setIsLoggedIn(false)
   }
 
-  const onDeleteUser = async (e, id) => {
+  const onDeleteUser = async (e: SyntheticEvent, id: number) => {
     e.preventDefault()
     try {
       const authToken = await getDecodedAuthToken()
@@ -111,7 +126,10 @@ export const UserProvider = ({ children }) => {
       }
       const response = await deleteUserById(id)
       if (response && response.status === 200) {
-        setUsers((prevState) => prevState.filter((item) => item.id !== id))
+        setUsers(
+          (prevState) =>
+            prevState && prevState.filter((item) => item.id !== id),
+        )
       }
     } catch (error) {
       onSetNotification("Error by deleting user")
@@ -119,11 +137,11 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const onCreateCustomer = async (e, data) => {
+  const onCreateCustomer = async (e: SyntheticEvent, data: User) => {
     e.preventDefault()
 
     try {
-      const typedItem = await convertDataToExpectedUserTypes(data)
+      const typedItem = convertDataToExpectedUserTypes(data)
       const validUser = await validate({
         item: typedItem,
         schema: createUserSchema,
@@ -139,7 +157,7 @@ export const UserProvider = ({ children }) => {
       }
       if (response && response.status === 201) {
         const newUser = response.data.user
-        setUsers((prevState) => [...prevState, newUser])
+        setUsers((prevState) => prevState && [...prevState, newUser])
         if (isCreatedByAdmin) {
           onSetNotification("User created succesfully")
         }
@@ -153,7 +171,7 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const onCreateAdmin = async (e, data) => {
+  const onCreateAdmin = async (e: SyntheticEvent, data: User) => {
     e.preventDefault()
 
     try {
@@ -173,7 +191,7 @@ export const UserProvider = ({ children }) => {
       }
       if (response && response.status === 201) {
         const newUser = response.data.user
-        setUsers((prevState) => [...prevState, newUser])
+        setUsers((prevState) => prevState && [...prevState, newUser])
         if (isCreatedByAdmin) {
           onSetNotification("Admin created succesfully")
         }
@@ -187,7 +205,13 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const extractValidProperty = async (key, updatedProductData, file) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const extractValidProperty = async (
+    key: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    updatedProductData: any,
+    file?: File,
+  ) => {
     if (key === "image" && file) {
       const image = await uploadFile(file)
       return { [key]: image }
@@ -201,7 +225,8 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const validateProperty = async (property) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const validateProperty = async (property: { [key: string]: any }) => {
     try {
       if (updateUserSchema) {
         return updateUserSchema.parse(property)
@@ -212,6 +237,15 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  interface OnUpdateUser {
+    key: string
+    id: number
+    initialData: Partial<User>
+    updatedData: Partial<User>
+    setUpdatedData: Dispatch<SetStateAction<Partial<User>>>
+    file?: File
+  }
+
   const onUpdateUser = async ({
     key,
     id,
@@ -219,14 +253,63 @@ export const UserProvider = ({ children }) => {
     updatedData,
     setUpdatedData,
     file,
-  }) => {
+  }: OnUpdateUser) => {
     try {
       const validProperty = await extractValidProperty(key, updatedData, file)
-      const validatedProperty = await validateProperty(validProperty)
+      const validatedProperty = (await validateProperty(validProperty)) ?? {}
       const response = await updateUser(id, validatedProperty)
       if (response && response.status === 200) {
         const updatedUser = response.data.user
-        setUsers((prevUsers) => {
+        setUsers((prevUsers: User[]) => {
+          return prevUsers?.map((user) =>
+            user.id === updatedUser.id ? updatedUser : user,
+          )
+        })
+        setUser(updatedUser)
+      }
+    } catch (error) {
+      console.error("Failed to update user:", error)
+      setUpdatedData(initialData)
+      const message = "Error by updating user"
+      onRequestError(error, setNotification, message)
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const validateShippingProperty = async (property: { [key: string]: any }) => {
+    try {
+      if (shippingDataSchema) {
+        return shippingDataSchema.parse(property) as ShippingData
+      }
+    } catch (error) {
+      onValidationError(error, setNotification)
+      console.error("Error by validating property:", error)
+    }
+  }
+
+  interface OnUpdateShippingData {
+    key: string
+    id: number
+    initialData: ShippingData
+    updatedData: ShippingData
+    setUpdatedData: Dispatch<SetStateAction<Partial<ShippingData>>>
+    file: File
+  }
+  const onUpdateShippingData = async ({
+    key,
+    id,
+    initialData,
+    updatedData,
+    setUpdatedData,
+  }: OnUpdateShippingData) => {
+    try {
+      const validProperty = await extractValidProperty(key, updatedData)
+      const validatedProperty =
+        (await validateShippingProperty(validProperty)) ?? ({} as ShippingData)
+      const response = await updateShippingData(id, validatedProperty)
+      if (response && response.status === 200) {
+        const updatedUser = response.data.user
+        setUsers((prevUsers: User[]) => {
           return prevUsers.map((user) =>
             user.id === updatedUser.id ? updatedUser : user,
           )
@@ -241,18 +324,15 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const onUpdateShippingData = async () => {}
-
   return (
     <UserContext.Provider
       value={{
         isLoggedIn,
         setIsLoggedIn,
         isLoading,
-        users,
+        users: users ?? [],
         user,
         setUser,
-        updateUser,
         onDeleteUser,
         onCreateCustomer,
         onUpdateUser,
@@ -265,5 +345,3 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   )
 }
-
-export const useUserContext = () => useContext(UserContext)
