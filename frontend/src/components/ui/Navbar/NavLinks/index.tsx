@@ -1,17 +1,23 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { LanguageSelector } from "#components/ui/LanguageSelector"
-import { LogoutButton } from "#components/ui/LogoutButton"
-import { CART, CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "#constants/routes"
-import { STYLES } from "#constants/styles"
-import useCartContext from "#context/cartContext"
-import { useUserContext } from "#context/userContext"
-import { useMenuOptions } from "#hooks/useMenuOptions"
-import { getIconByName } from "#utils/getIconByName"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { LanguageSelector } from "@/components/ui/LanguageSelector"
+import { LogoutButton } from "@/components/ui/LogoutButton"
+import {
+  CART,
+  CURRENT_ADMIN,
+  CURRENT_CUSTOMER,
+  LOGIN,
+} from "@/constants/routes"
+import { STYLES } from "@/constants/styles"
+import { useCartContext } from "@/context/cartContext"
+import { useUserContext } from "@/context/userContext"
+import { useMenuOptions } from "@/hooks/useMenuOptions"
+import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 import styles from "./navLinks.module.scss"
 
-export const NavLinks = () => {
+export const NavLinks: FC = () => {
   const { getAllProductsQuantity } = useCartContext()
   const { isLoggedIn, user } = useUserContext()
   const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
@@ -33,7 +39,9 @@ export const NavLinks = () => {
       <ul className={styles.list} aria-label={"navigation items"}>
         <li>
           <ActionButton
-            action={() => setShowProductsSearchBar((prevState) => !prevState)}
+            action={() =>
+              setShowProductsSearchBar((prevState: boolean) => !prevState)
+            }
             text={
               <FontAwesomeIcon icon={getIconByName("faSearch")} size={"xl"} />
             }
