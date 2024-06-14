@@ -53,10 +53,10 @@ router.get('/name/:name', async (req, res) => {
         },
       ],
     });
-    if (product === null) {
+    if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
-    res.json(product);
+    res.status(200).json(product);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -75,7 +75,7 @@ router.get('/:id', async (req, res) => {
         },
       ],
     });
-    if (product === null) {
+    if (!product) {
       return res
         .status(404)
         .json({ message: 'Product with this id not found' });
