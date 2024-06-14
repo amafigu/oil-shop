@@ -1,10 +1,10 @@
-import { teaserCards } from "#constants/cards"
-import { useTranslation } from "#hooks/useTranslation"
-import React from "react"
+import { teaserCards } from "@/constants/cards"
+import { useTranslation } from "@/hooks/useTranslation"
+import { FC } from "react"
 import { TeaserCard } from "./TeaserCard"
 import styles from "./teaserCards.module.scss"
 
-export const TeaserCards = () => {
+export const TeaserCards: FC = () => {
   const { translate } = useTranslation()
   return (
     <section className={styles.wrapper} aria-label='teaser items'>

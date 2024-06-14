@@ -1,8 +1,8 @@
-import { useTranslation } from "#hooks/useTranslation"
-import React from "react"
+import { useTranslation } from "@/hooks/useTranslation"
+import { FC } from "react"
 import styles from "./teaserText.module.scss"
 
-export const TeaserText = () => {
+export const TeaserText: FC = () => {
   const { translate } = useTranslation()
   return (
     <section className={styles.wrapper} aria-label='teaser section'>

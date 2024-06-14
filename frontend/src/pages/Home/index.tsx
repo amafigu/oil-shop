@@ -1,11 +1,12 @@
-import { useProductContext } from "#context/productContext"
+import { useProductContext } from "@/context/productContext"
+import { FC } from "react"
 import { Banner } from "./Banner"
 import { Slider } from "./Slider"
 import { TeaserCards } from "./TeaserCards"
 import { TeaserText } from "./TeaserText"
 import styles from "./home.module.scss"
 
-export const Home = () => {
+export const Home: FC = () => {
   const { products } = useProductContext()
   return (
     <main className={styles.wrapper} aria-label='home page'>
