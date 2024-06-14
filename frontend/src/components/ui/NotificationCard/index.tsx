@@ -1,11 +1,17 @@
-import React from "react"
-import ZodValidationErrorsCard from "./ZodValidationErrorsCard"
+import { FC } from "react"
+import { ValidationErrorsCard } from "./ValidationErrorsCard"
 import styles from "./notificationCard.module.scss"
 
-const NotificationCard = ({
+interface NotificationCardProps {
+  message: string
+  errorsMessageArray?: { message: string; path: string }[]
+  translatedValidationErrors?: { [key: string]: { [key: string]: string } }
+}
+
+export const NotificationCard: FC<NotificationCardProps> = ({
   message,
-  errorsMessageArray,
-  textValidationErrorsObject,
+  errorsMessageArray = [],
+  translatedValidationErrors = {},
 }) => {
   return (
     <article className={styles.container}>
@@ -15,14 +21,14 @@ const NotificationCard = ({
         </div>
       )}
 
-      {textValidationErrorsObject &&
+      {translatedValidationErrors &&
         errorsMessageArray &&
         errorsMessageArray.length > 0 && (
           <div className={styles.modal}>
             <div className={styles.card}>
-              <ZodValidationErrorsCard
+              <ValidationErrorsCard
                 errorsArray={errorsMessageArray}
-                translationObj={textValidationErrorsObject}
+                translationObj={translatedValidationErrors}
               />
             </div>
           </div>
@@ -30,5 +36,3 @@ const NotificationCard = ({
     </article>
   )
 }
-
-export default NotificationCard
