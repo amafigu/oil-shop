@@ -1,4 +1,4 @@
-import { USER_ROLES } from "#constants/api"
+import { USER_ROLES } from "@/constants/api"
 import axios from "axios"
 
 export const getUserRoles = async () => {

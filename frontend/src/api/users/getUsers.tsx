@@ -1,4 +1,4 @@
-import { USERS } from "#constants/api"
+import { USERS } from "@/constants/api"
 import axios from "axios"
 
 export const getUsers = async () => {
@@ -11,6 +11,7 @@ export const getUsers = async () => {
       return response
     }
   } catch (error) {
+    console.error("Error by getting users")
     throw error
   }
 }
