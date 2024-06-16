@@ -1,4 +1,4 @@
-import { LOGOUT } from "#constants/api"
+import { LOGOUT } from "@/constants/api"
 import axios from "axios"
 
 export const logout = async () => {
@@ -14,6 +14,7 @@ export const logout = async () => {
       return response
     }
   } catch (error) {
+    console.error("Error by logout", error)
     console.error(error)
   }
 }

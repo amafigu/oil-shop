@@ -1,4 +1,4 @@
-import { USER_TOKEN } from "#constants/api"
+import { USER_TOKEN } from "@/constants/api"
 import axios from "axios"
 
 export const getDecodedAuthToken = async () => {

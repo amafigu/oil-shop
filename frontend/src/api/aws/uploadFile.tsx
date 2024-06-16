@@ -1,6 +1,8 @@
 import axios from "axios"
 
-export const uploadFile = async (file) => {
+export const uploadFile = async (
+  file: File | null | undefined,
+): Promise<string> => {
   if (!file) return ""
   let newUrl = ""
   try {
@@ -10,19 +12,14 @@ export const uploadFile = async (file) => {
     )
     newUrl = `https://oylo-images.s3.us-east-2.amazonaws.com/${response.data.fileName}`
 
-    await axios.put(
-      response.data.uploadURL,
-      file,
-
-      {
-        headers: {
-          "Content-Type": file.type,
-        },
+    await axios.put(response.data.uploadURL, file, {
+      headers: {
+        "Content-Type": file.type,
       },
-    )
+    })
   } catch (error) {
     console.error("Error uploading to S3: ", error)
-    return null
+    return ""
   }
   return newUrl
 }
