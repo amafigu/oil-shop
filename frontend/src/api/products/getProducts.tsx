@@ -1,4 +1,4 @@
-import { PRODUCTS } from "#constants/api"
+import { PRODUCTS } from "@/constants/api"
 import axios from "axios"
 
 export const getProducts = async () => {

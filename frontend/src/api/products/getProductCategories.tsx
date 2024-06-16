@@ -1,4 +1,4 @@
-import { PRODUCT_CATEGORIES } from "#constants/api"
+import { PRODUCT_CATEGORIES } from "@/constants/api"
 import axios from "axios"
 
 export const getProductCategories = async () => {
@@ -6,8 +6,11 @@ export const getProductCategories = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}${PRODUCT_CATEGORIES}`,
     )
-    return response
+    if (response?.status === 200) {
+      return response
+    }
   } catch (error) {
+    console.error("Error by getting products", error)
     throw error
   }
 }
