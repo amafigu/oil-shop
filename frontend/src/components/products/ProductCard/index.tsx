@@ -1,15 +1,21 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { PRODUCTS } from "#constants/routes"
-import { STYLES } from "#constants/styles"
-import { useCart } from "#hooks/useCart"
-import { useTranslation } from "#hooks/useTranslation"
-import { setDefaultImageByError } from "#utils/setDefaultImageByError"
-import { titleCase } from "#utils/titleCase"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
+import { PRODUCTS } from "@/constants/routes"
+import { STYLES } from "@/constants/styles"
+import { useCart } from "@/hooks/useCart"
+import { useTranslation } from "@/hooks/useTranslation"
+import { Product } from "@/types/Product"
+import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
+import { titleCase } from "@/utils/titleCase"
+import { FC } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./productCard.module.scss"
 
-export const ProductCard = ({ product }) => {
+interface ProductCardProps {
+  product: Product
+}
+
+export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const { components } = useTranslation()
   const { addProduct } = useCart()
   const navigate = useNavigate()

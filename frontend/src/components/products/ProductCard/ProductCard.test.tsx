@@ -1,33 +1,53 @@
-import product from "#__mocks__/product"
-import { commonProperties, components } from "#__mocks__/translate"
-import { ProductCard } from "#components/products/ProductCard"
-import useCartContext from "#context/cartContext"
-import { useTranslation } from "#hooks/useTranslation"
+import { product } from "@/__mocks__/product"
+import { commonProperties, components } from "@/__mocks__/translate"
+import { ProductCard } from "@/components/products/ProductCard"
+import { CartContext } from "@/context/cartContext"
+import { useTranslation } from "@/hooks/useTranslation"
+import { CartContextType } from "@/types/Cart"
 import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
-import React from "react"
+import { ReactNode } from "react"
 import { MemoryRouter } from "react-router-dom"
 
-jest.mock("#hooks/useTranslation")
-jest.mock("#context/cartContext")
+jest.mock("@/hooks/useTranslation")
 
-function renderCard() {
-  render(
-    <MemoryRouter>
-      <ProductCard product={product} />
-    </MemoryRouter>,
-  )
+interface MockProviderProps {
+  children: ReactNode
+  addProduct: jest.Mock
+}
+
+const MockCartProvider = ({ children, addProduct }: MockProviderProps) => {
+  const value: CartContextType = {
+    cart: [],
+    addProduct,
+    updateProductQuantity: jest.fn(),
+    removeProduct: jest.fn(),
+    getAllProductsQuantity: 0,
+    setCart: jest.fn(),
+  }
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
 
 describe("ProductCard", () => {
-  let mockAddProduct
+  let mockAddProduct: jest.Mock
+
   beforeEach(() => {
     mockAddProduct = jest.fn()
-    useCartContext.mockReturnValue({
-      addProduct: mockAddProduct,
+    ;(useTranslation as jest.Mock).mockReturnValue({
+      commonProperties,
+      components,
     })
-    useTranslation.mockReturnValue({ commonProperties, components })
   })
+
+  function renderCard() {
+    render(
+      <MemoryRouter>
+        <MockCartProvider addProduct={mockAddProduct}>
+          <ProductCard product={product} />
+        </MockCartProvider>
+      </MemoryRouter>,
+    )
+  }
 
   test("renders product name correctly", () => {
     renderCard()
@@ -49,5 +69,6 @@ describe("ProductCard", () => {
     const button = screen.getByLabelText("Add product to your shop cart")
     fireEvent.click(button)
     expect(mockAddProduct).toHaveBeenCalledTimes(1)
+    expect(mockAddProduct).toHaveBeenCalledWith(product, 1)
   })
 })
