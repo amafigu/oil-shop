@@ -1,9 +1,10 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { navigationMenuItems } from "#constants/navigation"
-import { useActivePageLink } from "#hooks/useActivePageLink"
-import { useMenuOptions } from "#hooks/useMenuOptions"
-import { useTranslation } from "#hooks/useTranslation"
-import { translateByPath } from "#utils/translateByPath"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { navigationMenuItems } from "@/constants/navigation"
+import { useActivePageLink } from "@/hooks/useActivePageLink"
+import { useMenuOptions } from "@/hooks/useMenuOptions"
+import { useTranslation } from "@/hooks/useTranslation"
+import { translateByPath } from "@/utils/translateByPath"
+import { MouseEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./navigationMenu.module.scss"
 
@@ -13,7 +14,10 @@ export const NavigationMenu = () => {
   const { setShowMobileMenu } = useMenuOptions()
   const navigate = useNavigate()
 
-  const onSelect = (e, item) => {
+  const onSelect = (
+    e: MouseEvent<HTMLButtonElement>,
+    item: { path: string; label: string },
+  ) => {
     e.preventDefault()
     setActivePageLink(item.label)
     navigate(item.path)
@@ -28,7 +32,9 @@ export const NavigationMenu = () => {
             return (
               <li className={styles.item} key={index}>
                 <ActionButton
-                  action={(e) => onSelect(e, item)}
+                  action={(e) =>
+                    onSelect(e as MouseEvent<HTMLButtonElement>, item)
+                  }
                   text={translateByPath(components.navigationMenu, item.label)}
                   className={
                     item.label === activePageLink

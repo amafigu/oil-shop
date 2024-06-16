@@ -57,7 +57,9 @@ export const NavLinks: FC = () => {
             <Link
               className={styles.link}
               to={
-                user && user.role === "admin" ? CURRENT_ADMIN : CURRENT_CUSTOMER
+                (user && user.role?.name) === "admin"
+                  ? CURRENT_ADMIN
+                  : CURRENT_CUSTOMER
               }
             >
               <FontAwesomeIcon icon={getIconByName("faUser")} />

@@ -1,15 +1,19 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { CategoryMenu } from "#components/ui/CategoryMenu"
-import { LanguageSelector } from "#components/ui/LanguageSelector"
-import { LogoutButton } from "#components/ui/LogoutButton"
-import { CART, CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "#constants/routes"
-import { STYLES } from "#constants/styles"
-import useCartContext from "#context/cartContext"
-import { useUserContext } from "#context/userContext"
-import { useMenuOptions } from "#hooks/useMenuOptions"
-import { getIconByName } from "#utils/getIconByName"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { CategoryMenu } from "@/components/ui/CategoryMenu"
+import { LanguageSelector } from "@/components/ui/LanguageSelector"
+import { LogoutButton } from "@/components/ui/LogoutButton"
+import {
+  CART,
+  CURRENT_ADMIN,
+  CURRENT_CUSTOMER,
+  LOGIN,
+} from "@/constants/routes"
+import { STYLES } from "@/constants/styles"
+import { useCartContext } from "@/context/cartContext"
+import { useUserContext } from "@/context/userContext"
+import { useMenuOptions } from "@/hooks/useMenuOptions"
+import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { React } from "react"
 import { Link } from "react-router-dom"
 import styles from "./mobileMenu.module.scss"
 
@@ -73,7 +77,7 @@ export const MobileMenu = () => {
             >
               <Link
                 to={
-                  user && user.role === "admin"
+                  user && user.role?.name === "admin"
                     ? CURRENT_ADMIN
                     : CURRENT_CUSTOMER
                 }

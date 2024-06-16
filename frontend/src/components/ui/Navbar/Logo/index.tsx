@@ -1,5 +1,5 @@
-import { LOGO_IMAGE } from "#constants/media"
-import { HOME } from "#constants/routes"
+import { LOGO_IMAGE } from "@/constants/media"
+import { HOME } from "@/constants/routes"
 import { Link } from "react-router-dom"
 import styles from "./logo.module.scss"
 
