@@ -1,7 +1,8 @@
-import { ORDER_ITEMS } from "#constants/api"
+import { ORDER_ITEMS } from "@/constants/api"
+import { OrderItem } from "@/types/Order"
 import axios from "axios"
 
-export const createOrderItem = async (order) => {
+export const createOrderItem = async (order: OrderItem) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}${ORDER_ITEMS}`,

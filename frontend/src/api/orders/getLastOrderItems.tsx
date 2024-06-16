@@ -1,13 +1,18 @@
-import { LAST_ORDER } from "#constants/api"
+import { LAST_ORDER } from "@/constants/api"
 import axios from "axios"
 
-export const getLastOrderItems = async (userId) => {
+export const getLastOrderItems = async (userId: number) => {
   try {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}${LAST_ORDER}/${userId}`,
     )
-    return response
+    if (response && response.status === 200) {
+      return response
+    } else {
+      throw new Error("Status error by getting last order items")
+    }
   } catch (error) {
+    console.log("Error by getting last order items")
     throw error
   }
 }
