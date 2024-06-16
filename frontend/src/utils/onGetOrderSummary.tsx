@@ -1,13 +1,31 @@
-import { getAuthenticatedUserById } from "#api/auth/getAuthenticatedUserById"
-import { getLastOrderItems } from "#api/orders/getLastOrderItems"
-import { getUserShippingData } from "#api/users/getUserShippingData"
+import { getAuthenticatedUserById } from "@/api/auth/getAuthenticatedUserById"
+import { getLastOrderItems } from "@/api/orders/getLastOrderItems"
+import { getUserShippingData } from "@/api/users/getUserShippingData"
+import { OrderSummary } from "@/types/Order"
 import { onRequestError } from "./onRequestError"
 
-export const onGetOrderSummary = async (userId, setNotification) => {
-  let orderAndCartItems
-  let shippingData
-  let orderData
-  let userData
+export const onGetOrderSummary = async (
+  userId: number,
+  setNotification: (notification: string) => void,
+): Promise<OrderSummary | undefined> => {
+  let orderAndCartItems: OrderSummary["orderAndCartItems"] = { orderItems: [] }
+  let shippingData: OrderSummary["shippingData"] = {
+    street: "",
+    number: "",
+    postalCode: "",
+    city: "",
+    state: "",
+    country: "",
+  }
+  let orderData: OrderSummary["orderData"] = {
+    paymentMethod: "",
+    totalAmount: 0,
+  }
+  let userData: OrderSummary["userData"] = {
+    firstName: "",
+    lastName: "",
+    email: "",
+  }
 
   try {
     const userResponse = await getAuthenticatedUserById(userId)
@@ -21,7 +39,10 @@ export const onGetOrderSummary = async (userId, setNotification) => {
     }
     const shippingDataResponse = await getUserShippingData(userId)
 
-    if (shippingDataResponse.status === 200) {
+    if (
+      shippingDataResponse?.status === 200 ||
+      shippingDataResponse?.status === 404
+    ) {
       const data = shippingDataResponse.data
       shippingData = {
         street: data.street,

@@ -22,6 +22,7 @@ import {
   faMinus,
   faPeopleGroup,
   faPlus,
+  faQuestionCircle,
   faSearch,
   faSeedling,
   faTrash,
@@ -59,9 +60,10 @@ const icons: { [key: string]: IconDefinition } = {
   faTree,
   faUnlock,
   faArrowRightFromBracket,
+  faQuestionCircle,
 }
 
-export const getIconByName = (iconName: string): IconDefinition | null => {
+export const getIconByName = (iconName: string): IconDefinition => {
   const icon = icons[iconName]
-  return icon || null
+  return icon || faQuestionCircle
 }

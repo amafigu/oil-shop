@@ -1,8 +1,9 @@
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { SHORT_MESSAGE_TIMEOUT } from "@/constants/time"
 
 export const onRequestError = (
-  error,
-  setNotification,
+  error: any,
+  setNotification: any,
   message = "Error by handling request",
 ) => {
   console.error(error)

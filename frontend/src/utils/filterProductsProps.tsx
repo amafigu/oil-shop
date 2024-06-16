@@ -1,7 +1,8 @@
-import { STYLES } from "#constants/styles"
+import { STYLES } from "@/constants/styles"
+import { Product } from "@/types/Product"
 export const filterProductsProps = [
   {
-    action: (list, sortIsAsc) =>
+    action: (list: Product[], sortIsAsc: boolean) =>
       sortIsAsc
         ? list.sort((a, b) => a.name.localeCompare(b.name))
         : list.sort((a, b) => b.name.localeCompare(a.name)),
@@ -10,7 +11,7 @@ export const filterProductsProps = [
     isAsc: true,
   },
   {
-    action: (list, sortIsAsc) =>
+    action: (list: Product[], sortIsAsc: boolean) =>
       sortIsAsc
         ? list.sort((a, b) => a.categoryId - b.categoryId)
         : list.sort((a, b) => b.categoryId - a.categoryId),
@@ -20,7 +21,7 @@ export const filterProductsProps = [
     isAsc: true,
   },
   {
-    action: (list, sortIsAsc) =>
+    action: (list: Product[], sortIsAsc: boolean) =>
       sortIsAsc
         ? list.sort((a, b) => a.price - b.price)
         : list.sort((a, b) => b.price - a.price),
@@ -30,7 +31,7 @@ export const filterProductsProps = [
     isAsc: true,
   },
   {
-    action: (list, sortIsAsc) =>
+    action: (list: Product[], sortIsAsc: boolean) =>
       sortIsAsc
         ? list.sort((a, b) => a.size - b.size)
         : list.sort((a, b) => b.size - a.size),

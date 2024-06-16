@@ -1,7 +1,8 @@
-import { SHORT_MESSAGE_TIMEOUT } from "#constants/time"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { SHORT_MESSAGE_TIMEOUT } from "@/constants/time"
 
 export const onRequestHandlerNotification = (
-  setNotification,
+  setNotification: any,
   message = "Request successful",
 ) => {
   if (setNotification) {

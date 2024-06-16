@@ -1,7 +1,8 @@
-import { STYLES } from "#constants/styles"
+import { STYLES } from "@/constants/styles"
+import { User } from "@/types/User"
 export const filterUserProps = [
   {
-    action: (list, sortIsAsc) =>
+    action: (list: User[], sortIsAsc: boolean) =>
       sortIsAsc
         ? list.sort((a, b) => a.firstName.localeCompare(b.firstName))
         : list.sort((a, b) => b.firstName.localeCompare(a.firstName)),
@@ -10,7 +11,7 @@ export const filterUserProps = [
     isAsc: true,
   },
   {
-    action: (list, sortIsAsc) =>
+    action: (list: User[], sortIsAsc: boolean) =>
       sortIsAsc
         ? list.sort((a, b) => a.lastName.localeCompare(b.lastName))
         : list.sort((a, b) => b.lastName.localeCompare(a.lastName)),
@@ -19,7 +20,7 @@ export const filterUserProps = [
     isAsc: true,
   },
   {
-    action: (list, sortIsAsc) =>
+    action: (list: User[], sortIsAsc: boolean) =>
       sortIsAsc
         ? list.sort((a, b) => a.email.localeCompare(b.email))
         : list.sort((a, b) => b.email.localeCompare(a.email)),

@@ -1,12 +1,17 @@
+import { Product } from "@/types/Product"
+import { Dispatch, SetStateAction } from "react"
+
 export const searchProducts = (
-  e,
-  items,
-  setSearchItemText,
-  setMatches,
-  setShowMatchedItemsList,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  e: any,
+  items: Product[],
+  setSearchItemText: Dispatch<SetStateAction<string>>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setMatches: Dispatch<SetStateAction<any>>,
+  setShowMatchedItemsList: Dispatch<SetStateAction<boolean>>,
 ) => {
   setSearchItemText(e.target.value)
-  const match = items.filter((item) =>
+  const match = items.filter((item: Product) =>
     item.name.toLowerCase().includes(e.target.value.toLowerCase()),
   )
   if (e.target.value === "") {

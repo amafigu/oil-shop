@@ -1,21 +1,24 @@
-import { getAuthenticatedUserById } from "#api/auth/getAuthenticatedUserById"
-import { createOrder } from "#api/orders/createOrder"
-import { createOrderItem } from "#api/orders/createOrderItem"
+import { getAuthenticatedUserById } from "@/api/auth/getAuthenticatedUserById"
+import { createOrder } from "@/api/orders/createOrder"
+import { createOrderItem } from "@/api/orders/createOrderItem"
+import { CartItem } from "@/types/Cart"
+import { getTotalCost } from "./getTotalCost"
 import { onRequestError } from "./onRequestError"
-import { totalCost } from "./totalCost"
+
+type NotificationSetter = (message: string | null) => void
 
 export const onSubmitRegisteredUserOrder = async (
-  userId,
-  paymentMethod,
-  cart,
-  setNotification,
+  userId: number,
+  paymentMethod: string,
+  cart: CartItem[],
+  setNotification: NotificationSetter,
 ) => {
   try {
     const loggedInUserResponse = await getAuthenticatedUserById(userId)
     if (loggedInUserResponse && loggedInUserResponse.status === 200) {
       const newOrder = {
         userId: userId,
-        totalAmount: totalCost(cart),
+        totalAmount: getTotalCost(cart),
         paymentMethod: paymentMethod,
       }
       const orderResponse = await createOrder(userId, newOrder)
@@ -32,6 +35,7 @@ export const onSubmitRegisteredUserOrder = async (
         )
         if (
           orderWithItemsResponse &&
+          orderWithItemsResponse[0] &&
           orderWithItemsResponse[0].status === 201
         ) {
           return orderWithItemsResponse
@@ -39,7 +43,7 @@ export const onSubmitRegisteredUserOrder = async (
       }
     }
   } catch (error) {
-    const message = "Error by submiting order"
+    const message = "Error by submitting order"
     onRequestError(error, setNotification, message)
   }
 }
