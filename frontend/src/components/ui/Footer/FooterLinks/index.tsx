@@ -1,9 +1,10 @@
-import { FAQ, LOGIN, SHOP, SIGN_UP } from "#constants/routes"
-import { useTranslation } from "#hooks/useTranslation"
+import { FAQ, LOGIN, SHOP, SIGN_UP } from "@/constants/routes"
+import { useTranslation } from "@/hooks/useTranslation"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 import styles from "./footerLinks.module.scss"
 
-export const FooterLinks = () => {
+export const FooterLinks: FC = () => {
   const { translate } = useTranslation()
   const text = translate.components.footer
 
@@ -18,7 +19,8 @@ export const FooterLinks = () => {
             <address className={styles.itemsLinksList}>
               <p>{text.linksColumns.wayToUs.address}</p>
               <p>
-                {text.linksColumns.wayToUs.postalCode} {text.city}
+                {text.linksColumns.wayToUs.postalCode}{" "}
+                {text.linksColumns.wayToUs.city}
               </p>
               <p>
                 {text.linksColumns.wayToUs.phoneTitle}{" "}

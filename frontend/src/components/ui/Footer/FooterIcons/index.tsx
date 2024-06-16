@@ -2,15 +2,40 @@ import {
   SOCIAL_MEDIA_URL_FACEBOOK,
   SOCIAL_MEDIA_URL_INSTAGRAM,
   SOCIAL_MEDIA_URL_YOUTUBE,
-} from "#constants/media"
-import { useTranslation } from "#hooks/useTranslation"
-import { getIconByName } from "#utils/getIconByName"
+} from "@/constants/media"
+import { useTranslation } from "@/hooks/useTranslation"
+import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FC } from "react"
+import { Link } from "react-router-dom"
 import styles from "./footerIcons.module.scss"
 
-export const FooterIcons = () => {
+export const FooterIcons: FC = () => {
   const { translate } = useTranslation()
   const text = translate.components.footer
+  const items = [
+    {
+      url: SOCIAL_MEDIA_URL_FACEBOOK,
+      title: text.iconsColumns.socialMedia.facebook,
+      icon: (
+        <FontAwesomeIcon icon={getIconByName("faSquareFacebook")} size='2xl' />
+      ),
+    },
+    {
+      url: SOCIAL_MEDIA_URL_INSTAGRAM,
+      title: text.iconsColumns.socialMedia.instagram,
+      icon: (
+        <FontAwesomeIcon icon={getIconByName("faSquareInstagram")} size='2xl' />
+      ),
+    },
+    {
+      url: SOCIAL_MEDIA_URL_YOUTUBE,
+      title: text.iconsColumns.socialMedia.youtube,
+      icon: (
+        <FontAwesomeIcon icon={getIconByName("faSquareYoutube")} size='2xl' />
+      ),
+    },
+  ]
 
   return (
     <section className={styles.wrapper}>
@@ -46,48 +71,13 @@ export const FooterIcons = () => {
             <h4>{text.iconsColumns.socialMedia.title}</h4>
           </div>
           <ul className={styles.icons}>
-            <li>
-              <a
-                href={SOCIAL_MEDIA_URL_FACEBOOK}
-                target='_blank'
-                rel='noreferrer'
-                title={text.iconsColumns.socialMedia.facebook}
-                alt={text.iconsColumns.socialMedia.facebook}
-              >
-                <FontAwesomeIcon
-                  icon={getIconByName("faSquareFacebook")}
-                  size='2xl'
-                />
-              </a>
-            </li>
-            <li>
-              <a
-                href={SOCIAL_MEDIA_URL_INSTAGRAM}
-                target='_blank'
-                rel='noreferrer'
-                title={text.iconsColumns.socialMedia.instagram}
-                alt={text.iconsColumns.socialMedia.instagram}
-              >
-                <FontAwesomeIcon
-                  icon={getIconByName("faSquareInstagram")}
-                  size='2xl'
-                />
-              </a>
-            </li>
-            <li>
-              <a
-                href={SOCIAL_MEDIA_URL_YOUTUBE}
-                target='_blank'
-                rel='noreferrer'
-                title={text.iconsColumns.socialMedia.youtube}
-                alt={text.iconsColumns.socialMedia.youtube}
-              >
-                <FontAwesomeIcon
-                  icon={getIconByName("faSquareYoutube")}
-                  size='2xl'
-                />
-              </a>
-            </li>
+            {items.map((item) => (
+              <li key={item.url}>
+                <Link to={item.url} title={item.title}>
+                  {item.icon}
+                </Link>
+              </li>
+            ))}
           </ul>
         </li>
       </ul>
