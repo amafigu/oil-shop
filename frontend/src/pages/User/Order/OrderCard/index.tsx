@@ -1,16 +1,30 @@
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { useTranslation } from "#hooks/useTranslation"
-import { setDefaultImageByError } from "#utils/setDefaultImageByError"
-import { titleCase } from "#utils/titleCase"
+import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
+import { useTranslation } from "@/hooks/useTranslation"
+import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
+import { titleCase } from "@/utils/titleCase"
+import { FC } from "react"
 import styles from "./orderCard.module.scss"
 
-export const OrderCard = ({ product, quantity }) => {
+interface OrderCardProps {
+  product:
+    | {
+        name: string
+        image: string
+        size: string
+        description?: string
+        price?: number
+      }
+    | undefined
+  quantity: number
+}
+
+export const OrderCard: FC<OrderCardProps> = ({ product, quantity }) => {
   const { components } = useTranslation()
   const text = components.orderCard
   return (
     <article
       className={styles.wrapper}
-      aria-label={`${text.orderedProduct}: ${product.name}`}
+      aria-label={`${text.orderedProduct}: ${product?.name}`}
     >
       {product ? (
         <dl>
