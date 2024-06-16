@@ -3,8 +3,7 @@ import styles from "./toggleButton.module.scss"
 
 interface ToggleButtonProps {
   isVisible: boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onToggle: Dispatch<SetStateAction<any>>
+  onToggle: Dispatch<SetStateAction<boolean>>
   hideBtnText: string
   showBtnText: string
   classCss: string
