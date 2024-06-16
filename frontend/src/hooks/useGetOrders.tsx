@@ -1,22 +1,23 @@
-import { getOrderItems } from "#api/orders/getOrderItems"
-import { getOrdersByUserId } from "#api/orders/getOrdersByUserId"
-import { useUserContext } from "#context/userContext"
+import { getOrderItems } from "@/api/orders/getOrderItems"
+import { getOrdersByUserId } from "@/api/orders/getOrdersByUserId"
+import { useUserContext } from "@/context/userContext"
+import { Order } from "@/types/Order"
 import { useEffect, useState } from "react"
 
 export const useGetOrders = () => {
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState<Order[]>([])
   const { user, isLoading } = useUserContext()
 
   useEffect(() => {
     const getOrdersWithDetails = async () => {
       try {
-        if (isLoading) {
+        if (isLoading || !user) {
           return
         } else {
           const response = await getOrdersByUserId(user.id)
           if (response && response.status === 200) {
             const ordersWithDetails = await Promise.all(
-              response.data.map(async (order) => {
+              response.data.map(async (order: Omit<Order, "cartItems">) => {
                 const cartItemsResponse = await getOrderItems(order.id)
                 return { ...order, cartItems: cartItemsResponse.data }
               }),
@@ -31,7 +32,7 @@ export const useGetOrders = () => {
 
     getOrdersWithDetails()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
+  }, [user, isLoading])
 
   return {
     orders,

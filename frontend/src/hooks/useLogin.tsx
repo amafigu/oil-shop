@@ -1,14 +1,20 @@
-import { login } from "#api/auth/login"
-import { CURRENT_ADMIN, CURRENT_CUSTOMER } from "#constants/routes"
-import { useNotificationContext } from "#context/notificationContext"
-import { useUserContext } from "#context/userContext"
-import { onRequestError } from "#utils/onRequestError"
+import { login } from "@/api/auth/login"
+import { CURRENT_ADMIN, CURRENT_CUSTOMER } from "@/constants/routes"
+import { useNotificationContext } from "@/context/notificationContext"
+import { useUserContext } from "@/context/userContext"
+import { onRequestError } from "@/utils/onRequestError"
+import { FormEvent } from "react"
 import { useNavigate } from "react-router-dom"
+
 export const useLogin = () => {
   const { setIsLoggedIn, setUser } = useUserContext()
   const { setNotification } = useNotificationContext()
   const navigate = useNavigate()
-  const setLoggedUser = async (e, email, password) => {
+  const setLoggedUser = async (
+    e: FormEvent<HTMLButtonElement>,
+    email: string,
+    password: string,
+  ) => {
     e.preventDefault()
 
     try {

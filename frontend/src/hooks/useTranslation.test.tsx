@@ -1,18 +1,23 @@
-import { LocaleContext } from "#context/localeContext"
-import de from "#i18n/de.json"
-import en from "#i18n/en.json"
+import { LocaleContext } from "@/context/localeContext"
+import de from "@/i18n/de.json"
+import en from "@/i18n/en.json"
 import { act, renderHook } from "@testing-library/react"
-import { useState } from "react"
+import { FC, ReactNode, useState } from "react"
 import { useTranslation } from "./useTranslation"
 
 const languages = { en, de }
 
-const ContextWrapper = ({ children }) => {
-  const [language, setLanguage] = useState("en")
+const ContextWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+  const [language, setLanguage] = useState<keyof typeof languages>("en")
 
   return (
     <LocaleContext.Provider
-      value={{ translate: languages[language], language, setLanguage }}
+      value={{
+        languages,
+        translate: languages[language],
+        language,
+        setLanguage,
+      }}
     >
       {children}
     </LocaleContext.Provider>
@@ -20,20 +25,23 @@ const ContextWrapper = ({ children }) => {
 }
 
 describe("useTranslation hook", () => {
-  test("should change from english to german", () => {
+  test("change from English to German", () => {
     const { result } = renderHook(() => useTranslation(), {
       wrapper: ContextWrapper,
     })
 
-    expect(result.current.translate).toEqual(languages[result.current.language])
+    expect(result.current.translate).toEqual(languages.en)
     expect(result.current.language).toBe("en")
+
     act(() => {
       result.current.setLanguage("de")
     })
+
     expect(result.current.language).toBe("de")
+    expect(result.current.translate).toEqual(languages.de)
   })
 
-  test("should translate common properties correctly", () => {
+  test("translate common properties correctly", () => {
     const { result } = renderHook(() => useTranslation(), {
       wrapper: ContextWrapper,
     })
@@ -41,9 +49,11 @@ describe("useTranslation hook", () => {
     expect(result.current.commonProperties).toEqual(
       languages.en.commonProperties,
     )
+
     act(() => {
       result.current.setLanguage("de")
     })
+
     expect(result.current.commonProperties).toEqual(
       languages.de.commonProperties,
     )

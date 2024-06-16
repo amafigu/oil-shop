@@ -1,5 +1,5 @@
-import { navigationMenuItems } from "#constants/navigation"
-import useMenuContext from "#context/menuContext"
+import { navigationMenuItems } from "@/constants/navigation"
+import { useMenuContext } from "@/context/menuContext"
 import { useEffect } from "react"
 
 export const useActivePageLink = () => {

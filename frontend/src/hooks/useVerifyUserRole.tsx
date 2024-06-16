@@ -1,12 +1,13 @@
-import { getUserRoles } from "#api/users/getUserRoles"
-import { CURRENT_ADMIN, CURRENT_CUSTOMER } from "#constants/routes"
-import { useUserContext } from "#context/userContext"
+import { getUserRoles } from "@/api/users/getUserRoles"
+import { CURRENT_ADMIN, CURRENT_CUSTOMER } from "@/constants/routes"
+import { useUserContext } from "@/context/userContext"
+import { Role } from "@/types/User"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export const useVerifyUserRole = () => {
   const { user, isLoading } = useUserContext()
-  const { roles, setRoles } = useState([])
+  const [roles, setRoles] = useState<Role[]>([])
   const navigate = useNavigate()
 
   const fetchRoles = async () => {
@@ -19,6 +20,7 @@ export const useVerifyUserRole = () => {
       console.error("Error by fetching roles")
     }
   }
+
   useEffect(() => {
     if (!isLoading) {
       fetchRoles()
@@ -26,13 +28,13 @@ export const useVerifyUserRole = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const verifyUserRole = async () => {
-    const adminRole = roles && roles.find((role) => role.name === "admin")
+  const verifyUserRole = () => {
+    const adminRole = roles.find((role) => role.name === "admin")
     const adminId = adminRole ? adminRole.id : null
-    const customerRole = roles && roles.find((role) => role.name === "customer")
+    const customerRole = roles.find((role) => role.name === "customer")
     const customeId = customerRole ? customerRole.id : null
 
-    if (isLoading) {
+    if (isLoading || !user) {
       return
     } else {
       if (user.roleId === adminId) {
