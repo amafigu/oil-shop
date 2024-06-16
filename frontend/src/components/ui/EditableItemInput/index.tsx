@@ -1,10 +1,25 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { STYLES } from "#constants/styles"
-import { useTranslation } from "#hooks/useTranslation"
-import { useState } from "react"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { STYLES } from "@/constants/styles"
+import { useTranslation } from "@/hooks/useTranslation"
+import { CommonButtons, CommonProperties } from "@/types/Locale"
+import { ChangeEvent, FC, KeyboardEvent, MouseEvent, useState } from "react"
 import styles from "./editableItemInput.module.scss"
 
-export const EditableItemInput = ({
+interface EditableItemInputProps {
+  label?: string
+  name: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  updatedPropertyData: { [key: string]: any }
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onSave: (
+    event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLInputElement>,
+  ) => void
+  classCss: string
+  type: string
+  file?: File | null | undefined
+}
+
+export const EditableItemInput: FC<EditableItemInputProps> = ({
   label,
   name,
   updatedPropertyData,
@@ -15,9 +30,14 @@ export const EditableItemInput = ({
   file,
 }) => {
   const [isEditing, setIsEditing] = useState(false)
-  const { commonProperties, commonButtons } = useTranslation()
+  const { commonProperties, commonButtons } = useTranslation() as {
+    commonButtons: CommonButtons
+    commonProperties: CommonProperties
+  }
 
-  const saveEdition = (e) => {
+  const saveEdition = (
+    e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLInputElement>,
+  ) => {
     onSave(e)
     setIsEditing(false)
   }
@@ -56,7 +76,6 @@ export const EditableItemInput = ({
           <input
             aria-label={`${label} input`}
             className={styles[classCss]}
-            label={label}
             name={name}
             onChange={onChange}
             onKeyDown={(e) => {
@@ -86,7 +105,7 @@ export const EditableItemInput = ({
       )}
       {isEditing ? (
         <ActionButton
-          action={(e) => saveEdition(e)}
+          action={(e) => saveEdition(e as MouseEvent<HTMLButtonElement>)}
           text={commonButtons.save}
           className={STYLES.BUTTONS.ACTION}
           ariaLabel={"save edition"}
