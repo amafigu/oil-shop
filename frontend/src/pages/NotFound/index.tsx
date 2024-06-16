@@ -1,9 +1,10 @@
-import { LOGO_IMAGE } from "#constants/media"
-import { useTranslation } from "#hooks/useTranslation"
-import { scrollToTop } from "#utils/scrollToTop"
+import { LOGO_IMAGE } from "@/constants/media"
+import { useTranslation } from "@/hooks/useTranslation"
+import { scrollToTop } from "@/utils/scrollToTop"
+import { FC } from "react"
 import styles from "./notFound.module.scss"
 
-export const NotFound = () => {
+export const NotFound: FC = () => {
   const { translate } = useTranslation()
   const text = translate.pages.notFound
   scrollToTop()

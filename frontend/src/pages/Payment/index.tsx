@@ -1,16 +1,13 @@
-import NotificationCard from "#components/ui/NotificationCard"
-import { useRedirectAdminFromCheckout } from "#hooks/useRedirectAdminFromCheckout"
-import { scrollToTop } from "#utils/scrollToTop"
+import { scrollToTop } from "@/utils/scrollToTop"
+import { FC } from "react"
 import { PaymentForm } from "./PaymentForm"
 import styles from "./payment.module.scss"
 
-export const Payment = () => {
-  const { notification } = useRedirectAdminFromCheckout()
+export const Payment: FC = () => {
   scrollToTop()
 
   return (
     <main className={styles.wrapper} aria-label='Payment page'>
-      {notification && <NotificationCard message={notification} />}
       <section className={styles.container}>
         <PaymentForm />
       </section>

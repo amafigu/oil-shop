@@ -1,39 +1,28 @@
-import NotificationCard from "#components/ui/NotificationCard"
-import { useCart } from "#hooks/useCart"
-import { useRedirectAdminFromCheckout } from "#hooks/useRedirectAdminFromCheckout"
-import { useTranslation } from "#hooks/useTranslation"
-import { scrollToTop } from "#utils/scrollToTop"
-import { totalCost } from "#utils/totalCost"
-import React from "react"
+import { useCart } from "@/hooks/useCart"
+import { useTranslation } from "@/hooks/useTranslation"
+import { CartItem as CartItemType } from "@/types/Cart"
+import { scrollToTop } from "@/utils/scrollToTop"
+import { FC } from "react"
 import { CartItem } from "./CartItem"
 import { CartOrderSummary } from "./CartOrderSummary"
 import styles from "./cart.module.scss"
 
-export const Cart = () => {
+export const Cart: FC = () => {
   const { cart } = useCart()
-  const { notification } = useRedirectAdminFromCheckout()
   const { translate } = useTranslation()
   const text = translate.pages.cart
   scrollToTop()
   return (
     <main className={styles.wrapper} aria-label='shopping cart'>
-      {notification && <NotificationCard message={notification} />}
       <section className={styles.container}>
         <ul className={styles.list} aria-label='items list'>
           {cart.length > 0 ? (
-            cart.map((item) => (
+            cart.map((item: CartItemType) => (
               <li
                 className={styles.item}
                 key={`${item.product.name}${item.product.price}`}
               >
-                <CartItem
-                  description={item.product.description}
-                  image={item.product.image}
-                  name={item.product.name}
-                  price={item.product.price}
-                  quantity={item.quantity}
-                  size={item.product.size}
-                />
+                <CartItem item={item} />
                 <hr />
               </li>
             ))
@@ -43,7 +32,7 @@ export const Cart = () => {
             </div>
           )}
         </ul>
-        <CartOrderSummary totalCost={totalCost} />
+        <CartOrderSummary />
       </section>
     </main>
   )

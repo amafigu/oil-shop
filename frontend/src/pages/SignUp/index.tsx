@@ -1,11 +1,12 @@
-import { CreateUserForm } from "#components/ui/CreateUserForm"
-import { LOGO_IMAGE } from "#constants/media"
-import { useRegisterUser } from "#hooks/useRegisterUser"
-import { scrollToTop } from "#utils/scrollToTop"
+import { CreateUserForm } from "@/components/ui/CreateUserForm"
+import { LOGO_IMAGE } from "@/constants/media"
+import { useRegisterUser } from "@/hooks/useRegisterUser"
+import { scrollToTop } from "@/utils/scrollToTop"
+import { FC } from "react"
 import { LinkContainer } from "./LinkContainer"
 import styles from "./signUp.module.scss"
 
-export const SignUp = () => {
+export const SignUp: FC = () => {
   const { registerUser } = useRegisterUser()
   scrollToTop()
 

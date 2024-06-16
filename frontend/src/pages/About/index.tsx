@@ -1,10 +1,11 @@
-import { REPOSITORY_URL } from "#constants/media"
-import { useTranslation } from "#hooks/useTranslation"
-import { scrollToTop } from "#utils/scrollToTop"
+import { REPOSITORY_URL } from "@/constants/media"
+import { useTranslation } from "@/hooks/useTranslation"
+import { scrollToTop } from "@/utils/scrollToTop"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 import styles from "./about.module.scss"
 
-export const About = () => {
+export const About: FC = () => {
   const { translate } = useTranslation()
   const text = translate.pages.about
   scrollToTop()

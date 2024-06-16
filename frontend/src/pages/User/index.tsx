@@ -1,20 +1,21 @@
-import { EditableItemsList } from "#components/ui/EditableItemsList"
-import { EditableShippingData } from "#components/ui/EditableShippingData"
-import { EditableUserForm } from "#components/ui/EditableUserForm"
-import { ToggleButton } from "#components/ui/ToggleButton"
-import { UserHeader } from "#components/ui/UserHeader"
-import { editableUserShippingDataProperties } from "#constants/shippingData"
-import { STYLES } from "#constants/styles"
-import { editableUserProperties } from "#constants/users"
-import { useUserContext } from "#context/userContext"
-import { useGetOrders } from "#hooks/useGetOrders"
-import { useTranslation } from "#hooks/useTranslation"
-import { useVerifyUserRole } from "#hooks/useVerifyUserRole"
-import { useEffect, useState } from "react"
+import { EditableItemsList } from "@/components/ui/EditableItemsList"
+import { EditableShippingDataForm } from "@/components/ui/EditableShippingDataForm"
+import { EditableUserForm } from "@/components/ui/EditableUserForm"
+import { ToggleButton } from "@/components/ui/ToggleButton"
+import { UserHeader } from "@/components/ui/UserHeader"
+import { editableUserShippingDataProperties } from "@/constants/shippingData"
+import { STYLES } from "@/constants/styles"
+import { editableUserProperties } from "@/constants/users"
+import { useUserContext } from "@/context/userContext"
+import { useGetOrders } from "@/hooks/useGetOrders"
+import { useTranslation } from "@/hooks/useTranslation"
+import { useVerifyUserRole } from "@/hooks/useVerifyUserRole"
+import { User as IUser, ShippingData } from "@/types/User"
+import { FC, useEffect, useState } from "react"
 import { Order } from "./Order"
 import styles from "./user.module.scss"
 
-export const User = () => {
+export const User: FC = () => {
   const [showOrders, setShowOrders] = useState(false)
   const [showShippingData, setShowShippingData] = useState(false)
   const { user, onUpdateUser, onUpdateShippingData, shippingData, isLoggedIn } =
@@ -34,7 +35,7 @@ export const User = () => {
         <UserHeader />
         {user && (
           <EditableUserForm
-            item={user}
+            item={user as IUser}
             renderItemProps={editableUserProperties}
             onSave={onUpdateUser}
           />
@@ -49,8 +50,8 @@ export const User = () => {
           />
         </div>
         {showShippingData && shippingData && (
-          <EditableShippingData
-            item={shippingData}
+          <EditableShippingDataForm
+            item={shippingData as ShippingData}
             renderItemProps={editableUserShippingDataProperties}
             onSave={onUpdateShippingData}
           />
@@ -69,6 +70,7 @@ export const User = () => {
             itemsList={orders}
             ItemComponent={Order}
             title={components.ordersList.title}
+            filterProps={[]}
           />
         )}
       </section>
