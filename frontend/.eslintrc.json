@@ -1,35 +1,42 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest/globals": true
+    "es2021": true
   },
   "extends": [
-    "react-app",
-    "plugin:jest/recommended",
-    "prettier",
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "jest"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks"],
   "rules": {
-    "no-underscore-dangle": 0,
-    "import/extensions": [
-      "error",
-
-      {
-        "js": "never",
-        "jsx": "never",
-        "json": "always",
-        "scss": "always"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
+    "react/prop-types": "off",
+    "semi": "off",
+    "@typescript-eslint/no-extra-semi": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "overrides": [
+    {
+      "files": ["jest.config.js"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
       }
-    ],
-    "no-useless-catch": "off"
-  }
+    }
+  ]
 }
