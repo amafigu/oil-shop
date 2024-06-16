@@ -25,7 +25,7 @@ interface EditableUserFormProps {
     setUpdatedData: Dispatch<SetStateAction<Partial<User>>>
     file?: File | null | undefined
   }) => void
-  onDelete: (event: MouseEvent<HTMLButtonElement>, id: number) => void
+  onDelete?: (event: MouseEvent<HTMLButtonElement>, id: number) => void
   file?: File | undefined | null
 }
 
