@@ -307,7 +307,7 @@
     },
     "editableListProductData": {
       "deleteButton": {
-        "sucess": "Product successfully deleted",
+        "success": "Product successfully deleted",
         "fail": "We can not delete this product"
       }
     },
@@ -328,7 +328,8 @@
       "orderDate": "Order date",
       "payedWith": "Payed with",
       "total": "Total",
-      "productsHaveBeenDeleted": "The products of this order have been deleted from our system"
+      "productsHaveBeenDeleted": "The products of this order have been deleted from our system",
+      "productNotFound": "Product not found"
     },
     "orderCard": {
       "orderedProduct": "Ordered product",

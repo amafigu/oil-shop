@@ -352,7 +352,9 @@
       "orderedAt": "Bestellungsdatum",
       "payedWith": "Bezahlt mit",
       "total": "Gesamtsumme",
-      "productsHaveBeenDeleted": "Die Produkte dieser Bestellung wurden aus unserem System gelöscht"
+      "productsHaveBeenDeleted": "Die Produkte dieser Bestellung wurden aus unserem System gelöscht",
+      "orderDate": "Bestellt am",
+      "productNotFound": "Produkt nicht gefunden"
     },
     "orderCard": {
       "orderedProduct": "Bestelltes Produkt",
