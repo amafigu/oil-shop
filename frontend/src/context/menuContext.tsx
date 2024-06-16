@@ -1,8 +1,24 @@
-import { createContext, useContext, useState } from "react"
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react"
 
-export const MenuContext = createContext()
+interface MenuContextType {
+  showMobileMenu: boolean
+  setShowMobileMenu: Dispatch<SetStateAction<boolean>>
+  activePageLink: string
+  setActivePageLink: Dispatch<SetStateAction<string>>
+  showProductsSearchBar: boolean
+  setShowProductsSearchBar: Dispatch<SetStateAction<boolean>>
+}
 
-export const MenuProvider = ({ children }) => {
+export const MenuContext = createContext<MenuContextType | null>(null)
+
+export const MenuProvider = ({ children }: { children: ReactNode }) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [activePageLink, setActivePageLink] = useState("")
   const [showProductsSearchBar, setShowProductsSearchBar] = useState(false)
@@ -22,5 +38,10 @@ export const MenuProvider = ({ children }) => {
   )
 }
 
-const useMenuContext = () => useContext(MenuContext)
-export default useMenuContext
+export const useMenuContext = () => {
+  const context = useContext(MenuContext)
+  if (!context) {
+    throw new Error("useProductContext must be used within a ProductProvider")
+  }
+  return context
+}
