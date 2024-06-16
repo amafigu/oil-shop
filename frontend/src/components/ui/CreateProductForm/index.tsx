@@ -1,31 +1,45 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { FormInput } from "#components/ui/FormInput"
-import { STYLES } from "#constants/styles"
-import { useNotificationContext } from "#context/notificationContext"
-import { useProductContext } from "#context/productContext"
-import { useProductCategory } from "#hooks/useProductCategory"
-import { useTranslation } from "#hooks/useTranslation"
-import { listenInput } from "#utils/listenInput"
-import { setFileToUpload } from "#utils/setFileToUpload"
-import { useState } from "react"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { FormInput } from "@/components/ui/FormInput"
+import { STYLES } from "@/constants/styles"
+import { useProductContext } from "@/context/productContext"
+import { useProductCategory } from "@/hooks/useProductCategory"
+import { useTranslation } from "@/hooks/useTranslation"
+import { listenInput } from "@/utils/listenInput"
+import { setFileToUpload } from "@/utils/setFileToUpload"
+import { FC, FormEvent, useState } from "react"
 import { CategoryOptions } from "../CategoryOptions"
 import styles from "./createProductForm.module.scss"
 
-export const CreateProductForm = () => {
-  const { setNotification } = useNotificationContext()
+interface ProductData {
+  name: string
+  categoryId: number
+  description: string
+  price: number
+  details: string
+  size: number
+  image: string
+  [key: string]: string | number
+}
+
+export const CreateProductForm: FC = () => {
   const { onCreateProduct } = useProductContext()
   const { categories } = useProductCategory()
   const { components } = useTranslation()
-  const [file, setFile] = useState(null)
-  const [data, setData] = useState({
+  const [file, setFile] = useState<File | null | undefined>(null)
+  const [data, setData] = useState<ProductData>({
     name: "",
-    categoryId: "",
+    categoryId: 0,
     description: "",
-    price: "",
+    price: 0,
     details: "",
-    size: "",
+    size: 0,
     image: "",
   })
+
+  const handleCreateProduct = async (e: FormEvent) => {
+    await onCreateProduct({ e, data, file })
+    setData({ ...data })
+  }
 
   return (
     <section aria-label='Create product form'>
@@ -34,7 +48,6 @@ export const CreateProductForm = () => {
           data={data}
           setData={setData}
           onChange={listenInput}
-          setNotification={setNotification}
           options={categories}
           key={"categoryId"}
         />
@@ -49,21 +62,18 @@ export const CreateProductForm = () => {
                 onChangeListener={
                   field === "image"
                     ? (e) => setFileToUpload(e, setFile)
-                    : (e) => listenInput(e, data, setData, setNotification)
+                    : (e) => listenInput(e, data, setData)
                 }
                 placeholder={field}
                 label={field}
                 type={field === "image" ? field : undefined}
-                value={data[field]}
+                value={data[field]?.toString() ?? ""}
               />
             ),
         )}
         <div className={styles.button}>
           <ActionButton
-            action={async (e) => {
-              await onCreateProduct({ e, data, file })
-              setData({ ...data })
-            }}
+            action={handleCreateProduct}
             text={components.createItem.submitButton}
             className={STYLES.BUTTONS.ACTION}
             ariaLabel={components.createItem.submitButton}
