@@ -13,20 +13,20 @@ import {
   SHOP,
   SIGN_UP,
   SIGN_UP_ADMIN,
-} from "#constants/routes"
-import { About } from "#pages/About"
-import { Admin } from "#pages/Admin"
-import { Cart } from "#pages/Cart"
-import { Faq } from "#pages/Faq"
-import { Home } from "#pages/Home"
-import { Login } from "#pages/Login"
-import { NotFound } from "#pages/NotFound"
-import { OrderSummary } from "#pages/OrderSummary"
-import { Payment } from "#pages/Payment"
-import { ProductDetails } from "#pages/ProductDetails"
-import { Shop } from "#pages/Shop"
-import { SignUp } from "#pages/SignUp"
-import { User } from "#pages/User"
+} from "@/constants/routes"
+import { About } from "@/pages/About"
+import { Admin } from "@/pages/Admin"
+import { Cart } from "@/pages/Cart"
+import { Faq } from "@/pages/Faq"
+import { Home } from "@/pages/Home"
+import { Login } from "@/pages/Login"
+import { NotFound } from "@/pages/NotFound"
+import { OrderSummary } from "@/pages/OrderSummary"
+import { Payment } from "@/pages/Payment"
+import { ProductDetails } from "@/pages/ProductDetails"
+import { Shop } from "@/pages/Shop"
+import { SignUp } from "@/pages/SignUp"
+import { User } from "@/pages/User"
 
 export const routes = [
   { path: ABOUT, element: <About /> },

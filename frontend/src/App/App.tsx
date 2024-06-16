@@ -1,10 +1,10 @@
-import { CartProvider } from "#context/cartContext"
-import { LocaleContextProvider } from "#context/localeContext"
-import { MenuProvider } from "#context/menuContext"
-import { NotificationProvider } from "#context/notificationContext"
-import { ProductProvider } from "#context/productContext"
-import { UserProvider } from "#context/userContext"
 import { BrowserRouter } from "react-router-dom"
+import { CartProvider } from "../context/cartContext"
+import { LocaleContextProvider } from "../context/localeContext"
+import { MenuProvider } from "../context/menuContext"
+import { NotificationProvider } from "../context/notificationContext"
+import { ProductProvider } from "../context/productContext"
+import { UserProvider } from "../context/userContext"
 import { AppRoutes } from "./AppRoutes"
 
 export const App = () => {
