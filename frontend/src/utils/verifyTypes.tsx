@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 interface ConvertUserData {
   firstName: string
   lastName: string
   email: string
   password: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
@@ -23,14 +23,15 @@ interface Product {
   categoryId: number
   size: number
   price: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
 interface ConvertProductData {
   data: Product
-  file: File
+  file: File | null | undefined
   verifyImgUrl: (
-    file: File,
+    file: File | null | undefined,
     upload: (file: File) => Promise<string>,
   ) => Promise<string>
   upload: (file: File) => Promise<string>
@@ -44,8 +45,7 @@ export const convertDataToExpectedProductTypes = async ({
 }: ConvertProductData): Promise<Product> => {
   return {
     ...data,
-    image: await verifyImgUrl(file, upload),
-    details: String(data.details),
+    image: file ? await verifyImgUrl(file, upload) : "",
     description: String(data.description),
     categoryId: Number(data.categoryId),
     size: Number(data.size),
