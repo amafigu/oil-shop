@@ -1,65 +1,67 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { STYLES } from "#constants/styles"
-import { useCart } from "#hooks/useCart"
-import { getIconByName } from "#utils/getIconByName"
-import { setDefaultImageByError } from "#utils/setDefaultImageByError"
-import { titleCase } from "#utils/titleCase"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
+import { STYLES } from "@/constants/styles"
+import { useCart } from "@/hooks/useCart"
+import { CartItem as ICartItem } from "@/types/Cart"
+import { getIconByName } from "@/utils/getIconByName"
+import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
+import { titleCase } from "@/utils/titleCase"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
+import { FC } from "react"
 import styles from "./cartItem.module.scss"
 
-export const CartItem = ({
-  description,
-  image,
-  name,
-  price,
-  quantity,
-  size,
-}) => {
+interface CartItemProps {
+  item: ICartItem
+}
+
+export const CartItem: FC<CartItemProps> = ({ item }) => {
   const { removeProduct, updateProductQuantity } = useCart()
   return (
     <article className={styles.wrapper} aria-label='cart item'>
       <div className={styles.container}>
         <img
-          src={image}
-          alt={name}
+          src={item.product.image}
+          alt={item.product.name}
           className={styles.image || DEFAULT_PRODUCT_IMAGE}
           onError={(e) => {
             setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
           }}
         />
         <div className={styles.details}>
-          <span>{titleCase(name, "_")}</span>
-          <span>{description}</span>
-          <span>{size} ml</span>
+          <span>{titleCase(item.product.name, "_")}</span>
+          <span>{item.product.description}</span>
+          <span>{item.product.size} ml</span>
         </div>
       </div>
       <div className={styles.selectors}>
         <div className={styles.buttons}>
           <ActionButton
-            action={() => updateProductQuantity(name, quantity - 1)}
+            action={() =>
+              updateProductQuantity(item.product.name, item.quantity - 1)
+            }
             text={<FontAwesomeIcon icon={getIconByName("faMinus")} />}
             className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
-            ariaLabel={`Substract one ${name} from cart`}
+            ariaLabel={`Substract one ${item.product.name} from cart`}
           />
-          <span className={styles.quantity}>{quantity}</span>
+          <span className={styles.quantity}>{item.quantity}</span>
           <ActionButton
-            action={() => updateProductQuantity(name, quantity + 1)}
+            action={() =>
+              updateProductQuantity(item.product.name, item.quantity + 1)
+            }
             text={<FontAwesomeIcon icon={getIconByName("faPlus")} />}
             className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
-            ariaLabel={`Add one ${name} to cart`}
+            ariaLabel={`Add one ${item.product.name} to cart`}
           />
         </div>
         <div className={styles.cost}>
-          {(quantity * Number(price)).toFixed(2)} €
+          {(item.quantity * Number(item.product.price)).toFixed(2)} €
         </div>
         <div className={styles.deleteButtonWrapper}>
           <ActionButton
-            action={() => removeProduct(name)}
+            action={() => removeProduct(item.product.name)}
             text={<FontAwesomeIcon icon={getIconByName("faTrash")} />}
             className={STYLES.BUTTONS.CART_ITEM_DELETE}
-            ariaLabel={`Delete ${name} from cart`}
+            ariaLabel={`Delete ${item.product.name} from cart`}
           />
         </div>
       </div>

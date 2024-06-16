@@ -1,8 +1,19 @@
-import { camelToTitleCase } from "#utils/camelToTitleCase"
-import React from "react"
+import { camelToTitleCase } from "@/utils/camelToTitleCase"
+import { ChangeEvent, FC } from "react"
 import styles from "./formInput.module.scss"
 
-export const FormInput = ({
+interface FormInputProps {
+  classCss: string
+  name: string
+  value: string
+  onChangeListener: (event: ChangeEvent<HTMLInputElement>) => void
+  placeholder: string
+  label: string
+  type?: string
+  file?: File
+}
+
+export const FormInput: FC<FormInputProps> = ({
   classCss,
   name,
   value,

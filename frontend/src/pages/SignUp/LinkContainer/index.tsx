@@ -1,9 +1,10 @@
-import { LOGIN, SIGN_UP, SIGN_UP_ADMIN } from "#constants/routes"
-import { useTranslation } from "#hooks/useTranslation"
+import { LOGIN, SIGN_UP, SIGN_UP_ADMIN } from "@/constants/routes"
+import { useTranslation } from "@/hooks/useTranslation"
+import { FC } from "react"
 import { Link, useLocation } from "react-router-dom"
 import styles from "./linkContainer.module.scss"
 
-export const LinkContainer = () => {
+export const LinkContainer: FC = () => {
   const { translate } = useTranslation()
   const text = translate.pages.signUp
   const location = useLocation()

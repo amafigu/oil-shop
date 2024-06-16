@@ -1,9 +1,14 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { useLogout } from "#hooks/useLogout"
-import { getIconByName } from "#utils/getIconByName"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { useLogout } from "@/hooks/useLogout"
+import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FC } from "react"
 
-export const LogoutButton = ({ className }) => {
+interface LogoutButtonProps {
+  className: string
+}
+
+export const LogoutButton: FC<LogoutButtonProps> = ({ className }) => {
   const { setLogout } = useLogout()
   return (
     <ActionButton

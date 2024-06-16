@@ -1,12 +1,18 @@
-import { DEFAULT_USER_IMAGE } from "#constants/media"
-import { useUserContext } from "#context/userContext"
-import { useTranslation } from "#hooks/useTranslation"
-import { setDefaultImageByError } from "#utils/setDefaultImageByError"
+import { DEFAULT_USER_IMAGE } from "@/constants/media"
+import { useUserContext } from "@/context/userContext"
+import { useTranslation } from "@/hooks/useTranslation"
+import { UserHeader as IUserHeader } from "@/types/User"
+import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
 import { useEffect, useState } from "react"
 import styles from "./userHeader.module.scss"
 
 export const UserHeader = () => {
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState<IUserHeader>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    image: "",
+  })
   const { user, isLoading } = useUserContext()
   const { commonProperties } = useTranslation()
 
@@ -47,7 +53,9 @@ export const UserHeader = () => {
                         <dt
                           className={styles.property}
                         >{`${commonProperties[property]}: `}</dt>
-                        <dd className={styles.value}>{userData[property]}</dd>
+                        <dd className={styles.value}>
+                          {userData[property as keyof IUserHeader]}
+                        </dd>
                       </li>
                     ))}
               </ul>

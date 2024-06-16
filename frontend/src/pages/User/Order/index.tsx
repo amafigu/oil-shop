@@ -1,9 +1,15 @@
-import { useTranslation } from "#hooks/useTranslation"
-import { isoToLocaleDate } from "#utils/isoToLocaleDate"
+import { useTranslation } from "@/hooks/useTranslation"
+import { Order as IOrder, OrderItem } from "@/types/Order"
+import { isoToLocaleDate } from "@/utils/isoToLocaleDate"
+import { FC } from "react"
 import { OrderCard } from "./OrderCard"
 import styles from "./order.module.scss"
 
-export const Order = ({ item }) => {
+interface OrderProps {
+  item: IOrder
+}
+
+export const Order: FC<OrderProps> = ({ item }) => {
   const { components } = useTranslation()
   const text = components.ordersItem
 
@@ -26,12 +32,16 @@ export const Order = ({ item }) => {
 
       <ul className={styles.list}>
         {item.cartItems.length > 0 ? (
-          item.cartItems.map((cartItem) => (
+          item.cartItems.map((cartItem: OrderItem) => (
             <li key={cartItem.id}>
-              <OrderCard
-                product={cartItem.product}
-                quantity={cartItem.quantity}
-              />
+              {cartItem.product ? (
+                <OrderCard
+                  product={cartItem.product}
+                  quantity={cartItem.quantity}
+                />
+              ) : (
+                <p>{text.productNotFound}</p>
+              )}
             </li>
           ))
         ) : (

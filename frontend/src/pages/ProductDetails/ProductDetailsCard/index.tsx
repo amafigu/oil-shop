@@ -1,18 +1,19 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { SHOP } from "#constants/routes"
-import { STYLES } from "#constants/styles"
-import { useCart } from "#hooks/useCart"
-import { useProductCategory } from "#hooks/useProductCategory"
-import { useProductDetails } from "#hooks/useProductDetails"
-import { useTranslation } from "#hooks/useTranslation"
-import { setDefaultImageByError } from "#utils/setDefaultImageByError"
-import { titleCase } from "#utils/titleCase"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
+import { SHOP } from "@/constants/routes"
+import { STYLES } from "@/constants/styles"
+import { useCart } from "@/hooks/useCart"
+import { useProductCategory } from "@/hooks/useProductCategory"
+import { useProductDetails } from "@/hooks/useProductDetails"
+import { useTranslation } from "@/hooks/useTranslation"
+import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
+import { titleCase } from "@/utils/titleCase"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 import { Counter } from "./Counter"
 import styles from "./productDetailsCard.module.scss"
 
-export const ProductDetailsCard = () => {
+export const ProductDetailsCard: FC = () => {
   const { product, quantity, setQuantity } = useProductDetails()
   const { addProduct } = useCart()
   const { components } = useTranslation()
@@ -40,14 +41,14 @@ export const ProductDetailsCard = () => {
               <ul className={styles.list}>
                 <li
                   className={styles.category}
-                  aria-label={`link to ${product.category.name} products`}
+                  aria-label={`link to ${product.category?.name} products`}
                 >
                   <Link
                     className={styles.link}
                     to={SHOP}
-                    onClick={() => setSortCategory(product.category.name)}
+                    onClick={() => setSortCategory(product.category?.name)}
                   >
-                    {titleCase(product.category.name, " ")}
+                    {titleCase(product.category?.name ?? "", " ")}
                   </Link>
                 </li>
 

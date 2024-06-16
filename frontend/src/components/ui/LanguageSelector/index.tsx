@@ -1,22 +1,23 @@
-import { ActionButton } from "#components/ui/ActionButton"
-import { LOGIN, SIGN_UP } from "#constants/routes"
-import { STYLES } from "#constants/styles"
-import { useMenuOptions } from "#hooks/useMenuOptions"
-import { useTranslation } from "#hooks/useTranslation"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { LOGIN, SIGN_UP } from "@/constants/routes"
+import { STYLES } from "@/constants/styles"
+import { useMenuOptions } from "@/hooks/useMenuOptions"
+import { useTranslation } from "@/hooks/useTranslation"
 import { useLocation } from "react-router-dom"
 import styles from "./languageSelector.module.scss"
 
 export const LanguageSelector = () => {
   const { setLanguage, language } = useTranslation()
   const { setShowMobileMenu } = useMenuOptions()
+  const location = useLocation()
+  const currentPath = location.pathname
 
-  const changeLanguage = (lang) => {
+  type Langs = "de" | "en"
+
+  const changeLanguage = (lang: Langs) => {
     setLanguage(lang)
     setShowMobileMenu(false)
   }
-
-  const location = useLocation()
-  const currentPath = location.pathname
 
   return (
     <ul

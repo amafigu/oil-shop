@@ -1,26 +1,26 @@
-import NotificationCard from "#components/ui/NotificationCard"
-import { SHIPPING } from "#constants/routes"
-import { useSubmitOrder } from "#hooks/useSubmitOrder"
-import { useTranslation } from "#hooks/useTranslation"
-import { useState } from "react"
+import { SHIPPING } from "@/constants/routes"
+import { useNotificationContext } from "@/context/notificationContext"
+import { useSubmitOrder } from "@/hooks/useSubmitOrder"
+import { useTranslation } from "@/hooks/useTranslation"
+import { FC, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./paymentForm.module.scss"
 
-export const PaymentForm = () => {
+export const PaymentForm: FC = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const { submitOrder } = useSubmitOrder()
   const { translate } = useTranslation()
-  const [notification, setNotification] = useState(null)
+  const { setNotification } = useNotificationContext()
   const text = translate.pages.payment
   const navigate = useNavigate()
 
-  const selectPaymentMethod = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const selectPaymentMethod = (e: any) => {
     setPaymentMethod(e.target.value)
   }
 
   return (
     <>
-      {notification && <NotificationCard message={notification} />}
       <form
         aria-label='Submit Payment Form'
         className={styles.container}
