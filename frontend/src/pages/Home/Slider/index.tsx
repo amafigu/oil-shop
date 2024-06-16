@@ -1,17 +1,22 @@
-import { ProductCard } from "#components/products/ProductCard"
-import { ActionButton } from "#components/ui/ActionButton"
-import { STYLES } from "#constants/styles"
-import { getIconByName } from "#utils/getIconByName"
+import { ProductCard } from "@/components/products/ProductCard"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { STYLES } from "@/constants/styles"
+import { Product } from "@/types/Product"
+import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import styles from "./slider.module.scss"
 
-export const Slider = ({ items }) => {
+interface SliderProps {
+  items: Product[]
+}
+
+export const Slider: FC<SliderProps> = ({ items }) => {
   const [currentItemIndex, setCurrentItemIndex] = useState(0)
   const [sliderQuantity, setSliderQuantity] = useState(1)
 
   const updateSliderQuantityByScreenSize = () => {
-    let windowSize = window.innerWidth
+    const windowSize = window.innerWidth
     if (windowSize >= 1761) {
       setSliderQuantity(4)
     }
@@ -56,13 +61,14 @@ export const Slider = ({ items }) => {
         ariaLabel='previous item'
       />
       <ul className={styles.list} aria-label='slider items list'>
-        {items
-          .slice(currentItemIndex, currentItemIndex + sliderQuantity)
-          .map((product, index) => (
-            <li aria-label='slider item' key={index}>
-              <ProductCard product={product} />
-            </li>
-          ))}
+        {items &&
+          items
+            .slice(currentItemIndex, currentItemIndex + sliderQuantity)
+            .map((product, index) => (
+              <li aria-label='slider item' key={index}>
+                <ProductCard product={product} />
+              </li>
+            ))}
       </ul>
       <ActionButton
         action={nextItem}
