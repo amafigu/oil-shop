@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react"
+
 export interface User {
   id: number
   firstName: string
@@ -7,13 +8,14 @@ export interface User {
   password: string
   image: string
   roleId: number
+  role?: { id: number; name: string }
 }
 
 export interface UserHeader {
-  firstName: string
-  lastName: string
-  email: string
-  image: string
+  firstName: string | undefined
+  lastName: string | undefined
+  email: string | undefined
+  image: string | undefined
 }
 
 export interface Role {
@@ -52,8 +54,8 @@ export interface UserContextType {
   onCreateCustomer: (
     e: React.SyntheticEvent,
     data: Partial<User>,
-  ) => Promise<void>
-  onCreateAdmin: (e: React.SyntheticEvent, data: Partial<User>) => Promise<void>
+  ) => Promise<User>
+  onCreateAdmin: (e: React.SyntheticEvent, data: Partial<User>) => Promise<User>
   onUpdateShippingData: (data: {
     key: string
     id: number
