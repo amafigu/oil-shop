@@ -25,6 +25,7 @@ import {
   SetStateAction,
   SyntheticEvent,
   createContext,
+  useContext,
   useEffect,
   useState,
 } from "react"
@@ -344,4 +345,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </UserContext.Provider>
   )
+}
+
+export const useUserContext = () => {
+  const context = useContext(UserContext)
+  if (!context) {
+    throw new Error("useUserContext shoud be within a UserProvider")
+  }
+  return context
 }

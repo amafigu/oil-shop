@@ -1,11 +1,19 @@
-import NotificationCard from "#components/ui/NotificationCard"
-import { LOCAL_STORAGE_CART } from "#constants/localStorage"
-import { titleCase } from "#utils/titleCase"
-import { createContext, useContext, useEffect, useState } from "react"
+import { LOCAL_STORAGE_CART } from "@/constants/localStorage"
+import { CartContextType, CartItem } from "@/types/Cart"
+import { Product } from "@/types/Product"
+import { titleCase } from "@/utils/titleCase"
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
+import { useNotificationContext } from "./notificationContext"
 
-export const CartContext = createContext()
+export const CartContext = createContext<CartContextType | undefined>(undefined)
 
-export const CartProvider = ({ children }) => {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const getInitialCart = () => {
     try {
       const storageCart = localStorage.getItem(LOCAL_STORAGE_CART)
@@ -17,22 +25,22 @@ export const CartProvider = ({ children }) => {
     }
     return []
   }
-  const [cart, setCart] = useState(getInitialCart)
-  const [notification, setNotification] = useState(null)
+  const [cart, setCart] = useState<CartItem[]>(getInitialCart)
+  const { setNotification } = useNotificationContext()
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_CART, JSON.stringify(cart))
   }, [cart])
 
-  const addProduct = (product, quantity) => {
+  const addProduct = (product: Product, quantity: number) => {
     const existingProduct = cart.find(
-      (item) => item.product.name === product.name,
+      (item: CartItem) => item.product.name === product.name,
     )
 
     if (quantity > 0) {
       if (existingProduct) {
         setCart(
-          cart.map((item) =>
+          cart.map((item: CartItem) =>
             item.product.name === product.name
               ? { ...item, quantity: item.quantity + quantity }
               : item,
@@ -49,10 +57,10 @@ export const CartProvider = ({ children }) => {
     }
   }
 
-  const updateProductQuantity = (productName, newQuantity) => {
+  const updateProductQuantity = (productName: string, newQuantity: number) => {
     if (newQuantity > 0) {
       setCart(
-        cart.map((item) =>
+        cart.map((item: CartItem) =>
           item.product.name === productName
             ? { ...item, quantity: newQuantity }
             : item,
@@ -61,12 +69,12 @@ export const CartProvider = ({ children }) => {
     }
   }
 
-  const removeProduct = (productName) => {
-    setCart(cart.filter((item) => item.product.name !== productName))
+  const removeProduct = (productName: string) => {
+    setCart(cart.filter((item: CartItem) => item.product.name !== productName))
   }
 
   const getAllProductsQuantity = cart.reduce(
-    (total, item) => total + item.quantity,
+    (total: number, item: CartItem) => total + item.quantity,
     0,
   )
 
@@ -82,11 +90,14 @@ export const CartProvider = ({ children }) => {
       }}
     >
       {children}
-      {notification && <NotificationCard message={notification} />}
     </CartContext.Provider>
   )
 }
 
-const useCartContext = () => useContext(CartContext)
-
-export default useCartContext
+export const useCartContext = (): CartContextType => {
+  const context = useContext(CartContext)
+  if (!context) {
+    throw new Error("useCartContext must be used within a CartProvider")
+  }
+  return context
+}

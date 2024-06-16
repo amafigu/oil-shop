@@ -33,7 +33,7 @@ export const useNotificationContext = (): NotificationContextType => {
   if (!context) {
     console.error("can not access useNotificationContext")
     throw new Error(
-      "useNotificationContext must be used within a NotificationProvider",
+      "useNotificationContext should be accessible through a NotificationProvider",
     )
   }
   return context

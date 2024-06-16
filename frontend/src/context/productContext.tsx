@@ -24,6 +24,7 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useContext,
   useEffect,
   useState,
 } from "react"
@@ -92,7 +93,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   }: {
     e: FormEvent
     data: Product
-    file: File
+    file: File | null | undefined
   }) => {
     e.preventDefault()
     try {
@@ -204,4 +205,12 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </ProductContext.Provider>
   )
+}
+
+export const useProductContext = () => {
+  const context = useContext(ProductContext)
+  if (!context) {
+    throw new Error("useProductContext shoudl be within a Provider")
+  }
+  return context
 }
