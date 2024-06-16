@@ -1,8 +1,14 @@
-module.exports = {
-  name: "Test Product",
-  image: "image.jpg",
-  size: "15",
-  price: "25",
-  description: "description",
-  category: "massageOil",
+import { Product } from "@/types/Product"
+
+export const product: Product = {
+  id: 1,
+  name: "Sample Product",
+  price: 100,
+  size: 1,
+  details: "Sample details",
+  description: "Sample description",
+  categoryId: 1,
+  image: "sample-image.jpg",
+  brand: "Sample Brand",
+  category: { name: "Sample Category" },
 }
