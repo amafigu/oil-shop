@@ -1,8 +1,30 @@
-import { camelToTitleCase } from "#utils/camelToTitleCase"
-import { titleCase } from "#utils/titleCase"
+import { Category } from "@/types/Product"
+import { camelToTitleCase } from "@/utils/camelToTitleCase"
+import { titleCase } from "@/utils/titleCase"
+import { ChangeEvent, Dispatch, FC, SetStateAction } from "react"
 import styles from "./categoryOptions.module.scss"
 
-export const CategoryOptions = ({ data, setData, onChange, options }) => {
+interface CategoryOptionsProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: { [key: string]: any }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setData: Dispatch<SetStateAction<{ [key: string]: any }>>
+  onChange: (
+    event: ChangeEvent<HTMLSelectElement>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: { [key: string]: any },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setData: Dispatch<SetStateAction<{ [key: string]: any }>>,
+  ) => void
+  options: Category[]
+}
+
+export const CategoryOptions: FC<CategoryOptionsProps> = ({
+  data,
+  setData,
+  onChange,
+  options,
+}) => {
   return (
     <>
       <label className={styles.label} htmlFor='categoryId'>
@@ -21,8 +43,7 @@ export const CategoryOptions = ({ data, setData, onChange, options }) => {
               key={option.id}
               className={styles.formField}
               value={option.id}
-              name={option.id}
-              id={option.id}
+              id={option.id.toString()}
             >
               {titleCase(option.name, " ")}
             </option>
