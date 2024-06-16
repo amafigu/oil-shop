@@ -1,26 +1,41 @@
-import { uploadFile } from "#api/aws/uploadFile"
-import { createProduct } from "#api/products/createProduct"
-import { deleteProductById } from "#api/products/deleteProductById"
-import { getProductCategories } from "#api/products/getProductCategories"
-import { getProducts } from "#api/products/getProducts"
-import { updateProduct } from "#api/products/updateProduct"
-import { useNotificationContext } from "#context/notificationContext"
-import { onRequestError } from "#utils/onRequestError"
-import { onValidationError } from "#utils/onValidationError"
+import { uploadFile } from "@/api/aws/uploadFile"
+import { createProduct } from "@/api/products/createProduct"
+import { deleteProductById } from "@/api/products/deleteProductById"
+import { getProductCategories } from "@/api/products/getProductCategories"
+import { getProducts } from "@/api/products/getProducts"
+import { updateProduct } from "@/api/products/updateProduct"
+import { useNotificationContext } from "@/context/notificationContext"
+import { Category, Product, ProductContextType } from "@/types/Product"
+import { onRequestError } from "@/utils/onRequestError"
+import { onValidationError } from "@/utils/onValidationError"
 import {
   createProductSchema,
   updateProductSchema,
-} from "#utils/productsValidation"
-import { convertDataToExpectedProductTypes, validate } from "#utils/verifyTypes"
-import { verifyUploadedImageUrl } from "#utils/verifyUploadedImageUrl"
-import { createContext, useContext, useEffect, useState } from "react"
+} from "@/utils/productsValidation"
+import {
+  convertDataToExpectedProductTypes,
+  validate,
+} from "@/utils/verifyTypes"
+import { verifyUploadedImageUrl } from "@/utils/verifyUploadedImageUrl"
+import {
+  Dispatch,
+  FormEvent,
+  MouseEvent,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from "react"
 
-export const ProductContext = createContext()
+export const ProductContext = createContext<ProductContextType | undefined>(
+  undefined,
+)
 
-export const ProductProvider = ({ children }) => {
-  const [sortCategory, setSortCategory] = useState(undefined)
-  const [categories, setCategories] = useState([])
-  const [products, setProducts] = useState([])
+export const ProductProvider = ({ children }: { children: ReactNode }) => {
+  const [sortCategory, setSortCategory] = useState<string>("")
+  const [categories, setCategories] = useState<Category[]>([])
+  const [products, setProducts] = useState<Product[]>([])
   const { onSetNotification, setNotification } = useNotificationContext()
 
   const fetchProducts = async () => {
@@ -57,12 +72,12 @@ export const ProductProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onDeleteProduct = async (e, id) => {
+  const onDeleteProduct = async (e: MouseEvent, id: number) => {
     e.preventDefault()
     try {
       const response = await deleteProductById(id)
       if (response && response.status === 200) {
-        setProducts((prevState) => prevState.filter((item) => item.id !== id))
+        setProducts((prevState) => prevState?.filter((item) => item.id !== id))
       }
     } catch (error) {
       onSetNotification("Error by deleting product")
@@ -70,7 +85,15 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
-  const onCreateProduct = async ({ e, data, file }) => {
+  const onCreateProduct = async ({
+    e,
+    data,
+    file,
+  }: {
+    e: FormEvent
+    data: Product
+    file: File
+  }) => {
     e.preventDefault()
     try {
       const typedItem = await convertDataToExpectedProductTypes({
@@ -90,7 +113,7 @@ export const ProductProvider = ({ children }) => {
 
       if (response && response.status === 201) {
         const newProduct = response.data.product
-        setProducts((prevState) => [...prevState, newProduct])
+        setProducts((prevState) => prevState && [...prevState, newProduct])
         onSetNotification(`Product ${newProduct.name} created successfully`)
       }
     } catch (error) {
@@ -106,15 +129,24 @@ export const ProductProvider = ({ children }) => {
     updatedData,
     setUpdatedData,
     file,
+  }: {
+    key: string
+    id: number
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    initialData: any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    updatedData: any
+    setUpdatedData: Dispatch<SetStateAction<Product>>
+    file: File
   }) => {
     try {
       const validProperty = await extractValidProperty(key, updatedData, file)
-      const validatedProperty = await validateProperty(validProperty)
-      const response = await updateProduct(id, validatedProperty)
+      const validatedProperty = (await validateProduct(validProperty)) ?? {}
+      const response = await updateProduct(id, validatedProperty as Product)
       if (response && response.status === 200) {
         const updatedProduct = response.data.product
         setProducts((prevProducts) =>
-          prevProducts.map((product) =>
+          prevProducts?.map((product) =>
             product.id === updatedProduct.id ? updatedProduct : product,
           ),
         )
@@ -125,7 +157,12 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
-  const extractValidProperty = async (key, updatedProductData, file) => {
+  const extractValidProperty = async (
+    key: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    updatedProductData: any,
+    file: File | null,
+  ) => {
     if (key === "image" && file) {
       const image = await uploadFile(file)
       return { [key]: image }
@@ -139,7 +176,8 @@ export const ProductProvider = ({ children }) => {
     }
   }
 
-  const validateProperty = async (property) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const validateProduct = async (property: any) => {
     try {
       if (updateProductSchema) {
         return updateProductSchema.parse(property)
@@ -167,5 +205,3 @@ export const ProductProvider = ({ children }) => {
     </ProductContext.Provider>
   )
 }
-
-export const useProductContext = () => useContext(ProductContext)
