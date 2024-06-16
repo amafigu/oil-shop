@@ -1,6 +1,16 @@
+import { Dispatch, FC, SetStateAction } from "react"
 import styles from "./toggleButton.module.scss"
 
-export const ToggleButton = ({
+interface ToggleButtonProps {
+  isVisible: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onToggle: Dispatch<SetStateAction<any>>
+  hideBtnText: string
+  showBtnText: string
+  classCss: string
+}
+
+export const ToggleButton: FC<ToggleButtonProps> = ({
   isVisible,
   onToggle,
   hideBtnText,
