@@ -1,10 +1,22 @@
-import { DEFAULT_PRODUCT_IMAGE } from "#constants/media"
-import { useTranslation } from "#hooks/useTranslation"
-import { setDefaultImageByError } from "#utils/setDefaultImageByError"
-import { titleCase } from "#utils/titleCase"
+import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
+import { useTranslation } from "@/hooks/useTranslation"
+import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
+import { titleCase } from "@/utils/titleCase"
+import { FC } from "react"
 import styles from "./orderSummaryItem.module.scss"
 
-export const OrderSummaryItem = ({ image, name, size, quantity }) => {
+interface OrderSummaryItemProps {
+  image: string
+  name: string
+  size: number
+  quantity: number
+}
+export const OrderSummaryItem: FC<OrderSummaryItemProps> = ({
+  image,
+  name,
+  size,
+  quantity,
+}) => {
   const { translate } = useTranslation()
   const text = translate.components.orderSummaryItem.quantity
 

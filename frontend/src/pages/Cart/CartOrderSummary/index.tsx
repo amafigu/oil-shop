@@ -1,19 +1,22 @@
-import { SHIPPING_COST } from "#constants/cart"
-import { LOGIN, PAYMENT, SHOP } from "#constants/routes"
-import { useUserContext } from "#context/userContext"
-import { useCart } from "#hooks/useCart"
-import { useTranslation } from "#hooks/useTranslation"
-import React from "react"
+import { SHIPPING_COST } from "@/constants/cart"
+import { LOGIN, PAYMENT, SHOP } from "@/constants/routes"
+import { useUserContext } from "@/context/userContext"
+import { useCart } from "@/hooks/useCart"
+import { useTranslation } from "@/hooks/useTranslation"
+import { CartItem } from "@/types/Cart"
+import { getTotalCost } from "@/utils/getTotalCost"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 import styles from "./cartOrderSummary.module.scss"
 
-export const CartOrderSummary = ({ totalCost }) => {
+export const CartOrderSummary: FC = () => {
   const { cart } = useCart()
   const { isLoggedIn } = useUserContext()
   const { translate } = useTranslation()
   const text = translate.pages.cart
-  const cartTotalSum = (cart, shippingCost) =>
-    Number(totalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
+
+  const cartTotalSum = (cart: CartItem[], shippingCost: number) =>
+    Number(getTotalCost(cart).toFixed(2)) + Number(shippingCost.toFixed(2))
 
   const renderLink = () => {
     if (cart.length > 0) {
@@ -45,7 +48,7 @@ export const CartOrderSummary = ({ totalCost }) => {
       <dl className={styles.details}>
         <div className={styles.item}>
           <dt className={styles.field}>{text.orderSubtotal}</dt>
-          <dd>{totalCost(cart).toFixed(2)} €</dd>
+          <dd>{getTotalCost(cart).toFixed(2)} €</dd>
         </div>
         <div className={styles.item}>
           <dt className={styles.field}>{text.orderShipping} </dt>

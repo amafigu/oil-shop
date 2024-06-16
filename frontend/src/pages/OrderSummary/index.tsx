@@ -1,19 +1,18 @@
-import NotificationCard from "#components/ui/NotificationCard"
-import { useGetOrderSummary } from "#hooks/useGetOrderSummary"
-import { useTranslation } from "#hooks/useTranslation"
+import { useGetOrderSummary } from "@/hooks/useGetOrderSummary"
+import { useTranslation } from "@/hooks/useTranslation"
+import { FC } from "react"
 import { OrderSummaryData } from "./OrderSummaryData"
 import { OrderSummaryItemsList } from "./OrderSummaryItemsList"
 import styles from "./orderSummary.module.scss"
 
-export const OrderSummary = () => {
+export const OrderSummary: FC = () => {
   const { translate } = useTranslation()
   const text = translate.pages.orderSummary
-  const { notification, userData, shippingData, orderData, orderAndCartItems } =
+  const { userData, shippingData, orderData, orderAndCartItems } =
     useGetOrderSummary()
 
   return (
     <main className={styles.wrapper} aria-label='Order Summary Page'>
-      {notification && <NotificationCard message={notification} />}
       <header className={styles.header}>
         <h1 className={styles.title}>{text.thankClient}</h1>
         <h2 className={styles.subtitle}>{text.orderResume}:</h2>
