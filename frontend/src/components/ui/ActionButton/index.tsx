@@ -1,13 +1,26 @@
+import { FC, MouseEvent } from "react"
 import styles from "./actionButton.module.scss"
 
-export const ActionButton = ({ action, text, className, ariaLabel }) => {
+interface ActionButtonProps {
+  action: (e: MouseEvent<HTMLButtonElement>) => void
+  text?: string | JSX.Element
+  className?: string
+  ariaLabel?: string
+}
+
+export const ActionButton: FC<ActionButtonProps> = ({
+  action,
+  text,
+  className,
+  ariaLabel,
+}) => {
   return (
     <button
       style={{ userSelect: "none" }}
       className={className ? styles[className] : ""}
-      onClick={(e) => {
+      onClick={(e: MouseEvent) => {
         e.preventDefault()
-        action(e)
+        action(e as MouseEvent<HTMLButtonElement>)
       }}
       aria-label={ariaLabel}
     >
