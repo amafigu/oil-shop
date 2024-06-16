@@ -9,11 +9,11 @@ import {
 import de from "../i18n/de.json"
 import en from "../i18n/en.json"
 
-const languages = { en, de }
+export const languages = { en, de }
 
-type Language = keyof typeof languages
+export type Language = keyof typeof languages
 
-interface LocaleContextTypes {
+export interface LocaleContextTypes {
   languages: typeof languages
   setLanguage: Dispatch<SetStateAction<Language>>
   language: Language

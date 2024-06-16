@@ -1,6 +1,7 @@
-import { useLocaleContext } from "#context/localeContext"
+import { useLocaleContext } from "@/context/localeContext"
+import { Translation } from "@/types/Locale"
 
-export const useTranslation = () => {
+export const useTranslation = (): Translation => {
   const { translate, language, setLanguage } = useLocaleContext()
   const commonProperties = translate.commonProperties
   const commonButtons = translate.commonButtons
