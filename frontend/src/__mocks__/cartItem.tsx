@@ -1,4 +1,4 @@
-module.exports = {
+export const cartItem = {
   product: {
     name: "Test Product",
     image: "image.jpg",
