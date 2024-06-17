@@ -1,24 +1,56 @@
-Webshop Portfolio application
+# 🛍️ Webshop Portfolio Application
 
-Technologies stack -
+This application showcases an e-commerce platform with a the followed functionalities and technologies.
 
-- Backend: Node / Express / JS
-- Frontend: React / JS / Saas
-- Tests: Jest / React Testing Library / Supertest
-- File Storage with AWS S3 Bucket
-- Database: Postgres
-- ORM: Sequelize
+## 🛠️ Technologies Stack
 
-Functionalities -
+- **Backend**: Node / Express / JavaScript
+- **Frontend**: React / TypeScript / SASS
+- **Tests**: Jest / React Testing Library / Supertest
+- **File Storage**: AWS S3 Bucket
+- **Database**: PostgreSQL
+- **ORM**: Sequelize
 
-Translation - English and German.
+## 🌟 Functionalities
 
-Responsive design.
+### Translation
 
-Login system.
+The application supports multiple languages, currently including:
 
-2 Roles for users:
+- English
+- German
 
-Admin: can execute CRUD operations with users and products.
+### Responsive Design
 
-Customer: Registered user, which can execute CRUD operations available for a customer as edit personal data.
+The application is designed to be fully responsive and works seamlessly across various devices and screen sizes.
+
+### Login System
+
+A secure login system with role-based access control.
+
+### User Roles
+
+- **Admin**: Can perform CRUD operations on users and products.
+- **Customer**: Registered users can manage their personal data and perform operations available to them.
+
+## 📸 Screenshots
+
+### Homepage
+
+![Homepage](frontend/public/assets/readmeHomePage.png)
+
+### Shop page
+
+![Shop Page](frontend/public/assets/readmeShopPage.png)
+
+### Product Listing
+
+![Product Listing](frontend/public/assets/readmeProductsListing.png)
+
+
+## 📦 Setup and Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/amafigu/oil-shop.git
+   ```
