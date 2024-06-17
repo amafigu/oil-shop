@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface ConvertUserData {
   firstName: string
   lastName: string
   email: string
   password: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
