@@ -1,14 +1,16 @@
 module.exports = {
+  preset: "ts-jest",
+  testEnvironment: "jsdom", // Use jsdom for React testing
   collectCoverage: true,
-  collectCoverageFrom: ["src/**/*.{js,jsx}"],
+  collectCoverageFrom: ["src/**/*.{js,jsx,ts,tsx}"],
   coverageDirectory: "coverage",
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  transform: {
-    "^.+\\.[t|j]sx?$": "babel-jest",
-  },
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
   moduleNameMapper: {
-    "^#(.*)$": "<rootDir>/src/$1",
+    "^axios$": "axios/dist/node/axios.cjs",
+    "^@/(.*)$": "<rootDir>/src/$1",
     "\\.(css|less|scss|sss|styl)$": "<rootDir>/styleMock.js",
+  },
+  transform: {
+    "^.+\\.[tj]sx?$": "ts-jest",
   },
 }

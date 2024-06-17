@@ -1,4 +1,4 @@
-@import "#styles/helpers/mixins";
+@import "@/styles/helpers/mixins";
 
 section {
   @include create-item-form;
