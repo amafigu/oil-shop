@@ -49,7 +49,7 @@ describe("AddProductToCartButton", () => {
       </MockProvider>,
     )
 
-    const button = screen.getByLabelText("Add to cart button")
+    const button = screen.getByLabelText("Add item to cart")
     fireEvent.click(button)
     expect(addProductFnMocked).toHaveBeenCalledTimes(1)
     expect(addProductFnMocked).toHaveBeenCalledWith(product, 1)
