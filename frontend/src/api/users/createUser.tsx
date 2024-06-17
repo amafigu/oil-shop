@@ -1,8 +1,8 @@
 import { USERS } from "@/constants/api"
-import { User } from "@/types/User"
+import { CreateUser } from "@/types/User"
 import axios from "axios"
 
-export const createUser = async (user: User) => {
+export const createUser = async (user: CreateUser) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}${USERS}`,

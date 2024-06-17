@@ -1,8 +1,8 @@
 import { CREATE_ADMIN } from "@/constants/api"
-import { User } from "@/types/User"
+import { CreateUser } from "@/types/User"
 import axios from "axios"
 
-export const createAdmin = async (item: User) => {
+export const createAdmin = async (item: CreateUser) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}${CREATE_ADMIN}`,

@@ -11,6 +11,13 @@ export interface User {
   role?: { id: number; name: string }
 }
 
+export interface CreateUser {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
+
 export interface UserHeader {
   firstName: string | undefined
   lastName: string | undefined

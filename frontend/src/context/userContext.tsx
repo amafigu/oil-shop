@@ -10,7 +10,7 @@ import { updateShippingData } from "@/api/users/updateShippingData"
 import { updateUser } from "@/api/users/updateUser"
 import { CURRENT_ADMIN, SIGN_UP } from "@/constants/routes"
 import { useNotificationContext } from "@/context/notificationContext"
-import { ShippingData, User, UserContextType } from "@/types/User"
+import { CreateUser, ShippingData, User, UserContextType } from "@/types/User"
 import { onRequestError } from "@/utils/onRequestError"
 import { onValidationError } from "@/utils/onValidationError"
 import {
@@ -138,7 +138,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const onCreateCustomer = async (e: SyntheticEvent, data: User) => {
+  const onCreateCustomer = async (e: SyntheticEvent, data: CreateUser) => {
     e.preventDefault()
 
     try {
@@ -149,7 +149,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         onError: onValidationError,
         onNotification: setNotification,
       })
-      const response = await createUser(validUser)
+      const response = await createUser(typedItem)
       if (response && response.status === 422) {
         const message =
           "This user is already existent. Please try with another email."
@@ -172,11 +172,11 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const onCreateAdmin = async (e: SyntheticEvent, data: User) => {
+  const onCreateAdmin = async (e: SyntheticEvent, data: CreateUser) => {
     e.preventDefault()
 
     try {
-      const typedItem = await convertDataToExpectedUserTypes(data)
+      const typedItem = convertDataToExpectedUserTypes(data)
       const validUser = await validate({
         item: typedItem,
         schema: createUserSchema,
