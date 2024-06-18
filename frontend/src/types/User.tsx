@@ -18,6 +18,13 @@ export interface CreateUser {
   password: string
 }
 
+export interface UpdateUser {
+  firstName: string
+  lastName: string
+  email: string
+  image: string
+}
+
 export interface UserHeader {
   firstName: string | undefined
   lastName: string | undefined
@@ -31,8 +38,8 @@ export interface Role {
 }
 
 export interface ShippingData {
-  userId: number
   id: number
+  userId: number
   street: string
   number: string
   details: string

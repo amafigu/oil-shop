@@ -4,7 +4,7 @@ import axios from "axios"
 
 export const updateShippingData = async (
   userId: number,
-  data: ShippingData,
+  data: Partial<ShippingData>,
 ) => {
   try {
     const response = await axios.put(
