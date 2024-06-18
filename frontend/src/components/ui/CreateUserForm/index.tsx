@@ -7,7 +7,7 @@ import { ChangeEvent, FC, SyntheticEvent, useState } from "react"
 import styles from "./createUserForm.module.scss"
 
 interface CreateUserFormProps {
-  onCreate: (e: SyntheticEvent, data: Partial<User>) => Promise<User>
+  onCreate: (e: SyntheticEvent, data: Partial<User>) => Promise<Partial<User>>
 }
 
 export const CreateUserForm: FC<CreateUserFormProps> = ({ onCreate }) => {
