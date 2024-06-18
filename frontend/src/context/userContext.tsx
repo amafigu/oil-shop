@@ -10,7 +10,13 @@ import { updateShippingData } from "@/api/users/updateShippingData"
 import { updateUser } from "@/api/users/updateUser"
 import { CURRENT_ADMIN, SIGN_UP } from "@/constants/routes"
 import { useNotificationContext } from "@/context/notificationContext"
-import { CreateUser, ShippingData, User, UserContextType } from "@/types/User"
+import {
+  CreateUser,
+  ShippingData,
+  UpdateUser,
+  User,
+  UserContextType,
+} from "@/types/User"
 import { onRequestError } from "@/utils/onRequestError"
 import { onValidationError } from "@/utils/onValidationError"
 import {
@@ -210,14 +216,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const extractValidProperty = async (
     key: string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedProductData: any,
+    updatedData: any,
     file?: File,
   ) => {
     if (key === "image" && file) {
       const image = await uploadFile(file)
       return { [key]: image }
     } else {
-      const value = updatedProductData[key]
+      const value = updatedData[key]
       if (key === "price" || key === "size") {
         return { [key]: Number(value) }
       } else {
@@ -227,7 +233,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateProperty = async (property: { [key: string]: any }) => {
+  const validateUpdatedUser = async (property: any) => {
     try {
       if (updateUserSchema) {
         return updateUserSchema.parse(property)
@@ -238,12 +244,28 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  const convertUpdatedUserData = async (
+    key: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    updatedData: any,
+    file?: File,
+  ) => {
+    if (key === "image" && file) {
+      const image = await uploadFile(file)
+      return { [key]: image }
+    } else {
+      const value = updatedData[key]
+
+      return { [key]: value }
+    }
+  }
+
   interface OnUpdateUser {
     key: string
     id: number
-    initialData: Partial<User>
-    updatedData: Partial<User>
-    setUpdatedData: Dispatch<SetStateAction<Partial<User>>>
+    initialData: UpdateUser
+    updatedData: UpdateUser
+    setUpdatedData: Dispatch<SetStateAction<UpdateUser>>
     file?: File
   }
 
@@ -256,16 +278,16 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     file,
   }: OnUpdateUser) => {
     try {
-      const validProperty = await extractValidProperty(key, updatedData, file)
-      const validatedProperty = (await validateProperty(validProperty)) ?? {}
-      const response = await updateUser(id, validatedProperty)
+      const validProperty = await convertUpdatedUserData(key, updatedData, file)
+      const validatedProperty = (await validateUpdatedUser(validProperty)) ?? {}
+      const response = await updateUser(id, validatedProperty as User)
       if (response && response.status === 200) {
         const updatedUser = response.data.user
-        setUsers((prevUsers: User[]) => {
-          return prevUsers?.map((user) =>
+        setUsers((prevUsers) =>
+          prevUsers?.map((user) =>
             user.id === updatedUser.id ? updatedUser : user,
-          )
-        })
+          ),
+        )
         setUser(updatedUser)
       }
     } catch (error) {
@@ -277,10 +299,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateShippingProperty = async (property: { [key: string]: any }) => {
+  const validateShippingProperty = async (property: any) => {
     try {
       if (shippingDataSchema) {
-        return shippingDataSchema.parse(property) as ShippingData
+        return shippingDataSchema.parse(property) as Partial<ShippingData>
       }
     } catch (error) {
       onValidationError(error, setNotification)
@@ -291,8 +313,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   interface OnUpdateShippingData {
     key: string
     id: number
-    initialData: ShippingData
-    updatedData: ShippingData
+    initialData: Partial<ShippingData>
+    updatedData: Partial<ShippingData>
     setUpdatedData: Dispatch<SetStateAction<Partial<ShippingData>>>
     file: File
   }
@@ -306,16 +328,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     try {
       const validProperty = await extractValidProperty(key, updatedData)
       const validatedProperty =
-        (await validateShippingProperty(validProperty)) ?? ({} as ShippingData)
+        (await validateShippingProperty(validProperty)) ??
+        ({} as Partial<ShippingData>)
+
       const response = await updateShippingData(id, validatedProperty)
+
       if (response && response.status === 200) {
-        const updatedUser = response.data.user
-        setUsers((prevUsers: User[]) => {
-          return prevUsers.map((user) =>
-            user.id === updatedUser.id ? updatedUser : user,
-          )
-        })
-        setUser(updatedUser)
+        const updatedShippingData = response.data
+        setShippingData(updatedShippingData)
       }
     } catch (error) {
       console.error("Failed to update user:", error)
