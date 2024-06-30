@@ -6,12 +6,10 @@ const firstNameUpdateValidation = z
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "First name should have at least two characters.",
   })
-  .refine(
-    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
-    {
-      message: "First name should start with a capital letter.",
-    },
-  )
+  .refine((value) => value === "" || /^[A-Z][a-zA-Z\s]*$/.test(value), {
+    message:
+      "First name should start with a capital letter and contain only letters.",
+  })
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "First name can only contain letters.",
   })
@@ -24,12 +22,10 @@ const lastNameUpdateValidation = z
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "Last name should have at least two characters.",
   })
-  .refine(
-    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
-    {
-      message: "Last name should start with a capital letter.",
-    },
-  )
+  .refine((value) => value === "" || /^[A-Z][a-zA-Z\s]*$/.test(value), {
+    message:
+      "Last name should start with a capital letter and contain only letters.",
+  })
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "Last name can only contain letters.",
   })
@@ -42,12 +38,10 @@ const firstNameCreateUserValidation = z
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "First name should have at least two characters.",
   })
-  .refine(
-    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
-    {
-      message: "First name should start with a capital letter.",
-    },
-  )
+  .refine((value) => value === "" || /^[A-Z][a-zA-Z\s]*$/.test(value), {
+    message:
+      "First name should start with a capital letter and contain only letters.",
+  })
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "First name can only contain letters.",
   })
@@ -58,12 +52,10 @@ const lastNameCreateUserValidation = z
   .refine((value) => value.length === 0 || value.length >= 2, {
     message: "Last name should have at least two characters.",
   })
-  .refine(
-    (value) => value === "" || (value[0] === value && value[0].toUpperCase()),
-    {
-      message: "Last name should start with a capital letter.",
-    },
-  )
+  .refine((value) => value === "" || /^[A-Z][a-zA-Z\s]*$/.test(value), {
+    message:
+      "Last name should start with a capital letter and contain only letters.",
+  })
   .refine((value) => value === "" || /^[A-Za-z\s]+$/.test(value), {
     message: "Last name can only contain letters.",
   })

@@ -17,16 +17,13 @@ router.get('/:id', async (req, res) => {
     if (!shippingData && user) {
       const initialData = {
         userId: req.params.id,
-        firstName: 'Please add data',
-        lastName: 'Please add data',
-        email: 'Please add data',
         street: 'Please add data',
         number: 'Please add data',
         details: 'Please add data',
+        postalCode: 'Please add data',
         city: 'Please add data',
         state: 'Please add data',
         country: 'Please add data',
-        postalCode: 'Please add data',
       };
 
       shippingData = await db.shippingData.create(initialData);
@@ -80,6 +77,7 @@ router.put(
           userId: req.params.id,
         });
       } else {
+        shippingData.userId = req.params.id;
         shippingData.street = req.body.street || shippingData.street;
         shippingData.number = req.body.number || shippingData.number;
         shippingData.details = req.body.details || shippingData.details;

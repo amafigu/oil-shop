@@ -155,6 +155,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Error by updating product:", error)
       setUpdatedData(initialData)
+      const message = "Error by updating product"
+      onRequestError(error, setNotification, message)
     }
   }
 

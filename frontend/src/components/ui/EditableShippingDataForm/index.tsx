@@ -62,7 +62,7 @@ export const EditableShippingDataForm: FC<EditableShippingDataFormProps> = ({
                 onSave={() =>
                   onSave({
                     key,
-                    id: item.id,
+                    id: item.userId,
                     initialData,
                     updatedData,
                     setUpdatedData,
