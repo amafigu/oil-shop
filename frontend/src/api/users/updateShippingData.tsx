@@ -8,7 +8,7 @@ export const updateShippingData = async (
 ) => {
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}${SHIPPING_DATA}/${userId}`,
+      `${import.meta.env.VITE_APP_API_URL}${SHIPPING_DATA}/${userId}`,
       data,
       { withCredentials: true },
     )

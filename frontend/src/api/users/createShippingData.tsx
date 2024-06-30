@@ -8,7 +8,7 @@ export const createShippingData = async (
 ) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}${SHIPPING_DATA}/${userId}`,
+      `${import.meta.env.VITE_APP_API_URL}${SHIPPING_DATA}/${userId}`,
       data,
     )
     if (response?.status === 201) {

@@ -4,7 +4,7 @@ import axios from "axios"
 export const getUserRole = async (roleId: number) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${USER_ROLE}/${roleId}`,
+      `${import.meta.env.VITE_APP_API_URL}${USER_ROLE}/${roleId}`,
       { withCredentials: true },
     )
     if (response && response.status === 200) {

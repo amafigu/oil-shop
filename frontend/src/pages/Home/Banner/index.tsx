@@ -8,7 +8,7 @@ export const Banner: FC = () => {
       <div className={styles.container}>
         <img
           aria-label='banner image'
-          src={`${process.env.PUBLIC_URL}${HOME_BANNER}`}
+          src={`${HOME_BANNER}`}
           title='background'
         />
       </div>

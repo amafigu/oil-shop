@@ -14,11 +14,7 @@ export const SignUp: FC = () => {
     <main className={styles.wrapper} aria-label='Sign up page'>
       <section className={styles.container}>
         <div className={styles.logoContainer}>
-          <img
-            className={styles.logo}
-            src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
-            alt='logo'
-          />
+          <img className={styles.logo} src={`${LOGO_IMAGE}`} alt='logo' />
         </div>
         <div className={styles.form}>
           <CreateUserForm onCreate={registerUser} />

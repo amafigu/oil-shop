@@ -4,7 +4,7 @@ import axios from "axios"
 export const getAuthenticatedUserById = async (id: number) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${AUTHENTICATED_USER}/${id}`,
+      `${import.meta.env.VITE_APP_API_URL}${AUTHENTICATED_USER}/${id}`,
       { withCredentials: true },
     )
     if (

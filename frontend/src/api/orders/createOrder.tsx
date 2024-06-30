@@ -5,7 +5,7 @@ import axios from "axios"
 export const createOrder = async (userId: number, order: NewOrder) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}${ORDERS_BY_USER}/${userId}`,
+      `${import.meta.env.VITE_APP_API_URL}${ORDERS_BY_USER}/${userId}`,
       order,
     )
     if (response?.status === 201 || response?.status === 422) {

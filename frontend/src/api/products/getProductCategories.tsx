@@ -4,7 +4,7 @@ import axios from "axios"
 export const getProductCategories = async () => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${PRODUCT_CATEGORIES}`,
+      `${import.meta.env.VITE_APP_API_URL}${PRODUCT_CATEGORIES}`,
     )
     if (response?.status === 200) {
       return response

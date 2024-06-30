@@ -7,11 +7,7 @@ export const Logo = () => {
   return (
     <div className={styles.container}>
       <Link className={styles.link} to={HOME}>
-        <img
-          className={styles.logo}
-          src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
-          alt='logo'
-        />
+        <img className={styles.logo} src={`${LOGO_IMAGE}`} alt='logo' />
       </Link>
     </div>
   )

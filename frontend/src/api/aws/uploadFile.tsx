@@ -7,7 +7,9 @@ export const uploadFile = async (
   let newUrl = ""
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/aws/generate-upload-url?fileName=${file.name}`,
+      `${import.meta.env.VITE_APP_API_URL}/aws/generate-upload-url?fileName=${
+        file.name
+      }`,
       { withCredentials: true },
     )
     newUrl = `https://oylo-images.s3.us-east-2.amazonaws.com/${response.data.fileName}`

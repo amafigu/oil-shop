@@ -4,7 +4,7 @@ import axios from "axios"
 export const getUsers = async () => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${USERS}`,
+      `${import.meta.env.VITE_APP_API_URL}${USERS}`,
       { withCredentials: true },
     )
     if (response && response.status === 200) {
