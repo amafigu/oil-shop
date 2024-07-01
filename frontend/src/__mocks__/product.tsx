@@ -2,13 +2,13 @@ import { Product } from "@/types/Product"
 
 export const product: Product = {
   id: 1,
-  name: "Sample Product",
+  name: "Test Product",
   price: 100,
   size: 1,
-  details: "Sample details",
-  description: "Sample description",
+  details: "Test details",
+  description: "Test description",
   categoryId: 1,
-  image: "sample-image.jpg",
-  brand: "Sample Brand",
-  category: { name: "Sample Category" },
+  image: "test-image.jpg",
+  brand: "test brand",
+  category: { name: "test category" },
 }
