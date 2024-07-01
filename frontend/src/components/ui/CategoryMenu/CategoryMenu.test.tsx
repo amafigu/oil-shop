@@ -6,25 +6,26 @@ import { useProductCategory } from "@/hooks/useProductCategory"
 import { useTranslation } from "@/hooks/useTranslation"
 import { camelCase } from "@/utils/camelCase"
 import { fireEvent, render, screen } from "@testing-library/react"
+import { Mock, vi } from "vitest"
 
-jest.mock("@/hooks/useTranslation")
-jest.mock("@/hooks/useProductCategory")
-jest.mock("@/hooks/useMenuOptions")
+vi.mock("@/hooks/useTranslation")
+vi.mock("@/hooks/useProductCategory")
+vi.mock("@/hooks/useMenuOptions")
 
 describe("<CategoryMenu />", () => {
-  const setSortCategory = jest.fn()
-  const setShowMobileMenu = jest.fn()
-  const setShowProductsSearchBar = jest.fn()
+  const setSortCategory = vi.fn()
+  const setShowMobileMenu = vi.fn()
+  const setShowProductsSearchBar = vi.fn()
 
   beforeEach(() => {
-    ;(useTranslation as jest.Mock).mockReturnValue({ components })
-    ;(useMenuOptions as jest.Mock).mockReturnValue({
+    ;(useTranslation as Mock).mockReturnValue({ components })
+    ;(useMenuOptions as Mock).mockReturnValue({
       showMobileMenu: true,
       setShowMobileMenu,
       showProductsSearchBar: true,
       setShowProductsSearchBar,
     })
-    ;(useProductCategory as jest.Mock).mockReturnValue({
+    ;(useProductCategory as Mock).mockReturnValue({
       setSortCategory,
       categories: productCategories,
       sortCategory,
