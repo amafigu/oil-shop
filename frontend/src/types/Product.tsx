@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Product {
   id: number
   name: string
@@ -15,6 +14,17 @@ export interface Product {
 export interface Category {
   id: number
   name: string
+}
+
+export interface CreateProduct {
+  name: string
+  categoryId: number
+  description: string
+  price: number
+  details: string
+  size: number
+  image: string
+  brand: string
 }
 
 export interface ProductContextType {

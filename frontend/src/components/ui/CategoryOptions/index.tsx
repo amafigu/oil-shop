@@ -1,4 +1,4 @@
-import { Category } from "@/types/Product"
+import { Category, CreateProduct } from "@/types/Product"
 import { camelToTitleCase } from "@/utils/camelToTitleCase"
 import { titleCase } from "@/utils/titleCase"
 import { ChangeEvent, Dispatch, FC, SetStateAction } from "react"
@@ -6,15 +6,15 @@ import styles from "./categoryOptions.module.scss"
 
 interface CategoryOptionsProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: { [key: string]: any }
+  data: CreateProduct
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setData: Dispatch<SetStateAction<{ [key: string]: any }>>
+  setData: Dispatch<SetStateAction<CreateProduct>>
   onChange: (
     event: ChangeEvent<HTMLSelectElement>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: { [key: string]: any },
+    data: CreateProduct,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setData: Dispatch<SetStateAction<{ [key: string]: any }>>,
+    setData: Dispatch<SetStateAction<CreateProduct>>,
   ) => void
   options: Category[]
 }
