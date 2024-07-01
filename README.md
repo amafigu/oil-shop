@@ -5,9 +5,9 @@ This application showcases an e-commerce platform with a the followed functional
 ## 🛠️ Technologies Stack
 
 - **Backend**: Node / Express / JavaScript
-- **Frontend**: React / TypeScript / SASS
-- **Tests**: Jest / React Testing Library / Supertest
-- **File Storage**: AWS S3 Bucket
+- **Frontend**: Vite / React / TypeScript / Sass
+- **Tests**: Vitest / React Testing Library / Supertest
+- **File Storage**: AWS S3
 - **Database**: PostgreSQL
 - **ORM**: Sequelize
 
@@ -53,4 +53,20 @@ A secure login system with role-based access control.
 1. Clone the repository:
    ```sh
    git clone https://github.com/amafigu/oil-shop.git
+   ```
+
+2. Navigate to the project directory:
+   ```sh
+   cd oil-shop
+   ```
+
+
+3. Install frontend dependencies:
+   ```sh
+   cd frontend 
+   npm install
+   ```
+4. Run the application:
+   ```sh
+   npm start
    ```
