@@ -467,7 +467,8 @@
     "role": "Rolle",
     "size": "Size",
     "street": "Street",
-    "state": "State"
+    "state": "State",
+    "brand": "Brand"
   },
   "commonButtons": {
     "create": "Create",

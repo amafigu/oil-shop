@@ -1,3 +1,5 @@
+import { Dispatch, FormEvent, MouseEvent, SetStateAction } from "react"
+
 export interface Product {
   id: number
   name: string
@@ -6,9 +8,9 @@ export interface Product {
   details: string
   description: string
   categoryId: number
-  image?: string
-  brand?: string
-  category?: { name: string }
+  image: string
+  brand: string
+  category: { name: string }
 }
 
 export interface Category {
@@ -27,24 +29,34 @@ export interface CreateProduct {
   brand: string
 }
 
+export interface EditProduct {
+  name: string
+  description: string
+  price: number
+  details: string
+  size: number
+  image: string
+  brand: string
+}
+
 export interface ProductContextType {
   products: Product[]
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
+  setProducts: Dispatch<SetStateAction<Product[]>>
   onCreateProduct: (data: {
-    e: React.FormEvent
-    data: any
-    file: File | null | undefined
+    e: FormEvent
+    data: CreateProduct
+    file?: File | null | undefined
   }) => Promise<void>
   onUpdateProduct: (data: {
     key: string
     id: number
-    initialData: any
-    updatedData: any
-    setUpdatedData: React.Dispatch<React.SetStateAction<any>>
-    file: File
+    initialData: EditProduct
+    updatedData: EditProduct
+    setUpdatedData: Dispatch<SetStateAction<EditProduct>>
+    file?: File | null | undefined
   }) => Promise<void>
-  onDeleteProduct: (e: React.MouseEvent, id: number) => Promise<void>
+  onDeleteProduct: (e: MouseEvent, id: number) => Promise<void>
   sortCategory: string | undefined
-  setSortCategory: React.Dispatch<React.SetStateAction<string | undefined>>
+  setSortCategory: Dispatch<SetStateAction<string | undefined>>
   categories: Category[]
 }

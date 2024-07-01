@@ -492,7 +492,8 @@
     "role": "Rolle",
     "state": "Bundesland",
     "size": "Größe",
-    "street": "Straße"
+    "street": "Straße",
+    "brand": "Marke"
   },
   "commonButtons": {
     "create": "Erstellen",
