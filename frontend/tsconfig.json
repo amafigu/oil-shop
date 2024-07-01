@@ -25,13 +25,16 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "useUnknownInCatchVariables": false,
+    "types": ["node", "vite/client", "vitest/globals", "vitest/jsdom"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "./declarations.d.ts",
-    "./vite-env.d.ts"
+    "./vite-env.d.ts",
+    "./setupTests.ts"
   ],
   "exclude": ["node_modules/**/*"],
   "extends": "./tsconfig.path.json"
