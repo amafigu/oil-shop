@@ -59,17 +59,14 @@ export interface UserContextType {
   onUpdateUser: (data: {
     key: string
     id: number
-    initialData: Partial<User>
-    updatedData: Partial<User>
-    setUpdatedData: Dispatch<SetStateAction<Partial<User>>>
+    initialData: UpdateUser
+    updatedData: UpdateUser
+    setUpdatedData: Dispatch<SetStateAction<UpdateUser>>
     file?: File
   }) => Promise<void>
   onDeleteUser: (e: React.SyntheticEvent, id: number) => Promise<void>
-  onCreateCustomer: (
-    e: React.SyntheticEvent,
-    data: Partial<User>,
-  ) => Promise<User>
-  onCreateAdmin: (e: React.SyntheticEvent, data: Partial<User>) => Promise<User>
+  onCreateCustomer: (e: React.SyntheticEvent, data: CreateUser) => Promise<User>
+  onCreateAdmin: (e: React.SyntheticEvent, data: CreateUser) => Promise<User>
   onUpdateShippingData: (data: {
     key: string
     id: number

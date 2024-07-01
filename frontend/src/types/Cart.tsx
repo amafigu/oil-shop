@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react"
 import { Product } from "./Product"
 
 export interface CartItem {
@@ -12,5 +13,5 @@ export interface CartContextType {
   updateProductQuantity: (productName: string, newQuantity: number) => void
   removeProduct: (productName: string) => void
   getAllProductsQuantity: number
-  setCart: React.Dispatch<React.SetStateAction<CartItem[]>>
+  setCart: Dispatch<SetStateAction<CartItem[]>>
 }
