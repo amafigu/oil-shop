@@ -316,7 +316,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     initialData: Partial<ShippingData>
     updatedData: Partial<ShippingData>
     setUpdatedData: Dispatch<SetStateAction<Partial<ShippingData>>>
-    file: File
   }
   const onUpdateShippingData = async ({
     key,
