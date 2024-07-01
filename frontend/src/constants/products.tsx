@@ -4,4 +4,6 @@ export const editableProductProperties = [
   "price",
   "image",
   "size",
+  "brand",
+  "details",
 ]
