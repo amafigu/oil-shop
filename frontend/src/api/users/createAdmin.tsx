@@ -5,7 +5,7 @@ import axios from "axios"
 export const createAdmin = async (item: CreateUser) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}${CREATE_ADMIN}`,
+      `${import.meta.env.VITE_APP_API_URL}${CREATE_ADMIN}`,
       item,
     )
     if (

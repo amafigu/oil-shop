@@ -15,11 +15,7 @@ export const Login: FC = () => {
       <div className={styles.container}>
         <div className={styles.formContainer}>
           <div className={styles.logoContainer}>
-            <img
-              className={styles.logo}
-              src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
-              alt='logo'
-            />
+            <img className={styles.logo} src={`${LOGO_IMAGE}`} alt='logo' />
           </div>
           <LoginForm />
         </div>

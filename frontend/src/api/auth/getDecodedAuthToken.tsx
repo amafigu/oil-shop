@@ -4,7 +4,7 @@ import axios from "axios"
 export const getDecodedAuthToken = async () => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${USER_TOKEN}`,
+      `${import.meta.env.VITE_APP_API_URL}${USER_TOKEN}`,
       { withCredentials: true },
     )
     if (

@@ -6,6 +6,7 @@ export const user = {
   image:
     "https://oylo-images.s3.us-east-2.amazonaws.com/1702305642065-test.png",
   roleId: 5,
+  password: "password123!A",
   createdAt: "2023-10-18T15:52:56.026Z",
   updatedAt: "2023-12-11T15:14:22.010Z",
   role: {

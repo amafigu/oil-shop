@@ -4,7 +4,7 @@ import axios from "axios"
 export const deleteUserById = async (id: number) => {
   try {
     const response = await axios.delete(
-      `${process.env.REACT_APP_API_URL}${USERS}/${id}`,
+      `${import.meta.env.VITE_APP_API_URL}${USERS}/${id}`,
       { withCredentials: true },
     )
     if (response?.status === 200 || response?.status === 404) {

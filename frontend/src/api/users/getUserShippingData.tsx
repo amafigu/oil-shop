@@ -4,7 +4,7 @@ import axios from "axios"
 export const getUserShippingData = async (userId: number) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${SHIPPING_DATA}/${userId}`,
+      `${import.meta.env.VITE_APP_API_URL}${SHIPPING_DATA}/${userId}`,
       { withCredentials: true },
     )
     if (response?.status === 200 || response?.status === 404) {

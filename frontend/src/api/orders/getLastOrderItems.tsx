@@ -4,7 +4,7 @@ import axios from "axios"
 export const getLastOrderItems = async (userId: number) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${LAST_ORDER}/${userId}`,
+      `${import.meta.env.VITE_APP_API_URL}${LAST_ORDER}/${userId}`,
     )
     if (response && response.status === 200) {
       return response

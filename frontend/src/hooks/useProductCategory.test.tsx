@@ -3,6 +3,7 @@ import { ProductContext } from "@/context/productContext"
 import { ProductContextType } from "@/types/Product"
 import { act, renderHook } from "@testing-library/react"
 import { FC, ReactNode, useState } from "react"
+import { vi } from "vitest"
 import { useProductCategory } from "./useProductCategory"
 
 interface ContextWrapperProps {
@@ -10,17 +11,17 @@ interface ContextWrapperProps {
 }
 
 const ContextWrapper: FC<ContextWrapperProps> = ({ children }) => {
-  const [sortCategory, setSortCategory] = useState<string>("roll")
+  const [sortCategory, setSortCategory] = useState<string | undefined>("roll")
 
   const contextValue: ProductContextType = {
     sortCategory,
     setSortCategory,
     categories: productCategories,
     products: [],
-    setProducts: jest.fn(),
-    onCreateProduct: jest.fn(),
-    onUpdateProduct: jest.fn(),
-    onDeleteProduct: jest.fn(),
+    setProducts: vi.fn(),
+    onCreateProduct: vi.fn(),
+    onUpdateProduct: vi.fn(),
+    onDeleteProduct: vi.fn(),
   }
 
   return (
@@ -45,8 +46,8 @@ describe("useProductCategory hook", () => {
     expect(result.current.sortCategory).toBe("essential oil")
 
     act(() => {
-      result.current.setSortCategory("difuser")
+      result.current.setSortCategory("diffuser")
     })
-    expect(result.current.sortCategory).toBe("difuser")
+    expect(result.current.sortCategory).toBe("diffuser")
   })
 })

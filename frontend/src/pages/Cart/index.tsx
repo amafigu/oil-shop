@@ -1,7 +1,6 @@
 import { useCart } from "@/hooks/useCart"
 import { useTranslation } from "@/hooks/useTranslation"
 import { CartItem as CartItemType } from "@/types/Cart"
-import { scrollToTop } from "@/utils/scrollToTop"
 import { FC } from "react"
 import { CartItem } from "./CartItem"
 import { CartOrderSummary } from "./CartOrderSummary"
@@ -11,7 +10,7 @@ export const Cart: FC = () => {
   const { cart } = useCart()
   const { translate } = useTranslation()
   const text = translate.pages.cart
-  scrollToTop()
+
   return (
     <main className={styles.wrapper} aria-label='shopping cart'>
       <section className={styles.container}>

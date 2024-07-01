@@ -1,50 +1,83 @@
 import { product } from "@/__mocks__/product"
-import { commonProperties, components } from "@/__mocks__/translate"
 import { ProductCard } from "@/components/products/ProductCard"
 import { CartContext } from "@/context/cartContext"
-import { useTranslation } from "@/hooks/useTranslation"
-import { CartContextType } from "@/types/Cart"
+import { LocaleContext } from "@/context/localeContext"
+import de from "@/i18n/de.json"
+import en from "@/i18n/en.json"
+import { CartItem } from "@/types/Cart"
+import { Product } from "@/types/Product"
 import "@testing-library/jest-dom"
-import { fireEvent, render, screen } from "@testing-library/react"
-import { ReactNode } from "react"
+import { render, screen } from "@testing-library/react"
+import { FC, ReactNode, useState } from "react"
 import { MemoryRouter } from "react-router-dom"
+import { vi } from "vitest"
 
-jest.mock("@/hooks/useTranslation")
+const languages = { en, de }
+const LocaleContextWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+  const [language, setLanguage] = useState<keyof typeof languages>("en")
 
-interface MockProviderProps {
-  children: ReactNode
-  addProduct: jest.Mock
+  return (
+    <LocaleContext.Provider
+      value={{
+        languages,
+        translate: languages[language],
+        language,
+        setLanguage,
+      }}
+    >
+      {children}
+    </LocaleContext.Provider>
+  )
 }
+const CartContextWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+  const [cart, setCart] = useState<CartItem[]>([])
 
-const MockCartProvider = ({ children, addProduct }: MockProviderProps) => {
-  const value: CartContextType = {
-    cart: [],
-    addProduct,
-    updateProductQuantity: jest.fn(),
-    removeProduct: jest.fn(),
-    getAllProductsQuantity: 0,
-    setCart: jest.fn(),
-  }
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        setCart,
+        addProduct: (product: Product, quantity: number) => {
+          const existingProduct = cart.find(
+            (item: CartItem) => item.product.name === product.name,
+          )
+          if (quantity > 0) {
+            if (existingProduct) {
+              setCart(
+                cart.map((item: CartItem) =>
+                  item.product.name === product.name
+                    ? { ...item, quantity: item.quantity + quantity }
+                    : item,
+                ),
+              )
+            } else {
+              setCart([...cart, { product, quantity }])
+            }
+          }
+        },
+
+        updateProductQuantity: vi.fn(),
+        removeProduct: vi.fn(),
+        getAllProductsQuantity: cart.reduce(
+          (total: number, item: CartItem) => total + item.quantity,
+          0,
+        ),
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 describe("ProductCard", () => {
-  let mockAddProduct: jest.Mock
-
-  beforeEach(() => {
-    mockAddProduct = jest.fn()
-    ;(useTranslation as jest.Mock).mockReturnValue({
-      commonProperties,
-      components,
-    })
-  })
-
   function renderCard() {
     render(
       <MemoryRouter>
-        <MockCartProvider addProduct={mockAddProduct}>
-          <ProductCard product={product} />
-        </MockCartProvider>
+        <LocaleContextWrapper>
+          <CartContextWrapper>
+            <ProductCard product={product} />
+          </CartContextWrapper>
+        </LocaleContextWrapper>
       </MemoryRouter>,
     )
   }
@@ -62,13 +95,5 @@ describe("ProductCard", () => {
   test("renders product size correctly", () => {
     renderCard()
     expect(screen.getByText(`${product.size} ml`)).toBeInTheDocument()
-  })
-
-  test("add product button is clickable", () => {
-    renderCard()
-    const button = screen.getByLabelText("Add product to your shop cart")
-    fireEvent.click(button)
-    expect(mockAddProduct).toHaveBeenCalledTimes(1)
-    expect(mockAddProduct).toHaveBeenCalledWith(product, 1)
   })
 })

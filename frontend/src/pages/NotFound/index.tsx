@@ -12,11 +12,7 @@ export const NotFound: FC = () => {
   return (
     <main className={styles.wrapper} aria-label='Page not found'>
       <section className={styles.container}>
-        <img
-          className={styles.logo}
-          src={`${process.env.PUBLIC_URL}${LOGO_IMAGE}`}
-          alt='logo'
-        />
+        <img className={styles.logo} src={`${LOGO_IMAGE}`} alt='logo' />
         <p className={styles.message}>{text}</p>
       </section>
     </main>

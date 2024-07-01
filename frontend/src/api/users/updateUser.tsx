@@ -4,7 +4,7 @@ import axios from "axios"
 export const updateUser = async (id: number, data: object) => {
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}${USERS}/${id}`,
+      `${import.meta.env.VITE_APP_API_URL}${USERS}/${id}`,
       data,
       { withCredentials: true },
     )

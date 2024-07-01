@@ -4,7 +4,7 @@ import axios from "axios"
 export const getUserById = async (id: number) => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}${USERS}/${id}`,
+      `${import.meta.env.VITE_APP_API_URL}${USERS}/${id}`,
       { withCredentials: true },
     )
     if (response?.status === 200) {

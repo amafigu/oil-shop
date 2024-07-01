@@ -4,27 +4,38 @@
     "lib": ["ESNext", "dom"],
     "outDir": "lib",
     "removeComments": true,
-    "target": "ES6",
+    "target": "esnext",
+    "module": "esnext",
     "baseUrl": "src",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
     "paths": {
       "@/*": ["*"]
     },
+    "esModuleInterop": true,
+    "strict": true,
+    "moduleResolution": "node",
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "sourceMap": true,
     "sourceRoot": "/",
     "alwaysStrict": true,
     "allowUnreachableCode": false,
     "noImplicitAny": true,
+    "skipLibCheck": true,
     "strictNullChecks": true,
     "noImplicitReturns": false, // TODO: set true after finishing the migration to ts
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "useUnknownInCatchVariables": false,
+    "types": ["node", "vite/client", "vitest/globals", "vitest/jsdom"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "./declarations.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "./declarations.d.ts",
+    "./vite-env.d.ts",
+    "./setupTests.ts"
+  ],
   "exclude": ["node_modules/**/*"],
   "extends": "./tsconfig.path.json"
 }
