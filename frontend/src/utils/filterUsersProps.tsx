@@ -1,6 +1,6 @@
 import { STYLES } from "@/constants/styles"
 import { User } from "@/types/User"
-export const filterUserProps = [
+export const filterUsersProps = [
   {
     action: (list: User[], sortIsAsc: boolean) =>
       sortIsAsc
