@@ -1,5 +1,5 @@
-import { ActionButton } from "@/components/ui/ActionButton"
 import { FormInput } from "@/components/ui/FormInput"
+import { SubmitButton } from "@/components/ui/SubmitButton"
 import { STYLES } from "@/constants/styles"
 import { useProductContext } from "@/context/productContext"
 import { useProductCategory } from "@/hooks/useProductCategory"
@@ -27,14 +27,14 @@ export const CreateProductForm: FC = () => {
     brand: "",
   })
 
-  const handleCreateProduct = async (e: FormEvent) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     await onCreateProduct({ e, data, file })
     setData({ ...data })
   }
 
   return (
-    <section aria-label='Create product form'>
-      <form className={styles.container} id='create-product'>
+    <section aria-label='Create product' onSubmit={submit}>
+      <form className={styles.container}>
         <CategoryOptions
           data={data}
           setData={setData}
@@ -63,8 +63,7 @@ export const CreateProductForm: FC = () => {
             ),
         )}
         <div className={styles.button}>
-          <ActionButton
-            action={handleCreateProduct}
+          <SubmitButton
             text={components.createItem.submitButton}
             className={STYLES.BUTTONS.ACTION}
             ariaLabel={components.createItem.submitButton}
