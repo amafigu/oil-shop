@@ -19,6 +19,13 @@
   }
 }
 
+.list {
+  @include flex-column;
+}
+
+.item {
+  display: flex;
+}
 .buttonContainer {
   margin: theme.$spacing-regular 0;
 }

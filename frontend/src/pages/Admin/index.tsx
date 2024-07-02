@@ -1,19 +1,13 @@
 import { CreateProductForm } from "@/components/ui/CreateProductForm"
 import { CreateUserForm } from "@/components/ui/CreateUserForm"
-import { EditableItemsList } from "@/components/ui/EditableItemsList"
-import { EditableProductForm } from "@/components/ui/EditableProductForm"
-import { EditableUserForm } from "@/components/ui/EditableUserForm"
+import { EditableProductsList } from "@/components/ui/EditableProductsList"
+import { EditableUsersList } from "@/components/ui/EditableUsersList"
 import { ToggleButton } from "@/components/ui/ToggleButton"
 import { UserHeader } from "@/components/ui/UserHeader"
-import { editableProductProperties } from "@/constants/products"
 import { STYLES } from "@/constants/styles"
-import { editableUserProperties } from "@/constants/users"
-import { useProductContext } from "@/context/productContext"
 import { useUserContext } from "@/context/userContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyUserRole } from "@/hooks/useVerifyUserRole"
-import { filterProductsProps } from "@/utils/filterProductsProps"
-import { filterUserProps } from "@/utils/filterUserProps"
 import { useEffect, useState } from "react"
 import styles from "./admin.module.scss"
 
@@ -22,15 +16,7 @@ export const Admin = () => {
   const [showCreateProductForm, setShowCreateProductForm] = useState(false)
   const [showUsersList, setShowUsersList] = useState(false)
   const [showProductsList, setShowProductsList] = useState(false)
-  const {
-    users,
-    onDeleteUser,
-    onCreateCustomer,
-    onUpdateUser,
-    user,
-    isLoggedIn,
-  } = useUserContext()
-  const { onDeleteProduct, onUpdateProduct, products } = useProductContext()
+  const { onCreateCustomer, user, isLoggedIn } = useUserContext()
   const { verifyUserRole } = useVerifyUserRole()
   const { pages } = useTranslation()
   const usersText = pages.admin.usersManagement
@@ -57,19 +43,7 @@ export const Admin = () => {
             classCss={STYLES.BUTTONS.SHOW_HIDE}
           />
         </div>
-        {showUsersList && (
-          <EditableItemsList
-            itemsList={users}
-            ItemComponent={EditableUserForm}
-            title={usersText.editableItemsList.title}
-            itemProps={{
-              onSave: onUpdateUser,
-              onDelete: onDeleteUser,
-              renderItemProps: editableUserProperties,
-            }}
-            filterProps={filterUserProps}
-          />
-        )}
+        {showUsersList && <EditableUsersList />}
         <div className={styles.button}>
           <ToggleButton
             isVisible={showCreateUserForm}
@@ -92,19 +66,7 @@ export const Admin = () => {
             classCss={STYLES.BUTTONS.SHOW_HIDE}
           />
         </div>
-        {showProductsList && (
-          <EditableItemsList
-            itemsList={products}
-            ItemComponent={EditableProductForm}
-            title={productsText.editableItemsList.title}
-            itemProps={{
-              onSave: onUpdateProduct,
-              onDelete: onDeleteProduct,
-              renderItemProps: editableProductProperties,
-            }}
-            filterProps={filterProductsProps}
-          />
-        )}
+        {showProductsList && <EditableProductsList />}
         <div className={styles.button}>
           <ToggleButton
             isVisible={showCreateProductForm}
