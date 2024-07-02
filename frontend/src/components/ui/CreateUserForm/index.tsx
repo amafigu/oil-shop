@@ -1,61 +1,55 @@
-import { ActionButton } from "@/components/ui/ActionButton"
 import { FormInput } from "@/components/ui/FormInput"
+import { SubmitButton } from "@/components/ui/SubmitButton"
 import { STYLES } from "@/constants/styles"
 import { useTranslation } from "@/hooks/useTranslation"
-import { User } from "@/types/User"
-import { ChangeEvent, FC, SyntheticEvent, useState } from "react"
+import { CreateUser, User } from "@/types/User"
+import { listenInput } from "@/utils/listenInput"
+import { FC, FormEvent, useState } from "react"
 import styles from "./createUserForm.module.scss"
 
 interface CreateUserFormProps {
-  onCreate: (e: SyntheticEvent, data: Partial<User>) => Promise<Partial<User>>
+  onCreate: (e: FormEvent<HTMLFormElement>, data: CreateUser) => Promise<User>
 }
 
 export const CreateUserForm: FC<CreateUserFormProps> = ({ onCreate }) => {
   const { components } = useTranslation()
-  const [data, setData] = useState<Partial<User>>({
+  const [data, setData] = useState<CreateUser>({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   })
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await onCreate(e, data)
+    setData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    })
   }
 
   return (
-    <section aria-label='Create user form'>
-      <form className={styles.container}>
+    <section aria-label='Create user'>
+      <form className={styles.container} onSubmit={submit}>
         {Object.keys(data).map((field) => (
           <FormInput
             classCss={STYLES.FORMS.FIELD}
             key={field}
             name={field}
-            onChangeListener={handleInputChange}
+            onChangeListener={(e) => listenInput(e, data, setData)}
             placeholder={field}
             label={field}
             type='text'
-            value={data[field as keyof User]?.toString() ?? ""}
+            value={data[field as keyof CreateUser]?.toString() ?? ""}
           />
         ))}
         <div className={styles.button}>
-          <ActionButton
-            action={async (e) => {
-              await onCreate(e, data)
-              setData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                password: "",
-              })
-            }}
+          <SubmitButton
             text={components.createItem.submitButton}
             className={STYLES.BUTTONS.ACTION}
-            ariaLabel={components.createItem.submitButton}
           />
         </div>
       </form>

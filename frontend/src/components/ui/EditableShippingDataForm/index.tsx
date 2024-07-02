@@ -1,42 +1,29 @@
 import { EditableItemInput } from "@/components/ui/EditableItemInput"
 import { STYLES } from "@/constants/styles"
-import { ShippingData } from "@/types/User"
-import {
-  ChangeEvent,
-  Dispatch,
-  FC,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react"
+import { useUserContext } from "@/context/userContext"
+import { EditShippingData, ShippingData } from "@/types/User"
+import { ChangeEvent, FC, useEffect, useState } from "react"
 import styles from "./editableShippingDataForm.module.scss"
 
 interface EditableShippingDataFormProps {
   item: ShippingData
-  renderItemProps: string[]
-  onSave: (args: {
-    key: string
-    id: number
-    initialData: Partial<ShippingData>
-    updatedData: Partial<ShippingData>
-    setUpdatedData: Dispatch<SetStateAction<Partial<ShippingData>>>
-  }) => void
 }
 
 export const EditableShippingDataForm: FC<EditableShippingDataFormProps> = ({
   item,
-  renderItemProps,
-  onSave,
 }) => {
-  const [updatedData, setUpdatedData] = useState<Partial<ShippingData>>({})
-  const initialData: Partial<ShippingData> = renderItemProps.reduce(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (acc: any, val: keyof ShippingData) => {
-      acc[val] = item[val]
-      return acc
-    },
-    {} as Partial<ShippingData>,
-  )
+  const initialData: EditShippingData = {
+    street: item.street,
+    number: item.number,
+    details: item.details,
+    postalCode: item.postalCode,
+    city: item.city,
+    state: item.state,
+    country: item.country,
+  }
+
+  const [updatedData, setUpdatedData] = useState<EditShippingData>(initialData)
+  const { onUpdateShippingData } = useUserContext()
 
   useEffect(() => {
     setUpdatedData(initialData)
@@ -60,7 +47,7 @@ export const EditableShippingDataForm: FC<EditableShippingDataFormProps> = ({
                   }))
                 }}
                 onSave={() =>
-                  onSave({
+                  onUpdateShippingData({
                     key,
                     id: item.userId,
                     initialData,

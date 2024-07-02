@@ -1,16 +1,13 @@
-import { EditableItemsList } from "@/components/ui/EditableItemsList"
 import { EditableShippingDataForm } from "@/components/ui/EditableShippingDataForm"
 import { EditableUserForm } from "@/components/ui/EditableUserForm"
 import { ToggleButton } from "@/components/ui/ToggleButton"
 import { UserHeader } from "@/components/ui/UserHeader"
-import { editableUserShippingDataProperties } from "@/constants/shippingData"
 import { STYLES } from "@/constants/styles"
-import { editableUserProperties } from "@/constants/users"
 import { useUserContext } from "@/context/userContext"
 import { useGetOrders } from "@/hooks/useGetOrders"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyUserRole } from "@/hooks/useVerifyUserRole"
-import { User as IUser, ShippingData } from "@/types/User"
+import { User as ContextUser, ShippingData } from "@/types/User"
 import { FC, useEffect, useState } from "react"
 import { Order } from "./Order"
 import styles from "./user.module.scss"
@@ -18,9 +15,8 @@ import styles from "./user.module.scss"
 export const User: FC = () => {
   const [showOrders, setShowOrders] = useState(false)
   const [showShippingData, setShowShippingData] = useState(false)
-  const { user, onUpdateUser, onUpdateShippingData, shippingData, isLoggedIn } =
-    useUserContext()
-  const { components, pages } = useTranslation()
+  const { user, shippingData, isLoggedIn } = useUserContext()
+  const { pages } = useTranslation()
   const { orders } = useGetOrders()
   const { verifyUserRole } = useVerifyUserRole()
 
@@ -33,13 +29,7 @@ export const User: FC = () => {
     <main className={styles.wrapper} aria-label='Customer Management Page'>
       <section className={styles.container}>
         <UserHeader />
-        {user && (
-          <EditableUserForm
-            item={user as IUser}
-            renderItemProps={editableUserProperties}
-            onSave={onUpdateUser}
-          />
-        )}
+        {user && <EditableUserForm item={user as ContextUser} />}
         <div className={styles.buttonContainer}>
           <ToggleButton
             isVisible={showShippingData}
@@ -50,11 +40,7 @@ export const User: FC = () => {
           />
         </div>
         {showShippingData && shippingData && (
-          <EditableShippingDataForm
-            item={shippingData as ShippingData}
-            renderItemProps={editableUserShippingDataProperties}
-            onSave={onUpdateShippingData}
-          />
+          <EditableShippingDataForm item={shippingData as ShippingData} />
         )}
         <div className={styles.buttonContainer}>
           <ToggleButton
@@ -66,12 +52,13 @@ export const User: FC = () => {
           />
         </div>
         {showOrders && orders && (
-          <EditableItemsList
-            itemsList={orders}
-            ItemComponent={Order}
-            title={components.ordersList.title}
-            filterProps={[]}
-          />
+          <ul className={styles.list}>
+            {orders.map((item, index) => (
+              <li className={styles.item} key={index}>
+                <Order item={item} />
+              </li>
+            ))}
+          </ul>
         )}
       </section>
     </main>

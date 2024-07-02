@@ -1,39 +1,9 @@
-import { questionsAndAnswers } from "@/constants/faq"
+import { QuestionAnswer, questionsAndAnswers } from "@/constants/faq"
 import { useTranslation } from "@/hooks/useTranslation"
 import { Translation } from "@/types/Locale"
 import { scrollToTop } from "@/utils/scrollToTop"
 import { FC } from "react"
 import styles from "./faq.module.scss"
-
-const faqKeys = [
-  "difuserRoomSizeQuestion",
-  "difuserRoomSizeAnswer",
-  "howDifuserWorksQuestion",
-  "howDifuserWorksAnswer",
-  "thirdQuestion",
-  "thirdAnswer",
-  "fourthQuestion",
-  "fourthAnswer",
-  "addBodyOilAndUsedAsCosmeticQuestion",
-  "addBodyOilAndUsedAsCosmeticAnswer",
-  "sixthQuestion",
-  "sixthAnswer",
-  "seventhQuestion",
-  "seventhAnswer",
-  "eighthQuestion",
-  "eighthAnswer",
-  "ninthQuestion",
-  "ninthAnswer",
-  "tenthQuestion",
-  "tenthAnswer",
-] as const
-
-type FaqKey = (typeof faqKeys)[number]
-
-interface QuestionAnswer {
-  question: FaqKey
-  answer: FaqKey
-}
 
 export const Faq: FC = () => {
   const { translate } = useTranslation() as Translation

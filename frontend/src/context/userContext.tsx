@@ -12,8 +12,9 @@ import { CURRENT_ADMIN, SIGN_UP } from "@/constants/routes"
 import { useNotificationContext } from "@/context/notificationContext"
 import {
   CreateUser,
+  EditShippingData,
+  EditUser,
   ShippingData,
-  UpdateUser,
   User,
   UserContextType,
 } from "@/types/User"
@@ -27,6 +28,7 @@ import {
 import { convertDataToExpectedUserTypes, validate } from "@/utils/verifyTypes"
 import {
   Dispatch,
+  FormEvent,
   ReactNode,
   SetStateAction,
   SyntheticEvent,
@@ -144,7 +146,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const onCreateCustomer = async (e: SyntheticEvent, data: CreateUser) => {
+  const onCreateCustomer = async (
+    e: FormEvent<HTMLFormElement>,
+    data: CreateUser,
+  ) => {
     e.preventDefault()
 
     try {
@@ -178,7 +183,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const onCreateAdmin = async (e: SyntheticEvent, data: CreateUser) => {
+  const onCreateAdmin = async (
+    e: FormEvent<HTMLFormElement>,
+    data: CreateUser,
+  ) => {
     e.preventDefault()
 
     try {
@@ -246,15 +254,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const convertUpdatedUserData = async (
     key: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedData: any,
-    file?: File,
+    updatedData: EditUser,
+    file?: File | undefined | null,
   ) => {
     if (key === "image" && file) {
       const image = await uploadFile(file)
       return { [key]: image }
     } else {
-      const value = updatedData[key]
+      const value = updatedData[key as keyof EditUser]
 
       return { [key]: value }
     }
@@ -263,10 +270,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   interface OnUpdateUser {
     key: string
     id: number
-    initialData: UpdateUser
-    updatedData: UpdateUser
-    setUpdatedData: Dispatch<SetStateAction<UpdateUser>>
-    file?: File
+    initialData: EditUser
+    updatedData: EditUser
+    setUpdatedData: Dispatch<SetStateAction<EditUser>>
+    file?: File | null | undefined
   }
 
   const onUpdateUser = async ({
@@ -313,9 +320,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   interface OnUpdateShippingData {
     key: string
     id: number
-    initialData: Partial<ShippingData>
-    updatedData: Partial<ShippingData>
-    setUpdatedData: Dispatch<SetStateAction<Partial<ShippingData>>>
+    initialData: EditShippingData
+    updatedData: EditShippingData
+    setUpdatedData: Dispatch<SetStateAction<EditShippingData>>
   }
   const onUpdateShippingData = async ({
     key,
@@ -328,7 +335,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const validProperty = await extractValidProperty(key, updatedData)
       const validatedProperty =
         (await validateShippingProperty(validProperty)) ??
-        ({} as Partial<ShippingData>)
+        ({} as EditShippingData)
 
       const response = await updateShippingData(id, validatedProperty)
 

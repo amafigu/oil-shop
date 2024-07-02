@@ -29,7 +29,11 @@
       "productManagement": {
         "title": "Produktverwaltung",
         "editableItemsList": {
-          "title": "Produktliste"
+          "title": "Produktliste",
+          "name": "Nach Name sortieren",
+          "price": "Nach Preis sortieren",
+          "size": "Nach Größe sortieren",
+          "category": "Nach Kategorie sortieren"
         },
         "toggleListButton": {
           "show": "Produkte anzeigen",
@@ -492,7 +496,8 @@
     "role": "Rolle",
     "state": "Bundesland",
     "size": "Größe",
-    "street": "Straße"
+    "street": "Straße",
+    "brand": "Marke"
   },
   "commonButtons": {
     "create": "Erstellen",

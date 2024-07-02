@@ -5,7 +5,13 @@ import { getProductCategories } from "@/api/products/getProductCategories"
 import { getProducts } from "@/api/products/getProducts"
 import { updateProduct } from "@/api/products/updateProduct"
 import { useNotificationContext } from "@/context/notificationContext"
-import { Category, Product, ProductContextType } from "@/types/Product"
+import {
+  Category,
+  CreateProduct,
+  EditProduct,
+  Product,
+  ProductContextType,
+} from "@/types/Product"
 import { onRequestError } from "@/utils/onRequestError"
 import { onValidationError } from "@/utils/onValidationError"
 import {
@@ -34,7 +40,7 @@ export const ProductContext = createContext<ProductContextType | undefined>(
 )
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
-  const [sortCategory, setSortCategory] = useState<string>("")
+  const [sortCategory, setSortCategory] = useState<string | undefined>("")
   const [categories, setCategories] = useState<Category[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const { onSetNotification, setNotification } = useNotificationContext()
@@ -73,7 +79,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onDeleteProduct = async (e: MouseEvent, id: number) => {
+  const onDeleteProduct = async (e: MouseEvent, id: number): Promise<void> => {
     e.preventDefault()
     try {
       const response = await deleteProductById(id)
@@ -92,9 +98,9 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     file,
   }: {
     e: FormEvent
-    data: Product
-    file: File | null | undefined
-  }) => {
+    data: CreateProduct
+    file?: File | null | undefined
+  }): Promise<void> => {
     e.preventDefault()
     try {
       const typedItem = await convertDataToExpectedProductTypes({
@@ -134,11 +140,11 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     key: string
     id: number
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    initialData: any
+    initialData: EditProduct
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedData: any
-    setUpdatedData: Dispatch<SetStateAction<Product>>
-    file: File
+    updatedData: EditProduct
+    setUpdatedData: Dispatch<SetStateAction<EditProduct>>
+    file?: File | null | undefined
   }) => {
     try {
       const validProperty = await extractValidProperty(key, updatedData, file)
@@ -163,14 +169,14 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const extractValidProperty = async (
     key: string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedProductData: any,
-    file: File | null,
+    updatedProductData: EditProduct,
+    file: File | null | undefined,
   ) => {
     if (key === "image" && file) {
       const image = await uploadFile(file)
       return { [key]: image }
     } else {
-      const value = updatedProductData[key]
+      const value = updatedProductData[key as keyof EditProduct]
       if (key === "price" || key === "size") {
         return { [key]: Number(value) }
       } else {

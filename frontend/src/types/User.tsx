@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react"
+import { Dispatch, FormEvent, SetStateAction, SyntheticEvent } from "react"
 
 export interface User {
   id: number
@@ -18,11 +18,21 @@ export interface CreateUser {
   password: string
 }
 
-export interface UpdateUser {
+export interface EditUser {
   firstName: string
   lastName: string
   email: string
   image: string
+}
+
+export interface EditShippingData {
+  street: string
+  number: string
+  details: string
+  postalCode: string
+  city: string
+  state: string
+  country: string
 }
 
 export interface UserHeader {
@@ -59,20 +69,26 @@ export interface UserContextType {
   onUpdateUser: (data: {
     key: string
     id: number
-    initialData: UpdateUser
-    updatedData: UpdateUser
-    setUpdatedData: Dispatch<SetStateAction<UpdateUser>>
-    file?: File
+    initialData: EditUser
+    updatedData: EditUser
+    setUpdatedData: Dispatch<SetStateAction<EditUser>>
+    file?: File | undefined | null
   }) => Promise<void>
-  onDeleteUser: (e: React.SyntheticEvent, id: number) => Promise<void>
-  onCreateCustomer: (e: React.SyntheticEvent, data: CreateUser) => Promise<User>
-  onCreateAdmin: (e: React.SyntheticEvent, data: CreateUser) => Promise<User>
+  onDeleteUser: (e: SyntheticEvent, id: number) => Promise<void>
+  onCreateCustomer: (
+    e: FormEvent<HTMLFormElement>,
+    data: CreateUser,
+  ) => Promise<User>
+  onCreateAdmin: (
+    e: FormEvent<HTMLFormElement>,
+    data: CreateUser,
+  ) => Promise<User>
   onUpdateShippingData: (data: {
     key: string
     id: number
-    initialData: Partial<ShippingData>
-    updatedData: Partial<ShippingData>
-    setUpdatedData: Dispatch<SetStateAction<Partial<ShippingData>>>
+    initialData: EditShippingData
+    updatedData: EditShippingData
+    setUpdatedData: Dispatch<SetStateAction<EditShippingData>>
   }) => Promise<void>
   shippingData: Partial<ShippingData>
 }

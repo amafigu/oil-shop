@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ChangeEvent } from "react"
-
-export const listenInput = (
+import { ChangeEvent, Dispatch, SetStateAction } from "react"
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const listenInput = <T extends { [key: string]: any }>(
   e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  updatedDataObj: { [key: string]: any },
-  setUpdatedDataObj: React.Dispatch<
-    React.SetStateAction<{ [key: string]: any }>
-  >,
+  updatedDataObj: T,
+  setUpdatedDataObj: Dispatch<SetStateAction<T>>,
 ) => {
   setUpdatedDataObj({
     ...updatedDataObj,

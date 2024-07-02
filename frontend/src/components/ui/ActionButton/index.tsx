@@ -18,9 +18,9 @@ export const ActionButton: FC<ActionButtonProps> = ({
     <button
       style={{ userSelect: "none" }}
       className={className ? styles[className] : ""}
-      onClick={(e: MouseEvent) => {
+      onClick={(e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        action(e as MouseEvent<HTMLButtonElement>)
+        action(e)
       }}
       aria-label={ariaLabel}
     >
