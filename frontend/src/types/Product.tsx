@@ -43,7 +43,7 @@ export interface ProductContextType {
   products: Product[]
   setProducts: Dispatch<SetStateAction<Product[]>>
   onCreateProduct: (data: {
-    e: FormEvent
+    e: FormEvent<HTMLFormElement>
     data: CreateProduct
     file?: File | null | undefined
   }) => Promise<void>
