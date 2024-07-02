@@ -1,11 +1,12 @@
 import { ActionButton } from "@/components/ui/ActionButton"
 import { FormInput } from "@/components/ui/FormInput"
+import { SubmitButton } from "@/components/ui/SubmitButton"
 import { STYLES } from "@/constants/styles"
 import { useLogin } from "@/hooks/useLogin"
 import { useTranslation } from "@/hooks/useTranslation"
 import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { FC, useState } from "react"
+import { FC, FormEvent, useState } from "react"
 import styles from "./loginForm.module.scss"
 
 export const LoginForm: FC = () => {
@@ -16,9 +17,13 @@ export const LoginForm: FC = () => {
   const { setLoggedUser } = useLogin()
   const text = translate.pages.login
 
+  const submitLogin = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await setLoggedUser(e, email, password)
+  }
   return (
     <>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitLogin}>
         <FormInput
           classCss={STYLES.FORMS.FIELD}
           name={"email"}
@@ -51,11 +56,10 @@ export const LoginForm: FC = () => {
             ariaLabel={"show password"}
           />
         </div>
-        <ActionButton
-          action={(e) => setLoggedUser(e, email, password)}
+        <SubmitButton
           text={text.loginButton}
           className={STYLES.BUTTONS.WIDE}
-          ariaLabel={"confirm login"}
+          ariaLabel={""}
         />
       </form>
     </>

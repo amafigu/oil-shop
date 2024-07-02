@@ -5,7 +5,7 @@ import { useProductContext } from "@/context/productContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { EditProduct, Product } from "@/types/Product"
 import { setFileToUpload } from "@/utils/setFileToUpload"
-import { FC, useState } from "react"
+import { FC, MouseEvent, useState } from "react"
 import styles from "./editableProductForm.module.scss"
 
 interface EditableProductFormProps {
@@ -39,7 +39,9 @@ export const EditableProductForm: FC<EditableProductFormProps> = ({ item }) => {
           />
         </div>
         <ActionButton
-          action={(e) => onDeleteProduct(e, item.id)}
+          action={(e) =>
+            onDeleteProduct(e as MouseEvent<HTMLButtonElement>, item.id)
+          }
           text={components.editableItem.deleteButton}
           className={STYLES.BUTTONS.ACTION}
         />
