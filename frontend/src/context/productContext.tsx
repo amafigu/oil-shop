@@ -169,14 +169,14 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const extractValidProperty = async (
     key: string,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedProductData: any,
+    updatedProductData: EditProduct,
     file: File | null | undefined,
   ) => {
     if (key === "image" && file) {
       const image = await uploadFile(file)
       return { [key]: image }
     } else {
-      const value = updatedProductData[key]
+      const value = updatedProductData[key as keyof EditProduct]
       if (key === "price" || key === "size") {
         return { [key]: Number(value) }
       } else {

@@ -2,7 +2,7 @@ import { SIGN_UP_ADMIN } from "@/constants/routes"
 import { useNotificationContext } from "@/context/notificationContext"
 import { useUserContext } from "@/context/userContext"
 import { useLogin } from "@/hooks/useLogin"
-import { User } from "@/types/User"
+import { CreateUser, User } from "@/types/User"
 import { onRequestError } from "@/utils/onRequestError"
 import { FormEvent } from "react"
 import { useLocation } from "react-router-dom"
@@ -16,8 +16,8 @@ export const useRegisterUser = () => {
   const isAdmin = currentPath.includes(SIGN_UP_ADMIN)
 
   const registerUser = async (
-    e: FormEvent<HTMLButtonElement>,
-    data: Partial<User>,
+    e: FormEvent<HTMLFormElement>,
+    data: CreateUser,
   ): Promise<User> => {
     e.preventDefault()
     try {

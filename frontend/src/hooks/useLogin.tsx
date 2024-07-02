@@ -11,7 +11,7 @@ export const useLogin = () => {
   const { setNotification } = useNotificationContext()
   const navigate = useNavigate()
   const setLoggedUser = async (
-    e: FormEvent<HTMLButtonElement>,
+    e: FormEvent<HTMLFormElement>,
     email: string,
     password: string,
   ) => {
