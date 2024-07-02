@@ -1,0 +1,24 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.action {
+  height: 36px !important;
+
+  @include action-button;
+
+  @include media.mobile {
+    overflow: hidden;
+  }
+}
+
+.wide {
+  width: 100%;
+  height: 36px !important;
+
+  @include action-button;
+
+  @include media.mobile {
+    overflow: hidden;
+  }
+}
