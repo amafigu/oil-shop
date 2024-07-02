@@ -1,27 +1,26 @@
 import { ActionButton } from "@/components/ui/ActionButton"
-import { useProductContext } from "@/context/productContext"
+import { useUserContext } from "@/context/userContext"
 import { useTranslation } from "@/hooks/useTranslation"
-import { Product } from "@/types/Product"
-import { filterProductsProps } from "@/utils/filterProductsProps"
+import { User } from "@/types/User"
+import { filterUsersProps } from "@/utils/filterUsersProps"
 import { FC, useEffect, useState } from "react"
-import { EditableProductForm } from "../EditableProductForm"
-import styles from "./editableProductsList.module.scss"
+import { EditableUserForm } from "../EditableUserForm"
+import styles from "./editableUsersList.module.scss"
 
-export const EditableProductsList: FC = () => {
-  const [filteredItemsList, setFilteredItemsList] = useState<Product[]>([])
+export const EditableUsersList: FC = () => {
+  const [filteredItemsList, setFilteredItemsList] = useState<User[]>([])
   const [isAscendent, setIsAscendent] = useState<boolean[]>(
-    filterProductsProps.map(() => true),
+    filterUsersProps.map(() => true),
   )
   const { pages } = useTranslation()
-  const productsText = pages.admin.productManagement
-  const text = pages.admin.productManagement.editableItemsList
-  const { products } = useProductContext()
+  const { users } = useUserContext()
+  const text = pages.admin.usersManagement.editableItemsList
   useEffect(() => {
-    setFilteredItemsList(products)
-  }, [products])
+    setFilteredItemsList(users)
+  }, [users])
 
   const filterList = (
-    action: (list: Product[], sortIsAsc: boolean) => Product[],
+    action: (list: User[], sortIsAsc: boolean) => User[],
     index: number,
   ) => {
     const sortIsAsc = [...isAscendent]
@@ -35,13 +34,12 @@ export const EditableProductsList: FC = () => {
     setFilteredItemsList(filteredItems)
   }
 
-  console.log(filterProductsProps)
   return (
-    <section className={styles.wrapper} aria-label={text.title}>
-      <h2>{productsText.editableItemsList.title}</h2>
+    <section className={styles.wrapper}>
+      <h2>{text.title}</h2>
       <div className={styles.container}>
-        {filterProductsProps.length > 0 &&
-          filterProductsProps.map((filterButton, index) => (
+        {filterUsersProps.length > 0 &&
+          filterUsersProps.map((filterButton, index) => (
             <ActionButton
               key={index}
               action={() => filterList(filterButton.action, index)}
@@ -58,7 +56,7 @@ export const EditableProductsList: FC = () => {
       <ul className={styles.list}>
         {filteredItemsList.map((item, index) => (
           <li className={styles.item} key={item.id || index}>
-            <EditableProductForm item={item} />
+            <EditableUserForm item={item} />
           </li>
         ))}
       </ul>
