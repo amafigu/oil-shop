@@ -18,13 +18,3 @@ export const createShippingDataProperties = {
   country: "Please add data",
   postalCode: "Please add data",
 }
-
-export const editableUserShippingDataProperties = [
-  "street",
-  "number",
-  "details",
-  "postalCode",
-  "city",
-  "state",
-  "country",
-]
