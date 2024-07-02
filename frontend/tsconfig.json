@@ -2,7 +2,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "lib": ["ESNext", "dom"],
-    "outDir": "lib",
+    "outDir": "dist",
     "removeComments": true,
     "target": "esnext",
     "module": "esnext",
