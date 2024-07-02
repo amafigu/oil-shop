@@ -30,7 +30,11 @@
       "productManagement": {
         "title": "Products management",
         "editableItemsList": {
-          "title": "Products list"
+          "name": "Sort by Name",
+          "title": "Products list",
+          "price": "Sort by Price",
+          "size": "Sort by Size",
+          "category": "Sort by category"
         },
         "toggleListButton": {
           "show": "Show products",
