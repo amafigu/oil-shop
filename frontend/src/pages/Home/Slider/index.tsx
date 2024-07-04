@@ -62,6 +62,7 @@ export const Slider: FC<SliderProps> = ({ items }) => {
       />
       <ul className={styles.list} aria-label='slider items list'>
         {items &&
+          items.length > 0 &&
           items
             .slice(currentItemIndex, currentItemIndex + sliderQuantity)
             .map((product, index) => (
