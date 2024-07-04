@@ -8,6 +8,9 @@ import viteTsconfigPaths from "vite-tsconfig-paths"
 export default defineConfig({
   base: "/",
   plugins: [react(), viteTsconfigPaths()],
+  build: {
+    sourcemap: true,
+  },
   test: {
     globals: true,
     environment: "jsdom",
