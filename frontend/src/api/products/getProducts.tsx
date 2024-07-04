@@ -5,8 +5,8 @@ export const getProducts = async () => {
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}`,
-      { withCredentials: false },
     )
+    console.log("API URL HOTFIX:", import.meta.env.VITE_APP_API_URL)
     if (response && response.status === 200) {
       return response
     }
