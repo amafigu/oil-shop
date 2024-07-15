@@ -1,17 +1,21 @@
-# 🛍️ Webshop Portfolio Application
+# Webshop Portfolio Application
 
-This application showcases an e-commerce platform with a the followed functionalities and technologies.
+E-commerce platform with the followed functionalities and technologies
 
-## 🛠️ Technologies Stack
+## Live on 
+
+ [https://oylo.netlify.app](https://oylo.netlify.app)
+
+## Technologies Stack
 
 - **Backend**: Node / Express / JavaScript
 - **Frontend**: Vite / React / TypeScript / Sass
-- **Tests**: Vitest / React Testing Library / Supertest
+- **Tests**: Vitest / React Testing Library 
 - **File Storage**: AWS S3
 - **Database**: PostgreSQL
 - **ORM**: Sequelize
 
-## 🌟 Functionalities
+## Functionalities
 
 ### Translation
 
@@ -33,7 +37,7 @@ A secure login system with role-based access control.
 - **Admin**: Can perform CRUD operations on users and products.
 - **Customer**: Registered users can manage their personal data and perform operations available to them.
 
-## 📸 Screenshots
+## Screenshots
 
 ### Homepage
 
