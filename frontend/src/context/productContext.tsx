@@ -13,7 +13,6 @@ import {
   ProductContextType,
 } from "@/types/Product"
 import { onRequestError } from "@/utils/onRequestError"
-import { onValidationError } from "@/utils/onValidationError"
 import {
   createProductSchema,
   updateProductSchema,
@@ -113,8 +112,6 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       const validatedProduct = await validate({
         item: typedItem,
         schema: createProductSchema,
-        onError: onValidationError,
-        onNotification: setNotification,
       })
       const response = await createProduct(validatedProduct)
 
@@ -139,9 +136,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   }: {
     key: string
     id: number
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     initialData: EditProduct
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updatedData: EditProduct
     setUpdatedData: Dispatch<SetStateAction<EditProduct>>
     file?: File | null | undefined
@@ -192,7 +187,6 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         return updateProductSchema.parse(property)
       }
     } catch (error) {
-      onValidationError(error, setNotification)
       console.error("Error by validating property:", error)
     }
   }
