@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 
 export const useLogin = () => {
   const { setIsLoggedIn, setUser } = useUserContext()
-  const { setNotification } = useNotificationContext()
+  const { onSetNotification } = useNotificationContext()
   const navigate = useNavigate()
   const setLoggedUser = async (
     e: FormEvent<HTMLFormElement>,
@@ -30,13 +30,11 @@ export const useLogin = () => {
         }
       }
       if (loginResponse && loginResponse.status === 401) {
-        setNotification("Email or password invalid")
+        onSetNotification("Email or password invalid")
         return
       }
     } catch (error) {
-      const message =
-        "There is an error by loggin, please check your credentials"
-      onRequestError(error, setNotification, message)
+      onRequestError(error, onSetNotification)
     }
   }
 
