@@ -1,5 +1,6 @@
 import { ActionButton } from "@/components/ui/ActionButton"
 import { EditableItemInput } from "@/components/ui/EditableItemInput"
+import { DEFAULT_USER_IMAGE } from "@/constants/media"
 import { STYLES } from "@/constants/styles"
 import { useUserContext } from "@/context/userContext"
 import { useTranslation } from "@/hooks/useTranslation"
@@ -23,15 +24,15 @@ export const EditableUserForm: FC<EditableUserFormProps> = ({ item }) => {
   const [updatedData, setUpdatedData] = useState<EditUser>(initialData)
   const [file, setFile] = useState<File | undefined | null>(null)
   const { components } = useTranslation()
-
   const { onUpdateUser, onDeleteUser } = useUserContext()
+
   return (
     <article className={styles.wrapper} aria-label='Edit user'>
       <div className={styles.container}>
         <div className={styles.imageContainer}>
           <img
             className={styles.image}
-            src={updatedData.image || ""}
+            src={updatedData.image || DEFAULT_USER_IMAGE}
             alt='user'
           />
         </div>
