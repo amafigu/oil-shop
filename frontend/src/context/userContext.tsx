@@ -19,7 +19,6 @@ import {
   UserContextType,
 } from "@/types/User"
 import { onRequestError } from "@/utils/onRequestError"
-import { onValidationError } from "@/utils/onValidationError"
 import {
   createUserSchema,
   shippingDataSchema,
@@ -154,32 +153,23 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
     try {
       const typedItem = convertDataToExpectedUserTypes(data)
-      const validUser = await validate({
+      await validate({
         item: typedItem,
         schema: createUserSchema,
-        onError: onValidationError,
-        onNotification: setNotification,
       })
       const response = await createUser(typedItem)
       if (response && response.status === 422) {
         const message =
           "This user is already existent. Please try with another email."
-        onSetNotification(message)
-        return
+        setTimeout(() => onSetNotification(message), 4000)
       }
       if (response && response.status === 201) {
         const newUser = response.data.user
         setUsers((prevState) => prevState && [...prevState, newUser])
-        if (isCreatedByAdmin) {
-          onSetNotification("User created succesfully")
-        }
-        if (isSignup) {
-          return validUser
-        }
+        return newUser
       }
     } catch (error) {
-      console.error("Error by creating user:", error)
-      onRequestError(error, setNotification)
+      onRequestError(error, onSetNotification)
     }
   }
 
@@ -194,8 +184,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       const validUser = await validate({
         item: typedItem,
         schema: createUserSchema,
-        onError: onValidationError,
-        onNotification: setNotification,
       })
       const response = await createAdmin(validUser)
       if (response && response.status === 422) {
@@ -247,7 +235,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         return updateUserSchema.parse(property)
       }
     } catch (error) {
-      onValidationError(error, setNotification)
       console.error("Error by validating property:", error)
     }
   }
@@ -312,7 +299,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         return shippingDataSchema.parse(property) as Partial<ShippingData>
       }
     } catch (error) {
-      onValidationError(error, setNotification)
       console.error("Error by validating property:", error)
     }
   }

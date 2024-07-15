@@ -82,16 +82,9 @@ export const extractValidProperty = async ({
 interface Validate {
   item: any
   schema: any
-  onError: (error: any, onNotification: any) => void
-  onNotification: any
 }
 
-export const validate = async ({
-  item,
-  schema,
-  onError,
-  onNotification,
-}: Validate): Promise<any> => {
+export const validate = async ({ item, schema }: Validate): Promise<any> => {
   try {
     if (schema) {
       return schema.parse(item)
@@ -100,6 +93,5 @@ export const validate = async ({
     }
   } catch (error) {
     console.error("Error by validation", error)
-    onError(error, onNotification)
   }
 }
