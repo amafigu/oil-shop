@@ -38,7 +38,7 @@ export const UserHeader = () => {
             <div className={styles.imageContainer}>
               <img
                 className={styles.image}
-                src={userData.image}
+                src={userData.image || DEFAULT_USER_IMAGE}
                 alt='user'
                 onError={(e) => setDefaultImageByError(e, DEFAULT_USER_IMAGE)}
               />
