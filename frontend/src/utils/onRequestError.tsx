@@ -1,35 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { SHORT_MESSAGE_TIMEOUT } from "@/constants/time"
+import { NotificationContextType } from "@/types/Notification"
+import { AxiosError } from "axios"
+
+interface ResponseData {
+  message?: string
+  errors?: { message: string }[]
+}
 
 export const onRequestError = (
-  error: any,
-  setNotification: any,
+  error: AxiosError<ResponseData>,
+  setNotification: NotificationContextType["onSetNotification"],
   message = "Error by handling request",
 ) => {
-  console.error(error)
-  if (error && error.response && error.response.data) {
-    if (setNotification) {
-      if (error.response.data.errors) {
-        setNotification(
-          `Error: ${error.response.data.errors[0].path} ${error.response.data.errors[0].message}`,
-        )
-        setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-      } else {
-        if (error.response.data.message) {
-          setNotification(`Error: ${error.response.data.message}`)
-          setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
-        }
-      }
+  const errorMessage = error?.response?.data?.message
+  const errorDetails = error?.response?.data?.errors?.[0]?.message
+
+  if (setNotification) {
+    if (errorDetails) {
+      setNotification(`Error: ${errorDetails}`)
+      return
     }
-  } else if (error && error.response && error.response.data.message) {
-    if (setNotification) {
-      setNotification(`Error: ${error.response.data.message}`)
-      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+    if (errorMessage) {
+      setNotification(`Error: ${errorMessage}`)
+      return
     }
-  } else {
-    if (setNotification) {
-      setNotification(message)
-      setTimeout(() => setNotification(null), SHORT_MESSAGE_TIMEOUT)
+    if (error.message) {
+      setNotification(error.message)
+      return
     }
+    setNotification(message)
   }
 }
