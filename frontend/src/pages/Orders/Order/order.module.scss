@@ -1,0 +1,54 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.item {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  @include media.tablet-down {
+    @include flex-column;
+  }
+}
+
+.content {
+  margin-right: theme.$spacing-extra-huge;
+
+  @include media.mobile {
+    margin-right: 0;
+    margin-bottom: theme.$spacing-regular;
+  }
+}
+
+.details {
+  display: flex;
+}
+
+.property {
+  margin-right: theme.$spacing-smallest;
+
+  @include typography-medium-semibold;
+}
+
+.value {
+  @include typography-medium-normal;
+}
+
+.list {
+  justify-content: space-evenly;
+  flex-grow: 1;
+
+  @include flex-column;
+
+  @include media.desktop-down {
+    width: 480px;
+  }
+
+  @include media.mobile {
+    width: 100%;
+  }
+}
+
+.info {
+  @include typography-medium-semibold;
+}
