@@ -1,0 +1,25 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.wrapper {
+  @include flex-column-align-center;
+  @include margin-page-wrapper;
+}
+
+.ordersContainer {
+  width: 80%;
+
+  @include flex-column-align-center;
+}
+
+.list {
+  @include flex-column;
+}
+
+.item {
+  display: flex;
+  @include media.mobile {
+    width: 100%;
+  }
+}

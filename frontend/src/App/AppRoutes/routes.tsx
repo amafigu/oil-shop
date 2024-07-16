@@ -1,5 +1,6 @@
 import {
   ABOUT,
+  ACCOUNT_ORDERS,
   CART,
   CURRENT_ADMIN,
   CURRENT_CUSTOMER,
@@ -21,6 +22,7 @@ import { Faq } from "@/pages/Faq"
 import { Home } from "@/pages/Home"
 import { Login } from "@/pages/Login"
 import { NotFound } from "@/pages/NotFound"
+import { Orders } from "@/pages/Orders"
 import { OrderSummary } from "@/pages/OrderSummary"
 import { Payment } from "@/pages/Payment"
 import { ProductDetails } from "@/pages/ProductDetails"
@@ -43,4 +45,5 @@ export const routes = [
   { path: SIGN_UP_ADMIN, element: <SignUp /> },
   { path: SHOP, element: <Shop /> },
   { path: CURRENT_CUSTOMER, element: <User /> },
+  { path: ACCOUNT_ORDERS, element: <Orders /> },
 ]
