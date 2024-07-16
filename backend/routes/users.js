@@ -113,15 +113,6 @@ router.get('/role/:roleId', async (req, res) => {
   }
 });
 
-router.get('/roles', decodeJWT, async (req, res) => {
-  try {
-    const roles = await db.roles.findAll();
-    return res.status(200).json(roles);
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-});
-
 router.delete('/:id', decodeJWT, async (req, res) => {
   try {
     const result = await db.users.destroy({
