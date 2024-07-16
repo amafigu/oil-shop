@@ -1,0 +1,48 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.card {
+  padding: theme.$spacing-smaller;
+  height: 346px;
+  width: 572px;
+  background-color: theme.$background-color-primary;
+  z-index: theme.$z-index-account-option;
+
+  @include flex-column-all-center;
+
+  @include media.mobile {
+    width: 100%;
+  }
+}
+
+.container {
+  width: 100%;
+  margin-bottom: theme.$spacing-large;
+  @include flex-column-align-center;
+}
+.icon {
+  margin-bottom: theme.$spacing-small;
+}
+
+.title {
+  @include typography-large-semibold;
+  text-align: center;
+}
+
+.subtitle {
+  @include typography-semimedium-normal;
+  text-align: center;
+}
+
+.link {
+  @include action-button;
+  // overwrite background color
+  background-color: theme.$branding-color-tertiary;
+}
+
+.linkContent {
+  text-align: center;
+  color: theme.$font-color-contrast;
+  @include typography-medium-semibold;
+}
