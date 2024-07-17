@@ -181,8 +181,48 @@
     "addOneToCartButton": {
       "text": "add to cart"
     },
+    "accountHeader": {
+      "greeting": "Welcome,",
+      "management": "Here you can see your data management."
+    },
+    "accountSectionHeader": {
+      "orders": {
+        "title": "My Orders",
+        "subtitle": "Here you can view your purchases."
+      },
+      "profile": {
+        "title": "My Profile",
+        "subtitle": "Here you can change or add your personal data."
+      },
+      "productsManagement": {
+        "title": "Products Management",
+        "subtitle": "Here you can change or add products data."
+      },
+      "usersManagement": {
+        "title": "Users Management",
+        "subtitle": "Here you can change or add user data."
+      },
+      "productsCreation": {
+        "title": "Create Products",
+        "subtitle": "Here you can add products to our system."
+      },
+      "usersCreation": {
+        "title": "Create Users",
+        "subtitle": "Here you can add users to our system."
+      }
+    },
     "createItem": {
       "submitButton": "Submit"
+    },
+    "editDataCard": {
+      "personalData": {
+        "title": "Personal Data",
+        "action": "Edit"
+      },
+      "addressData": {
+        "title": "Billing address",
+        "action": "Edit"
+      }
     },
     "editableItem": {
       "deleteButton": "Delete"
@@ -320,6 +360,21 @@
       "shop": "Shop",
       "about": "About us"
     },
+    "noItemsCard": {
+      "orders": {
+        "title": "No order available",
+        "subtitle": "How about taking a look at our products?",
+        "link": "To shopping"
+      }
+    },
+    "optionCard": {
+      "orders": "My Orders",
+      "profile": "My Profile",
+      "usersManagement": "Management",
+      "productsManagement": "Management",
+      "createUser": "Create",
+      "createProduct": "Create"
+    },
     "orderSummaryItem": {
       "quantity": "Quantity"
     },
@@ -410,6 +465,18 @@
       "returnProductsTitle": "Return buyed products policy",
       "faq": "Frequently Asked Questions / FAQ",
       "faqTitle": "Frequently Asked Questions"
+    },
+    "shippingDataForm": {
+      "title": "Edit address information",
+      "info": "Please note that changes will also be reflected in your billing address.",
+      "save": "Save changes",
+      "cancel": "Cancel"
+    },
+    "userForm": {
+      "title": "Edit personal information",
+      "info": "Please note that changes to your name and title will also be reflected in your billing address.",
+      "save": "Save changes",
+      "cancel": "Cancel"
     }
   },
   "errors": {
