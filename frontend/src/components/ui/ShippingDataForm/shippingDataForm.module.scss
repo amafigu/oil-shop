@@ -1,0 +1,53 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.wrapper {
+  @include form-wrapper;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: theme.$spacing-regular;
+}
+
+.title {
+  @include typography-medium-semibold;
+}
+
+.info {
+  @include typography-semimedium-normal;
+}
+
+.container {
+  justify-content: center;
+  width: 160px;
+  margin-right: theme.$spacing-regular;
+
+  @include flex-column-align-center;
+
+  @include media.mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.form {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+
+  @include flex-column-justify-center;
+}
+
+.inputContainer {
+  margin: theme.$spacing-regular 0;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: theme.$spacing-regular;
+}
