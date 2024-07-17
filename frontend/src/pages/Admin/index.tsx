@@ -1,82 +1,90 @@
-import { CreateProductForm } from "@/components/ui/CreateProductForm"
-import { CreateUserForm } from "@/components/ui/CreateUserForm"
-import { EditableProductsList } from "@/components/ui/EditableProductsList"
-import { EditableUsersList } from "@/components/ui/EditableUsersList"
-import { ToggleButton } from "@/components/ui/ToggleButton"
-import { UserHeader } from "@/components/ui/UserHeader"
-import { STYLES } from "@/constants/styles"
+import { AccountHeader } from "@/components/ui/AccountHeader"
+import { OptionCard } from "@/components/ui/OptionCard"
+import {
+  ACCOUNT_PROFILE,
+  PRODUCTS_CREATE,
+  PRODUCTS_MANAGEMENT,
+  USERS_CREATE,
+  USERS_MANAGEMENT,
+} from "@/constants/routes"
 import { useUserContext } from "@/context/userContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyUserRole } from "@/hooks/useVerifyUserRole"
-import { useEffect, useState } from "react"
+import { getIconByName } from "@/utils/getIconByName"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FC, useEffect } from "react"
 import styles from "./admin.module.scss"
 
-export const Admin = () => {
-  const [showCreateUserForm, setShowCreateUserForm] = useState(false)
-  const [showCreateProductForm, setShowCreateProductForm] = useState(false)
-  const [showUsersList, setShowUsersList] = useState(false)
-  const [showProductsList, setShowProductsList] = useState(false)
-  const { onCreateCustomer, user, isLoggedIn } = useUserContext()
+export const Admin: FC = () => {
+  const { user, isLoggedIn } = useUserContext()
   const { verifyUserRole } = useVerifyUserRole()
-  const { pages } = useTranslation()
-  const usersText = pages.admin.usersManagement
-  const productsText = pages.admin.productManagement
+  const { components } = useTranslation()
 
   useEffect(() => {
     verifyUserRole()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, isLoggedIn])
+  }, [user, isLoggedIn, verifyUserRole])
 
   return (
-    <main className={styles.wrapper}>
-      <div className={styles.container}>
-        <UserHeader />
-      </div>
+    <main className={styles.wrapper} aria-label='Admin Management Page'>
+      <AccountHeader user={user} />
       <section className={styles.container}>
-        <h2>{usersText.title}</h2>
-        <div className={styles.button}>
-          <ToggleButton
-            isVisible={showUsersList}
-            onToggle={() => setShowUsersList((prevState) => !prevState)}
-            hideBtnText={usersText.toggleListButton.hide.toUpperCase()}
-            showBtnText={usersText.toggleListButton.show.toUpperCase()}
-            classCss={STYLES.BUTTONS.SHOW_HIDE}
+        <div className={styles.optionCards}>
+          <OptionCard
+            title={components.optionCard.usersManagement}
+            route={USERS_MANAGEMENT}
+            icon={
+              <FontAwesomeIcon
+                icon={getIconByName("faUsers")}
+                size='4x'
+                color='#6e4a9e'
+              />
+            }
+          />
+          <OptionCard
+            title={components.optionCard.createUser}
+            route={USERS_CREATE}
+            icon={
+              <FontAwesomeIcon
+                icon={getIconByName("faUserPlus")}
+                size='4x'
+                color='#6e4a9e'
+              />
+            }
+          />
+          <OptionCard
+            title={components.optionCard.productsManagement}
+            route={PRODUCTS_MANAGEMENT}
+            icon={
+              <FontAwesomeIcon
+                icon={getIconByName("faCartShopping")}
+                size='4x'
+                color='#6e4a9e'
+              />
+            }
+          />
+          <OptionCard
+            title={components.optionCard.createProduct}
+            route={PRODUCTS_CREATE}
+            icon={
+              <FontAwesomeIcon
+                icon={getIconByName("faCartPlus")}
+                size='4x'
+                color='#6e4a9e'
+              />
+            }
+          />
+          <OptionCard
+            title={components.optionCard.profile}
+            route={ACCOUNT_PROFILE}
+            icon={
+              <FontAwesomeIcon
+                icon={getIconByName("faCircleUser")}
+                size='4x'
+                color='#6e4a9e'
+              />
+            }
           />
         </div>
-        {showUsersList && <EditableUsersList />}
-        <div className={styles.button}>
-          <ToggleButton
-            isVisible={showCreateUserForm}
-            onToggle={setShowCreateUserForm}
-            hideBtnText={usersText.toggleCreateItemButton.hide.toUpperCase()}
-            showBtnText={usersText.toggleCreateItemButton.show.toUpperCase()}
-            classCss={STYLES.BUTTONS.SHOW_HIDE}
-          />
-        </div>
-        {showCreateUserForm && <CreateUserForm onCreate={onCreateCustomer} />}
-      </section>
-      <section className={styles.container}>
-        <h2>{productsText.title}</h2>
-        <div className={styles.button}>
-          <ToggleButton
-            isVisible={showProductsList}
-            onToggle={() => setShowProductsList((prevState) => !prevState)}
-            hideBtnText={productsText.toggleListButton.hide.toUpperCase()}
-            showBtnText={productsText.toggleListButton.show.toUpperCase()}
-            classCss={STYLES.BUTTONS.SHOW_HIDE}
-          />
-        </div>
-        {showProductsList && <EditableProductsList />}
-        <div className={styles.button}>
-          <ToggleButton
-            isVisible={showCreateProductForm}
-            onToggle={setShowCreateProductForm}
-            hideBtnText={productsText.toggleCreateItemButton.hide.toUpperCase()}
-            showBtnText={productsText.toggleCreateItemButton.show.toUpperCase()}
-            classCss={STYLES.BUTTONS.SHOW_HIDE}
-          />
-        </div>
-        {showCreateProductForm && <CreateProductForm />}
       </section>
     </main>
   )
