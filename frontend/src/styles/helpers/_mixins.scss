@@ -140,6 +140,25 @@
   }
 }
 
+@mixin modal-form-button {
+  gap: theme.$spacing-smallest;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  padding: 0px theme.$spacing-semi-regular;
+  position: relative;
+  width: fit-content;
+  border-radius: theme.$border-radius-regular;
+  height: 48px;
+
+  border: 2px solid rgb(0, 0, 0);
+  &:hover {
+    opacity: theme.$opacity-hover;
+  }
+  @include typography-small-semibold;
+}
+
 @mixin footer-column {
   display: flex;
   align-items: baseline;
@@ -223,6 +242,12 @@
   line-height: theme.$line-height-primary;
 }
 
+@mixin typography-semi-huge-semibold {
+  font-size: theme.$font-size-large;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
 @mixin hide {
   width: 0;
   height: 0;
@@ -262,8 +287,6 @@
 
 @mixin menu-list {
   @include flex-align-center;
-
-  height: 60px;
 
   li {
     margin: 0 16px;
