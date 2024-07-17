@@ -31,25 +31,35 @@ export const NavLinks: FC = () => {
       <div className={styles.mobile}>
         <ActionButton
           action={onMobileMenu}
-          text={<FontAwesomeIcon icon={getIconByName("faBars")} size={"2xl"} />}
+          text={
+            <FontAwesomeIcon
+              icon={getIconByName("faBars")}
+              size={"2xl"}
+              color='#fff'
+            />
+          }
           className={STYLES.LINKS.NAVIGATION_MENU_LINK}
           ariaLabel={"show mobile menu"}
         />
       </div>
       <ul className={styles.list} aria-label={"navigation items"}>
-        <li>
+        <li className={styles.link}>
           <ActionButton
             action={() =>
               setShowProductsSearchBar((prevState: boolean) => !prevState)
             }
             text={
-              <FontAwesomeIcon icon={getIconByName("faSearch")} size={"xl"} />
+              <FontAwesomeIcon
+                icon={getIconByName("faSearch")}
+                size={"xl"}
+                color='#fff'
+              />
             }
             className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
             ariaLabel={"show search bar"}
           />
         </li>
-        <li className={styles.link}>
+        <li>
           <LanguageSelector />
         </li>
         {isLoggedIn ? (
@@ -62,18 +72,21 @@ export const NavLinks: FC = () => {
                   : CURRENT_CUSTOMER
               }
             >
-              <FontAwesomeIcon icon={getIconByName("faUser")} />
+              <FontAwesomeIcon icon={getIconByName("faUser")} color='#fff' />
             </Link>
-            <LogoutButton className={STYLES.LINKS.NAVIGATION_MENU_LINK} />
+            <LogoutButton className={STYLES.BUTTONS.LOGOUT} />
           </li>
         ) : (
           <Link className={styles.link} to={LOGIN}>
-            <FontAwesomeIcon icon={getIconByName("faUser")} />
+            <FontAwesomeIcon icon={getIconByName("faUser")} color='#fff' />
           </Link>
         )}
         <li className={styles.cart} aria-label={"cart items quantity"}>
           <Link className={styles.link} to={CART}>
-            <FontAwesomeIcon icon={getIconByName("faCartShopping")} />
+            <FontAwesomeIcon
+              icon={getIconByName("faCartShopping")}
+              color='#fff'
+            />
           </Link>
           <span className={styles.quantity}>{getAllProductsQuantity}</span>
         </li>
