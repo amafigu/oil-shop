@@ -1,0 +1,15 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.inputContainer {
+  @include form-input-container;
+}
+
+.label {
+  @include form-input-label;
+}
+
+.input {
+  @include form-input;
+}
