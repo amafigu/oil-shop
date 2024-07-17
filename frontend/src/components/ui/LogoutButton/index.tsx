@@ -17,6 +17,7 @@ export const LogoutButton: FC<LogoutButtonProps> = ({ className }) => {
         <FontAwesomeIcon
           icon={getIconByName("faArrowRightFromBracket")}
           size='2xl'
+          color='#fff'
         />
       }
       className={className}
