@@ -32,11 +32,10 @@ export const CreateUserForm: FC<CreateUserFormProps> = ({ onCreate }) => {
   }
 
   return (
-    <section aria-label='Create user'>
-      <form className={styles.container} onSubmit={submit}>
+    <section className={styles.wrapper}>
+      <form className={styles.form} onSubmit={submit}>
         {Object.keys(data).map((field) => (
           <FormInput
-            classCss={STYLES.FORMS.FIELD}
             key={field}
             name={field}
             onChangeListener={(e) => listenInput(e, data, setData)}
@@ -49,7 +48,7 @@ export const CreateUserForm: FC<CreateUserFormProps> = ({ onCreate }) => {
         <div className={styles.button}>
           <SubmitButton
             text={components.createItem.submitButton}
-            className={STYLES.BUTTONS.ACTION}
+            className={STYLES.BUTTONS.SAVE}
           />
         </div>
       </form>
