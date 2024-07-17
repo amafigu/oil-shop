@@ -22,7 +22,6 @@ export interface EditUser {
   firstName: string
   lastName: string
   email: string
-  image: string
 }
 
 export interface EditShippingData {
@@ -67,12 +66,10 @@ export interface UserContextType {
   user: User | null
   setUser: Dispatch<SetStateAction<User | null>>
   onUpdateUser: (data: {
-    key: string
     id: number
     initialData: EditUser
     updatedData: EditUser
     setUpdatedData: Dispatch<SetStateAction<EditUser>>
-    file?: File | undefined | null
   }) => Promise<void>
   onDeleteUser: (e: SyntheticEvent, id: number) => Promise<void>
   onCreateCustomer: (
@@ -84,7 +81,6 @@ export interface UserContextType {
     data: CreateUser,
   ) => Promise<User>
   onUpdateShippingData: (data: {
-    key: string
     id: number
     initialData: EditShippingData
     updatedData: EditShippingData
