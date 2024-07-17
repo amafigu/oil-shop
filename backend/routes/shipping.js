@@ -17,13 +17,13 @@ router.get('/:id', async (req, res) => {
     if (!shippingData && user) {
       const initialData = {
         userId: req.params.id,
-        street: 'Please add data',
-        number: 'Please add data',
-        details: 'Please add data',
-        postalCode: 'Please add data',
-        city: 'Please add data',
-        state: 'Please add data',
-        country: 'Please add data',
+        street: 'Street',
+        number: 'number',
+        details: 'details',
+        postalCode: 'postal code',
+        city: 'city',
+        state: 'state',
+        country: 'country',
       };
 
       shippingData = await db.shippingData.create(initialData);
