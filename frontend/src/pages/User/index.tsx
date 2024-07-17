@@ -1,65 +1,55 @@
-import { EditableShippingDataForm } from "@/components/ui/EditableShippingDataForm"
-import { EditableUserForm } from "@/components/ui/EditableUserForm"
-import { ToggleButton } from "@/components/ui/ToggleButton"
-import { UserHeader } from "@/components/ui/UserHeader"
-import { STYLES } from "@/constants/styles"
+import { AccountHeader } from "@/components/ui/AccountHeader"
+import { OptionCard } from "@/components/ui/OptionCard"
+import { ACCOUNT_ORDERS, ACCOUNT_PROFILE } from "@/constants/routes"
 import { useUserContext } from "@/context/userContext"
-import { useGetOrders } from "@/hooks/useGetOrders"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyUserRole } from "@/hooks/useVerifyUserRole"
-import { User as ContextUser, ShippingData } from "@/types/User"
-import { FC, useEffect, useState } from "react"
-import { Order } from "./Order"
+import { getIconByName } from "@/utils/getIconByName"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FC, useEffect } from "react"
 import styles from "./user.module.scss"
 
 export const User: FC = () => {
-  const [showOrders, setShowOrders] = useState(false)
-  const [showShippingData, setShowShippingData] = useState(false)
-  const { user, shippingData, isLoggedIn } = useUserContext()
-  const { pages } = useTranslation()
-  const { orders } = useGetOrders()
+  const { user, isLoggedIn } = useUserContext()
   const { verifyUserRole } = useVerifyUserRole()
+  const { components } = useTranslation()
 
   useEffect(() => {
     verifyUserRole()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, isLoggedIn])
+  }, [user, isLoggedIn, verifyUserRole])
 
   return (
-    <main className={styles.wrapper} aria-label='Customer Management Page'>
+    <main className={styles.wrapper} aria-label='User Management Page'>
+      <AccountHeader user={user} />
       <section className={styles.container}>
-        <UserHeader />
-        {user && <EditableUserForm item={user as ContextUser} />}
-        <div className={styles.buttonContainer}>
-          <ToggleButton
-            isVisible={showShippingData}
-            onToggle={setShowShippingData}
-            hideBtnText={pages.user.toggleShippingData.hide.toUpperCase()}
-            showBtnText={pages.user.toggleShippingData.show.toUpperCase()}
-            classCss={STYLES.BUTTONS.SHOW_HIDE}
-          />
+        <div className={styles.optionCards}>
+          {user?.role?.name === "customer" && (
+            <>
+              <OptionCard
+                title={components.optionCard.orders}
+                route={ACCOUNT_ORDERS}
+                icon={
+                  <FontAwesomeIcon
+                    icon={getIconByName("faBagShopping")}
+                    size='4x'
+                    color='#6e4a9e'
+                  />
+                }
+              />
+              <OptionCard
+                title={components.optionCard.profile}
+                route={ACCOUNT_PROFILE}
+                icon={
+                  <FontAwesomeIcon
+                    icon={getIconByName("faCircleUser")}
+                    size='4x'
+                    color='#6e4a9e'
+                  />
+                }
+              />
+            </>
+          )}
         </div>
-        {showShippingData && shippingData && (
-          <EditableShippingDataForm item={shippingData as ShippingData} />
-        )}
-        <div className={styles.buttonContainer}>
-          <ToggleButton
-            isVisible={showOrders}
-            onToggle={setShowOrders}
-            hideBtnText={pages.user.toggleOrders.hide.toUpperCase()}
-            showBtnText={pages.user.toggleOrders.show.toUpperCase()}
-            classCss={STYLES.BUTTONS.SHOW_HIDE}
-          />
-        </div>
-        {showOrders && orders && (
-          <ul className={styles.list}>
-            {orders.map((item, index) => (
-              <li className={styles.item} key={index}>
-                <Order item={item} />
-              </li>
-            ))}
-          </ul>
-        )}
       </section>
     </main>
   )
