@@ -1,11 +1,13 @@
 import { SHIPPING_DATA } from "@/constants/api"
-import { ShippingData } from "@/types/User"
+import { EditShippingData } from "@/types/User"
 import axios from "axios"
 
 export const updateShippingData = async (
   userId: number,
-  data: Partial<ShippingData>,
+  data: EditShippingData,
 ) => {
+  console.log("updateShippingData data", data)
+  console.log("updateShippingData userId", userId)
   try {
     const response = await axios.put(
       `${import.meta.env.VITE_APP_API_URL}${SHIPPING_DATA}/${userId}`,
