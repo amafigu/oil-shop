@@ -1,7 +1,7 @@
+import { Footer } from "@/components/ui/Footer"
+import { Navbar } from "@/components/ui/Navbar"
+import { NavigationMenu } from "@/components/ui/NavigationMenu"
 import { Route, Routes } from "react-router-dom"
-import { Footer } from "../../components/ui/Footer"
-import { Navbar } from "../../components/ui/Navbar"
-import { NavigationMenu } from "../../components/ui/NavigationMenu"
 import { routes } from "./routes"
 
 export const AppRoutes = () => {
