@@ -33,7 +33,7 @@ export const FooterLinks: FC = () => {
               {text.linksColumns.forClient.title}
             </div>
             <ul className={styles.itemsLinksList}>
-              <li>
+              <li className={styles.link}>
                 <Link
                   to={SHOP}
                   title={text.linksColumns.forClient.returnToShopTitle}
@@ -41,7 +41,7 @@ export const FooterLinks: FC = () => {
                   {text.linksColumns.forClient.returnToShop}
                 </Link>
               </li>
-              <li>
+              <li className={styles.link}>
                 <Link to={FAQ} title='FAQ'>
                   {text.linksColumns.forClient.faq}
                 </Link>
@@ -54,12 +54,12 @@ export const FooterLinks: FC = () => {
               {text.linksColumns.users.title}
             </div>
             <ul className={styles.itemsLinksList}>
-              <li>
+              <li className={styles.link}>
                 <Link to={LOGIN} title='account & login'>
                   {text.linksColumns.users.accountAndLogin}
                 </Link>
               </li>
-              <li>
+              <li className={styles.link}>
                 <Link to={SIGN_UP} title='registration'>
                   {text.linksColumns.users.registration}
                 </Link>
