@@ -1,0 +1,42 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.card {
+  padding: theme.$spacing-semi-large;
+  height: 218px;
+  width: 322px;
+  background-color: theme.$background-color-primary;
+  border: theme.$border-regular-component;
+  border-radius: theme.$border-radius-regular;
+  z-index: theme.$z-index-account-option;
+
+  @include flex-column;
+}
+
+.title {
+  margin-bottom: theme.$spacing-regular;
+  @include typography-medium-semibold;
+}
+
+.data {
+  margin-bottom: theme.$spacing-semi-large;
+}
+
+.dataItem {
+  @include typography-small-normal;
+}
+
+.buttonContainer {
+  height: fitContent;
+}
+
+.button {
+  @include reset-button;
+  @include typography-small-semibold;
+  padding: 0;
+  color: theme.$font-color-light;
+  &:hover {
+    text-decoration: underline 1px theme.$font-color-light;
+  }
+}
