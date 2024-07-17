@@ -34,6 +34,13 @@
   }
 }
 
+.logout {
+  @include reset-button;
+  :hover {
+    opacity: theme.$opacity-hover;
+  }
+}
+
 .navigation,
 .slider {
   @include reset-button;
@@ -73,4 +80,32 @@
   cursor: pointer;
 
   @include reset-button;
+}
+
+.cancelForm {
+  background: transparent;
+  color: rgb(0, 0, 0);
+
+  @include modal-form-button;
+  @include typography-small-semibold;
+  @include flex-all-center;
+}
+
+.saveForm {
+  color: theme.$font-color-contrast;
+  background: rgb(0, 0, 0);
+
+  @include modal-form-button;
+  @include flex-all-center;
+}
+
+.closeModal {
+  border: none;
+  background: transparent;
+  color: theme.$font-color-primary;
+  cursor: pointer;
+  &:hover {
+    background: rgba(227, 227, 227);
+    border-radius: theme.$border-radius-small;
+  }
 }
