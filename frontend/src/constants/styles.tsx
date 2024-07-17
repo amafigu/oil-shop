@@ -9,6 +9,10 @@ export const STYLES = Object.freeze({
     CART_ITEM_QUANTITY: "cartQuantity",
     CART_ITEM_DELETE: "cartDelete",
     LANGUAGES_SELECTOR: "languages",
+    LOGOUT: "logout",
+    CANCEL: "cancelForm",
+    SAVE: "saveForm",
+    CLOSE_MODAL: "closeModal",
   },
   LINKS: {
     NAVIGATION_MENU_LINK: "navigation",
