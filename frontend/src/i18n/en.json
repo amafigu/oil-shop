@@ -8,15 +8,16 @@
         "title": "Users management",
         "editableItemsList": {
           "title": "Users list",
-          "firstName": "Sort by First Name",
-          "reverseFilterByFirstName": "Reverse order",
-          "lastName": "Sort by Last Name",
-          "name": "Sort by Name",
-          "email": "Sort by Email",
-          "price": "Sort by Price",
-          "size": "Sort by Size",
-          "category": "Sort by category",
-          "reverse": "Reverse order"
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "name": "Name",
+          "email": "Email",
+          "price": "Price",
+          "size": "Size",
+          "category": "Category",
+          "ascendent": "ascending",
+          "descendent": "descending",
+          "sortBy": "Sort by"
         },
         "toggleListButton": {
           "show": "Show users",
@@ -30,11 +31,11 @@
       "productManagement": {
         "title": "Products management",
         "editableItemsList": {
-          "name": "Sort by Name",
+          "name": "Name",
           "title": "Products list",
-          "price": "Sort by Price",
-          "size": "Sort by Size",
-          "category": "Sort by category"
+          "price": "Price",
+          "size": "Size",
+          "category": "category"
         },
         "toggleListButton": {
           "show": "Show products",
@@ -354,6 +355,10 @@
         "success": "Product successfully deleted",
         "fail": "We can not delete this product"
       }
+    },
+    "listUserForm": {
+      "save": "Save",
+      "delete": "Delete"
     },
     "navigationMenu": {
       "home": "Home",

@@ -3,6 +3,8 @@
 @import "@/styles/helpers/mixins";
 
 .wrapper {
+  min-height: calc(100vh - 400px);
+
   @include flex-column-align-center;
   @include margin-page-wrapper;
 }
