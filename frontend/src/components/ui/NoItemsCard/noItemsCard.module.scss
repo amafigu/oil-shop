@@ -37,12 +37,17 @@
 
 .link {
   @include action-button;
-  // overwrite background color
   background-color: theme.$branding-color-tertiary;
+  &:hover {
+    background-color: theme.$branding-color-secondary;
+    box-shadow: theme.$box-shadow-primary;
+  }
 }
 
 .linkContent {
   text-align: center;
   color: theme.$font-color-contrast;
+  margin: theme.$spacing-semi-regular;
+
   @include typography-medium-semibold;
 }
