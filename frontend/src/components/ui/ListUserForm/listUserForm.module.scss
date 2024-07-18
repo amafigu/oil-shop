@@ -1,0 +1,19 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.wrapper {
+  @include list-item-wrapper;
+}
+
+.buttonsContainer {
+  @include list-item-buttons-container;
+}
+
+.form {
+  @include list-item-form;
+}
+
+.inputContainer {
+  @include list-item-input-container;
+}
