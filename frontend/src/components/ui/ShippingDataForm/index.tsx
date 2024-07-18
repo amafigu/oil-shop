@@ -73,7 +73,6 @@ export const ShippingDataForm: FC<ShippingDataFormProps> = ({
               name={key}
               updatedPropertyData={updatedData}
               onChange={onInputChange}
-              classCss={STYLES.FORMS.FIELD}
               type={"text"}
               key={key}
             />
