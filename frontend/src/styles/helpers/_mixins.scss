@@ -339,6 +339,7 @@
     width: 100%;
   }
 }
+
 @mixin form {
   .form {
     width: 100%;
@@ -390,8 +391,125 @@
   color: rgb(58, 58, 58);
 }
 
+@mixin form-save-button {
+  color: theme.$font-color-contrast;
+  background: rgb(0, 0, 0);
+
+  @include modal-form-button;
+  @include flex-all-center;
+}
+
+@mixin form-cancel-button {
+  background: transparent;
+  color: rgb(0, 0, 0);
+
+  @include modal-form-button;
+  @include typography-small-semibold;
+  @include flex-all-center;
+}
+
 @mixin page-wrapper {
   width: 100%;
   min-height: calc(100vh - 300px);
   @include flex-column-align-center;
+}
+
+@mixin editable-list-section {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+  @include flex-justify-center;
+}
+
+@mixin editable-list-container {
+  width: 80%;
+  display: flex;
+
+  @include media.fullscreen-small-down {
+    flex-direction: column;
+  }
+}
+
+@mixin editable-list-filter-column {
+  width: 240px;
+  margin-right: theme.$spacing-regular;
+
+  @include flex-column;
+  align-items: flex-start;
+}
+
+@mixin editable-list {
+  width: 100%;
+}
+
+@mixin editable-list-item {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+  max-width: 1200px;
+  border-bottom: theme.$border-regular-component;
+  @include flex-column-justify-center;
+
+  @include media.mobile {
+    width: 100%;
+    margin: theme.$spacing-semi-extra-large 0 theme.$spacing-regular 0;
+    @include flex-column-align-center;
+  }
+}
+
+@mixin editable-list-filter-select {
+  appearance: none;
+  background-color: transparent;
+  box-shadow: none;
+  display: block;
+  font-size: 16px;
+  line-height: calc(1.42857);
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 10;
+  padding: 16px 32px 16px 16px;
+  color: rgb(58, 58, 58);
+  border-radius: 8px;
+  border: 2px solid rgb(140, 140, 140);
+  cursor: pointer;
+}
+
+@mixin list-item-wrapper {
+  width: 100%;
+  gap: theme.$spacing-regular;
+  @include flex-align-center;
+
+  @include media.mobile {
+    @include flex-column-justify-center;
+  }
+}
+
+@mixin list-item-buttons-container {
+  width: 160px;
+  gap: theme.$spacing-regular;
+
+  @include flex-column-align-center;
+
+  @include media.mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@mixin list-item-form {
+  width: 100%;
+  flex-grow: 1;
+  margin: theme.$spacing-regular 0;
+
+  @include flex-column-justify-center;
+  @include media.mobile {
+    order: 2;
+  }
+}
+
+@mixin list-item-input-container {
+  margin: theme.$spacing-regular 0;
 }
