@@ -13,6 +13,9 @@ export const STYLES = Object.freeze({
     CANCEL: "cancelForm",
     SAVE: "saveForm",
     CLOSE_MODAL: "closeModal",
+    SAVE_ITEM: "saveItem",
+    DELETE_ITEM: "deleteItem",
+    FILTER_OPTION: "filterOption",
   },
   LINKS: {
     NAVIGATION_MENU_LINK: "navigation",
