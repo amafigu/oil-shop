@@ -25,28 +25,33 @@ export const NavigationMenu = () => {
   }
 
   return (
-    <nav className={styles.pages} aria-label='navigation menu'>
-      <ul className={styles.list}>
-        {navigationMenuItems &&
-          navigationMenuItems.map((item, index) => {
-            return (
-              <li className={styles.item} key={index}>
-                <ActionButton
-                  action={(e) =>
-                    onSelect(e as MouseEvent<HTMLButtonElement>, item)
-                  }
-                  text={translateByPath(components.navigationMenu, item.label)}
-                  className={
-                    item.label === activePageLink
-                      ? "navigationActive"
-                      : "navigation"
-                  }
-                  aria-label='page navigation item'
-                />
-              </li>
-            )
-          })}
-      </ul>
-    </nav>
+    <>
+      <nav className={styles.navigationMenu} aria-label='navigation menu'>
+        <ul className={styles.list}>
+          {navigationMenuItems &&
+            navigationMenuItems.map((item, index) => {
+              return (
+                <li className={styles.item} key={index}>
+                  <ActionButton
+                    action={(e) =>
+                      onSelect(e as MouseEvent<HTMLButtonElement>, item)
+                    }
+                    text={translateByPath(
+                      components.navigationMenu,
+                      item.label,
+                    )}
+                    className={
+                      item.label === activePageLink
+                        ? "navigationActive"
+                        : "navigation"
+                    }
+                    aria-label='page navigation item'
+                  />
+                </li>
+              )
+            })}
+        </ul>
+      </nav>
+    </>
   )
 }
