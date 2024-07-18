@@ -83,20 +83,21 @@
 }
 
 .cancelForm {
-  background: transparent;
-  color: rgb(0, 0, 0);
+  @include form-cancel-button;
+}
 
-  @include modal-form-button;
-  @include typography-small-semibold;
-  @include flex-all-center;
+.deleteItem {
+  @include form-cancel-button;
+  width: 120px;
+}
+
+.saveItem {
+  @include form-save-button;
+  width: 120px;
 }
 
 .saveForm {
-  color: theme.$font-color-contrast;
-  background: rgb(0, 0, 0);
-
-  @include modal-form-button;
-  @include flex-all-center;
+  @include form-save-button;
 }
 
 .closeModal {
@@ -108,4 +109,11 @@
     background: rgba(227, 227, 227);
     border-radius: theme.$border-radius-small;
   }
+}
+
+.filterOption {
+  @include reset-button;
+  cursor: pointer;
+  @include typography-medium-normal;
+  color: theme.$font-color-light;
 }
