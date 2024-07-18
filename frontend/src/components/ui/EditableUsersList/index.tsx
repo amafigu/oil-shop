@@ -1,65 +1,74 @@
-import { ActionButton } from "@/components/ui/ActionButton"
 import { useUserContext } from "@/context/userContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { User } from "@/types/User"
 import { filterUsersProps } from "@/utils/filterUsersProps"
-import { FC, useEffect, useState } from "react"
-import { EditableUserForm } from "../EditableUserForm"
+import { ChangeEvent, FC, useEffect, useState } from "react"
+import { ListUserForm } from "../ListUserForm"
 import styles from "./editableUsersList.module.scss"
 
 export const EditableUsersList: FC = () => {
   const [filteredItemsList, setFilteredItemsList] = useState<User[]>([])
-  const [isAscendent, setIsAscendent] = useState<boolean[]>(
-    filterUsersProps.map(() => true),
-  )
   const { pages } = useTranslation()
   const { users } = useUserContext()
   const text = pages.admin.usersManagement.editableItemsList
+
   useEffect(() => {
-    setFilteredItemsList(users)
+    setFilteredItemsList(users || [])
   }, [users])
 
-  const filterList = (
-    action: (list: User[], sortIsAsc: boolean) => User[],
-    index: number,
-  ) => {
-    const sortIsAsc = [...isAscendent]
-    sortIsAsc[index] = !sortIsAsc[index]
-    setIsAscendent(sortIsAsc)
-
-    const filteredItems = action(
-      [...filteredItemsList],
-      sortIsAsc[index] ?? true,
-    )
-    setFilteredItemsList(filteredItems)
+  const selectFilter = (e: ChangeEvent<HTMLSelectElement>) => {
+    const index = parseInt(e.target.value)
+    if (index >= 0 && index < filterUsersProps.length) {
+      const filterAction = filterUsersProps[index]?.action
+      if (filterAction && filteredItemsList) {
+        const sortedItems = filterAction([...filteredItemsList])
+        setFilteredItemsList(sortedItems)
+      }
+    }
   }
 
   return (
-    <section className={styles.wrapper}>
-      <h2>{text.title}</h2>
-      <div className={styles.container}>
-        {filterUsersProps.length > 0 &&
-          filterUsersProps.map((filterButton, index) => (
-            <ActionButton
-              key={index}
-              action={() => filterList(filterButton.action, index)}
-              text={
-                isAscendent[index]
-                  ? `${text[filterButton.targetProperty]} asc`
-                  : `${text[filterButton.targetProperty]} des`
-              }
-              className={filterButton.className}
-              ariaLabel='Filter button'
-            />
-          ))}
-      </div>
-      <ul className={styles.list}>
-        {filteredItemsList.map((item, index) => (
-          <li className={styles.item} key={item.id || index}>
-            <EditableUserForm item={item} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <>
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <div className={styles.filterColumn}>
+            <div className={styles.selector}>
+              <label className={styles.label} htmlFor='filterOptions'></label>
+              <select
+                className={styles.select}
+                name='filterOptions'
+                id='filterOptions'
+                onChange={selectFilter}
+                defaultValue=''
+              >
+                <option value='' disabled>
+                  {`${text.sortBy} ...`}
+                </option>
+                {filterUsersProps.map((filterButton, index) => (
+                  <option key={index} value={index}>
+                    {filterButton.isAsc
+                      ? `${text[filterButton.targetProperty]}: ${
+                          text.ascendent
+                        }`
+                      : `${text[filterButton.targetProperty]}: ${
+                          text.descendent
+                        }`}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className={styles.listColumn}>
+            <ul className={styles.list}>
+              {filteredItemsList.map((item, index) => (
+                <li className={styles.item} key={item.id || index}>
+                  <ListUserForm item={item} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
