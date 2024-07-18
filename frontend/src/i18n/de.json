@@ -15,7 +15,9 @@
           "price": "Nach Preis sortieren",
           "size": "Nach Größe sortieren",
           "category": "Nach Kategorie sortieren",
-          "reverse": "Umkehren"
+          "ascendent": "aufsteigend",
+          "descendent": "absteigend",
+          "sortBy": "Sortieren nach"
         },
         "toggleListButton": {
           "show": "Benutzern anzeigen",
@@ -378,6 +380,10 @@
         "sucess": "Produkt erfolgreich gelöscht",
         "fail": "Wir können dieses Produkt nicht löschen"
       }
+    },
+    "listUserForm": {
+      "save": "Speichern",
+      "delete": "Löschen"
     },
     "navigationMenu": {
       "home": "Home",
