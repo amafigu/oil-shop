@@ -13,10 +13,7 @@ import {
   ProductContextType,
 } from "@/types/Product"
 import { onRequestError } from "@/utils/onRequestError"
-import {
-  createProductSchema,
-  updateProductSchema,
-} from "@/utils/productsValidation"
+import { createProductSchema } from "@/utils/productsValidation"
 import {
   convertDataToExpectedProductTypes,
   validate,
@@ -127,24 +124,21 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const onUpdateProduct = async ({
-    key,
     id,
     initialData,
     updatedData,
     setUpdatedData,
-    file,
   }: {
-    key: string
     id: number
     initialData: EditProduct
     updatedData: EditProduct
     setUpdatedData: Dispatch<SetStateAction<EditProduct>>
-    file?: File | null | undefined
   }) => {
+    console.log("onUpdateProduct initialData", initialData)
+    console.log("onUpdateProduct updatedData", updatedData)
     try {
-      const validProperty = await extractValidProperty(key, updatedData, file)
-      const validatedProperty = (await validateProduct(validProperty)) ?? {}
-      const response = await updateProduct(id, validatedProperty as Product)
+      // const validatedProperty = (await validateProduct(updatedData)) ?? {}
+      const response = await updateProduct(id, updatedData as Product)
       if (response && response.status === 200) {
         const updatedProduct = response.data.product
         setProducts((prevProducts) =>
@@ -156,38 +150,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Error by updating product:", error)
       setUpdatedData(initialData)
-      const message = "Error by updating product"
-      onRequestError(error, setNotification, message)
-    }
-  }
-
-  const extractValidProperty = async (
-    key: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedProductData: EditProduct,
-    file: File | null | undefined,
-  ) => {
-    if (key === "image" && file) {
-      const image = await uploadFile(file)
-      return { [key]: image }
-    } else {
-      const value = updatedProductData[key as keyof EditProduct]
-      if (key === "price" || key === "size") {
-        return { [key]: Number(value) }
-      } else {
-        return { [key]: value }
-      }
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateProduct = async (property: any) => {
-    try {
-      if (updateProductSchema) {
-        return updateProductSchema.parse(property)
-      }
-    } catch (error) {
-      console.error("Error by validating property:", error)
+      onRequestError(error, onSetNotification)
     }
   }
 
