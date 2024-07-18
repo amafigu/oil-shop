@@ -9,7 +9,7 @@ interface OrderCardProps {
   product:
     | {
         name: string
-        image: string
+        image?: string
         size: string
         description?: string
         price?: number
@@ -21,38 +21,34 @@ interface OrderCardProps {
 export const OrderCard: FC<OrderCardProps> = ({ product, quantity }) => {
   const { components } = useTranslation()
   const text = components.orderCard
+
   return (
     <article
       className={styles.wrapper}
       aria-label={`${text.orderedProduct}: ${product?.name}`}
     >
       {product ? (
-        <dl>
-          <div className={styles.container}>
-            <div className={styles.body}>
-              <div className={styles.imageContainer}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className={styles.image}
-                  onError={(e) =>
-                    setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
-                  }
-                />
-              </div>
-              <div className={styles.description}>
-                <dt className={styles.hide}>{text.hiddenSemantics}</dt>
-                <dd>{`${quantity} ${titleCase(product.name, "_")} ${
-                  product.size
-                } ml`}</dd>
-                <dd>{product.description}</dd>
-                <dd></dd>
-                <dd>{`${product.price} € ${text.pricePerUnit}`} </dd>
-              </div>
+        <div className={styles.container}>
+          <div className={styles.body}>
+            <div className={styles.imageContainer}>
+              <img
+                src={product.image || DEFAULT_PRODUCT_IMAGE}
+                alt={product.name}
+                className={styles.image}
+                onError={(e) =>
+                  setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                }
+              />
             </div>
-            <hr />
+            <div className={styles.description}>
+              <div>{`${quantity} ${titleCase(product.name, "_")} ${
+                product.size
+              } ml`}</div>
+              <div>{`${product.price} € ${text.pricePerUnit}`}</div>
+            </div>
           </div>
-        </dl>
+          <hr />
+        </div>
       ) : (
         <p>{text.productNotFound}</p>
       )}
