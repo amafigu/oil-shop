@@ -1,6 +1,5 @@
 import { getAuthenticatedUserById } from "@/api/auth/getAuthenticatedUserById"
 import { getDecodedAuthToken } from "@/api/auth/getDecodedAuthToken"
-import { uploadFile } from "@/api/aws/uploadFile"
 import { createAdmin } from "@/api/users/createAdmin"
 import { createUser } from "@/api/users/createUser"
 import { deleteUserById } from "@/api/users/deleteUserById"
@@ -19,11 +18,7 @@ import {
   UserContextType,
 } from "@/types/User"
 import { onRequestError } from "@/utils/onRequestError"
-import {
-  createUserSchema,
-  shippingDataSchema,
-  updateUserSchema,
-} from "@/utils/usersValidation"
+import { createUserSchema, updateUserSchema } from "@/utils/usersValidation"
 import { convertDataToExpectedUserTypes, validate } from "@/utils/verifyTypes"
 import {
   Dispatch,
@@ -204,76 +199,35 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (error) {
       console.error("Error by creating user:", error)
-      onRequestError(error, setNotification)
+      onRequestError(error, onSetNotification)
     }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const extractValidProperty = async (
-    key: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    updatedData: any,
-    file?: File,
-  ) => {
-    if (key === "image" && file) {
-      const image = await uploadFile(file)
-      return { [key]: image }
-    } else {
-      const value = updatedData[key]
-      if (key === "price" || key === "size") {
-        return { [key]: Number(value) }
-      } else {
-        return { [key]: value }
-      }
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateUpdatedUser = async (property: any) => {
+  const validateUpdatedUser = async (data: any) => {
     try {
       if (updateUserSchema) {
-        return updateUserSchema.parse(property)
+        return updateUserSchema.parse(data)
       }
     } catch (error) {
       console.error("Error by validating property:", error)
+      throw error
     }
-  }
-
-  const convertUpdatedUserData = async (
-    key: string,
-    updatedData: EditUser,
-    file?: File | undefined | null,
-  ) => {
-    if (key === "image" && file) {
-      const image = await uploadFile(file)
-      return { [key]: image }
-    } else {
-      const value = updatedData[key as keyof EditUser]
-
-      return { [key]: value }
-    }
-  }
-
-  interface OnUpdateUser {
-    key: string
-    id: number
-    initialData: EditUser
-    updatedData: EditUser
-    setUpdatedData: Dispatch<SetStateAction<EditUser>>
-    file?: File | null | undefined
   }
 
   const onUpdateUser = async ({
-    key,
     id,
     initialData,
     updatedData,
     setUpdatedData,
-    file,
-  }: OnUpdateUser) => {
+  }: {
+    id: number
+    initialData: EditUser
+    updatedData: EditUser
+    setUpdatedData: Dispatch<SetStateAction<EditUser>>
+  }) => {
     try {
-      const validProperty = await convertUpdatedUserData(key, updatedData, file)
-      const validatedProperty = (await validateUpdatedUser(validProperty)) ?? {}
+      const validatedProperty = (await validateUpdatedUser(updatedData)) ?? {}
       const response = await updateUser(id, validatedProperty as User)
       if (response && response.status === 200) {
         const updatedUser = response.data.user
@@ -287,53 +241,33 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Failed to update user:", error)
       setUpdatedData(initialData)
-      const message = "Error by updating user"
-      onRequestError(error, setNotification, message)
+
+      onRequestError(error, onSetNotification)
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateShippingProperty = async (property: any) => {
-    try {
-      if (shippingDataSchema) {
-        return shippingDataSchema.parse(property) as Partial<ShippingData>
-      }
-    } catch (error) {
-      console.error("Error by validating property:", error)
-    }
-  }
-
-  interface OnUpdateShippingData {
-    key: string
-    id: number
-    initialData: EditShippingData
-    updatedData: EditShippingData
-    setUpdatedData: Dispatch<SetStateAction<EditShippingData>>
-  }
   const onUpdateShippingData = async ({
-    key,
     id,
     initialData,
     updatedData,
     setUpdatedData,
-  }: OnUpdateShippingData) => {
+  }: {
+    id: number
+    initialData: EditShippingData
+    updatedData: EditShippingData
+    setUpdatedData: Dispatch<SetStateAction<EditShippingData>>
+  }) => {
     try {
-      const validProperty = await extractValidProperty(key, updatedData)
-      const validatedProperty =
-        (await validateShippingProperty(validProperty)) ??
-        ({} as EditShippingData)
-
-      const response = await updateShippingData(id, validatedProperty)
+      const response = await updateShippingData(id, updatedData)
 
       if (response && response.status === 200) {
         const updatedShippingData = response.data
         setShippingData(updatedShippingData)
       }
     } catch (error) {
-      console.error("Failed to update user:", error)
+      console.error("Failed to update shipping data:", error)
       setUpdatedData(initialData)
-      const message = "Error by updating user"
-      onRequestError(error, setNotification, message)
+      onRequestError(error, onSetNotification)
     }
   }
 
