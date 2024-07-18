@@ -1,3 +1,4 @@
+import { MatchedItemsProvider } from "@/context/matchedItemsContext"
 import { BrowserRouter } from "react-router-dom"
 import { CartProvider } from "../context/cartContext"
 import { LocaleContextProvider } from "../context/localeContext"
@@ -13,13 +14,15 @@ export const App = () => {
       <MenuProvider>
         <NotificationProvider>
           <LocaleContextProvider>
-            <UserProvider>
-              <ProductProvider>
-                <CartProvider>
-                  <AppRoutes />
-                </CartProvider>
-              </ProductProvider>
-            </UserProvider>
+            <MatchedItemsProvider>
+              <UserProvider>
+                <ProductProvider>
+                  <CartProvider>
+                    <AppRoutes />
+                  </CartProvider>
+                </ProductProvider>
+              </UserProvider>
+            </MatchedItemsProvider>
           </LocaleContextProvider>
         </NotificationProvider>
       </MenuProvider>
