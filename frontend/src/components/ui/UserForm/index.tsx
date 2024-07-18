@@ -64,7 +64,6 @@ export const UserForm: FC<UserFormProps> = ({ item, setShowForm }) => {
               name={key}
               updatedPropertyData={updatedData}
               onChange={onInputChange}
-              classCss={STYLES.FORMS.FIELD}
               type={"text"}
               key={key}
             />

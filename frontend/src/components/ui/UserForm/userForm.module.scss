@@ -3,18 +3,7 @@
 @import "@/styles/helpers/mixins";
 
 .wrapper {
-  width: 560px;
-  margin: theme.$spacing-regular 0;
-  background-color: theme.$background-color-primary;
-  padding: theme.$spacing-large theme.$spacing-semi-regular-large;
-  box-shadow: theme.$box-shadow-modal;
-  border-radius: theme.$border-radius-regular;
-
-  @include flex-column;
-
-  @include media.mobile {
-    width: 100%;
-  }
+  @include form-wrapper;
 }
 
 .header {
