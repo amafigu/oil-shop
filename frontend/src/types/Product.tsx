@@ -48,12 +48,10 @@ export interface ProductContextType {
     file?: File | null | undefined
   }) => Promise<void>
   onUpdateProduct: (data: {
-    key: string
     id: number
     initialData: EditProduct
     updatedData: EditProduct
     setUpdatedData: Dispatch<SetStateAction<EditProduct>>
-    file?: File | null | undefined
   }) => Promise<void>
   onDeleteProduct: (e: MouseEvent, id: number) => Promise<void>
   sortCategory: string | undefined

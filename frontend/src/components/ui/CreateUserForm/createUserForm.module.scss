@@ -1,5 +1,9 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-section {
-  @include create-item-form;
+.wrapper {
+  @include form-wrapper;
+  box-shadow: none;
+  margin-bottom: theme.$spacing-huge;
 }

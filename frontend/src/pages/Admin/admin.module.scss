@@ -3,23 +3,32 @@
 @import "@/styles/helpers/mixins";
 
 .wrapper {
-  justify-content: flex-start;
-  min-height: theme.$min-height-page-regular;
+  width: 100%;
+  min-height: calc(100vh - 300px);
+}
 
-  @include flex-column-align-center;
-  @include margin-page-wrapper;
+.container {
+  width: 80%;
+  margin-bottom: theme.$spacing-large;
+  @include flex-column;
 
-  .container {
-    width: 80%;
-
-    @include flex-column;
-
-    @include media.widescreen-down {
-      width: 90%;
-    }
+  @include media.widescreen-down {
+    width: 90%;
   }
 
-  .button {
-    margin: theme.$spacing-regular 0;
+  @include media.mobile {
+    width: 100%;
+  }
+}
+
+.optionCards {
+  gap: theme.$spacing-regular;
+  margin-top: -40px;
+  flex-wrap: wrap;
+
+  @include flex-all-center;
+
+  @include media.mobile {
+    @include flex-column;
   }
 }

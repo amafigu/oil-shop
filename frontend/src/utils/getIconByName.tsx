@@ -10,12 +10,15 @@ import {
 } from "@fortawesome/free-brands-svg-icons"
 import {
   faArrowRightFromBracket,
+  faBagShopping,
   faBars,
+  faCartPlus,
   faCartShopping,
   faChevronDown,
   faChevronLeft,
   faChevronRight,
   faChevronUp,
+  faCircleUser,
   faEnvelope,
   faGlobe,
   faLock,
@@ -29,6 +32,8 @@ import {
   faTree,
   faUnlock,
   faUser,
+  faUserPlus,
+  faUsers,
   faX,
 } from "@fortawesome/free-solid-svg-icons"
 
@@ -61,6 +66,11 @@ const icons: { [key: string]: IconDefinition } = {
   faUnlock,
   faArrowRightFromBracket,
   faQuestionCircle,
+  faBagShopping,
+  faCircleUser,
+  faCartPlus,
+  faUsers,
+  faUserPlus,
 }
 
 export const getIconByName = (iconName: string): IconDefinition => {

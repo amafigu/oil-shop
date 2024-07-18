@@ -26,7 +26,9 @@ export const Order: FC<OrderProps> = ({ item }) => {
         </div>
         <div className={styles.details}>
           <dt className={styles.property}>{`${text.total}:`} </dt>
-          <dd className={styles.value}>{item.totalAmount} €</dd>
+          <dd className={styles.value}>
+            {Number(item.totalAmount).toFixed(2)} €
+          </dd>
         </div>
       </dl>
 

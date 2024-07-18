@@ -4,10 +4,10 @@
 
 .item {
   display: flex;
-  margin: theme.$spacing-semi-large 0;
-
+  width: 100%;
+  height: fit-content;
   @include media.tablet-down {
-    @include flex-column-align-center;
+    @include flex-column;
   }
 }
 
@@ -36,7 +36,7 @@
 
 .list {
   justify-content: space-evenly;
-  width: 600px;
+  flex-grow: 1;
 
   @include flex-column;
 

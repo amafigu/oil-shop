@@ -2,24 +2,14 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.form {
-  @include flex-column;
-
-  margin: theme.$spacing-regular;
-
-  @include media.tablet-down {
-    margin: theme.$spacing-semi-regular-semi-large;
-  }
-}
-
-.field {
-  width: 100%;
-
-  @include form-field;
+.inputContainer {
+  @include form-input-container;
 }
 
 .label {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: theme.$spacing-smallest;
+  @include form-input-label;
+}
+
+.input {
+  @include form-input;
 }

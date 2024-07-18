@@ -34,6 +34,13 @@
   }
 }
 
+.logout {
+  @include reset-button;
+  :hover {
+    opacity: theme.$opacity-hover;
+  }
+}
+
 .navigation,
 .slider {
   @include reset-button;
@@ -73,4 +80,40 @@
   cursor: pointer;
 
   @include reset-button;
+}
+
+.cancelForm {
+  @include form-cancel-button;
+}
+
+.deleteItem {
+  @include form-cancel-button;
+  width: 120px;
+}
+
+.saveItem {
+  @include form-save-button;
+  width: 120px;
+}
+
+.saveForm {
+  @include form-save-button;
+}
+
+.closeModal {
+  border: none;
+  background: transparent;
+  color: theme.$font-color-primary;
+  cursor: pointer;
+  &:hover {
+    background: rgba(227, 227, 227);
+    border-radius: theme.$border-radius-small;
+  }
+}
+
+.filterOption {
+  @include reset-button;
+  cursor: pointer;
+  @include typography-medium-normal;
+  color: theme.$font-color-light;
 }

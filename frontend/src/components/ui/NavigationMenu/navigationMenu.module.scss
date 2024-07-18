@@ -2,9 +2,9 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.pages {
+.navigationMenu {
   @include flex-justify-center;
-
+  height: 44px;
   width: 100%;
 
   button {
@@ -25,11 +25,9 @@
 }
 
 .list {
-  @include menu-list;
-
+  @include flex-all-center;
   @include media.tablet-down {
     flex-direction: row;
     gap: theme.$spacing-semi-regular;
-    margin: theme.$spacing-semi-regular;
   }
 }

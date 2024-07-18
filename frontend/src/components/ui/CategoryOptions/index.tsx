@@ -5,15 +5,11 @@ import { ChangeEvent, Dispatch, FC, SetStateAction } from "react"
 import styles from "./categoryOptions.module.scss"
 
 interface CategoryOptionsProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: CreateProduct
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setData: Dispatch<SetStateAction<CreateProduct>>
   onChange: (
     event: ChangeEvent<HTMLSelectElement>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: CreateProduct,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setData: Dispatch<SetStateAction<CreateProduct>>,
   ) => void
   options: Category[]
@@ -26,13 +22,13 @@ export const CategoryOptions: FC<CategoryOptionsProps> = ({
   options,
 }) => {
   return (
-    <>
+    <div className={styles.inputContainer}>
       <label className={styles.label} htmlFor='categoryId'>
         {camelToTitleCase("category")}
       </label>
       <select
         onChange={(e) => onChange(e, data, setData)}
-        className={styles.formField}
+        className={styles.input}
         name='categoryId'
         id='categoryId'
         value={data.categoryId}
@@ -41,7 +37,7 @@ export const CategoryOptions: FC<CategoryOptionsProps> = ({
           options.map((option) => (
             <option
               key={option.id}
-              className={styles.formField}
+              className={styles.input}
               value={option.id}
               id={option.id.toString()}
             >
@@ -49,6 +45,6 @@ export const CategoryOptions: FC<CategoryOptionsProps> = ({
             </option>
           ))}
       </select>
-    </>
+    </div>
   )
 }

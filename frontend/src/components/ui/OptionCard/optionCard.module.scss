@@ -1,0 +1,30 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.optionCardContainer {
+  z-index: theme.$z-index-account-option;
+}
+
+.card {
+  padding: theme.$spacing-smaller;
+  height: 214px;
+  width: 192px;
+  background-color: theme.$background-color-primary;
+  border: theme.$border-regular-component;
+  border-radius: theme.$border-radius-regular;
+  @include flex-all-center;
+}
+
+.container {
+  width: 100%;
+  @include flex-column-align-center;
+}
+.icon {
+  margin-bottom: theme.$spacing-large;
+}
+
+.title {
+  @include typography-medium-semibold;
+  text-align: center;
+}

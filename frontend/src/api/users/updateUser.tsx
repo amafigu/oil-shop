@@ -13,7 +13,8 @@ export const updateUser = async (id: number, data: object) => {
       (response && response.status === 400) ||
       (response && response.status === 404)
     )
-      return response
+      console.log("updateUser response ", response)
+    return response
   } catch (error) {
     console.error("Error by updating user", error)
     throw error

@@ -17,14 +17,14 @@ export const CreateProductForm: FC = () => {
   const { components } = useTranslation()
   const [file, setFile] = useState<File | null | undefined>(null)
   const [data, setData] = useState<CreateProduct>({
-    name: "",
     categoryId: 0,
-    description: "",
-    price: 0,
+    name: "",
     details: "",
+    description: "",
+    brand: "",
+    price: 0,
     size: 0,
     image: "",
-    brand: "",
   })
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
@@ -33,8 +33,8 @@ export const CreateProductForm: FC = () => {
   }
 
   return (
-    <section aria-label='Create product' onSubmit={submit}>
-      <form className={styles.container}>
+    <section className={styles.wrapper}>
+      <form className={styles.form} onSubmit={submit}>
         <CategoryOptions
           data={data}
           setData={setData}
@@ -47,7 +47,6 @@ export const CreateProductForm: FC = () => {
             field !== "categoryId" &&
             field !== "category" && (
               <FormInput
-                classCss={STYLES.FORMS.FIELD}
                 key={field}
                 name={field}
                 onChangeListener={
@@ -65,8 +64,7 @@ export const CreateProductForm: FC = () => {
         <div className={styles.button}>
           <SubmitButton
             text={components.createItem.submitButton}
-            className={STYLES.BUTTONS.ACTION}
-            ariaLabel={components.createItem.submitButton}
+            className={STYLES.BUTTONS.SAVE}
           />
         </div>
       </form>

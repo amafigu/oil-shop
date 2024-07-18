@@ -22,3 +22,11 @@
     overflow: hidden;
   }
 }
+
+.saveForm {
+  color: theme.$font-color-contrast;
+  background: rgb(0, 0, 0);
+
+  @include modal-form-button;
+  @include flex-all-center;
+}

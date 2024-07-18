@@ -1,0 +1,21 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease-in-out;
+  z-index: theme.$z-index-modal;
+
+  @include flex-all-center;
+}
+
+.modalContent {
+  width: fit-content;
+  position: relative;
+}

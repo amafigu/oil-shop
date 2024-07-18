@@ -3,36 +3,27 @@ import { ChangeEvent, FC } from "react"
 import styles from "./formInput.module.scss"
 
 interface FormInputProps {
-  classCss: string
   name: string
   value: string
   onChangeListener: (event: ChangeEvent<HTMLInputElement>) => void
-  placeholder: string
+  placeholder?: string
   label: string
   type?: string
   file?: File
 }
 
 export const FormInput: FC<FormInputProps> = ({
-  classCss,
   name,
   value,
   onChangeListener,
-  placeholder,
   label,
   type = "text",
-  file,
 }) => {
   return (
-    <div aria-label={`${name} input`}>
+    <>
       {name === "image" ? (
-        <>
-          <span className={styles.label}>
-            {file ? "Selected file: " : "Select a file"}
-          </span>
-          <label htmlFor='fileInput'>
-            {file ? file.name : "Search on device"}
-          </label>
+        <div className={styles.inputContainer}>
+          <label htmlFor='fileInput'></label>
           <input
             type='file'
             name='image'
@@ -40,25 +31,26 @@ export const FormInput: FC<FormInputProps> = ({
             onChange={onChangeListener}
             required
           />
-        </>
+        </div>
       ) : (
-        <>
-          <label className={styles.label} htmlFor={`${name}-input`}>
-            {camelToTitleCase(label)}
-          </label>
-          <input
-            className={styles[classCss]}
-            type={type}
-            id={`${name}-input`}
-            name={name}
-            onChange={onChangeListener}
-            value={value}
-            placeholder={camelToTitleCase(placeholder)}
-            required
-            autoComplete='true'
-          />
-        </>
+        <div className={styles.item}>
+          <div className={styles.inputContainer}>
+            <label className={styles.label} htmlFor={`${name}-input`}>
+              {camelToTitleCase(label)}
+            </label>
+            <input
+              className={styles.input}
+              type={type}
+              id={`${name}-input`}
+              name={name}
+              onChange={onChangeListener}
+              value={value}
+              required
+              autoComplete='true'
+            />
+          </div>
+        </div>
       )}
-    </div>
+    </>
   )
 }

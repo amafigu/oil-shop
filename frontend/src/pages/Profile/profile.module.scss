@@ -1,0 +1,40 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.wrapper {
+  min-height: calc(100vh - 400px);
+  position: relative;
+  @include flex-column;
+  @include margin-page-wrapper;
+}
+
+.content {
+  width: 100%;
+  gap: theme.$spacing-regular;
+  @include flex-justify-center;
+}
+
+.cardContainer {
+  width: 80%;
+  display: flex;
+  justify-content: start;
+  gap: theme.$spacing-large;
+  flex-wrap: wrap;
+
+  @include media.mobile {
+    flex-direction: column;
+    gap: theme.$spacing-small;
+  }
+}
+
+.list {
+  @include flex-column;
+}
+
+.item {
+  display: flex;
+  @include media.mobile {
+    width: 100%;
+  }
+}

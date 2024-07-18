@@ -25,7 +25,6 @@ export const LoginForm: FC = () => {
     <>
       <form className={styles.form} onSubmit={submitLogin}>
         <FormInput
-          classCss={STYLES.FORMS.FIELD}
           name={"email"}
           value={email}
           onChangeListener={(e) => setEmail(e.target.value)}
@@ -35,7 +34,6 @@ export const LoginForm: FC = () => {
         />
         <div className={styles.container}>
           <FormInput
-            classCss={STYLES.FORMS.FIELD}
             name={"email"}
             value={password}
             onChangeListener={(e) => setPassword(e.target.value)}
@@ -56,11 +54,7 @@ export const LoginForm: FC = () => {
             ariaLabel={"show password"}
           />
         </div>
-        <SubmitButton
-          text={text.loginButton}
-          className={STYLES.BUTTONS.WIDE}
-          ariaLabel={""}
-        />
+        <SubmitButton text={text.loginButton} className={STYLES.BUTTONS.WIDE} />
       </form>
     </>
   )

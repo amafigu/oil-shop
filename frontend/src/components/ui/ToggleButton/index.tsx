@@ -20,7 +20,6 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
     <>
       {isVisible ? (
         <button
-          aria-label={`${hideBtnText} button`}
           onClick={() => onToggle(false)}
           className={styles[classCss]}
           type='button'
@@ -29,7 +28,6 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
         </button>
       ) : (
         <button
-          aria-label={`${showBtnText} button`}
           onClick={() => onToggle(true)}
           className={styles[classCss]}
           type='button'

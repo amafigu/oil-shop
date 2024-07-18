@@ -13,6 +13,7 @@
   background-color: theme.$background-color-primary;
   border-bottom-left-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
+  z-index: theme.$z-index-sidebar-menu;
 
   @include media.tablet {
     display: none;

@@ -140,6 +140,25 @@
   }
 }
 
+@mixin modal-form-button {
+  gap: theme.$spacing-smallest;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  padding: 0px theme.$spacing-semi-regular;
+  position: relative;
+  width: fit-content;
+  border-radius: theme.$border-radius-regular;
+  height: 48px;
+
+  border: 2px solid rgb(0, 0, 0);
+  &:hover {
+    opacity: theme.$opacity-hover;
+  }
+  @include typography-small-semibold;
+}
+
 @mixin footer-column {
   display: flex;
   align-items: baseline;
@@ -223,6 +242,12 @@
   line-height: theme.$line-height-primary;
 }
 
+@mixin typography-semi-huge-semibold {
+  font-size: theme.$font-size-large;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
 @mixin hide {
   width: 0;
   height: 0;
@@ -263,8 +288,6 @@
 @mixin menu-list {
   @include flex-align-center;
 
-  height: 60px;
-
   li {
     margin: 0 16px;
 
@@ -300,4 +323,193 @@
       }
     }
   }
+}
+
+@mixin form-wrapper {
+  width: 560px;
+  margin: theme.$spacing-regular 0;
+  background-color: theme.$background-color-primary;
+  padding: theme.$spacing-large theme.$spacing-semi-regular-large;
+  box-shadow: theme.$box-shadow-modal;
+  border-radius: theme.$border-radius-regular;
+
+  @include flex-column;
+
+  @include media.mobile {
+    width: 100%;
+  }
+}
+
+@mixin form {
+  .form {
+    width: 100%;
+    margin: theme.$spacing-regular 0;
+
+    @include flex-column-justify-center;
+  }
+}
+
+@mixin form-input-container {
+  height: 56px;
+  position: relative;
+  background: theme.$background-color-primary;
+  border-radius: theme.$border-radius-regular;
+  border: theme.$border-form-input;
+  padding: 0px theme.$spacing-semi-regular;
+  margin-bottom: theme.$spacing-regular;
+}
+
+@mixin form-input-label {
+  position: absolute;
+  transition: color 0.25s cubic-bezier(0, 0, 0.2, 1) 0ms,
+    top 0.25s cubic-bezier(0, 0, 0.2, 1) 0ms;
+  color: rgb(58, 58, 58);
+  width: calc(100% - 48px);
+  top: 8px;
+  transform-origin: left top;
+  left: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+@mixin form-input {
+  width: 100%;
+  border: 0px;
+  box-sizing: content-box;
+  display: block;
+  font-size: theme.$font-size-small;
+  width: 100%;
+  height: calc(100% - 16px);
+  outline: none;
+  position: relative;
+  background: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  padding-top: theme.$spacing-semi-regular;
+  color: rgb(58, 58, 58);
+}
+
+@mixin form-save-button {
+  color: theme.$font-color-contrast;
+  background: rgb(0, 0, 0);
+
+  @include modal-form-button;
+  @include flex-all-center;
+}
+
+@mixin form-cancel-button {
+  background: transparent;
+  color: rgb(0, 0, 0);
+
+  @include modal-form-button;
+  @include typography-small-semibold;
+  @include flex-all-center;
+}
+
+@mixin page-wrapper {
+  width: 100%;
+  min-height: calc(100vh - 300px);
+  @include flex-column-align-center;
+}
+
+@mixin editable-list-section {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+  @include flex-justify-center;
+}
+
+@mixin editable-list-container {
+  width: 80%;
+  display: flex;
+
+  @include media.fullscreen-small-down {
+    flex-direction: column;
+  }
+}
+
+@mixin editable-list-filter-column {
+  width: 240px;
+  margin-right: theme.$spacing-regular;
+
+  @include flex-column;
+  align-items: flex-start;
+}
+
+@mixin editable-list {
+  width: 100%;
+}
+
+@mixin editable-list-item {
+  width: 100%;
+  margin: theme.$spacing-regular 0;
+  max-width: 1200px;
+  border-bottom: theme.$border-regular-component;
+  @include flex-column-justify-center;
+
+  @include media.mobile {
+    width: 100%;
+    margin: theme.$spacing-semi-extra-large 0 theme.$spacing-regular 0;
+    @include flex-column-align-center;
+  }
+}
+
+@mixin editable-list-filter-select {
+  appearance: none;
+  background-color: transparent;
+  box-shadow: none;
+  display: block;
+  font-size: 16px;
+  line-height: calc(1.42857);
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 10;
+  padding: 16px 32px 16px 16px;
+  color: rgb(58, 58, 58);
+  border-radius: 8px;
+  border: 2px solid rgb(140, 140, 140);
+  cursor: pointer;
+}
+
+@mixin list-item-wrapper {
+  width: 100%;
+  gap: theme.$spacing-regular;
+  @include flex-align-center;
+
+  @include media.mobile {
+    @include flex-column-justify-center;
+  }
+}
+
+@mixin list-item-buttons-container {
+  width: 160px;
+  gap: theme.$spacing-regular;
+
+  @include flex-column-align-center;
+
+  @include media.mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@mixin list-item-form {
+  width: 100%;
+  flex-grow: 1;
+  margin: theme.$spacing-regular 0;
+
+  @include flex-column-justify-center;
+  @include media.mobile {
+    order: 2;
+  }
+}
+
+@mixin list-item-input-container {
+  margin: theme.$spacing-regular 0;
 }

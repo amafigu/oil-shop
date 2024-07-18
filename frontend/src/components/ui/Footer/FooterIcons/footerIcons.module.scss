@@ -51,3 +51,7 @@
     height: 40px;
   }
 }
+
+.icon:hover {
+  opacity: theme.$opacity-hover;
+}

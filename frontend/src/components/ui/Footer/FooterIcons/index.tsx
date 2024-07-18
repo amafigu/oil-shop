@@ -72,7 +72,7 @@ export const FooterIcons: FC = () => {
           </div>
           <ul className={styles.icons}>
             {items.map((item) => (
-              <li key={item.url}>
+              <li className={styles.icon} key={item.url}>
                 <Link to={item.url} title={item.title}>
                   {item.icon}
                 </Link>

@@ -15,7 +15,9 @@
           "price": "Nach Preis sortieren",
           "size": "Nach Größe sortieren",
           "category": "Nach Kategorie sortieren",
-          "reverse": "Umkehren"
+          "ascendent": "aufsteigend",
+          "descendent": "absteigend",
+          "sortBy": "Sortieren nach"
         },
         "toggleListButton": {
           "show": "Benutzern anzeigen",
@@ -199,8 +201,48 @@
     "addOneToCartButton": {
       "text": "in den Warenkorb"
     },
+    "accountHeader": {
+      "greeting": "Wilkommen,",
+      "management": "Hier können Sie Ihre Datenverwaltung sehen."
+    },
+    "accountSectionHeader": {
+      "orders": {
+        "title": "Meine Käufe",
+        "subtitle": "Hier kannst du deine Einkäufe ansehen."
+      },
+      "profile": {
+        "title": "Mein Profil",
+        "subtitle": "Hier kannst du deine persönlichen Daten ändern oder ergänzen."
+      },
+      "productsManagement": {
+        "title": "Produktmanagement",
+        "subtitle": "Hier können Sie Produktdaten ändern oder hinzufügen."
+      },
+      "usersManagement": {
+        "title": "Benutzerverwaltung",
+        "subtitle": "Hier können Sie Benutzerdaten ändern oder hinzufügen."
+      },
+      "productsCreation": {
+        "title": "Produkte erstellen",
+        "subtitle": "„Hier können Sie Produkte zu unserem System hinzufügen."
+      },
+      "usersCreation": {
+        "title": "Benutzer erstellen",
+        "subtitle": "Hier können Sie Benutzer zu unserem System hinzufügen."
+      }
+    },
     "createItem": {
       "submitButton": "Senden"
+    },
+    "editDataCard": {
+      "personalData": {
+        "title": "Persönliche Daten",
+        "action": "Bearbeiten"
+      },
+      "addressData": {
+        "title": "Rechnungsadresse",
+        "action": "Bearbeiten"
+      }
     },
     "editableItemsList": {
       "showButton": "List anzeigen",
@@ -339,10 +381,29 @@
         "fail": "Wir können dieses Produkt nicht löschen"
       }
     },
+    "listUserForm": {
+      "save": "Speichern",
+      "delete": "Löschen"
+    },
     "navigationMenu": {
       "home": "Home",
       "shop": "Shop",
       "about": "Über uns"
+    },
+    "noItemsCard": {
+      "orders": {
+        "title": "Keine Bestellung vorhanden",
+        "subtitle": "Wie wäre es mit einem Blick auf unsere Produkte?",
+        "link": "Zum Einkauf"
+      }
+    },
+    "optionCard": {
+      "orders": "Meine Käufe",
+      "profile": "Mein Profil",
+      "usersManagement": "Verwalten",
+      "productsManagement": "Verwalten",
+      "createUser": "Erstellen",
+      "createProduct": "Erstellen"
     },
     "orderSummaryItem": {
       "quantity": "Menge"
@@ -435,6 +496,18 @@
       "returnProductsTitle": "Return buyed products policy",
       "faq": "Frequently Asked Questions / FAQ",
       "faqTitle": "Frequently Asked Questions"
+    },
+    "shippingDataForm": {
+      "title": "Edit address information",
+      "info": "Bitte beachte, dass Änderungen für deine Rechnungsadresse übernommen werden.",
+      "save": "Änderungen speichern",
+      "cancel": "Abbrechen"
+    },
+    "userForm": {
+      "title": "Persönliche Informationen bearbeiten",
+      "info": "Bitte beachte, dass Änderungen deines Namens und deiner Anrede auch für deine Rechnungsadresse übernommen werden.",
+      "save": "Änderungen speichern",
+      "cancel": "Abbrechen"
     }
   },
   "errors": {

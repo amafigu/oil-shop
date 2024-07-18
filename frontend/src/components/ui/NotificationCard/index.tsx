@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { Modal } from "../Modal"
 import styles from "./notificationCard.module.scss"
 
 interface NotificationCardProps {
@@ -9,9 +10,9 @@ export const NotificationCard: FC<NotificationCardProps> = ({ message }) => {
   return (
     <article className={styles.container}>
       {message && message !== "" && (
-        <div className={styles.modal}>
+        <Modal isOpen={true}>
           <div className={styles.card}>{message}</div>
-        </div>
+        </Modal>
       )}
     </article>
   )

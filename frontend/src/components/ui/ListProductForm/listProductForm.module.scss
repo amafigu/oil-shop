@@ -1,0 +1,51 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.wrapper {
+  @include list-item-wrapper;
+}
+
+.buttonsContainer {
+  @include list-item-buttons-container;
+
+  @include media.mobile {
+    flex-direction: column;
+    align-items: flex-end;
+    button {
+      width: 80%;
+    }
+  }
+}
+
+.imageContainer {
+  width: 120px;
+  height: 160px;
+  border-radius: theme.$border-radius-small;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: theme.$border-radius-small;
+}
+
+.form {
+  @include list-item-form;
+}
+
+.inputContainer {
+  @include list-item-input-container;
+}
+
+.container {
+  gap: theme.$spacing-regular;
+
+  @include flex-column-align-center;
+  @include media.mobile {
+    order: 1;
+    width: 100%;
+    flex-direction: row;
+  }
+}

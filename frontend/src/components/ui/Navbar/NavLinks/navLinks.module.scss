@@ -30,10 +30,14 @@
 
 .link {
   @include flex-align-center;
+  &:hover {
+    opacity: theme.$opacity-hover;
+  }
 }
 
 .quantity {
   width: 36px;
+  color: theme.$font-color-contrast;
 }
 
 .cart {

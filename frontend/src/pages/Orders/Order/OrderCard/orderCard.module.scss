@@ -5,18 +5,14 @@
 .wrapper {
   display: flex;
   padding: theme.$spacing-small 0;
-  overflow: hidden;
   border-bottom: solid 1px theme.$font-color-light;
+  height: fit-content;
 }
 
 .container {
-  height: 120px;
+  height: fit-content;
 
   @include flex-align-center;
-
-  @include media.mobile {
-    height: 100px;
-  }
 
   hr {
     margin-top: theme.$spacing-regular;
