@@ -1,12 +1,13 @@
 import { CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "@/constants/routes"
 import { useUserContext } from "@/context/userContext"
+import { useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 
 export const useVerifyUserRole = () => {
   const { user, isLoading } = useUserContext()
   const navigate = useNavigate()
 
-  const verifyUserRole = () => {
+  const verifyUserRole = useCallback(() => {
     if (isLoading) {
       return
     } else {
@@ -18,7 +19,7 @@ export const useVerifyUserRole = () => {
         navigate(LOGIN)
       }
     }
-  }
+  }, [isLoading, user, navigate])
 
   return { verifyUserRole }
 }
