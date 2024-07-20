@@ -1,7 +1,7 @@
 import { ActionButton } from "@/components/ui/ActionButton"
 import { navigationMenuItems } from "@/constants/navigation"
+import { useMenuContext } from "@/context/menuContext"
 import { useActivePageLink } from "@/hooks/useActivePageLink"
-import { useMenuOptions } from "@/hooks/useMenuOptions"
 import { useTranslation } from "@/hooks/useTranslation"
 import { translateByPath } from "@/utils/translateByPath"
 import { MouseEvent } from "react"
@@ -11,7 +11,7 @@ import styles from "./navigationMenu.module.scss"
 export const NavigationMenu = () => {
   const { activePageLink, setActivePageLink } = useActivePageLink()
   const { components } = useTranslation()
-  const { setShowMobileMenu } = useMenuOptions()
+  const { setShowMobileMenu } = useMenuContext()
   const navigate = useNavigate()
 
   const onSelect = (
