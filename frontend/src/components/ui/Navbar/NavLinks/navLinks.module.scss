@@ -3,18 +3,12 @@
 @import "@/styles/helpers/mixins";
 
 .container {
-  justify-content: flex-end;
-  width: 33.333%;
-
-  @include flex-align-center;
+  @include flex-all-center;
 }
 
-.mobile {
-  display: none;
-
+.languageSelectorContainer {
   @include media.tablet-down {
-    display: block;
-    margin-right: theme.$spacing-regular;
+    display: none;
   }
 }
 
@@ -23,13 +17,15 @@
 
   @include flex-align-center;
 
-  @include media.tablet-down {
-    display: none;
-  }
+  @include flex-align-center;
+}
+
+.logout {
+  display: flex;
+  gap: theme.$spacing-semi-regular;
 }
 
 .link {
-  @include flex-align-center;
   &:hover {
     opacity: theme.$opacity-hover;
   }
@@ -48,9 +44,4 @@
   @include media.tablet {
     margin-right: 0;
   }
-}
-
-.logout {
-  display: flex;
-  gap: theme.$spacing-semi-regular;
 }
