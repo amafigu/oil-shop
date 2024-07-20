@@ -35,7 +35,6 @@ export const LanguageSelector = () => {
           action={() => changeLanguage("en")}
           text={"EN"}
           className={STYLES.BUTTONS.LANGUAGES_SELECTOR}
-          ariaLabel={"translate to english"}
         />
       </li>
       <li className={styles.divider}>I</li>
@@ -46,7 +45,6 @@ export const LanguageSelector = () => {
           action={() => changeLanguage("de")}
           text={"DE"}
           className={STYLES.BUTTONS.LANGUAGES_SELECTOR}
-          ariaLabel={"translate to german"}
         />
       </li>
     </ul>
