@@ -7,7 +7,7 @@ import { camelCase } from "@/utils/camelCase"
 import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Dispatch, FC, SetStateAction } from "react"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { ActionButton } from "../ActionButton"
 import styles from "./sidebar.module.scss"
 
@@ -26,8 +26,10 @@ export const Sidebar: FC<SidebarProps> = ({
 }) => {
   const { setLanguage, language } = useLocaleContext()
   const { components } = useTranslation()
+  const navigate = useNavigate()
   const onSelect = (item: string) => {
     setItems(item)
+    navigate(SHOP)
     setShowSidebar(false)
   }
 
@@ -75,14 +77,20 @@ export const Sidebar: FC<SidebarProps> = ({
               </div>
             </li>
           )}
-
+          <li className={styles.listItem} onClick={() => onSelect("all")}>
+            <div className={styles.listItemLink}>
+              <span className={styles.listItemLinkContent}>
+                {components.sidebar.productCategories[camelCase("all", " ")]}
+              </span>
+            </div>
+          </li>
           {items.map((item: Category, index: number) => (
-            <li key={index} className={styles.listItem}>
-              <Link
-                onClick={() => onSelect(item.name)}
-                className={styles.listItemLink}
-                to={SHOP}
-              >
+            <li
+              key={index}
+              className={styles.listItem}
+              onClick={() => onSelect(item.name)}
+            >
+              <div className={styles.listItemLink}>
                 <span className={styles.listItemLinkContent}>
                   {
                     components.sidebar.productCategories[
@@ -90,7 +98,7 @@ export const Sidebar: FC<SidebarProps> = ({
                     ]
                   }
                 </span>
-              </Link>
+              </div>
             </li>
           ))}
         </ul>
