@@ -12,16 +12,16 @@ interface MenuContextType {
   setShowMobileMenu: Dispatch<SetStateAction<boolean>>
   activePageLink: string
   setActivePageLink: Dispatch<SetStateAction<string>>
-  showProductsSearchBar: boolean
-  setShowProductsSearchBar: Dispatch<SetStateAction<boolean>>
+  showSidebar: boolean
+  setShowSidebar: Dispatch<SetStateAction<boolean>>
 }
 
 export const MenuContext = createContext<MenuContextType | null>(null)
 
 export const MenuProvider = ({ children }: { children: ReactNode }) => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const [activePageLink, setActivePageLink] = useState("")
-  const [showProductsSearchBar, setShowProductsSearchBar] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+  const [showSidebar, setShowSidebar] = useState<boolean>(false)
+  const [activePageLink, setActivePageLink] = useState<string>("")
   return (
     <MenuContext.Provider
       value={{
@@ -29,8 +29,8 @@ export const MenuProvider = ({ children }: { children: ReactNode }) => {
         setShowMobileMenu,
         activePageLink,
         setActivePageLink,
-        showProductsSearchBar,
-        setShowProductsSearchBar,
+        showSidebar,
+        setShowSidebar,
       }}
     >
       {children}
