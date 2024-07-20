@@ -80,52 +80,6 @@
   @include flex-all-center;
 }
 
-@mixin notification-card-content {
-  overflow: hidden;
-  color: theme.$font-color-primary;
-  text-align: center;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  background-color: theme.$branding-color-primary;
-  border: none;
-  border-radius: theme.$border-radius-small;
-  box-shadow: theme.$box-shadow-primary;
-
-  @include flex-all-center;
-  @include typography-medium-semibold;
-}
-
-@mixin input-styles-reset {
-  appearance: none;
-  background: none;
-  border: none;
-  outline: none;
-}
-
-@mixin reset-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
-@mixin menu-list-item {
-  cursor: pointer;
-
-  @include typography-semilarge-medium;
-}
-
-@mixin margin-page-wrapper {
-  margin-bottom: 80px;
-
-  @include media.desktop-down {
-    margin-bottom: 40px;
-  }
-
-  @include media.mobile {
-    margin-bottom: theme.$spacing-regular-large;
-  }
-}
-
 @mixin form-action-button {
   @include action-button;
 
@@ -151,12 +105,57 @@
   width: fit-content;
   border-radius: theme.$border-radius-regular;
   height: 48px;
-
   border: 2px solid rgb(0, 0, 0);
   &:hover {
     opacity: theme.$opacity-hover;
   }
   @include typography-small-semibold;
+}
+
+@mixin reset-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+@mixin notification-card-content {
+  overflow: hidden;
+  color: theme.$font-color-primary;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  background-color: theme.$branding-color-primary;
+  border: none;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
+
+  @include flex-all-center;
+  @include typography-medium-semibold;
+}
+
+@mixin input-styles-reset {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+@mixin menu-list-item {
+  cursor: pointer;
+
+  @include typography-semilarge-medium;
+}
+
+@mixin margin-page-wrapper {
+  margin-bottom: 80px;
+
+  @include media.desktop-down {
+    margin-bottom: 40px;
+  }
+
+  @include media.mobile {
+    margin-bottom: theme.$spacing-regular-large;
+  }
 }
 
 @mixin footer-column {
@@ -408,9 +407,35 @@
   @include flex-all-center;
 }
 
+@mixin cancel-option-small-button {
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  padding: 0px;
+  position: relative;
+  font-weight: bold;
+  width: 32px;
+  border-radius: 4px;
+  height: 32px;
+  font-size: 14px;
+}
+
 @mixin page-wrapper {
   width: 100%;
   min-height: calc(100vh - 300px);
+  @include flex-column-align-center;
+}
+
+@mixin small-page-wrapper {
+  width: 100%;
+  min-height: calc(100vh - 600px);
   @include flex-column-align-center;
 }
 
