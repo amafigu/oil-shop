@@ -54,7 +54,7 @@
   color: theme.$branding-color-primary !important;
 }
 
-.mobile {
+.openMobileMenu {
   @include reset-button;
 
   color: inherit;
@@ -77,22 +77,33 @@
 }
 
 .languages {
-  cursor: pointer;
-
   @include reset-button;
+
+  cursor: pointer;
 }
 
 .cancelForm {
   @include form-cancel-button;
 }
+.navbarCategories {
+  @include modal-form-button;
+  @include flex-align-center;
+  justify-content: space-between;
+  color: theme.$font-color-contrast;
+  border: 2px solid theme.$font-color-contrast;
+  background-color: transparent;
+  min-width: 186px;
+}
 
 .deleteItem {
   @include form-cancel-button;
+
   width: 120px;
 }
 
 .saveItem {
   @include form-save-button;
+
   width: 120px;
 }
 
@@ -105,15 +116,45 @@
   background: transparent;
   color: theme.$font-color-primary;
   cursor: pointer;
+
   &:hover {
-    background: rgba(227, 227, 227);
+    background: theme.$background-color-hover-secondary;
     border-radius: theme.$border-radius-small;
   }
 }
 
 .filterOption {
   @include reset-button;
-  cursor: pointer;
+
   @include typography-medium-normal;
+
+  cursor: pointer;
   color: theme.$font-color-light;
+}
+
+.sidebarHeader {
+  @include cancel-option-small-button;
+
+  background: theme.$background-color-tertiary-button;
+  border: 2px solid theme.$background-color-tertiary-button;
+  color: theme.$font-color-dark;
+
+  &:hover {
+    background-color: theme.$background-color-hover-secondary;
+  }
+}
+
+.cancelSearch {
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+  background-color: theme.$font-color-primary;
+  border: none;
+  cursor: pointer;
+  border-radius: theme.$border-radius-circle;
+  color: theme.$font-color-dark;
+  height: 20px;
+  min-width: 20px;
+
+  @include flex-all-center;
 }

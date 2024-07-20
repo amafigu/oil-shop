@@ -12,7 +12,7 @@ export const Cart: FC = () => {
   const text = translate.pages.cart
 
   return (
-    <main className={styles.wrapper} aria-label='shopping cart'>
+    <main className={styles.cartPage}>
       <section className={styles.container}>
         <ul className={styles.list} aria-label='items list'>
           {cart.length > 0 ? (

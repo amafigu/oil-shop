@@ -58,7 +58,6 @@ export const Slider: FC<SliderProps> = ({ items }) => {
           <FontAwesomeIcon icon={getIconByName("faChevronLeft")} size='2xl' />
         }
         className={STYLES.BUTTONS.SLIDER}
-        ariaLabel='previous item'
       />
       <ul className={styles.list} aria-label='slider items list'>
         {items &&
@@ -77,7 +76,6 @@ export const Slider: FC<SliderProps> = ({ items }) => {
           <FontAwesomeIcon icon={getIconByName("faChevronRight")} size='2xl' />
         }
         className={STYLES.BUTTONS.SLIDER}
-        ariaLabel='next item'
       />
     </section>
   )

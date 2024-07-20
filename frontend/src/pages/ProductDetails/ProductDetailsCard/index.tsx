@@ -68,7 +68,6 @@ export const ProductDetailsCard: FC = () => {
                   action={() => addProduct(product, quantity)}
                   className={STYLES.BUTTONS.ADD_PRODUCT}
                   text={components.addOneToCartButton.text}
-                  ariaLabel='add product to cart'
                 />
               </div>
             </div>

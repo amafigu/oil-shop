@@ -57,7 +57,6 @@ export const ProductCard: FC<ProductCardProps> = ({ product }) => {
                 action={() => addProduct(product, 1)}
                 text={components.productCard.addProductButton}
                 className={STYLES.BUTTONS.ADD_PRODUCT}
-                ariaLabel={components.productCard.addProductButtonLabel}
               />
             </div>
           </div>

@@ -2,51 +2,94 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
-  width: 33.333%;
-
+.searchBar {
+  flex: 1 1 100%;
+  box-sizing: border-box;
   @include flex-align-center;
 }
 
-.show {
-  display: flex;
-}
+.wrapper {
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  margin: 0px;
 
-.hide {
-  display: none;
+  @include flex-column;
 }
 
 .container {
-  width: 100%;
-  height: 40px;
-  padding-left: theme.$spacing-regular;
-
-  @include flex-align-center;
-
-  @include media.mobile {
-    width: 100%;
-    padding-left: theme.$spacing-semi-regular;
-
-    @include typography-small-normal;
-  }
+  position: relative;
+  background: theme.$background-color-primary;
+  border-radius: theme.$border-radius-regular;
+  border: theme.$border-form-input;
+  padding: 0px 16px 0px 52px;
+  height: 56px;
 }
 
 .input {
-  width: 100%;
+  border: 0px;
+  box-sizing: content-box;
+  display: block;
+  font-size: theme.$font-size-small;
+  min-width: 0px;
+  width: calc(100% - 36px);
+  height: calc(100% - 28px);
+  outline: none;
+  position: relative;
+  background: theme.$background-color-tertiary-button;
+  margin: 0px;
+  z-index: theme.$z-index-input;
+  color: theme.$font-color-input;
+}
+
+.label {
+  color: theme.$font-color-label;
+  font-size: theme.$font-size-smallest;
+}
+
+.searchIconContainer {
+  left: 0px;
+  top: 0px;
+  position: absolute;
   height: 100%;
-  padding-left: theme.$spacing-small;
-  font-family: theme.$font-family-primary;
-  color: theme.$font-color-primary;
-  background-color: theme.$background-color-primary !important;
-  border-radius: theme.$border-radius-small;
+  line-height: 0;
+  z-index: theme.$z-index-input-icon;
+  padding: 0px theme.$spacing-semi-regular;
+  border-radius: theme.$border-radius-regular;
 
-  @include typography-semilarge-extralight;
-  @include input-styles-reset;
+  @include flex-align-center;
 
-  @include media.mobile {
-    width: 90%;
-    padding-left: theme.$spacing-smallest;
+  button {
+    padding: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    background: none;
+    border: none;
+    margin: 0px;
+    cursor: pointer;
 
-    @include typography-small-normal;
+    span {
+      position: relative;
+    }
   }
+}
+
+.matchedListWrapper {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: theme.$z-index-product-search-dropdow;
+}
+
+.cancelButtonContainer {
+  right: 0px;
+  top: 0px;
+  position: absolute;
+  height: 100%;
+  line-height: 0;
+  z-index: theme.$z-index-input-icon;
+  padding: 0px theme.$spacing-semi-regular;
+  border-radius: theme.$border-radius-regular;
 }

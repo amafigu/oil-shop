@@ -1,13 +1,11 @@
 import { Product } from "@/types/Product"
-import { Dispatch, SetStateAction } from "react"
+import { ChangeEvent, Dispatch, SetStateAction } from "react"
 
 export const searchProducts = (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  e: any,
+  e: ChangeEvent<HTMLInputElement>,
   items: Product[],
   setSearchItemText: Dispatch<SetStateAction<string>>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setMatches: Dispatch<SetStateAction<any>>,
+  setMatches: Dispatch<SetStateAction<Product[]>>,
   setShowMatchedItemsList: Dispatch<SetStateAction<boolean>>,
 ) => {
   setSearchItemText(e.target.value)

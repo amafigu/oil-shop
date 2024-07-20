@@ -1,18 +1,18 @@
-import { FC, MouseEvent } from "react"
+import { FC, MouseEvent, ReactNode } from "react"
 import styles from "./actionButton.module.scss"
 
 interface ActionButtonProps {
   action: (e: MouseEvent<HTMLButtonElement>) => void
   text?: string | JSX.Element
   className?: string
-  ariaLabel?: string
+  children?: ReactNode
 }
 
 export const ActionButton: FC<ActionButtonProps> = ({
   action,
   text,
   className,
-  ariaLabel,
+  children,
 }) => {
   return (
     <button
@@ -22,9 +22,8 @@ export const ActionButton: FC<ActionButtonProps> = ({
         e.preventDefault()
         action(e)
       }}
-      aria-label={ariaLabel}
     >
-      {text}
+      {children} {text}
     </button>
   )
 }

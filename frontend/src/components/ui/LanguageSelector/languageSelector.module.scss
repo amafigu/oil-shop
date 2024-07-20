@@ -17,6 +17,7 @@
     color: theme.$font-color-light;
 
     @include typography-semimedium-normal;
+    font-weight: theme.$font-weight-bold;
   }
 }
 

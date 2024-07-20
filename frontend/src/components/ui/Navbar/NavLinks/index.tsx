@@ -1,4 +1,3 @@
-import { ActionButton } from "@/components/ui/ActionButton"
 import { LanguageSelector } from "@/components/ui/LanguageSelector"
 import { LogoutButton } from "@/components/ui/LogoutButton"
 import {
@@ -8,9 +7,7 @@ import {
   LOGIN,
 } from "@/constants/routes"
 import { STYLES } from "@/constants/styles"
-import { useCartContext } from "@/context/cartContext"
 import { useUserContext } from "@/context/userContext"
-import { useMenuOptions } from "@/hooks/useMenuOptions"
 import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FC } from "react"
@@ -18,48 +15,12 @@ import { Link } from "react-router-dom"
 import styles from "./navLinks.module.scss"
 
 export const NavLinks: FC = () => {
-  const { getAllProductsQuantity } = useCartContext()
   const { isLoggedIn, user } = useUserContext()
-  const { setShowMobileMenu, setShowProductsSearchBar } = useMenuOptions()
 
-  const onMobileMenu = () => {
-    setShowProductsSearchBar(false)
-    setShowMobileMenu(true)
-  }
   return (
-    <section className={styles.container} aria-label={"navigation section"}>
-      <div className={styles.mobile}>
-        <ActionButton
-          action={onMobileMenu}
-          text={
-            <FontAwesomeIcon
-              icon={getIconByName("faBars")}
-              size={"2xl"}
-              color='#fff'
-            />
-          }
-          className={STYLES.LINKS.NAVIGATION_MENU_LINK}
-          ariaLabel={"show mobile menu"}
-        />
-      </div>
+    <section className={styles.container}>
       <ul className={styles.list} aria-label={"navigation items"}>
-        <li className={styles.link}>
-          <ActionButton
-            action={() =>
-              setShowProductsSearchBar((prevState: boolean) => !prevState)
-            }
-            text={
-              <FontAwesomeIcon
-                icon={getIconByName("faSearch")}
-                size={"xl"}
-                color='#fff'
-              />
-            }
-            className={STYLES.COMPONENTS.MOBILE_MENU.ITEMS}
-            ariaLabel={"show search bar"}
-          />
-        </li>
-        <li>
+        <li className={styles.languageSelectorContainer}>
           <LanguageSelector />
         </li>
         {isLoggedIn ? (
@@ -81,14 +42,13 @@ export const NavLinks: FC = () => {
             <FontAwesomeIcon icon={getIconByName("faUser")} color='#fff' />
           </Link>
         )}
-        <li className={styles.cart} aria-label={"cart items quantity"}>
+        <li className={styles.cart}>
           <Link className={styles.link} to={CART}>
             <FontAwesomeIcon
               icon={getIconByName("faCartShopping")}
               color='#fff'
             />
           </Link>
-          <span className={styles.quantity}>{getAllProductsQuantity}</span>
         </li>
       </ul>
     </section>
