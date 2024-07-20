@@ -1,51 +1,93 @@
+import { ActionButton } from "@/components/ui/ActionButton"
+import { useMatchedItemsContext } from "@/context/matchedItemsContext"
 import { useProductContext } from "@/context/productContext"
-import { useMenuOptions } from "@/hooks/useMenuOptions"
-import { Product } from "@/types/Product"
+import { useTranslation } from "@/hooks/useTranslation"
+import { getIconByName } from "@/utils/getIconByName"
 import { searchProducts } from "@/utils/searchProducts"
-import { Dispatch, SetStateAction } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { MatchedProductsList } from "../MatchedProductsList"
 import styles from "./searchBar.module.scss"
 
-interface SearchBarProps {
-  searchProductText: string
-  setSearchProductText: Dispatch<SetStateAction<string>>
-  setMatchedProducts: Dispatch<SetStateAction<Product[]>>
-  setShowMatchedProductsList: Dispatch<SetStateAction<boolean>>
-}
-
-export const SearchBar = ({
-  searchProductText,
-  setSearchProductText,
-  setMatchedProducts,
-  setShowMatchedProductsList,
-}: SearchBarProps) => {
+export const SearchBar = () => {
   const { products } = useProductContext()
-  const { showProductsSearchBar } = useMenuOptions()
+
+  const {
+    searchProductText,
+    setSearchProductText,
+    matchedProducts,
+    setMatchedProducts,
+    showMatchedProductsList,
+    setShowMatchedProductsList,
+  } = useMatchedItemsContext()
+
+  const { components } = useTranslation()
+  const onCancelSearch = () => {
+    setSearchProductText("")
+    setMatchedProducts([])
+  }
 
   return (
-    <section className={styles.wrapper}>
-      <div
-        className={
-          showProductsSearchBar
-            ? `${styles.container} ${styles.show}`
-            : `${styles.hide}`
-        }
-      >
-        <input
-          id={"searchbar-input"}
-          className={styles.input}
-          onChange={(e) =>
-            searchProducts(
-              e,
-              products,
-              setSearchProductText,
-              setMatchedProducts,
-              setShowMatchedProductsList,
-            )
-          }
-          placeholder='Search Product'
-          value={searchProductText}
-        />
-      </div>
-    </section>
+    <div className={styles.searchBar}>
+      <section className={styles.wrapper}>
+        <div className={styles.container}>
+          <label
+            htmlFor='searchbar-input'
+            id='searchbar-input'
+            className={styles.label}
+          >
+            {components.searchBar.placeholder}
+          </label>
+          <div className={styles.searchIconContainer}>
+            <div>
+              <span>
+                <FontAwesomeIcon
+                  icon={getIconByName("faSearch")}
+                  size={"xl"}
+                  color='#686868'
+                />
+              </span>
+            </div>
+          </div>
+          <input
+            id={"searchbar-input"}
+            className={styles.input}
+            onChange={(e) =>
+              searchProducts(
+                e,
+                products,
+                setSearchProductText,
+                setMatchedProducts,
+                setShowMatchedProductsList,
+              )
+            }
+            value={searchProductText}
+          />
+          <div className={styles.cancelButtonContainer}>
+            {searchProductText && (
+              <ActionButton
+                action={() => onCancelSearch()}
+                className='cancelSearch'
+              >
+                <FontAwesomeIcon
+                  icon={getIconByName("faX")}
+                  size='xs'
+                  color='#fff'
+                />
+              </ActionButton>
+            )}
+          </div>
+        </div>
+        {matchedProducts.length > 0 && showMatchedProductsList && (
+          <div className={styles.matchedListWrapper}>
+            <MatchedProductsList
+              matchedProducts={matchedProducts}
+              setMatchedProducts={setMatchedProducts}
+              setShowMatchedProductsList={setShowMatchedProductsList}
+              setSearchProductText={setSearchProductText}
+            />
+          </div>
+        )}
+      </section>
+    </div>
   )
 }
