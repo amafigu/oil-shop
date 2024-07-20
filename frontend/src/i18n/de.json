@@ -385,6 +385,12 @@
       "save": "Speichern",
       "delete": "Löschen"
     },
+    "matchedProductsList": {
+      "taxesInclusive": "inkl. MwSt."
+    },
+    "navbar": {
+      "showCategoriesButton": "Alle Kategorien"
+    },
     "navigationMenu": {
       "home": "Home",
       "shop": "Shop",
@@ -432,6 +438,16 @@
       "addProductButton": "in den Warenkorb",
       "addProductButtonLabel": "Fügen Sie das Produkt Ihrem Warenkorb hinzu"
     },
+    "sidebar": {
+      "productCategories": {
+        "bodyCare": "Korper Pflege",
+        "massageOil": "Massieren Öle",
+        "difuser": "Difuser",
+        "essentialOil": "Ätherische Öle",
+        "roll": "Roll On",
+        "all": "Alle"
+      }
+    },
     "footer": {
       "linksColumns": {
         "wayToUs": {
@@ -476,6 +492,9 @@
         }
       },
       "copy": "OYLO OILS - Alle Rechte vorbehalten"
+    },
+    "searchBar": {
+      "placeholder": "Was suchst du?"
     },
     "sidebarMenu": {
       "allProducts": "Alle Produkte",
