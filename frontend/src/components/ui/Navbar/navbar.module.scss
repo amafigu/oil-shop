@@ -2,11 +2,102 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.container {
-  display: flex;
-  justify-content: space-between;
+.header {
+  min-height: 92px;
+  position: relative;
+  vertical-align: top;
   width: 100%;
-  height: 84px;
+  margin: 0px;
+  background-color: theme.$branding-color-tertiary;
+
+  @include flex-column;
+}
+
+.openSidebarMobile {
+  display: none;
+
+  @include media.desktop-down {
+    margin-right: theme.$spacing-regular;
+
+    @include flex-align-center;
+  }
+}
+
+.hideOnMobile {
+  display: block;
+
+  @include media.desktop-down {
+    display: none;
+  }
+}
+
+.hideOnTablet {
+  display: block;
+
+  @include media.tablet-down {
+    display: none;
+  }
+}
+
+.searchbarContainer {
+  display: flex;
+  flex-grow: 1;
+
+  @include media.tablet-down {
+    width: 100%;
+  }
+}
+
+.navbar {
+  justify-content: space-between;
+  min-height: 92px;
   user-select: none;
   background-color: theme.$branding-color-tertiary;
+  box-sizing: border-box;
+  margin: 0px auto;
+  width: 90%;
+  max-width: 1472px;
+  gap: theme.$spacing-regular;
+
+  @include flex-align-center;
+
+  @include media.tablet-down {
+    flex-direction: column;
+    gap: theme.$spacing-semi-regular;
+    margin: theme.$spacing-semi-regular auto;
+  }
+}
+
+.link {
+  width: 100%;
+  height: 100%;
+}
+
+.navLinksContainer {
+  @include media.tablet-down {
+    order: 2;
+  }
+}
+
+.navLinksContainerMobile {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  @include media.tablet {
+    display: none;
+  }
+}
+
+.categoryButtonText {
+  width: fit-content;
+}
+
+.upperOptionsContainer {
+  width: 100%;
+
+  @include flex-align-center;
+
+  @include media.tablet {
+    width: fit-content;
+  }
 }

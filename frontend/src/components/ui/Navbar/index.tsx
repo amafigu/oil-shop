@@ -1,47 +1,88 @@
 import { WITHOUT_NAVBAR } from "@/constants/routes"
-import { useMenuOptions } from "@/hooks/useMenuOptions"
-import { Product } from "@/types/Product"
-import { FC, useState } from "react"
+import { useMenuContext } from "@/context/menuContext"
+import { useProductCategory } from "@/hooks/useProductCategory"
+import { useTranslation } from "@/hooks/useTranslation"
+import { getIconByName } from "@/utils/getIconByName"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FC } from "react"
 import { useLocation } from "react-router-dom"
+import { ActionButton } from "../ActionButton"
+import { Sidebar } from "../Sidebar"
 import { Logo } from "./Logo"
-import { MatchedProductsList } from "./MatchedProductsList"
-import { MobileMenu } from "./MobileMenu"
 import { NavLinks } from "./NavLinks"
 import { SearchBar } from "./SearchBar"
 import styles from "./navbar.module.scss"
 
 export const Navbar: FC = () => {
-  const [matchedProducts, setMatchedProducts] = useState<Product[]>([])
-  const [showMatchedProductsList, setShowMatchedProductsList] = useState(false)
-  const [searchProductText, setSearchProductText] = useState("")
   const location = useLocation()
   const currentPath = location.pathname
-  const { showMobileMenu } = useMenuOptions()
+  const { setShowSidebar, showSidebar } = useMenuContext()
+  const { categories, setSortCategory } = useProductCategory()
+  const { components } = useTranslation()
 
   return (
     <>
       {!WITHOUT_NAVBAR.includes(currentPath) && (
-        <>
-          <nav className={styles.container}>
-            <SearchBar
-              searchProductText={searchProductText}
-              setSearchProductText={setSearchProductText}
-              setMatchedProducts={setMatchedProducts}
-              setShowMatchedProductsList={setShowMatchedProductsList}
-            />
-            <Logo />
-            <NavLinks />
+        <header className={styles.header}>
+          <nav className={styles.navbar}>
+            <div className={styles.upperOptionsContainer}>
+              <div className={styles.openSidebarMobile}>
+                <ActionButton
+                  action={() => setShowSidebar(true)}
+                  text={
+                    <FontAwesomeIcon
+                      icon={getIconByName("faBars")}
+                      size={"2xl"}
+                      color='#fff'
+                    />
+                  }
+                  className={"openMobileMenu"}
+                />
+              </div>
+              <div className={styles.logoContainer}>
+                <Logo />
+              </div>
+              <div
+                className={`${styles.navLinksContainerMobile} ${styles.showOnMobile}`}
+              >
+                <NavLinks />
+              </div>
+            </div>
+            <div className={styles.hideOnMobile}>
+              <ActionButton
+                action={() => setShowSidebar(true)}
+                className={`navbarCategories`}
+              >
+                <FontAwesomeIcon
+                  icon={getIconByName("faBars")}
+                  size={"xl"}
+                  color='#fff'
+                />
+                <span className={styles.categoryButtonText}>
+                  {components.navbar.showCategoriesButton}
+                </span>
+              </ActionButton>
+            </div>
+
+            <div className={styles.searchbarContainer}>
+              <SearchBar />
+            </div>
+            <div
+              className={`${styles.navLinksContainer} ${styles.hideOnTablet}`}
+            >
+              <NavLinks />
+            </div>
           </nav>
-          {matchedProducts.length > 0 && showMatchedProductsList && (
-            <MatchedProductsList
-              matchedProducts={matchedProducts}
-              setMatchedProducts={setMatchedProducts}
-              setShowMatchedProductsList={setShowMatchedProductsList}
-              setSearchProductText={setSearchProductText}
+
+          {showSidebar && (
+            <Sidebar
+              items={categories}
+              setShowSidebar={setShowSidebar}
+              setItems={setSortCategory}
+              showSidebar={showSidebar}
             />
           )}
-          {showMobileMenu && <MobileMenu />}
-        </>
+        </header>
       )}
     </>
   )
