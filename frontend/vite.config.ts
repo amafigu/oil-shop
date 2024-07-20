@@ -21,4 +21,9 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  css: {
+    modules: {
+      generateScopedName: "[name]__[local]__[hash:base64:5]",
+    },
+  },
 })
