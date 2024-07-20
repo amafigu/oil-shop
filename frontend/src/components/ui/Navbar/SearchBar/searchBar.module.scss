@@ -57,6 +57,8 @@
   padding: 0px theme.$spacing-semi-regular;
   border-radius: theme.$border-radius-regular;
 
+  @include flex-align-center;
+
   button {
     padding: 0px;
     top: 50%;

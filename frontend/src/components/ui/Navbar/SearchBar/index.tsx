@@ -42,7 +42,7 @@ export const SearchBar = () => {
               <span>
                 <FontAwesomeIcon
                   icon={getIconByName("faSearch")}
-                  size={"xl"}
+                  size={"sm"}
                   color='#686868'
                 />
               </span>
