@@ -1,6 +1,6 @@
 import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
 import { PRODUCTS } from "@/constants/routes"
-import { useMenuOptions } from "@/hooks/useMenuOptions"
+import { useTranslation } from "@/hooks/useTranslation"
 import { Product } from "@/types/Product"
 import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
 import { titleCase } from "@/utils/titleCase"
@@ -43,27 +43,17 @@ export const MatchedProductsList: FC<MatchedProductsListProps> = ({
   setSearchProductText,
 }) => {
   const navigate = useNavigate()
-  const { setShowProductsSearchBar } = useMenuOptions()
+  const { components } = useTranslation()
 
   return (
-    <ul className={styles.list} aria-label={"Searched products list"}>
-      {matchedProducts.map((product) => (
-        <li
-          className={styles.item}
-          aria-label={`Searched item: ${product.name}`}
-          key={product.id}
-          onClick={() => {
-            navigateAndClose({
-              productId: product.id,
-              navigate,
-              setItemsList: setMatchedProducts,
-              setShowList: setShowMatchedProductsList,
-              setSearchProductText,
-            })
-            setShowProductsSearchBar(false)
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
+    <div className={styles.wrapper}>
+      <ul className={styles.list} aria-label={"Searched products list"}>
+        {matchedProducts.map((product: Product) => (
+          <li
+            className={styles.item}
+            aria-label={`Searched item: ${product.name}`}
+            key={product.id}
+            onClick={() => {
               navigateAndClose({
                 productId: product.id,
                 navigate,
@@ -71,27 +61,50 @@ export const MatchedProductsList: FC<MatchedProductsListProps> = ({
                 setShowList: setShowMatchedProductsList,
                 setSearchProductText,
               })
-              setShowProductsSearchBar(false)
-            }
-          }}
-          tabIndex={0}
-        >
-          <div className={styles.imageContainer}>
-            <img
-              src={product.image}
-              alt={product.name}
-              className={styles.image}
-              onError={(e) => setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)}
-            />
-          </div>
-          <div>
-            <span className={styles.content}>
-              {product.name ? titleCase(product.name, "_") : ""}
-            </span>
-            <span className={styles.content}>{`${product.size} ml`}</span>
-          </div>
-        </li>
-      ))}
-    </ul>
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                navigateAndClose({
+                  productId: product.id,
+                  navigate,
+                  setItemsList: setMatchedProducts,
+                  setShowList: setShowMatchedProductsList,
+                  setSearchProductText,
+                })
+              }
+            }}
+            tabIndex={0}
+          >
+            <div className={styles.imageContainer}>
+              <img
+                src={product.image}
+                alt={product.name}
+                className={styles.image}
+                onError={(e) =>
+                  setDefaultImageByError(e, DEFAULT_PRODUCT_IMAGE)
+                }
+              />
+            </div>
+            <div className={styles.descriptionContainer}>
+              <div className={styles.data}>
+                <span className={styles.content}>
+                  {titleCase(product.brand, " ")}
+                </span>
+                <span className={styles.content}>
+                  {titleCase(product.name, "_")}
+                </span>
+                <span className={styles.content}>{`${product.size} ml`}</span>
+              </div>
+              <div className={styles.price}>
+                <span className={styles.content}>{`${product.price} €`}</span>
+                <span className={styles.contentTaxes}>
+                  {components.matchedProductsList.taxesInclusive}
+                </span>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
