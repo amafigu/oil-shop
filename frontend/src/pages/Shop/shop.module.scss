@@ -7,14 +7,6 @@
   @include margin-page-wrapper;
 }
 
-.menuContainer {
-  display: flex;
-
-  @include media.tablet-down {
-    display: none;
-  }
-}
-
 .productsSection {
   width: 80%;
   min-height: theme.$min-height-page-small;
