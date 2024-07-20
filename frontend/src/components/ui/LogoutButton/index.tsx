@@ -21,7 +21,6 @@ export const LogoutButton: FC<LogoutButtonProps> = ({ className }) => {
         />
       }
       className={className}
-      ariaLabel={"Logout"}
     />
   )
 }

@@ -41,7 +41,6 @@ export const Counter: FC<CounterProps> = ({ counter, setCounter }) => {
             <FontAwesomeIcon icon={getIconByName("faChevronUp")} size='sm' />
           }
           className={STYLES.BUTTONS.COUNTER}
-          ariaLabel={"increase quantity"}
         />
         <ActionButton
           action={() => decreaseQuantity(counter, setCounter)}
@@ -49,7 +48,6 @@ export const Counter: FC<CounterProps> = ({ counter, setCounter }) => {
             <FontAwesomeIcon icon={getIconByName("faChevronDown")} size='sm' />
           }
           className={STYLES.BUTTONS.COUNTER}
-          ariaLabel={"decrease quantity"}
         />
       </div>
     </div>

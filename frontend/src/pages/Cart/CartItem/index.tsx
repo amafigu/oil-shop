@@ -41,7 +41,6 @@ export const CartItem: FC<CartItemProps> = ({ item }) => {
             }
             text={<FontAwesomeIcon icon={getIconByName("faMinus")} />}
             className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
-            ariaLabel={`Substract one ${item.product.name} from cart`}
           />
           <span className={styles.quantity}>{item.quantity}</span>
           <ActionButton
@@ -50,7 +49,6 @@ export const CartItem: FC<CartItemProps> = ({ item }) => {
             }
             text={<FontAwesomeIcon icon={getIconByName("faPlus")} />}
             className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
-            ariaLabel={`Add one ${item.product.name} to cart`}
           />
         </div>
         <div className={styles.cost}>
@@ -61,7 +59,6 @@ export const CartItem: FC<CartItemProps> = ({ item }) => {
             action={() => removeProduct(item.product.name)}
             text={<FontAwesomeIcon icon={getIconByName("faTrash")} />}
             className={STYLES.BUTTONS.CART_ITEM_DELETE}
-            ariaLabel={`Delete ${item.product.name} from cart`}
           />
         </div>
       </div>

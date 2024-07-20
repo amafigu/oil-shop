@@ -51,7 +51,6 @@ export const LoginForm: FC = () => {
               )
             }
             className={""}
-            ariaLabel={"show password"}
           />
         </div>
         <SubmitButton text={text.loginButton} className={STYLES.BUTTONS.WIDE} />

@@ -2,7 +2,7 @@ import { LOGO_IMAGE } from "@/constants/media"
 import { SHOP } from "@/constants/routes"
 import { useLocaleContext } from "@/context/localeContext"
 import { useTranslation } from "@/hooks/useTranslation"
-import { Category, Product } from "@/types/Product"
+import { Category } from "@/types/Product"
 import { camelCase } from "@/utils/camelCase"
 import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -12,7 +12,7 @@ import { ActionButton } from "../ActionButton"
 import styles from "./sidebar.module.scss"
 
 interface SidebarProps {
-  items: Product[]
+  items: Category[]
   setShowSidebar: Dispatch<SetStateAction<boolean>>
   showSidebar: boolean
   setItems: Dispatch<SetStateAction<string | undefined>>
