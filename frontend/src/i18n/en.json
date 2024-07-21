@@ -57,6 +57,13 @@
       "orderTotal": "Total:",
       "canNotBuyProducts": "As an administrator you cannot purchase products"
     },
+    "home": {
+      "subTeaser": {
+        "title": "At Oylo, our appreciation for nature's treasured gifts is boundless"
+      },
+      "title": "Welcome to our world of natural wellness ",
+      "text": "where we believe in the power of plants and our Essential Oil Shop is a place for those seeking to boost their health, improve their mood, or simply create a home that smells wonderful and fresh. Each drop of essential oils is derived from nature's most precious gifts, sustainably sourced and meticulously distilled to preserve the inherent life force of each plant. We carry a range of oils that can energize, calm, uplift, or purify, all depending on your unique needs. We invite you to explore our diverse collection, we also offer a selection of oil-infused products such as diffusers, haircare, and skincare."
+    },
     "faq": {
       "difuserRoomSizeQuestion": "Which difuser is suitable for which room size?",
       "difuserRoomSizeAnswer": "The difuser should always be adapted to the room you want to scent. Small ultrasonic difusers are for smaller rooms up to approx. 15sqm suitable. For larger rooms up to about 30 square meters is a larger one difuser suitable. Otherwise you can also change the dosage a little bit change it, for example by adding a few more drops of oil to the difuser.",
@@ -157,17 +164,6 @@
         "show": "Show shipping data",
         "hide": "Hide shipping data"
       }
-    },
-    "welcome": {
-      "subTeaser": {
-        "title": "At Oylo, our appreciation for nature's treasured gifts is boundless"
-      },
-      "title": "Welcome to our world of natural wellness ",
-      "teaserSentence": "where we believe in the power of plants and our Essential Oil Shop is a place for those seeking to boost their health, improve their mood, or simply create a home that smells wonderful and fresh.",
-      "teaserSubSentenceOne": "Each drop of essential oils is derived from nature's most precious gifts, sustainably sourced and meticulously distilled to preserve the inherent life force of each plant. ",
-      "teaserSubSentenceTwo": "We carry a range of oils that can energize, calm, uplift, or purify, all depending on your unique needs.",
-      "teaserSubSentenceThree": "We invite you to explore our diverse collection, we also offer a selection of oil-infused products such as diffusers, haircare, and skincare.",
-      "teaserSubSentenceFour": "Whether you're an essential oil aficionado or just beginning your journey into the aromatic world, we're here to guide."
     }
   },
   "components": {
@@ -404,6 +400,10 @@
       "loading": "Loading product",
       "addProductButton": "add to cart",
       "addProductButtonLabel": "Add product to your shop cart"
+    },
+    "productDetailsCard": {
+      "quantity": "Quantity",
+      "priceInfo": "Prices incl. VAT plus shipping costs"
     },
     "sidebar": {
       "productCategories": {
