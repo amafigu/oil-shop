@@ -7,8 +7,8 @@ export const Payment: FC = () => {
   scrollToTop()
 
   return (
-    <main className={styles.wrapper} aria-label='Payment page'>
-      <section className={styles.container}>
+    <main className={styles.paymentPage}>
+      <section className={styles.paymentFormContainer}>
         <PaymentForm />
       </section>
     </main>

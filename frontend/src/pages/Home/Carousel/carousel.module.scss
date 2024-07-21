@@ -1,0 +1,48 @@
+@use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
+@import "@/styles/helpers/mixins";
+
+.carousel {
+  background: theme.$background-color-primary;
+  padding-top: theme.$spacing-large;
+  padding-bottom: theme.$spacing-extra-large;
+  width: 100%;
+
+  .embla {
+    overflow: hidden;
+    width: 100%;
+  }
+}
+
+.emblaContainer {
+  display: flex;
+}
+
+.emblaSlide {
+  flex: 0 0 25%;
+  min-width: 0;
+  padding: 0;
+
+  @include media.fullscreen-down {
+    flex: 0 0 33.333%;
+  }
+
+  @include media.desktop-down {
+    flex: 0 0 50%;
+  }
+
+  @include media.tablet-down {
+    flex: 0 0 100%;
+  }
+}
+
+.buttonsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: theme.$spacing-regular;
+}
+
+.slideItem {
+  @include flex-justify-center;
+}

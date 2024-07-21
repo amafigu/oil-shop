@@ -1,31 +1,43 @@
 @use "@/styles/theme" as theme;
+@use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
+.faqPage {
   @include flex-justify-center;
 }
 
-.container {
+.listContainer {
+  width: theme.$page-width-primary;
+  max-width: 1420px;
+  margin: theme.$spacing-extra-large 0;
+
   @include flex-column-align-center;
 
-  width: theme.$page-width-primary;
-  margin: 60px 0;
-}
-
-.questionsAndAnswers {
-  max-width: 60%;
+  @include media.tablet-down {
+    margin: theme.$spacing-large 0;
+  }
 }
 
 .title {
   margin-bottom: theme.$spacing-semi-regular-semi-large;
-  font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-normal;
   text-align: center;
+  color: theme.$branding-color-tertiary;
+
+  @include typography-large-semibold;
+
+  @include media.tablet-down {
+    @include typography-semilarge-semibold;
+  }
 }
 
-.subtitle {
+.text {
   margin-bottom: theme.$spacing-large;
-  font-size: theme.$font-size-medium;
-  font-weight: theme.$font-weight-extra-light;
   text-align: center;
+
+  @include typography-semilarge-normal;
+  font-weight: theme.$font-weight-light;
+
+  @include media.tablet-down {
+    font-size: theme.$font-size-medium;
+  }
 }

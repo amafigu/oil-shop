@@ -66,18 +66,23 @@
   min-height: 36px;
   overflow: hidden;
   font-family: theme.$font-family-primary;
-  color: theme.$font-color-primary;
+  color: theme.$font-color-contrast;
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
   cursor: pointer;
-  background-color: theme.$branding-color-primary;
+  background-color: theme.$branding-color-tertiary;
   border: none;
   border-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
+  transition: background-color 0.3s ease-in-out;
 
   @include typography-small-semibold;
   @include flex-all-center;
+
+  &:hover {
+    background-color: theme.$branding-color-primary;
+  }
 }
 
 @mixin form-action-button {
@@ -116,21 +121,6 @@
   cursor: pointer;
   background: none;
   border: none;
-}
-
-@mixin notification-card-content {
-  overflow: hidden;
-  color: theme.$font-color-primary;
-  text-align: center;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  background-color: theme.$branding-color-primary;
-  border: none;
-  border-radius: theme.$border-radius-small;
-  box-shadow: theme.$box-shadow-primary;
-
-  @include flex-all-center;
-  @include typography-medium-semibold;
 }
 
 @mixin input-styles-reset {
@@ -243,6 +233,12 @@
 
 @mixin typography-semi-huge-semibold {
   font-size: theme.$font-size-large;
+  font-weight: theme.$font-weight-semibold;
+  line-height: theme.$line-height-primary;
+}
+
+@mixin typography-huge-semibold {
+  font-size: theme.$font-size-huge;
   font-weight: theme.$font-weight-semibold;
   line-height: theme.$line-height-primary;
 }

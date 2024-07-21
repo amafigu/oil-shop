@@ -39,7 +39,7 @@
   @include action-button;
   background-color: theme.$branding-color-tertiary;
   &:hover {
-    background-color: theme.$branding-color-secondary;
+    background-color: theme.$branding-color-primary;
     box-shadow: theme.$box-shadow-primary;
   }
 }

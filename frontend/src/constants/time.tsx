@@ -1,6 +1,6 @@
 export const SHORT_MESSAGE_TIMEOUT = 2000
-export const MESSAGE_TIMEOUT = 3000
-export const LONG_MESSAGE_TIMEOUT = 4000
+export const MESSAGE_TIMEOUT = 6000
+export const LONG_MESSAGE_TIMEOUT = 8000
 export const REDIRECT_TIMEOUT = 200
 export const LONG_REDIRECT_TIMEOUT = 400
 export const PROCESS_TIMEOUT = 600

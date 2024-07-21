@@ -10,22 +10,19 @@ import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
 import { titleCase } from "@/utils/titleCase"
 import { FC } from "react"
 import { Link } from "react-router-dom"
-import { Counter } from "./Counter"
 import styles from "./productDetailsCard.module.scss"
 
 export const ProductDetailsCard: FC = () => {
-  const { product, quantity, setQuantity } = useProductDetails()
+  const { product, quantity } = useProductDetails()
   const { addProduct } = useCart()
   const { components } = useTranslation()
   const { setSortCategory } = useProductCategory()
+  const text = components.productDetailsCard
 
   return (
     <>
       {product && (
-        <article
-          className={styles.wrapper}
-          aria-label={`${product.name} details`}
-        >
+        <article className={styles.card}>
           <section className={styles.body}>
             <div className={styles.imageContainer}>
               <img
@@ -37,33 +34,51 @@ export const ProductDetailsCard: FC = () => {
                 }
               />
             </div>
-            <div className={styles.container}>
+            <div className={styles.data}>
               <ul className={styles.list}>
-                <li
-                  className={styles.category}
-                  aria-label={`link to ${product.category?.name} products`}
-                >
+                <li className={`${styles.listItem} ${styles.nameContainer}`}>
+                  <span className={styles.name}>
+                    {titleCase(product.name, " ")}
+                  </span>
+                </li>
+                <li className={styles.listItem}>
                   <Link
-                    className={styles.link}
                     to={SHOP}
                     onClick={() => setSortCategory(product.category?.name)}
                   >
-                    {titleCase(product.category?.name ?? "", " ")}
+                    <span className={styles.categoryLink}>
+                      {titleCase(product.category?.name ?? "", " ")}
+                    </span>
                   </Link>
                 </li>
-
-                <li className={styles.name}>
-                  {titleCase(product.name, " ")} {product.size} ml
+                <li className={styles.listItem}>
+                  <span className={styles.price}>{product.price} €</span>
                 </li>
-                <li className={styles.description}>{product.description}</li>
-                <li className={styles.details}>{product.details}</li>
-                <li className={styles.detailsRow}>
-                  <span className={styles.size}>{product.size} ml</span>
-                  <span className={styles.price}>${product.price}</span>
+                <li className={styles.listItem}>
+                  <span className={styles.size}>
+                    {text.quantity}: {product.size} ml
+                  </span>
+                </li>
+                <li className={styles.listItem}>
+                  <span className={styles.priceInfo}>{text.priceInfo}</span>
+                </li>
+                <div className={styles.separator} role='separator'></div>
+                <li
+                  className={`${styles.listItem} ${styles.descriptionContainer}`}
+                >
+                  <div>
+                    <span className={styles.description}>
+                      {product.details}
+                    </span>
+                  </div>
+                  <div>
+                    <span className={styles.description}>
+                      {product.description}
+                    </span>
+                  </div>
                 </li>
               </ul>
-              <div className={styles.selection}>
-                <Counter counter={quantity} setCounter={setQuantity} />
+              <div className={styles.buttonContainer}>
                 <ActionButton
                   action={() => addProduct(product, quantity)}
                   className={STYLES.BUTTONS.ADD_PRODUCT}

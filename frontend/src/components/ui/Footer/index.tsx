@@ -5,8 +5,7 @@ import styles from "./footer.module.scss"
 
 export const Footer: FC = () => {
   return (
-    <footer className={styles.container} aria-label='Footer'>
-      <div className={styles.divider}></div>
+    <footer className={styles.footer}>
       <FooterLinks />
       <FooterIcons />
     </footer>

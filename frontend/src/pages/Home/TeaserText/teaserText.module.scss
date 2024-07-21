@@ -3,17 +3,13 @@
 @import "@/styles/helpers/mixins";
 
 .wrapper {
-  display: flex;
-  justify-content: center;
+  @include flex-justify-center;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 70%;
   text-align: center;
-
+  @include flex-column-all-center;
   @include media.tablet-down {
     width: 90%;
   }
@@ -23,7 +19,7 @@
   margin-bottom: theme.$spacing-semi-regular-large;
   text-align: center;
   text-transform: uppercase;
-
+  color: theme.$branding-color-tertiary;
   @include typography-large-semibold;
 }
 

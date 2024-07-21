@@ -21,8 +21,12 @@
 
   h2 {
     margin-right: 8px;
-    font-size: theme.$font-size-semi-large;
+    @include typography-semilarge-semibold;
   }
+}
+
+.subtitle {
+  @include typography-small-normal;
 }
 
 .options {
@@ -86,24 +90,19 @@
 
 /* end create custom radio */
 
-.buttons {
+.buttonsContainer {
   display: flex;
   flex-grow: 1;
   justify-content: space-around;
   width: 100%;
-}
 
-.button {
-  @include action-button;
-
-  width: 160px;
-  height: 36px;
-  font-size: theme.$font-size-small;
-  text-transform: none;
+  @include media.tablet-down {
+    justify-content: space-between;
+  }
 
   @include media.mobile {
-    width: 120px;
-    overflow: hidden;
+    flex-direction: column;
+    gap: theme.$spacing-regular;
   }
 }
 

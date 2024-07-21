@@ -57,6 +57,13 @@
       "orderTotal": "Gesamt:",
       "canNotBuyProducts": "Als Administrator können Sie keine Produkte kaufen"
     },
+    "home": {
+      "subTeaser": {
+        "title": "Bei Oylo ist unsere Wertschätzung für die wertvollen Geschenke der Natur grenzenlos"
+      },
+      "title": "Willkommen in unserer Welt des natürlichen Wohlbefindens.",
+      "text": "Wir glauben an die Kraft der Pflanzen und unser Shop für ätherische Öle ist ein Ort für alle, die ihre Gesundheit steigern, ihre Stimmung verbessern oder einfach ein Zuhause schaffen möchten, das wunderbar und frisch duftet. Jeder Tropfen ätherischer Öle wird aus den wertvollsten Geschenken der Natur gewonnen, nachhaltig beschafft und sorgfältig destilliert, um die inhärente Lebenskraft jeder Pflanze zu bewahren. Wir laden Sie ein, unsere vielfältige Kollektion zu erkunden. Wir bieten auch eine Auswahl an mit Öl angereicherten Produkten wie Diffusoren, Haarpflege und Hautpflege an."
+    },
     "faq": {
       "difuserRoomSizeQuestion": "Welcher Diffusor eignet sich für welche Raumgröße?",
       "difuserRoomSizeAnswer": "Der Diffusor sollte immer an den Raum angepasst werden, den Sie beduften möchten. Kleine Ultraschall-Diffuser eignen sich für kleinere Räume bis ca. 15qmgeeignet. Für größere Räume bis etwa 30 Quadratmeter ist ein größerer Diffusor geeignet. Ansonsten können Sie die Dosierung auch ein wenig verändern, indem Sie beispielsweise noch ein paar Tropfen Öl in den Diffusor geben.",
@@ -176,25 +183,6 @@
         "show": "Versanddaten anzeigen",
         "hide": "Versanddaten ausblenden"
       }
-    },
-    "welcome": {
-      "subTeaser": {
-        "title": "Bei Oylo ist unsere Wertschätzung für die wertvollen Geschenke der Natur grenzenlos",
-        "teaserFirstSubtitle": "VERWENDUNG ÄTHERISCHER ÖLE",
-        "teaserFirstSentence": "Von Diffusoren bis hin zu Massageölen, von belebenden Bädern bis hin zu aromatischen kulinarischen Aufgüssen.",
-        "teaserSecondSubtitle": "DIE KRAFT ÄTHERISCHER ÖLE",
-        "teaserSecondSentence": "Ätherische Öle wecken Emotionen und führen zu einer positiven Veränderung. Heben Sie Ihre Stimmung mit Zitrusfrüchten auf oder schärfen Sie Ihren Fokus mit Rosmarin.",
-        "teaserThirthSubtitle": "DIE OYLO-KOLLEKTION",
-        "teaserThirthSentence": "Unser Online-Shop bietet eine Auswahl an Aromaölen, einzigartigen Ayurveda-Mischungen, Wellnessprodukten, Naturkosmetik und bezaubernden Geschenksets.",
-        "teaserFourthSubtitle": "OYLO'S QUALITÄTSVERSPRECHEN",
-        "teaserFourthSentence": "Oylo sorgt für völlig natürliche Produkte, frei von synthetischen Zusatzstoffen, Parabenen oder gentechnisch veränderten Substanzen."
-      },
-      "title": "Willkommen in unserer Welt des natürlichen Wohlbefindens",
-      "teaserSentence": "Wir glauben an die Kraft der Pflanzen und unser Shop für ätherische Öle ist ein Ort für alle, die ihre Gesundheit steigern, ihre Stimmung verbessern oder einfach ein Zuhause schaffen möchten, das wunderbar und frisch duftet.",
-      "teaserSubSentenceOne": "Each drop of essential oils is derived from nature's most precious gifts, sustainably sourced and meticulously distilled to preserve the inherent life force of each plant. ",
-      "teaserSubSentenceTwo": "Jeder Tropfen ätherischer Öle wird aus den wertvollsten Geschenken der Natur gewonnen, nachhaltig beschafft und sorgfältig destilliert, um die inhärente Lebenskraft jeder Pflanze zu bewahren.",
-      "teaserSubSentenceThree": "Wir laden Sie ein, unsere vielfältige Kollektion zu erkunden. Wir bieten auch eine Auswahl an mit Öl angereicherten Produkten wie Diffusoren, Haarpflege und Hautpflege an.",
-      "teaserSubSentenceFour": "Egal, ob Sie ein Liebhaber ätherischer Öle sind oder gerade erst Ihre Reise in die Welt der Aromen beginnen, wir sind hier, um Sie zu begleiten."
     }
   },
   "components": {
@@ -437,6 +425,10 @@
       "loading": "Produkt wird geladen",
       "addProductButton": "in den Warenkorb",
       "addProductButtonLabel": "Fügen Sie das Produkt Ihrem Warenkorb hinzu"
+    },
+    "productDetailsCard": {
+      "quantity": "Inhalt",
+      "priceInfo": "Preise inkl. MwSt. zzgl. Versandkosten"
     },
     "sidebar": {
       "productCategories": {
