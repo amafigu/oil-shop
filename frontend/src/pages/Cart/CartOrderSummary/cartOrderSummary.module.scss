@@ -2,13 +2,13 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
+.cartOrderSummary {
   width: 35%;
   max-width: 460px;
   height: fit-content;
-  padding: 32px;
-  margin-left: 3rem;
-  background: #f4f4f4;
+  padding: theme.$spacing-semi-large;
+  margin-left: theme.$spacing-semi-extra-large;
+  background: theme.$background-color-form-primary;
   border-radius: theme.$border-radius-small;
   box-shadow: theme.$box-shadow-primary;
 
@@ -19,15 +19,18 @@
     padding: 0;
     margin-left: 0;
 
-    @include flex-justify-center;
+    @include flex-column-justify-center;
   }
 }
 
 .title {
   margin-bottom: theme.$spacing-semi-regular-large;
   text-transform: uppercase;
+  color: theme.$branding-color-tertiary;
 
   @include typography-semilarge-semibold;
+
+  font-weight: theme.$font-weight-extra-bold;
 
   @include media.desktop-down {
     padding: theme.$spacing-semi-regular-large 0 0
@@ -44,13 +47,22 @@
 }
 
 .item {
-  display: flex;
+  @include flex-align-baseline;
 
   .field {
     margin-right: theme.$spacing-smallest;
 
     @include typography-medium-semibold;
   }
+}
+
+.value {
+  @include typography-small-normal;
+}
+
+.totalValue {
+  @include typography-small-semibold;
+  color: theme.$branding-color-tertiary;
 }
 
 .divider {

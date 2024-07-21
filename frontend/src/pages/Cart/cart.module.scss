@@ -6,6 +6,10 @@
   @include small-page-wrapper;
 
   margin: theme.$spacing-huge 0;
+
+  @include media.mobile {
+    margin: theme.$spacing-regular 0;
+  }
 }
 
 .container {
@@ -41,7 +45,6 @@
 
   hr {
     margin-top: theme.$spacing-regular;
-    margin-right: 38px;
 
     @include media.desktop-down {
       margin-top: 0;

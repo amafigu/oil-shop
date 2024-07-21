@@ -2,21 +2,21 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
+.cartItem {
   @include flex-align-center;
 
-  @include media.desktop-down {
+  @include media.widescreen-down {
     flex-direction: column;
   }
 }
 
-.container {
+.body {
   @include flex-align-center;
 
   flex-grow: 1;
   flex-shrink: 1;
 
-  @include media.desktop-down {
+  @include media.widescreen-down {
     width: 100%;
     margin-bottom: theme.$spacing-semi-regular;
   }
@@ -29,7 +29,7 @@
   object-fit: contain;
   margin-right: theme.$spacing-large;
 
-  @include media.desktop-down {
+  @include media.widescreen-down {
     width: 2.75rem;
     min-height: 80px;
     max-height: 80px;
@@ -37,45 +37,51 @@
 }
 
 .details {
-  flex-grow: 1;
-  flex-shrink: 1;
-  width: 172px;
+  width: 60%;
   overflow: hidden;
 
   @include flex-column;
+
+  @include media.mobile {
+    width: 172px;
+  }
+}
+
+.detailsName {
+  @include typography-medium-semibold;
+}
+
+.detailsItem {
+  @include typography-small-normal;
 }
 
 .selectors {
   @include flex-align-center;
 
-  flex-grow: 1;
   justify-content: space-between;
 
-  @include media.desktop-down {
-    flex-grow: 0;
+  @include media.widescreen-down {
     width: 100%;
     margin-bottom: 4px;
   }
 }
 
 .buttons {
-  display: flex;
-  flex-basis: 0;
-  flex-grow: 1;
-  margin-left: theme.$spacing-regular;
+  @include flex-align-center;
 }
 
 .quantity {
+  width: 80px;
+
   @include flex-all-center;
 
-  width: 2rem;
-  height: 32px;
-  border: none;
-  outline: none;
+  @include media.mobile {
+    width: 60px;
+  }
 }
 
 .cost {
-  min-width: 120px;
+  width: 120px;
 
   @include flex-all-center;
 }

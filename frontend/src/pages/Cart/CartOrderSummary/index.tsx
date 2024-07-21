@@ -43,23 +43,28 @@ export const CartOrderSummary: FC = () => {
   }
 
   return (
-    <section className={styles.wrapper} aria-label='Products cart summary'>
+    <section
+      className={styles.cartOrderSummary}
+      aria-label='Products cart summary'
+    >
       <h2 className={styles.title}>{text.orderSummary}</h2>
       <dl className={styles.details}>
         <div className={styles.item}>
           <dt className={styles.field}>{text.orderSubtotal}</dt>
-          <dd>{getTotalCost(cart).toFixed(2)} €</dd>
+          <dd className={styles.value}>{getTotalCost(cart).toFixed(2)} €</dd>
         </div>
         <div className={styles.item}>
           <dt className={styles.field}>{text.orderShipping} </dt>
-          <dd>{SHIPPING_COST.toFixed(2)} €</dd>
+          <dd className={styles.value}>{SHIPPING_COST.toFixed(2)} €</dd>
         </div>
         <div className={styles.divider}>
           <hr />
         </div>
         <div className={styles.item}>
           <dt className={styles.field}>{text.orderTotal}</dt>
-          <dd>{cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €</dd>
+          <dd className={styles.totalValue}>
+            {cartTotalSum(cart, SHIPPING_COST).toFixed(2)} €
+          </dd>
         </div>
       </dl>
       {renderLink()}

@@ -17,8 +17,8 @@ interface CartItemProps {
 export const CartItem: FC<CartItemProps> = ({ item }) => {
   const { removeProduct, updateProductQuantity } = useCart()
   return (
-    <article className={styles.wrapper} aria-label='cart item'>
-      <div className={styles.container}>
+    <article className={styles.cartItem} aria-label='cart item'>
+      <div className={styles.body}>
         <img
           src={item.product.image}
           alt={item.product.name}
@@ -28,9 +28,11 @@ export const CartItem: FC<CartItemProps> = ({ item }) => {
           }}
         />
         <div className={styles.details}>
-          <span>{titleCase(item.product.name, "_")}</span>
-          <span>{item.product.description}</span>
-          <span>{item.product.size} ml</span>
+          <span className={styles.detailsName}>
+            {titleCase(item.product.name, "_")}
+          </span>
+          <span className={styles.detailsItem}>{item.product.description}</span>
+          <span className={styles.detailsItem}>{item.product.size} ml</span>
         </div>
       </div>
       <div className={styles.selectors}>
@@ -40,7 +42,7 @@ export const CartItem: FC<CartItemProps> = ({ item }) => {
               updateProductQuantity(item.product.name, item.quantity - 1)
             }
             text={<FontAwesomeIcon icon={getIconByName("faMinus")} />}
-            className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
+            className={STYLES.BUTTONS.CART_ITEM}
           />
           <span className={styles.quantity}>{item.quantity}</span>
           <ActionButton
@@ -48,7 +50,7 @@ export const CartItem: FC<CartItemProps> = ({ item }) => {
               updateProductQuantity(item.product.name, item.quantity + 1)
             }
             text={<FontAwesomeIcon icon={getIconByName("faPlus")} />}
-            className={STYLES.BUTTONS.CART_ITEM_QUANTITY}
+            className={STYLES.BUTTONS.CART_ITEM}
           />
         </div>
         <div className={styles.cost}>
@@ -58,7 +60,7 @@ export const CartItem: FC<CartItemProps> = ({ item }) => {
           <ActionButton
             action={() => removeProduct(item.product.name)}
             text={<FontAwesomeIcon icon={getIconByName("faTrash")} />}
-            className={STYLES.BUTTONS.CART_ITEM_DELETE}
+            className={STYLES.BUTTONS.CART_ITEM}
           />
         </div>
       </div>
