@@ -48,11 +48,6 @@
   @include typography-small-semibold;
 }
 
-.contentTaxes {
-  color: theme.$font-color-label;
-  font-size: theme.$font-size-smallest;
-}
-
 .imageContainer {
   width: 60px;
   height: 84px;
@@ -60,6 +55,10 @@
 
   .image {
     @include responsive-image;
+  }
+
+  @include media.mobile {
+    margin-right: theme.$spacing-small;
   }
 }
 
@@ -74,4 +73,20 @@
 .data {
   display: flex;
   gap: theme.$spacing-smallest;
+  flex-wrap: wrap;
+
+  @include media.mobile {
+    width: 60%;
+  }
+}
+
+.price {
+  @include media.mobile {
+    width: fit-content;
+  }
+}
+
+.contentTaxes {
+  color: theme.$font-color-label;
+  font-size: theme.$font-size-smallest;
 }
