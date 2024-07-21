@@ -2,7 +2,7 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
+.card {
   width: 100%;
 
   @include flex-column-all-center;
@@ -28,7 +28,7 @@
     width: 86%;
   }
 
-  @include media.mobile {
+  @include media.desktop-down {
     width: 100%;
 
     @include flex-column-align-center;
@@ -36,16 +36,20 @@
 }
 
 .imageContainer {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   margin-right: theme.$spacing-semi-regular-semi-large;
 
   @include flex-all-center;
 
+  @include media.desktop-down {
+    margin-right: 0;
+    margin-bottom: theme.$spacing-semi-regular-semi-large;
+  }
+
   @include media.mobile {
     width: 200px;
     height: 200px;
-    margin-right: 0;
   }
 }
 
@@ -55,77 +59,113 @@
   @include responsive-image;
 }
 
-.container {
+.data {
   width: 50%;
   height: auto;
-  overflow: hidden;
+  flex-wrap: wrap;
   font-family: theme.$font-family-primary;
 
   @include flex-column-all-center;
 
-  @include media.mobile {
-    flex-grow: 1;
-    min-width: 60%;
+  @include media.desktop-down {
+    width: 100%;
   }
 }
 
 .list {
   width: 100%;
 
-  @include media.mobile {
-    @include flex-column-align-center;
+  @include media.desktop-down {
+    @include flex-column;
+    align-items: flex-start;
   }
 }
 
-.category {
-  color: theme.$font-color-primary;
-
-  @include typography-semilarge-normal;
+.listItem {
+  height: auto;
+  user-select: none;
+  overflow-wrap: break-word;
 }
 
-.link {
+.categoryLink {
   display: inline-block;
-  color: theme.$font-color-primary;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-}
-
-.name {
-  margin-top: theme.$spacing-regular;
-  margin-bottom: theme.$spacing-large;
+  color: theme.$branding-color-primary;
 
   @include typography-semilarge-semibold;
-}
 
-.description,
-.details {
-  margin-bottom: theme.$spacing-semi-regular-large;
-
-  @include typography-semilarge-extralight;
-}
-
-.detailsRow {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: theme.$spacing-semi-regular-large;
-  border-radius: theme.$border-radius-small;
-}
-
-.size {
-  margin-right: theme.$spacing-semi-regular-large;
-
-  @include typography-medium-normal;
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    color: theme.$branding-color-tertiary;
+    text-underline-offset: 0.125rem;
+  }
 }
 
 .price {
-  margin-bottom: 0;
+  color: theme.$branding-color-tertiary;
 
-  @include typography-medium-normal;
+  @include typography-huge-semibold;
+
+  @include media.mobile {
+    font-size: theme.$font-size-extra-large;
+  }
 }
 
-.selection {
+.nameContainer {
+  margin-bottom: theme.$spacing-regular;
+}
+
+.name {
+  color: theme.$branding-color-tertiary;
+
+  @include typography-huge-semibold;
+
+  @include media.mobile {
+    font-size: theme.$font-size-extra-large;
+  }
+}
+
+.size {
+  color: theme.$branding-color-tertiary;
+
+  @include typography-semimedium-normal;
+}
+.description {
+  color: theme.$branding-color-tertiary;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include typography-semimedium-normal;
+}
+
+.priceInfo {
+  font-size: theme.$font-size-smallest;
+  color: theme.$branding-color-tertiary;
+}
+
+.buttonContainer {
   display: flex;
   gap: theme.$spacing-regular;
+  width: 100%;
+}
+
+.separator {
+  width: 100%;
+  margin: theme.$spacing-semi-regular 0px;
+  color: theme.$font-color-light;
+
+  @include flex-align-center;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid theme.$background-color-hover-secondary;
+  }
+}
+
+.descriptionContainer {
+  margin-bottom: theme.$spacing-semi-regular;
   width: 100%;
 }
