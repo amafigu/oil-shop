@@ -1,8 +1,11 @@
-import { SHIPPING } from "@/constants/routes"
+import { ActionButton } from "@/components/ui/ActionButton"
+import { SubmitButton } from "@/components/ui/SubmitButton"
+import { CART } from "@/constants/routes"
+import { STYLES } from "@/constants/styles"
 import { useNotificationContext } from "@/context/notificationContext"
 import { useSubmitOrder } from "@/hooks/useSubmitOrder"
 import { useTranslation } from "@/hooks/useTranslation"
-import { FC, useState } from "react"
+import { ChangeEvent, FC, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./paymentForm.module.scss"
 
@@ -14,8 +17,7 @@ export const PaymentForm: FC = () => {
   const text = translate.pages.payment
   const navigate = useNavigate()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const selectPaymentMethod = (e: any) => {
+  const selectPaymentMethod = (e: ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(e.target.value)
   }
 
@@ -30,7 +32,7 @@ export const PaymentForm: FC = () => {
           <h2>{text.title}</h2>
         </header>
         <fieldset className={styles.options}>
-          <legend>{text.legend}</legend>
+          <legend className={styles.subtitle}>{text.legend}</legend>
           <div className={styles.option}>
             <input
               aria-label='payment with paypal'
@@ -56,21 +58,17 @@ export const PaymentForm: FC = () => {
             <label htmlFor='googlePay'>Google Pay</label>
           </div>
         </fieldset>
-        <div className={styles.buttons}>
-          <button
-            aria-label='come back to shipping data form'
-            className={styles.button}
-            onClick={() => navigate(SHIPPING)}
+        <div className={styles.buttonsContainer}>
+          <ActionButton
+            className={STYLES.BUTTONS.ACTION}
+            action={() => navigate(CART)}
           >
             {text.backButton}
-          </button>
-          <button
-            aria-label='submit payment'
-            className={styles.button}
-            type='submit'
-          >
-            {text.paymentButton}
-          </button>
+          </ActionButton>
+          <SubmitButton
+            className={STYLES.BUTTONS.ACTION}
+            text={text.paymentButton}
+          />
         </div>
       </form>
     </>
