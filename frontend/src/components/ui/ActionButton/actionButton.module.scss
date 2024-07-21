@@ -60,13 +60,6 @@
   color: inherit;
 }
 
-.counter {
-  @include reset-button;
-
-  cursor: pointer;
-}
-
-.cartQuantity,
 .cartDelete {
   @include reset-button;
 
@@ -157,4 +150,32 @@
   min-width: 20px;
 
   @include flex-all-center;
+}
+
+.carouselButton,
+.cartItem {
+  cursor: pointer;
+  border: none;
+  color: theme.$font-color-primary;
+  background: theme.$background-color-hover-secondary;
+  border-radius: theme.$border-radius-small;
+  padding: theme.$spacing-smaller theme.$spacing-small;
+
+  &:hover {
+    background: theme.$branding-color-tertiary;
+    color: theme.$font-color-contrast;
+  }
+}
+
+.counter {
+  cursor: pointer;
+  border: none;
+  color: theme.$font-color-primary;
+  background: theme.$background-color-hover-secondary;
+  border-radius: theme.$border-radius-small;
+
+  &:hover {
+    background: theme.$branding-color-tertiary;
+    color: theme.$font-color-contrast;
+  }
 }
