@@ -3,8 +3,8 @@ $tablet: 768px;
 $desktop: 960px;
 $short: 860px;
 $widescreen: 1152px;
-$fullscreen-small: 1280px;
-$fullscreen: 1440px;
+$fullscreen-small: 1286px;
+$fullscreen: 1540px;
 
 @mixin short {
   @media screen and (max-height: $short) {
