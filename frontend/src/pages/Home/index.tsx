@@ -1,8 +1,7 @@
 import { useProductContext } from "@/context/productContext"
 import { FC } from "react"
 import { Banner } from "./Banner"
-import { Slider } from "./Slider"
-import { TeaserCards } from "./TeaserCards"
+import { Carousel } from "./Carousel"
 import { TeaserText } from "./TeaserText"
 import styles from "./home.module.scss"
 
@@ -17,9 +16,8 @@ export const Home: FC = () => {
           </section>
           <TeaserText />
           <section className={styles.slider}>
-            <Slider items={products} />
+            <Carousel items={products} />
           </section>
-          <TeaserCards />
         </div>
       </div>
     </main>
