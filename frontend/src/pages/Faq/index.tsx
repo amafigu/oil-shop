@@ -6,28 +6,22 @@ import { FC } from "react"
 import styles from "./faq.module.scss"
 
 export const Faq: FC = () => {
-  const { translate } = useTranslation() as Translation
-  const text = translate.pages.faq
+  const { pages } = useTranslation() as Translation
+  const text = pages.faq
   scrollToTop()
 
   return (
-    <main className={styles.wrapper} aria-label='Frequent asked questions page'>
-      <div className={styles.container}>
-        <section className={styles.questionsAndAnswers}>
-          <ul>
-            {questionsAndAnswers.map((item: QuestionAnswer) => (
-              <li key={item.question}>
-                <p className={styles.title} aria-label='question'>
-                  {text[item.question]}
-                </p>
-                <p className={styles.subtitle} aria-label='answer'>
-                  {text[item.answer]}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
+    <main className={styles.faqPage}>
+      <section className={styles.listContainer}>
+        <ul className={styles.list}>
+          {questionsAndAnswers.map((item: QuestionAnswer) => (
+            <li className={styles.listItem} key={item.question}>
+              <p className={styles.title}>{text[item.question]}</p>
+              <p className={styles.text}>{text[item.answer]}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   )
 }
