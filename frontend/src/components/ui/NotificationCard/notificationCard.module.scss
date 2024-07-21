@@ -24,6 +24,16 @@
   padding: theme.$spacing-semi-regular-large;
   margin: 40vh auto;
   border: theme.$border-regular-component;
+  overflow: hidden;
+  color: theme.$font-color-contrast;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  background-color: theme.$branding-color-tertiary;
+  border: none;
+  border-radius: theme.$border-radius-small;
+  box-shadow: theme.$box-shadow-primary;
 
-  @include notification-card-content;
+  @include flex-all-center;
+  @include typography-medium-semibold;
 }
