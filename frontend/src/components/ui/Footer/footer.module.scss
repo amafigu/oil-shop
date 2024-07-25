@@ -3,6 +3,7 @@
 @import "@/styles/helpers/mixins";
 
 .footer {
+  padding-top: theme.$spacing-semi-regular;
   width: 100%;
   font-family: theme.$font-family-primary;
   color: theme.$font-color-contrast;

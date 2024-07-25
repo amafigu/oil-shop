@@ -10,9 +10,9 @@ export const FooterLinks: FC = () => {
 
   return (
     <section>
-      <nav className={styles.navigationItems} aria-label='Footer navigation'>
-        <ul className={styles.itemsList} aria-label='Links columns'>
-          <li className={styles.item} aria-label='Contact data'>
+      <nav className={styles.navigationItems}>
+        <ul className={styles.itemsList}>
+          <li className={styles.item}>
             <p className={styles.itemTitle}>
               {text.linksColumns.wayToUs.title}
             </p>
@@ -28,7 +28,7 @@ export const FooterLinks: FC = () => {
               </p>
             </address>
           </li>
-          <li className={styles.item} aria-label='Useful Links'>
+          <li className={styles.item}>
             <div className={styles.itemTitle}>
               {text.linksColumns.forClient.title}
             </div>
@@ -48,7 +48,6 @@ export const FooterLinks: FC = () => {
               </li>
             </ul>
           </li>
-
           <li className={styles.item}>
             <div className={styles.itemTitle}>
               {text.linksColumns.users.title}
