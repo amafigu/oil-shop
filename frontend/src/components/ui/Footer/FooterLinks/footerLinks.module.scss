@@ -27,7 +27,7 @@
   margin-bottom: theme.$spacing-small;
 
   @include flex-all-center;
-  @include typography-semilarge-semibold;
+  @include typography-medium-semibold;
 }
 
 .itemsLinksList {
@@ -38,6 +38,12 @@
   @include flex-column-align-center;
 }
 
+.link {
+  font-size: 16px;
+  transition: text-decoration-color 800ms ease 0s;
+  text-underline-offset: 0.15em;
+}
+
 .link:hover {
-  text-decoration: underline theme.$font-color-contrast;
+  text-decoration: underline 1px solid theme.$font-color-contrast;
 }
