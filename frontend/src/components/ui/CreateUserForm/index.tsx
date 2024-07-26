@@ -32,26 +32,22 @@ export const CreateUserForm: FC<CreateUserFormProps> = ({ onCreate }) => {
   }
 
   return (
-    <section className={styles.wrapper}>
-      <form className={styles.form} onSubmit={submit}>
-        {Object.keys(data).map((field) => (
-          <FormInput
-            key={field}
-            name={field}
-            onChangeListener={(e) => listenInput(e, data, setData)}
-            placeholder={field}
-            label={field}
-            type='text'
-            value={data[field as keyof CreateUser]?.toString() ?? ""}
-          />
-        ))}
-        <div className={styles.button}>
-          <SubmitButton
-            text={components.createItem.submitButton}
-            className={STYLES.BUTTONS.SAVE}
-          />
-        </div>
-      </form>
-    </section>
+    <form className={styles.form} onSubmit={submit}>
+      {Object.keys(data).map((field) => (
+        <FormInput
+          key={field}
+          name={field}
+          onChangeListener={(e) => listenInput(e, data, setData)}
+          placeholder={field}
+          label={field}
+          type='text'
+          value={data[field as keyof CreateUser]?.toString() ?? ""}
+        />
+      ))}
+      <SubmitButton
+        text={components.createItem.submitButton}
+        className={STYLES.BUTTONS.LOGIN}
+      />
+    </form>
   )
 }

@@ -2,8 +2,6 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
-  @include form-wrapper;
-  box-shadow: none;
-  margin-bottom: theme.$spacing-huge;
+.form {
+  width: 100%;
 }

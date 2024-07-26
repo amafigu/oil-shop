@@ -34,7 +34,7 @@ export const LoginForm: FC = () => {
         />
         <div className={styles.container}>
           <FormInput
-            name={"email"}
+            name={"password"}
             value={password}
             onChangeListener={(e) => setPassword(e.target.value)}
             placeholder={"password"}
@@ -53,7 +53,10 @@ export const LoginForm: FC = () => {
             className={""}
           />
         </div>
-        <SubmitButton text={text.loginButton} className={STYLES.BUTTONS.WIDE} />
+        <SubmitButton
+          text={text.loginButton}
+          className={STYLES.BUTTONS.LOGIN}
+        />
       </form>
     </>
   )
