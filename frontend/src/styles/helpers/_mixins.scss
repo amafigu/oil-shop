@@ -534,3 +534,46 @@
 @mixin list-item-input-container {
   margin: theme.$spacing-regular 0;
 }
+
+@mixin register-user-page {
+  margin: theme.$spacing-semi-large auto theme.$spacing-extra-large;
+  width: theme.$page-width-primary;
+
+  @include flex-column-all-center;
+
+  @include media.mobile {
+    width: 100%;
+    padding: theme.$spacing-semi-large;
+    margin: 0;
+  }
+}
+
+@mixin register-user-page-form-container {
+  width: theme.$width-form-registration;
+  height: auto;
+
+  @include flex-column-align-center;
+
+  @include media.mobile {
+    width: theme.$width-form-registration-mobile;
+  }
+}
+
+@mixin register-user-page-link {
+  font-weight: theme.$font-weight-semibold;
+  color: theme.$branding-color-primary;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+}
+
+@mixin register-user-page-link-container {
+  width: 100%;
+  height: auto;
+  margin: theme.$spacing-large 0;
+  border-radius: theme.$border-radius-small;
+
+  @include flex-column-all-center;
+}

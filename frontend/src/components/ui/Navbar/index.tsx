@@ -22,68 +22,72 @@ export const Navbar: FC = () => {
 
   return (
     <>
-      {!WITHOUT_NAVBAR.includes(currentPath) && (
-        <header className={styles.header}>
-          <nav className={styles.navbar}>
-            <div className={styles.upperOptionsContainer}>
-              <div className={styles.openSidebarMobile}>
-                <ActionButton
-                  action={() => setShowSidebar(true)}
-                  text={
-                    <FontAwesomeIcon
-                      icon={getIconByName("faBars")}
-                      size={"2xl"}
-                      color='#fff'
-                    />
-                  }
-                  className={"openMobileMenu"}
-                />
-              </div>
-              <div className={styles.logoContainer}>
-                <Logo />
-              </div>
+      <header className={styles.header}>
+        <nav className={styles.navbar}>
+          <div className={styles.upperOptionsContainer}>
+            <div className={styles.openSidebarMobile}>
+              <ActionButton
+                action={() => setShowSidebar(true)}
+                text={
+                  <FontAwesomeIcon
+                    icon={getIconByName("faBars")}
+                    size={"2xl"}
+                    color='#fff'
+                  />
+                }
+                className={"openMobileMenu"}
+              />
+            </div>
+            <div className={styles.logoContainer}>
+              <Logo />
+            </div>
+            {!WITHOUT_NAVBAR.includes(currentPath) && (
               <div
                 className={`${styles.navLinksContainerMobile} ${styles.showOnMobile}`}
               >
                 <NavLinks />
               </div>
-            </div>
-            <div className={styles.hideOnMobile}>
-              <ActionButton
-                action={() => setShowSidebar(true)}
-                className={`navbarCategories`}
+            )}
+          </div>
+          {!WITHOUT_NAVBAR.includes(currentPath) && (
+            <>
+              <div className={styles.hideOnMobile}>
+                <ActionButton
+                  action={() => setShowSidebar(true)}
+                  className={`navbarCategories`}
+                >
+                  <FontAwesomeIcon
+                    icon={getIconByName("faBars")}
+                    size={"xl"}
+                    color='#fff'
+                  />
+                  <span className={styles.categoryButtonText}>
+                    {components.navbar.showCategoriesButton}
+                  </span>
+                </ActionButton>
+              </div>
+
+              <div className={styles.searchbarContainer}>
+                <SearchBar />
+              </div>
+              <div
+                className={`${styles.navLinksContainer} ${styles.hideOnTablet}`}
               >
-                <FontAwesomeIcon
-                  icon={getIconByName("faBars")}
-                  size={"xl"}
-                  color='#fff'
-                />
-                <span className={styles.categoryButtonText}>
-                  {components.navbar.showCategoriesButton}
-                </span>
-              </ActionButton>
-            </div>
-
-            <div className={styles.searchbarContainer}>
-              <SearchBar />
-            </div>
-            <div
-              className={`${styles.navLinksContainer} ${styles.hideOnTablet}`}
-            >
-              <NavLinks />
-            </div>
-          </nav>
-
-          {showSidebar && (
-            <Sidebar
-              items={categories}
-              setShowSidebar={setShowSidebar}
-              setItems={setSortCategory}
-              showSidebar={showSidebar}
-            />
+                <NavLinks />
+              </div>
+            </>
           )}
-        </header>
-      )}
+        </nav>
+
+        {showSidebar && (
+          <Sidebar
+            items={categories}
+            setShowSidebar={setShowSidebar}
+            setItems={setSortCategory}
+            showSidebar={showSidebar}
+          />
+        )}
+      </header>
     </>
   )
 }

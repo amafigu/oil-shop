@@ -2,46 +2,22 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
-  @include flex-column-all-center;
+.signUpPage {
+  @include register-user-page;
 }
 
-.container {
+.backLinkContainer {
   width: 100%;
-  min-height: theme.$min-height-page-regular;
-
-  @include flex-column-all-center;
 }
 
-.logoContainer {
-  display: flex;
-  justify-content: center;
-
-  @include flex-justify-center;
+.formContainer {
+  @include register-user-page-form-container;
 }
 
-.logo {
-  width: 216px;
-  border-radius: theme.$border-radius-circle;
+.linkContainer {
+  @include register-user-page-link-container;
 }
 
-.form {
-  width: 100%;
-  padding: theme.$spacing-regular;
-  border-radius: theme.$border-radius-small;
-
-  @include flex-justify-center;
-
-  section {
-    width: 348px;
-
-    @include media.mobile {
-      width: 288px;
-    }
-
-    button {
-      width: 100%;
-      margin-top: theme.$spacing-small;
-    }
-  }
+.link {
+  @include register-user-page-link;
 }
