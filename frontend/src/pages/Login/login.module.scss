@@ -2,60 +2,22 @@
 @use "@/styles/media" as media;
 @import "@/styles/helpers/mixins";
 
-.wrapper {
-  @include flex-column-all-center;
+.loginPage {
+  @include register-user-page;
 }
 
-.container {
+.backLinkContainer {
   width: 100%;
-  min-height: theme.$min-height-page-regular;
-
-  @include flex-column-all-center;
-
-  @include media.mobile {
-    min-height: theme.$min-height-page-small;
-    margin-top: theme.$spacing-large;
-  }
 }
 
 .formContainer {
-  width: 348px;
-  height: auto;
-
-  @include flex-column-align-center;
-
-  @include media.mobile {
-    width: 288px;
-  }
-}
-
-.logoContainer {
-  width: 216px;
-
-  @include flex-justify-center;
-}
-
-.logo {
-  border-radius: theme.$border-radius-circle;
-
-  @include responsive-image;
-}
-
-.linkContainer {
-  width: 100%;
-  height: auto;
-  margin: theme.$spacing-large 0;
-  border-radius: theme.$border-radius-small;
-
-  @include flex-column-all-center;
+  @include register-user-page-form-container;
 }
 
 .link {
-  font-weight: theme.$font-weight-semibold;
-  color: theme.$branding-color-primary;
+  @include register-user-page-link;
+}
 
-  &:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-  }
+.linkContainer {
+  @include register-user-page-link-container;
 }
