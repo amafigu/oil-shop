@@ -13,19 +13,13 @@ export const LinkContainer: FC = () => {
   return (
     <nav className={styles.wrapper} aria-label='Navigation links'>
       <ul className={styles.list}>
-        <li aria-label='Navigate to login page'>
+        <li className={styles.listItem}>
           {text.haveAccount}{" "}
           <Link className={styles.link} to={LOGIN}>
             {text.login}
           </Link>
         </li>
-        <li
-          aria-label={
-            currentPath.includes(SIGN_UP_ADMIN)
-              ? text.createCustomer
-              : text.createAdminLink
-          }
-        >
+        <li className={styles.listItem}>
           {currentPath.includes(SIGN_UP) &&
             !currentPath.includes(SIGN_UP_ADMIN) && (
               <>
