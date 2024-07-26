@@ -3,7 +3,6 @@
 @import "@/styles/helpers/mixins";
 
 .header {
-  min-height: 92px;
   position: relative;
   vertical-align: top;
   width: 100%;
@@ -63,6 +62,7 @@
 
   @include media.tablet-down {
     flex-direction: column;
+    min-height: 0;
     gap: theme.$spacing-semi-regular;
     margin: theme.$spacing-semi-regular auto;
   }
