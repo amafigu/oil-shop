@@ -11,6 +11,7 @@ export const STYLES = Object.freeze({
     LOGOUT: "logout",
     CANCEL: "cancelForm",
     SAVE: "saveForm",
+    LOGIN: "login",
     CLOSE_MODAL: "closeModal",
     SAVE_ITEM: "saveItem",
     DELETE_ITEM: "deleteItem",
