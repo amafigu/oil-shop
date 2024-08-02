@@ -13,6 +13,8 @@ export const useActivePageLink = () => {
     })
     if (pageLinks.includes(path)) {
       setActivePageLink(path)
+    } else if (path === "") {
+      setActivePageLink("home")
     } else {
       setActivePageLink("")
     }
