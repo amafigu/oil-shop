@@ -17,6 +17,7 @@
     max-width: 1000px;
     height: 100%;
     max-height: 500px;
+    min-height: 500px;
     margin: auto;
     overflow: hidden;
 
@@ -24,6 +25,7 @@
 
     @include media.mobile {
       height: 340px;
+      min-height: 340px;
     }
   }
 
