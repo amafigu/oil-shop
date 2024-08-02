@@ -12,3 +12,4 @@ export const product: Product = {
   brand: "test brand",
   category: { name: "test category" },
 }
+

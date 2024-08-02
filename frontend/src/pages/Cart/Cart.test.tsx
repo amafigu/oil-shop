@@ -1,4 +1,4 @@
-import { cartItem } from "@/__mocks__/cartItem"
+import { cartDifuserItem, cartItem } from "@/__mocks__/cartItem"
 import { user } from "@/__mocks__/user"
 import { CartContext } from "@/context/cartContext"
 import { LocaleContext } from "@/context/localeContext"
@@ -7,6 +7,8 @@ import { useCart } from "@/hooks/useCart"
 import de from "@/i18n/de.json"
 import en from "@/i18n/en.json"
 import { CartItem } from "@/types/Cart"
+import { Product } from "@/types/Product"
+import { titleCase } from "@/utils/titleCase"
 import "@testing-library/jest-dom"
 import { act, render, renderHook, screen } from "@testing-library/react"
 import { FC, ReactNode, useState } from "react"
@@ -56,6 +58,7 @@ const UserContextWrapper: FC<{ children: ReactNode }> = ({ children }) => {
   )
 }
 
+const setNotification = vi.fn()
 const CartContextWrapper: FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([cartItem])
 
@@ -64,8 +67,41 @@ const CartContextWrapper: FC<{ children: ReactNode }> = ({ children }) => {
       value={{
         cart,
         setCart,
-        addProduct: vi.fn(),
-        updateProductQuantity: vi.fn(),
+        addProduct: (product: Product, quantity: number) => {
+          const existingProduct = cart.find(
+            (item: CartItem) => item.product.name === product.name,
+          )
+      
+          if (quantity > 0) {
+            if (existingProduct) {
+              setCart(
+                cart.map((item: CartItem) =>
+                  item.product.name === product.name
+                    ? { ...item, quantity: item.quantity + quantity }
+                    : item,
+                ),
+              )
+            } else {
+              setCart([...cart, { product, quantity }])
+            }
+      
+            setNotification(
+              `${quantity} ${titleCase(product.name, "_")} were added to your cart`,
+            )
+            setTimeout(() => setNotification(null), 1300)
+          }
+        },
+        updateProductQuantity: (productName: string, newQuantity: number) => {
+          if (newQuantity > 0) {
+            setCart(
+              cart.map((item: CartItem) =>
+                item.product.name === productName
+                  ? { ...item, quantity: newQuantity }
+                  : item,
+              ),
+            )
+          }
+        },
         removeProduct: (productName: string) => {
           setCart(
             cart.filter((item: CartItem) => item.product.name !== productName),
@@ -96,8 +132,8 @@ function renderCart() {
   )
 }
 
-describe("Cart should", () => {
-  it("call remove product", async () => {
+describe("Cart does", () => {
+  it("remove product", async () => {
     const { result } = renderHook(() => useCart(), {
       wrapper: CartContextWrapper,
     })
@@ -114,5 +150,38 @@ describe("Cart should", () => {
   it("renders products correctly", () => {
     renderCart()
     expect(screen.getByText("Cart item product")).toBeInTheDocument()
+  })
+
+  it("adds product successfully", async () => {
+    const { result } = renderHook(() => useCart(), {
+      wrapper: CartContextWrapper,
+    })
+
+    expect(result.current.cart).toEqual([cartItem]) 
+    
+    act(() => {
+      result.current.addProduct(cartDifuserItem, 1)
+    })
+
+    expect(result.current.cart).toEqual([
+      { ...cartItem, quantity: 1 },
+      { product: cartDifuserItem, quantity: 1 }
+    ])
+  })
+
+  it("updates product quantity successfully", async () => {
+    const { result } = renderHook(() => useCart(), {
+      wrapper: CartContextWrapper,
+    })
+
+    expect(result.current.cart).toEqual([cartItem]) 
+    
+    act(() => {
+      result.current.updateProductQuantity(cartItem.product.name, 3)
+    })
+
+    expect(result.current.cart).toEqual([
+      { ...cartItem, quantity: 3 }
+    ])
   })
 })
