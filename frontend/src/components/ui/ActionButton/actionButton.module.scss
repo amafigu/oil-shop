@@ -52,6 +52,8 @@
   @include reset-button;
 
   color: theme.$branding-color-primary !important;
+  text-decoration: underline 1px theme.$branding-color-primary !important;
+  text-underline-offset: 0.125rem;
 }
 
 .openMobileMenu {
