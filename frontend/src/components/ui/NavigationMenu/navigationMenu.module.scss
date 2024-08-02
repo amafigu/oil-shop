@@ -3,31 +3,37 @@
 @import "@/styles/helpers/mixins";
 
 .navigationMenu {
-  @include flex-justify-center;
-  height: 44px;
+  display: flex;
+  height: 68px;
   width: 100%;
 
   button {
     font-family: theme.$font-family-primary;
     color: theme.$font-color-light;
+    text-decoration: underline 1px theme.$font-color-light;
+    text-underline-offset: 0.125rem;
 
     @include typography-semilarge-normal;
-  }
 
-  @include media.mobile {
-    button {
-      font-family: theme.$font-family-primary;
-      color: theme.$font-color-light;
-
-      @include typography-semilarge-normal;
+    &:hover {
+      text-decoration: none;
+      color: theme.$branding-color-primary;
     }
   }
 }
 
 .list {
-  @include flex-all-center;
+  justify-content: space-evenly;
+  width: 100%;
+
+  @include flex-align-center;
+
   @include media.tablet-down {
     flex-direction: row;
     gap: theme.$spacing-semi-regular;
   }
+}
+
+.listItem {
+  @include flex-align-center;
 }

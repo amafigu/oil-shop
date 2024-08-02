@@ -36,7 +36,7 @@ export const NavigationMenu = () => {
             {navigationMenuItems &&
               navigationMenuItems.map((item, index) => {
                 return (
-                  <li className={styles.item} key={index}>
+                  <li className={styles.listItem} key={index}>
                     <ActionButton
                       action={(e) =>
                         onSelect(e as MouseEvent<HTMLButtonElement>, item)
