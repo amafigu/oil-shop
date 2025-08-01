@@ -10,7 +10,6 @@ import {
   CreateProduct,
   EditProduct,
   Product,
-  ProductContextType,
 } from "@/types/Product"
 import { onRequestError } from "@/utils/onRequestError"
 import { createProductSchema } from "@/utils/productsValidation"
@@ -25,23 +24,24 @@ import {
   MouseEvent,
   ReactNode,
   SetStateAction,
-  createContext,
-  useContext,
+  useCallback,
   useEffect,
+  useMemo,
   useState,
 } from "react"
+import { ProductContext } from "./ProductContext"
 
-export const ProductContext = createContext<ProductContextType | undefined>(
-  undefined,
-)
+type Props = {
+ children: ReactNode
+}
 
-export const ProductProvider = ({ children }: { children: ReactNode }) => {
+export function ProductProvider({ children }: Props) {
   const [sortCategory, setSortCategory] = useState<string | undefined>("")
   const [categories, setCategories] = useState<Category[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const { onSetNotification, setNotification } = useNotificationContext()
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const response = await getProducts()
       if (response && response.status === 200) {
@@ -51,9 +51,9 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       onSetNotification(error.message)
       console.error(error)
     }
-  }
+  },[onSetNotification])
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       const response = await getProductCategories()
       if (response && response.status === 200) {
@@ -63,19 +63,16 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       onSetNotification(error.message)
       console.error(error)
     }
-  }
+  },[onSetNotification])
 
   useEffect(() => {
     fetchProducts()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
     fetchCategories()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchProducts, fetchCategories])
 
-  const onDeleteProduct = async (e: MouseEvent, id: number): Promise<void> => {
+ 
+
+  const onDeleteProduct = useCallback(async (e: MouseEvent, id: number): Promise<void> => {
     e.preventDefault()
     try {
       const response = await deleteProductById(id)
@@ -86,9 +83,9 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       onSetNotification("Error by deleting product")
       console.error("Error by deleting product:", error)
     }
-  }
+  },[onSetNotification])
 
-  const onCreateProduct = async ({
+  const onCreateProduct = useCallback(async ({
     e,
     data,
     file,
@@ -121,9 +118,9 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       console.error("Error by creating product:", error)
       onRequestError(error, setNotification)
     }
-  }
+  }, [onSetNotification,setNotification])
 
-  const onUpdateProduct = async ({
+  const onUpdateProduct = useCallback(async ({
     id,
     initialData,
     updatedData,
@@ -134,10 +131,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
     updatedData: EditProduct
     setUpdatedData: Dispatch<SetStateAction<EditProduct>>
   }) => {
-    console.log("onUpdateProduct initialData", initialData)
-    console.log("onUpdateProduct updatedData", updatedData)
+    
     try {
-      // const validatedProperty = (await validateProduct(updatedData)) ?? {}
       const response = await updateProduct(id, updatedData as Product)
       if (response && response.status === 200) {
         const updatedProduct = response.data.product
@@ -152,30 +147,35 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       setUpdatedData(initialData)
       onRequestError(error, onSetNotification)
     }
-  }
+  }, [onSetNotification])
 
+   const value = useMemo(
+    () => ({
+      products,
+      setProducts,
+      onCreateProduct,
+      onUpdateProduct,
+      onDeleteProduct,
+      sortCategory,
+      setSortCategory,
+      categories,
+    }),
+    [
+      products,
+      onCreateProduct,
+      onUpdateProduct,
+      onDeleteProduct,
+      sortCategory,
+      setSortCategory,
+      categories,
+    ]
+  )
   return (
     <ProductContext.Provider
-      value={{
-        products,
-        setProducts,
-        onCreateProduct,
-        onUpdateProduct,
-        onDeleteProduct,
-        sortCategory,
-        setSortCategory,
-        categories,
-      }}
+      value={value}
     >
       {children}
     </ProductContext.Provider>
   )
 }
 
-export const useProductContext = () => {
-  const context = useContext(ProductContext)
-  if (!context) {
-    throw new Error("useProductContext shoudl be within a Provider")
-  }
-  return context
-}
