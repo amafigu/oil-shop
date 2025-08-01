@@ -1,74 +1,68 @@
-import { useProductContext } from "@/context/productContext"
+import { FC, ChangeEvent, useState, useMemo, useCallback } from "react"
+import { useProductContext } from "@/context/useProductContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { Product } from "@/types/Product"
 import { filterProductsProps } from "@/utils/filterProductsProps"
-import { ChangeEvent, FC, useEffect, useState } from "react"
 import { ListProductForm } from "../ListProductForm"
 import styles from "./editableProductsList.module.scss"
 
 export const EditableProductsList: FC = () => {
-  const [filteredItemsList, setFilteredItemsList] = useState<Product[]>([])
-  const { pages } = useTranslation()
   const { products } = useProductContext()
+  const { pages } = useTranslation()
   const text = pages.admin.usersManagement.editableItemsList
 
-  useEffect(() => {
-    setFilteredItemsList(products || [])
-  }, [products])
+  const [filterIndex, setFilterIndex] = useState<number | "">( "" )
 
-  const selectFilter = (e: ChangeEvent<HTMLSelectElement>) => {
-    const index = parseInt(e.target.value)
-    if (index >= 0 && index < filterProductsProps.length) {
-      const filterAction = filterProductsProps[index]?.action
-      if (filterAction && filteredItemsList) {
-        const sortedItems = filterAction([...filteredItemsList])
-        setFilteredItemsList(sortedItems)
-      }
-    }
-  }
+  const sortedProducts = useMemo<Product[]>(() => {
+    if (filterIndex === "") return products
+
+    const idx = Number(filterIndex)
+    const action = filterProductsProps[idx]?.action
+    return action ? action([...products]) : products
+  }, [products, filterIndex])
+
+  const handleFilterChange = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      setFilterIndex(e.target.value === "" ? "" : Number(e.target.value))
+    },
+    []
+  )
 
   return (
-    <>
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.filterColumn}>
-            <div className={styles.selector}>
-              <label className={styles.label} htmlFor='filterOptions'></label>
-              <select
-                className={styles.select}
-                name='filterOptions'
-                id='filterOptions'
-                onChange={selectFilter}
-                defaultValue=''
-              >
-                <option value='' disabled>
-                  {`${text.sortBy} ...`}
-                </option>
-                {filterProductsProps.map((filterButton, index) => (
-                  <option key={index} value={index}>
-                    {filterButton.isAsc
-                      ? `${text[filterButton.targetProperty]}: ${
-                          text.ascendent
-                        }`
-                      : `${text[filterButton.targetProperty]}: ${
-                          text.descendent
-                        }`}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className={styles.listColumn}>
-            <ul className={styles.list}>
-              {filteredItemsList.map((item, index) => (
-                <li className={styles.item} key={item.id || index}>
-                  <ListProductForm item={item} />
-                </li>
-              ))}
-            </ul>
-          </div>
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <div className={styles.filterColumn}>
+          <label htmlFor="filterOptions" className={styles.label}>
+            {text.sortBy}:
+          </label>
+          <select
+            id="filterOptions"
+            className={styles.select}
+            value={filterIndex}
+            onChange={handleFilterChange}
+          >
+            <option value="" disabled>
+              {`${text.sortBy} …`}
+            </option>
+            {filterProductsProps.map((f, i) => (
+              <option key={i} value={i}>
+                {text[f.targetProperty]}:{" "}
+                {f.isAsc ? text.ascendent : text.descendent}
+              </option>
+            ))}
+          </select>
         </div>
-      </section>
-    </>
+
+        <div className={styles.listColumn}>
+          <ul className={styles.list}>
+            {sortedProducts.map((item) => (
+              <li className={styles.item} key={item.id}>
+                <ListProductForm item={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   )
 }

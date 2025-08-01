@@ -1,13 +1,12 @@
 import { ProductCard } from "@/components/products/ProductCard"
-import { useProductContext } from "@/context/asdasdasproductContext"
-import { useProductCategory } from "@/context/useProductContext"import { Category, Product } from "@/types/Product"
+import { useProductContext } from "@/context/useProductContext"
+import { Category, Product } from "@/types/Product"
 import { FC, useEffect, useState } from "react"
 import styles from "./sortedProductsList.module.scss"
 
 export const SortedProductsList: FC = () => {
   const [productsList, setProductsList] = useState<Product[]>([])
-  const { products } = useProductContext()
-  const { sortCategory, categories } = useProductCategory()
+  const { products, sortCategory, categories } = useProductContext()
 
   useEffect(() => {
     const sortByCategory = (

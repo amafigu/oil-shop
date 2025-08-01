@@ -1,6 +1,6 @@
 import { WITHOUT_NAVBAR } from "@/constants/routes"
 import { useMenuContext } from "@/context/menuContext"
-import { useProductCategory } from "@/hooks/useProductCategory"
+import { useProductContext } from "@/context/useProductContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -17,7 +17,7 @@ export const Navbar: FC = () => {
   const location = useLocation()
   const currentPath = location.pathname
   const { setShowSidebar, showSidebar } = useMenuContext()
-  const { categories, setSortCategory } = useProductCategory()
+  const { categories, setSortCategory } = useProductContext()
   const { components } = useTranslation()
 
   return (

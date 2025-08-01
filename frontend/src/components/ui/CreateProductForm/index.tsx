@@ -1,31 +1,21 @@
 import { FormInput } from "@/components/ui/FormInput"
 import { SubmitButton } from "@/components/ui/SubmitButton"
 import { STYLES } from "@/constants/styles"
-import { useProductContext } from "@/context/productContext"
-import { useProductCategory } from "@/hooks/useProductCategory"
+import { useProductContext } from "@/context/useProductContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { CreateProduct } from "@/types/Product"
 import { listenInput } from "@/utils/listenInput"
 import { setFileToUpload } from "@/utils/setFileToUpload"
-import { FC, FormEvent, useState } from "react"
+import { FormEvent, useState } from "react"
 import { CategoryOptions } from "../CategoryOptions"
 import styles from "./createProductForm.module.scss"
+import { defaultProductData } from "@/constants/products"
 
-export const CreateProductForm: FC = () => {
-  const { onCreateProduct } = useProductContext()
-  const { categories } = useProductCategory()
+export function CreateProductForm() {
+  const { onCreateProduct, categories } = useProductContext()
   const { components } = useTranslation()
   const [file, setFile] = useState<File | null | undefined>(null)
-  const [data, setData] = useState<CreateProduct>({
-    categoryId: 0,
-    name: "",
-    details: "",
-    description: "",
-    brand: "",
-    price: 0,
-    size: 0,
-    image: "",
-  })
+  const [data, setData] = useState<CreateProduct>(defaultProductData)
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     await onCreateProduct({ e, data, file })

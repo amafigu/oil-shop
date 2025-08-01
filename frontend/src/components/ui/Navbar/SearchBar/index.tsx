@@ -1,6 +1,6 @@
 import { ActionButton } from "@/components/ui/ActionButton"
 import { useMatchedItemsContext } from "@/context/matchedItemsContext"
-import { useProductContext } from "@/context/asdasdasproductContext"
+import { useProductContext } from "@/context/useProductContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { getIconByName } from "@/utils/getIconByName"
 import { searchProducts } from "@/utils/searchProducts"
