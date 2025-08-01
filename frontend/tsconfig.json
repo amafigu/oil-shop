@@ -27,7 +27,7 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "useUnknownInCatchVariables": false,
-    "types": ["node", "vite/client", "vitest/globals", "vitest/jsdom"]
+    "types": ["node", "vite/client", "vitest/globals", "vitest/jsdom", "vitest"]
   },
   "include": [
     "src/**/*.ts",
