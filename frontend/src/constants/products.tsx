@@ -1,3 +1,5 @@
+import { CreateProduct } from "@/types/Product"
+
 export const editableProductProperties = [
   "name",
   "description",
@@ -7,3 +9,14 @@ export const editableProductProperties = [
   "brand",
   "details",
 ]
+
+export const defaultProductData:CreateProduct = {
+    categoryId: 0,
+    name: "",
+    details: "",
+    description: "",
+    brand: "",
+    price: 0,
+    size: 0,
+    image: "",
+  }

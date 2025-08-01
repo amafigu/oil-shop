@@ -10,6 +10,6 @@ export const product: Product = {
   categoryId: 1,
   image: "test-image.jpg",
   brand: "test brand",
-  category: { name: "test category" },
+  category: { name: "massage oil" },
 }
 
