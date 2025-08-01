@@ -2,48 +2,73 @@ import { uploadFile } from "@/api/aws/uploadFile"
 import { ItemFormInput } from "@/components/ui/ItemFormInput"
 import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
 import { STYLES } from "@/constants/styles"
-import { useProductContext } from "@/context/productContext"
+import { useProductContext } from "@/context/useProductContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { EditProduct, Product } from "@/types/Product"
-import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react"
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react"
 import { ActionButton } from "../ActionButton"
 import styles from "./listProductForm.module.scss"
 
-interface ListProductProps {
+interface Props {
   item: Product
   setShowForm?: Dispatch<SetStateAction<boolean>>
 }
 
-export const ListProductForm: FC<ListProductProps> = ({
+export function ListProductForm ({
   item,
   setShowForm,
-}) => {
-  const initialData: EditProduct = {
-    name: item.name,
-    description: item.description,
-    size: item.size,
-    price: item.price,
-    details: item.details,
-    image: item.image,
-    brand: item.brand,
-  }
-
-  const [updatedData, setUpdatedData] = useState<EditProduct>(initialData)
-  const [file, setFile] = useState<File | null>(null)
+}:Props)  {
   const { onUpdateProduct, onDeleteProduct } = useProductContext()
   const { components } = useTranslation()
 
-  const submit = async () => {
-    const dataToUpdate = {
+  const initialData = useMemo<EditProduct>(
+    () => ({
+      name: item.name,
+      description: item.description,
+      size: item.size,
+      price: item.price,
+      details: item.details,
+      image: item.image,
+      brand: item.brand,
+    }),
+    [item]
+  )
+
+  // 2) Keep updatedData in sync if item changes
+  const [updatedData, setUpdatedData] =
+    useState<EditProduct>(initialData)
+  useEffect(() => {
+    setUpdatedData(initialData)
+  }, [initialData])
+
+  const [file, setFile] = useState<File | null>(null)
+  const previewUrl = useMemo(
+    () => (file ? URL.createObjectURL(file) : null),
+    [file]
+  )
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
+    }
+  }, [previewUrl])
+
+  const submit = useCallback(async () => {
+    const dataToUpdate: EditProduct = {
       ...updatedData,
       size: Number(updatedData.size),
       price: Number(updatedData.price),
     }
     if (file) {
       const imageUrl = await uploadFile(file)
-      if (imageUrl) {
-        dataToUpdate.image = imageUrl
-      }
+      if (imageUrl) dataToUpdate.image = imageUrl
     }
 
     await onUpdateProduct({
@@ -52,26 +77,33 @@ export const ListProductForm: FC<ListProductProps> = ({
       updatedData: dataToUpdate,
       setUpdatedData,
     })
+    setShowForm?.(false)
+  }, [
+    file,
+    updatedData,
+    initialData,
+    item.id,
+    onUpdateProduct,
+    setShowForm,
+  ])
 
-    if (setShowForm) {
-      setShowForm(false)
-    }
-  }
-
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, files } = e.target
-    if (name === "image" && files && files.length > 0) {
-      setFile(files[0] || null)
-    } else {
-      setUpdatedData((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }))
-    }
-  }
+  const onInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value, files } = e.target
+      if (name === "image" && files?.length) {
+        setFile(files[0] ?? null)
+        } else {
+        setUpdatedData((prev) => ({
+          ...prev,
+          [name]: value,
+        }))
+      }
+    },
+    []
+  )
 
   return (
-    <article className={styles.wrapper} aria-label='Edit Product'>
+    <article className={styles.wrapper} aria-label="Edit Product">
       <form className={styles.form}>
         {Object.keys(initialData).map((key) => (
           <ItemFormInput
@@ -83,23 +115,23 @@ export const ListProductForm: FC<ListProductProps> = ({
           />
         ))}
       </form>
+
       <div className={styles.container}>
-        {item && (
-          <div className={styles.imageContainer}>
-            <img
-              className={styles.image}
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : item.image || DEFAULT_PRODUCT_IMAGE
-              }
-              alt='Product Image'
-            />
-          </div>
-        )}
+        <div className={styles.imageContainer}>
+          <img
+            className={styles.image}
+            src={
+              previewUrl ||
+              item.image ||
+              DEFAULT_PRODUCT_IMAGE
+            }
+            alt="Product Preview"
+          />
+        </div>
+
         <div className={styles.buttonsContainer}>
           <ActionButton
-            action={() => submit()}
+            action={submit}
             className={STYLES.BUTTONS.SAVE_ITEM}
             text={components.listUserForm.save}
           />

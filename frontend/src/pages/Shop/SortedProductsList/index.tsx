@@ -1,7 +1,6 @@
 import { ProductCard } from "@/components/products/ProductCard"
-import { useProductContext } from "@/context/productContext"
-import { useProductCategory } from "@/hooks/useProductCategory"
-import { Category, Product } from "@/types/Product"
+import { useProductContext } from "@/context/asdasdasproductContext"
+import { useProductCategory } from "@/context/useProductContext"import { Category, Product } from "@/types/Product"
 import { FC, useEffect, useState } from "react"
 import styles from "./sortedProductsList.module.scss"
 
