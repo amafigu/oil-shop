@@ -1,4 +1,4 @@
-import { useProductContext } from "@/context/productContext"
+import { useProductContext } from "@/context/useProductContext"
 import { FC } from "react"
 import { Banner } from "./Banner"
 import { Carousel } from "./Carousel"

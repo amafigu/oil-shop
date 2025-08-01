@@ -3,7 +3,6 @@ import { DEFAULT_PRODUCT_IMAGE } from "@/constants/media"
 import { SHOP } from "@/constants/routes"
 import { STYLES } from "@/constants/styles"
 import { useCart } from "@/hooks/useCart"
-import { useProductCategory } from "@/hooks/useProductCategory"
 import { useProductDetails } from "@/hooks/useProductDetails"
 import { useTranslation } from "@/hooks/useTranslation"
 import { setDefaultImageByError } from "@/utils/setDefaultImageByError"
@@ -11,12 +10,13 @@ import { titleCase } from "@/utils/titleCase"
 import { FC } from "react"
 import { Link } from "react-router-dom"
 import styles from "./productDetailsCard.module.scss"
+import { useProductContext } from "@/context/useProductContext"
 
 export const ProductDetailsCard: FC = () => {
   const { product, quantity } = useProductDetails()
   const { addProduct } = useCart()
   const { components } = useTranslation()
-  const { setSortCategory } = useProductCategory()
+  const { setSortCategory } = useProductContext()
   const text = components.productDetailsCard
 
   return (

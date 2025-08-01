@@ -1,19 +1,22 @@
+import axios, { AxiosResponse } from "axios"
 import { PRODUCTS } from "@/constants/api"
-import { Product } from "@/types/Product"
-import axios from "axios"
+import type { Product } from "@/types/Product"
 
-export const updateProduct = async (productId: number, product: Product) => {
+export async function updateProduct(
+  productId: number,
+  product: Product
+): Promise<AxiosResponse<{ product: Product }>> {
+  const url = `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}/${productId}`
   try {
-    const response = await axios.put(
-      `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}/${productId}`,
-      product,
-      { withCredentials: true },
-    )
-    if (response?.status === 200) {
-      return response
+    const response = await axios.put<{ product: Product }>(url, product, {
+      withCredentials: true,
+    })
+    if (response.status !== 200) {
+      throw new Error(`updateProduct: Unexpected status ${response.status}`)
     }
-  } catch (error) {
-    console.error("Error by updating product", error)
-    throw error
+    return response
+  } catch (err) {
+    console.error(`Error updating product ${productId}`, err)
+    throw err
   }
 }

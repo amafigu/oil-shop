@@ -1,16 +1,19 @@
+import axios, { AxiosResponse } from "axios"
 import { PRODUCTS } from "@/constants/api"
-import axios from "axios"
+import type { Product } from "@/types/Product"
 
-export const getProducts = async () => {
+export async function getProducts(): Promise<AxiosResponse<Product[]>> {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}`,
-    )
-    if (response && response.status === 200) {
-      return response
+    const url = `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}`
+    const response = await axios.get<Product[]>(url)
+
+    if (response.status !== 200) {
+      throw new Error(`Got status ${response.status}`)
     }
+
+    return response
   } catch (error) {
-    console.error("Error by getting products", error)
+    console.error("Error fetching products", error)
     throw error
   }
 }

@@ -4,7 +4,7 @@ import { CartProvider } from "../context/cartContext"
 import { LocaleContextProvider } from "../context/localeContext"
 import { MenuProvider } from "../context/menuContext"
 import { NotificationProvider } from "../context/notificationContext"
-import { ProductProvider } from "../context/productContext"
+import { ProductProvider } from "../context/ProductProvider"
 import { UserProvider } from "../context/userContext"
 import { AppRoutes } from "./AppRoutes"
 

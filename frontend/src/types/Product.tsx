@@ -1,4 +1,3 @@
-import { Dispatch, FormEvent, MouseEvent, SetStateAction } from "react"
 
 export interface Product {
   id: number
@@ -39,22 +38,4 @@ export interface EditProduct {
   brand: string
 }
 
-export interface ProductContextType {
-  products: Product[]
-  setProducts: Dispatch<SetStateAction<Product[]>>
-  onCreateProduct: (data: {
-    e: FormEvent<HTMLFormElement>
-    data: CreateProduct
-    file?: File | null | undefined
-  }) => Promise<void>
-  onUpdateProduct: (data: {
-    id: number
-    initialData: EditProduct
-    updatedData: EditProduct
-    setUpdatedData: Dispatch<SetStateAction<EditProduct>>
-  }) => Promise<void>
-  onDeleteProduct: (e: MouseEvent, id: number) => Promise<void>
-  sortCategory: string | undefined
-  setSortCategory: Dispatch<SetStateAction<string | undefined>>
-  categories: Category[]
-}
+

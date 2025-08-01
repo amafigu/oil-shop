@@ -1,16 +1,21 @@
+import axios, { AxiosResponse } from "axios"
 import { PRODUCT_CATEGORIES } from "@/constants/api"
-import axios from "axios"
+import type { Category } from "@/types/Product"
 
-export const getProductCategories = async () => {
+export async function getProductCategories(): Promise<
+  AxiosResponse<Category[]>
+> {
+  const url = `${import.meta.env.VITE_APP_API_URL}${PRODUCT_CATEGORIES}`
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}${PRODUCT_CATEGORIES}`,
-    )
-    if (response?.status === 200) {
-      return response
+    const response = await axios.get<Category[]>(url)
+    if (response.status !== 200) {
+      throw new Error(
+        `getProductCategories: Unexpected status ${response.status}`
+      )
     }
-  } catch (error) {
-    console.error("Error by getting products", error)
-    throw error
+    return response
+  } catch (err) {
+    console.error("Error fetching categories", err)
+    throw err
   }
 }
