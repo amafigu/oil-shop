@@ -5,6 +5,7 @@ import { getProductCategories } from "./getProductCategories"
 import { PRODUCT_CATEGORIES } from "@/constants/api"
 import type { Category } from "@/types/Product"
 import { productCategories } from "@/__mocks__/productCategories"
+import { emptyAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
 
 vi.mock("axios")
 const mockedGet = vi.mocked(axios.get)
@@ -26,20 +27,13 @@ describe("getProductCategories", () => {
 
     const result = await getProductCategories()
 
-    // should call axios.get with the correct URL
     expect(mockedGet).toHaveBeenCalledWith(`${baseUrl}${PRODUCT_CATEGORIES}`)
-    // should return the raw axios response
     expect(result).toBe(axiosResponse)
   })
 
   it("throws if status is not 200", async () => {
-    const axiosResponse = {
-      data: [],
-      status: 404,
-      statusText: "Not Found",
-      headers: {},
-      config: {},
-    } as unknown as AxiosResponse<Category[]>
+    const axiosResponse = 
+      emptyAxiosResponse as unknown as AxiosResponse<Category[]>
 
     mockedGet.mockResolvedValue(axiosResponse)
 
@@ -49,7 +43,7 @@ describe("getProductCategories", () => {
   })
 
   it("re-throws network or other errors", async () => {
-    const networkError = new Error("Network failure")
+    const networkError = new Error("Network error")
     mockedGet.mockRejectedValue(networkError)
 
     await expect(getProductCategories()).rejects.toBe(networkError)

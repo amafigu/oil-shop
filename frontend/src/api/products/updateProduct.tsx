@@ -15,8 +15,8 @@ export async function updateProduct(
       throw new Error(`updateProduct: Unexpected status ${response.status}`)
     }
     return response
-  } catch (err) {
-    console.error(`Error updating product ${productId}`, err)
-    throw err
+  } catch (error) {
+    console.error(`Error updating product ${productId}`, error)
+    throw error
   }
 }
