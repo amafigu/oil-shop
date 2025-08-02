@@ -5,7 +5,7 @@ import { getProductCategories } from "./getProductCategories"
 import { PRODUCT_CATEGORIES } from "@/constants/api"
 import type { Category } from "@/types/Product"
 import { productCategories } from "@/__mocks__/productCategories"
-import { emptyAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
+import { notFoundAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
 
 vi.mock("axios")
 const mockedGet = vi.mocked(axios.get)
@@ -14,7 +14,6 @@ describe("getProductCategories", () => {
   const baseUrl = import.meta.env.VITE_APP_API_URL
 
   it("resolves with data when status is 200", async () => {
-    
     const axiosResponse = {
       data: productCategories,
       status: 200,
@@ -32,13 +31,14 @@ describe("getProductCategories", () => {
   })
 
   it("throws if status is not 200", async () => {
-    const axiosResponse = 
-      emptyAxiosResponse as unknown as AxiosResponse<Category[]>
+    const axiosResponse = notFoundAxiosResponse as unknown as AxiosResponse<
+      Category[]
+    >
 
     mockedGet.mockResolvedValue(axiosResponse)
 
     await expect(getProductCategories()).rejects.toThrow(
-      "getProductCategories: Unexpected status 404"
+      "getProductCategories: Unexpected status 404",
     )
   })
 

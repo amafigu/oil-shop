@@ -5,7 +5,7 @@ import { getProducts } from "./getProducts"
 import { PRODUCTS } from "@/constants/api"
 import type { Product } from "@/types/Product"
 import { products } from "@/__mocks__/products"
-import { emptyAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
+import { notFoundAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
 
 vi.mock("axios")
 const mockedGet = vi.mocked(axios.get)
@@ -31,11 +31,13 @@ describe("getProducts", () => {
   })
 
   it("throws error if status is not 200", async () => {
-    const axiosResponse = emptyAxiosResponse as unknown as AxiosResponse<Product[]>
+    const axiosResponse = notFoundAxiosResponse as unknown as AxiosResponse<
+      Product[]
+    >
     mockedGet.mockResolvedValue(axiosResponse)
 
     await expect(getProducts()).rejects.toThrow(
-      `Got status ${axiosResponse.status}`
+      `Got status ${axiosResponse.status}`,
     )
   })
 
