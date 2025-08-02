@@ -13,3 +13,11 @@ export const deleteAxiosResponse = {
   headers: {},
   config: {},
 }
+
+export const notFoundWithUndefinedData = {
+  data: undefined,
+  status: 404,
+  statusText: "Not Found",
+  headers: {},
+  config: {},
+}
