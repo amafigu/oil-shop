@@ -1,4 +1,3 @@
-import { Dispatch, FormEvent, SetStateAction, SyntheticEvent } from "react"
 
 export interface User {
   id: number
@@ -58,33 +57,4 @@ export interface ShippingData {
   country: string
 }
 
-export interface UserContextType {
-  isLoggedIn: boolean
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>
-  isLoading: boolean
-  users: User[]
-  user: User | null
-  setUser: Dispatch<SetStateAction<User | null>>
-  onUpdateUser: (data: {
-    id: number
-    initialData: EditUser
-    updatedData: EditUser
-    setUpdatedData: Dispatch<SetStateAction<EditUser>>
-  }) => Promise<void>
-  onDeleteUser: (e: SyntheticEvent, id: number) => Promise<void>
-  onCreateCustomer: (
-    e: FormEvent<HTMLFormElement>,
-    data: CreateUser,
-  ) => Promise<User>
-  onCreateAdmin: (
-    e: FormEvent<HTMLFormElement>,
-    data: CreateUser,
-  ) => Promise<User>
-  onUpdateShippingData: (data: {
-    id: number
-    initialData: EditShippingData
-    updatedData: EditShippingData
-    setUpdatedData: Dispatch<SetStateAction<EditShippingData>>
-  }) => Promise<void>
-  shippingData: Partial<ShippingData>
-}
+
