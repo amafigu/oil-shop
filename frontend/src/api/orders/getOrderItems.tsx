@@ -1,12 +1,11 @@
-import { ORDER_ITEMS } from "@/constants/api"
+import { baseUrl, ORDER_ITEMS } from "@/constants/api"
 import axios from "axios"
 
 export const getOrderItems = async (orderId: number) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}${ORDER_ITEMS}/${orderId}`,
-      { withCredentials: true },
-    )
+    const response = await axios.get(`${baseUrl}${ORDER_ITEMS}/${orderId}`, {
+      withCredentials: true,
+    })
     if (response && response.status === 200) {
       return response
     } else {

@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from "axios"
-import { PRODUCTS } from "@/constants/api"
+import { baseUrl, PRODUCTS } from "@/constants/api"
 import type { Product } from "@/types/Product"
 
 export async function getProducts(): Promise<AxiosResponse<Product[]>> {
   try {
-    const url = `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}`
+    const url = `${baseUrl}${PRODUCTS}`
     const response = await axios.get<Product[]>(url)
 
     if (response.status !== 200) {

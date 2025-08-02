@@ -1,11 +1,9 @@
-import { LAST_ORDER } from "@/constants/api"
+import { baseUrl, LAST_ORDER } from "@/constants/api"
 import axios from "axios"
 
 export const getLastOrderItems = async (userId: number) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}${LAST_ORDER}/${userId}`,
-    )
+    const response = await axios.get(`${baseUrl}${LAST_ORDER}/${userId}`)
     if (response && response.status === 200) {
       return response
     } else {

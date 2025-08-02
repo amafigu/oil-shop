@@ -1,4 +1,4 @@
-import { SHIPPING_DATA } from "@/constants/api"
+import { baseUrl, SHIPPING_DATA } from "@/constants/api"
 import { ShippingData } from "@/types/User"
 import axios from "axios"
 
@@ -8,7 +8,7 @@ export const createShippingData = async (
 ) => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}${SHIPPING_DATA}/${userId}`,
+      `${baseUrl}${SHIPPING_DATA}/${userId}`,
       data,
     )
     if (response?.status === 201) {

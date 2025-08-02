@@ -1,10 +1,10 @@
-import { LOGIN } from "@/constants/api"
+import { baseUrl, LOGIN } from "@/constants/api"
 import axios from "axios"
 
 export const login = async (email: string, password: string) => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}${LOGIN}`,
+      `${baseUrl}${LOGIN}`,
       { email, password },
       { withCredentials: true },
     )

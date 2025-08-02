@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from "axios"
-import { PRODUCTS } from "@/constants/api"
+import { baseUrl, PRODUCTS } from "@/constants/api"
 
 export async function deleteProductById(
   id: number,
 ): Promise<AxiosResponse<void>> {
-  const url = `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}/${id}`
+  const url = `${baseUrl}${PRODUCTS}/${id}`
 
   try {
     const response = await axios.delete<void>(url, {

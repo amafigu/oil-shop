@@ -1,12 +1,11 @@
-import { AUTHENTICATED_USER } from "@/constants/api"
+import { AUTHENTICATED_USER, baseUrl } from "@/constants/api"
 import axios from "axios"
 
 export const getAuthenticatedUserById = async (id: number) => {
   try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_APP_API_URL}${AUTHENTICATED_USER}/${id}`,
-      { withCredentials: true },
-    )
+    const response = await axios.get(`${baseUrl}${AUTHENTICATED_USER}/${id}`, {
+      withCredentials: true,
+    })
     if (
       (response && response.status === 200) ||
       (response && response.status === 401) ||

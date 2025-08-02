@@ -1,10 +1,10 @@
-import { LOGOUT } from "@/constants/api"
+import { baseUrl, LOGOUT } from "@/constants/api"
 import axios from "axios"
 
 export const logout = async () => {
   try {
     const response = await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}${LOGOUT}`,
+      `${baseUrl}${LOGOUT}`,
       {},
       {
         withCredentials: true,

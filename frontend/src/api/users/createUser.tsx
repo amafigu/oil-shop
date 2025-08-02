@@ -1,11 +1,11 @@
-import { USERS } from "@/constants/api"
+import { baseUrl, USERS } from "@/constants/api"
 import { CreateUser, User } from "@/types/User"
 import axios, { AxiosResponse } from "axios"
 
 export async function createUser(
   user: CreateUser,
 ): Promise<AxiosResponse<{ user: User }>> {
-  const url = `${import.meta.env.VITE_APP_API_URL}${USERS}`
+  const url = `${baseUrl}${USERS}`
 
   try {
     const response = await axios.post<{ user: User }>(url, user, {

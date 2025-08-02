@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from "axios"
-import { PRODUCTS } from "@/constants/api"
+import { baseUrl, PRODUCTS } from "@/constants/api"
 import type { Product } from "@/types/Product"
 
 export async function createProduct(
   product: Product,
 ): Promise<AxiosResponse<{ product: Product }>> {
-  const url = `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}`
+  const url = `${baseUrl}${PRODUCTS}`
   try {
     const response = await axios.post<{ product: Product }>(url, product, {
       withCredentials: true,
