@@ -14,3 +14,4 @@ export const LOGOUT = "/auth/logout"
 export const ORDERS_BY_USER = "/orders/user"
 export const ORDER_ITEMS = "/orders/items"
 export const LAST_ORDER = "/orders/last-order"
+export const baseUrl = import.meta.env.VITE_APP_API_URL
