@@ -4,22 +4,19 @@ import { describe, it, expect, vi } from "vitest"
 import { deleteProductById } from "./deleteProductById"
 import { PRODUCTS } from "@/constants/api"
 import { product } from "@/__mocks__/product"
-import { emptyAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
+import {
+  deleteAxiosResponse,
+  notFoundAxiosResponse,
+} from "@/__mocks__/api/emptyAxiosResponse"
 
 vi.mock("axios")
 const mockedDelete = vi.mocked(axios.delete)
 
 describe("deleteProductById", () => {
-  const baseUrl = import.meta.env.VITE_APP_API_URL
+  const baseUrl = notFoundAxiosResponse
 
   it("resolves when status is 200", async () => {
-    const axiosResponse = {
-      data: undefined,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {},
-    } as unknown as AxiosResponse<void>
+    const axiosResponse = deleteAxiosResponse as unknown as AxiosResponse<void>
 
     mockedDelete.mockResolvedValue(axiosResponse)
 
@@ -27,17 +24,18 @@ describe("deleteProductById", () => {
 
     expect(mockedDelete).toHaveBeenCalledWith(
       `${baseUrl}${PRODUCTS}/${product.id}`,
-      { withCredentials: true }
+      { withCredentials: true },
     )
     expect(result).toBe(axiosResponse)
   })
 
   it("throws error if status is not 200", async () => {
-    const axiosResponse = emptyAxiosResponse as unknown as AxiosResponse<void>
+    const axiosResponse =
+      notFoundAxiosResponse as unknown as AxiosResponse<void>
     mockedDelete.mockResolvedValue(axiosResponse)
 
     await expect(deleteProductById(product.id)).rejects.toThrow(
-      `deleteProductById: Unexpected status ${axiosResponse.status}`
+      `deleteProductById: Unexpected status ${axiosResponse.status}`,
     )
   })
 
