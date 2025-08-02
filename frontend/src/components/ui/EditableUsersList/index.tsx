@@ -1,4 +1,4 @@
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { User } from "@/types/User"
 import { filterUsersProps } from "@/utils/filterUsersProps"

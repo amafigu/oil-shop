@@ -1,5 +1,5 @@
 import { LOGIN } from "@/constants/routes"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useNavigate } from "react-router-dom"
 
 export const useVerifyIsLoggedIn = () => {

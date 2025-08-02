@@ -3,7 +3,7 @@ import { PRODUCTS } from "@/constants/api"
 import type { Product } from "@/types/Product"
 
 export async function createProduct(
-  product: Product
+  product: Product,
 ): Promise<AxiosResponse<{ product: Product }>> {
   const url = `${import.meta.env.VITE_APP_API_URL}${PRODUCTS}`
   try {
@@ -13,9 +13,10 @@ export async function createProduct(
     if (response.status !== 201) {
       throw new Error(`createProduct: Unexpected status ${response.status}`)
     }
+
     return response
   } catch (error) {
-    console.error("Error creating product", error)
+    console.error("Error by creating product", error)
     throw error
   }
 }

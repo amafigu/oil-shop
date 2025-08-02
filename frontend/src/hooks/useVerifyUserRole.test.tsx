@@ -1,5 +1,5 @@
 import { CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "@/constants/routes"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { act, renderHook } from "@testing-library/react"
 import { useNavigate } from "react-router-dom"
 import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest"

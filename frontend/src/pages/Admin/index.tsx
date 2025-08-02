@@ -7,7 +7,7 @@ import {
   USERS_CREATE,
   USERS_MANAGEMENT,
 } from "@/constants/routes"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyUserRole } from "@/hooks/useVerifyUserRole"
 import { getIconByName } from "@/utils/getIconByName"

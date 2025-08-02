@@ -1,7 +1,7 @@
 import { AccountHeader } from "@/components/ui/AccountHeader"
 import { OptionCard } from "@/components/ui/OptionCard"
 import { ACCOUNT_ORDERS, ACCOUNT_PROFILE } from "@/constants/routes"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyUserRole } from "@/hooks/useVerifyUserRole"
 import { getIconByName } from "@/utils/getIconByName"

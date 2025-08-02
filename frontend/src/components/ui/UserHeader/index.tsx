@@ -1,5 +1,5 @@
 import { DEFAULT_USER_IMAGE } from "@/constants/media"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { UserHeader as IUserHeader } from "@/types/User"
 import { setDefaultImageByError } from "@/utils/setDefaultImageByError"

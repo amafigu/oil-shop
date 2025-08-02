@@ -1,6 +1,6 @@
 import { getOrderItems } from "@/api/orders/getOrderItems"
 import { getOrdersByUserId } from "@/api/orders/getOrdersByUserId"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { Order } from "@/types/Order"
 import { useEffect, useState } from "react"
 

@@ -1,5 +1,5 @@
 import { CURRENT_ADMIN, CURRENT_CUSTOMER, LOGIN } from "@/constants/routes"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 

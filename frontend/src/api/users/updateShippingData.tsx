@@ -6,8 +6,6 @@ export const updateShippingData = async (
   userId: number,
   data: EditShippingData,
 ) => {
-  console.log("updateShippingData data", data)
-  console.log("updateShippingData userId", userId)
   try {
     const response = await axios.put(
       `${import.meta.env.VITE_APP_API_URL}${SHIPPING_DATA}/${userId}`,

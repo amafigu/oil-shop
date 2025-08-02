@@ -7,7 +7,7 @@ import {
   LOGIN,
 } from "@/constants/routes"
 import { STYLES } from "@/constants/styles"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FC } from "react"

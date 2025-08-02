@@ -1,7 +1,7 @@
 import { login } from "@/api/auth/login"
 import { CURRENT_ADMIN, CURRENT_CUSTOMER } from "@/constants/routes"
 import { useNotificationContext } from "@/context/notificationContext"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { onRequestError } from "@/utils/onRequestError"
 import { FormEvent } from "react"
 import { useNavigate } from "react-router-dom"

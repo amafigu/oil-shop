@@ -1,7 +1,7 @@
 import { AccountSectionHeader } from "@/components/ui/AccountSectionHeader"
 import { NoItemsCard } from "@/components/ui/NoItemsCard"
 import { SHOP } from "@/constants/routes"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useGetOrders } from "@/hooks/useGetOrders"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyIsLoggedIn } from "@/hooks/useVerifyIsLoggedIn"

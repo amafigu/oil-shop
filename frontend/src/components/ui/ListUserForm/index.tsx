@@ -1,6 +1,6 @@
 import { ItemFormInput } from "@/components/ui/ItemFormInput"
 import { STYLES } from "@/constants/styles"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { EditUser, User } from "@/types/User"
 import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react"

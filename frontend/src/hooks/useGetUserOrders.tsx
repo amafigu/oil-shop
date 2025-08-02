@@ -1,7 +1,7 @@
 import { getOrdersByUserId } from "@/api/orders/getOrdersByUserId"
 import { LONG_MESSAGE_TIMEOUT } from "@/constants/time"
 import { useNotificationContext } from "@/context/notificationContext"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useEffect, useState } from "react"
 
 export const useGetUserOrders = () => {

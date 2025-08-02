@@ -1,6 +1,6 @@
 import { AccountSectionHeader } from "@/components/ui/AccountSectionHeader"
 import { CreateUserForm } from "@/components/ui/CreateUserForm"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { FC } from "react"
 import styles from "./createUser.module.scss"

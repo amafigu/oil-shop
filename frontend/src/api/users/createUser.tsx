@@ -1,19 +1,22 @@
 import { USERS } from "@/constants/api"
-import { CreateUser } from "@/types/User"
-import axios from "axios"
+import { CreateUser, User } from "@/types/User"
+import axios, { AxiosResponse } from "axios"
 
-export const createUser = async (user: CreateUser) => {
+export async function createUser(
+  user: CreateUser,
+): Promise<AxiosResponse<{ user: User }>> {
+  const url = `${import.meta.env.VITE_APP_API_URL}${USERS}`
+
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_APP_API_URL}${USERS}`,
-      user,
-    )
-    if (
-      (response && response.status === 201) ||
-      (response && response.status === 422)
-    ) {
-      return response
+    const response = await axios.post<{ user: User }>(url, user, {
+      withCredentials: true,
+    })
+
+    if (response.status !== 201) {
+      throw new Error(`createUser: Unexpected status ${response.status}`)
     }
+
+    return response
   } catch (error) {
     console.error("Error by creating user", error)
     throw error

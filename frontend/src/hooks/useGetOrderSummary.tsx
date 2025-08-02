@@ -4,7 +4,7 @@ import {
   initialUserData,
 } from "@/constants/orderSummaryData"
 import { useNotificationContext } from "@/context/notificationContext"
-import { useUserContext } from "@/context/userContext"
+import { useUserContext } from "@/context/useUserContext"
 import { CartItem, OrderData } from "@/types/Order"
 import { useEffect, useState } from "react"
 import { onGetOrderSummary } from "../utils/onGetOrderSummary"
