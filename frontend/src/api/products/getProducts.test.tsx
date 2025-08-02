@@ -30,7 +30,7 @@ describe("getProducts", () => {
     expect(result).toBe(axiosResponse)
   })
 
-  it("throws error if status is not 200", async () => {
+  it("throws error if is not succesful", async () => {
     const axiosResponse = notFoundAxiosResponse as unknown as AxiosResponse<
       Product[]
     >

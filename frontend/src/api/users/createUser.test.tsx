@@ -45,7 +45,7 @@ describe("createUser", () => {
     )
   })
 
-  it("re-throws network or other errors", async () => {
+  it("throws network error", async () => {
     const networkError = new Error("Network down")
     mockedPost.mockRejectedValue(networkError)
 

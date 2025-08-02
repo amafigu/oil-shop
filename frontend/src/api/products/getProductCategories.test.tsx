@@ -13,7 +13,7 @@ const mockedGet = vi.mocked(axios.get)
 describe("getProductCategories", () => {
   const baseUrl = import.meta.env.VITE_APP_API_URL
 
-  it("resolves with data when status is 200", async () => {
+  it("resolves successfully", async () => {
     const axiosResponse = {
       data: productCategories,
       status: 200,
@@ -30,7 +30,7 @@ describe("getProductCategories", () => {
     expect(result).toBe(axiosResponse)
   })
 
-  it("throws if status is not 200", async () => {
+  it("throws if is not succesful", async () => {
     const axiosResponse = notFoundAxiosResponse as unknown as AxiosResponse<
       Category[]
     >
@@ -42,7 +42,7 @@ describe("getProductCategories", () => {
     )
   })
 
-  it("re-throws network or other errors", async () => {
+  it("throws network error", async () => {
     const networkError = new Error("Network error")
     mockedGet.mockRejectedValue(networkError)
 

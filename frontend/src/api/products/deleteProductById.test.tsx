@@ -29,7 +29,7 @@ describe("deleteProductById", () => {
     expect(result).toBe(axiosResponse)
   })
 
-  it("throws error if status is not 200", async () => {
+  it("throws error if is not succesful", async () => {
     const axiosResponse =
       notFoundAxiosResponse as unknown as AxiosResponse<void>
     mockedDelete.mockResolvedValue(axiosResponse)
@@ -39,7 +39,7 @@ describe("deleteProductById", () => {
     )
   })
 
-  it("re-throws network or other errors", async () => {
+  it("throws network error", async () => {
     const networkError = new Error("Network error")
     mockedDelete.mockRejectedValue(networkError)
 
