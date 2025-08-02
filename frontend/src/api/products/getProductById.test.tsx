@@ -5,6 +5,8 @@ import { getProductById } from "./getProductById"
 import { PRODUCTS } from "@/constants/api"
 import type { Product } from "@/types/Product"
 import { product } from "@/__mocks__/product"
+import { notFoundWithUndefinedData } from "@/__mocks__/api/emptyAxiosResponse"
+import { successfulAxiosResponseWithoutData } from "@/__mocks__/api/successfulAxiosResponse"
 
 vi.mock("axios")
 const mockedGet = vi.mocked(axios.get)
@@ -12,13 +14,10 @@ const mockedGet = vi.mocked(axios.get)
 describe("getProductById", () => {
   const baseUrl = import.meta.env.VITE_APP_API_URL
 
-  it("resolves with data when status is 200", async () => {
+  it("resolves successfully", async () => {
     const axiosResponse = {
+      ...successfulAxiosResponseWithoutData,
       data: product,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {},
     } as unknown as AxiosResponse<Product>
 
     mockedGet.mockResolvedValue(axiosResponse)
@@ -32,14 +31,10 @@ describe("getProductById", () => {
     expect(result).toBe(axiosResponse)
   })
 
-  it("resolves with undefined data when status is 404", async () => {
-    const axiosResponse = {
-      data: undefined,
-      status: 404,
-      statusText: "Not Found",
-      headers: {},
-      config: {},
-    } as unknown as AxiosResponse<Product | undefined>
+  it("is undefined when not found", async () => {
+    const axiosResponse = notFoundWithUndefinedData as unknown as AxiosResponse<
+      Product | undefined
+    >
 
     mockedGet.mockResolvedValue(axiosResponse)
 
@@ -48,7 +43,7 @@ describe("getProductById", () => {
     expect(result).toBe(axiosResponse)
   })
 
-  it("throws if status is not 200 or 404", async () => {
+  it("throws if is not succesful or 404", async () => {
     const axiosResponse = {
       data: product,
       status: 500,
