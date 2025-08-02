@@ -14,8 +14,8 @@ export async function createProduct(
       throw new Error(`createProduct: Unexpected status ${response.status}`)
     }
     return response
-  } catch (err) {
-    console.error("Error creating product", err)
-    throw err
+  } catch (error) {
+    console.error("Error creating product", error)
+    throw error
   }
 }
