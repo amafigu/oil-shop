@@ -1,4 +1,4 @@
-module.exports = [
+export const users = [
   {
     id: 1,
     firstName: "Test one firstName",
