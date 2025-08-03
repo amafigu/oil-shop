@@ -1,17 +1,9 @@
-
 import { CURRENT_ADMIN, SIGN_UP } from "@/constants/routes"
 import { useNotificationContext } from "@/context/notificationContext"
-import type {
-  CreateUser,
-  ShippingData,
-  User,
-} from "@/types/User"
+import type { CreateUser, UserShippingData, User } from "@/types/User"
 import { onRequestError } from "@/utils/onRequestError"
 import { createUserSchema, updateUserSchema } from "@/utils/usersValidation"
-import {
-  convertDataToExpectedUserTypes,
-  validate,
-} from "@/utils/verifyTypes"
+import { convertDataToExpectedUserTypes, validate } from "@/utils/verifyTypes"
 import {
   FormEvent,
   ReactNode,
@@ -42,7 +34,9 @@ export function UserProvider({ children }: Props) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const [shippingData, setShippingData] = useState<Partial<ShippingData>>({})
+  const [shippingData, setShippingData] = useState<Partial<UserShippingData>>(
+    {},
+  )
 
   const { onSetNotification, setNotification } = useNotificationContext()
   const { pathname } = useLocation()
@@ -91,16 +85,19 @@ export function UserProvider({ children }: Props) {
       const response = await getUserShippingData(user.id)
       if (response?.status === 200) setShippingData(response.data)
     } catch (err) {
-      onRequestError(err, setNotification, "Error by getting user shipping data")
+      onRequestError(
+        err,
+        setNotification,
+        "Error by getting user shipping data",
+      )
     }
   }, [user, isLoading, setNotification])
 
   useEffect(() => {
     verifyLogin()
-     fetchUsers()
-        fetchShippingData()
-  }, [verifyLogin,fetchUsers,fetchShippingData])
-
+    fetchUsers()
+    fetchShippingData()
+  }, [verifyLogin, fetchUsers, fetchShippingData])
 
   const onDeleteUser = useCallback(
     async (e: SyntheticEvent, id: number) => {
@@ -120,7 +117,7 @@ export function UserProvider({ children }: Props) {
         console.error(err)
       }
     },
-    [onSetNotification]
+    [onSetNotification],
   )
 
   const onCreateCustomer = useCallback(
@@ -131,7 +128,10 @@ export function UserProvider({ children }: Props) {
         await validate({ item: typed, schema: createUserSchema })
         const response = await createUser(typed)
         if (response?.status === 422) {
-          setTimeout(() => onSetNotification("This user is already existent."), 4000)
+          setTimeout(
+            () => onSetNotification("This user is already existent."),
+            4000,
+          )
         }
         if (response?.status === 201) {
           setUsers((prev) => [...prev, response.data.user])
@@ -141,7 +141,7 @@ export function UserProvider({ children }: Props) {
         onRequestError(err, onSetNotification)
       }
     },
-    [onSetNotification]
+    [onSetNotification],
   )
 
   const onCreateAdmin = useCallback(
@@ -164,12 +164,12 @@ export function UserProvider({ children }: Props) {
         onRequestError(err, onSetNotification)
       }
     },
-    [isCreatedByAdmin, isSignup, onSetNotification]
+    [isCreatedByAdmin, isSignup, onSetNotification],
   )
 
   const validateUpdatedUser = useCallback(
     async (data: unknown) => updateUserSchema.parse(data),
-    []
+    [],
   )
 
   const onUpdateUser = useCallback(
@@ -179,7 +179,11 @@ export function UserProvider({ children }: Props) {
         const response = await updateUser(id, valid as User)
         if (response.status === 200) {
           const userResponse = response.data.user
-          setUsers((prev) => prev.map((user) => (user.id === userResponse.id ? userResponse : user)))
+          setUsers((prev) =>
+            prev.map((user) =>
+              user.id === userResponse.id ? userResponse : user,
+            ),
+          )
           setUser(userResponse)
         }
       } catch (err) {
@@ -188,7 +192,7 @@ export function UserProvider({ children }: Props) {
         onRequestError(err, onSetNotification)
       }
     },
-    [validateUpdatedUser, onSetNotification]
+    [validateUpdatedUser, onSetNotification],
   )
 
   const onUpdateShippingData = useCallback(
@@ -202,7 +206,7 @@ export function UserProvider({ children }: Props) {
         onRequestError(err, onSetNotification)
       }
     },
-    [onSetNotification]
+    [onSetNotification],
   )
 
   const value = useMemo(
@@ -232,7 +236,7 @@ export function UserProvider({ children }: Props) {
       onUpdateUser,
       onUpdateShippingData,
       shippingData,
-    ]
+    ],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>

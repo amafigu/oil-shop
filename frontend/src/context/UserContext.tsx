@@ -1,5 +1,17 @@
-import { User, EditUser, CreateUser, EditShippingData, ShippingData } from "@/types/User"
-import { createContext, Dispatch, FormEvent, SetStateAction, SyntheticEvent } from "react"
+import {
+  User,
+  EditUser,
+  CreateUser,
+  EditShippingData,
+  UserShippingData,
+} from "@/types/User"
+import {
+  createContext,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  SyntheticEvent,
+} from "react"
 
 type Value = {
   isLoggedIn: boolean
@@ -29,7 +41,7 @@ type Value = {
     updatedData: EditShippingData
     setUpdatedData: Dispatch<SetStateAction<EditShippingData>>
   }) => Promise<void>
-  shippingData: Partial<ShippingData>
+  shippingData: Partial<UserShippingData>
 }
 
 export const UserContext = createContext<Value | null>(null)
