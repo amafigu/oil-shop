@@ -1,4 +1,3 @@
-
 export interface User {
   id: number
   firstName: string
@@ -40,12 +39,7 @@ export interface UserHeader {
   image: string | undefined
 }
 
-export interface Role {
-  id: number
-  name: string
-}
-
-export interface ShippingData {
+export interface UserShippingData {
   id: number
   userId: number
   street: string
@@ -56,5 +50,3 @@ export interface ShippingData {
   state: string
   country: string
 }
-
-
