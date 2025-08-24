@@ -6,7 +6,7 @@ import { UserForm } from "@/components/ui/UserForm"
 import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
 import { useVerifyIsLoggedIn } from "@/hooks/useVerifyIsLoggedIn"
-import { ShippingData, User } from "@/types/User"
+import { UserShippingData, User } from "@/types/User"
 import { FC, useEffect, useState } from "react"
 import styles from "./profile.module.scss"
 
@@ -64,7 +64,7 @@ export const Profile: FC = () => {
           onClose={() => setShowShippingData(false)}
         >
           <ShippingDataForm
-            item={shippingData as ShippingData}
+            item={shippingData as UserShippingData}
             setShowForm={setShowShippingData}
           />
         </Modal>

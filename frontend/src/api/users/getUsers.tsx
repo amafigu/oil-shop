@@ -1,14 +1,17 @@
 import { baseUrl, USERS } from "@/constants/api"
-import axios from "axios"
+import { User } from "@/types/User"
+import axios, { AxiosResponse } from "axios"
 
-export const getUsers = async () => {
+export async function getUsers(): Promise<AxiosResponse<User[]>> {
+  const url = `${baseUrl}${USERS}`
   try {
-    const response = await axios.get(`${baseUrl}${USERS}`, {
+    const response = await axios.get(url, {
       withCredentials: true,
     })
-    if (response && response.status === 200) {
-      return response
+    if (response.status !== 200) {
+      throw new Error(`Error with status ${response.status} by getting users`)
     }
+    return response
   } catch (error) {
     console.error("Error by getting users")
     throw error

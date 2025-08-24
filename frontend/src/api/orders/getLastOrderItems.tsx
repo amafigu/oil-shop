@@ -7,7 +7,7 @@ export const getLastOrderItems = async (userId: number) => {
     if (response && response.status === 200) {
       return response
     } else {
-      throw new Error("Status error by getting last order items")
+      throw new Error("Error by getting last order items")
     }
   } catch (error) {
     console.error("Error by getting last order items")

@@ -9,7 +9,7 @@ export const getOrderItems = async (orderId: number) => {
     if (response && response.status === 200) {
       return response
     } else {
-      throw new Error("Status error by getting order items")
+      throw new Error("Error by getting order items")
     }
   } catch (error) {
     console.error("Error by getting order items")

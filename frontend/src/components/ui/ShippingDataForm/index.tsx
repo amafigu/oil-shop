@@ -2,7 +2,7 @@ import { ItemFormInput } from "@/components/ui/ItemFormInput"
 import { STYLES } from "@/constants/styles"
 import { useUserContext } from "@/context/useUserContext"
 import { useTranslation } from "@/hooks/useTranslation"
-import { EditShippingData, ShippingData } from "@/types/User"
+import { EditShippingData, UserShippingData } from "@/types/User"
 import { getIconByName } from "@/utils/getIconByName"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react"
@@ -10,7 +10,7 @@ import { ActionButton } from "../ActionButton"
 import styles from "./shippingDataForm.module.scss"
 
 interface ShippingDataFormProps {
-  item: ShippingData
+  item: UserShippingData
   setShowForm?: Dispatch<SetStateAction<boolean>>
 }
 
