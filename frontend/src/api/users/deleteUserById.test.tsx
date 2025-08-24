@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios"
 import { describe, it, expect, vi } from "vitest"
 
 import { deleteUserById } from "./deleteUserById"
-import { USERS } from "@/constants/api"
+import { baseUrl, USERS } from "@/constants/api"
 import { user } from "@/__mocks__/user"
 import {
   deleteAxiosResponse,
@@ -13,8 +13,6 @@ vi.mock("axios")
 const mockedDelete = vi.mocked(axios.delete)
 
 describe("deleteUserById", () => {
-  const baseUrl = notFoundAxiosResponse
-
   it("resolves when status is 200", async () => {
     const axiosResponse = deleteAxiosResponse as unknown as AxiosResponse<void>
 

@@ -1,43 +1,41 @@
 import axios, { AxiosResponse } from "axios"
 import { describe, it, expect, vi } from "vitest"
 
-import { getProducts } from "./getProducts"
-import { PRODUCTS } from "@/constants/api"
-import type { Product } from "@/types/Product"
-import { products } from "@/__mocks__/products"
+import { getUsers } from "./getUsers"
+import { baseUrl, USERS } from "@/constants/api"
+import type { User } from "@/types/User"
+import { users } from "@/__mocks__/users"
 import { notFoundAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
+import { successfulAxiosResponseWithoutData } from "@/__mocks__/api/successfulAxiosResponse"
 
 vi.mock("axios")
 const mockedGet = vi.mocked(axios.get)
 
-describe("getProducts", () => {
-  const baseUrl = import.meta.env.VITE_APP_API_URL
-
+describe("getUsers", () => {
   it("resolves when status is 200", async () => {
     const axiosResponse = {
-      data: products,
-      status: 200,
-      statusText: "OK",
-      headers: {},
-      config: {},
-    } as unknown as AxiosResponse<Product[]>
+      ...successfulAxiosResponseWithoutData,
+      data: users,
+    } as unknown as AxiosResponse<User[]>
 
     mockedGet.mockResolvedValue(axiosResponse)
 
-    const result = await getProducts()
+    const result = await getUsers()
 
-    expect(mockedGet).toHaveBeenCalledWith(`${baseUrl}${PRODUCTS}`)
+    expect(mockedGet).toHaveBeenCalledWith(`${baseUrl}${USERS}`, {
+      withCredentials: true,
+    })
     expect(result).toBe(axiosResponse)
   })
 
   it("throws error if is not succesful", async () => {
     const axiosResponse = notFoundAxiosResponse as unknown as AxiosResponse<
-      Product[]
+      User[]
     >
     mockedGet.mockResolvedValue(axiosResponse)
 
-    await expect(getProducts()).rejects.toThrow(
-      `Got status ${axiosResponse.status}`,
+    await expect(getUsers()).rejects.toThrow(
+      `Error with status ${axiosResponse.status} by getting users`,
     )
   })
 
@@ -45,6 +43,6 @@ describe("getProducts", () => {
     const networkError = new Error("Network error")
     mockedGet.mockRejectedValue(networkError)
 
-    await expect(getProducts()).rejects.toBe(networkError)
+    await expect(getUsers()).rejects.toBe(networkError)
   })
 })

@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios"
 import { describe, it, expect, vi } from "vitest"
 
 import { createUser } from "./createUser"
-import { USERS } from "@/constants/api"
+import { baseUrl, USERS } from "@/constants/api"
 import type { User } from "@/types/User"
 import { user } from "@/__mocks__/user"
 import { notFoundAxiosResponse } from "@/__mocks__/api/emptyAxiosResponse"
@@ -11,8 +11,6 @@ vi.mock("axios")
 const mockedPost = vi.mocked(axios.post)
 
 describe("createUser", () => {
-  const baseUrl = notFoundAxiosResponse
-
   it("resolves with data when status is 201", async () => {
     const payload = { user }
     const axiosResponse = {
